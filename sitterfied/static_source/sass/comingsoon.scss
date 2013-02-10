@@ -1,4 +1,42 @@
-#coming-soon {
-    background: url('../img/background.png')
+@import "compass/css3";
+@import "compass/css3/images";
 
+html, body {
+    height: 100%;
+}
+
+#comingsoon {
+    background: url('../img/background.png');
+    color: white;
+    background-size: cover;
+    background-position: 0% 69%;
+
+    hr {
+        height:0px;
+	    border: .1em dashed;
+        color: #c5c6be;
+    }
+}
+
+.vspacer {
+    margin-top: 60px;
+}
+
+#content {
+    min-height: 100%;
+}
+.container {
+    height: 100%;
+    height: auto !important;
+}
+
+footer{
+    position: relative;
+    margin-top: -60px; /* negative value of footer height */
+    height: 60px;
+    clear:both;
+
+
+    border-top: 1px solid white;
+    opacity: .5;
 }

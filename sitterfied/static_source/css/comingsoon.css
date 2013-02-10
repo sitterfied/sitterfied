@@ -1,0 +1,45 @@
+/* line 4, ../sass/comingsoon.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 8, ../sass/comingsoon.scss */
+#comingsoon {
+  background: url("../img/background.png");
+  color: white;
+  background-size: cover;
+  background-position: 0% 69%;
+}
+/* line 14, ../sass/comingsoon.scss */
+#comingsoon hr {
+  height: 0px;
+  border: .1em dashed;
+  color: #c5c6be;
+}
+
+/* line 21, ../sass/comingsoon.scss */
+.vspacer {
+  margin-top: 60px;
+}
+
+/* line 25, ../sass/comingsoon.scss */
+#content {
+  min-height: 100%;
+}
+
+/* line 28, ../sass/comingsoon.scss */
+.container {
+  height: 100%;
+  height: auto !important;
+}
+
+/* line 33, ../sass/comingsoon.scss */
+footer {
+  position: relative;
+  margin-top: -60px;
+  /* negative value of footer height */
+  height: 60px;
+  clear: both;
+  border-top: 1px solid white;
+  opacity: .5;
+}
