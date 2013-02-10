@@ -1,3 +1,3 @@
 
-GRAPPELLI_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
+GRAPPELLI_INDEX_DASHBOARD = 'sitterfied.dashboard.CustomIndexDashboard'
 FILEBROWSER_DIRECTORY = ""

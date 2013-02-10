@@ -9,7 +9,7 @@ from filebrowser.sites import site
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'app.views.index', name='home'),
-    # url(r'^project/', include('project.foo.urls')),
+    # url(r'^/', include('project.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -14,14 +14,8 @@
         {% compressed_css 'screen' %}
         {% block extra_head %}
         {% endblock extra_head %}
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
     </head>
-    <body>
+    <body {% block bodyclass %} {% endblock %}>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
