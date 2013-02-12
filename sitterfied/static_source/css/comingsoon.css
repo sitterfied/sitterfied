@@ -1,45 +1,88 @@
-/* line 4, ../sass/comingsoon.scss */
+/* line 5, ../sass/comingsoon.scss */
 html, body {
   height: 100%;
 }
 
-/* line 8, ../sass/comingsoon.scss */
+/* line 9, ../sass/comingsoon.scss */
 #comingsoon {
   background: url("../img/background.png");
   color: white;
   background-size: cover;
   background-position: 0% 69%;
 }
-/* line 14, ../sass/comingsoon.scss */
+/* line 15, ../sass/comingsoon.scss */
 #comingsoon hr {
   height: 0px;
   border: .1em dashed;
   color: #c5c6be;
 }
 
-/* line 21, ../sass/comingsoon.scss */
+/* line 22, ../sass/comingsoon.scss */
 .vspacer {
   margin-top: 60px;
 }
 
-/* line 25, ../sass/comingsoon.scss */
+/* line 26, ../sass/comingsoon.scss */
 #content {
   min-height: 100%;
 }
 
-/* line 28, ../sass/comingsoon.scss */
+/* line 29, ../sass/comingsoon.scss */
 .container {
   height: 100%;
   height: auto !important;
 }
 
-/* line 33, ../sass/comingsoon.scss */
+/* line 34, ../sass/comingsoon.scss */
 footer {
   position: relative;
   margin-top: -60px;
   /* negative value of footer height */
   height: 60px;
   clear: both;
-  border-top: 1px solid white;
-  opacity: .5;
+  background: url("../img/footer.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* line 45, ../sass/comingsoon.scss */
+footer div {
+  margin-top: 6px;
+}
+
+/* line 49, ../sass/comingsoon.scss */
+#socialicons {
+  margin-left: -40px;
+}
+
+/* line 53, ../sass/comingsoon.scss */
+input[type="radio"] {
+  display: none;
+}
+
+/* line 58, ../sass/comingsoon.scss */
+input[type="radio"] {
+  display: none;
+}
+
+/* line 61, ../sass/comingsoon.scss */
+input[type="radio"] + label {
+  display: inline-block;
+  width: 20px;
+  height: 19px;
+  background-color: white;
+  cursor: pointer;
+  vertical-align: middle;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* line 71, ../sass/comingsoon.scss */
+input[type="radio"]:checked + label {
+  background-repeat: no-repeat;
+  background-position: center;
+  background: white url(../img/green_checkmark.png);
 }

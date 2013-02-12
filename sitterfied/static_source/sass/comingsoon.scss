@@ -1,5 +1,6 @@
 @import "compass/css3";
 @import "compass/css3/images";
+@import "compass/css3/border-radius";
 
 html, body {
     height: 100%;
@@ -35,8 +36,40 @@ footer{
     margin-top: -60px; /* negative value of footer height */
     height: 60px;
     clear:both;
+    background: url('../img/footer.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+
+}
+
+footer div {
+    margin-top: 6px;
+}
+
+#socialicons {
+    margin-left: -40px;
+}
+
+input[type="radio"] {
+    display:none;
+}
 
 
-    border-top: 1px solid white;
-    opacity: .5;
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label {
+    display:inline-block;
+    width:20px;
+    height:19px;
+    background-color:white;
+    cursor:pointer;
+    vertical-align:middle;
+    @include border-radius(2px);
+}
+
+input[type="radio"]:checked + label {
+    background-repeat:no-repeat;
+    background-position:center;
+    background:white url(../img/green_checkmark.png);
 }
