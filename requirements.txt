@@ -1,4 +1,4 @@
-git+git://github.com/django/django.git@1.5b2
+
 django-pipeline
 django-pipeline-compass
 
@@ -41,3 +41,4 @@ django_smtp_ssl
 #pillow
 #whoosh
 #django-haystack
+git+git://github.com/django/django.git@1.5b2
