@@ -1,16 +1,36 @@
 from .base import *
+import json
+with open('/home/dotcloud/environment.json') as f:
+  env = json.load(f)
+
+#DEBUG = False
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': env['DOTCLOUD_CACHE_REDIS_HOST'] + ":" + env['DOTCLOUD_CACHE_REDIS_PORT'],
+        'OPTIONS': {
+            'DB': 1,
+            'PASSWORD': env['DOTCLOUD_CACHE_REDIS_PASSWORD'],
+            'PARSER_CLASS': 'redis.connection.HiredisParser',
+            'PICKLE_VERSION': 2,
+        },
+    },
+}
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sitterfied',
+        'USER': env['DOTCLOUD_DATA_SQL_LOGIN'],
+        'PASSWORD': env['DOTCLOUD_DATA_SQL_PASSWORD'],
+        'HOST': env['DOTCLOUD_DATA_SQL_HOST'],
+        'PORT': int(env['DOTCLOUD_DATA_SQL_PORT']),
     }
 }
+
+
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -20,7 +40,7 @@ MEDIA_ROOT = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = PROJECT_ROOT.child("static")
 
 
 MIDDLEWARE_CLASSES += (
