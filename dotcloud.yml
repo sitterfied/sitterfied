@@ -1,0 +1,16 @@
+www:
+  type: python
+  config:
+    python_version: v2.7
+    #enable_newrelic: true
+  approot: sitterfied
+  # environment:
+  #    NEW_RELIC_LICENSE_KEY: d7fda4550c9a0ae2bc8ca3ccc6066aa94728f627
+  #    NEW_RELIC_APP_NAME: Hvz source
+  #    NEW_RELIC_LOG: /var/log/supervisor/newrelic.log
+  #    NEW_RELIC_LOG_LEVEL: info
+data:
+  type: postgresql
+
+cache:
+  type: redis

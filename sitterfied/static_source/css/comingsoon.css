@@ -1,39 +1,45 @@
 /* line 5, ../sass/comingsoon.scss */
 html, body {
   height: 100%;
+  overflow: hidden;
 }
 
-/* line 9, ../sass/comingsoon.scss */
+/* line 10, ../sass/comingsoon.scss */
 #comingsoon {
   background: url("../img/background.png");
   color: white;
   background-size: cover;
   background-position: 0% 69%;
 }
-/* line 15, ../sass/comingsoon.scss */
+/* line 16, ../sass/comingsoon.scss */
 #comingsoon hr {
   height: 0px;
   border: .1em dashed;
   color: #c5c6be;
 }
 
-/* line 22, ../sass/comingsoon.scss */
+/* line 23, ../sass/comingsoon.scss */
 .vspacer {
   margin-top: 60px;
 }
 
-/* line 26, ../sass/comingsoon.scss */
+/* line 27, ../sass/comingsoon.scss */
 #content {
   min-height: 100%;
 }
 
-/* line 29, ../sass/comingsoon.scss */
+/* line 30, ../sass/comingsoon.scss */
 .container {
   height: 100%;
   height: auto !important;
 }
 
-/* line 34, ../sass/comingsoon.scss */
+/* line 35, ../sass/comingsoon.scss */
+.clear {
+  clear: both;
+}
+
+/* line 39, ../sass/comingsoon.scss */
 footer {
   position: relative;
   margin-top: -60px;
@@ -45,19 +51,14 @@ footer {
   background-size: 100% 100%;
 }
 
-/* line 45, ../sass/comingsoon.scss */
+/* line 50, ../sass/comingsoon.scss */
 footer div {
   margin-top: 6px;
 }
 
-/* line 49, ../sass/comingsoon.scss */
+/* line 54, ../sass/comingsoon.scss */
 #socialicons {
   margin-left: -40px;
-}
-
-/* line 53, ../sass/comingsoon.scss */
-input[type="radio"] {
-  display: none;
 }
 
 /* line 58, ../sass/comingsoon.scss */
@@ -65,7 +66,12 @@ input[type="radio"] {
   display: none;
 }
 
-/* line 61, ../sass/comingsoon.scss */
+/* line 63, ../sass/comingsoon.scss */
+input[type="radio"] {
+  display: none;
+}
+
+/* line 66, ../sass/comingsoon.scss */
 input[type="radio"] + label {
   display: inline-block;
   width: 20px;
@@ -80,9 +86,35 @@ input[type="radio"] + label {
   border-radius: 2px;
 }
 
-/* line 71, ../sass/comingsoon.scss */
+/* line 76, ../sass/comingsoon.scss */
 input[type="radio"]:checked + label {
   background-repeat: no-repeat;
   background-position: center;
   background: white url(../img/green_checkmark.png);
+}
+
+/* line 82, ../sass/comingsoon.scss */
+.greencheck_box {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  margin-left: -30px;
+  margin-top: -10px;
+  width: 28px;
+  vertical-align: middle;
+}
+
+/* line 92, ../sass/comingsoon.scss */
+.playbtn {
+  margin-left: -20px;
+  cursor: pointer;
+}
+
+/* line 97, ../sass/comingsoon.scss */
+#share_with_friends_block {
+  display: none;
+  height: 800px;
+  background-color: brown;
 }

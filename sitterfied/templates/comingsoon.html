@@ -11,6 +11,7 @@ Sitterfied
 {% endblock bodyclass %}
 
 {% block content %}
+<div id="topcontent">
 <div class="vspacer"></div>
 <div class="row-fluid">
   <div class="span12">
@@ -24,80 +25,160 @@ Sitterfied
   </div>
 </div>
 
-<div class="row-fluid">
+<div  class="row-fluid">
   <div class="span6">
     Friend Verified. Search Simplified
   </div>
 </div>
+</div>
+<div id="email_form_block">
+  <div class="row-fluid">
+    <div class="span5">
+      <hr>
+    </div>
+  </div>
 
-<div class="row-fluid">
-  <div class="span5">
-    <hr>
+  <div class="row-fluid">
+    <div class="span6">
+      Sign up and Invite your friends for early access.
+    </div>
+    <div class="span2 offset2">
+      <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
+    </div>
   </div>
-</div>
 
-<div class="row-fluid">
-  <div class="span6">
-    Sign up and Invite your friends for early access.
-  </div>
-  <div class="span2 offset2">
-    playbutton
-  </div>
-</div>
+  <form id="email_form">
+    <div class="row-fluid">
+      <div class="span1">
+        <input type="radio" id="parent" name="parent_or_sitter" value="p" checked>
+        <label for="parent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent
+        </label>
+      </div>
+      <div class="span1">
+        <input type="radio" id="sitter" name="parent_or_sitter" value="s" >
+        <label for="sitter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sitter</label>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span6">
+        <input type="text" name="name" placeholder="Your Name">
+      </div>
+    </div>
 
-<form>
-<div class="row-fluid">
-  <div class="span1">
-    <input type="radio" id="parent" name="parent_or_sitter" value="parent" checked>
-    <label for="parent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent
-    </label>
-  </div>
-  <div class="span1">
-    <input type="radio" id="sitter" name="parent_or_sitter" value="sitter" >
-    <label for="sitter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sitter</label>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span6">
-    Name
-  </div>
-</div>
+    <div class="row-fluid">
+      <div class="span6">
+        <input id="email" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+      </div>
+    </div>
 
-<div class="row-fluid">
-  <div class="span6">
-    email
-  </div>
-</div>
+    <div class="row-fluid">
+      <div class="span2">
+        <input class="btn btn-info" type="submit" value="GO" >
+      </div>
+    </div>
+  </form>
 
-<div class="row-fluid">
-  <div class="span1">
-    <button>go</button>
+  <div class="row-fluid">
+    <div class="span5">
+      <hr>
+    </div>
   </div>
-</div>
-</form>
-<div class="row-fluid">
-  <div class="span5">
-    <hr>
-  </div>
-</div>
 
 
-<div class="row-fluid">
-  <div class="span6">
-    We respect your privacy. You can unsubscribe at any time.
+  <div class="row-fluid">
+    <div class="span6">
+      We respect your privacy. You can unsubscribe at any time.
+    </div>
   </div>
 </div>
+</div>
+<div id="share_with_friends_block">
+    <div class="container">
+      <div class="row=fluid">
+        <div class="span6">
+          test
+        </div>
+      </div>
+    </div>
+</div>
+
 
 
 {% endblock content %}
 
 {% block body_media %}
 <script type="text/javascript">
-  $(document).ready(function(){
-   $("input:radio").change(function(){
-       $(this)
-   })
-  });
-</script>
+    $(document).ready(function(){
+        $("#email").keyup(function(){
+          valid = this.checkValidity()
+          that = $(this)
+          val = that.val()
+          if (valid && val !== "") {
+             $("#email").next().show()
+          }
+      })
+       $("#email_form").submit(function(e){
+           var data = $(this).serialize();
+           e.preventDefault();
+           $.ajax({
+               url: "{% url 'comingsoon_email_submit' %}",
+               type: "POST",
+               data: data,
+           })
+           $("#email_form_block").fadeOut(500, function(){
+               //Element Height = Viewport height - element.offset.top - desired bottom margin
+               start = $("#topcontent").position().top + $("#topcontent").height()
+               end = $(window).height()
+               $("#share_with_friends_block").height(end-start)
+               $("#share_with_friends_block").show("slide", { direction: "down" }, 500);
+           });
+           return false
+       });
 
+  })
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+function sameOrigin(url) {
+    // test that a given url is a same-origin URL
+    // url could be relative or scheme relative or absolute
+    var host = document.location.host; // host + port
+    var protocol = document.location.protocol;
+    var sr_origin = '//' + host;
+    var origin = protocol + sr_origin;
+    // Allow absolute or scheme relative URLs to same origin
+    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+        // or any other URL that isn't scheme relative or absolute i.e relative.
+        !(/^(\/\/|http:|https:).*/.test(url));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+            // Send the token to same-origin, relative URLs only.
+            // Send the token only if the method warrants CSRF protection
+            // Using the CSRFToken value acquired earlier
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
 {% endblock %}

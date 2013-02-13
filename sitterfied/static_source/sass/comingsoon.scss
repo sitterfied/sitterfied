@@ -4,6 +4,7 @@
 
 html, body {
     height: 100%;
+    overflow:hidden;
 }
 
 #comingsoon {
@@ -29,6 +30,10 @@ html, body {
 .container {
     height: 100%;
     height: auto !important;
+}
+
+.clear {
+    clear:both;
 }
 
 footer{
@@ -72,4 +77,25 @@ input[type="radio"]:checked + label {
     background-repeat:no-repeat;
     background-position:center;
     background:white url(../img/green_checkmark.png);
+}
+
+.greencheck_box {
+    @include border-radius(3px);
+    margin-left: -30px;
+    margin-top: -10px;
+    width: 28px;
+
+    vertical-align:middle;
+
+}
+
+.playbtn {
+    margin-left: -20px;
+    cursor: pointer;
+}
+
+#share_with_friends_block {
+    display:none;
+    height:     800px;
+    background-color: brown;
 }
