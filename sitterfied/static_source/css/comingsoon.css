@@ -132,31 +132,30 @@ input[type="radio"]:checked + label {
 }
 /* line 112, ../sass/comingsoon.scss */
 #footer-left p {
-  width: 100%;
   float: right;
   text-align: right;
   margin-top: 16px;
 }
 
-/* line 119, ../sass/comingsoon.scss */
+/* line 118, ../sass/comingsoon.scss */
 #footer-right {
   height: 100%;
   width: 65%;
   float: right;
 }
 
-/* line 125, ../sass/comingsoon.scss */
+/* line 124, ../sass/comingsoon.scss */
 #socialicons {
   float: left;
-  margin-left: 4px;
+  margin-left: 20px;
   margin-top: 8px;
 }
 
-/* line 132, ../sass/comingsoon.scss */
+/* line 131, ../sass/comingsoon.scss */
 .arrow-right {
-  float: left;
-  margin: 0px;
-  margin-top: 8px;
+  margin-right: -15px;
+  float: right;
+  margin-top: 13px;
   width: 0;
   height: 0;
   border-top: 15px solid transparent;
