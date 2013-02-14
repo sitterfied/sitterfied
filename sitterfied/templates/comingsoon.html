@@ -67,7 +67,7 @@ Sitterfied
 
     <div class="row-fluid">
       <div class="span6">
-        <input id="email" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+        <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
       </div>
     </div>
 
@@ -93,13 +93,98 @@ Sitterfied
 </div>
 </div>
 <div id="share_with_friends_block">
-    <div class="container">
-      <div class="row=fluid">
-        <div class="span6">
-          test
+  <div class="container">
+    <div class="vspacer"></div>
+    <div class="row-fluid">
+
+      <div class="span6">
+        <div class="row-fluid">
+          <div class="span2">
+            <img src="{{STATIC_URL}}img/heart.png" />
+          </div>
+
+
+        </div>
+        <div class="row-fluid">
+
+          <div class="span12">
+            <h1>Want Priority Access?</h1>
+          </div>
+
+        </div>
+        <div class="row-fluid">
+
+          <div class="span12">
+            Sign up 5 friends (one must be a sitter) and we'll invite
+            you all to our private beta program
+          </div>
+          <div class="vspacer"></div>
+
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            The more friends you invite the sonner you'll gain
+            access :)
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            <input type="text" readonly="readonly" value="idcode"><img class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+          </div>
+
+        </div>
+      </div>
+
+      <div class="span6">
+        <div class="row-fluid">
+          <div class="span6">
+            Share with your network
+          </div>
+          <div class="span6">
+            Share by email
+          </div>
+        </div>
+
+        <div id="invitebyemail">
+          <div class="row-fluid">
+            <div class="span6">
+              Invite Friends by email:
+            </div>
+          </div>
+          <form>
+            <div class="row-fluid">
+              <div class="span12">
+                <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
+                <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
+                <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
+                <input class="btn btn-info" type="submit" value="SEND" >
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+    <div class="row-fluid">
+      <div class="span6">
+        <hr>
+      </div>
+      <div class="span6">
+        <hr>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -109,12 +194,12 @@ Sitterfied
 {% block body_media %}
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#email").keyup(function(){
+        $(".email_input").keyup(function(){
           valid = this.checkValidity()
           that = $(this)
           val = that.val()
           if (valid && val !== "") {
-             $("#email").next().show()
+             $(this).next().show()
           }
       })
        $("#email_form").submit(function(e){
@@ -125,17 +210,22 @@ Sitterfied
                type: "POST",
                data: data,
            })
-           $("#email_form_block").fadeOut(500, function(){
-               //Element Height = Viewport height - element.offset.top - desired bottom margin
-               start = $("#topcontent").position().top + $("#topcontent").height()
-               end = $(window).height()
-               $("#share_with_friends_block").height(end-start)
-               $("#share_with_friends_block").show("slide", { direction: "down" }, 500);
-           });
+           tell_friends()
            return false
        });
-
   })
+tell_friends = function(){
+    $("#email_form_block").fadeOut(500, function(){
+        //Element Height = Viewport height - element.offset.top - desired bottom margin
+        start = $("#topcontent").position().top + $("#topcontent").height()
+        end = $(window).height()
+        $("#share_with_friends_block").height(end-start)
+        $("#share_with_friends_block").show("slide", { direction: "down" }, 500);
+    });
+}
+
+
+
 // using jQuery
 function getCookie(name) {
     var cookieValue = null;
