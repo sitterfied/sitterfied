@@ -40,20 +40,18 @@ footer{
     position: relative;
     margin-top: -60px; /* negative value of footer height */
     height: 60px;
+    width: 100%;
     clear:both;
-    background: url('../img/footer.png');
     background-repeat:no-repeat;
     background-size:100% 100%;
-
+    border-top: 1px solid rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, .1);
 }
 
 footer div {
     margin-top: 6px;
 }
 
-#socialicons {
-    margin-left: -40px;
-}
 
 input[type="radio"] {
     display:none;
@@ -98,4 +96,46 @@ input[type="radio"]:checked + label {
     display:none;
     height:     800px;
     background-color: brown;
+}
+
+#footer-left {
+    background: rgba(255, 255, 255, .3);
+    float: left;
+}
+
+#footer-left {
+    float: left;
+    height: 100%;
+    margin-top: 0px;
+    width: 35%;
+    border-top: 1px solid rgba(255, 255, 255, .4);
+    p {
+        width: 100%;
+        float: right;
+        text-align:right;
+        margin-top:16px;
+    }
+}
+#footer-right {
+    height: 100%;
+    width: 65%;
+    float: right;
+
+}
+#socialicons {
+    float: left;
+    margin-left:4px;
+    margin-top:8px;
+
+}
+
+.arrow-right {
+    float: left;
+    margin:0px;
+    margin-top:8px;
+	width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-left: 15px solid rgba(255, 255, 255, .3);
 }

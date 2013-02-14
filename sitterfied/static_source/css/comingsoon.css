@@ -6,7 +6,7 @@ html, body {
 
 /* line 10, ../sass/comingsoon.scss */
 #comingsoon {
-  background: url("../img/background.jpg");
+  background: url("../img/background.png");
   color: white;
   background-size: cover;
   background-position: 0% 69%;
@@ -45,33 +45,30 @@ footer {
   margin-top: -60px;
   /* negative value of footer height */
   height: 60px;
+  width: 100%;
   clear: both;
-  background: url("../img/footer.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* line 50, ../sass/comingsoon.scss */
+/* line 51, ../sass/comingsoon.scss */
 footer div {
   margin-top: 6px;
 }
 
-/* line 54, ../sass/comingsoon.scss */
-#socialicons {
-  margin-left: -40px;
-}
-
-/* line 58, ../sass/comingsoon.scss */
+/* line 56, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 63, ../sass/comingsoon.scss */
+/* line 61, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 66, ../sass/comingsoon.scss */
+/* line 64, ../sass/comingsoon.scss */
 input[type="radio"] + label {
   display: inline-block;
   width: 20px;
@@ -86,14 +83,14 @@ input[type="radio"] + label {
   border-radius: 2px;
 }
 
-/* line 76, ../sass/comingsoon.scss */
+/* line 74, ../sass/comingsoon.scss */
 input[type="radio"]:checked + label {
   background-repeat: no-repeat;
   background-position: center;
   background: white url(../img/green_checkmark.png);
 }
 
-/* line 82, ../sass/comingsoon.scss */
+/* line 80, ../sass/comingsoon.scss */
 .greencheck_box {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -106,15 +103,63 @@ input[type="radio"]:checked + label {
   vertical-align: middle;
 }
 
-/* line 92, ../sass/comingsoon.scss */
+/* line 90, ../sass/comingsoon.scss */
 .playbtn {
   margin-left: -20px;
   cursor: pointer;
 }
 
-/* line 97, ../sass/comingsoon.scss */
+/* line 95, ../sass/comingsoon.scss */
 #share_with_friends_block {
   display: none;
   height: 800px;
   background-color: brown;
+}
+
+/* line 101, ../sass/comingsoon.scss */
+#footer-left {
+  background: rgba(255, 255, 255, 0.3);
+  float: left;
+}
+
+/* line 106, ../sass/comingsoon.scss */
+#footer-left {
+  float: left;
+  height: 100%;
+  margin-top: 0px;
+  width: 35%;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+/* line 112, ../sass/comingsoon.scss */
+#footer-left p {
+  width: 100%;
+  float: right;
+  text-align: right;
+  margin-top: 16px;
+}
+
+/* line 119, ../sass/comingsoon.scss */
+#footer-right {
+  height: 100%;
+  width: 65%;
+  float: right;
+}
+
+/* line 125, ../sass/comingsoon.scss */
+#socialicons {
+  float: left;
+  margin-left: 4px;
+  margin-top: 8px;
+}
+
+/* line 132, ../sass/comingsoon.scss */
+.arrow-right {
+  float: left;
+  margin: 0px;
+  margin-top: 8px;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid rgba(255, 255, 255, 0.3);
 }
