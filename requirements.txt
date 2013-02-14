@@ -41,4 +41,6 @@ django_smtp_ssl
 #whoosh
 #django-haystack
 
---upgrade git+git://github.com/django/django.git@1.5b2
+https://www.djangoproject.com/download/1.5c1/tarball/
+
+#git+git://github.com/django/django.git@1.5b2 --upgrade
