@@ -41,4 +41,4 @@ django_smtp_ssl
 #whoosh
 #django-haystack
 
-git+git://github.com/django/django.git@1.5b2
+--upgrade git+git://github.com/django/django.git@1.5b2
