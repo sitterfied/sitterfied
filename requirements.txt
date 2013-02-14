@@ -5,7 +5,7 @@ cssmin
 slimit
 django-grappelli
 django-filebrowser
-
+PIL
 
 #DB
 psycopg2

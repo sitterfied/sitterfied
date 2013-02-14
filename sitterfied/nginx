@@ -1,0 +1,4 @@
+# choose an alias location that suits your code tree.
+location /static/ {
+   alias /home/dotcloud/current/static/;
+}

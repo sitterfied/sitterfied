@@ -10,7 +10,7 @@ django-filebrowser
 #DB
 psycopg2
 south
-
+pillow
 #FORMS
 django-crispy-forms
 django-floppyforms
@@ -36,7 +36,7 @@ django-ses
 django_smtp_ssl
 
 #OPTIONAL TOOLS
-pillow
+
 #whoosh
 #django-haystack
 
