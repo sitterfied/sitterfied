@@ -1,4 +1,8 @@
+echo "django"
 #pip install --upgrade git+git://github.com/django/django.git@1.5b2
+echo "syncdb"
 /home/dotcloud/current/manage.py syncdb --noinput --settings sitterfied.settings.production
+echo "migrate"
 /home/dotcloud/current/manage.py migrate --noinput --settings sitterfied.settings.production
+echo "collectstatic"
 /home/dotcloud/current/manage.py collectstatic --noinput --settings sitterfied.settings.production
