@@ -9,8 +9,9 @@ www:
   #    NEW_RELIC_APP_NAME: Hvz source
   #    NEW_RELIC_LOG: /var/log/supervisor/newrelic.log
   #    NEW_RELIC_LOG_LEVEL: info
+
 data:
-  type: postgresql
+  type: postgis
 
 cache:
   type: redis

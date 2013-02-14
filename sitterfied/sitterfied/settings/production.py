@@ -1,5 +1,7 @@
 from .base import *
 import json
+import os
+
 with open('/home/dotcloud/environment.json') as f:
   env = json.load(f)
 
@@ -47,3 +49,5 @@ MIDDLEWARE_CLASSES += (
    'django.middleware.gzip.GZipMiddleware',
    'pipeline.middleware.MinifyHTMLMiddleware',
 )
+
+SECRET_KEY =  os.environ['DJANGO_SECRET_KEY']
