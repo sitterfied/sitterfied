@@ -18,6 +18,7 @@ class ComingSoonInterest(TimeStampedModel):
     parent_or_sitter = models.CharField(blank=False, max_length=1, choices=PARENTING_CHOICES)
     name  = models.CharField(max_length=80)
     email = models.EmailField()
+    referred_by = models.ForeignKey('self', null=True)
 
     def __unicode__(self):
         return self.name

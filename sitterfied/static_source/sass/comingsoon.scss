@@ -8,7 +8,7 @@ html, body {
 }
 
 #comingsoon {
-    background: url('../img/background.png');
+    background: url('../img/background.jpg');
     color: white;
     background-size: cover;
     background-position: 0% 69%;
@@ -52,6 +52,10 @@ footer div {
     margin-top: 6px;
 }
 
+input[type="text"], input[type="email"] {
+    border: 0px !important;
+
+}
 
 input[type="radio"] {
     display:none;
@@ -90,6 +94,10 @@ input[type="radio"]:checked + label {
 .playbtn {
     margin-left: -20px;
     cursor: pointer;
+    opacity: .5;
+}
+.playbtn:hover {
+    opacity: 1;
 }
 
 #share_with_friends_block {
@@ -129,12 +137,56 @@ input[type="radio"]:checked + label {
 }
 
 .arrow-right {
-    margin-right:-15px;
-    float: right;
-    margin-top:13px;
+    float: left;
+    margin-top:9px;
 	width: 0;
 	height: 0;
-	border-top: 15px solid transparent;
-	border-bottom: 15px solid transparent;
-	border-left: 15px solid rgba(255, 255, 255, .3);
+	border-top: 13px solid transparent;
+	border-bottom: 13px solid transparent;
+	border-left: 13px solid rgba(255, 255, 255, .3);
+}
+
+.copied{
+    position: relative;
+    top:-4px;
+    display:none;
+
+}
+
+.copy-button {
+    margin-left: -36px;
+    margin-top: -10px;
+    width: 35px;
+    @include border-radius(3px);
+}
+
+.smalltext{
+    font-size: 12px;
+}
+
+.inline {
+    display:inline;
+}
+
+#idcode {
+    width: 250px;
+
+}
+
+.loading {
+    display:none;
+}
+
+#invitebynetwork{
+
+}
+#invitebyemail{
+    display:none;
+}
+
+
+textarea {
+    resize: none;
+    overflow:hidden;
+    width: 420px !important;
 }

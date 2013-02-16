@@ -31,23 +31,26 @@ Sitterfied
   </div>
 </div>
 </div>
-<div id="email_form_block">
-  <div class="row-fluid">
+
+  <div class="row-fluid hrrow">
     <div class="span5">
       <hr>
     </div>
   </div>
 
   <div class="row-fluid">
-    <div class="span6">
+    <div class="span6 thanksdiv">
       Sign up and Invite your friends for early access.
     </div>
     <div class="span2 offset2">
       <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
     </div>
   </div>
-
+<div id="email_form_block">
   <form id="email_form">
+    {% if referred_by %}
+        <input type="hidden" id="referred_by" name="referred_by" value="{{referred_by}}">
+    {% endif %}
     <div class="row-fluid">
       <div class="span1">
         <input type="radio" id="parent" name="parent_or_sitter" value="p" checked>
@@ -61,13 +64,13 @@ Sitterfied
     </div>
     <div class="row-fluid">
       <div class="span6">
-        <input type="text" name="name" placeholder="Your Name">
+        <input type="text" class="text_input" name="name" pattern="\w+ \w+"placeholder="First name Last name" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
       </div>
     </div>
 
     <div class="row-fluid">
       <div class="span6">
-        <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+        <input class="email_input" name="email" type="email" placeholder="Email" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
       </div>
     </div>
 
@@ -86,7 +89,7 @@ Sitterfied
 
 
   <div class="row-fluid">
-    <div class="span6">
+    <div class="span6 smalltext">
       We respect your privacy. You can unsubscribe at any time.
     </div>
   </div>
@@ -128,8 +131,9 @@ Sitterfied
           </div>
         </div>
         <div class="row-fluid">
-          <div class="span12">
-            <input type="text" readonly="readonly" value="idcode"><img class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+          <div class="span12 inline">
+            <input size="100" type="text" class="idcode" readonly="readonly" value=""><img data-clipboard-text="Copy Me!" class="copy-button" src="{{STATIC_URL}}img/copybutton.png" />
+            <span class="copied"><i>Copied!</i></span>
           </div>
 
         </div>
@@ -138,11 +142,35 @@ Sitterfied
       <div class="span6">
         <div class="row-fluid">
           <div class="span6">
-            Share with your network
+            <a href="#" id="sharewithnetwork">Share with your network</a>
           </div>
           <div class="span6">
-            Share by email
+            <a href="#" id="sharewithemail">Share by email</a>
           </div>
+        </div>
+
+        <div id="invitebynetwork">
+
+          <div class="row-fluid">
+            <div class="span12 inline">
+              <input size="100" type="text" class="idcode" readonly="readonly" value=""><img data-clipboard-text="Copy Me!" class="copy-button" src="{{STATIC_URL}}img/copybutton.png" />
+              <span class="copied"><i>Copied!</i></span>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <textarea cols="40" rows="2" id="sharetext">Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free:</textarea>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span6">
+               <a class="facebook" class="facebookshare" target="_blank" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=300')" href="http://www.facebook.com/sharer/sharer.php?u=YOUR_URL">Facebook</a>
+            </div>
+          </div>
+
+
+
+
         </div>
 
         <div id="invitebyemail">
@@ -151,7 +179,8 @@ Sitterfied
               Invite Friends by email:
             </div>
           </div>
-          <form>
+          <form id="invite_email_form">
+            <input type="hidden" id="referral_link" name="referral_link" value="">
             <div class="row-fluid">
               <div class="span12">
                 <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
@@ -169,7 +198,7 @@ Sitterfied
             </div>
             <div class="row-fluid">
               <div class="span12">
-                <input class="btn btn-info" type="submit" value="SEND" >
+                <input class="btn btn-info" type="submit" value="SEND" > <img src="{{STATIC_URL}}img/loading.gif" class="loading">
               </div>
             </div>
           </form>
@@ -190,32 +219,125 @@ Sitterfied
 
 
 {% endblock content %}
-
+p
 {% block body_media %}
 <script type="text/javascript">
+    left = $("h1").offset().left
+    pwidth = $("#footer-left > p").width()
+    $("#footer-left").width(left+pwidth)
+    window_width = $(window).width()
+
+    $("#footer-right").width(window_width - (left+pwidth) )
+
     $(document).ready(function(){
-        $(".email_input").keyup(function(){
+        $(window).resize(function () {
+            left = $("h1").offset().left
+            pwidth = $("#footer-left > p").width()
+            $("#footer-left").width(left+pwidth)
+            window_width = $(window).width()
+            $("#footer-right").width(window_width - (left+pwidth) )
+
+        });
+
+        $(".email_input, .text_input").keyup(function(){
           valid = this.checkValidity()
           that = $(this)
           val = that.val()
           if (valid && val !== "") {
              $(this).next().show()
           }
+          else {
+             $(this).next().hide()
+          }
+
       })
+
+
        $("#email_form").submit(function(e){
            var data = $(this).serialize();
+           firstname = $(this.name).val().split(" ")[0]
            e.preventDefault();
            $.ajax({
                url: "{% url 'comingsoon_email_submit' %}",
                type: "POST",
                data: data,
+           }).success(function(data){
+                refer_url = window.location.origin + "/refer/" + data.id
+               $(".idcode").attr('value',refer_url)
+               $(".copy-button").attr("data-clipboard-text", refer_url)
+               $("#referral_link").attr("value", refer_url)
+               val = $("#sharetext").val()
+               $("#sharetext").val(val + " " + refer_url)
            })
-           tell_friends()
+           tell_friends(firstname)
            return false
        });
-  })
-tell_friends = function(){
+
+       $("#invite_email_form").submit(function(e){
+           var data = $(this).serialize();
+           e.preventDefault();
+           $.ajax({
+               url: "{% url 'invite_email_submit' %}",
+               type: "POST",
+               data: data,
+           }).success(function(data){
+               $('.loading').hide()
+               $("#invite_email_form input[type=email]").val("").keyup()
+           })
+           $('.loading').show()
+           return false
+       });
+
+
+        var clip = new ZeroClipboard( $(".copy-button"), {
+            moviePath: "{{STATIC_URL}}swf/ZeroClipboard.swf"
+        });
+        clip.on( 'complete', function(client, args) {
+            cc = $(this).next()
+            cc.fadeIn(500)
+            setTimeout(function(){
+                cc.fadeOut(500)
+            }, 3000)
+        });
+
+
+        $("#sharewithnetwork").click(function(){
+            if (!$("#invitebynetwork").is("visible")) {
+                $("#invitebyemail").fadeOut(500, function(){
+                    $("#invitebynetwork").fadeIn(500)
+                })
+
+            }
+        })
+        $("#sharewithemail").click(function(){
+            if (!$("#invitebyemail").is("visible")) {
+                $("#invitebynetwork").fadeOut(500, function(){
+                    $("#invitebyemail").fadeIn(500)
+                })
+
+            }
+        })
+
+        edit_facebook_url = function(){
+            base_fb_url  = 'href="http://www.facebook.com/sharer.php?s=100&p[title]=Sitterfied"'
+            summarry = "&p[summary]=YOUR_SUMMARY"
+            url = "&p[url]=" + refer_url
+            //"&p[images][0]=YOUR_IMAGE_TO_SHARE_OBJECT"
+        }
+
+
+
+
+
+
+    })
+tell_friends = function(firstname){
+    $(".hrrow").fadeOut(500)
+    $(".thanksdiv").fadeOut(500, function(){
+        $(".thanksdiv").html("<h2>Thanks " + firstname + "!</h2>").fadeIn()
+    })
     $("#email_form_block").fadeOut(500, function(){
+
         //Element Height = Viewport height - element.offset.top - desired bottom margin
         start = $("#topcontent").position().top + $("#topcontent").height()
         end = $(window).height()
@@ -223,6 +345,7 @@ tell_friends = function(){
         $("#share_with_friends_block").show("slide", { direction: "down" }, 500);
     });
 }
+
 
 
 

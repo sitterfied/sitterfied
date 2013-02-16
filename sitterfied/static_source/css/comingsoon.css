@@ -6,7 +6,7 @@ html, body {
 
 /* line 10, ../sass/comingsoon.scss */
 #comingsoon {
-  background: url("../img/background.png");
+  background: url("../img/background.jpg");
   color: white;
   background-size: cover;
   background-position: 0% 69%;
@@ -58,17 +58,22 @@ footer div {
   margin-top: 6px;
 }
 
-/* line 56, ../sass/comingsoon.scss */
+/* line 55, ../sass/comingsoon.scss */
+input[type="text"], input[type="email"] {
+  border: 0px !important;
+}
+
+/* line 60, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 61, ../sass/comingsoon.scss */
+/* line 65, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 64, ../sass/comingsoon.scss */
+/* line 68, ../sass/comingsoon.scss */
 input[type="radio"] + label {
   display: inline-block;
   width: 20px;
@@ -83,14 +88,14 @@ input[type="radio"] + label {
   border-radius: 2px;
 }
 
-/* line 74, ../sass/comingsoon.scss */
+/* line 78, ../sass/comingsoon.scss */
 input[type="radio"]:checked + label {
   background-repeat: no-repeat;
   background-position: center;
   background: white url(../img/green_checkmark.png);
 }
 
-/* line 80, ../sass/comingsoon.scss */
+/* line 84, ../sass/comingsoon.scss */
 .greencheck_box {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -103,26 +108,32 @@ input[type="radio"]:checked + label {
   vertical-align: middle;
 }
 
-/* line 90, ../sass/comingsoon.scss */
+/* line 94, ../sass/comingsoon.scss */
 .playbtn {
   margin-left: -20px;
   cursor: pointer;
+  opacity: .5;
 }
 
-/* line 95, ../sass/comingsoon.scss */
+/* line 99, ../sass/comingsoon.scss */
+.playbtn:hover {
+  opacity: 1;
+}
+
+/* line 103, ../sass/comingsoon.scss */
 #share_with_friends_block {
   display: none;
   height: 800px;
   background-color: #4E3539;
 }
 
-/* line 101, ../sass/comingsoon.scss */
+/* line 109, ../sass/comingsoon.scss */
 #footer-left {
   background: rgba(255, 255, 255, 0.3);
   float: left;
 }
 
-/* line 106, ../sass/comingsoon.scss */
+/* line 114, ../sass/comingsoon.scss */
 #footer-left {
   float: left;
   height: 100%;
@@ -130,35 +141,85 @@ input[type="radio"]:checked + label {
   width: 35%;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
-/* line 112, ../sass/comingsoon.scss */
+/* line 120, ../sass/comingsoon.scss */
 #footer-left p {
   float: right;
   text-align: right;
   margin-top: 16px;
 }
 
-/* line 118, ../sass/comingsoon.scss */
+/* line 126, ../sass/comingsoon.scss */
 #footer-right {
   height: 100%;
   width: 65%;
   float: right;
 }
 
-/* line 124, ../sass/comingsoon.scss */
+/* line 132, ../sass/comingsoon.scss */
 #socialicons {
   float: left;
   margin-left: 20px;
   margin-top: 8px;
 }
 
-/* line 131, ../sass/comingsoon.scss */
+/* line 139, ../sass/comingsoon.scss */
 .arrow-right {
-  margin-right: -15px;
-  float: right;
-  margin-top: 13px;
+  float: left;
+  margin-top: 9px;
   width: 0;
   height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 15px solid rgba(255, 255, 255, 0.3);
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  border-left: 13px solid rgba(255, 255, 255, 0.3);
+}
+
+/* line 149, ../sass/comingsoon.scss */
+.copied {
+  position: relative;
+  top: -4px;
+  display: none;
+}
+
+/* line 156, ../sass/comingsoon.scss */
+.copy-button {
+  margin-left: -36px;
+  margin-top: -10px;
+  width: 35px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 163, ../sass/comingsoon.scss */
+.smalltext {
+  font-size: 12px;
+}
+
+/* line 167, ../sass/comingsoon.scss */
+.inline {
+  display: inline;
+}
+
+/* line 171, ../sass/comingsoon.scss */
+#idcode {
+  width: 250px;
+}
+
+/* line 176, ../sass/comingsoon.scss */
+.loading {
+  display: none;
+}
+
+/* line 183, ../sass/comingsoon.scss */
+#invitebyemail {
+  display: none;
+}
+
+/* line 188, ../sass/comingsoon.scss */
+textarea {
+  resize: none;
+  overflow: hidden;
+  width: 420px !important;
 }
