@@ -31,6 +31,4 @@ def invite_email_submit(request):
     emails = [email for email in emails if email != ""]
     send_mail('Sitterfied!', 'Sitterfied is great.', 'sitterfied@sitterfied.com',
               emails, fail_silently=True)
-    import pdb
-    pdb.set_trace()
     return {}
