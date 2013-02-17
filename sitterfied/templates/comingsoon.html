@@ -247,13 +247,13 @@ facebook = function(){
     app_id="app_id=141907389308388"
     link="link=" + refer_url
 
-    picture="picture={{STATIC_URL}}img/heart.png"
+    picture="picture=" + window.location.origin + "{{STATIC_URL}}img/heart.png"
     redirect_uri="redirect_uri=https://www.facebook.com"
     name="name=Sitterfied"
     caption="caption=Friend%20Verified.%20Search%20Simplified"
     description="description=" + toshare
 
-    share_link =  "http://www.facebook.com/dialog/feed?" + app_id + "&" + link +  "&" + name + "&" + caption + "&" + description +  "&" + redirect_uri
+    share_link =  "http://www.facebook.com/dialog/feed?" + app_id + "&" + link +  "&" + name + "&" + caption + "&" + description +  "&" + redirect_uri +  "&" + picture
     newwindow=window.open(share_link,'share this','height=500,width=1200');
 	if (window.focus) {newwindow.focus()}
 	return false;
