@@ -18,7 +18,8 @@ Sitterfied
       <h1> Find and book friend-verified babysitters</h1>
     </div>
   </div>
-  <div class="vspacer"></div>
+
+  <div class="vspacer2"></div>
   <div class="row-fluid">
     <div class="span3 logo">
       <img src="{{STATIC_URL}}img/logo.png" height=44 width=236 alt="sitterfied">
@@ -35,7 +36,7 @@ Sitterfied
     <div class="span6 thanksdiv">
       Sign up and Invite your friends for early access.
     </div>
-    <div class="span2 offset2">
+    <div class="span2 offset3">
       <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
     </div>
   </div>
@@ -372,7 +373,7 @@ tell_friends = function(firstname){
     $("#email_form_block").fadeOut(500, function(){
 
         //Element Height = Viewport height - element.offset.top - desired bottom margin
-        start = $(".thanksdiv").position().top + $(".thanksdiv").height()
+        start = $(".thanksdiv").position().top + $(".thanksdiv").height() + 13
         end = $(window).height()
         $("#share_with_friends_block").height(end-start)
         $("#share_with_friends_block").show("slide", { direction: "down" }, 500);

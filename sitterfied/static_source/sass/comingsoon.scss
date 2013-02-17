@@ -4,6 +4,14 @@
 @import "compass/css3/font-face";
 
 
+@include font-face('marketo',
+  font-files(
+    '/static/css/fonts/marketotbold.woff', woff,
+    '/static/css/fonts/marketotbold.ttf', ttf,
+    '/static/css/fonts/marketotbold.svg', svg),
+    '/static/css/fonts/marketotbold.eot');
+
+
 @include font-face('Proxima Nova',
   font-files(
     '/static/css/fonts/proxima_nova_reg-webfont.woff', woff,
@@ -36,10 +44,17 @@
 %proxima {
   font-family: 'Proxima Nova', sans-serif !important;
 }
+%marketo {
+  font-family: 'marketo', sans-serif !important;
+}
+
 
 h1 {
   @extend %proxima;
+  width: 100%;
+  font-size: 50px !important;
 }
+
 p {
   @extend %proxima;
 }
@@ -54,11 +69,10 @@ html, body {
 }
 
 #comingsoon {
-    background: url('../img/background.jpg');
+    background: url('../img/background.jpg') no-repeat;
     color: white;
-    background-size: cover;
-    background-position: 0% 69%;
-
+    background-size: 100%;
+    background-position-y: 29%;
     hr {
         height:0px;
 	    border: .1em dashed;
@@ -67,7 +81,10 @@ html, body {
 }
 
 .vspacer {
-    margin-top: 60px;
+    margin-top: 40px;
+}
+.vspacer2 {
+    margin-top: 130px;
 }
 
 #content {
@@ -84,8 +101,8 @@ html, body {
 
 footer{
     position: relative;
-    margin-top: -60px; /* negative value of footer height */
-    height: 60px;
+    margin-top: -45px; /* negative value of footer height */
+    height: 45px;
     width: 100%;
     clear:both;
     background-repeat:no-repeat;
@@ -174,7 +191,7 @@ input[type="radio"]:checked + label {
 #socialicons {
     float: left;
     margin-left:20px;
-    margin-top:8px;
+    margin-top:5px;
 
 }
 
@@ -189,8 +206,10 @@ input[type="radio"]:checked + label {
 }
 
 .copied{
+    @extend %marketo;
     position: relative;
     top:-4px;
+    margin-right: 3px;
     display:none;
 
 }
