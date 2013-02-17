@@ -12,25 +12,18 @@ Sitterfied
 
 {% block content %}
 <div id="topcontent">
-<div class="vspacer"></div>
-<div class="row-fluid">
-  <div class="span12">
-    <h1> Find and book friend-verified babysitters</h1>
+  <div class="vspacer"></div>
+  <div class="row-fluid">
+    <div class="span12">
+      <h1> Find and book friend-verified babysitters</h1>
+    </div>
   </div>
-</div>
-<div class="vspacer"></div>
-<div class="row-fluid">
-  <div class="span3 logo">
-    <img src="{{STATIC_URL}}img/logo.png" height=44 width=236 alt="sitterfied">
+  <div class="vspacer"></div>
+  <div class="row-fluid">
+    <div class="span3 logo">
+      <img src="{{STATIC_URL}}img/logo.png" height=44 width=236 alt="sitterfied">
+    </div>
   </div>
-</div>
-
-<div  class="row-fluid">
-  <div class="span6">
-    Friend Verified. Search Simplified
-  </div>
-</div>
-</div>
 
   <div class="row-fluid hrrow">
     <div class="span5">
@@ -46,51 +39,52 @@ Sitterfied
       <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
     </div>
   </div>
-<div id="email_form_block">
-  <form id="email_form">
-    {% if referred_by %}
-        <input type="hidden" id="referred_by" name="referred_by" value="{{referred_by}}">
-    {% endif %}
-    <div class="row-fluid">
-      <div class="span1">
-        <input type="radio" id="parent" name="parent_or_sitter" value="p" checked>
-        <label for="parent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent
-        </label>
+  <div id="email_form_block">
+    <form id="email_form">
+      {% if referred_by %}
+      <input type="hidden" id="referred_by" name="referred_by" value="{{referred_by}}">
+      {% endif %}
+      <div class="row-fluid">
+        <div class="span1">
+          <input type="radio" id="parent" name="parent_or_sitter" value="p" checked>
+          <label for="parent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent
+          </label>
+        </div>
+        <div class="span1">
+          <input type="radio" id="sitter" name="parent_or_sitter" value="s" >
+          <label for="sitter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sitter</label>
+        </div>
       </div>
-      <div class="span1">
-        <input type="radio" id="sitter" name="parent_or_sitter" value="s" >
-        <label for="sitter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sitter</label>
+      <div class="row-fluid">
+        <div class="span6">
+          <input type="text" class="text_input" name="name" pattern="\w+ \w+"placeholder="First name Last name" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+        </div>
       </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span6">
-        <input type="text" class="text_input" name="name" pattern="\w+ \w+"placeholder="First name Last name" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+
+      <div class="row-fluid">
+        <div class="span6">
+          <input class="email_input" name="email" type="email" placeholder="Email" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+        </div>
       </div>
-    </div>
+
+      <div class="row-fluid">
+        <div class="span2">
+          <input class="btn btn-info" type="submit" value="GO" >
+        </div>
+      </div>
+    </form>
 
     <div class="row-fluid">
-      <div class="span6">
-        <input class="email_input" name="email" type="email" placeholder="Email" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+      <div class="span5">
+        <hr>
       </div>
     </div>
+
 
     <div class="row-fluid">
-      <div class="span2">
-        <input class="btn btn-info" type="submit" value="GO" >
+      <div class="span6 smalltext">
+        We respect your privacy. You can unsubscribe at any time.
       </div>
-    </div>
-  </form>
-
-  <div class="row-fluid">
-    <div class="span5">
-      <hr>
-    </div>
-  </div>
-
-
-  <div class="row-fluid">
-    <div class="span6 smalltext">
-      We respect your privacy. You can unsubscribe at any time.
     </div>
   </div>
 </div>
@@ -139,18 +133,22 @@ Sitterfied
         </div>
       </div>
 
-      <div class="span6">
-        <div class="row-fluid">
+      <div id="sharerow" class="span6">
+        <div class="row-fluid sharebtns">
           <div class="span6">
-            <a href="#" id="sharewithnetwork">Share with your network</a>
+            <a href="#" id="sharewithnetwork" class="active-share">Share with your network</a>
           </div>
           <div class="span6">
             <a href="#" id="sharewithemail">Share by email</a>
           </div>
         </div>
+        <div class="row-fluid">
+          <div id="carrotimage" class="span1 offset2">
+            <img src="{{STATIC_URL}}/img/circumflex.png" />
+          </div>
+        </div>
 
         <div id="invitebynetwork">
-
           <div class="row-fluid">
             <div class="span12 inline">
               <input size="100" type="text" class="idcode" readonly="readonly" value=""><img data-clipboard-text="Copy Me!" class="copy-button" src="{{STATIC_URL}}img/copybutton.png" />
@@ -164,13 +162,18 @@ Sitterfied
           </div>
           <div class="row-fluid">
             <div class="span6">
-               <a class="facebook" class="facebookshare" target="_blank" onclick="return !window.open(this.href, 'Facebook', 'width=640,height=300')" href="http://www.facebook.com/sharer/sharer.php?u=YOUR_URL">Facebook</a>
+              <button class="btn btn-info" onclick="facebook()">
+                <img src="{{STATIC_URL}}img/facebookbtnimg.png">
+                Share on facebook
+              </button class="btn btn-info">
+            </div>
+            <div class="span6">
+              <button class="btn btn-info" onclick="tweet()">
+                <img src="{{STATIC_URL}}img/tweetbtnimg.png">
+                Tweet on twitter
+              </button>
             </div>
           </div>
-
-
-
-
         </div>
 
         <div id="invitebyemail">
@@ -216,10 +219,8 @@ Sitterfied
   </div>
 </div>
 
-
-
 {% endblock content %}
-p
+
 {% block body_media %}
 <script type="text/javascript">
     left = $("h1").offset().left
@@ -228,6 +229,36 @@ p
     window_width = $(window).width()
 
     $("#footer-right").width(window_width - (left+pwidth) )
+    var refer_url;
+
+tweet = function() {
+    totweet = $("#sharetext").val()
+    totweet = encodeURIComponent(totweet)
+    tweet_link = "https://twitter.com/share?related=sitterfied&text=" + totweet
+    newwindow=window.open(tweet_link,'tweet this','height=260,width=510');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+
+facebook = function(){
+    toshare = $("#sharetext").val()
+    toshare = encodeURIComponent(toshare)
+
+    app_id="app_id=141907389308388"
+    link="link=" + refer_url
+
+    picture="picture={{STATIC_URL}}img/heart.png"
+    redirect_uri="redirect_uri=https://www.facebook.com"
+    name="name=Sitterfied"
+    caption="caption=Friend%20Verified.%20Search%20Simplified"
+    description="description=" + toshare
+
+    share_link =  "http://www.facebook.com/dialog/feed?" + app_id + "&" + link +  "&" + name + "&" + caption + "&" + description +  "&" + redirect_uri
+    newwindow=window.open(share_link,'share this','height=500,width=1200');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+
 
     $(document).ready(function(){
         $(window).resize(function () {
@@ -262,7 +293,7 @@ p
                type: "POST",
                data: data,
            }).success(function(data){
-                refer_url = window.location.origin + "/refer/" + data.id
+               refer_url = window.location.origin + "/refer/" + data.id;
                $(".idcode").attr('value',refer_url)
                $(".copy-button").attr("data-clipboard-text", refer_url)
                $("#referral_link").attr("value", refer_url)
@@ -303,6 +334,9 @@ p
 
         $("#sharewithnetwork").click(function(){
             if (!$("#invitebynetwork").is("visible")) {
+                $(this).switchClass("", "active-share")
+                $("#sharewithemail").switchClass("active-share", "")
+                $("#carrotimage").switchClass("offset7", "offset2")
                 $("#invitebyemail").fadeOut(500, function(){
                     $("#invitebynetwork").fadeIn(500)
                 })
@@ -311,6 +345,9 @@ p
         })
         $("#sharewithemail").click(function(){
             if (!$("#invitebyemail").is("visible")) {
+                $(this).switchClass("", "active-share")
+                $("#sharewithnetwork").switchClass("active-share", "")
+                $("#carrotimage").switchClass("offset2", "offset7")
                 $("#invitebynetwork").fadeOut(500, function(){
                     $("#invitebyemail").fadeIn(500)
                 })
@@ -318,16 +355,12 @@ p
             }
         })
 
-        edit_facebook_url = function(){
+        edit_facebook_url = function(summery){
             base_fb_url  = 'href="http://www.facebook.com/sharer.php?s=100&p[title]=Sitterfied"'
             summarry = "&p[summary]=YOUR_SUMMARY"
             url = "&p[url]=" + refer_url
             //"&p[images][0]=YOUR_IMAGE_TO_SHARE_OBJECT"
         }
-
-
-
-
 
 
     })
@@ -339,7 +372,7 @@ tell_friends = function(firstname){
     $("#email_form_block").fadeOut(500, function(){
 
         //Element Height = Viewport height - element.offset.top - desired bottom margin
-        start = $("#topcontent").position().top + $("#topcontent").height()
+        start = $(".thanksdiv").position().top + $(".thanksdiv").height()
         end = $(window).height()
         $("#share_with_friends_block").height(end-start)
         $("#share_with_friends_block").show("slide", { direction: "down" }, 500);

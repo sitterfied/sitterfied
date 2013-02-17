@@ -1,45 +1,79 @@
-/* line 5, ../sass/comingsoon.scss */
+@font-face {
+  font-family: "Proxima Nova";
+  src: url(/static/css/fonts/proxima_nova_reg-webfont.eot);
+  src: url(/static/css/fonts/proxima_nova_reg-webfont.eot?#iefix) format('eot'), url(/static/css/fonts/proxima_nova_reg-webfont.woff) format('woff'), url(/static/css/fonts/proxima_nova_reg-webfont.ttf) format('truetype'), url(/static/css/fonts/proxima_nova_reg-webfont.svg) format('svg');
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url(/static/css/fonts/proxima_nova_bold-webfont.eot);
+  src: url(/static/css/fonts/proxima_nova_bold-webfont.eot?#iefix) format('eot'), url(/static/css/fonts/proxima_nova_bold-webfont.woff) format('woff'), url(/static/css/fonts/proxima_nova_bold-webfont.ttf) format('truetype'), url(/static/css/fonts/proxima_nova_bold-webfont.svg) format('svg');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url(/static/css/fonts/proxima_nova_reg_it-webfont.eot);
+  src: url(/static/css/fonts/proxima_nova_reg_it-webfont.eot?#iefix) format('eot'), url(/static/css/fonts/proxima_nova_reg_it-webfont.woff) format('woff'), url(/static/css/fonts/proxima_nova_reg_it-webfont.ttf) format('truetype'), url(/static/css/fonts/proxima_nova_reg_it-webfont.svg) format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url(/static/css/fonts/proxima_nova_bold_it-webfont.eot);
+  src: url(/static/css/fonts/proxima_nova_bold_it-webfont.eot?#iefix) format('eot'), url(/static/css/fonts/proxima_nova_bold_it-webfont.woff) format('woff'), url(/static/css/fonts/proxima_nova_bold_it-webfont.ttf) format('truetype'), url(/static/css/fonts/proxima_nova_bold_it-webfont.svg) format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* line 36, ../sass/comingsoon.scss */
+h1, p, div {
+  font-family: 'Proxima Nova', sans-serif !important;
+}
+
+/* line 51, ../sass/comingsoon.scss */
 html, body {
   height: 100%;
   overflow: hidden;
 }
 
-/* line 10, ../sass/comingsoon.scss */
+/* line 56, ../sass/comingsoon.scss */
 #comingsoon {
   background: url("../img/background.jpg");
   color: white;
   background-size: cover;
   background-position: 0% 69%;
 }
-/* line 16, ../sass/comingsoon.scss */
+/* line 62, ../sass/comingsoon.scss */
 #comingsoon hr {
   height: 0px;
   border: .1em dashed;
   color: #c5c6be;
 }
 
-/* line 23, ../sass/comingsoon.scss */
+/* line 69, ../sass/comingsoon.scss */
 .vspacer {
   margin-top: 60px;
 }
 
-/* line 27, ../sass/comingsoon.scss */
+/* line 73, ../sass/comingsoon.scss */
 #content {
   min-height: 100%;
 }
 
-/* line 30, ../sass/comingsoon.scss */
+/* line 76, ../sass/comingsoon.scss */
 .container {
   height: 100%;
   height: auto !important;
 }
 
-/* line 35, ../sass/comingsoon.scss */
+/* line 81, ../sass/comingsoon.scss */
 .clear {
   clear: both;
 }
 
-/* line 39, ../sass/comingsoon.scss */
+/* line 85, ../sass/comingsoon.scss */
 footer {
   position: relative;
   margin-top: -60px;
@@ -53,27 +87,22 @@ footer {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* line 51, ../sass/comingsoon.scss */
+/* line 97, ../sass/comingsoon.scss */
 footer div {
   margin-top: 6px;
 }
 
-/* line 55, ../sass/comingsoon.scss */
-input[type="text"], input[type="email"] {
-  border: 0px !important;
-}
-
-/* line 60, ../sass/comingsoon.scss */
+/* line 102, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 65, ../sass/comingsoon.scss */
+/* line 107, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 68, ../sass/comingsoon.scss */
+/* line 110, ../sass/comingsoon.scss */
 input[type="radio"] + label {
   display: inline-block;
   width: 20px;
@@ -88,14 +117,14 @@ input[type="radio"] + label {
   border-radius: 2px;
 }
 
-/* line 78, ../sass/comingsoon.scss */
+/* line 120, ../sass/comingsoon.scss */
 input[type="radio"]:checked + label {
   background-repeat: no-repeat;
   background-position: center;
   background: white url(../img/green_checkmark.png);
 }
 
-/* line 84, ../sass/comingsoon.scss */
+/* line 126, ../sass/comingsoon.scss */
 .greencheck_box {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -108,32 +137,32 @@ input[type="radio"]:checked + label {
   vertical-align: middle;
 }
 
-/* line 94, ../sass/comingsoon.scss */
+/* line 136, ../sass/comingsoon.scss */
 .playbtn {
   margin-left: -20px;
   cursor: pointer;
   opacity: .5;
 }
 
-/* line 99, ../sass/comingsoon.scss */
+/* line 141, ../sass/comingsoon.scss */
 .playbtn:hover {
   opacity: 1;
 }
 
-/* line 103, ../sass/comingsoon.scss */
+/* line 145, ../sass/comingsoon.scss */
 #share_with_friends_block {
   display: none;
   height: 800px;
   background-color: #4E3539;
 }
 
-/* line 109, ../sass/comingsoon.scss */
+/* line 151, ../sass/comingsoon.scss */
 #footer-left {
   background: rgba(255, 255, 255, 0.3);
   float: left;
 }
 
-/* line 114, ../sass/comingsoon.scss */
+/* line 156, ../sass/comingsoon.scss */
 #footer-left {
   float: left;
   height: 100%;
@@ -141,28 +170,28 @@ input[type="radio"]:checked + label {
   width: 35%;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
-/* line 120, ../sass/comingsoon.scss */
+/* line 162, ../sass/comingsoon.scss */
 #footer-left p {
   float: right;
   text-align: right;
   margin-top: 16px;
 }
 
-/* line 126, ../sass/comingsoon.scss */
+/* line 168, ../sass/comingsoon.scss */
 #footer-right {
   height: 100%;
   width: 65%;
   float: right;
 }
 
-/* line 132, ../sass/comingsoon.scss */
+/* line 174, ../sass/comingsoon.scss */
 #socialicons {
   float: left;
   margin-left: 20px;
   margin-top: 8px;
 }
 
-/* line 139, ../sass/comingsoon.scss */
+/* line 181, ../sass/comingsoon.scss */
 .arrow-right {
   float: left;
   margin-top: 9px;
@@ -173,14 +202,14 @@ input[type="radio"]:checked + label {
   border-left: 13px solid rgba(255, 255, 255, 0.3);
 }
 
-/* line 149, ../sass/comingsoon.scss */
+/* line 191, ../sass/comingsoon.scss */
 .copied {
   position: relative;
   top: -4px;
   display: none;
 }
 
-/* line 156, ../sass/comingsoon.scss */
+/* line 198, ../sass/comingsoon.scss */
 .copy-button {
   margin-left: -36px;
   margin-top: -10px;
@@ -192,34 +221,63 @@ input[type="radio"]:checked + label {
   border-radius: 3px;
 }
 
-/* line 163, ../sass/comingsoon.scss */
+/* line 205, ../sass/comingsoon.scss */
 .smalltext {
   font-size: 12px;
 }
 
-/* line 167, ../sass/comingsoon.scss */
+/* line 209, ../sass/comingsoon.scss */
 .inline {
   display: inline;
 }
 
-/* line 171, ../sass/comingsoon.scss */
+/* line 213, ../sass/comingsoon.scss */
 #idcode {
   width: 250px;
 }
 
-/* line 176, ../sass/comingsoon.scss */
+/* line 218, ../sass/comingsoon.scss */
 .loading {
   display: none;
 }
 
-/* line 183, ../sass/comingsoon.scss */
-#invitebyemail {
-  display: none;
+/* line 222, ../sass/comingsoon.scss */
+#invitebynetwork {
+  min-height: 180px;
 }
 
-/* line 188, ../sass/comingsoon.scss */
+/* line 226, ../sass/comingsoon.scss */
+#invitebyemail {
+  display: none;
+  min-height: 180px;
+}
+
+/* line 231, ../sass/comingsoon.scss */
+#sharerow {
+  min-height: 260px;
+}
+
+/* line 235, ../sass/comingsoon.scss */
 textarea {
   resize: none;
   overflow: hidden;
   width: 420px !important;
+}
+
+/* line 241, ../sass/comingsoon.scss */
+.sharebtns a {
+  color: white;
+  opacity: .5;
+}
+
+/* line 245, ../sass/comingsoon.scss */
+.sharebtns a.active-share {
+  opacity: 1;
+}
+
+/* line 250, ../sass/comingsoon.scss */
+.sharebtns a:hover {
+  text-decoration: none;
+  color: white;
+  opacity: 1;
 }
