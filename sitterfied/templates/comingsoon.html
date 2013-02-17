@@ -269,6 +269,13 @@ facebook = function(){
             window_width = $(window).width()
             $("#footer-right").width(window_width - (left+pwidth) )
 
+
+        start = $(".thanksdiv").position().top + $(".thanksdiv").height() + 13
+        end = $(window).height()
+        $("#share_with_friends_block").height(end-start)
+
+
+
         });
 
         $(".email_input, .text_input").keyup(function(){
