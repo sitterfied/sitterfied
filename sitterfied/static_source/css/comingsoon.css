@@ -231,8 +231,13 @@ input[type="radio"]:checked + label {
   margin-right: 3px;
   display: none;
 }
+/* line 214, ../sass/comingsoon.scss */
+.copied i {
+  width: 50px;
+  margin-right: 3px;
+}
 
-/* line 217, ../sass/comingsoon.scss */
+/* line 220, ../sass/comingsoon.scss */
 .copy-button {
   margin-left: -36px;
   margin-top: -10px;
@@ -244,61 +249,61 @@ input[type="radio"]:checked + label {
   border-radius: 3px;
 }
 
-/* line 224, ../sass/comingsoon.scss */
+/* line 227, ../sass/comingsoon.scss */
 .smalltext {
   font-size: 12px;
 }
 
-/* line 228, ../sass/comingsoon.scss */
+/* line 231, ../sass/comingsoon.scss */
 .inline {
   display: inline;
 }
 
-/* line 232, ../sass/comingsoon.scss */
+/* line 235, ../sass/comingsoon.scss */
 #idcode {
   width: 250px;
 }
 
-/* line 237, ../sass/comingsoon.scss */
+/* line 240, ../sass/comingsoon.scss */
 .loading {
   display: none;
 }
 
-/* line 241, ../sass/comingsoon.scss */
+/* line 244, ../sass/comingsoon.scss */
 #invitebynetwork {
   min-height: 180px;
 }
 
-/* line 245, ../sass/comingsoon.scss */
+/* line 248, ../sass/comingsoon.scss */
 #invitebyemail {
   display: none;
   min-height: 180px;
 }
 
-/* line 250, ../sass/comingsoon.scss */
+/* line 253, ../sass/comingsoon.scss */
 #sharerow {
   min-height: 260px;
 }
 
-/* line 254, ../sass/comingsoon.scss */
+/* line 257, ../sass/comingsoon.scss */
 textarea {
   resize: none;
   overflow: hidden;
   width: 420px !important;
 }
 
-/* line 260, ../sass/comingsoon.scss */
+/* line 263, ../sass/comingsoon.scss */
 .sharebtns a {
   color: white;
   opacity: .5;
 }
 
-/* line 264, ../sass/comingsoon.scss */
+/* line 267, ../sass/comingsoon.scss */
 .sharebtns a.active-share {
   opacity: 1;
 }
 
-/* line 269, ../sass/comingsoon.scss */
+/* line 272, ../sass/comingsoon.scss */
 .sharebtns a:hover {
   text-decoration: none;
   color: white;
