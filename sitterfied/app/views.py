@@ -15,6 +15,8 @@ from .forms import ComingSoonInterestForm
 def index(request, referred_by=None):
     return {"referred_by":referred_by}
 
+
+@csrf_exempt
 @ajax_request
 @require_POST
 def comingsoon_email_submit(request):
@@ -25,9 +27,9 @@ def comingsoon_email_submit(request):
     else:
         return HttpResponse(status=400)
 
+@csrf_exempt
 @ajax_request
 @require_POST
-@csrf_exempt
 def invite_email_submit(request):
     emails = request.POST.getlist('email')
     emails = [email for email in emails if email != ""]
