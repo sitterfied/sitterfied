@@ -2,6 +2,7 @@
 from time import sleep
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 
 from annoying.decorators import render_to, ajax_request
 
@@ -26,6 +27,7 @@ def comingsoon_email_submit(request):
 
 @ajax_request
 @require_POST
+@csrf_exempt
 def invite_email_submit(request):
     emails = request.POST.getlist('email')
     emails = [email for email in emails if email != ""]
