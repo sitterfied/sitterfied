@@ -11,7 +11,6 @@
     '/static/css/fonts/marketotbold.svg', svg),
     '/static/css/fonts/marketotbold.eot');
 
-
 @include font-face('Proxima Nova',
   font-files(
     '/static/css/fonts/proxima_nova_reg-webfont.woff', woff,
@@ -40,6 +39,24 @@
     '/static/css/fonts/proxima_nova_bold_it-webfont.svg', svg),
     '/static/css/fonts/proxima_nova_bold_it-webfont.eot', bold, italic);
 
+@include font-face('Proxima Nova SBold',
+  font-files(
+    '/static/css/fonts/proxima_nova_sbold-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_sbold-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_sbold-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_sbold-webfont.eot');
+
+
+@include font-face('Proxima Nova SBold',
+  font-files(
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.eot', normal, italic);
+
+
+
+
 
 %proxima {
   font-family: 'Proxima Nova', sans-serif !important;
@@ -48,11 +65,19 @@
   font-family: 'marketo', sans-serif !important;
 }
 
+.semi-bold {
+  font-family: 'Proxima Nova SBold', sans-serif !important;
+}
 
 h1 {
   @extend %proxima;
-  width: 100%;
-  font-size: 50px !important;
+  width: 150%;
+  font-size: 55px !important;
+  font-weight: normal !important;
+}
+
+.largerfont {
+    font-size: 16px;
 }
 
 p {
@@ -65,14 +90,15 @@ div {
 
 html, body {
     height: 100%;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
 #comingsoon {
     background: url('../img/background.jpg') no-repeat;
+    min-height: 1000px;
+    overflow-y:hidden;
     color: white;
-    background-size: 100%;
-    background-position-y: 29%;
+    background-size: 1440px 1000px;
     hr {
         height:0px;
 	    border: .1em dashed;
@@ -80,15 +106,23 @@ html, body {
     }
 }
 
+.halfvspacer {
+    margin-top: 20px;
+}
+.bottomspacer {
+    margin-bottom: 25px;
+}
+
+
 .vspacer {
-    margin-top: 40px;
+    margin-top: 80px;
 }
 .vspacer2 {
-    margin-top: 130px;
+    margin-top: 180px;
 }
 
 #content {
-    min-height: 100%;
+    min-height: 1000px;
 }
 .container {
     height: 100%;
@@ -152,6 +186,7 @@ input[type="radio"]:checked + label {
 
 .playbtn {
     margin-left: -20px;
+    margin-top: -30px;
     cursor: pointer;
     opacity: .5;
 }
@@ -206,12 +241,13 @@ input[type="radio"]:checked + label {
 }
 
 .copied{
-    @extend %marketo;
     position: relative;
     top:-4px;
+    margin-left: 10px;
     margin-right: 3px;
     display:none;
     i {
+        font-weight: bold;
         width: 50px;
         margin-right: 3px;
     }
