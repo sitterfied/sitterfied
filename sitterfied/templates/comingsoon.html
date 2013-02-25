@@ -4,15 +4,13 @@
 Sitterfied
 {% endblock title %}
 
-{% block header %}{% endblock header %}
-
 {% block bodyclass %}
    id="comingsoon"
 {% endblock bodyclass %}
 
 {% block content %}
 <div id="topcontent">
-  <div class="vspacer"></div>
+  <div class="halfvspacer"></div>
   <div class="row-fluid">
     <div class="span12">
       <h1> Find and book friend-verified babysitters.</h1>
@@ -25,60 +23,63 @@ Sitterfied
       <img src="{{STATIC_URL}}img/logo.png" height=44 width=236 alt="sitterfied">
     </div>
   </div>
-
+  <div class="fullvspacer"></div>
   <div class="row-fluid hrrow">
-    <div class="span5">
+    <div class="span6">
       <hr>
     </div>
   </div>
 
-  <div class="halfvspacer"></div>
-  <div class="row-fluid">
-    <div class="span7 thanksdiv">
-      <b class="largerfont">Launching soon. Sign up and Invite your friends for early access.</b>
+  <div class="row-fluid margintop thanksdiv">
+    <div class="span6">
+      <b class="seventeen">We're launching soon. <a href="#" class="blog">Learn more about us here.</a></b>
+      <p><span class="semi-bold largerfont">Then sign up and Invite your friends for early access!</p>
     </div>
-    <div class="span2 offset2">
+    <div class="span2">
       <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
     </div>
   </div>
-  <div class="halfvspacer"></div>
   <div id="email_form_block">
     <form id="email_form">
       {% if referred_by %}
       <input type="hidden" id="referred_by" name="referred_by" value="{{referred_by}}">
       {% endif %}
       <div class="row-fluid">
-        <div class="span1">
-          <input type="radio" id="parent" name="parent_or_sitter" value="p" checked>
-          <label for="parent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent
-          </label>
-        </div>
-        <div class="span1">
-          <input type="radio" id="sitter" name="parent_or_sitter" value="s" >
-          <label for="sitter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sitter</label>
+        <div class="span6">
+          <div class="row-fluid">
+            <div class="span1">
+              <input type="radio" id="parent" name="parent_or_sitter" value="p" checked>
+              <label for="parent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent
+              </label>
+            </div>
+            <div class="span1 offset2">
+              <input type="radio" id="sitter" name="parent_or_sitter" value="s" >
+              <label for="sitter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sitter</label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row-fluid">
         <div class="span6">
-          <input type="text" class="text_input" name="name" pattern="\w+ \w+"placeholder="First name Last name" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+          <input type="text" class="text_input front-input" name="name" title="Please enter both first and last name" pattern="\w+ \w+[\w ]*"placeholder="First & Last Name" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/checkbox.png" />
         </div>
       </div>
 
       <div class="row-fluid">
         <div class="span6">
-          <input class="email_input" name="email" type="email" placeholder="Email" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/greencheck_box.png" />
+          <input class="email_input front-input" name="email" type="email" title="Your email address doesn't look right" placeholder="Email Address" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/checkbox.png" />
         </div>
       </div>
 
       <div class="row-fluid">
-        <div class="span2">
-          <input class="btn btn-info" type="submit" value="GO" >
+        <div class="span3">
+          <button class="btn btn-info" type="submit"><b class="seventeen">KEEP ME POSTED</b></button>
         </div>
       </div>
     </form>
 
     <div class="row-fluid">
-      <div class="span5">
+      <div class="span8">
         <hr>
       </div>
     </div>
@@ -92,6 +93,8 @@ Sitterfied
   </div>
 </div>
 </div>
+
+<div id="notharmed">No children were harmed in the making of this photo. Just very tired little arms.</div>
 <div id="share_with_friends_block">
   <div class="container">
     <div class="halfvspacer"></div>
@@ -229,12 +232,6 @@ Sitterfied
 
 {% block body_media %}
 <script type="text/javascript">
-    left = $("h1").offset().left
-    pwidth = $("#footer-left > p").width()
-    $("#footer-left").width(left+pwidth)
-    window_width = $(window).width() - 15
-
-    $("#footer-right").width(window_width - (left+pwidth) + 15 )
     var refer_url;
 
 tweet = function() {
@@ -266,22 +263,9 @@ facebook = function(){
 }
 
 
-    $(document).ready(function(){
-        $(window).resize(function () {
-            left = $("h1").offset().left
-            pwidth = $("#footer-left > p").width()
-            $("#footer-left").width(left+pwidth)
-            window_width = $(window).width() -10
-            $("#footer-right").width(window_width - (left+pwidth) + 15 )
+    $(document).ready(function()
+    {
 
-
-        start = $(".thanksdiv").position().top + $(".thanksdiv").height() + 13
-        end = $(window).height()
-        $("#share_with_friends_block").height(end-start)
-
-
-
-        });
 
         $(".email_input, .text_input").keyup(function(){
           valid = this.checkValidity()
@@ -358,7 +342,7 @@ facebook = function(){
             e.preventDefault();
             e.stopPropagation();
 
-        })
+        });
         $("#sharewithemail").click(function(e){
             if (!$("#invitebyemail").is("visible")) {
                 $(this).switchClass("", "active-share")
@@ -371,7 +355,7 @@ facebook = function(){
             }
             e.preventDefault();
             e.stopPropagation();
-        })
+        });
 
         edit_facebook_url = function(summery){
             base_fb_url  = 'href="http://www.facebook.com/sharer.php?s=100&p[title]=Sitterfied"'
@@ -384,15 +368,16 @@ facebook = function(){
     })
 tell_friends = function(firstname){
     $(".hrrow").css("visibility", "hidden");
+    function capitaliseFirstLetter(string)
+    {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     $(".thanksdiv").fadeOut(500, function(){
-        $(".thanksdiv").html("<h2>Thanks " + firstname + "!</h2>").fadeIn()
+        $(".thanksdiv").html("<h2>Thanks " + capitaliseFirstLetter(firstname) + "!</h2>").fadeIn()
     })
+    $("#notharmed").hide()
     $("#email_form_block").fadeOut(500, function(){
 
-        //Element Height = Viewport height - element.offset.top - desired bottom margin
-        start = $(".thanksdiv").position().top + $(".thanksdiv").height() + 13
-        end = $("body").height()
-        $("#share_with_friends_block").height(end-start)
         $("#share_with_friends_block").show("slide", { direction: "down" }, 500);
     });
 }

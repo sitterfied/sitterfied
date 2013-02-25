@@ -26,7 +26,7 @@
     '/static/css/fonts/proxima_nova_bold-webfont.eot', bold);
 
 @include font-face('Proxima Nova',
-  font-files(
+  font-files(p
     '/static/css/fonts/proxima_nova_reg_it-webfont.woff', woff,
     '/static/css/fonts/proxima_nova_reg_it-webfont.ttf', ttf,
     '/static/css/fonts/proxima_nova_reg_it-webfont.svg', svg),
@@ -56,8 +56,6 @@
 
 
 
-
-
 %proxima {
   font-family: 'Proxima Nova', sans-serif !important;
 }
@@ -79,10 +77,21 @@ h1 {
 .largerfont {
     font-size: 16px;
 }
+.seventeen {
+    font-size: 17px;
+}
 
 p {
   @extend %proxima;
 }
+button {
+  @extend %proxima;
+
+  b {
+      line-height: 29px;
+  }
+}
+
 div {
   @extend %proxima;
 }
@@ -107,7 +116,10 @@ html, body {
 }
 
 .halfvspacer {
-    margin-top: 20px;
+    padding-top: 20px;
+}
+.fullvspacer {
+    padding-top: 60px;
 }
 .bottomspacer {
     margin-bottom: 25px;
@@ -115,10 +127,10 @@ html, body {
 
 
 .vspacer {
-    margin-top: 80px;
+    margin-top: 100px;
 }
 .vspacer2 {
-    margin-top: 180px;
+    margin-top: 120px;
 }
 
 #content {
@@ -133,22 +145,9 @@ html, body {
     clear:both;
 }
 
-footer{
-    position: relative;
-    margin-top: -45px; /* negative value of footer height */
-    height: 45px;
-    width: 100%;
-    clear:both;
-    background-repeat:no-repeat;
-    background-size:100% 100%;
-    border-top: 1px solid rgba(255, 255, 255, .2);
-    background: rgba(255, 255, 255, .1);
+.front-input{
+    margin-bottom: 20px !important;
 }
-
-footer div {
-    margin-top: 6px;
-}
-
 
 input[type="radio"] {
     display:none;
@@ -166,18 +165,18 @@ input[type="radio"] + label {
     cursor:pointer;
     vertical-align:middle;
     @include border-radius(2px);
+    margin-bottom: 20px;
 }
 
 input[type="radio"]:checked + label {
     background-repeat:no-repeat;
     background-position:center;
-    background:white url(../img/green_checkmark.png);
+    background:white url(../img/green_checkmark.png) no-repeat center center;
 }
 
 .greencheck_box {
-    @include border-radius(3px);
     margin-left: -30px;
-    margin-top: -10px;
+    margin-top: -20px;
     width: 28px;
 
     vertical-align:middle;
@@ -185,8 +184,8 @@ input[type="radio"]:checked + label {
 }
 
 .playbtn {
-    margin-left: -20px;
-    margin-top: -30px;
+    margin-left: -70px;
+    margin-top: -16px;
     cursor: pointer;
     opacity: .5;
 }
@@ -202,42 +201,74 @@ input[type="radio"]:checked + label {
 
 #footer-left {
     background: rgba(255, 255, 255, .3);
-    float: left;
+    height: 50px;
+    width: 35%;
+    display: inline-block;
 }
 
 #footer-left {
-    float: left;
-    height: 100%;
-    margin-top: 0px;
-    width: 35%;
-    border-top: 1px solid rgba(255, 255, 255, .4);
     p {
         float: right;
         text-align:right;
         margin-top:16px;
+        margin-right: 10px;
     }
 }
 #footer-right {
-    height: 100%;
+    height: 50px;
+    display:inline-block;
     width: 65%;
-    float: right;
+    margin-left: -4px;
+    background: rgba(184,180, 163, .9);
 
 }
+.blog {
+    color: #359dad;
+}
+.blog:hover {
+    color: white;
+    text-decoration:none !important;
+}
+
 #socialicons {
-    float: left;
-    margin-left:20px;
-    margin-top:5px;
-
+    height: 50px;
+    margin-left: 30px;
 }
+
+#socialicons .circle {
+    float: left;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: white;
+    height:30px;
+    width: 30px;
+    @include border-radius(30px);
+}
+.facebook {
+    background: url(../img/facebookicon.png) no-repeat center center;
+}
+
+.facebook:hover {
+    background-color: #3b5998 !important;
+}
+
+.twitter {
+    background: url(../img/twittericon.png) no-repeat center center;
+}
+
+.twitter:hover {
+    background-color: #00bcf5 !important;
+}
+
 
 .arrow-right {
     float: left;
-    margin-top:9px;
+    margin-top:11px;
 	width: 0;
 	height: 0;
 	border-top: 13px solid transparent;
 	border-bottom: 13px solid transparent;
-	border-left: 13px solid rgba(255, 255, 255, .3);
+	border-left: 13px solid rgba(255, 255, 255, .2);
 }
 
 .copied{
@@ -309,4 +340,16 @@ textarea {
     text-decoration: none;
     color: white;
     opacity: 1;
+}
+
+.margintop {
+    margin-top: 10px;
+}
+
+#notharmed {
+    position: absolute;
+    top: 915px;
+    left: 780px;
+    @extend %proxima;
+    font-size: 12px;
 }
