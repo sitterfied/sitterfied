@@ -26,7 +26,7 @@
     '/static/css/fonts/proxima_nova_bold-webfont.eot', bold);
 
 @include font-face('Proxima Nova',
-  font-files(p
+  font-files(
     '/static/css/fonts/proxima_nova_reg_it-webfont.woff', woff,
     '/static/css/fonts/proxima_nova_reg_it-webfont.ttf', ttf,
     '/static/css/fonts/proxima_nova_reg_it-webfont.svg', svg),
