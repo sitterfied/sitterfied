@@ -205,9 +205,10 @@ input[type="radio"]:checked + label {
   display: none;
   height: 800px;
   background-color: #4E3539;
+  overflow: hidden;
 }
 
-/* line 202, ../sass/comingsoon.scss */
+/* line 203, ../sass/comingsoon.scss */
 #footer-left {
   background: rgba(255, 255, 255, 0.3);
   height: 50px;
@@ -215,7 +216,7 @@ input[type="radio"]:checked + label {
   display: inline-block;
 }
 
-/* line 210, ../sass/comingsoon.scss */
+/* line 211, ../sass/comingsoon.scss */
 #footer-left p {
   float: right;
   text-align: right;
@@ -223,7 +224,7 @@ input[type="radio"]:checked + label {
   margin-right: 10px;
 }
 
-/* line 217, ../sass/comingsoon.scss */
+/* line 218, ../sass/comingsoon.scss */
 #footer-right {
   height: 50px;
   display: inline-block;
@@ -232,24 +233,24 @@ input[type="radio"]:checked + label {
   background: rgba(184, 180, 163, 0.9);
 }
 
-/* line 225, ../sass/comingsoon.scss */
+/* line 226, ../sass/comingsoon.scss */
 .blog {
   color: #359dad;
 }
 
-/* line 228, ../sass/comingsoon.scss */
+/* line 229, ../sass/comingsoon.scss */
 .blog:hover {
   color: white;
   text-decoration: none !important;
 }
 
-/* line 233, ../sass/comingsoon.scss */
+/* line 234, ../sass/comingsoon.scss */
 #socialicons {
   height: 50px;
   margin-left: 30px;
 }
 
-/* line 238, ../sass/comingsoon.scss */
+/* line 239, ../sass/comingsoon.scss */
 #socialicons .circle {
   float: left;
   margin-top: 10px;
@@ -264,27 +265,27 @@ input[type="radio"]:checked + label {
   border-radius: 30px;
 }
 
-/* line 247, ../sass/comingsoon.scss */
+/* line 248, ../sass/comingsoon.scss */
 .facebook {
   background: url(../img/facebookicon.png) no-repeat center center;
 }
 
-/* line 251, ../sass/comingsoon.scss */
+/* line 252, ../sass/comingsoon.scss */
 .facebook:hover {
   background-color: #3b5998 !important;
 }
 
-/* line 255, ../sass/comingsoon.scss */
+/* line 256, ../sass/comingsoon.scss */
 .twitter {
   background: url(../img/twittericon.png) no-repeat center center;
 }
 
-/* line 259, ../sass/comingsoon.scss */
+/* line 260, ../sass/comingsoon.scss */
 .twitter:hover {
   background-color: #00bcf5 !important;
 }
 
-/* line 264, ../sass/comingsoon.scss */
+/* line 265, ../sass/comingsoon.scss */
 .arrow-right {
   float: left;
   margin-top: 11px;
@@ -295,7 +296,7 @@ input[type="radio"]:checked + label {
   border-left: 13px solid rgba(255, 255, 255, 0.2);
 }
 
-/* line 274, ../sass/comingsoon.scss */
+/* line 275, ../sass/comingsoon.scss */
 .copied {
   position: relative;
   top: -4px;
@@ -303,14 +304,14 @@ input[type="radio"]:checked + label {
   margin-right: 3px;
   display: none;
 }
-/* line 280, ../sass/comingsoon.scss */
+/* line 281, ../sass/comingsoon.scss */
 .copied i {
   font-weight: bold;
   width: 50px;
   margin-right: 3px;
 }
 
-/* line 287, ../sass/comingsoon.scss */
+/* line 288, ../sass/comingsoon.scss */
 .copy-button {
   margin-left: -36px;
   margin-top: -10px;
@@ -322,73 +323,73 @@ input[type="radio"]:checked + label {
   border-radius: 3px;
 }
 
-/* line 294, ../sass/comingsoon.scss */
+/* line 295, ../sass/comingsoon.scss */
 .smalltext {
   font-size: 12px;
 }
 
-/* line 298, ../sass/comingsoon.scss */
+/* line 299, ../sass/comingsoon.scss */
 .inline {
   display: inline;
 }
 
-/* line 302, ../sass/comingsoon.scss */
+/* line 303, ../sass/comingsoon.scss */
 #idcode {
   width: 250px;
 }
 
-/* line 307, ../sass/comingsoon.scss */
+/* line 308, ../sass/comingsoon.scss */
 .loading {
   display: none;
 }
 
-/* line 311, ../sass/comingsoon.scss */
+/* line 312, ../sass/comingsoon.scss */
 #invitebynetwork {
   min-height: 180px;
 }
 
-/* line 315, ../sass/comingsoon.scss */
+/* line 316, ../sass/comingsoon.scss */
 #invitebyemail {
   display: none;
   min-height: 180px;
 }
 
-/* line 320, ../sass/comingsoon.scss */
+/* line 321, ../sass/comingsoon.scss */
 #sharerow {
   min-height: 260px;
 }
 
-/* line 324, ../sass/comingsoon.scss */
+/* line 325, ../sass/comingsoon.scss */
 textarea {
   resize: none;
   overflow: hidden;
   width: 420px !important;
 }
 
-/* line 330, ../sass/comingsoon.scss */
+/* line 331, ../sass/comingsoon.scss */
 .sharebtns a {
   color: white;
   opacity: .5;
 }
 
-/* line 334, ../sass/comingsoon.scss */
+/* line 335, ../sass/comingsoon.scss */
 .sharebtns a.active-share {
   opacity: 1;
 }
 
-/* line 339, ../sass/comingsoon.scss */
+/* line 340, ../sass/comingsoon.scss */
 .sharebtns a:hover {
   text-decoration: none;
   color: white;
   opacity: 1;
 }
 
-/* line 345, ../sass/comingsoon.scss */
+/* line 346, ../sass/comingsoon.scss */
 .margintop {
   margin-top: 10px;
 }
 
-/* line 349, ../sass/comingsoon.scss */
+/* line 350, ../sass/comingsoon.scss */
 #notharmed {
   position: absolute;
   top: 915px;

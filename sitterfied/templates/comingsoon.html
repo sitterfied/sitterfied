@@ -373,11 +373,12 @@ tell_friends = function(firstname){
     return string.charAt(0).toUpperCase() + string.slice(1);
     }
     $(".thanksdiv").fadeOut(500, function(){
-        $(".thanksdiv").html("<h2>Thanks " + capitaliseFirstLetter(firstname) + "!</h2>").fadeIn()
+        $(".fullvspacer").hide()
+
+        $(".thanksdiv").html("<h2>Thanks " + capitaliseFirstLetter(firstname) + "!</h2>").fadeIn().removeClass('margintop')
     })
     $("#notharmed").hide()
     $("#email_form_block").fadeOut(500, function(){
-
         $("#share_with_friends_block").show("slide", { direction: "down" }, 500);
     });
 }

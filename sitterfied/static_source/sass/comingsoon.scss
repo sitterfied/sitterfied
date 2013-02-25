@@ -197,6 +197,7 @@ input[type="radio"]:checked + label {
     display:none;
     height:     800px;
     background-color: #4E3539;
+    overflow: hidden;
 }
 
 #footer-left {
