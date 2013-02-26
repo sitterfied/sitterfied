@@ -32,8 +32,8 @@ Sitterfied
 
   <div class="row-fluid margintop thanksdiv">
     <div class="span6">
-      <b class="seventeen">We're launching soon. <a href="#" class="blog">Learn more about us here.</a></b>
-      <p><span class="semi-bold largerfont">Then sign up and Invite your friends for early access!</p>
+      <p class="seventeen semi-bold">We're launching soon. <a href="#" class="blog">Learn more about us here.</a></p>
+      <p><span class="largerfont">Then sign up and Invite your friends for early access!</p>
     </div>
     <div class="span2">
       <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
@@ -73,7 +73,7 @@ Sitterfied
 
       <div class="row-fluid">
         <div class="span3">
-          <button class="btn btn-info" type="submit"><b class="seventeen">KEEP ME POSTED</b></button>
+          <button class="btn btn-info" type="submit"><p class="seventeen semi-bold">KEEP ME POSTED</b></button>
         </div>
       </div>
     </form>
@@ -110,13 +110,13 @@ Sitterfied
         <div class="row-fluid">
 
           <div class="span12">
-            <h3>Want Priority Access?</h3>
+            <h3 class="semi-bold">Want Priority Access?</h3>
           </div>
 
         </div>
         <div class="row-fluid">
 
-          <div class="span12 semi-bold">
+          <div class="span12">
             Sign up 5 friends (<i>one must be a sitter</i>) and<br> we'll invite
             you all to our private beta program
           </div>
@@ -125,7 +125,7 @@ Sitterfied
 
         </div>
         <div class="row-fluid">
-          <div class="span12 semi-bold">
+          <div class="span12">
             The more friends you invite the sooner you'll gain
             access :)
           </div>
@@ -159,14 +159,10 @@ Sitterfied
 
         <div id="invitebynetwork">
           <div class="row-fluid">
-            <div class="span12 inline">
-              <input size="100" type="text" class="idcode" readonly="readonly" value=""><img data-clipboard-text="Copy Me!" class="copy-button" src="{{STATIC_URL}}img/copybutton.png" />
-              <span class="copied"><i>Copied!</i></span>
-            </div>
-          </div>
-          <div class="row-fluid">
             <div class="span12">
-              <textarea cols="40" rows="2" id="sharetext">Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free:</textarea>
+              <textarea cols="40" rows="3" id="sharetext">Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free:</textarea>
+            <div class="halfvspacer"></div>
+
             </div>
           </div>
           <div class="row-fluid">
@@ -235,6 +231,19 @@ Sitterfied
 {% block body_media %}
 <script type="text/javascript">
     var refer_url;
+
+margin_left = $('.container').css('margin-left')
+$("#footer-left > p").css('margin-left', margin_left)
+footer_right_width = $(window).width() - $("#footer-left").width() - 10
+$("#footer-right").css('width', footer_right_width)
+
+$(window).resize(function(){
+    margin_left = $('.container').css('margin-left')
+$("#footer-left > p").css('margin-left', margin_left)
+footer_right_width = $(window).width() - $("#footer-left").width() - 10
+$("#footer-right").css('width', footer_right_width)
+
+    })
 
 tweet = function() {
     totweet = $("#sharetext").val()
@@ -377,7 +386,7 @@ tell_friends = function(firstname){
     $(".thanksdiv").fadeOut(500, function(){
         $(".fullvspacer").hide()
 
-        $(".thanksdiv").html("<h2>Thanks " + capitaliseFirstLetter(firstname) + "!</h2>").fadeIn().removeClass('margintop')
+        $(".thanksdiv").html("<h2 class='semi-bold'>Thanks " + capitaliseFirstLetter(firstname) + "!</h2>").fadeIn().removeClass('margintop')
     })
     $("#notharmed").hide()
     $("#email_form_block").fadeOut(500, function(){

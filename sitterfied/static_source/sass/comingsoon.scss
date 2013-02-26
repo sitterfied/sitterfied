@@ -70,6 +70,7 @@
 h1 {
   @extend %proxima;
   width: 150%;
+  margin-left: -3px !important;
   font-size: 55px !important;
   font-weight: normal !important;
 }
@@ -103,17 +104,29 @@ html, body {
 }
 
 #comingsoon {
-    background: url('../img/background.jpg') no-repeat;
-    min-height: 1000px;
+    background: url('../img/background.jpg')  no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     overflow-y:hidden;
     color: white;
-    background-size: 1440px 1000px;
+    width: 100%;
+    height: auto;
     hr {
         height:0px;
 	    border: .1em dashed;
         color: #c5c6be;
     }
 }
+@media only all and (max-width: 1440px) and (max-height: 1000px) {
+  #comingsoon {
+    background: url('../img/background.jpg') no-repeat;
+    background-size: 1440px 1000px;
+    -moz-background-size: 1440px 1000px;
+  }
+}
+
 
 .halfvspacer {
     padding-top: 20px;
@@ -130,7 +143,7 @@ html, body {
     margin-top: 100px;
 }
 .vspacer2 {
-    margin-top: 120px;
+    margin-top: 135px;
 }
 
 #content {
@@ -212,13 +225,12 @@ input[type="radio"]:checked + label {
 #footer-left {
     background: rgba(255, 255, 255, .3);
     height: 50px;
-    width: 35%;
     display: inline-block;
 }
 
 #footer-left {
     p {
-        float: right;
+        float:right;
         text-align:right;
         margin-top:16px;
         margin-right: 10px;
@@ -227,7 +239,6 @@ input[type="radio"]:checked + label {
 #footer-right {
     height: 50px;
     display:inline-block;
-    width: 65%;
     margin-left: -4px;
     background: rgba(184,180, 163, .9);
 
@@ -295,10 +306,9 @@ input[type="radio"]:checked + label {
 }
 
 .copy-button {
-    margin-left: -36px;
+    margin-left: -43px;
     margin-top: -9px;
-    width: 35px;
-    @include border-radius(3px);
+    width: 42px;
 }
 
 .smalltext{
