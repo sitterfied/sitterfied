@@ -54,7 +54,12 @@
     '/static/css/fonts/proxima_nova_sbold_it-webfont.svg', svg),
     '/static/css/fonts/proxima_nova_sbold_it-webfont.eot', normal, italic);
 
-
+backgroundTransition {
+   -webkit-transition:background 300ms ease-in;
+   -moz-transition:background 300ms ease-in;
+   -o-transition:background 300ms ease-in;
+   transition:background 300ms ease-in;
+}
 
 %proxima {
   font-family: 'Proxima Nova', sans-serif !important;
@@ -260,26 +265,39 @@ input[type="radio"]:checked + label {
     float: left;
     margin-top: 10px;
     margin-right: 10px;
-    background-color: white;
     height:30px;
     width: 30px;
     @include border-radius(30px);
+    overflow:hidden;
 }
 .facebook {
-    background: url(../img/facebookicon.png) no-repeat center center;
+    background: url(../img/facebook.png) no-repeat center center;
 }
 
 .facebook:hover {
-    background-color: #3b5998 !important;
+    @extend backgroundTransition;
+    background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
 .twitter {
-    background: url(../img/twittericon.png) no-repeat center center;
+    background: url(../img/twitter.png) no-repeat center center;
 }
 
 .twitter:hover {
-    background-color: #00bcf5 !important;
+    @extend backgroundTransition;
+    background: url(../img/twitter-hover.png) no-repeat center center;
 }
+.mail {
+    background: url(../img/mail.png) no-repeat center center;
+}
+
+.mail:hover {
+    @extend backgroundTransition;
+    background: url(../img/mail-hover.png) no-repeat center center;
+
+}
+
+
 
 
 .arrow-right {
