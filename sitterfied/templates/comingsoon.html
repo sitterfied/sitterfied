@@ -33,7 +33,7 @@ Sitterfied
   <div class="row-fluid margintop thanksdiv">
     <div class="span6">
       <p class="seventeen semi-bold">We're launching soon. <a href="#" class="blog">Learn more about us here.</a></p>
-      <p><span class="largerfont">Then sign up and Invite your friends for early access!</p>
+      <p><span class="largerfont">Then sign up and invite your friends for early access!</p>
     </div>
     <div class="span2">
       <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
@@ -61,13 +61,13 @@ Sitterfied
       </div>
       <div class="row-fluid">
         <div class="span6">
-          <input type="text" class="text_input front-input" name="name" title="Please enter both first and last name" pattern="\w+ \w+[\w ]*"placeholder="First & Last Name" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/checkbox.png" />
+          <input type="text" class="text_input front-input" name="name" data-error="Please enter both first and last name" pattern="\w+ \w+[\w ]*"placeholder="First & Last Name" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/checkbox.png" />
         </div>
       </div>
 
       <div class="row-fluid">
         <div class="span6">
-          <input class="email_input front-input" name="email" type="email" title="Your email address doesn't look right" placeholder="Email Address" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/checkbox.png" />
+          <input class="email_input front-input" name="email" type="email" data-error="Your email address doesn't look right" placeholder="Email Address" required><img style="display:none" class="greencheck_box" src="{{STATIC_URL}}img/checkbox.png" />
         </div>
       </div>
 
@@ -127,14 +127,15 @@ Sitterfied
         <div class="row-fluid">
           <div class="span12">
             The more friends you invite the sooner you'll gain
-            access :)
+            access!
           </div>
           <div class="clear"></div>
           <div class="bottomspacer"></div>
         </div>
         <div class="row-fluid">
           <div class="span12 inline">
-            <input size="100" type="text" class="idcode" readonly="readonly" value=""><img data-clipboard-text="Copy Me!" class="copy-button" src="{{STATIC_URL}}img/copybutton.png" />
+            <input size="100" type="text" class="idcode" readonly="readonly" value="">
+            <button data-clipboard-text="Copy Me!" class="btn-info copy-button">COPY</button>
             <span class="copied"><i>Copied!</i></span>
           </div>
 
@@ -161,24 +162,25 @@ Sitterfied
           <div class="row-fluid">
             <div class="span12">
               <textarea cols="40" rows="3" id="sharetext">Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free:</textarea>
+              <div class="span1 offset10"><p id="twittercount"></p></div>
             <div class="halfvspacer"></div>
 
             </div>
           </div>
           <div class="row-fluid">
-            <div class="span6">
-              <button class="btn btn-info" onclick="facebook()">
-                <img src="{{STATIC_URL}}img/facebookbtnimg.png">
-                &nbsp;&nbsp;&nbsp;
-                Share on facebook
-              </button class="btn btn-info">
-            </div>
-            <div class="span6">
+            <div class="span5 pull-right">
               <button class="btn btn-info" onclick="tweet()">
                 <img src="{{STATIC_URL}}img/tweetbtnimg.png">
                 &nbsp;&nbsp;&nbsp;
                 Tweet on twitter
               </button>
+            </div>
+            <div class="span5 pull-right">
+              <button class="btn btn-info" onclick="facebook()">
+                <img src="{{STATIC_URL}}img/facebookbtnimg.png">
+                &nbsp;&nbsp;&nbsp;
+                Share on facebook
+              </button class="btn btn-info">
             </div>
           </div>
         </div>
@@ -273,23 +275,38 @@ facebook = function(){
 	return false;
 }
 
-
-    $(document).ready(function()
-    {
+$(document).ready(function() {
 
 
-        $(".email_input, .text_input").keyup(function(){
-          valid = this.checkValidity()
-          that = $(this)
-          val = that.val()
-          if (valid && val !== "") {
-             $(this).next().show()
-          }
-          else {
-             $(this).next().hide()
-          }
+    $("#sharetext").keyup(function(e){
+        twittercount = 140 - $(this).val().length
+        $("#twittercount").html(twittercount)
+    })
 
-      })
+    $("input").bind('invalid',function(e){
+        console.log('test')
+        e.target.setCustomValidity("");
+        if (!e.target.validity.valid) {
+            title = $(this).data('error')
+            e.target.setCustomValidity(title)
+        }
+        return true
+    }).on('oninput', function(e){
+        e.target.setCustomValidity("");
+    })
+
+    $(".email_input, .text_input").keyup(function(){
+            valid = this.checkValidity()
+            that = $(this)
+            val = that.val()
+            if (valid && val !== "") {
+                $(this).next().show()
+            }
+            else {
+                $(this).next().hide()
+            }
+
+        });
 
 
        $("#email_form").submit(function(e){
@@ -307,6 +324,8 @@ facebook = function(){
                $("#referral_link").attr("value", refer_url)
                val = $("#sharetext").val()
                $("#sharetext").val(val + " " + refer_url)
+               $("#sharetext").keyup()
+
            })
            tell_friends(firstname)
            return false
@@ -376,7 +395,7 @@ facebook = function(){
         }
 
 
-    })
+});
 tell_friends = function(firstname){
     $(".hrrow").css("visibility", "hidden");
     function capitaliseFirstLetter(string)

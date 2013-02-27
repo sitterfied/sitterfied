@@ -47,7 +47,29 @@
   font-style: italic;
 }
 
-/* line 57, ../sass/comingsoon.scss */
+/* line 58, ../sass/comingsoon.scss */
+::-webkit-input-placeholder {
+  font-family: 'Proxima Nova', sans-serif !important;
+}
+
+/* line 61, ../sass/comingsoon.scss */
+::-moz-placeholder {
+  font-family: 'Proxima Nova', sans-serif !important;
+}
+
+/* firefox 19+ */
+/* line 64, ../sass/comingsoon.scss */
+:-ms-input-placeholder {
+  font-family: 'Proxima Nova', sans-serif !important;
+}
+
+/* ie */
+/* line 67, ../sass/comingsoon.scss */
+input:-moz-placeholder {
+  font-family: 'Proxima Nova', sans-serif !important;
+}
+
+/* line 71, ../sass/comingsoon.scss */
 backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   -webkit-transition: background 300ms ease-in;
   -moz-transition: background 300ms ease-in;
@@ -55,46 +77,55 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   transition: background 300ms ease-in;
 }
 
-/* line 64, ../sass/comingsoon.scss */
+/* line 78, ../sass/comingsoon.scss */
 h1, p, button, div, #notharmed {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 71, ../sass/comingsoon.scss */
+/* line 85, ../sass/comingsoon.scss */
 .semi-bold {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
 
-/* line 75, ../sass/comingsoon.scss */
+/* line 89, ../sass/comingsoon.scss */
 h1 {
+  text-shadow: 1px 1px 0px gray;
   width: 150%;
   margin-left: -3px !important;
   font-size: 55px !important;
   font-weight: normal !important;
 }
 
-/* line 83, ../sass/comingsoon.scss */
+/* line 98, ../sass/comingsoon.scss */
 .largerfont {
   font-size: 16px;
 }
 
-/* line 86, ../sass/comingsoon.scss */
+/* line 101, ../sass/comingsoon.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 96, ../sass/comingsoon.scss */
+/* line 105, ../sass/comingsoon.scss */
+button p {
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+/* line 119, ../sass/comingsoon.scss */
 button b {
   line-height: 29px;
 }
 
-/* line 106, ../sass/comingsoon.scss */
+/* line 129, ../sass/comingsoon.scss */
 html, body {
   height: 100%;
   overflow-x: hidden;
 }
 
-/* line 111, ../sass/comingsoon.scss */
+/* line 134, ../sass/comingsoon.scss */
 #comingsoon {
   background: url("../img/background.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -106,7 +137,7 @@ html, body {
   width: 100%;
   height: auto;
 }
-/* line 121, ../sass/comingsoon.scss */
+/* line 144, ../sass/comingsoon.scss */
 #comingsoon hr {
   height: 0px;
   border: .1em dashed;
@@ -114,70 +145,70 @@ html, body {
 }
 
 @media only all and (max-width: 1440px) and (max-height: 1000px) {
-  /* line 128, ../sass/comingsoon.scss */
+  /* line 151, ../sass/comingsoon.scss */
   #comingsoon {
     background: url("../img/background.jpg") no-repeat;
     background-size: 1440px 1000px;
     -moz-background-size: 1440px 1000px;
   }
 }
-/* line 136, ../sass/comingsoon.scss */
+/* line 159, ../sass/comingsoon.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 139, ../sass/comingsoon.scss */
+/* line 162, ../sass/comingsoon.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 142, ../sass/comingsoon.scss */
+/* line 165, ../sass/comingsoon.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 147, ../sass/comingsoon.scss */
+/* line 170, ../sass/comingsoon.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 150, ../sass/comingsoon.scss */
+/* line 173, ../sass/comingsoon.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 154, ../sass/comingsoon.scss */
+/* line 177, ../sass/comingsoon.scss */
 #content {
   min-height: 1000px;
 }
 
-/* line 157, ../sass/comingsoon.scss */
+/* line 180, ../sass/comingsoon.scss */
 .container {
   height: 100%;
   height: auto !important;
 }
 
-/* line 162, ../sass/comingsoon.scss */
+/* line 185, ../sass/comingsoon.scss */
 .clear {
   clear: both;
 }
 
-/* line 166, ../sass/comingsoon.scss */
+/* line 189, ../sass/comingsoon.scss */
 .front-input {
   margin-bottom: 20px !important;
 }
 
-/* line 170, ../sass/comingsoon.scss */
+/* line 193, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 175, ../sass/comingsoon.scss */
+/* line 198, ../sass/comingsoon.scss */
 input[type="radio"] {
   display: none;
 }
 
-/* line 178, ../sass/comingsoon.scss */
+/* line 201, ../sass/comingsoon.scss */
 input[type="radio"] + label {
   display: inline-block;
   width: 20px;
@@ -185,38 +216,35 @@ input[type="radio"] + label {
   background-color: white;
   cursor: pointer;
   vertical-align: middle;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
   margin-bottom: 20px;
 }
 
-/* line 189, ../sass/comingsoon.scss */
+/* line 211, ../sass/comingsoon.scss */
 input[type="radio"]:checked + label {
   background-repeat: no-repeat;
   background-position: center;
   background: white url(../img/green_checkmark.png) no-repeat center center;
 }
 
-/* line 195, ../sass/comingsoon.scss */
+/* line 217, ../sass/comingsoon.scss */
 .greencheck_box {
-  margin-left: -30px;
+  margin-left: -29px;
   margin-top: -20px;
-  width: 28px;
+  width: 27.9px;
+  height: 27.9px;
   vertical-align: middle;
 }
 
-/* line 203, ../sass/comingsoon.scss */
+/* line 225, ../sass/comingsoon.scss */
 .greencheck_box_lessmargin {
   margin-left: -29px;
   margin-top: -10px;
-  width: 28px;
+  width: 27.9px;
+  height: 27.9px;
   vertical-align: middle;
 }
 
-/* line 213, ../sass/comingsoon.scss */
+/* line 235, ../sass/comingsoon.scss */
 .playbtn {
   margin-left: -70px;
   margin-top: -16px;
@@ -224,12 +252,12 @@ input[type="radio"]:checked + label {
   opacity: .5;
 }
 
-/* line 219, ../sass/comingsoon.scss */
+/* line 241, ../sass/comingsoon.scss */
 .playbtn:hover {
   opacity: 1;
 }
 
-/* line 223, ../sass/comingsoon.scss */
+/* line 245, ../sass/comingsoon.scss */
 #share_with_friends_block {
   display: none;
   height: 800px;
@@ -237,14 +265,14 @@ input[type="radio"]:checked + label {
   overflow: hidden;
 }
 
-/* line 230, ../sass/comingsoon.scss */
+/* line 252, ../sass/comingsoon.scss */
 #footer-left {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(192, 187, 172, 0.9);
   height: 50px;
   display: inline-block;
 }
 
-/* line 237, ../sass/comingsoon.scss */
+/* line 259, ../sass/comingsoon.scss */
 #footer-left p {
   float: right;
   text-align: right;
@@ -252,7 +280,7 @@ input[type="radio"]:checked + label {
   margin-right: 10px;
 }
 
-/* line 244, ../sass/comingsoon.scss */
+/* line 266, ../sass/comingsoon.scss */
 #footer-right {
   height: 50px;
   display: inline-block;
@@ -260,24 +288,24 @@ input[type="radio"]:checked + label {
   background: rgba(184, 180, 163, 0.9);
 }
 
-/* line 251, ../sass/comingsoon.scss */
+/* line 273, ../sass/comingsoon.scss */
 .blog {
   color: #359dad;
 }
 
-/* line 254, ../sass/comingsoon.scss */
+/* line 276, ../sass/comingsoon.scss */
 .blog:hover {
   color: white;
   text-decoration: none !important;
 }
 
-/* line 259, ../sass/comingsoon.scss */
+/* line 281, ../sass/comingsoon.scss */
 #socialicons {
   height: 50px;
   margin-left: 30px;
 }
 
-/* line 264, ../sass/comingsoon.scss */
+/* line 286, ../sass/comingsoon.scss */
 #socialicons .circle {
   float: left;
   margin-top: 10px;
@@ -292,37 +320,37 @@ input[type="radio"]:checked + label {
   overflow: hidden;
 }
 
-/* line 273, ../sass/comingsoon.scss */
+/* line 295, ../sass/comingsoon.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 277, ../sass/comingsoon.scss */
+/* line 299, ../sass/comingsoon.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 282, ../sass/comingsoon.scss */
+/* line 304, ../sass/comingsoon.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 286, ../sass/comingsoon.scss */
+/* line 308, ../sass/comingsoon.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 290, ../sass/comingsoon.scss */
+/* line 312, ../sass/comingsoon.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 294, ../sass/comingsoon.scss */
+/* line 316, ../sass/comingsoon.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
-/* line 303, ../sass/comingsoon.scss */
+/* line 325, ../sass/comingsoon.scss */
 .arrow-right {
   float: left;
   margin-top: 11px;
@@ -330,10 +358,10 @@ input[type="radio"]:checked + label {
   height: 0;
   border-top: 13px solid transparent;
   border-bottom: 13px solid transparent;
-  border-left: 13px solid rgba(255, 255, 255, 0.2);
+  border-left: 13px solid #beb8a9;
 }
 
-/* line 313, ../sass/comingsoon.scss */
+/* line 335, ../sass/comingsoon.scss */
 .copied {
   position: relative;
   top: -4px;
@@ -341,90 +369,95 @@ input[type="radio"]:checked + label {
   margin-right: 3px;
   display: none;
 }
-/* line 319, ../sass/comingsoon.scss */
+/* line 341, ../sass/comingsoon.scss */
 .copied i {
   font-weight: bold;
   width: 50px;
   margin-right: 3px;
 }
 
-/* line 326, ../sass/comingsoon.scss */
+/* line 348, ../sass/comingsoon.scss */
 .copy-button {
-  margin-left: -43px;
+  padding: 2px;
+  margin-left: -51px;
   margin-top: -9px;
-  width: 42px;
 }
 
-/* line 332, ../sass/comingsoon.scss */
+/* line 354, ../sass/comingsoon.scss */
 .smalltext {
   font-size: 12px;
 }
 
-/* line 336, ../sass/comingsoon.scss */
+/* line 358, ../sass/comingsoon.scss */
 .inline {
   display: inline;
 }
 
-/* line 340, ../sass/comingsoon.scss */
+/* line 362, ../sass/comingsoon.scss */
 .idcode {
   width: 350px !important;
 }
 
-/* line 345, ../sass/comingsoon.scss */
+/* line 367, ../sass/comingsoon.scss */
 .loading {
   display: none;
 }
 
-/* line 349, ../sass/comingsoon.scss */
+/* line 371, ../sass/comingsoon.scss */
 #invitebynetwork {
   min-height: 180px;
 }
 
-/* line 353, ../sass/comingsoon.scss */
+/* line 375, ../sass/comingsoon.scss */
 #invitebyemail {
   display: none;
   min-height: 180px;
 }
 
-/* line 358, ../sass/comingsoon.scss */
+/* line 380, ../sass/comingsoon.scss */
 #sharerow {
-  min-height: 260px;
+  min-height: 280px;
 }
 
-/* line 362, ../sass/comingsoon.scss */
+/* line 384, ../sass/comingsoon.scss */
 textarea {
   resize: none;
   overflow: hidden;
   width: 420px !important;
 }
 
-/* line 368, ../sass/comingsoon.scss */
+/* line 390, ../sass/comingsoon.scss */
 .sharebtns a {
   color: white;
   opacity: .5;
 }
 
-/* line 372, ../sass/comingsoon.scss */
+/* line 394, ../sass/comingsoon.scss */
 .sharebtns a.active-share {
   opacity: 1;
 }
 
-/* line 377, ../sass/comingsoon.scss */
+/* line 399, ../sass/comingsoon.scss */
 .sharebtns a:hover {
   text-decoration: none;
   color: white;
   opacity: 1;
 }
 
-/* line 383, ../sass/comingsoon.scss */
+/* line 405, ../sass/comingsoon.scss */
 .margintop {
   margin-top: 10px;
 }
 
-/* line 387, ../sass/comingsoon.scss */
+/* line 409, ../sass/comingsoon.scss */
 #notharmed {
   position: absolute;
   top: 915px;
   left: 780px;
   font-size: 12px;
+}
+
+/* line 417, ../sass/comingsoon.scss */
+#twittercount {
+  color: #2f96b4;
 }

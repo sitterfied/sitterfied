@@ -54,6 +54,20 @@
     '/static/css/fonts/proxima_nova_sbold_it-webfont.svg', svg),
     '/static/css/fonts/proxima_nova_sbold_it-webfont.eot', normal, italic);
 
+
+::-webkit-input-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+}
+::-moz-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+} /* firefox 19+ */
+:-ms-input-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+} /* ie */
+input:-moz-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+}
+
 backgroundTransition {
    -webkit-transition:background 300ms ease-in;
    -moz-transition:background 300ms ease-in;
@@ -74,6 +88,7 @@ backgroundTransition {
 
 h1 {
   @extend %proxima;
+  text-shadow: 1px 1px 0px gray;
   width: 150%;
   margin-left: -3px !important;
   font-size: 55px !important;
@@ -85,6 +100,14 @@ h1 {
 }
 .seventeen {
     font-size: 17px;
+}
+
+button p {
+    text-align: center;
+    vertical-align:middle;
+    display:inline-block;
+    margin-bottom: 0px;
+
 }
 
 p {
@@ -182,7 +205,6 @@ input[type="radio"] + label {
     background-color:white;
     cursor:pointer;
     vertical-align:middle;
-    @include border-radius(2px);
     margin-bottom: 20px;
 }
 
@@ -193,18 +215,18 @@ input[type="radio"]:checked + label {
 }
 
 .greencheck_box {
-    margin-left: -30px;
+    margin-left: -29px;
     margin-top: -20px;
-    width: 28px;
-
+    width: 27.9px;
+    height: 27.9px;
     vertical-align:middle;
 
 }
 .greencheck_box_lessmargin {
     margin-left: -29px;
     margin-top: -10px;
-    width: 28px;
-
+    width: 27.9px;
+    height: 27.9px;
     vertical-align:middle;
 
 }
@@ -228,7 +250,7 @@ input[type="radio"]:checked + label {
 }
 
 #footer-left {
-    background: rgba(255, 255, 255, .3);
+    background: rgba(192, 187, 172, .9);
     height: 50px;
     display: inline-block;
 }
@@ -307,7 +329,7 @@ input[type="radio"]:checked + label {
 	height: 0;
 	border-top: 13px solid transparent;
 	border-bottom: 13px solid transparent;
-	border-left: 13px solid rgba(255, 255, 255, .2);
+	border-left: 13px solid rgba(190, 184, 169, 1);
 }
 
 .copied{
@@ -324,9 +346,9 @@ input[type="radio"]:checked + label {
 }
 
 .copy-button {
-    margin-left: -43px;
+    padding:2px;
+    margin-left: -51px;
     margin-top: -9px;
-    width: 42px;
 }
 
 .smalltext{
@@ -356,7 +378,7 @@ input[type="radio"]:checked + label {
 }
 
 #sharerow {
-    min-height: 260px;
+    min-height: 280px;
 }
 
 textarea {
@@ -390,4 +412,8 @@ textarea {
     left: 780px;
     @extend %proxima;
     font-size: 12px;
+}
+
+#twittercount {
+    color: #2f96b4;
 }
