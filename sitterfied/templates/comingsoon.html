@@ -236,13 +236,13 @@ Sitterfied
 
 margin_left = $('.container').css('margin-left')
 $("#footer-left > p").css('margin-left', margin_left)
-footer_right_width = $(window).width() - $("#footer-left").width() - 10
+footer_right_width = $(window).width() - $("#footer-left").width()
 $("#footer-right").css('width', footer_right_width)
 
 $(window).resize(function(){
     margin_left = $('.container').css('margin-left')
 $("#footer-left > p").css('margin-left', margin_left)
-footer_right_width = $(window).width() - $("#footer-left").width() - 10
+footer_right_width = $(window).width() - $("#footer-left").width()
 $("#footer-right").css('width', footer_right_width)
 
     })
