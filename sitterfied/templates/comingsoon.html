@@ -142,12 +142,13 @@ Sitterfied
           <div class="bottomspacer"></div>
         </div>
         <div class="row-fluid">
-          <div class="span12 inline">
-            <input size="100" type="text" class="idcode" readonly="readonly" value="">
+          <div class="span10" style="position:relative;">
             <button data-clipboard-text="Copy Me!" class="btn-info copy-button">COPY</button>
+            <input size="100" type="text" class="idcode input-block-level" readonly="readonly" value="">
+          </div>
+          <div class="span1">
             <span class="copied"><i>Copied!</i></span>
           </div>
-
         </div>
       </div>
 
@@ -203,18 +204,27 @@ Sitterfied
           <form id="invite_email_form">
             <input type="hidden" id="referral_link" name="referral_link" value="">
             <div class="row-fluid">
-              <div class="span12">
-                <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box_lessmargin" src="{{STATIC_URL}}img/checkbox.png" />
+              <div class="span6" style="position:relative;">
+                <div class="greencheck_div_lessmargin" style="display:none;">
+                  <img  class="greencheck_box"  src="{{STATIC_URL}}img/checkbox.png" />
+                </div>
+                <input class="email_input" name="email" type="email" placeholder="Email">
               </div>
             </div>
             <div class="row-fluid">
-              <div class="span12">
-                <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box_lessmargin" src="{{STATIC_URL}}img/checkbox.png" />
+              <div class="span6" style="position:relative;">
+                <div class="greencheck_div_lessmargin" style="display:none;">
+                  <img  class="greencheck_box"  src="{{STATIC_URL}}img/checkbox.png" />
+                </div>
+                <input class="email_input" name="email" type="email" placeholder="Email">
               </div>
             </div>
             <div class="row-fluid">
-              <div class="span12">
-                <input class="email_input" name="email" type="email" placeholder="Email"><img style="display:none" class="greencheck_box_lessmargin" src="{{STATIC_URL}}img/checkbox.png" />
+              <div class="span6" style="position:relative;">
+                <div class="greencheck_div_lessmargin" style="display:none;">
+                  <img  class="greencheck_box"  src="{{STATIC_URL}}img/checkbox.png" />
+                </div>
+                <input class="email_input" name="email" type="email" placeholder="Email">
               </div>
             </div>
             <div class="row-fluid">
@@ -360,7 +370,7 @@ $(document).ready(function() {
             moviePath: "{{STATIC_URL}}swf/ZeroClipboard.swf"
         });
         clip.on( 'complete', function(client, args) {
-            cc = $(this).next()
+            cc = $('.copied')
             cc.fadeIn(500)
             setTimeout(function(){
                 cc.fadeOut(500)

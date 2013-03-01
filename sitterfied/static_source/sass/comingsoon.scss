@@ -222,18 +222,19 @@ input[type="radio"]:checked + label {
     z-index: 4;
 }
 
+.greencheck_div_lessmargin {
+    right:6px !important;
+    @extend .greencheck_div;
+}
+
 .greencheck_box {
     width: 28px;
     height: 28px;
 
 }
 .greencheck_box_lessmargin {
-    margin-left: -29px;
-    margin-top: -10px;
     width: 27.9px;
     height: 27.9px;
-    vertical-align:middle;
-
 }
 
 
@@ -345,15 +346,17 @@ input[type="radio"]:checked + label {
     display:none;
     i {
         font-weight: bold;
-        width: 50px;
+        line-height: 40px;
         margin-right: 3px;
     }
 }
 
 .copy-button {
-    padding:2px;
-    margin-left: -51px;
-    margin-top: -9px;
+    position:absolute;
+    right:1px;
+    top:1px;
+    height: 28px;
+    z-index: 4;
 }
 
 .smalltext{
@@ -362,11 +365,6 @@ input[type="radio"]:checked + label {
 
 .inline {
     display:inline;
-}
-
-.idcode {
-    width: 350px !important;
-
 }
 
 .loading {

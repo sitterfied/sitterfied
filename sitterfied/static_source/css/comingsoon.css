@@ -226,7 +226,7 @@ input[type="radio"]:checked + label {
 }
 
 /* line 216, ../sass/comingsoon.scss */
-.greencheck_div {
+.greencheck_div, .greencheck_div_lessmargin {
   position: absolute;
   right: 1px;
   top: 1px;
@@ -236,21 +236,23 @@ input[type="radio"]:checked + label {
 }
 
 /* line 225, ../sass/comingsoon.scss */
+.greencheck_div_lessmargin {
+  right: 6px !important;
+}
+
+/* line 230, ../sass/comingsoon.scss */
 .greencheck_box {
   width: 28px;
   height: 28px;
 }
 
-/* line 230, ../sass/comingsoon.scss */
+/* line 235, ../sass/comingsoon.scss */
 .greencheck_box_lessmargin {
-  margin-left: -29px;
-  margin-top: -10px;
   width: 27.9px;
   height: 27.9px;
-  vertical-align: middle;
 }
 
-/* line 240, ../sass/comingsoon.scss */
+/* line 241, ../sass/comingsoon.scss */
 .playbtn {
   margin-left: -70px;
   margin-top: -16px;
@@ -258,12 +260,12 @@ input[type="radio"]:checked + label {
   opacity: .5;
 }
 
-/* line 246, ../sass/comingsoon.scss */
+/* line 247, ../sass/comingsoon.scss */
 .playbtn:hover {
   opacity: 1;
 }
 
-/* line 250, ../sass/comingsoon.scss */
+/* line 251, ../sass/comingsoon.scss */
 #share_with_friends_block {
   display: none;
   height: 800px;
@@ -271,14 +273,14 @@ input[type="radio"]:checked + label {
   overflow: hidden;
 }
 
-/* line 257, ../sass/comingsoon.scss */
+/* line 258, ../sass/comingsoon.scss */
 #footer-left {
   background: rgba(192, 187, 172, 0.9);
   height: 50px;
   display: inline-block;
 }
 
-/* line 264, ../sass/comingsoon.scss */
+/* line 265, ../sass/comingsoon.scss */
 #footer-left p {
   float: right;
   text-align: right;
@@ -286,7 +288,7 @@ input[type="radio"]:checked + label {
   margin-right: 10px;
 }
 
-/* line 271, ../sass/comingsoon.scss */
+/* line 272, ../sass/comingsoon.scss */
 #footer-right {
   height: 50px;
   display: inline-block;
@@ -294,24 +296,24 @@ input[type="radio"]:checked + label {
   background: rgba(184, 180, 163, 0.9);
 }
 
-/* line 278, ../sass/comingsoon.scss */
+/* line 279, ../sass/comingsoon.scss */
 .blog {
   color: #359dad;
 }
 
-/* line 281, ../sass/comingsoon.scss */
+/* line 282, ../sass/comingsoon.scss */
 .blog:hover {
   color: white;
   text-decoration: none !important;
 }
 
-/* line 286, ../sass/comingsoon.scss */
+/* line 287, ../sass/comingsoon.scss */
 #socialicons {
   height: 50px;
   margin-left: 30px;
 }
 
-/* line 291, ../sass/comingsoon.scss */
+/* line 292, ../sass/comingsoon.scss */
 #socialicons .circle {
   float: left;
   margin-top: 10px;
@@ -326,37 +328,37 @@ input[type="radio"]:checked + label {
   overflow: hidden;
 }
 
-/* line 300, ../sass/comingsoon.scss */
+/* line 301, ../sass/comingsoon.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 304, ../sass/comingsoon.scss */
+/* line 305, ../sass/comingsoon.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 309, ../sass/comingsoon.scss */
+/* line 310, ../sass/comingsoon.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 313, ../sass/comingsoon.scss */
+/* line 314, ../sass/comingsoon.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 317, ../sass/comingsoon.scss */
+/* line 318, ../sass/comingsoon.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 321, ../sass/comingsoon.scss */
+/* line 322, ../sass/comingsoon.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
-/* line 330, ../sass/comingsoon.scss */
+/* line 331, ../sass/comingsoon.scss */
 .arrow-right {
   float: left;
   margin-top: 11px;
@@ -367,7 +369,7 @@ input[type="radio"]:checked + label {
   border-left: 13px solid #beb8a9;
 }
 
-/* line 340, ../sass/comingsoon.scss */
+/* line 341, ../sass/comingsoon.scss */
 .copied {
   position: relative;
   top: -4px;
@@ -375,87 +377,84 @@ input[type="radio"]:checked + label {
   margin-right: 3px;
   display: none;
 }
-/* line 346, ../sass/comingsoon.scss */
+/* line 347, ../sass/comingsoon.scss */
 .copied i {
   font-weight: bold;
-  width: 50px;
+  line-height: 40px;
   margin-right: 3px;
 }
 
-/* line 353, ../sass/comingsoon.scss */
+/* line 354, ../sass/comingsoon.scss */
 .copy-button {
-  padding: 2px;
-  margin-left: -51px;
-  margin-top: -9px;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  height: 28px;
+  z-index: 4;
 }
 
-/* line 359, ../sass/comingsoon.scss */
+/* line 362, ../sass/comingsoon.scss */
 .smalltext {
   font-size: 12px;
 }
 
-/* line 363, ../sass/comingsoon.scss */
+/* line 366, ../sass/comingsoon.scss */
 .inline {
   display: inline;
 }
 
-/* line 367, ../sass/comingsoon.scss */
-.idcode {
-  width: 350px !important;
-}
-
-/* line 372, ../sass/comingsoon.scss */
+/* line 370, ../sass/comingsoon.scss */
 .loading {
   display: none;
 }
 
-/* line 376, ../sass/comingsoon.scss */
+/* line 374, ../sass/comingsoon.scss */
 #invitebynetwork {
   min-height: 180px;
 }
 
-/* line 380, ../sass/comingsoon.scss */
+/* line 378, ../sass/comingsoon.scss */
 #invitebyemail {
   display: none;
   min-height: 180px;
 }
 
-/* line 385, ../sass/comingsoon.scss */
+/* line 383, ../sass/comingsoon.scss */
 #sharerow {
   min-height: 280px;
 }
 
-/* line 389, ../sass/comingsoon.scss */
+/* line 387, ../sass/comingsoon.scss */
 textarea {
   resize: none;
   overflow: hidden;
   width: 420px !important;
 }
 
-/* line 395, ../sass/comingsoon.scss */
+/* line 393, ../sass/comingsoon.scss */
 .sharebtns a {
   color: white;
   opacity: .5;
 }
 
-/* line 399, ../sass/comingsoon.scss */
+/* line 397, ../sass/comingsoon.scss */
 .sharebtns a.active-share {
   opacity: 1;
 }
 
-/* line 404, ../sass/comingsoon.scss */
+/* line 402, ../sass/comingsoon.scss */
 .sharebtns a:hover {
   text-decoration: none;
   color: white;
   opacity: 1;
 }
 
-/* line 410, ../sass/comingsoon.scss */
+/* line 408, ../sass/comingsoon.scss */
 .margintop {
   margin-top: 10px;
 }
 
-/* line 414, ../sass/comingsoon.scss */
+/* line 412, ../sass/comingsoon.scss */
 #notharmed {
   position: absolute;
   top: 915px;
@@ -463,7 +462,7 @@ textarea {
   font-size: 12px;
 }
 
-/* line 422, ../sass/comingsoon.scss */
+/* line 420, ../sass/comingsoon.scss */
 #twittercount {
   color: #2f96b4;
 }
