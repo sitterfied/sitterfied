@@ -186,8 +186,26 @@ button b {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
+/* line 166, ../sass/sitterfied.scss */
+.facebook-preload {
+  display: none !important;
+  background: url(../img/facebook-hover.png) no-repeat center center;
+}
+
+/* line 171, ../sass/sitterfied.scss */
+.twitter-preload {
+  display: none !important;
+  background: url(../img/twitter-hover.png) no-repeat center center;
+}
+
+/* line 175, ../sass/sitterfied.scss */
+.mail-preload {
+  display: none !important;
+  background: url(../img/mail-hover.png) no-repeat center center;
+}
+
 /* The ghost, nudged to maintain perfect centering */
-/* line 169, ../sass/sitterfied.scss */
+/* line 184, ../sass/sitterfied.scss */
 .vcenter:before {
   content: '';
   display: inline-block;
@@ -196,40 +214,40 @@ button b {
   /* Adjusts for spacing */
 }
 
-/* line 176, ../sass/sitterfied.scss */
+/* line 191, ../sass/sitterfied.scss */
 .vcenter {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 181, ../sass/sitterfied.scss */
+/* line 196, ../sass/sitterfied.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 185, ../sass/sitterfied.scss */
+/* line 200, ../sass/sitterfied.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 188, ../sass/sitterfied.scss */
+/* line 203, ../sass/sitterfied.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 194, ../sass/sitterfied.scss */
+/* line 209, ../sass/sitterfied.scss */
 #topcontainer {
   background: url(../img/backgroundtile.png) repeat;
 }
 
-/* line 198, ../sass/sitterfied.scss */
+/* line 213, ../sass/sitterfied.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 202, ../sass/sitterfied.scss */
+/* line 217, ../sass/sitterfied.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
