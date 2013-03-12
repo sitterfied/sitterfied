@@ -213,3 +213,8 @@ button b {
 #topcontainer {
   background: url(../img/backgroundtile.png) repeat;
 }
+
+/* line 190, ../sass/sitterfied.scss */
+.nodisplay {
+  display: none;
+}

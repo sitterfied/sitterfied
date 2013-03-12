@@ -214,6 +214,11 @@ button b {
   background: url(../img/backgroundtile.png) repeat;
 }
 
+/* line 190, ../sass/sitterfied.scss */
+.nodisplay {
+  display: none;
+}
+
 /* line 7, ../sass/comingsoon.scss */
 h1 {
   width: 150%;
