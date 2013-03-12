@@ -6,35 +6,36 @@
 /* line 4, ../sass/howitworks.scss */
 #howitworks {
   background: #edeff2;
+  color: #616161;
 }
 
-/* line 8, ../sass/howitworks.scss */
+/* line 9, ../sass/howitworks.scss */
 #wheneverwant, #youcantrust {
   position: absolute;
 }
 
-/* line 11, ../sass/howitworks.scss */
+/* line 12, ../sass/howitworks.scss */
 #wheneverwant {
   top: -50px;
 }
 
-/* line 14, ../sass/howitworks.scss */
+/* line 16, ../sass/howitworks.scss */
 #youcantrust {
   top: 30px;
   left: 30px;
 }
 
-/* line 20, ../sass/howitworks.scss */
+/* line 22, ../sass/howitworks.scss */
 .hundredwidth {
   width: 100%;
 }
 
-/* line 24, ../sass/howitworks.scss */
+/* line 26, ../sass/howitworks.scss */
 #topcontainer .container {
   padding-right: 20px;
 }
 
-/* line 27, ../sass/howitworks.scss */
+/* line 29, ../sass/howitworks.scss */
 #topcontainer-content {
   padding-right: 20px;
   background: white;
@@ -44,7 +45,7 @@
   border-top: 5px solid;
 }
 
-/* line 36, ../sass/howitworks.scss */
+/* line 38, ../sass/howitworks.scss */
 #bottomcontainer {
   padding-right: 20px;
   border-color: #e8ebed !important;
@@ -54,24 +55,25 @@
   background: white;
 }
 
-/* line 46, ../sass/howitworks.scss */
+/* line 48, ../sass/howitworks.scss */
 .header {
   height: 100px;
   line-height: 100px;
 }
 
-/* line 52, ../sass/howitworks.scss */
+/* line 54, ../sass/howitworks.scss */
 .simple {
   color: #3fb0bd;
   font-weight: normal;
 }
 
-/* line 56, ../sass/howitworks.scss */
+/* line 58, ../sass/howitworks.scss */
 .weexist {
-  color: #003366;
+  font-size: 36px;
+  color: #104952;
 }
 
-/* line 59, ../sass/howitworks.scss */
+/* line 62, ../sass/howitworks.scss */
 hr {
   margin-left: 20px !important;
   height: 0px;
@@ -80,12 +82,18 @@ hr {
   opacity: .5;
 }
 
-/* line 67, ../sass/howitworks.scss */
+/* line 70, ../sass/howitworks.scss */
+.icontext {
+  color: #104952;
+  font-size: 24pt;
+}
+
+/* line 78, ../sass/howitworks.scss */
 h4 {
   color: #104952 !important;
 }
 
-/* line 71, ../sass/howitworks.scss */
+/* line 82, ../sass/howitworks.scss */
 .helpus {
   color: #003366;
   text-align: center;
