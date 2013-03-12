@@ -78,7 +78,7 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
 }
 
 /* line 76, ../sass/sitterfied.scss */
-p, button, div {
+p, .header, button, div {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
@@ -111,78 +111,83 @@ button p {
   margin-bottom: 0px;
 }
 
-/* line 107, ../sass/sitterfied.scss */
+/* line 104, ../sass/sitterfied.scss */
+.header {
+  color: white;
+}
+
+/* line 112, ../sass/sitterfied.scss */
 button b {
   line-height: 29px;
 }
 
-/* line 114, ../sass/sitterfied.scss */
+/* line 119, ../sass/sitterfied.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 117, ../sass/sitterfied.scss */
+/* line 122, ../sass/sitterfied.scss */
 .quartervspacer {
   padding-top: 16px;
 }
 
-/* line 120, ../sass/sitterfied.scss */
+/* line 125, ../sass/sitterfied.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 123, ../sass/sitterfied.scss */
+/* line 128, ../sass/sitterfied.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 126, ../sass/sitterfied.scss */
+/* line 131, ../sass/sitterfied.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 129, ../sass/sitterfied.scss */
+/* line 134, ../sass/sitterfied.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 132, ../sass/sitterfied.scss */
+/* line 137, ../sass/sitterfied.scss */
 .clear {
   clear: both;
 }
 
-/* line 135, ../sass/sitterfied.scss */
+/* line 140, ../sass/sitterfied.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 139, ../sass/sitterfied.scss */
+/* line 144, ../sass/sitterfied.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 144, ../sass/sitterfied.scss */
+/* line 149, ../sass/sitterfied.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 148, ../sass/sitterfied.scss */
+/* line 153, ../sass/sitterfied.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 152, ../sass/sitterfied.scss */
+/* line 157, ../sass/sitterfied.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 156, ../sass/sitterfied.scss */
+/* line 161, ../sass/sitterfied.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
 /* The ghost, nudged to maintain perfect centering */
-/* line 164, ../sass/sitterfied.scss */
+/* line 169, ../sass/sitterfied.scss */
 .vcenter:before {
   content: '';
   display: inline-block;
@@ -191,35 +196,41 @@ button b {
   /* Adjusts for spacing */
 }
 
-/* line 171, ../sass/sitterfied.scss */
+/* line 176, ../sass/sitterfied.scss */
 .vcenter {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 176, ../sass/sitterfied.scss */
+/* line 181, ../sass/sitterfied.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 180, ../sass/sitterfied.scss */
+/* line 185, ../sass/sitterfied.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 183, ../sass/sitterfied.scss */
+/* line 188, ../sass/sitterfied.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 189, ../sass/sitterfied.scss */
+/* line 194, ../sass/sitterfied.scss */
 #topcontainer {
   background: url(../img/backgroundtile.png) repeat;
 }
 
-/* line 193, ../sass/sitterfied.scss */
+/* line 198, ../sass/sitterfied.scss */
 .nodisplay {
   display: none;
+}
+
+/* line 202, ../sass/sitterfied.scss */
+.marginten {
+  margin-right: 10px;
+  margin-left: 10px;
 }

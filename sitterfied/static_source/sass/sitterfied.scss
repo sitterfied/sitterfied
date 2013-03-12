@@ -101,6 +101,11 @@ button p {
 p {
   @extend %proxima;
 }
+.header {
+  @extend %proxima;
+  color:white;
+}
+
 button {
   @extend %proxima;
 
@@ -192,4 +197,9 @@ div {
 
 .nodisplay {
     display:none;
+}
+
+.marginten {
+    margin-right: 10px;
+    margin-left: 10px;
 }
