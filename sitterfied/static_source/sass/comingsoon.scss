@@ -2,89 +2,7 @@
 @import "compass/css3/images";
 @import "compass/css3/border-radius";
 @import "compass/css3/font-face";
-
-
-@include font-face('marketo',
-  font-files(
-    '/static/css/fonts/marketotbold.woff', woff,
-    '/static/css/fonts/marketotbold.ttf', ttf,
-    '/static/css/fonts/marketotbold.svg', svg),
-    '/static/css/fonts/marketotbold.eot');
-
-@include font-face('Proxima Nova',
-  font-files(
-    '/static/css/fonts/proxima_nova_reg-webfont.woff', woff,
-    '/static/css/fonts/proxima_nova_reg-webfont.ttf', ttf,
-    '/static/css/fonts/proxima_nova_reg-webfont.svg', svg),
-    '/static/css/fonts/proxima_nova_reg-webfont.eot');
-
-@include font-face('Proxima Nova',
-  font-files(
-    '/static/css/fonts/proxima_nova_bold-webfont.woff', woff,
-    '/static/css/fonts/proxima_nova_bold-webfont.ttf', ttf,
-    '/static/css/fonts/proxima_nova_bold-webfont.svg', svg),
-    '/static/css/fonts/proxima_nova_bold-webfont.eot', bold);
-
-@include font-face('Proxima Nova',
-  font-files(
-    '/static/css/fonts/proxima_nova_reg_it-webfont.woff', woff,
-    '/static/css/fonts/proxima_nova_reg_it-webfont.ttf', ttf,
-    '/static/css/fonts/proxima_nova_reg_it-webfont.svg', svg),
-    '/static/css/fonts/proxima_nova_reg_it-webfont.eot', normal, italic);
-
-@include font-face('Proxima Nova',
-  font-files(
-    '/static/css/fonts/proxima_nova_bold_it-webfont.woff', woff,
-    '/static/css/fonts/proxima_nova_bold_it-webfont.ttf', ttf,
-    '/static/css/fonts/proxima_nova_bold_it-webfont.svg', svg),
-    '/static/css/fonts/proxima_nova_bold_it-webfont.eot', bold, italic);
-
-@include font-face('Proxima Nova SBold',
-  font-files(
-    '/static/css/fonts/proxima_nova_sbold-webfont.woff', woff,
-    '/static/css/fonts/proxima_nova_sbold-webfont.ttf', ttf,
-    '/static/css/fonts/proxima_nova_sbold-webfont.svg', svg),
-    '/static/css/fonts/proxima_nova_sbold-webfont.eot');
-
-
-@include font-face('Proxima Nova SBold',
-  font-files(
-    '/static/css/fonts/proxima_nova_sbold_it-webfont.woff', woff,
-    '/static/css/fonts/proxima_nova_sbold_it-webfont.ttf', ttf,
-    '/static/css/fonts/proxima_nova_sbold_it-webfont.svg', svg),
-    '/static/css/fonts/proxima_nova_sbold_it-webfont.eot', normal, italic);
-
-
-::-webkit-input-placeholder {
-    font-family: 'Proxima Nova', sans-serif !important;
-}
-::-moz-placeholder {
-    font-family: 'Proxima Nova', sans-serif !important;
-} /* firefox 19+ */
-:-ms-input-placeholder {
-    font-family: 'Proxima Nova', sans-serif !important;
-} /* ie */
-input:-moz-placeholder {
-    font-family: 'Proxima Nova', sans-serif !important;
-}
-
-backgroundTransition {
-   -webkit-transition:background 300ms ease-in;
-   -moz-transition:background 300ms ease-in;
-   -o-transition:background 300ms ease-in;
-   transition:background 300ms ease-in;
-}
-
-%proxima {
-  font-family: 'Proxima Nova', sans-serif !important;
-}
-%marketo {
-  font-family: 'marketo', sans-serif !important;
-}
-
-.semi-bold {
-  font-family: 'Proxima Nova SBold', sans-serif !important;
-}
+@import "sitterfied";
 
 h1 {
   @extend %proxima;
@@ -97,33 +15,6 @@ h1 {
 .largerfont {
     font-size: 16px;
 }
-.seventeen {
-    font-size: 17px;
-}
-
-button p {
-    text-align: center;
-    vertical-align:middle;
-    display:inline-block;
-    margin-bottom: 0px;
-
-}
-
-p {
-  @extend %proxima;
-}
-button {
-  @extend %proxima;
-
-  b {
-      line-height: 29px;
-  }
-}
-
-div {
-  @extend %proxima;
-}
-
 
 html, body {
     height: 100%;
@@ -155,24 +46,6 @@ html, body {
 }
 
 
-.halfvspacer {
-    padding-top: 20px;
-}
-.fullvspacer {
-    padding-top: 60px;
-}
-.bottomspacer {
-    margin-bottom: 25px;
-}
-
-
-.vspacer {
-    margin-top: 100px;
-}
-.vspacer2 {
-    margin-top: 135px;
-}
-
 #content {
     min-height: 1000px;
 }
@@ -181,9 +54,6 @@ html, body {
     height: auto !important;
 }
 
-.clear {
-    clear:both;
-}
 
 .front-input{
     margin-bottom: 20px !important;
@@ -289,44 +159,21 @@ input[type="radio"]:checked + label {
     margin-left: 30px;
 }
 
+
 #socialicons .circle {
     float: left;
     margin-top: 10px;
     margin-right: 10px;
+}
+
+.circle {
+    vertical-align: middle;
+    display: inline-block;
     height:30px;
     width: 30px;
     @include border-radius(30px);
     overflow:hidden;
 }
-.facebook {
-    background: url(../img/facebook.png) no-repeat center center;
-}
-
-.facebook:hover {
-    @extend backgroundTransition;
-    background: url(../img/facebook-hover.png) no-repeat center center;
-}
-
-.twitter {
-    background: url(../img/twitter.png) no-repeat center center;
-}
-
-.twitter:hover {
-    @extend backgroundTransition;
-    background: url(../img/twitter-hover.png) no-repeat center center;
-}
-.mail {
-    background: url(../img/mail.png) no-repeat center center;
-}
-
-.mail:hover {
-    @extend backgroundTransition;
-    background: url(../img/mail-hover.png) no-repeat center center;
-
-}
-
-
-
 
 .arrow-right {
     float: left;
