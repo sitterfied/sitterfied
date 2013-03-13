@@ -4,10 +4,10 @@ PIPELINE_CSS = {
     'comingsoon': {
         'source_filenames': (
           'css/comingsoon.css',
-          'css/vendor/*',
+          'css/vendor/*.css',
 
         ),
-        'output_filename': 'css/screen.css',
+        'output_filename': 'css/comingsoon.css',
         'variant': 'datauri',
         'extra_context': {
             'media': 'screen,projection',
@@ -16,9 +16,9 @@ PIPELINE_CSS = {
     'sitterfied': {
         'source_filenames': (
           'css/sitterfied.css',
-          'css/vendor/*',
+          'css/vendor/*.css',
         ),
-        'output_filename': 'css/screen.css',
+        'output_filename': 'css/sitterfied.css',
         'variant': 'datauri',
         'extra_context': {
             'media': 'screen,projection',
