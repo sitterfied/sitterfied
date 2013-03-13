@@ -2,7 +2,7 @@
 @import "compass/css3/images";
 @import "compass/css3/border-radius";
 @import "compass/css3/font-face";
-@import "sitterfied";
+@import "_util";
 
 h1 {
   @extend %proxima;
@@ -234,7 +234,7 @@ input[type="radio"]:checked + label {
 textarea {
     resize: none;
     overflow:hidden;
-    width: 420px !important;
+
 }
 
 .sharebtns a{

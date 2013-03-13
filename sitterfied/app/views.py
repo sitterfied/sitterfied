@@ -36,3 +36,7 @@ def invite_email_submit(request):
     send_mail('Sitterfied!', 'Sitterfied is great.', 'sitterfied@sitterfied.com',
               emails, fail_silently=True)
     return {}
+
+@render_to('referraltracking.html')
+def referral_tracking(request):
+    return {}

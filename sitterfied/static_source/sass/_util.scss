@@ -1,0 +1,283 @@
+$darkblue: #003366;
+$lightblue: #81abb0;
+$greenblue: #104952;
+$gray: #616161;
+$lightgray: #e1e3e5;
+
+@import "compass/css3";
+@import "compass/css3/images";
+@import "compass/css3/border-radius";
+@import "compass/css3/font-face";
+@import "compass/css3/box-shadow";
+
+@include font-face('marketo',
+  font-files(
+    '/static/css/fonts/marketotbold.woff', woff,
+    '/static/css/fonts/marketotbold.ttf', ttf,
+    '/static/css/fonts/marketotbold.svg', svg),
+    '/static/css/fonts/marketotbold.eot');
+
+@include font-face('Proxima Nova',
+  font-files(
+    '/static/css/fonts/proxima_nova_reg-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_reg-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_reg-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_reg-webfont.eot');
+
+@include font-face('Proxima Nova',
+  font-files(
+    '/static/css/fonts/proxima_nova_bold-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_bold-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_bold-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_bold-webfont.eot', bold);
+
+@include font-face('Proxima Nova',
+  font-files(
+    '/static/css/fonts/proxima_nova_reg_it-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_reg_it-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_reg_it-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_reg_it-webfont.eot', normal, italic);
+
+@include font-face('Proxima Nova',
+  font-files(
+    '/static/css/fonts/proxima_nova_bold_it-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_bold_it-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_bold_it-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_bold_it-webfont.eot', bold, italic);
+
+@include font-face('Proxima Nova SBold',
+  font-files(
+    '/static/css/fonts/proxima_nova_sbold-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_sbold-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_sbold-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_sbold-webfont.eot');
+
+
+@include font-face('Proxima Nova SBold',
+  font-files(
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.woff', woff,
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.ttf', ttf,
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.svg', svg),
+    '/static/css/fonts/proxima_nova_sbold_it-webfont.eot', normal, italic);
+
+
+::-webkit-input-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+}
+::-moz-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+} /* firefox 19+ */
+:-ms-input-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+} /* ie */
+input:-moz-placeholder {
+    font-family: 'Proxima Nova', sans-serif !important;
+}
+
+backgroundTransition {
+   -webkit-transition:background 300ms ease-in;
+   -moz-transition:background 300ms ease-in;
+   -o-transition:background 300ms ease-in;
+   transition:background 300ms ease-in;
+}
+%proxima {
+  font-family: 'Proxima Nova', sans-serif !important;
+}
+%marketo {
+  font-family: 'marketo', sans-serif !important;
+}
+
+.cursive {
+    @extend %marketo;
+    font-size: 22px;
+    color: rgb(63, 176, 189);
+}
+
+.semi-bold {
+  font-family: 'Proxima Nova SBold', sans-serif !important;
+}
+.seventeen {
+    font-size: 17px;
+}
+button p {
+    text-align: center;
+    vertical-align:middle;
+    display:inline-block;
+    margin-bottom: 0px;
+}
+
+p {
+  @extend %proxima;
+  color: $gray;
+}
+.header {
+  @extend %proxima;
+  color:white;
+}
+
+button {
+  @extend %proxima;
+
+  b {
+      line-height: 29px;
+  }
+}
+div {
+  @extend %proxima;
+}
+.halfvspacer {
+    padding-top: 20px;
+}
+.quartervspacer {
+    padding-top: 16px;
+}
+.fullvspacer {
+    padding-top: 60px;
+}
+.bottomspacer {
+    margin-bottom: 25px;
+}
+.vspacer {
+    margin-top: 100px;
+}
+.vspacer2 {
+    margin-top: 135px;
+}
+.clear {
+    clear:both;
+}
+.facebook {
+    background: url(../img/facebook.png) no-repeat center center;
+}
+
+.facebook:hover {
+    @extend backgroundTransition;
+    background: url(../img/facebook-hover.png) no-repeat center center;
+}
+
+.twitter {
+    background: url(../img/twitter.png) no-repeat center center;
+}
+
+.twitter:hover {
+    @extend backgroundTransition;
+    background: url(../img/twitter-hover.png) no-repeat center center;
+}
+.mail {
+    background: url(../img/mail.png) no-repeat center center;
+}
+
+.mail:hover {
+    @extend backgroundTransition;
+    background: url(../img/mail-hover.png) no-repeat center center;
+
+}
+.facebook-preload {
+    display:none !important;
+    background: url(../img/facebook-hover.png) no-repeat center center;
+}
+
+.twitter-preload {
+    display:none !important;
+    background: url(../img/twitter-hover.png) no-repeat center center;
+}
+.mail-preload {
+    display:none !important;
+    background: url(../img/mail-hover.png) no-repeat center center;
+}
+
+
+
+
+/* The ghost, nudged to maintain perfect centering */
+.vcenter:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+.vcenter{
+    display:inline-block;
+    vertical-align: middle
+}
+
+
+.centeralign {
+    text-align: center;
+}
+.centeralign-image {
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
+}
+
+.heighthundred {
+    height: 100px;
+}
+
+
+#topcontainer {
+    background: url(../img/backgroundtile.png) repeat;
+}
+
+.nodisplay {
+    display:none;
+}
+
+.marginten {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.pillbox {
+    @include border-radius(20px);
+    @include background-clip(padding-box);
+    border: 1px solid gray;
+    height: 40px;
+    line-height: 40px;
+    width: 500px;
+    position: relative;
+    overflow: hidden;
+    @include box-shadow(inset 0 0 5px rgba(0,0,0,.35));
+
+}
+
+.orangebox {
+    @include background-image(linear-gradient(bottom, #e37f41 0%, #f2965a 100%));
+    height: 40px;
+    width: 100px;
+    float: left;
+    position:absolute;
+
+}
+
+.allwidth {
+    width: 100%
+}
+
+.darkblue {
+    color:$darkblue;
+}
+.lightblue {
+    color:$lightblue;
+}
+.lightgray {
+    color:$lightgray;
+}
+
+.fonteighteen {
+    font-size: 18px;
+}
+.fontsixteen {
+    font-size: 16px;
+}
+
+
+.fonttwentyfour {
+    font-size: 24pt;
+}
+
+.fontthirtysix {
+    font-size: 36pt;
+}

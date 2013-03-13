@@ -1,9 +1,11 @@
+@import "_util";
+
 .rel {
     position:relative;
 }
 #howitworks {
     background: rgb(237, 239, 242);
-    color:#616161;
+    color: $gray;
 }
 
 #wheneverwant, #youcantrust {
@@ -57,7 +59,7 @@
 }
 .weexist {
     font-size: 36px;
-    color: #104952;
+    color: $greenblue;
 }
 hr {
     margin-left: 20px !important;
@@ -68,19 +70,17 @@ hr {
 }
 
 .icontext {
-    color: #104952;
+    color: $greenblue;
     font-size: 24pt;
 }
 
 
-
-
 h4 {
-    color: #104952 !important;
+    color: $greenblue !important;
 }
 
 .helpus {
-    color: #003366;
+    color: $darkblue;
     text-align:center;
     font-size:24px;
 }

@@ -1,0 +1,35 @@
+@import "_util";
+
+#referrals {
+    background: rgb(237, 239, 242);
+    color: $gray;
+}
+
+
+
+.emailaddr {
+    margin-top: 7px;
+    margin-bottom: 3px;
+}
+
+.inputborder {
+    border: 1px solid #bfcdd5 !important;
+}
+
+.border-right {
+    border-right: 1px solid $lightgray;
+}
+
+
+button{
+    font-weight: bold !important;
+}
+
+.clearbox {
+    width: 100px;
+    height: 20px;
+}
+
+.clearbox:last-child {
+    border-right: 1px solid #dbdbdb;
+}
