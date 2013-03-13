@@ -96,34 +96,12 @@ backgroundTransition {
 .semi-bold {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
-.seventeen {
-    font-size: 17px;
-}
-button p {
-    text-align: center;
-    vertical-align:middle;
-    display:inline-block;
-    margin-bottom: 0px;
-}
 
-p {
-  @extend %proxima;
-  color: $gray;
-}
-.header {
-  @extend %proxima;
-  color:white;
-}
-
-button {
-  @extend %proxima;
-
-  b {
-      line-height: 29px;
-  }
-}
 div {
   @extend %proxima;
+}
+.rel {
+    position:relative;
 }
 .halfvspacer {
     padding-top: 20px;
@@ -146,6 +124,16 @@ div {
 .clear {
     clear:both;
 }
+
+.circle {
+    vertical-align: middle;
+    display: inline-block;
+    height:30px;
+    width: 30px;
+    @include border-radius(30px);
+    overflow:hidden;
+}
+
 .facebook {
     background: url(../img/facebook.png) no-repeat center center;
 }
@@ -188,7 +176,6 @@ div {
 
 
 
-
 /* The ghost, nudged to maintain perfect centering */
 .vcenter:before {
   content: '';
@@ -201,7 +188,6 @@ div {
     display:inline-block;
     vertical-align: middle
 }
-
 
 .centeralign {
     text-align: center;
@@ -216,10 +202,10 @@ div {
     height: 100px;
 }
 
-
-#topcontainer {
-    background: url(../img/backgroundtile.png) repeat;
+.hundredwidth {
+    width: 100%;
 }
+
 
 .nodisplay {
     display:none;
@@ -230,27 +216,6 @@ div {
     margin-left: 10px;
 }
 
-.pillbox {
-    @include border-radius(20px);
-    @include background-clip(padding-box);
-    border: 1px solid gray;
-    height: 40px;
-    line-height: 40px;
-    width: 500px;
-    position: relative;
-    overflow: hidden;
-    @include box-shadow(inset 0 0 5px rgba(0,0,0,.35));
-
-}
-
-.orangebox {
-    @include background-image(linear-gradient(bottom, #e37f41 0%, #f2965a 100%));
-    height: 40px;
-    width: 100px;
-    float: left;
-    position:absolute;
-
-}
 
 .allwidth {
     width: 100%
@@ -266,18 +231,18 @@ div {
     color:$lightgray;
 }
 
-.fonteighteen {
-    font-size: 18px;
+.fontthirtysix {
+    font-size: 36pt;
 }
-.fontsixteen {
-    font-size: 16px;
-}
-
-
 .fonttwentyfour {
     font-size: 24pt;
 }
-
-.fontthirtysix {
-    font-size: 36pt;
+.fonteighteen {
+    font-size: 18px;
+}
+.seventeen {
+    font-size: 17px;
+}
+.fontsixteen {
+    font-size: 16px;
 }

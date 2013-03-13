@@ -1,9 +1,11 @@
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 PIPELINE_CSS = {
-    'screen': {
+    'comingsoon': {
         'source_filenames': (
-          'css/*.css',
+          'css/comingsoon.css',
+          'css/vendor/*',
+
         ),
         'output_filename': 'css/screen.css',
         'variant': 'datauri',
@@ -11,6 +13,20 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
+    'sitterfied': {
+        'source_filenames': (
+          'css/sitterfied.css',
+          'css/vendor/*',
+        ),
+        'output_filename': 'css/screen.css',
+        'variant': 'datauri',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+
+
+
 }
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'

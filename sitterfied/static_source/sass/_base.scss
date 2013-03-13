@@ -1,0 +1,85 @@
+
+@import "_util";
+@import "compass/css3";
+@import "compass/css3/images";
+@import "compass/css3/border-radius";
+@import "compass/css3/font-face";
+@import "compass/css3/box-shadow";
+
+body {
+    background-image:  url(../img/backgroundtile.png);
+    background-color: rgb(237, 239, 242) !important;
+    background-repeat: repeat-x;
+    background-position: left top;
+    color: $gray;
+}
+
+#topcontainer {
+
+}
+
+#topcontainer .container{
+    padding-right:  20px;
+}
+#topcontainer-content{
+    padding-right:  20px;
+    background: white;
+    border-color: rgb(63, 176, 189) !important;
+    border-right: 5px solid;
+    border-left: 5px solid;
+    border-top: 5px solid;
+    height: 214px;
+}
+
+#bottomcontainer{
+    padding-right:  20px;
+    border-color: #e8ebed !important;
+    border-right: 5px solid;
+    border-left: 5px solid;
+    border-bottom: 5px solid;
+    background: white;
+}
+
+
+.header {
+    height: 100px;
+    line-height: 100px;
+}
+
+
+button {
+  p {
+    text-align: center;
+    vertical-align:middle;
+    display:inline-block;
+    margin-bottom: 0px;
+  }
+}
+
+p {
+  @extend %proxima;
+  color: $gray;
+}
+
+.header {
+  @extend %proxima;
+  color:white;
+}
+button {
+  @extend %proxima;
+
+  b {
+    line-height: 29px;
+  }
+}
+
+div {
+  @extend %proxima;
+}
+hr {
+    margin-left: 20px !important;
+    height:0px;
+	border: .1em dashed !important;
+    color: #c5c6be !important;
+    opacity: .5;
+}

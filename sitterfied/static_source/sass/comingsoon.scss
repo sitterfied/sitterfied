@@ -166,15 +166,6 @@ input[type="radio"]:checked + label {
     margin-right: 10px;
 }
 
-.circle {
-    vertical-align: middle;
-    display: inline-block;
-    height:30px;
-    width: 30px;
-    @include border-radius(30px);
-    overflow:hidden;
-}
-
 .arrow-right {
     float: left;
     margin-top:11px;
@@ -266,4 +257,26 @@ textarea {
 
 #twittercount {
     color: #2f96b4;
+}
+
+button  {
+    @extend %proxima;
+    p {
+        text-align: center;
+        vertical-align:middle;
+        display:inline-block;
+        margin-bottom: 0px;
+    }
+  b {
+      line-height: 29px;
+  }
+}
+
+button {
+
+
+}
+
+textarea {
+    width: 420px !important;
 }

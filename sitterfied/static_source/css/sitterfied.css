@@ -78,7 +78,7 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
 }
 
 /* line 83, ../sass/_util.scss */
-p, .header, button, div, h1, #notharmed {
+div, p, .header, button {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
@@ -98,424 +98,47 @@ p, .header, button, div, h1, #notharmed {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
 
-/* line 99, ../sass/_util.scss */
-.seventeen {
-  font-size: 17px;
+/* line 103, ../sass/_util.scss */
+.rel {
+  position: relative;
 }
 
-/* line 102, ../sass/_util.scss */
-button p {
-  text-align: center;
-  vertical-align: middle;
-  display: inline-block;
-  margin-bottom: 0px;
-}
-
-/* line 109, ../sass/_util.scss */
-p {
-  color: #616161;
-}
-
-/* line 113, ../sass/_util.scss */
-.header {
-  color: white;
-}
-
-/* line 121, ../sass/_util.scss */
-button b {
-  line-height: 29px;
-}
-
-/* line 128, ../sass/_util.scss */
+/* line 106, ../sass/_util.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 131, ../sass/_util.scss */
+/* line 109, ../sass/_util.scss */
 .quartervspacer {
   padding-top: 16px;
 }
 
-/* line 134, ../sass/_util.scss */
+/* line 112, ../sass/_util.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 137, ../sass/_util.scss */
+/* line 115, ../sass/_util.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 140, ../sass/_util.scss */
+/* line 118, ../sass/_util.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 143, ../sass/_util.scss */
+/* line 121, ../sass/_util.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 146, ../sass/_util.scss */
+/* line 124, ../sass/_util.scss */
 .clear {
   clear: both;
 }
 
-/* line 149, ../sass/_util.scss */
-.facebook {
-  background: url(../img/facebook.png) no-repeat center center;
-}
-
-/* line 153, ../sass/_util.scss */
-.facebook:hover {
-  background: url(../img/facebook-hover.png) no-repeat center center;
-}
-
-/* line 158, ../sass/_util.scss */
-.twitter {
-  background: url(../img/twitter.png) no-repeat center center;
-}
-
-/* line 162, ../sass/_util.scss */
-.twitter:hover {
-  background: url(../img/twitter-hover.png) no-repeat center center;
-}
-
-/* line 166, ../sass/_util.scss */
-.mail {
-  background: url(../img/mail.png) no-repeat center center;
-}
-
-/* line 170, ../sass/_util.scss */
-.mail:hover {
-  background: url(../img/mail-hover.png) no-repeat center center;
-}
-
-/* line 175, ../sass/_util.scss */
-.facebook-preload {
-  display: none !important;
-  background: url(../img/facebook-hover.png) no-repeat center center;
-}
-
-/* line 180, ../sass/_util.scss */
-.twitter-preload {
-  display: none !important;
-  background: url(../img/twitter-hover.png) no-repeat center center;
-}
-
-/* line 184, ../sass/_util.scss */
-.mail-preload {
-  display: none !important;
-  background: url(../img/mail-hover.png) no-repeat center center;
-}
-
-/* The ghost, nudged to maintain perfect centering */
-/* line 193, ../sass/_util.scss */
-.vcenter:before {
-  content: '';
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: -0.25em;
-  /* Adjusts for spacing */
-}
-
-/* line 200, ../sass/_util.scss */
-.vcenter {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-/* line 206, ../sass/_util.scss */
-.centeralign {
-  text-align: center;
-}
-
-/* line 209, ../sass/_util.scss */
-.centeralign-image {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-/* line 215, ../sass/_util.scss */
-.heighthundred {
-  height: 100px;
-}
-
-/* line 220, ../sass/_util.scss */
-#topcontainer {
-  background: url(../img/backgroundtile.png) repeat;
-}
-
-/* line 224, ../sass/_util.scss */
-.nodisplay {
-  display: none;
-}
-
-/* line 228, ../sass/_util.scss */
-.marginten {
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-/* line 233, ../sass/_util.scss */
-.pillbox {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  -webkit-background-clip: padding;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  border: 1px solid gray;
-  height: 40px;
-  line-height: 40px;
-  width: 500px;
-  position: relative;
-  overflow: hidden;
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
-}
-
-/* line 246, ../sass/_util.scss */
-.orangebox {
-  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e37f41), color-stop(100%, #f2965a));
-  background-image: -webkit-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  background-image: -moz-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  background-image: -o-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  background-image: linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  height: 40px;
-  width: 100px;
-  float: left;
-  position: absolute;
-}
-
-/* line 255, ../sass/_util.scss */
-.allwidth {
-  width: 100%;
-}
-
-/* line 259, ../sass/_util.scss */
-.darkblue {
-  color: #003366;
-}
-
-/* line 262, ../sass/_util.scss */
-.lightblue {
-  color: #81abb0;
-}
-
-/* line 265, ../sass/_util.scss */
-.lightgray {
-  color: #e1e3e5;
-}
-
-/* line 269, ../sass/_util.scss */
-.fonteighteen {
-  font-size: 18px;
-}
-
-/* line 272, ../sass/_util.scss */
-.fontsixteen {
-  font-size: 16px;
-}
-
-/* line 277, ../sass/_util.scss */
-.fonttwentyfour {
-  font-size: 24pt;
-}
-
-/* line 281, ../sass/_util.scss */
-.fontthirtysix {
-  font-size: 36pt;
-}
-
-/* line 7, ../sass/_comingsoon.scss */
-h1 {
-  width: 150%;
-  margin-left: -3px !important;
-  font-size: 55px !important;
-  font-weight: normal !important;
-}
-
-/* line 15, ../sass/_comingsoon.scss */
-.largerfont {
-  font-size: 16px;
-}
-
-/* line 19, ../sass/_comingsoon.scss */
-html, body {
-  height: 100%;
-  overflow-x: hidden;
-}
-
-/* line 24, ../sass/_comingsoon.scss */
-#comingsoon {
-  background: url("../img/background.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  overflow-y: hidden;
-  color: white;
-  width: 100%;
-  height: auto;
-}
-/* line 34, ../sass/_comingsoon.scss */
-#comingsoon hr {
-  height: 0px;
-  border: .1em dashed;
-  color: #c5c6be;
-}
-
-@media only all and (max-width: 1440px) and (max-height: 1000px) {
-  /* line 41, ../sass/_comingsoon.scss */
-  #comingsoon {
-    background: url("../img/background.jpg") no-repeat;
-    background-size: 1440px 1000px;
-    -moz-background-size: 1440px 1000px;
-  }
-}
-/* line 49, ../sass/_comingsoon.scss */
-#content {
-  min-height: 1000px;
-}
-
-/* line 52, ../sass/_comingsoon.scss */
-.container {
-  height: 100%;
-  height: auto !important;
-}
-
-/* line 58, ../sass/_comingsoon.scss */
-.front-input {
-  margin-bottom: 20px !important;
-}
-
-/* line 62, ../sass/_comingsoon.scss */
-input[type="radio"] {
-  display: none;
-}
-
-/* line 67, ../sass/_comingsoon.scss */
-input[type="radio"] {
-  display: none;
-}
-
-/* line 70, ../sass/_comingsoon.scss */
-input[type="radio"] + label {
-  display: inline-block;
-  width: 20px;
-  height: 19px;
-  background-color: white;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-bottom: 20px;
-}
-
-/* line 80, ../sass/_comingsoon.scss */
-input[type="radio"]:checked + label {
-  background-repeat: no-repeat;
-  background-position: center;
-  background: white url(../img/green_checkmark.png) no-repeat center center;
-}
-
-/* line 86, ../sass/_comingsoon.scss */
-.greencheck_div, .greencheck_div_lessmargin {
-  position: absolute;
-  right: 1px;
-  top: 1px;
-  width: 28px;
-  height: 28px;
-  z-index: 4;
-}
-
-/* line 95, ../sass/_comingsoon.scss */
-.greencheck_div_lessmargin {
-  right: 6px !important;
-}
-
-/* line 100, ../sass/_comingsoon.scss */
-.greencheck_box {
-  width: 28px;
-  height: 28px;
-}
-
-/* line 105, ../sass/_comingsoon.scss */
-.greencheck_box_lessmargin {
-  width: 27.9px;
-  height: 27.9px;
-}
-
-/* line 111, ../sass/_comingsoon.scss */
-.playbtn {
-  margin-left: -70px;
-  margin-top: -16px;
-  cursor: pointer;
-  opacity: .5;
-}
-
-/* line 117, ../sass/_comingsoon.scss */
-.playbtn:hover {
-  opacity: 1;
-}
-
-/* line 121, ../sass/_comingsoon.scss */
-#share_with_friends_block {
-  display: none;
-  height: 800px;
-  background-color: #4E3539;
-  overflow: hidden;
-}
-
-/* line 128, ../sass/_comingsoon.scss */
-#footer-left {
-  background: rgba(192, 187, 172, 0.9);
-  height: 50px;
-  display: inline-block;
-}
-
-/* line 135, ../sass/_comingsoon.scss */
-#footer-left p {
-  float: right;
-  text-align: right;
-  margin-top: 16px;
-  margin-right: 10px;
-}
-
-/* line 142, ../sass/_comingsoon.scss */
-#footer-right {
-  height: 50px;
-  display: inline-block;
-  margin-left: -4px;
-  background: rgba(184, 180, 163, 0.9);
-}
-
-/* line 149, ../sass/_comingsoon.scss */
-.blog {
-  color: #359dad;
-}
-
-/* line 152, ../sass/_comingsoon.scss */
-.blog:hover {
-  color: white;
-  text-decoration: none !important;
-}
-
-/* line 157, ../sass/_comingsoon.scss */
-#socialicons {
-  height: 50px;
-  margin-left: 30px;
-}
-
-/* line 163, ../sass/_comingsoon.scss */
-#socialicons .circle {
-  float: left;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-/* line 169, ../sass/_comingsoon.scss */
+/* line 128, ../sass/_util.scss */
 .circle {
   vertical-align: middle;
   display: inline-block;
@@ -527,112 +150,219 @@ input[type="radio"]:checked + label {
   overflow: hidden;
 }
 
-/* line 178, ../sass/_comingsoon.scss */
-.arrow-right {
-  float: left;
-  margin-top: 11px;
-  width: 0;
-  height: 0;
-  border-top: 13px solid transparent;
-  border-bottom: 13px solid transparent;
-  border-left: 13px solid #beb8a9;
+/* line 137, ../sass/_util.scss */
+.facebook {
+  background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 188, ../sass/_comingsoon.scss */
-.copied {
-  position: relative;
-  top: -4px;
+/* line 141, ../sass/_util.scss */
+.facebook:hover {
+  background: url(../img/facebook-hover.png) no-repeat center center;
+}
+
+/* line 146, ../sass/_util.scss */
+.twitter {
+  background: url(../img/twitter.png) no-repeat center center;
+}
+
+/* line 150, ../sass/_util.scss */
+.twitter:hover {
+  background: url(../img/twitter-hover.png) no-repeat center center;
+}
+
+/* line 154, ../sass/_util.scss */
+.mail {
+  background: url(../img/mail.png) no-repeat center center;
+}
+
+/* line 158, ../sass/_util.scss */
+.mail:hover {
+  background: url(../img/mail-hover.png) no-repeat center center;
+}
+
+/* line 163, ../sass/_util.scss */
+.facebook-preload {
+  display: none !important;
+  background: url(../img/facebook-hover.png) no-repeat center center;
+}
+
+/* line 168, ../sass/_util.scss */
+.twitter-preload {
+  display: none !important;
+  background: url(../img/twitter-hover.png) no-repeat center center;
+}
+
+/* line 172, ../sass/_util.scss */
+.mail-preload {
+  display: none !important;
+  background: url(../img/mail-hover.png) no-repeat center center;
+}
+
+/* The ghost, nudged to maintain perfect centering */
+/* line 180, ../sass/_util.scss */
+.vcenter:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -0.25em;
+  /* Adjusts for spacing */
+}
+
+/* line 187, ../sass/_util.scss */
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 192, ../sass/_util.scss */
+.centeralign {
+  text-align: center;
+}
+
+/* line 195, ../sass/_util.scss */
+.centeralign-image {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* line 201, ../sass/_util.scss */
+.heighthundred {
+  height: 100px;
+}
+
+/* line 205, ../sass/_util.scss */
+.hundredwidth {
+  width: 100%;
+}
+
+/* line 210, ../sass/_util.scss */
+.nodisplay {
+  display: none;
+}
+
+/* line 214, ../sass/_util.scss */
+.marginten {
+  margin-right: 10px;
   margin-left: 10px;
-  margin-right: 3px;
-  display: none;
-}
-/* line 194, ../sass/_comingsoon.scss */
-.copied i {
-  font-weight: bold;
-  line-height: 40px;
-  margin-right: 3px;
 }
 
-/* line 201, ../sass/_comingsoon.scss */
-.copy-button {
-  position: absolute;
-  right: 1px;
-  top: 1px;
-  height: 28px;
-  z-index: 4;
+/* line 220, ../sass/_util.scss */
+.allwidth {
+  width: 100%;
 }
 
-/* line 209, ../sass/_comingsoon.scss */
-.smalltext {
-  font-size: 12px;
+/* line 224, ../sass/_util.scss */
+.darkblue {
+  color: #003366;
 }
 
-/* line 213, ../sass/_comingsoon.scss */
-.inline {
-  display: inline;
+/* line 227, ../sass/_util.scss */
+.lightblue {
+  color: #81abb0;
 }
 
-/* line 217, ../sass/_comingsoon.scss */
-.loading {
-  display: none;
+/* line 230, ../sass/_util.scss */
+.lightgray {
+  color: #e1e3e5;
 }
 
-/* line 221, ../sass/_comingsoon.scss */
-#invitebynetwork {
-  min-height: 180px;
+/* line 234, ../sass/_util.scss */
+.fontthirtysix {
+  font-size: 36pt;
 }
 
-/* line 225, ../sass/_comingsoon.scss */
-#invitebyemail {
-  display: none;
-  min-height: 180px;
+/* line 237, ../sass/_util.scss */
+.fonttwentyfour {
+  font-size: 24pt;
 }
 
-/* line 230, ../sass/_comingsoon.scss */
-#sharerow {
-  min-height: 280px;
+/* line 240, ../sass/_util.scss */
+.fonteighteen {
+  font-size: 18px;
 }
 
-/* line 234, ../sass/_comingsoon.scss */
-textarea {
-  resize: none;
-  overflow: hidden;
+/* line 243, ../sass/_util.scss */
+.seventeen {
+  font-size: 17px;
 }
 
-/* line 240, ../sass/_comingsoon.scss */
-.sharebtns a {
+/* line 246, ../sass/_util.scss */
+.fontsixteen {
+  font-size: 16px;
+}
+
+/* line 9, ../sass/_base.scss */
+body {
+  background-image: url(../img/backgroundtile.png);
+  background-color: #edeff2 !important;
+  background-repeat: repeat-x;
+  background-position: left top;
+  color: #616161;
+}
+
+/* line 21, ../sass/_base.scss */
+#topcontainer .container {
+  padding-right: 20px;
+}
+
+/* line 24, ../sass/_base.scss */
+#topcontainer-content {
+  padding-right: 20px;
+  background: white;
+  border-color: #3fb0bd !important;
+  border-right: 5px solid;
+  border-left: 5px solid;
+  border-top: 5px solid;
+  height: 214px;
+}
+
+/* line 34, ../sass/_base.scss */
+#bottomcontainer {
+  padding-right: 20px;
+  border-color: #e8ebed !important;
+  border-right: 5px solid;
+  border-left: 5px solid;
+  border-bottom: 5px solid;
+  background: white;
+}
+
+/* line 44, ../sass/_base.scss */
+.header {
+  height: 100px;
+  line-height: 100px;
+}
+
+/* line 51, ../sass/_base.scss */
+button p {
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+/* line 59, ../sass/_base.scss */
+p {
+  color: #616161;
+}
+
+/* line 64, ../sass/_base.scss */
+.header {
   color: white;
+}
+
+/* line 71, ../sass/_base.scss */
+button b {
+  line-height: 29px;
+}
+
+/* line 79, ../sass/_base.scss */
+hr {
+  margin-left: 20px !important;
+  height: 0px;
+  border: .1em dashed !important;
+  color: #c5c6be !important;
   opacity: .5;
-}
-
-/* line 244, ../sass/_comingsoon.scss */
-.sharebtns a.active-share {
-  opacity: 1;
-}
-
-/* line 249, ../sass/_comingsoon.scss */
-.sharebtns a:hover {
-  text-decoration: none;
-  color: white;
-  opacity: 1;
-}
-
-/* line 255, ../sass/_comingsoon.scss */
-.margintop {
-  margin-top: 10px;
-}
-
-/* line 259, ../sass/_comingsoon.scss */
-#notharmed {
-  position: absolute;
-  top: 915px;
-  left: 780px;
-  font-size: 12px;
-}
-
-/* line 267, ../sass/_comingsoon.scss */
-#twittercount {
-  color: #2f96b4;
 }
 
 @font-face {
@@ -715,7 +445,7 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
 }
 
 /* line 83, ../sass/_util.scss */
-p, .header, button, div, h1, #notharmed {
+div, p, .header, button {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
@@ -735,119 +465,108 @@ p, .header, button, div, h1, #notharmed {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
 
-/* line 99, ../sass/_util.scss */
-.seventeen {
-  font-size: 17px;
+/* line 103, ../sass/_util.scss */
+.rel {
+  position: relative;
 }
 
-/* line 102, ../sass/_util.scss */
-button p {
-  text-align: center;
-  vertical-align: middle;
-  display: inline-block;
-  margin-bottom: 0px;
-}
-
-/* line 109, ../sass/_util.scss */
-p {
-  color: #616161;
-}
-
-/* line 113, ../sass/_util.scss */
-.header {
-  color: white;
-}
-
-/* line 121, ../sass/_util.scss */
-button b {
-  line-height: 29px;
-}
-
-/* line 128, ../sass/_util.scss */
+/* line 106, ../sass/_util.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 131, ../sass/_util.scss */
+/* line 109, ../sass/_util.scss */
 .quartervspacer {
   padding-top: 16px;
 }
 
-/* line 134, ../sass/_util.scss */
+/* line 112, ../sass/_util.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 137, ../sass/_util.scss */
+/* line 115, ../sass/_util.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 140, ../sass/_util.scss */
+/* line 118, ../sass/_util.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 143, ../sass/_util.scss */
+/* line 121, ../sass/_util.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 146, ../sass/_util.scss */
+/* line 124, ../sass/_util.scss */
 .clear {
   clear: both;
 }
 
-/* line 149, ../sass/_util.scss */
+/* line 128, ../sass/_util.scss */
+.circle {
+  vertical-align: middle;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+/* line 137, ../sass/_util.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 153, ../sass/_util.scss */
+/* line 141, ../sass/_util.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 158, ../sass/_util.scss */
+/* line 146, ../sass/_util.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 162, ../sass/_util.scss */
+/* line 150, ../sass/_util.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 166, ../sass/_util.scss */
+/* line 154, ../sass/_util.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 170, ../sass/_util.scss */
+/* line 158, ../sass/_util.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
-/* line 175, ../sass/_util.scss */
+/* line 163, ../sass/_util.scss */
 .facebook-preload {
   display: none !important;
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 180, ../sass/_util.scss */
+/* line 168, ../sass/_util.scss */
 .twitter-preload {
   display: none !important;
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 184, ../sass/_util.scss */
+/* line 172, ../sass/_util.scss */
 .mail-preload {
   display: none !important;
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
 /* The ghost, nudged to maintain perfect centering */
-/* line 193, ../sass/_util.scss */
+/* line 180, ../sass/_util.scss */
 .vcenter:before {
   content: '';
   display: inline-block;
@@ -856,214 +575,131 @@ button b {
   /* Adjusts for spacing */
 }
 
-/* line 200, ../sass/_util.scss */
+/* line 187, ../sass/_util.scss */
 .vcenter {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 206, ../sass/_util.scss */
+/* line 192, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 195, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 215, ../sass/_util.scss */
+/* line 201, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 220, ../sass/_util.scss */
-#topcontainer {
-  background: url(../img/backgroundtile.png) repeat;
+/* line 205, ../sass/_util.scss */
+.hundredwidth {
+  width: 100%;
 }
 
-/* line 224, ../sass/_util.scss */
+/* line 210, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 214, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 233, ../sass/_util.scss */
-.pillbox {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  -webkit-background-clip: padding;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  border: 1px solid gray;
-  height: 40px;
-  line-height: 40px;
-  width: 500px;
-  position: relative;
-  overflow: hidden;
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
-}
-
-/* line 246, ../sass/_util.scss */
-.orangebox {
-  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e37f41), color-stop(100%, #f2965a));
-  background-image: -webkit-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  background-image: -moz-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  background-image: -o-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  background-image: linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
-  height: 40px;
-  width: 100px;
-  float: left;
-  position: absolute;
-}
-
-/* line 255, ../sass/_util.scss */
+/* line 220, ../sass/_util.scss */
 .allwidth {
   width: 100%;
 }
 
-/* line 259, ../sass/_util.scss */
+/* line 224, ../sass/_util.scss */
 .darkblue {
   color: #003366;
 }
 
-/* line 262, ../sass/_util.scss */
+/* line 227, ../sass/_util.scss */
 .lightblue {
   color: #81abb0;
 }
 
-/* line 265, ../sass/_util.scss */
+/* line 230, ../sass/_util.scss */
 .lightgray {
   color: #e1e3e5;
 }
 
-/* line 269, ../sass/_util.scss */
-.fonteighteen {
-  font-size: 18px;
-}
-
-/* line 272, ../sass/_util.scss */
-.fontsixteen {
-  font-size: 16px;
-}
-
-/* line 277, ../sass/_util.scss */
-.fonttwentyfour {
-  font-size: 24pt;
-}
-
-/* line 281, ../sass/_util.scss */
+/* line 234, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
+/* line 237, ../sass/_util.scss */
+.fonttwentyfour {
+  font-size: 24pt;
+}
+
+/* line 240, ../sass/_util.scss */
+.fonteighteen {
+  font-size: 18px;
+}
+
+/* line 243, ../sass/_util.scss */
+.seventeen {
+  font-size: 17px;
+}
+
+/* line 246, ../sass/_util.scss */
+.fontsixteen {
+  font-size: 16px;
+}
+
 /* line 3, ../sass/_howitworks.scss */
-.rel {
-  position: relative;
-}
-
-/* line 6, ../sass/_howitworks.scss */
-#howitworks {
-  background: #edeff2;
-  color: #616161;
-}
-
-/* line 11, ../sass/_howitworks.scss */
 #wheneverwant, #youcantrust {
   position: absolute;
 }
 
-/* line 14, ../sass/_howitworks.scss */
+/* line 6, ../sass/_howitworks.scss */
 #wheneverwant {
   top: -50px;
   left: 10px;
 }
 
-/* line 18, ../sass/_howitworks.scss */
+/* line 10, ../sass/_howitworks.scss */
 #youcantrust {
   top: 36px;
   left: 43px;
 }
 
-/* line 24, ../sass/_howitworks.scss */
-.hundredwidth {
-  width: 100%;
-}
-
-/* line 28, ../sass/_howitworks.scss */
-#topcontainer .container {
-  padding-right: 20px;
-}
-
-/* line 31, ../sass/_howitworks.scss */
-#topcontainer-content {
-  padding-right: 20px;
-  background: white;
-  border-color: #3fb0bd !important;
-  border-right: 5px solid;
-  border-left: 5px solid;
-  border-top: 5px solid;
-}
-
-/* line 40, ../sass/_howitworks.scss */
-#bottomcontainer {
-  padding-right: 20px;
-  border-color: #e8ebed !important;
-  border-right: 5px solid;
-  border-left: 5px solid;
-  border-bottom: 5px solid;
-  background: white;
-}
-
-/* line 50, ../sass/_howitworks.scss */
-.header {
-  height: 100px;
-  line-height: 100px;
-}
-
-/* line 56, ../sass/_howitworks.scss */
+/* line 15, ../sass/_howitworks.scss */
 .simple {
   color: #3fb0bd;
   font-weight: normal;
 }
 
-/* line 60, ../sass/_howitworks.scss */
+/* line 19, ../sass/_howitworks.scss */
 .weexist {
   font-size: 36px;
   color: #104952;
 }
 
-/* line 64, ../sass/_howitworks.scss */
-hr {
-  margin-left: 20px !important;
-  height: 0px;
-  border: .1em dashed !important;
-  color: #c5c6be !important;
-  opacity: .5;
-}
-
-/* line 72, ../sass/_howitworks.scss */
+/* line 24, ../sass/_howitworks.scss */
 .icontext {
   color: #104952;
   font-size: 24pt;
 }
 
-/* line 78, ../sass/_howitworks.scss */
+/* line 29, ../sass/_howitworks.scss */
 h4 {
   color: #104952 !important;
 }
 
-/* line 82, ../sass/_howitworks.scss */
+/* line 33, ../sass/_howitworks.scss */
 .helpus {
   color: #003366;
   text-align: center;
@@ -1150,7 +786,7 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
 }
 
 /* line 83, ../sass/_util.scss */
-p, .header, button, div, h1, #notharmed {
+div, p, .header, button {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
@@ -1170,119 +806,108 @@ p, .header, button, div, h1, #notharmed {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
 
-/* line 99, ../sass/_util.scss */
-.seventeen {
-  font-size: 17px;
+/* line 103, ../sass/_util.scss */
+.rel {
+  position: relative;
 }
 
-/* line 102, ../sass/_util.scss */
-button p {
-  text-align: center;
-  vertical-align: middle;
-  display: inline-block;
-  margin-bottom: 0px;
-}
-
-/* line 109, ../sass/_util.scss */
-p {
-  color: #616161;
-}
-
-/* line 113, ../sass/_util.scss */
-.header {
-  color: white;
-}
-
-/* line 121, ../sass/_util.scss */
-button b {
-  line-height: 29px;
-}
-
-/* line 128, ../sass/_util.scss */
+/* line 106, ../sass/_util.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 131, ../sass/_util.scss */
+/* line 109, ../sass/_util.scss */
 .quartervspacer {
   padding-top: 16px;
 }
 
-/* line 134, ../sass/_util.scss */
+/* line 112, ../sass/_util.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 137, ../sass/_util.scss */
+/* line 115, ../sass/_util.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 140, ../sass/_util.scss */
+/* line 118, ../sass/_util.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 143, ../sass/_util.scss */
+/* line 121, ../sass/_util.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 146, ../sass/_util.scss */
+/* line 124, ../sass/_util.scss */
 .clear {
   clear: both;
 }
 
-/* line 149, ../sass/_util.scss */
+/* line 128, ../sass/_util.scss */
+.circle {
+  vertical-align: middle;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+/* line 137, ../sass/_util.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 153, ../sass/_util.scss */
+/* line 141, ../sass/_util.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 158, ../sass/_util.scss */
+/* line 146, ../sass/_util.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 162, ../sass/_util.scss */
+/* line 150, ../sass/_util.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 166, ../sass/_util.scss */
+/* line 154, ../sass/_util.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 170, ../sass/_util.scss */
+/* line 158, ../sass/_util.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
-/* line 175, ../sass/_util.scss */
+/* line 163, ../sass/_util.scss */
 .facebook-preload {
   display: none !important;
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 180, ../sass/_util.scss */
+/* line 168, ../sass/_util.scss */
 .twitter-preload {
   display: none !important;
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 184, ../sass/_util.scss */
+/* line 172, ../sass/_util.scss */
 .mail-preload {
   display: none !important;
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
 /* The ghost, nudged to maintain perfect centering */
-/* line 193, ../sass/_util.scss */
+/* line 180, ../sass/_util.scss */
 .vcenter:before {
   content: '';
   display: inline-block;
@@ -1291,46 +916,123 @@ button b {
   /* Adjusts for spacing */
 }
 
-/* line 200, ../sass/_util.scss */
+/* line 187, ../sass/_util.scss */
 .vcenter {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 206, ../sass/_util.scss */
+/* line 192, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 195, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 215, ../sass/_util.scss */
+/* line 201, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 220, ../sass/_util.scss */
-#topcontainer {
-  background: url(../img/backgroundtile.png) repeat;
+/* line 205, ../sass/_util.scss */
+.hundredwidth {
+  width: 100%;
 }
 
-/* line 224, ../sass/_util.scss */
+/* line 210, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 214, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 233, ../sass/_util.scss */
+/* line 220, ../sass/_util.scss */
+.allwidth {
+  width: 100%;
+}
+
+/* line 224, ../sass/_util.scss */
+.darkblue {
+  color: #003366;
+}
+
+/* line 227, ../sass/_util.scss */
+.lightblue {
+  color: #81abb0;
+}
+
+/* line 230, ../sass/_util.scss */
+.lightgray {
+  color: #e1e3e5;
+}
+
+/* line 234, ../sass/_util.scss */
+.fontthirtysix {
+  font-size: 36pt;
+}
+
+/* line 237, ../sass/_util.scss */
+.fonttwentyfour {
+  font-size: 24pt;
+}
+
+/* line 240, ../sass/_util.scss */
+.fonteighteen {
+  font-size: 18px;
+}
+
+/* line 243, ../sass/_util.scss */
+.seventeen {
+  font-size: 17px;
+}
+
+/* line 246, ../sass/_util.scss */
+.fontsixteen {
+  font-size: 16px;
+}
+
+/* line 4, ../sass/_referral.scss */
+.emailaddr {
+  margin-top: 7px;
+  margin-bottom: 3px;
+}
+
+/* line 9, ../sass/_referral.scss */
+.inputborder {
+  border: 1px solid #bfcdd5 !important;
+}
+
+/* line 13, ../sass/_referral.scss */
+.border-right {
+  border-right: 1px solid #e1e3e5;
+}
+
+/* line 18, ../sass/_referral.scss */
+button {
+  font-weight: bold !important;
+}
+
+/* line 22, ../sass/_referral.scss */
+.clearbox {
+  width: 100px;
+  height: 20px;
+}
+
+/* line 27, ../sass/_referral.scss */
+.clearbox:last-child {
+  border-right: 1px solid #dbdbdb;
+}
+
+/* line 31, ../sass/_referral.scss */
 .pillbox {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -1349,7 +1051,7 @@ button b {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
 }
 
-/* line 246, ../sass/_util.scss */
+/* line 44, ../sass/_referral.scss */
 .orangebox {
   background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e37f41), color-stop(100%, #f2965a));
   background-image: -webkit-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
@@ -1360,82 +1062,4 @@ button b {
   width: 100px;
   float: left;
   position: absolute;
-}
-
-/* line 255, ../sass/_util.scss */
-.allwidth {
-  width: 100%;
-}
-
-/* line 259, ../sass/_util.scss */
-.darkblue {
-  color: #003366;
-}
-
-/* line 262, ../sass/_util.scss */
-.lightblue {
-  color: #81abb0;
-}
-
-/* line 265, ../sass/_util.scss */
-.lightgray {
-  color: #e1e3e5;
-}
-
-/* line 269, ../sass/_util.scss */
-.fonteighteen {
-  font-size: 18px;
-}
-
-/* line 272, ../sass/_util.scss */
-.fontsixteen {
-  font-size: 16px;
-}
-
-/* line 277, ../sass/_util.scss */
-.fonttwentyfour {
-  font-size: 24pt;
-}
-
-/* line 281, ../sass/_util.scss */
-.fontthirtysix {
-  font-size: 36pt;
-}
-
-/* line 3, ../sass/_referral.scss */
-#referrals {
-  background: #edeff2;
-  color: #616161;
-}
-
-/* line 10, ../sass/_referral.scss */
-.emailaddr {
-  margin-top: 7px;
-  margin-bottom: 3px;
-}
-
-/* line 15, ../sass/_referral.scss */
-.inputborder {
-  border: 1px solid #bfcdd5 !important;
-}
-
-/* line 19, ../sass/_referral.scss */
-.border-right {
-  border-right: 1px solid #e1e3e5;
-}
-
-/* line 24, ../sass/_referral.scss */
-button {
-  font-weight: bold !important;
-}
-
-/* line 28, ../sass/_referral.scss */
-.clearbox {
-  width: 100px;
-  height: 20px;
-}
-
-/* line 33, ../sass/_referral.scss */
-.clearbox:last-child {
-  border-right: 1px solid #dbdbdb;
 }
