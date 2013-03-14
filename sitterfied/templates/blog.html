@@ -101,16 +101,17 @@
                 width: 76px;
                 height: 38px;
                 margin-bottom: 50px;
+                margin-right:10px;
             }
             #logo {
                 display: inline;
                 vertical-align: middle;
                 margin-left: 240px;
-                margin-right: 50px;
+                margin-right: 150px;
             }
 #socialicons {
             display: inline;
-            margin-left: 20px;
+            margin-left: 100px;
             }
 
 .circle {
@@ -121,6 +122,19 @@
     border-radius(30px);
     overflow:hidden;
 }
+
+.rss {
+            background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss.png) no-repeat center center;
+}
+
+.rss:hover {
+   -webkit-transition:background 300ms ease-in;
+   -moz-transition:background 300ms ease-in;
+   -o-transition:background 300ms ease-in;
+   transition:background 300ms ease-in;
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
+}
+
 
 .facebook {
             background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook.png) no-repeat center center;
@@ -171,6 +185,10 @@
     display:none !important;
     background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail-hover.png) no-repeat center center;
 }
+.mail-preload {
+    display:none !important;
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
+}
 
 
 
@@ -205,7 +223,6 @@
 
             .datebox {
                 position: absolute;
-                background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/tumblr/datebox.png);
                 height: 70px;
                 width: 70px;
 
@@ -218,7 +235,7 @@
 
             hr {
                 height:0px;
-	            border: .1em dashed !important;
+                border: .1em dashed !important;
                 color: #c5c6be !important;
                 opacity: .5;
             }
@@ -899,9 +916,11 @@
 
     </head>
     <body>
-      <section id="headerbar"><img id="logo" src="http://sitterfieddev-jnanscawen.dotcloud.com/static/img/top_logo.png" alt="sitterfied"><button id="signup" >SIGN UP</button>
-for free months and a shot at early access!
+      <section id="headerbar"><img id="logo" src="http://sitterfieddev-jnanscawen.dotcloud.com/static/img/top_logo.png" alt="sitterfied"><button id="signup" ><b>SIGN UP</b></button>
+for an invite to early beta
   <div id="socialicons">
+    <div class="circle rss"></div>
+    <div class="circle rss-preload"></div>
     <div class="circle facebook"></div>
     <div class="circle facebook-preload"></div>
     <div class="circle twitter"></div>
