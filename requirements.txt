@@ -1,3 +1,4 @@
+django
 django-pipeline
 django-pipeline-compass
 
@@ -40,7 +41,3 @@ django_smtp_ssl
 #pillow
 #whoosh
 #django-haystack
-
-https://www.djangoproject.com/download/1.5c1/tarball/
-
-#git+git://github.com/django/django.git@1.5b2 --upgrade
