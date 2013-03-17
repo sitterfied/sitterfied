@@ -375,6 +375,12 @@ hr {
   opacity: .5;
 }
 
+/* line 86, ../sass/_base.scss */
+textarea {
+  width: 100% !important;
+  padding: 4px;
+}
+
 @font-face {
   font-family: "marketo";
   src: url(/static/css/fonts/marketotbold.eot);

@@ -83,11 +83,11 @@ Sitterfied
   </div>
   <div class="row-fluid">
     <div class="span6 offset1">
-        <img src="{{STATIC_URL}}img/sitterfied_explained.png" alt="Sitterfied explained in 90 seconds">
+      <a href="#wistia_modal" role="button" data-toggle="modal"><img src="{{STATIC_URL}}img/sitterfied_explained.png" alt="Sitterfied explained in 90 seconds"></a>
     </div>
     <div class="span2 offset3 heighthundred">
       <div class="vcenter">
-        <img src="{{STATIC_URL}}img/notifyme.png" alt="Notify Me!" >
+        <a href="{% url "home" %}"><img src="{{STATIC_URL}}img/notifyme.png" alt="Notify Me!" ></a>
       </div>
     </div>
   </div>
@@ -98,12 +98,12 @@ Sitterfied
   </div>
   <div class="row-fluid">
     <div class="span2 offset5">
-      <img src="{{STATIC_URL}}img/want_more.jpg" alt="want more?" >
+      <a href="#wantmore"><img src="{{STATIC_URL}}img/want_more.jpg" alt="want more?" ></a>
     </div>
   </div>
   <div class="row-fluid">
     <div class="span12">
-      <hr>
+      <hr id="wantmore">
     </div>
   </div>
   <div class="halfvspacer"></div>
@@ -156,7 +156,7 @@ Sitterfied
 
   <div class="row-fluid">
     <div class="span4 offset5">
-      <img src="{{STATIC_URL}}img/keepmeposted.jpg" alt="Tell your friends" >
+      <a href="{% url "home" %}"><img src="{{STATIC_URL}}img/keepmeposted.png" alt="Tell your friends" ><a href="{% url "home" %}">
     </div>
   </div>
   <div class="row-fluid">
@@ -198,7 +198,7 @@ Sitterfied
   <div class="row-fluid">
     <div class="span5 offset1 vcenter">
       <h4>We're mobile</h4>
-      Our site will adapt to any mobile browser so you can access Sitterfied on the go. Because, let’s be honest, when are you ever not on the go?
+      Our site will adapt to any mobile browser so you can access Sitterfied on the go. Because, let’s be honest, when are you not on the go?
     </div>
     <div class="span5 offset1">
       <img class="centeralign-image" src="{{STATIC_URL}}img/mobile.png" alt="We're mobile" >
@@ -216,7 +216,7 @@ Sitterfied
   </div>
   <div class="row-fluid">
     <div class="span4 offset4">
-      <img src="{{STATIC_URL}}img/signmeup.jpg" alt="share the love"> <span class="cursive"> for early beta access</span>
+      <a href="{% url "home" %}"><img src="{{STATIC_URL}}img/signmeup.jpg" alt="share the love"> <span class="cursive"> for early beta access</span></a>
     </div>
   </div>
   <div class="row-fluid">
@@ -226,7 +226,7 @@ Sitterfied
   </div>
   <div class="row-fluid">
     <div class="span2 offset5">
-      <img src="{{STATIC_URL}}img/back_top.png" alt="Back to top" >
+      <a href="#topcontainer"><img src="{{STATIC_URL}}img/back_top.png" alt="Back to top" ></a>
     </div>
   </div>
   <div class="halfvspacer"></div>
@@ -239,8 +239,53 @@ Sitterfied
 </div>
 <div class="halfvspacer"></div>
 <div class="halfvspacer"></div>
+<div id="wistia_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<object id="wistia_2841909" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="960" height="540">
+  <param name="allowfullscreen" value="true" />
+  <param name="allowscriptaccess" value="always" />
+  <param name="wmode" value="opaque" />
+  <param name="flashvars"
+         value="videoUrl=http://embed-0.wistia.com/deliveries/f05ed2c68ab439c7db399503c9ec711f77e422dc.bin&stillUrl=http://embed-0.wistia.com/deliveries/dc0dbb8c26c5c731d175c13efa4e53923a43ee69.bin&playButtonVisible=true&controlsVisibleOnLoad=false&unbufferedSeek=false&autoLoad=false&autoPlay=false&endVideoBehavior=default&embedServiceURL=http://distillery.wistia.com/x&accountKey=wistia-production_48337&mediaID=wistia-production_2841909&mediaDuration=97.56&hdUrl=http://embed-0.wistia.com/deliveries/39ecac9894bd84387eef0b2403ef35bae4a5fb91.bin"
+         />
+  <param name="movie" value="http://embed-0.wistia.com/flash/embed_player_v2.0.swf" />
+  <embed src="http://embed-0.wistia.com/flash/embed_player_v2.0.swf"
+         name="wistia_2841909" type="application/x-shockwave-flash"
+         width="960" height="540" allowfullscreen="true"
+         allowscriptaccess="always" wmode="opaque"
+         flashvars="videoUrl=http://embed-0.wistia.com/deliveries/f05ed2c68ab439c7db399503c9ec711f77e422dc.bin&stillUrl=http://embed-0.wistia.com/deliveries/dc0dbb8c26c5c731d175c13efa4e53923a43ee69.bin&playButtonVisible=true&controlsVisibleOnLoad=false&unbufferedSeek=false&autoLoad=false&autoPlay=false&endVideoBehavior=default&embedServiceURL=http://distillery.wistia.com/x&accountKey=wistia-production_48337&mediaID=wistia-production_2841909&mediaDuration=97.56&hdUrl=http://embed-0.wistia.com/deliveries/39ecac9894bd84387eef0b2403ef35bae4a5fb91.bin">
+  </embed>
+</object>
+</div>
 {% endblock content %}
 
 {% block body_media %}
+<script type="text/javascript">
+  $(function(){
+$('#wistia_modal').modal({
+        backdrop: true,
+        keyboard: true,
+        show:false,
+    }).css({
+       'width': function () {
+           return 980+ 'px';
+       },
+       'margin-left': function () {
+           return -($(this).width() / 2);
+       },
+       'padding-left': function () {
+           return "20px"
+       },
+       'padding-top': function () {
+           return "20px"
+       },
+       'padding-bottom': function () {
+           return "10px"
+       },
 
+});
+
+  $("a").smoothScroll()
+})
+
+</script>
 {% endblock %}

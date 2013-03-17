@@ -187,14 +187,14 @@ Go to http://sitterfied.com anytime to track your progress
             </div>
           </div>
         </div>
-        <div id="thanksforemail">
-          <div></div>
-        </div>
         <div id="invitebyemail">
           <div class="row-fluid">
             <div class="span6">
               <b>Invite Friends by email:</b>
             </div>
+          </div>
+          <div id="thanksforemail" class="hide">
+            <div class="semi-bold">Thanks for sharing! Go to http://sitterfied.com to continue sharing, see who responded and track progress. Thanks again and good luck!</div>
           </div>
           <form id="invite_email_form">
             <input type="hidden" id="referral_link" name="referral_link" value="">
@@ -391,7 +391,9 @@ $('#wistia_modal').modal({
                data: data,
            }).success(function(data){
                $('.loading').hide()
-               $("#invite_email_form input[type=email]").val("").keyup()
+               $("#invite_email_form").hide()
+               $("#thanksforemail").show()
+
            })
            $('.loading').show()
            return false
