@@ -81,6 +81,8 @@ input[type="radio"]:checked + label {
     background-repeat:no-repeat;
     background-position:center;
     background:white url(../img/green_checkmark.png) no-repeat center center;
+    background-size: 80%;
+
 }
 
 .greencheck_div {
@@ -279,4 +281,13 @@ button {
 
 textarea {
     width: 420px !important;
+}
+
+
+input {
+    text-shadow: 0 1px 1px rgba(0,0,0,.25);
+ }
+
+textarea { width: 100% !important;
+           padding: 4px;
 }

@@ -23,7 +23,7 @@ Sitterfied
       <img src="{{STATIC_URL}}img/logo.png" height=44 width=236 alt="sitterfied">
     </div>
   </div>
-  <div class="fullvspacer"></div>
+  <div class="halfvspacer" id="signupspacer"></div>
   <div class="row-fluid hrrow">
     <div class="span6">
       <hr>
@@ -36,7 +36,7 @@ Sitterfied
       <p><span class="largerfont">Then sign up and invite your friends for early access!</p>
     </div>
     <div class="span2">
-      <img class="playbtn" src="{{STATIC_URL}}img/playbtn.png" />
+      <a href="#wistia_modal" role="button" data-toggle="modal"><img class="playbtn"  src="{{STATIC_URL}}img/playbtn.png" /></a>
     </div>
   </div>
   <div id="email_form_block">
@@ -126,8 +126,9 @@ Sitterfied
         <div class="row-fluid">
 
           <div class="span12">
-            Sign up 5 friends (<i>one must be a sitter</i>) and<br> we'll invite
-            you all to our private beta program
+            Sign up 5 friends and we'll invite you all to our private beta. More friends means sooner access!
+
+Go to http://sitterfied.com anytime to track your progress
           </div>
           <div class="clear"></div>
           <div class="bottomspacer"></div>
@@ -172,29 +173,23 @@ Sitterfied
           <div class="row-fluid">
             <div class="span12">
               <textarea cols="40" rows="3" id="sharetext">Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free:</textarea>
-              <div class="span1 offset10"><p id="twittercount"></p></div>
+              <div class="span1 offset10"></div>
             <div class="halfvspacer"></div>
 
             </div>
           </div>
           <div class="row-fluid">
             <div class="span5 pull-right">
-              <button class="btn btn-info" onclick="tweet()">
-                <img src="{{STATIC_URL}}img/tweetbtnimg.png">
-                &nbsp;&nbsp;&nbsp;
-                Tweet on twitter
-              </button>
+              <img src="{{STATIC_URL}}img/twittershare.png" class="pointer" onclick="tweet()">
             </div>
             <div class="span5 pull-right">
-              <button class="btn btn-info" onclick="facebook()">
-                <img src="{{STATIC_URL}}img/facebookbtnimg.png">
-                &nbsp;&nbsp;&nbsp;
-                Share on facebook
-              </button class="btn btn-info">
+              <img src="{{STATIC_URL}}img/facebookshare.png" class="pointer" onclick="facebook()">
             </div>
           </div>
         </div>
-
+        <div id="thanksforemail">
+          <div>
+        </div>
         <div id="invitebyemail">
           <div class="row-fluid">
             <div class="span6">
@@ -204,27 +199,19 @@ Sitterfied
           <form id="invite_email_form">
             <input type="hidden" id="referral_link" name="referral_link" value="">
             <div class="row-fluid">
-              <div class="span6" style="position:relative;">
-                <div class="greencheck_div_lessmargin" style="display:none;">
-                  <img  class="greencheck_box"  src="{{STATIC_URL}}img/checkbox.png" />
-                </div>
-                <input class="email_input" name="email" type="email" placeholder="Email">
+              <div class="span5 offset7 rigthtalign">
+                <a class="cs_import">Add from Address Book</a>
               </div>
             </div>
             <div class="row-fluid">
-              <div class="span6" style="position:relative;">
-                <div class="greencheck_div_lessmargin" style="display:none;">
-                  <img  class="greencheck_box"  src="{{STATIC_URL}}img/checkbox.png" />
-                </div>
-                <input class="email_input" name="email" type="email" placeholder="Email">
+              <div class="span12">
+                <input class="email_input input-block-level" name="email" id="contact_list" type="email" placeholder="Enter email addresses (separate with a comma)">
               </div>
             </div>
             <div class="row-fluid">
-              <div class="span6" style="position:relative;">
-                <div class="greencheck_div_lessmargin" style="display:none;">
-                  <img  class="greencheck_box"  src="{{STATIC_URL}}img/checkbox.png" />
-                </div>
-                <input class="email_input" name="email" type="email" placeholder="Email">
+              <div class="span12">
+                <textarea class="span12" cols="40" rows="3" id="emailtext">A new way to see all of our babysitters and book them online!
+ If you sign up with me, we can get early access and test it out.</textarea>
               </div>
             </div>
             <div class="row-fluid">
@@ -246,7 +233,7 @@ Sitterfied
     </div>
   </div>
 </div>
-<div class="nodisplay">
+<div id="wistia_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <object id="wistia_2841909" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="960" height="540">
   <param name="allowfullscreen" value="true" />
   <param name="allowscriptaccess" value="always" />
@@ -317,6 +304,28 @@ facebook = function(){
 }
 
 $(document).ready(function() {
+$('#wistia_modal').modal({
+        backdrop: true,
+        keyboard: true,
+        show:false,
+    }).css({
+       'width': function () {
+           return 980+ 'px';
+       },
+       'margin-left': function () {
+           return -($(this).width() / 2);
+       },
+       'padding-left': function () {
+           return "20px"
+       },
+       'padding-top': function () {
+           return "20px"
+       },
+       'padding-bottom': function () {
+           return "10px"
+       },
+
+});
 
 
     $("#sharetext").keyup(function(e){
@@ -365,7 +374,8 @@ $(document).ready(function() {
                $("#referral_link").attr("value", refer_url)
                val = $("#sharetext").val()
                $("#sharetext").val(val + " " + refer_url)
-               $("#sharetext").keyup()
+               val = $("#emailtext").val()
+               $("#emailtext").val("Hey check this out - " + refer_url + "\n" + val)
 
            })
            tell_friends(firstname)
@@ -444,7 +454,7 @@ tell_friends = function(firstname){
     return string.charAt(0).toUpperCase() + string.slice(1);
     }
     $(".thanksdiv").fadeOut(500, function(){
-        $(".fullvspacer").hide()
+        $(".signupspacer").hide()
 
         $(".thanksdiv").html("<h2 class='semi-bold'>Thanks " + capitaliseFirstLetter(firstname) + "!</h2>").fadeIn().removeClass('margintop')
     })
@@ -501,5 +511,16 @@ $.ajaxSetup({
         }
     }
 });
+
+
+</script>
+
+<!-- Include these scripts to import address books with CloudSponge -->
+<script type="text/javascript" src="https://api.cloudsponge.com/address_books.js"></script>
+<script type="text/javascript" charset="utf-8">
+var csPageOptions = {
+  domain_key:"Q6YB3YJYFBRKAHRURUMV",
+  textarea_id:"contact_list"
+};
 </script>
 {% endblock %}
