@@ -302,6 +302,11 @@ div, h1, #notharmed, button {
   cursor: pointer;
 }
 
+/* line 256, ../sass/_util.scss */
+.vishidden {
+  visibility: hidden;
+}
+
 /* line 7, ../sass/comingsoon.scss */
 h1 {
   width: 150%;

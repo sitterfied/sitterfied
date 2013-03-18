@@ -49,3 +49,16 @@ button{
     position:absolute;
 
 }
+
+
+.copied{
+    position: absolute;
+    margin-top: -5px;
+    margin-left: 4px;
+    display:none;
+    i {
+        font-weight: bold;
+        line-height: 40px;
+        margin-right: 3px;
+    }
+}

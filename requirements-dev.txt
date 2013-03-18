@@ -1,4 +1,4 @@
-git+git://github.com/django/django.git@1.5b2
+django
 django-pipeline
 django-pipeline-compass
 cssmin
@@ -52,3 +52,4 @@ line_profiler
 dozer
 
 ipython
+django-mandrill

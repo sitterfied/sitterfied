@@ -31,6 +31,8 @@ def comingsoon_email_submit(request):
 @ajax_request
 @require_POST
 def invite_email_submit(request):
+    import pdb
+    pdb.set_trace()
     emails = request.POST.getlist('email')
     emails = [email for email in emails if email != ""]
     send_mail('Sitterfied!', 'Sitterfied is great.', 'sitterfied@sitterfied.com',

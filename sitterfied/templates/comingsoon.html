@@ -205,7 +205,7 @@ Go to http://sitterfied.com anytime to track your progress
             </div>
             <div class="row-fluid">
               <div class="span12">
-                <input class="email_input input-block-level" name="email" id="contact_list" type="email" placeholder="Enter email addresses (separate with a comma)">
+                <input class="email_input input-block-level" name="email" id="contact_list" type="text" placeholder="Enter email addresses (separate with a comma)">
               </div>
             </div>
             <div class="row-fluid">
@@ -440,13 +440,6 @@ $('#wistia_modal').modal({
             e.stopPropagation();
         });
 
-        edit_facebook_url = function(summery){
-            base_fb_url  = 'href="http://www.facebook.com/sharer.php?s=100&p[title]=Sitterfied"'
-            summarry = "&p[summary]=YOUR_SUMMARY"
-            url = "&p[url]=" + refer_url
-            //"&p[images][0]=YOUR_IMAGE_TO_SHARE_OBJECT"
-        }
-
 
 });
 tell_friends = function(firstname){
@@ -522,7 +515,8 @@ $.ajaxSetup({
 <script type="text/javascript" charset="utf-8">
 var csPageOptions = {
   domain_key:"Q6YB3YJYFBRKAHRURUMV",
-  textarea_id:"contact_list"
+  textarea_id:"contact_list",
+  include: ['email'],
 };
 </script>
 {% endblock %}

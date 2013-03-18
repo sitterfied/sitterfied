@@ -302,6 +302,11 @@ div, p, .header, button {
   cursor: pointer;
 }
 
+/* line 256, ../sass/_util.scss */
+.vishidden {
+  visibility: hidden;
+}
+
 /* line 9, ../sass/_base.scss */
 body {
   background-image: url(../img/backgroundtile.png);
@@ -685,6 +690,11 @@ div, p, .header, button {
   cursor: pointer;
 }
 
+/* line 256, ../sass/_util.scss */
+.vishidden {
+  visibility: hidden;
+}
+
 /* line 3, ../sass/_howitworks.scss */
 #wheneverwant, #youcantrust {
   position: absolute;
@@ -1036,6 +1046,11 @@ div, p, .header, button {
   cursor: pointer;
 }
 
+/* line 256, ../sass/_util.scss */
+.vishidden {
+  visibility: hidden;
+}
+
 /* line 4, ../sass/_referral.scss */
 .emailaddr {
   margin-top: 7px;
@@ -1098,4 +1113,18 @@ button {
   width: 100px;
   float: left;
   position: absolute;
+}
+
+/* line 54, ../sass/_referral.scss */
+.copied {
+  position: absolute;
+  margin-top: -5px;
+  margin-left: 4px;
+  display: none;
+}
+/* line 59, ../sass/_referral.scss */
+.copied i {
+  font-weight: bold;
+  line-height: 40px;
+  margin-right: 3px;
 }

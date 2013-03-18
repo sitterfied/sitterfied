@@ -156,3 +156,4 @@ AUTH_USER_MODEL = 'app.User'
 
 from .pipeline import *
 from .grappelli import *
+from .mandrill import *
