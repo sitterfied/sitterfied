@@ -3,54 +3,57 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{%block title%} {%endblock title%}</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{%block title%} {%endblock title%}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-        {% load compressed %}
-        {% compressed_css 'sitterfied' %}
-        {% block extra_head %}
-        {% endblock extra_head %}
-    </head>
-    <body {% block bodyclass %} {% endblock %}>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    {% load compressed %}
+    {% compressed_css 'sitterfied' %}
+    {% block extra_head %}
+    {% endblock extra_head %}
+  </head>
+  <body {% block bodyclass %} {% endblock %}>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-        <div id="content">
+    <div id="content">
 
-          {% block header %}
-          <header class="navbar navbar-inverse navbar-fixed-top">
-            {% include "nav.html" %}
-          </header>
-          {% endblock header %}
 
-            {% block content %}
-            {% endblock content %}
-
+      <div id="topcontainer">
+        {% block header %}
+        {% include "header.html" %}
+        {% endblock header %}
+        <div id="topcontainer-content" class="container">
+          {% block topcontainer %}
+          {% endblock %}
         </div>
+      </div>
+      <div id="bottomcontainer" class="container">
+        {% block content %}
+        {% endblock content %}
+      </div>
+      {% block footer %}
+      <footer>
+        {% include "footer.html" %}
+      </footer>
+      {% endblock footer %}
 
-        {% block footer %}
-        <footer>
-          {% include "footer.html" %}
-        </footer>
-        {% endblock footer %}
+      {% compressed_js 'app' %}
 
-        {% compressed_js 'app' %}
+      {% block body_media %}
+      {% endblock body_media %}
 
-        {% block body_media %}
-        {% endblock body_media %}
-
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-<script type="text/javascript">
+      <script>
+        var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
+      <script type="text/javascript">
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -94,6 +97,6 @@ $.ajaxSetup({
         }
     }
 });
-</script>
-    </body>
+                            </script>
+  </body>
 </html>
