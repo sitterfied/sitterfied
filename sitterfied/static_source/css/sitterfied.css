@@ -272,37 +272,42 @@ div, p, .header, button {
   color: #e1e3e5;
 }
 
-/* line 237, ../sass/_util.scss */
+/* line 236, ../sass/_util.scss */
+.white {
+  color: white;
+}
+
+/* line 240, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 240, ../sass/_util.scss */
+/* line 243, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 243, ../sass/_util.scss */
+/* line 246, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 246, ../sass/_util.scss */
+/* line 249, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 252, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 253, ../sass/_util.scss */
+/* line 256, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 256, ../sass/_util.scss */
+/* line 259, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
 }
@@ -660,37 +665,42 @@ div, p, .header, button {
   color: #e1e3e5;
 }
 
-/* line 237, ../sass/_util.scss */
+/* line 236, ../sass/_util.scss */
+.white {
+  color: white;
+}
+
+/* line 240, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 240, ../sass/_util.scss */
+/* line 243, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 243, ../sass/_util.scss */
+/* line 246, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 246, ../sass/_util.scss */
+/* line 249, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 252, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 253, ../sass/_util.scss */
+/* line 256, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 256, ../sass/_util.scss */
+/* line 259, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
 }
@@ -1016,37 +1026,42 @@ div, p, .header, button {
   color: #e1e3e5;
 }
 
-/* line 237, ../sass/_util.scss */
+/* line 236, ../sass/_util.scss */
+.white {
+  color: white;
+}
+
+/* line 240, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 240, ../sass/_util.scss */
+/* line 243, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 243, ../sass/_util.scss */
+/* line 246, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 246, ../sass/_util.scss */
+/* line 249, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 252, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 253, ../sass/_util.scss */
+/* line 256, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 256, ../sass/_util.scss */
+/* line 259, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
 }
