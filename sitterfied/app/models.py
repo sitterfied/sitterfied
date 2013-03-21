@@ -22,3 +22,7 @@ class ComingSoonInterest(TimeStampedModel):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def first_name(self):
+        return self.name.split(" ", 1)[0]

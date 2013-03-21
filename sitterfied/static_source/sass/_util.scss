@@ -3,6 +3,7 @@ $lightblue: #81abb0;
 $greenblue: #104952;
 $gray: #616161;
 $lightgray: #e1e3e5;
+$aqua: #35a5b5;
 
 @import "compass/css3";
 @import "compass/css3/images";
@@ -230,9 +231,17 @@ div {
 .lightblue {
     color:$lightblue;
 }
+.aqua {
+    color:$aqua;
+}
+
 .lightgray {
     color:$lightgray;
 }
+.greenblue {
+    color:$greenblue;
+}
+
 .white {
     color:white;
 }

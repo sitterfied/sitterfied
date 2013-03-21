@@ -1,0 +1,16 @@
+{% extends "email.html" %}
+
+{% block message %}
+
+<p style="font-weight:24px;color:#104952;"><b>Hi there,</b></p>
+{{inviter_full_name}} has invited you to join Sitterfied.
+A personal message from {{inviter_full_name}}: {{personal_message}} - {{inviter_first_name}}
+
+
+accept your invitation here
+
+Join {{inviter_first_name}} and many others who are excited about
+parents and sitters meeting though real friend connections. We're
+still testing out the site so sign up to see what all the fuss is
+about and how you can join our private beta.
+{% endblock message %}

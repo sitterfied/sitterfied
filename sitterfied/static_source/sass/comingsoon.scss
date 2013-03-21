@@ -213,12 +213,12 @@ input[type="radio"]:checked + label {
 }
 
 #invitebynetwork{
-    min-height: 180px;
+    min-height: 160px;
 
 }
 #invitebyemail{
     display:none;
-    min-height: 180px;
+    min-height: 160px;
 }
 
 #sharerow {
@@ -279,4 +279,9 @@ textarea {
     box-sizing: border-box;
     width: 100% !important;
     padding: 4px !important;
+}
+
+
+a {
+    color: #35a5b5 !important;
 }

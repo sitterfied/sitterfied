@@ -1,0 +1,15 @@
+{% extends "email.html" %}
+
+{% block message %}
+
+<p style="font-weight:24px;color:#104952;"><b>Hi {{first_name}}!</b></p>
+{{invited_full_name}} just joined Sitterfied.
+
+You're another step closer to our Beta program.
+
+Share and track your progress <a href="http://sitterfied.com">here</a>.
+
+Thanks for sharing and keep it up!
+
+
+{% endblock message %}
