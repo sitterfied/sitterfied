@@ -47,29 +47,29 @@
   font-style: italic;
 }
 
-/* line 65, ../sass/_util.scss */
+/* line 69, ../sass/_util.scss */
 ::-webkit-input-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 68, ../sass/_util.scss */
+/* line 72, ../sass/_util.scss */
 ::-moz-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
 /* firefox 19+ */
-/* line 71, ../sass/_util.scss */
+/* line 75, ../sass/_util.scss */
 :-ms-input-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
 /* ie */
-/* line 74, ../sass/_util.scss */
+/* line 78, ../sass/_util.scss */
 input:-moz-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 78, ../sass/_util.scss */
+/* line 82, ../sass/_util.scss */
 backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   -webkit-transition: background 300ms ease-in;
   -moz-transition: background 300ms ease-in;
@@ -77,68 +77,68 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   transition: background 300ms ease-in;
 }
 
-/* line 84, ../sass/_util.scss */
+/* line 88, ../sass/_util.scss */
 div, p, .header, button {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 87, ../sass/_util.scss */
+/* line 91, ../sass/_util.scss */
 .cursive {
   font-family: 'marketo', sans-serif !important;
 }
 
-/* line 91, ../sass/_util.scss */
+/* line 95, ../sass/_util.scss */
 .cursive {
   font-size: 22px;
   color: #3fb0bd;
 }
 
-/* line 97, ../sass/_util.scss */
+/* line 101, ../sass/_util.scss */
 .semi-bold {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
 
-/* line 104, ../sass/_util.scss */
+/* line 108, ../sass/_util.scss */
 .rel {
   position: relative;
 }
 
-/* line 107, ../sass/_util.scss */
+/* line 111, ../sass/_util.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 110, ../sass/_util.scss */
+/* line 114, ../sass/_util.scss */
 .quartervspacer {
   padding-top: 16px;
 }
 
-/* line 113, ../sass/_util.scss */
+/* line 117, ../sass/_util.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 116, ../sass/_util.scss */
+/* line 120, ../sass/_util.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 119, ../sass/_util.scss */
+/* line 123, ../sass/_util.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 122, ../sass/_util.scss */
+/* line 126, ../sass/_util.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 125, ../sass/_util.scss */
+/* line 129, ../sass/_util.scss */
 .clear {
   clear: both;
 }
 
-/* line 129, ../sass/_util.scss */
+/* line 133, ../sass/_util.scss */
 .circle {
   vertical-align: middle;
   display: inline-block;
@@ -150,56 +150,56 @@ div, p, .header, button {
   overflow: hidden;
 }
 
-/* line 138, ../sass/_util.scss */
+/* line 142, ../sass/_util.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 142, ../sass/_util.scss */
+/* line 146, ../sass/_util.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 147, ../sass/_util.scss */
+/* line 151, ../sass/_util.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 151, ../sass/_util.scss */
+/* line 155, ../sass/_util.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 155, ../sass/_util.scss */
+/* line 159, ../sass/_util.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 159, ../sass/_util.scss */
+/* line 163, ../sass/_util.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
-/* line 164, ../sass/_util.scss */
+/* line 168, ../sass/_util.scss */
 .facebook-preload {
   display: none !important;
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 169, ../sass/_util.scss */
+/* line 173, ../sass/_util.scss */
 .twitter-preload {
   display: none !important;
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 173, ../sass/_util.scss */
+/* line 177, ../sass/_util.scss */
 .mail-preload {
   display: none !important;
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
 /* The ghost, nudged to maintain perfect centering */
-/* line 181, ../sass/_util.scss */
+/* line 185, ../sass/_util.scss */
 .vcenter:before {
   content: '';
   display: inline-block;
@@ -208,118 +208,130 @@ div, p, .header, button {
   /* Adjusts for spacing */
 }
 
-/* line 188, ../sass/_util.scss */
+/* line 192, ../sass/_util.scss */
 .vcenter {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 193, ../sass/_util.scss */
+/* line 197, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 196, ../sass/_util.scss */
+/* line 200, ../sass/_util.scss */
 .rigthtalign {
   text-align: right;
 }
 
-/* line 199, ../sass/_util.scss */
+/* line 203, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 205, ../sass/_util.scss */
+/* line 209, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 213, ../sass/_util.scss */
 .hundredwidth {
   width: 100%;
 }
 
-/* line 214, ../sass/_util.scss */
+/* line 218, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 218, ../sass/_util.scss */
+/* line 222, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 224, ../sass/_util.scss */
+/* line 228, ../sass/_util.scss */
 .allwidth {
   width: 100%;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 232, ../sass/_util.scss */
 .darkblue {
   color: #003366;
 }
 
-/* line 231, ../sass/_util.scss */
+/* line 235, ../sass/_util.scss */
 .lightblue {
   color: #81abb0;
 }
 
-/* line 234, ../sass/_util.scss */
+/* line 238, ../sass/_util.scss */
 .aqua {
   color: #35a5b5;
 }
 
-/* line 238, ../sass/_util.scss */
+/* line 242, ../sass/_util.scss */
 .lightgray {
   color: #e1e3e5;
 }
 
-/* line 241, ../sass/_util.scss */
+/* line 245, ../sass/_util.scss */
 .greenblue {
   color: #104952;
 }
 
-/* line 245, ../sass/_util.scss */
+/* line 249, ../sass/_util.scss */
 .white {
   color: white;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 253, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 252, ../sass/_util.scss */
+/* line 256, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 255, ../sass/_util.scss */
+/* line 259, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 258, ../sass/_util.scss */
+/* line 262, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 261, ../sass/_util.scss */
+/* line 265, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 265, ../sass/_util.scss */
+/* line 269, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 268, ../sass/_util.scss */
+/* line 272, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
+}
+
+/* line 276, ../sass/_util.scss */
+.right-padding {
+  padding-right: 20px;
+}
+
+/* line 280, ../sass/_util.scss */
+.right-border .row-fluid {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* line 9, ../sass/_base.scss */
@@ -450,29 +462,29 @@ textarea {
   font-style: italic;
 }
 
-/* line 65, ../sass/_util.scss */
+/* line 69, ../sass/_util.scss */
 ::-webkit-input-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 68, ../sass/_util.scss */
+/* line 72, ../sass/_util.scss */
 ::-moz-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
 /* firefox 19+ */
-/* line 71, ../sass/_util.scss */
+/* line 75, ../sass/_util.scss */
 :-ms-input-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
 /* ie */
-/* line 74, ../sass/_util.scss */
+/* line 78, ../sass/_util.scss */
 input:-moz-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 78, ../sass/_util.scss */
+/* line 82, ../sass/_util.scss */
 backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   -webkit-transition: background 300ms ease-in;
   -moz-transition: background 300ms ease-in;
@@ -480,68 +492,68 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   transition: background 300ms ease-in;
 }
 
-/* line 84, ../sass/_util.scss */
+/* line 88, ../sass/_util.scss */
 div, p, .header, button {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 87, ../sass/_util.scss */
+/* line 91, ../sass/_util.scss */
 .cursive {
   font-family: 'marketo', sans-serif !important;
 }
 
-/* line 91, ../sass/_util.scss */
+/* line 95, ../sass/_util.scss */
 .cursive {
   font-size: 22px;
   color: #3fb0bd;
 }
 
-/* line 97, ../sass/_util.scss */
+/* line 101, ../sass/_util.scss */
 .semi-bold {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
 
-/* line 104, ../sass/_util.scss */
+/* line 108, ../sass/_util.scss */
 .rel {
   position: relative;
 }
 
-/* line 107, ../sass/_util.scss */
+/* line 111, ../sass/_util.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 110, ../sass/_util.scss */
+/* line 114, ../sass/_util.scss */
 .quartervspacer {
   padding-top: 16px;
 }
 
-/* line 113, ../sass/_util.scss */
+/* line 117, ../sass/_util.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 116, ../sass/_util.scss */
+/* line 120, ../sass/_util.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 119, ../sass/_util.scss */
+/* line 123, ../sass/_util.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 122, ../sass/_util.scss */
+/* line 126, ../sass/_util.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 125, ../sass/_util.scss */
+/* line 129, ../sass/_util.scss */
 .clear {
   clear: both;
 }
 
-/* line 129, ../sass/_util.scss */
+/* line 133, ../sass/_util.scss */
 .circle {
   vertical-align: middle;
   display: inline-block;
@@ -553,56 +565,56 @@ div, p, .header, button {
   overflow: hidden;
 }
 
-/* line 138, ../sass/_util.scss */
+/* line 142, ../sass/_util.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 142, ../sass/_util.scss */
+/* line 146, ../sass/_util.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 147, ../sass/_util.scss */
+/* line 151, ../sass/_util.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 151, ../sass/_util.scss */
+/* line 155, ../sass/_util.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 155, ../sass/_util.scss */
+/* line 159, ../sass/_util.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 159, ../sass/_util.scss */
+/* line 163, ../sass/_util.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
-/* line 164, ../sass/_util.scss */
+/* line 168, ../sass/_util.scss */
 .facebook-preload {
   display: none !important;
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 169, ../sass/_util.scss */
+/* line 173, ../sass/_util.scss */
 .twitter-preload {
   display: none !important;
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 173, ../sass/_util.scss */
+/* line 177, ../sass/_util.scss */
 .mail-preload {
   display: none !important;
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
 /* The ghost, nudged to maintain perfect centering */
-/* line 181, ../sass/_util.scss */
+/* line 185, ../sass/_util.scss */
 .vcenter:before {
   content: '';
   display: inline-block;
@@ -611,118 +623,130 @@ div, p, .header, button {
   /* Adjusts for spacing */
 }
 
-/* line 188, ../sass/_util.scss */
+/* line 192, ../sass/_util.scss */
 .vcenter {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 193, ../sass/_util.scss */
+/* line 197, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 196, ../sass/_util.scss */
+/* line 200, ../sass/_util.scss */
 .rigthtalign {
   text-align: right;
 }
 
-/* line 199, ../sass/_util.scss */
+/* line 203, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 205, ../sass/_util.scss */
+/* line 209, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 213, ../sass/_util.scss */
 .hundredwidth {
   width: 100%;
 }
 
-/* line 214, ../sass/_util.scss */
+/* line 218, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 218, ../sass/_util.scss */
+/* line 222, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 224, ../sass/_util.scss */
+/* line 228, ../sass/_util.scss */
 .allwidth {
   width: 100%;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 232, ../sass/_util.scss */
 .darkblue {
   color: #003366;
 }
 
-/* line 231, ../sass/_util.scss */
+/* line 235, ../sass/_util.scss */
 .lightblue {
   color: #81abb0;
 }
 
-/* line 234, ../sass/_util.scss */
+/* line 238, ../sass/_util.scss */
 .aqua {
   color: #35a5b5;
 }
 
-/* line 238, ../sass/_util.scss */
+/* line 242, ../sass/_util.scss */
 .lightgray {
   color: #e1e3e5;
 }
 
-/* line 241, ../sass/_util.scss */
+/* line 245, ../sass/_util.scss */
 .greenblue {
   color: #104952;
 }
 
-/* line 245, ../sass/_util.scss */
+/* line 249, ../sass/_util.scss */
 .white {
   color: white;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 253, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 252, ../sass/_util.scss */
+/* line 256, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 255, ../sass/_util.scss */
+/* line 259, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 258, ../sass/_util.scss */
+/* line 262, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 261, ../sass/_util.scss */
+/* line 265, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 265, ../sass/_util.scss */
+/* line 269, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 268, ../sass/_util.scss */
+/* line 272, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
+}
+
+/* line 276, ../sass/_util.scss */
+.right-padding {
+  padding-right: 20px;
+}
+
+/* line 280, ../sass/_util.scss */
+.right-border .row-fluid {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* line 3, ../sass/_howitworks.scss */
@@ -821,29 +845,29 @@ h4 {
   font-style: italic;
 }
 
-/* line 65, ../sass/_util.scss */
+/* line 69, ../sass/_util.scss */
 ::-webkit-input-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 68, ../sass/_util.scss */
+/* line 72, ../sass/_util.scss */
 ::-moz-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
 /* firefox 19+ */
-/* line 71, ../sass/_util.scss */
+/* line 75, ../sass/_util.scss */
 :-ms-input-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
 /* ie */
-/* line 74, ../sass/_util.scss */
+/* line 78, ../sass/_util.scss */
 input:-moz-placeholder {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 78, ../sass/_util.scss */
+/* line 82, ../sass/_util.scss */
 backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   -webkit-transition: background 300ms ease-in;
   -moz-transition: background 300ms ease-in;
@@ -851,68 +875,68 @@ backgroundTransition, .facebook:hover, .twitter:hover, .mail:hover {
   transition: background 300ms ease-in;
 }
 
-/* line 84, ../sass/_util.scss */
+/* line 88, ../sass/_util.scss */
 div, p, .header, button {
   font-family: 'Proxima Nova', sans-serif !important;
 }
 
-/* line 87, ../sass/_util.scss */
+/* line 91, ../sass/_util.scss */
 .cursive {
   font-family: 'marketo', sans-serif !important;
 }
 
-/* line 91, ../sass/_util.scss */
+/* line 95, ../sass/_util.scss */
 .cursive {
   font-size: 22px;
   color: #3fb0bd;
 }
 
-/* line 97, ../sass/_util.scss */
+/* line 101, ../sass/_util.scss */
 .semi-bold {
   font-family: 'Proxima Nova SBold', sans-serif !important;
 }
 
-/* line 104, ../sass/_util.scss */
+/* line 108, ../sass/_util.scss */
 .rel {
   position: relative;
 }
 
-/* line 107, ../sass/_util.scss */
+/* line 111, ../sass/_util.scss */
 .halfvspacer {
   padding-top: 20px;
 }
 
-/* line 110, ../sass/_util.scss */
+/* line 114, ../sass/_util.scss */
 .quartervspacer {
   padding-top: 16px;
 }
 
-/* line 113, ../sass/_util.scss */
+/* line 117, ../sass/_util.scss */
 .fullvspacer {
   padding-top: 60px;
 }
 
-/* line 116, ../sass/_util.scss */
+/* line 120, ../sass/_util.scss */
 .bottomspacer {
   margin-bottom: 25px;
 }
 
-/* line 119, ../sass/_util.scss */
+/* line 123, ../sass/_util.scss */
 .vspacer {
   margin-top: 100px;
 }
 
-/* line 122, ../sass/_util.scss */
+/* line 126, ../sass/_util.scss */
 .vspacer2 {
   margin-top: 135px;
 }
 
-/* line 125, ../sass/_util.scss */
+/* line 129, ../sass/_util.scss */
 .clear {
   clear: both;
 }
 
-/* line 129, ../sass/_util.scss */
+/* line 133, ../sass/_util.scss */
 .circle {
   vertical-align: middle;
   display: inline-block;
@@ -924,56 +948,56 @@ div, p, .header, button {
   overflow: hidden;
 }
 
-/* line 138, ../sass/_util.scss */
+/* line 142, ../sass/_util.scss */
 .facebook {
   background: url(../img/facebook.png) no-repeat center center;
 }
 
-/* line 142, ../sass/_util.scss */
+/* line 146, ../sass/_util.scss */
 .facebook:hover {
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 147, ../sass/_util.scss */
+/* line 151, ../sass/_util.scss */
 .twitter {
   background: url(../img/twitter.png) no-repeat center center;
 }
 
-/* line 151, ../sass/_util.scss */
+/* line 155, ../sass/_util.scss */
 .twitter:hover {
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 155, ../sass/_util.scss */
+/* line 159, ../sass/_util.scss */
 .mail {
   background: url(../img/mail.png) no-repeat center center;
 }
 
-/* line 159, ../sass/_util.scss */
+/* line 163, ../sass/_util.scss */
 .mail:hover {
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
-/* line 164, ../sass/_util.scss */
+/* line 168, ../sass/_util.scss */
 .facebook-preload {
   display: none !important;
   background: url(../img/facebook-hover.png) no-repeat center center;
 }
 
-/* line 169, ../sass/_util.scss */
+/* line 173, ../sass/_util.scss */
 .twitter-preload {
   display: none !important;
   background: url(../img/twitter-hover.png) no-repeat center center;
 }
 
-/* line 173, ../sass/_util.scss */
+/* line 177, ../sass/_util.scss */
 .mail-preload {
   display: none !important;
   background: url(../img/mail-hover.png) no-repeat center center;
 }
 
 /* The ghost, nudged to maintain perfect centering */
-/* line 181, ../sass/_util.scss */
+/* line 185, ../sass/_util.scss */
 .vcenter:before {
   content: '';
   display: inline-block;
@@ -982,118 +1006,130 @@ div, p, .header, button {
   /* Adjusts for spacing */
 }
 
-/* line 188, ../sass/_util.scss */
+/* line 192, ../sass/_util.scss */
 .vcenter {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 193, ../sass/_util.scss */
+/* line 197, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 196, ../sass/_util.scss */
+/* line 200, ../sass/_util.scss */
 .rigthtalign {
   text-align: right;
 }
 
-/* line 199, ../sass/_util.scss */
+/* line 203, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 205, ../sass/_util.scss */
+/* line 209, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 213, ../sass/_util.scss */
 .hundredwidth {
   width: 100%;
 }
 
-/* line 214, ../sass/_util.scss */
+/* line 218, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 218, ../sass/_util.scss */
+/* line 222, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 224, ../sass/_util.scss */
+/* line 228, ../sass/_util.scss */
 .allwidth {
   width: 100%;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 232, ../sass/_util.scss */
 .darkblue {
   color: #003366;
 }
 
-/* line 231, ../sass/_util.scss */
+/* line 235, ../sass/_util.scss */
 .lightblue {
   color: #81abb0;
 }
 
-/* line 234, ../sass/_util.scss */
+/* line 238, ../sass/_util.scss */
 .aqua {
   color: #35a5b5;
 }
 
-/* line 238, ../sass/_util.scss */
+/* line 242, ../sass/_util.scss */
 .lightgray {
   color: #e1e3e5;
 }
 
-/* line 241, ../sass/_util.scss */
+/* line 245, ../sass/_util.scss */
 .greenblue {
   color: #104952;
 }
 
-/* line 245, ../sass/_util.scss */
+/* line 249, ../sass/_util.scss */
 .white {
   color: white;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 253, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 252, ../sass/_util.scss */
+/* line 256, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 255, ../sass/_util.scss */
+/* line 259, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 258, ../sass/_util.scss */
+/* line 262, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 261, ../sass/_util.scss */
+/* line 265, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 265, ../sass/_util.scss */
+/* line 269, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 268, ../sass/_util.scss */
+/* line 272, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
+}
+
+/* line 276, ../sass/_util.scss */
+.right-padding {
+  padding-right: 20px;
+}
+
+/* line 280, ../sass/_util.scss */
+.right-border .row-fluid {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* line 4, ../sass/_referral.scss */

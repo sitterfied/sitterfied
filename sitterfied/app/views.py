@@ -9,6 +9,7 @@ from annoying.decorators import render_to, ajax_request
 from django.views.decorators.http import require_POST
 
 from .forms import ComingSoonInterestForm
+from .models import ComingSoonInterest
 
 from django.core.mail import EmailMultiAlternatives
 
@@ -26,7 +27,7 @@ def send_html_email(subject, frm, address, text, html):
 @render_to('comingsoon.html')
 def index(request, referred_by=None):
     if request.session.get('full_name', False):
-        return HttpResponseRedirect("/referrals")
+        pass #return HttpResponseRedirect("/referrals")
     return {"referred_by":referred_by}
 
 
@@ -45,16 +46,17 @@ def comingsoon_email_submit(request):
         text = html = render_to_string(email_template,
                                        {'first_name':coming_soon_interest.first_name})
 
-        send_html_email("Welcome to sittefied!",
+        send_html_email("Welcome to Sitterfied!",
                         "hello@sitterfied.com",
                         coming_soon_interest.email, text, html)
         request.session['full_name'] = coming_soon_interest.name
         request.session['first_name'] = coming_soon_interest.first_name
+        request.session['id'] = coming_soon_interest.id
 
 
         if coming_soon_interest.referred_by:
             email = coming_soon_interest.referred_by.email
-            text = html = render_to_string(email_template,
+            text = html = render_to_string("referral_signed_up_email.html",
                                        {'invited_full_name':coming_soon_interest.name,
                                         'first_name': coming_soon_interest.referred_by.first_name,
                                         })
@@ -65,7 +67,7 @@ def comingsoon_email_submit(request):
                             email, text, html)
 
 
-        return {'id':coming_soon_interest.id}
+        return {'url':coming_soon_interest.refer_url}
     else:
         return HttpResponse(status=400)
 
@@ -91,6 +93,8 @@ def invite_email_submit(request):
 
 @render_to('referraltracking.html')
 def referral_tracking(request):
-    if not request.session.get('full_name', False):
+    interest_id = request.session.get('id', False)
+    if not interest_id:
         return HttpResponseRedirect("/")
-    return {}
+    refer_url = ComingSoonInterest.static_refer_url(interest_id)
+    return {"refer_url":refer_url}

@@ -5,7 +5,11 @@ $gray: #616161;
 $lightgray: #e1e3e5;
 $aqua: #35a5b5;
 
+
+
+
 @import "compass/css3";
+@import "compass/css3/box-sizing";
 @import "compass/css3/images";
 @import "compass/css3/border-radius";
 @import "compass/css3/font-face";
@@ -267,4 +271,12 @@ div {
 }
 .vishidden {
     visibility: hidden;
+}
+
+.right-padding {
+    padding-right:20px;
+}
+
+.right-border .row-fluid {
+ @include box-sizing(border-box);
 }
