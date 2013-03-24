@@ -47,6 +47,7 @@ def comingsoon_email_submit(request):
         text = html = render_to_string(email_template,
                                        {'first_name':coming_soon_interest.first_name,
                                         'signup_url': coming_soon_interest.refer_url
+                                        'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                         ,})
 
         send_html_email("Welcome to Sitterfied!",
@@ -62,6 +63,7 @@ def comingsoon_email_submit(request):
             text = html = render_to_string("referral_signed_up_email.html",
                                        {'invited_full_name':coming_soon_interest.name,
                                         'first_name': coming_soon_interest.referred_by.first_name,
+                                        'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                         })
 
 
@@ -89,6 +91,7 @@ def invite_email_submit(request):
                                     'inviter_full_name':full_name,
                                     'personal_message':personal_message,
                                     'signup_url': ComingSoonInterest.static_refer_url(interest_id)
+                                    'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                     })
 
     for email in emails:
