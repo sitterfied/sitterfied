@@ -22,13 +22,6 @@ Thanks again for signing up!
 
 {% block ps %}
 <hr>
-<style type="text/css">
-  #betabutton {
-     display: block;
-     margin: 0 auto;
-     padding-top: 10px;
 
-  }
-</style>
-<a href="{{signup_url}}"><img id="betabutton" src="{{full_static_url}}email/images/joinbetabutton.png"  alt=""></a>
+<a href="{{signup_url}}"><img style="display:block;margin:0 auto;padding-top:10px;" id="betabutton" src="{{full_static_url}}email/images/joinbetabutton.png"  alt=""></a>
 {% endblock ps %}
