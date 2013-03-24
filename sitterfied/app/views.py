@@ -1,5 +1,6 @@
 # Create your views here.
 from time import sleep
+from django.conf import settings
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
@@ -44,7 +45,9 @@ def comingsoon_email_submit(request):
             email_template = "welcome_email_parent.html"
 
         text = html = render_to_string(email_template,
-                                       {'first_name':coming_soon_interest.first_name})
+                                       {'first_name':coming_soon_interest.first_name,
+                                        'signup_url': coming_soon_interest.refer_url()
+                                        ,})
 
         send_html_email("Welcome to Sitterfied!",
                         "hello@sitterfied.com",
@@ -77,6 +80,7 @@ def comingsoon_email_submit(request):
 def invite_email_submit(request):
     full_name = request.session.get('full_name')
     first_name = request.session.get('first_name')
+    interest_id = request.session.get('id')
     personal_message = request.POST['personal_message']
     emails = [email.strip() for email in request.POST.get('email').split(',') if email]
 
@@ -84,6 +88,7 @@ def invite_email_submit(request):
                                    {'inviter_first_name':first_name,
                                     'inviter_full_name':full_name,
                                     'personal_message':personal_message,
+                                    'signup_url': ComingSoonInterest.static_refer_url(interest_id)
                                     })
 
     for email in emails:
@@ -98,3 +103,13 @@ def referral_tracking(request):
         return HttpResponseRedirect("/")
     refer_url = ComingSoonInterest.static_refer_url(interest_id)
     return {"refer_url":refer_url}
+
+
+from django.views.generic import TemplateView
+from django.template import TemplateDoesNotExist
+
+class StaticView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super(StaticView, self).get_context_data(**kwargs)
+        context['full_static_url'] = self.request.build_absolute_uri(settings.STATIC_URL)
+        return context

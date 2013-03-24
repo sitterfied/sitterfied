@@ -1,15 +1,20 @@
-{% extends "email.html" %}
+{% extends "email_base.html" %}
+{% block iconpath %}megaphoneicon.png{% endblock %}
 
 {% block message %}
 
 <p style="font-weight:24px;color:#104952;"><b>Hi {{first_name}}!</b></p>
-{{invited_full_name}} just joined Sitterfied.
-
+{{invited_full_name}} just joined Sitterfied.<br>
+<br>
 You're another step closer to our Beta program.
 
-Share and track your progress <a href="http://sitterfied.com">here</a>.
 
+<br><br>
 Thanks for sharing and keep it up!
 
 
 {% endblock message %}
+
+{% block ps %}
+Share and track your progress <a href="http://sitterfied.com">here</a>.
+{% endblock ps %}

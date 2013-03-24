@@ -1,4 +1,4 @@
-{% extends "email.html" %}
+{% extends "email_base.html" %}
 
 {% block message %}
 
@@ -6,8 +6,14 @@
 {{inviter_full_name}} has invited you to join Sitterfied.
 A personal message from {{inviter_full_name}}: {{personal_message}} - {{inviter_first_name}}
 
-
-accept your invitation here
+<style type="text/css">
+  #betabutton {
+     display: block;
+     margin: 0 auto;
+     padding: 10px 0;
+  }
+</style>
+<a href="{{signup_url}}">><img id="betabutton" src="{{full_static_url}}email/images/acceptyourinvitationhere.png"  alt=""></a>
 
 Join {{inviter_first_name}} and many others who are excited about
 parents and sitters meeting though real friend connections. We're

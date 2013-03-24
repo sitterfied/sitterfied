@@ -1,5 +1,5 @@
 {% extends "email.html" %}
-
+{% block iconpath %}checkicon.png{% endblock %}
 {% block message %}
 
 <p style="font-weight:24px;color:#104952;"><b>Hi {{first_name}}!</b></p>
@@ -15,3 +15,15 @@ We know you’ll love Sitterfied and we can’t wait to share it with you.
 Thanks again for signing up!
 
 {% endblock message %}
+{% block ps %}
+<hr>
+<style type="text/css">
+  #betabutton {
+     display: block;
+     margin: 0 auto;
+     padding-top: 10px;
+
+  }
+</style>
+<a href="{{signup_url}}"><img id="betabutton" src="{{full_static_url}}email/images/joinbetabutton.png"  alt=""></a>
+{% endblock ps %}
