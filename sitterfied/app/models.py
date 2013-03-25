@@ -34,3 +34,11 @@ class ComingSoonInterest(TimeStampedModel):
     @staticmethod
     def static_refer_url(id):
         return "/refer/" + str(id)
+
+    @property
+    def referrals(self):
+        return ComingSoonInterest.objects.filter(refered_by=self)
+
+    @staticmethod
+    def static_referrals(id):
+        return ComingSoonInterest.objects.filter(refered_by_id=id)
