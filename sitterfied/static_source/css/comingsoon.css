@@ -514,7 +514,7 @@ input[type="radio"]:checked + label {
 
 /* line 155, ../sass/comingsoon.scss */
 .blog:hover {
-  color: white;
+  color: white !important;
   text-decoration: none !important;
 }
 
@@ -663,7 +663,12 @@ a {
   color: #35a5b5 !important;
 }
 
-/* line 289, ../sass/comingsoon.scss */
+/* line 288, ../sass/comingsoon.scss */
+a:hover {
+  color: white !important;
+}
+
+/* line 293, ../sass/comingsoon.scss */
 #thanksforemail {
   line-height: 30px;
   vertical-align: middle;
