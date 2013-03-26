@@ -41,4 +41,4 @@ class ComingSoonInterest(TimeStampedModel):
 
     @staticmethod
     def static_referrals(id):
-        return ComingSoonInterest.objects.filter(refered_by_id=id)
+        return ComingSoonInterest.objects.filter(referred_by_id=id)

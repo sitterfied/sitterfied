@@ -22,6 +22,8 @@ button{
 .clearbox {
     width: 100px;
     height: 20px;
+    display:inline;
+    float: left;
 }
 
 .clearbox:last-child {
@@ -46,7 +48,7 @@ button{
     height: 40px;
     width: 100px;
     float: left;
-    position:absolute;
+
 
 }
 

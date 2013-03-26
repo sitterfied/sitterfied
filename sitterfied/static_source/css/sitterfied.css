@@ -1157,14 +1157,16 @@ button {
 .clearbox {
   width: 100px;
   height: 20px;
+  display: inline;
+  float: left;
 }
 
-/* line 27, ../sass/_referral.scss */
+/* line 29, ../sass/_referral.scss */
 .clearbox:last-child {
   border-right: 1px solid #dbdbdb;
 }
 
-/* line 31, ../sass/_referral.scss */
+/* line 33, ../sass/_referral.scss */
 .pillbox {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -1183,7 +1185,7 @@ button {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.35);
 }
 
-/* line 44, ../sass/_referral.scss */
+/* line 46, ../sass/_referral.scss */
 .orangebox {
   background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e37f41), color-stop(100%, #f2965a));
   background-image: -webkit-linear-gradient(bottom, #e37f41 0%, #f2965a 100%);
@@ -1193,17 +1195,16 @@ button {
   height: 40px;
   width: 100px;
   float: left;
-  position: absolute;
 }
 
-/* line 54, ../sass/_referral.scss */
+/* line 56, ../sass/_referral.scss */
 .copied {
   position: absolute;
   margin-top: -5px;
   margin-left: 4px;
   display: none;
 }
-/* line 59, ../sass/_referral.scss */
+/* line 61, ../sass/_referral.scss */
 .copied i {
   font-weight: bold;
   line-height: 40px;

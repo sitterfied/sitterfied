@@ -43,15 +43,21 @@ id="referrals"
   <div class="row-fluid icons">
     <div class="span6 offset3 centeralign" style="position:relative;">
       <div class="pillbox">
-        <span class="orangebox"></span>
+        {% for r in referrals %}
+          <span class="orangebox"></span>
+        {% endfor %}
         <p class="cursive">
           5 friends needed for early access
         </p>
       </div>
+      <div class="clear"></div>
       <span>
+        {% for r in referrals %}
         <div class="clearbox"></div>
+        {% endfor %}
       </span>
-      <div style="width:200px;">
+<div class="clear"></div>
+      <div style="width:{{width}}px;">
         <p class="lightblue" >Thanks for joining!</p>
       </div>
     </div>

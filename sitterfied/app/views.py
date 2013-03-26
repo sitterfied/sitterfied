@@ -106,10 +106,11 @@ def referral_tracking(request):
         return HttpResponseRedirect("/")
     refer_url = ComingSoonInterest.static_refer_url(interest_id)
 
-#    referrals = ComingSoonInterest.static_referrals(interest_id)
-#    refer_count = min(len(referrals), 6)
-    refer_count = 1
-    return {"refer_url":refer_url, "refer_count":refer_count}
+    referrals = ComingSoonInterest.static_referrals(interest_id)
+    if len(referrals) > 5:
+        referrals = range(5)
+    width = max(len(referrals) * 200, 117)
+    return {"refer_url":refer_url, "referrals":referrals, 'width':width}
 
 
 from django.views.generic import TemplateView
