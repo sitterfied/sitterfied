@@ -110,7 +110,8 @@ def referral_tracking(request):
     if len(referrals) > 5:
         referrals = range(5)
     width = max(len(referrals) * 200, 117)
-    return {"refer_url":refer_url, "referrals":referrals, 'width':width}
+    left = 6 - len(referrals)
+    return {"refer_url":refer_url, "referrals":referrals, 'width':width, 'left':left}
 
 
 from django.views.generic import TemplateView
