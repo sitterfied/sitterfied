@@ -39,7 +39,7 @@ def comingsoon_email_submit(request):
     form = ComingSoonInterestForm(request.POST)
     if form.is_valid():
         coming_soon_interest = form.save()
-        if coming_soon_interest.parent_or_sitter == "S":
+        if coming_soon_interest.parent_or_sitter == "s":
             email_template = "welcome_email_sitter.html"
         else:
             email_template = "welcome_email_parent.html"

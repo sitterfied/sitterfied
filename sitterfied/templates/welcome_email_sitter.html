@@ -1,4 +1,4 @@
-{% extends "email.html" %}
+{% extends "email_base.html" %}
 {% block iconpath %}checkicon.png{% endblock %}
 {% block message %}
 
@@ -20,5 +20,5 @@ Thanks again for signing up!
 {% endblock message %}
 {% block ps %}
 <hr>
-<a href="http://www.sitterfied.com{{signup_url}}"><img style="display:block;margin:0 auto;padding-top:10px;" id="betabutton" src="{{full_static_url}}email/images/joinbetabutton.png"  alt=""></a>
+<a href="http://www.sitterfied.com{% url "referral_tracking" interest_id=interest_id %}"><img style="display:block;margin:0 auto;padding-top:10px;" id="betabutton" src="{{full_static_url}}email/images/joinbetabutton.png"  alt=""></a>
 {% endblock ps %}
