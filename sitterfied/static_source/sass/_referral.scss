@@ -20,7 +20,7 @@ button{
 }
 
 .clearbox {
-    width: 100px;
+    width: 75px;
     height: 20px;
     display:inline;
     float: left;
@@ -46,10 +46,8 @@ button{
 .orangebox {
     @include background-image(linear-gradient(bottom, #e37f41 0%, #f2965a 100%));
     height: 40px;
-    width: 100px;
+    width: 75px;
     float: left;
-
-
 }
 
 

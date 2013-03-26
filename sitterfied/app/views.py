@@ -109,9 +109,8 @@ def referral_tracking(request):
     referrals = ComingSoonInterest.static_referrals(interest_id)
     if len(referrals) > 5:
         referrals = range(5)
-    width = max(len(referrals) * 200, 117)
-    left = 6 - len(referrals)
-    return {"refer_url":refer_url, "referrals":referrals, 'width':width, 'left':left}
+    padding_left = len(referrals) * 75
+    return {"refer_url":refer_url, "referrals":referrals, 'padding_left':padding_left}
 
 
 from django.views.generic import TemplateView
