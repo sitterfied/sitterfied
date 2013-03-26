@@ -39,7 +39,7 @@ def comingsoon_email_submit(request):
     form = ComingSoonInterestForm(request.POST)
     if form.is_valid():
         coming_soon_interest = form.save()
-        if coming_soon_interest.parent_or_sitter == "s":
+        if coming_soon_interest.parent_or_sitter == "S":
             email_template = "welcome_email_sitter.html"
         else:
             email_template = "welcome_email_parent.html"
@@ -47,6 +47,7 @@ def comingsoon_email_submit(request):
         text = html = render_to_string(email_template,
                                        {'first_name':coming_soon_interest.first_name,
                                         'signup_url': coming_soon_interest.invite_url,
+                                        'interest_id': coming_soon_interest.id,
                                         'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                         })
 
@@ -63,6 +64,7 @@ def comingsoon_email_submit(request):
             text = html = render_to_string("referral_signed_up_email.html",
                                        {'invited_full_name':coming_soon_interest.name,
                                         'first_name': coming_soon_interest.referred_by.first_name,
+                                        'interest_id': coming_soon_interest.referred_by.id,
                                         'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                         })
 
