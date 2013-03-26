@@ -27,7 +27,7 @@ def send_html_email(subject, frm, address, text, html):
 
 @render_to('comingsoon.html')
 def index(request, referred_by=None):
-    if request.session.get('full_name', False):
+    if request.session.get('id', False):
         pass #return HttpResponseRedirect("/referrals")
     return {"referred_by":referred_by}
 
@@ -46,7 +46,7 @@ def comingsoon_email_submit(request):
 
         text = html = render_to_string(email_template,
                                        {'first_name':coming_soon_interest.first_name,
-                                        'signup_url': coming_soon_interest.refer_url,
+                                        'signup_url': coming_soon_interest.invite_url,
                                         'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                         })
 
@@ -72,7 +72,7 @@ def comingsoon_email_submit(request):
                             email, text, html)
 
 
-        return {'url':coming_soon_interest.refer_url}
+        return {'url':coming_soon_interest.invite_url}
     else:
         return HttpResponse(status=400)
 
@@ -90,7 +90,7 @@ def invite_email_submit(request):
                                    {'inviter_first_name':first_name,
                                     'inviter_full_name':full_name,
                                     'personal_message':personal_message,
-                                    'signup_url': ComingSoonInterest.static_refer_url(interest_id),
+                                    'signup_url': ComingSoonInterest.static_invite_url(interest_id),
                                     'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                     })
 
@@ -100,11 +100,11 @@ def invite_email_submit(request):
     return {}
 
 @render_to('referraltracking.html')
-def referral_tracking(request):
-    interest_id = request.session.get('id', False)
+def referral_tracking(request, interest_id=None):
+    interest_id = interest_id or request.session.get('id', False)
     if not interest_id:
         return HttpResponseRedirect("/")
-    refer_url = ComingSoonInterest.static_refer_url(interest_id)
+    refer_url = ComingSoonInterest.static_invite_url(interest_id)
 
     referrals = ComingSoonInterest.static_referrals(interest_id)
     if len(referrals) > 5:

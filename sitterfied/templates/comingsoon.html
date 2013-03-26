@@ -371,7 +371,7 @@ $('#wistia_modal').modal({
                type: "POST",
                data: data,
            }).success(function(data){
-               refer_url = window.location.origin + data.refer_url;
+               refer_url = window.location.origin + data.url;
                $(".idcode").attr('value',refer_url)
                $(".copy-button").attr("data-clipboard-text", refer_url)
                $("#referral_link").attr("value", refer_url)

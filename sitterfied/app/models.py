@@ -28,12 +28,12 @@ class ComingSoonInterest(TimeStampedModel):
         return self.name.split(" ", 1)[0]
 
     @property
-    def refer_url(self):
-        return "/refer/" + str(self.id)
+    def invite_url(self):
+        return "/invite/" + str(self.id)
 
     @staticmethod
-    def static_refer_url(id):
-        return "/refer/" + str(id)
+    def static_invite_url(id):
+        return "/invite/" + str(id)
 
     @property
     def referrals(self):
