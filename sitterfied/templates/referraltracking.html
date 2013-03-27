@@ -122,19 +122,18 @@ id="referrals"
             </div>
             <div class="row-fluid">
               <div class="span11">
-                <textarea class="span10 inputborder"  cols="40" rows="5" id="emailtext">A new way to see all of our babysitters and book them online! If you sign up with me, we can get early access and test it out.</textarea>
+                <textarea class="span10 inputborder"  cols="40" rows="5" name="personal_message" id="emailtext">
+A new way to see all of our babysitters and book them online! If you sign up with me, we can get early access and test it out.</textarea>
               </div>
             </div>
         </div>
         <div class="row-fluid">
-          <div class="span9 offset2">
+          <div id="thanksforemail" class="span7 semi-bold">
+          </div>
+          <div class="span4">
             <button id="sendbutton" class="btn btn-info pull-right">SEND INVITES</button>
           </div>
         </form>
-        <div id="thanksforemail" class="hide span9 offset2">
-          <div class="semi-bold">Thanks for sharing! Go to http://sitterfied.com to continue sharing, see who responded and track progress. Thanks again and good luck!</div>
-        </div>
-
         </div>
       </div>
 
@@ -150,7 +149,7 @@ id="referrals"
       </div>
       <div class="row-fluid">
         <div class="span4 pull-right">
-          <img src="{{STATIC_URL}}img/twittershare.png" class="pointer" onclick="tweet()">
+          <img  src="{{STATIC_URL}}img/twittershare.png" class="pointer tweetbutton" onclick="tweet()">
         </div>
         <div class="span5 pull-right">
           <img src="{{STATIC_URL}}img/facebookshare.png" class="pointer" onclick="facebook()">
@@ -230,9 +229,7 @@ $(function(){
             type: "POST",
             data: data,
         }).success(function(data){
-            $("#invite_email_form").hide()
-            $("#sendbutton").hide()
-            $("#thanksforemail").show()
+            $("#thanksforemail").html("Email sent. Thanks for sharing!")
 
         })
         return false

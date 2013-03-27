@@ -97,7 +97,7 @@ def invite_email_submit(request):
                                     })
 
     for email in emails:
-        send_html_email("You've been invited to Sitterfied!", "hello@sitterfied.com", email, text, html)
+        send_html_email("You've been invited to Sitterfied", "hello@sitterfied.com", email, text, html)
 
     return {}
 

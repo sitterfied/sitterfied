@@ -1240,3 +1240,16 @@ button {
   line-height: 40px;
   margin-right: 3px;
 }
+
+/* line 65, ../sass/_referral.scss */
+.tweetbutton {
+  height: 30px;
+  width: 155px;
+}
+
+/* line 70, ../sass/_referral.scss */
+#thanksforemail {
+  line-height: 30px;
+  vertical-align: middle;
+  font-size: 18px;
+}
