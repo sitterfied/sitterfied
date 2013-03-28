@@ -10,7 +10,7 @@ from annoying.decorators import render_to, ajax_request
 from django.views.decorators.http import require_POST
 
 from .forms import ComingSoonInterestForm
-from .models import ComingSoonInterest
+from .models import ComingSoonInterest, EmailBlacklist
 
 from django.core.mail import EmailMultiAlternatives
 
@@ -19,6 +19,11 @@ from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect
 
 def send_html_email(subject, frm, address, text, html):
+    try:
+        EmailBlacklist.objects.get(email=address)
+        return
+    except:
+        pass
     msg = EmailMultiAlternatives(subject, text, frm, [address])
     msg.attach_alternative(html, "text/html")
     msg.send()
@@ -120,11 +125,17 @@ def referral_tracking(request, interest_id=None):
 @render_to('unsubscribe.html')
 def unsubscribe(request):
     email = request.GET.get('email')
+    EmailBlacklist.objects.get_or_create(email=email)
     return {'email':email}
 
 @render_to('cancel_unsubscribe.html')
 def cancel_unsubscribe(request):
     email = request.GET.get('email')
+    try:
+        e = EmailBlacklist.objects.get(email=email)
+        e.delete()
+    except:
+        pass
     return {'email':email}
 
 

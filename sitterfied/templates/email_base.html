@@ -32,7 +32,7 @@
       <div id="bottom" style="margin-left: 10px; margin-right: 20px;">
         {% block unsubscribe %}
         <div class="unsubscribe" style="float: right;">
-          <a href="http://www.sitterfied.com/{% url "unsubscribe" %}?email={{email}}"><img src="{{full_static_url}}email/images/unsubscribe.png" alt=""></a>
+          <a href="http://www.sitterfied.com{% url "unsubscribe" %}?email={{email}}"><img src="{{full_static_url}}email/images/unsubscribe.png" alt=""></a>
         </div>
         {% endblock unsubscribe %}
         <div class="address" style="color: #b6b8b8; font-family: 'Proxima Nova'; font-weight: bold;">
