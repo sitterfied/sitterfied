@@ -28,17 +28,19 @@
         {% endblock ps %}
         </div>
       </div>
-      <img src="{{full_static_url}}email/images/bottom.png" alt=""><div id="bottom" style="margin-left: 10px; margin-right: 20px;">
+      <img src="{{full_static_url}}email/images/bottom.png" alt="">
+      <div id="bottom" style="margin-left: 10px; margin-right: 20px;">
+        {% block unsubscribe %}
         <div class="unsubscribe" style="float: right;">
           <img src="{{full_static_url}}email/images/unsubscribe.png" alt="">
-</div>
-
+        </div>
+        {% endblock unsubscribe %}
         <div class="address" style="color: #b6b8b8; font-family: 'Proxima Nova'; font-weight: bold;">
           <div style="font-size: 12px;">Sitterfied Inc.</div>
           <div style="font-size: 10px;">50 Harrison Street<br>
-          Suite PH 427<br>
-          Hoboken, NJ 070<br>
-</div>
+            Suite PH 427<br>
+            Hoboken, NJ 07030<br>
+          </div>
         </div>
       </div>
 

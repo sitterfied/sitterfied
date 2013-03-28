@@ -123,12 +123,15 @@ id="referrals"
             <div class="row-fluid">
               <div class="span11">
                 <textarea class="span10 inputborder"  cols="40" rows="5" name="personal_message" id="emailtext">
-A new way to see all of our babysitters and book them online! If you sign up with me, we can get early access and test it out.</textarea>
+Hey check this out - {{request.get_host}}{{refer_url}}
+A new way to see all of our babysitters and book them online!
+ If you sign up with me, we can get early access and test it out.
+</textarea>
               </div>
             </div>
         </div>
         <div class="row-fluid">
-          <div id="thanksforemail" class="span7 semi-bold">
+          <div id="thanksforemail" class="span7 semi-bold" style="color: #81abb0;">
           </div>
           <div class="span4">
             <button id="sendbutton" class="btn btn-info pull-right">SEND INVITES</button>
