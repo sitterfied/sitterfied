@@ -115,6 +115,17 @@ def referral_tracking(request, interest_id=None):
     return {"refer_url":refer_url, "referrals":referrals, 'padding_left':padding_left}
 
 
+@render_to('unsubscribe.html')
+def unsubscribe(request):
+    email = request.GET.get('email')
+    return {'email':email}
+
+@render_to('cancel_unsubscribe.html')
+def cancel_unsubscribe(request):
+    email = request.GET.get('email')
+    return {'email':email}
+
+
 from django.views.generic import TemplateView
 from django.template import TemplateDoesNotExist
 

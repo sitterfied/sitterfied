@@ -42,3 +42,9 @@ class ComingSoonInterest(TimeStampedModel):
     @staticmethod
     def static_referrals(id):
         return ComingSoonInterest.objects.filter(referred_by_id=id)
+
+class EmailBlacklist(TimeStampedModel):
+    email = models.EmailField()
+
+    def __unicode__(self):
+        return self.email
