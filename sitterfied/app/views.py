@@ -48,6 +48,7 @@ def comingsoon_email_submit(request):
                                        {'first_name':coming_soon_interest.first_name,
                                         'signup_url': coming_soon_interest.invite_url,
                                         'interest_id': coming_soon_interest.id,
+                                        'email': coming_soon_interest.email,
                                         'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                         })
 
@@ -65,6 +66,7 @@ def comingsoon_email_submit(request):
                                        {'invited_full_name':coming_soon_interest.name,
                                         'first_name': coming_soon_interest.referred_by.first_name,
                                         'interest_id': coming_soon_interest.referred_by.id,
+                                        'email': coming_soon_interest.email,
                                         'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
                                         })
 

@@ -1,3073 +1,6146 @@
-body {
-
-
-
-    -webkit-font-smoothing: antialiased;
-
-
-
-    font-size: 15px;
-
-
-
-    background: #edeff2;
-
-
-
-}
-
-
-
-
-
-
-
-@font-face {
-
-
-
-  font-family: "marketo";
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.eot);
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.svg) format('svg');
-
-
-
-}
-
-
-
-
-
-
-
-@font-face {
-
-
-
-  font-family: "Proxima Nova";
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.eot);
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.svg) format('svg');
-
-
-
-}
-
-
-
-
-
-
-
-@font-face {
-
-
-
-  font-family: "Proxima Nova";
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.eot);
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.svg) format('svg');
-
-
-
-  font-weight: bold;
-
-
-
-}
-
-
-
-
-
-
-
-@font-face {
-
-
-
-  font-family: "Proxima Nova";
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.eot);
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.svg) format('svg');
-
-
-
-  font-weight: normal;
-
-
-
-  font-style: italic;
-
-
-
-}
-
-
-
-
-
-
-
-@font-face {
-
-
-
-  font-family: "Proxima Nova";
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.eot);
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.svg) format('svg');
-
-
-
-  font-weight: bold;
-
-
-
-  font-style: italic;
-
-
-
-}
-
-
-
-
-
-
-
-@font-face {
-
-
-
-  font-family: "Proxima Nova SBold";
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.eot);
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.svg) format('svg');
-
-
-
-}
-
-
-
-
-
-
-
-@font-face {
-
-
-
-  font-family: "Proxima Nova SBold";
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot);
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.svg) format('svg');
-
-
-
-  font-weight: normal;
-
-
-
-  font-style: italic;
-
-
-
-}
-
-
-
-
-
-
-
-/* line 64, ../sass/_util.scss */
-
-
-
-::-webkit-input-placeholder {
-
-
-
-  font-family: 'Proxima Nova', sans-serif !important;
-
-
-
-}
-
-
-
-
-
-
-
-/* line 67, ../sass/_util.scss */
-
-
-
-::-moz-placeholder {
-
-
-
-  font-family: 'Proxima Nova', sans-serif !important;
-
-
-
-}
-
-
-
-
-
-
-
-/* firefox 19+ */
-
-
-
-/* line 70, ../sass/_util.scss */
-
-
-
-:-ms-input-placeholder {
-
-
-
-  font-family: 'Proxima Nova', sans-serif !important;
-
-
-
-}
-
-
-
-
-
-
-
-/* ie */
-
-
-
-/* line 73, ../sass/_util.scss */
-
-
-
-input:-moz-placeholder {
-
-
-
-  font-family: 'Proxima Nova', sans-serif !important;
-
-
-
-}
-
-
-
-div, p, .headerbar, button, .proxima {
-
-
-
-  font-family: 'Proxima Nova', sans-serif !important;
-
-
-
-}
-
-
-
-p {
-
-
-
- font-weight: normal !important;
-
-
-
-}
-
-
-
-
-
-
-
-#sidebar div h4 {
-
-
-
-    font-size: 16px;
-
-
-
-    color: #104952;
-
-
-
-    font-family: 'Proxima Nova SBold', sans-serif !important;
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-.addthis_toolbox .addthis_button_pinterest_pinit{
-
-
-
- margin-right: 35px !important;
-
-
-
-}
-
-
-
-
-
-
-
-#socialicons {
-
-
-
-            display: inline;
-
-
-
-            margin-left: 500px;
-
-
-
-            }
-
-
-
-
-
-
-
-.circle {
-
-
-
-    vertical-align: middle;
-
-
-
-    display: inline-block;
-
-
-
-    height:30px;
-
-
-
-    width: 30px;
-
-
-
-    border-radius(30px);
-
-
-
-    overflow:hidden;
-
-
-
-}
-
-
-
-
-
-
-
-.rss {
-
-
-
-            background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-.rss:hover {
-
-
-
-   -webkit-transition:background 300ms ease-in;
-
-
-
-   -moz-transition:background 300ms ease-in;
-
-
-
-   -o-transition:background 300ms ease-in;
-
-
-
-   transition:background 300ms ease-in;
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-.facebook {
-
-
-
-            background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-.facebook:hover {
-
-
-
-   -webkit-transition:background 300ms ease-in;
-
-
-
-   -moz-transition:background 300ms ease-in;
-
-
-
-   -o-transition:background 300ms ease-in;
-
-
-
-   transition:background 300ms ease-in;
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook-hover.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-.twitter {
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-.twitter:hover {
-
-
-
-   -webkit-transition:background 300ms ease-in;
-
-
-
-   -moz-transition:background 300ms ease-in;
-
-
-
-   -o-transition:background 300ms ease-in;
-
-
-
-   transition:background 300ms ease-in;
-
-
-
-
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter-hover.png) no-repeat center center;
-
-
-
-}
-
-
-
-.mail {
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-.mail:hover {
-
-
-
-   -webkit-transition:background 300ms ease-in;
-
-
-
-   -moz-transition:background 300ms ease-in;
-
-
-
-   -o-transition:background 300ms ease-in;
-
-
-
-   transition:background 300ms ease-in;
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail-hover.png) no-repeat center center;
-
-
-
-
-
-
-
-}
-
-
-
-.facebook-preload {
-
-
-
-    display:none !important;
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook-hover.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-.twitter-preload {
-
-
-
-    display:none !important;
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter-hover.png) no-repeat center center;
-
-
-
-}
-
-
-
-.mail-preload {
-
-
-
-    display:none !important;
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail-hover.png) no-repeat center center;
-
-
-
-}
-
-
-
-.rss-preload {
-
-
-
-    display:none !important;
-
-
-
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
-
-
-
-}
-
-
-
-
-
-
-
-.title {
-
-
-
-  font-family: 'Proxima Nova', sans-serif !important;
-
-
-
-  font-size: 36px;
-
-
-
-  color: #104952;
-
-
-
-
-}
-
-
-
-.title a {
-
-  font-family: 'Proxima Nova', sans-serif !important;
-
-  font-weight: normal;
-
-  font-size: 36px;
-
-
-
-  color: #104952 !important;
-
-
-
-}
-
-
-.button{
-
-
-
-    padding:4px 10px;
-
-
-
-    background:#5AB7DA;
-
-
-
-    color:#fff;
-
-
-
-    border-radius:2px;
-
-
-
-    border-bottom:2px solid #379ABF;
-
-
-
-}
-
-
-
-
-
-
-
-.button:hover{text-decoration:underline;}
-
-
-
-
-
-
-
-/*
-
-
-
-HEADER
-
-
-
-*/
-
-
-
-header{
-
-
-
-    height: 10px;
-
-
-
-    background-image:  url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/backgroundtile.png);
-
-
-
-    background-repeat: repeat-x;
-
-
-
-    background-position: left top;
-
-
-
-    line-height: 95px;
-
-
-
-    color: white;
-
-
-
-    width:100%;
-
-
-
-	padding-top: 10px;
-
-
-
-	padding-bottom: 40px;
-
-
-
-}
-
-
-
-
-
-
-
-button {
-
-
-
-    border: 1px solid #145f6b; /* stroke */
-
-
-
-    -moz-border-radius: 3px;
-
-
-
-    -webkit-border-radius: 3px;
-
-
-
-    border-radius: 3px; /* border radius */
-
-
-
-    -moz-background-clip: padding;
-
-
-
-    -webkit-background-clip: padding-box;
-
-
-
-    background-clip: padding-box; /* prevents bg color from leaking outside the border */
-
-
-
-    background-color: #1b8191; /* layer fill content */
-
-
-
-    -moz-box-shadow: 1px 2px 2px rgba(0,0,0,.23); /* drop shadow */
-
-
-
-    -webkit-box-shadow: 1px 2px 2px rgba(0,0,0,.23); /* drop shadow */
-
-
-
-    box-shadow: 1px 2px 2px rgba(0,0,0,.23); /* drop shadow */
-
-
-
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFjODE5MSIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI2YTBiNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+); /* gradient overlay */
-
-
-
-    background-image: -moz-linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
-
-
-
-    background-image: -o-linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
-
-
-
-    background-image: -webkit-linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
-
-
-
-    background-image: linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
-
-
-
-    color: white;
-
-
-
-    height: 40px;
-
-    width: 76px;
-
-    cursor: pointer;
-
-
-
-}
-
-
-
-.nopadding {
-
-  padding:0px !important;
-
-  border-bottom: 0px !important;
-
-  background-color: transparent !important;
-
-
-
-}
-
-
-
-
-
-#logo {
-
-
-
-    display: inline;
-
-
-
-    vertical-align: middle;
-
-
-
-    /* margin-left: 240px; */
-
-
-
-    margin-right: 150px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#logo{float:left;}
-
-
-
-#logo a{
-
-
-
-  color:#333;
-
-
-
-  text-transform:uppercase;
-
-
-
-  font-weight:100;
-
-
-
-  font-size:30px;
-
-
-
-}
-
-
-
-
-
-
-
-nav{float:right;margin-top:20px;}
-
-
-
-nav a{
-
-
-
-  margin-left:30px;
-
-
-
-  color:#555;
-
-
-
-}
-
-
-
-
-
-
-
-nav a:hover{
-
-
-
-  color:{color:Highlight};
-
-
-
-}
-
-
-
-
-
-
-
-/*
-
-
-
-SLIDER
-
-
-
-*/
-
-
-
-#slider{
-
-
-
-  width:100%;
-
-
-
-  height:500px;
-
-
-
-  overflow:hidden;
-
-
-
-  position:relative;
-
-
-
-  margin-bottom:80px;
-
-
-
-  float:left;
-
-
-
-}
-
-
-
-
-
-
-
-#slider img{
-
-
-
-  position:absolute;
-
-
-
-  bottom:0;
-
-
-
-  left:0;
-
-
-
-  width:100%;
-
-
-
-  display:none;
-
-
-
-}
-
-
-
-
-
-
-
-#overlay{
-
-
-
-  position:absolute;
-
-
-
-  width:100%;
-
-
-
-  bottom:50px;
-
-
-
-  left:0;
-
-
-
-  z-index:9;
-
-
-
-}
-
-
-
-
-
-
-
-#caption{
-
-
-
-  background:url('http://static.tumblr.com/vbjnszm/QNCmj28zq/dim.png');
-
-
-
-  padding:20px;
-
-
-
-  color:#fff;
-
-
-
-  font-size:13px;
-
-
-
-  float:left;
-
-
-
-  font-weight:100;
-
-
-
-  width:350px;
-
-
-
-  -webkit-border-radius: 2px;
-
-
-
-     -moz-border-radius: 2px;
-
-
-
-          border-radius: 2px;
-
-
-
-}
-
-
-
-
-
-
-
-#caption h2{
-
-
-
-  font-size:18px;
-
-
-
-  display:block;
-
-
-
-  font-weight:400;
-
-
-
-  margin-bottom:15px;
-
-
-
-}
-
-
-
-
-
-
-
-#caption a{
-
-
-
-  background:#5AB7DA;
-
-
-
-  padding:6px 10px;
-
-
-
-  color:#fff;
-
-
-
-  float:left;
-
-
-
-  border-bottom:2px solid #379ABF;
-
-
-
-  -webkit-border-radius: 2px;
-
-
-
-     -moz-border-radius: 2px;
-
-
-
-          border-radius: 2px;
-
-
-
-}
-
-
-
-
-
-
-
-#caption a:hover{text-decoration:underline;}
-
-
-
-
-
-
-
-#slides{
-
-
-
-  position:absolute;
-
-
-
-  right:0;
-
-
-
-  bottom:10px;
-
-
-
-}
-
-
-
-
-
-
-
-.slide{
-
-
-
-  width:8px;
-
-
-
-  height:8px;
-
-
-
-  border:2px solid #fff;
-
-
-
-  -webkit-border-radius: 10px;
-
-
-
-     -moz-border-radius: 10px;
-
-
-
-          border-radius: 10px;
-
-
-
-  float:left;
-
-
-
-  margin-left:5px;
-
-
-
-  cursor:pointer;
-
-
-
-}
-
-
-
-
-
-
-
-.slide.active{background:white;}
-
-
-
-
-
-
-
-/*
-
-
-
-POSTS STYLING
-
-
-
-*/
-
-
-
-.post{
-
-
-
-  margin-bottom:100px;
-
-
-
-  padding-right:20px;
-
-
-
-  background: white;
-
-
-
-  padding-left: 20px;
-
-
-
-}
-
-
-
-
-
-
-
-.post h1{
-
-
-
-  margin-bottom:30px;
-
-
-
-  float:left;
-
-
-
-  width:100%;
-
-
-
-  display:block;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-.post h1.quote a{
-
-
-
-  font-style:italic;
-
-
-
-}
-
-
-
-
-
-
-
-.post h1 a:hover{
-
-
-
-  text-decoration:none;
-
-
-
-}
-
-
-
-
-
-
-
-.video{
-
-
-
-  float:left;
-
-
-
-  width:100%;
-
-
-
-  margin-bottom:30px;
-
-
-
-}
-
-
-
-
-
-
-
-.video iframe{width:100%;}
-
-
-
-
-
-
-
-.photoset{
-
-
-
-    width:100%;
-
-
-
-    height:300px;
-
-
-
-    float:left;
-
-
-
-    margin-bottom:30px;
-
-
-
-    position:relative;
-
-
-
-    overflow:hidden;
-
-
-
-    border-radius:2px;
-
-
-
-}
-
-
-
-
-
-
-
-.photoset img{
-
-
-
-    position:absolute;
-
-
-
-    top:0;
-
-
-
-    left:0;
-
-
-
-}
-
-
-
-
-
-
-
-.photoset-next{
-
-
-
-  width:40px;
-
-
-
-  height:40px;
-
-
-
-  background:#333 url('http://static.tumblr.com/vbjnszm/Gg9mj4132/arrow.png') no-repeat center;
-
-
-
-  position:absolute;
-
-
-
-  left:50px;
-
-
-
-  bottom:5px;
-
-
-
-  z-index:999;
-
-
-
-  display:block;
-
-
-
-  cursor:pointer;
-
-
-
-}
-
-
-
-
-
-
-
-.photoset-previous{
-
-
-
-  width:40px;
-
-
-
-  height:40px;
-
-
-
-  background:#333 url('http://static.tumblr.com/vbjnszm/0Ixmj3h7u/arrow-left.png') no-repeat center;
-
-
-
-  position:absolute;
-
-
-
-  left:6px;
-
-
-
-  bottom:5px;
-
-
-
-  display:block;
-
-
-
-  z-index:999;
-
-
-
-  cursor:pointer;
-
-
-
-}
-
-
-
-
-
-
-
-.post-photo{
-
-
-
-  padding-top: 10px;
-
-
-
-  -webkit-border-radius: 2px;
-
-
-
-     -moz-border-radius: 2px;
-
-
-
-          border-radius: 2px;
-
-
-
-  margin-bottom:30px;
-
-
-
-  float:left;
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-.post h2{
-
-
-
-  font-size:20px;
-
-
-
-  font-weight:100;
-
-
-
-  margin-bottom:30px;
-
-
-
-  color:#777;
-
-
-
-}
-
-
-
-
-
-
-
-.post p{
-
-
-
-  color:#333;
-
-
-
-  font-size:15px;
-
-
-
-  line-height:1.8;
-
-
-
-}
-
-
-
-
-
-
-
-.post p img {
-
-
-
- margin-right: auto;
-
-
-
- margin-left: auto;
-
-
-
- display:block;
-
-
-
-}
-
-
-
-
-
-
-
-.post blockquote{
-
-
-
-  font-size:15px;
-
-
-
-  color:#777;
-
-
-  margin-left:30px;
-
-
-
-  font-style:italic;
-
-
-
-}
-
-
-
-
-
-
-
-.chat-block{
-
-
-
- margin-bottom:30px;
-
-
-
-}
-
-
-
-
-
-
-
-.chat-block .name{
-
-
-
- width:100%;
-
-
-
- display:block;
-
-
-
- margin-bottom:5px;
-
-
-
- font-size:18px;
-
-
-
- color:#999;
-
-
-
- font-weight:400;
-
-
-
-}
-
-
-
-
-
-
-
-.album {
-
-
-
-    width: 207px;
-
-
-
-    float: left;
-
-
-
-    margin-right: 30px;
-
-
-
-}
-
-
-
-
-
-
-
-.album img {
-
-
-
-    float: left;
-
-
-
-}
-
-
-
-
-
-
-
-.artist a{
-
-
-
-    font-weight: 800;
-
-
-
-    font-size: 38px;
-
-
-
-    display: block;
-
-
-
-    color:#333 !important;
-
-
-
-    text-shadow:0 2px 0 #eee;
-
-
-
-}
-
-
-
-
-
-
-
-.artist a:hover{text-decoration:underline;}
-
-
-
-
-
-
-
-.track{
-
-
-
-    display:block;
-
-
-
-    font-size:18px;
-
-
-
-    margin-bottom:8px;
-
-
-
-}
-
-
-
-
-
-
-
-.album-name{
-
-
-
-    display:block;
-
-
-
-    font-size:16px;
-
-
-
-    margin-bottom:8px;
-
-
-
-    color:#999;
-
-
-
-    font-weight:100;
-
-
-
-}
-
-
-
-
-
-
-
-pre.prettyprint{
-
-
-
-    border:none !important;
-
-
-
-    padding:10px !important;
-
-
-
-    background:#eee;
-
-
-
-    margin-bottom:30px;
-
-
-
-    border-radius:3px;
-
-
-
-}
-
-
-
-
-
-
-
-.post a:hover{text-decoration:underline;}
-
-
-
-
-
-
-
-.read_more{
-
-
-
-  background:#5AB7DA;
-
-
-
-  padding:5px 10px;
-
-
-
-  color:#fff;
-
-
-
-  border-bottom:2px solid #379ABF;
-
-
-
-  -webkit-border-radius: 2px;
-
-
-
-     -moz-border-radius: 2px;
-
-
-
-          border-radius: 2px;
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-.meta a{
-
-
-
-    background:#EEEEEE;
-
-
-
-    padding:4px 10px;
-
-
-
-    padding-bottom:3px;
-
-
-
-    color:#888 !important;
-
-
-
-    font-weight:300;
-
-
-
-    margin-right:10px;
-
-
-
-    border-bottom:1px solid #C9C9C9;
-
-
-
-    float:left;
-
-
-
-    font-size:14px;
-
-
-
-    border-radius:2px;
-
-
-
-    opacity:.6;
-
-
-
-    margin-bottom:15px;
-
-
-
-}
-
-
-
-
-
-
-
-.meta a:hover{opacity:1;}
-
-
-
-
-
-
-
-.date{
-
-
-
-    padding-left:30px !important;
-
-
-
-    background:#eee url('http://static.tumblr.com/vbjnszm/YXSmj3m5g/date.png') no-repeat 10px 9px !important;
-
-
-
-}
-
-
-
-
-
-
-
-.tag{
-
-
-
-    margin-left:20px;
-
-
-
-    position:relative;
-
-
-
-}
-
-
-
-
-
-
-
-.tag img{
-
-
-
-    position:absolute;
-
-
-
-    top:0;
-
-
-
-    left:-18px
-
-
-
-}
-
-
-
-
-
-
-
-.addthis_toolbox{
-
-
-
-    float:left;
-
-
-
-    margin:30px 0;
-
-
-
-    width:100%;
-
-
-
-}
-
-
-
-
-
-
-
-.page-title {
-
-
-
-    width: 100%;
-
-
-
-    border-top: 1px solid #ddd;
-
-
-
-    border-bottom: 1px solid #ddd;
-
-
-
-    padding: 30px 0;
-
-
-
-    float: left;
-
-
-
-    margin-bottom: 60px;
-
-
-
-}
-
-
-
-
-
-
-
-.page-title h3{
-
-
-
-    color:#555;
-
-
-
-    font-weight:100;
-
-
-
-    font-size:24px;
-
-
-
-    float:left;
-
-
-
-}
-
-
-
-
-
-
-
-.page-title a{
-
-
-
-  float:right;
-
-
-
-  margin-top:3px;
-
-
-
-}
-
-
-
-
-
-
-
-#pagination{
-
-
-
-    float:left;
-
-
-
-    margin-bottom:50px;
-
-
-
-}
-
-
-
-
-
-
-
-#pagination a{
-
-
-
-    background:#eee;
-
-
-
-    padding:5px 12px;
-
-
-
-    float:left;
-
-
-
-    margin-right:10px;
-
-
-
-    border-radius:3px;
-
-
-
-    color:#979797;
-
-
-
-    border-bottom:2px solid #DEDEDE;
-
-
-
-}
-
-
-
-
-
-
-
-#pagination a.current{
-
-
-
-    background:#5AB7DA;
-
-
-
-    color:#fff;
-
-
-
-    border-bottom:2px solid #379ABF;
-
-
-
-}
-
-
-
-
-
-
-
-/*
-
-
-
-SIDEBAR
-
-
-
-*/
-
-
-
-#posts{
-
-
-
-	padding-top: 15px;
-
-
-
-  -webkit-box-shadow: 1px 0 0 #eee;
-
-
-
-     -moz-box-shadow: 1px 0 0 #eee;
-
-
-
-          box-shadow: 1px 0 0 #eee;
-
-
-
-}
-
-
-
-
-
-
-
-#sidebar{float:right;}
-
-
-
-
-
-
-
-#sidebar h4{
-
-
-
-  font-size:15px;
-
-
-
-  margin-bottom:15px;
-
-
-
-  display:block;
-
-
-
-  color:#333;
-
-
-
-  font-weight:600;
-
-
-
-}
-
-
-
-
-
-
-
-#sidebar h4 a{
-
-
-
-    margin-left:5px;
-
-
-
-    font-size:14px;
-
-
-
-    font-weight:400;
-
-
-
-    margin-top:2px;
-
-
-
-}
-
-
-
-
-
-
-
-#sidebar h4 a:hover{text-decoration:underline;}
-
-
-
-
-
-
-
-#sidebar .block{
-
-
-
-  margin-bottom:80px;
-
-
-
-  font-size:14px;
-
-
-
-  line-height:1.8;
-
-
-
-  font-weight:100;
-
-
-
-  color:#777;
-
-
-
-  padding-left:30px;
-
-
-
-}
-
-
-
-
-
-
-
-#search_input{
-
-
-
-  outline:none;
-
-
-
-  padding:2%;
-
-
-
-  width:98%;
-
-
-
-  font-weight:400;
-
-
-
-  font-size:14px;
-
-
-
-  border:1px solid #E0E0E0;
-
-
-
-  margin-top:15px;
-
-
-
-  -webkit-border-radius: 3px;
-
-
-
-     -moz-border-radius: 3px;
-
-
-
-          border-radius: 3px;
-
-
-
-  -webkit-box-shadow: 0 2px 0 #F4F4F4;
-
-
-
-     -moz-box-shadow: 0 2px 0 #F4F4F4;
-
-
-
-          box-shadow: 0 2px 0 #F4F4F4;
-
-
-
-}
-
-
-
-
-
-
-
-#categories{clear:both;margin-top:5px;float:left;}
-
-
-
-#categories a{
-
-
-
-  padding:3px 10px;
-
-
-
-  background:#eee;
-
-
-
-  float:left;
-
-
-
-  color:#777;
-
-
-
-  margin-right:10px;
-
-
-
-  margin-bottom:10px;
-
-
-
-  border-bottom:2px solid #ddd;
-
-
-
-  -webkit-border-radius: 2px;
-
-
-
-     -moz-border-radius: 2px;
-
-
-
-          border-radius: 2px;
-
-
-
-}
-
-
-
-
-
-
-
-#dribbble-shots{
-
-
-
-  float:left;
-
-
-
-  margin-top:5px;
-
-
-
-}
-
-
-
-
-
-
-
-#dribbble-shots a{
-
-
-
-  float:left;
-
-
-
-  width:48%;
-
-
-
-  margin-right:2%;
-
-
-
-  margin-bottom:2%;
-
-
-
-}
-
-
-
-
-
-
-
-#dribbble-shots a img{
-
-
-
-  width:100%;
-
-
-
-  float:left;
-
-
-
-  -webkit-border-radius: 3px;
-
-
-
-     -moz-border-radius: 3px;
-
-
-
-          border-radius: 3px;
-
-
-
-}
-
-
-
-
-
-
-
-#twitter-feed li{
-
-
-
-  padding-bottom:20px;
-
-
-
-  margin-bottom:20px;
-
-
-
-  border-bottom:1px solid #eee;
-
-
-
-  font-size:14px;
-
-
-
-  line-height:1.8;
-
-
-
-}
-
-
-
-
-
-
-
-#twitter-feed li a{
-
-
-
-  font-weight:600;
-
-
-
-  color:#777;
-
-
-
-  font-size:13px;
-
-
-
-}
-
-
-
-
-
-
-
-#twitter-feed li .time-ago{
-
-
-
-  font-size:13px;
-
-
-
-  color:#aaa;
-
-
-
-}
-
-
-
-
-
-
-
-/*Footer*/
-
-
-
-footer{
-
-
-
-    float:left;
-
-
-
-    clear:both;
-
-
-
-    padding:50px 0;
-
-
-
-    margin-top:60px;
-
-
-
-    width:100%;
-
-
-
-    background:#f5f5f5;
-
-
-
-}
-
-
-
-
-
-
-
-footer .col{
-
-
-
-    color:#999;
-
-
-
-}
-
-
-
-
-
-
-
-footer .col h5{
-
-
-
-    color:#666;
-
-
-
-    display:block;
-
-
-
-    margin-bottom:10px;
-
-
-
-    font-weight:400;
-
-
-
-    text-transform:uppercase;
-
-
-
-    font-size:14px;
-
-
-
-}
-
-
-
-
-
-
-
-footer .col a{
-
-
-
-    float:left;
-
-
-
-    margin-right:10px;
-
-
-
-    padding-right:10px;
-
-
-
-    margin-bottom:10px;
-
-
-
-    color:#aaa;
-
-
-
-    font-size:14px;
-
-
-
-    border-right:1px solid #d5d5d5;
-
-
-
-}
-
-
-
-
-
-
-
-footer .col a:last-child{border-right:none;}
-
-
-
-
-
-
-
-#bottom-bar{
-
-
-
-    clear:both;
-
-
-
-    float:left;
-
-
-
-    width:100%;
-
-
-
-    padding:10px 0;
-
-
-
-    background: #edeff2;
-
-
-
-    color:#aaa;
-
-
-
-    font-weight:100;
-
-
-
-}
-
-
-
-
-
-
-
-#bottom-bar #rights{float:left;}
-
-
-
-#bottom-bar #credit{float:right;}
-
-
-
-
-
-
-
-/*responsive*/
-
-
-
-
-
-
-
-@media screen and (max-width:1100px){
-
-
-
-  #slider{display:none;}
-
-
-
-  header{border-bottom:1px solid #ddd;margin-bottom:50px;}
-
-
-
-}
-
-
-
-
-
-
-
-@media screen and (max-width:700px){
-
-
-
-  nav{display:none;}
-
-
-
-  .post{padding-right:0;}
-
-
-
-  #posts{box-shadow:none;}
-
-
-
-}
-
-
-
+body {
+
+
+
+
+
+
+
+    -webkit-font-smoothing: antialiased;
+
+
+
+
+
+
+
+    font-size: 15px;
+
+
+
+
+
+
+
+    background: #edeff2;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "marketo";
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.eot);
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.svg) format('svg');
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "Proxima Nova";
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.eot);
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.svg) format('svg');
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "Proxima Nova";
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.eot);
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.svg) format('svg');
+
+
+
+
+
+
+
+  font-weight: bold;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "Proxima Nova";
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.eot);
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.svg) format('svg');
+
+
+
+
+
+
+
+  font-weight: normal;
+
+
+
+
+
+
+
+  font-style: italic;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "Proxima Nova";
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.eot);
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.svg) format('svg');
+
+
+
+
+
+
+
+  font-weight: bold;
+
+
+
+
+
+
+
+  font-style: italic;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "Proxima Nova SBold";
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.eot);
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.svg) format('svg');
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "Proxima Nova SBold";
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot);
+
+
+
+
+
+
+
+  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.svg) format('svg');
+
+
+
+
+
+
+
+  font-weight: normal;
+
+
+
+
+
+
+
+  font-style: italic;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* line 64, ../sass/_util.scss */
+
+
+
+
+
+
+
+::-webkit-input-placeholder {
+
+
+
+
+
+
+
+  font-family: 'Proxima Nova', sans-serif !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* line 67, ../sass/_util.scss */
+
+
+
+
+
+
+
+::-moz-placeholder {
+
+
+
+
+
+
+
+  font-family: 'Proxima Nova', sans-serif !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* firefox 19+ */
+
+
+
+
+
+
+
+/* line 70, ../sass/_util.scss */
+
+
+
+
+
+
+
+:-ms-input-placeholder {
+
+
+
+
+
+
+
+  font-family: 'Proxima Nova', sans-serif !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ie */
+
+
+
+
+
+
+
+/* line 73, ../sass/_util.scss */
+
+
+
+
+
+
+
+input:-moz-placeholder {
+
+
+
+
+
+
+
+  font-family: 'Proxima Nova', sans-serif !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+div, p, .headerbar, button, .proxima {
+
+
+
+
+
+
+
+  font-family: 'Proxima Nova', sans-serif !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+p {
+
+
+
+
+
+
+
+ font-weight: normal !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sidebar div h4 {
+
+
+
+
+
+
+
+    font-size: 16px;
+
+
+
+
+
+
+
+    color: #104952;
+
+
+
+
+
+
+
+    font-family: 'Proxima Nova SBold', sans-serif !important;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.addthis_toolbox .addthis_button_pinterest_pinit{
+
+
+
+
+
+
+
+ margin-right: 35px !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#socialicons {
+
+
+
+
+
+
+
+            display: inline;
+
+
+
+
+
+
+
+            margin-left: 400px;
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.circle {
+
+
+
+
+
+
+
+    vertical-align: middle;
+
+
+
+
+
+
+
+    display: inline-block;
+
+
+
+
+
+
+
+    height:30px;
+
+
+
+
+
+
+
+    width: 30px;
+
+
+
+
+
+
+
+    border-radius(30px);
+
+
+
+
+
+
+
+    overflow:hidden;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rss {
+
+
+
+
+
+
+
+            background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rss:hover {
+
+
+
+
+
+
+
+   -webkit-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -moz-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -o-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   transition:background 300ms ease-in;
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.facebook {
+
+
+
+
+
+
+
+            background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.facebook:hover {
+
+
+
+
+
+
+
+   -webkit-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -moz-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -o-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   transition:background 300ms ease-in;
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.twitter {
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.twitter:hover {
+
+
+
+
+
+
+
+   -webkit-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -moz-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -o-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   transition:background 300ms ease-in;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+.mail {
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mail:hover {
+
+
+
+
+
+
+
+   -webkit-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -moz-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   -o-transition:background 300ms ease-in;
+
+
+
+
+
+
+
+   transition:background 300ms ease-in;
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+.facebook-preload {
+
+
+
+
+
+
+
+    display:none !important;
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.twitter-preload {
+
+
+
+
+
+
+
+    display:none !important;
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+.mail-preload {
+
+
+
+
+
+
+
+    display:none !important;
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+.rss-preload {
+
+
+
+
+
+
+
+    display:none !important;
+
+
+
+
+
+
+
+    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.title {
+
+
+
+
+
+
+
+  font-family: 'Proxima Nova', sans-serif !important;
+
+
+
+
+
+
+
+  font-size: 36px;
+
+
+
+
+
+
+
+  color: #104952;
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+.title a {
+
+
+
+  font-family: 'Proxima Nova', sans-serif !important;
+
+
+
+  font-weight: normal;
+
+
+
+  font-size: 36px;
+
+
+
+
+
+
+
+  color: #104952 !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+.button{
+
+
+
+
+
+
+
+    padding:4px 10px;
+
+
+
+
+
+
+
+    background:#5AB7DA;
+
+
+
+
+
+
+
+    color:#fff;
+
+
+
+
+
+
+
+    border-radius:2px;
+
+
+
+
+
+
+
+    border-bottom:2px solid #379ABF;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.button:hover{text-decoration:underline;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+
+HEADER
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+header{
+
+
+
+
+
+
+
+    height: 10px;
+
+
+
+
+
+
+
+    background-image:  url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/backgroundtile.png);
+
+
+
+
+
+
+
+    background-repeat: repeat-x;
+
+
+
+
+
+
+
+    background-position: left top;
+
+
+
+
+
+
+
+    line-height: 95px;
+
+
+
+
+
+
+
+    color: white;
+
+
+
+
+
+
+
+    width:100%;
+
+
+
+
+
+
+
+	padding-top: 10px;
+
+
+
+
+
+
+
+	padding-bottom: 40px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+button {
+
+
+
+
+
+
+
+    border: 1px solid #145f6b; /* stroke */
+
+
+
+
+
+
+
+    -moz-border-radius: 3px;
+
+
+
+
+
+
+
+    -webkit-border-radius: 3px;
+
+
+
+
+
+
+
+    border-radius: 3px; /* border radius */
+
+
+
+
+
+
+
+    -moz-background-clip: padding;
+
+
+
+
+
+
+
+    -webkit-background-clip: padding-box;
+
+
+
+
+
+
+
+    background-clip: padding-box; /* prevents bg color from leaking outside the border */
+
+
+
+
+
+
+
+    background-color: #1b8191; /* layer fill content */
+
+
+
+
+
+
+
+    -moz-box-shadow: 1px 2px 2px rgba(0,0,0,.23); /* drop shadow */
+
+
+
+
+
+
+
+    -webkit-box-shadow: 1px 2px 2px rgba(0,0,0,.23); /* drop shadow */
+
+
+
+
+
+
+
+    box-shadow: 1px 2px 2px rgba(0,0,0,.23); /* drop shadow */
+
+
+
+
+
+
+
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFjODE5MSIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI2YTBiNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+); /* gradient overlay */
+
+
+
+
+
+
+
+    background-image: -moz-linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
+
+
+
+
+
+
+
+    background-image: -o-linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
+
+
+
+
+
+
+
+    background-image: -webkit-linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
+
+
+
+
+
+
+
+    background-image: linear-gradient(bottom, #1c8191 0%, #26a0b4 100%); /* gradient overlay */
+
+
+
+
+
+
+
+    color: white;
+
+
+
+
+
+
+
+    height: 40px;
+
+
+
+    width: 76px;
+
+
+
+    cursor: pointer;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+.nopadding {
+
+
+
+  padding:0px !important;
+
+
+
+  border-bottom: 0px !important;
+
+
+
+  background-color: transparent !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+#logo {
+
+
+
+
+
+
+
+    display: inline;
+
+
+
+
+
+
+
+    vertical-align: middle;
+
+
+
+
+
+
+
+    /* margin-left: 240px; */
+
+
+
+
+
+
+
+    margin-right: 150px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#logo{float:left;}
+
+
+
+
+
+
+
+#logo a{
+
+
+
+
+
+
+
+  color:#333;
+
+
+
+
+
+
+
+  text-transform:uppercase;
+
+
+
+
+
+
+
+  font-weight:100;
+
+
+
+
+
+
+
+  font-size:30px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+nav{float:right;margin-top:20px;}
+
+
+
+
+
+
+
+nav a{
+
+
+
+
+
+
+
+  margin-left:30px;
+
+
+
+
+
+
+
+  color:#555;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+nav a:hover{
+
+
+
+
+
+
+
+  color:{color:Highlight};
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+
+SLIDER
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+#slider{
+
+
+
+
+
+
+
+  width:100%;
+
+
+
+
+
+
+
+  height:500px;
+
+
+
+
+
+
+
+  overflow:hidden;
+
+
+
+
+
+
+
+  position:relative;
+
+
+
+
+
+
+
+  margin-bottom:80px;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#slider img{
+
+
+
+
+
+
+
+  position:absolute;
+
+
+
+
+
+
+
+  bottom:0;
+
+
+
+
+
+
+
+  left:0;
+
+
+
+
+
+
+
+  width:100%;
+
+
+
+
+
+
+
+  display:none;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#overlay{
+
+
+
+
+
+
+
+  position:absolute;
+
+
+
+
+
+
+
+  width:100%;
+
+
+
+
+
+
+
+  bottom:50px;
+
+
+
+
+
+
+
+  left:0;
+
+
+
+
+
+
+
+  z-index:9;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#caption{
+
+
+
+
+
+
+
+  background:url('http://static.tumblr.com/vbjnszm/QNCmj28zq/dim.png');
+
+
+
+
+
+
+
+  padding:20px;
+
+
+
+
+
+
+
+  color:#fff;
+
+
+
+
+
+
+
+  font-size:13px;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  font-weight:100;
+
+
+
+
+
+
+
+  width:350px;
+
+
+
+
+
+
+
+  -webkit-border-radius: 2px;
+
+
+
+
+
+
+
+     -moz-border-radius: 2px;
+
+
+
+
+
+
+
+          border-radius: 2px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#caption h2{
+
+
+
+
+
+
+
+  font-size:18px;
+
+
+
+
+
+
+
+  display:block;
+
+
+
+
+
+
+
+  font-weight:400;
+
+
+
+
+
+
+
+  margin-bottom:15px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#caption a{
+
+
+
+
+
+
+
+  background:#5AB7DA;
+
+
+
+
+
+
+
+  padding:6px 10px;
+
+
+
+
+
+
+
+  color:#fff;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  border-bottom:2px solid #379ABF;
+
+
+
+
+
+
+
+  -webkit-border-radius: 2px;
+
+
+
+
+
+
+
+     -moz-border-radius: 2px;
+
+
+
+
+
+
+
+          border-radius: 2px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#caption a:hover{text-decoration:underline;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#slides{
+
+
+
+
+
+
+
+  position:absolute;
+
+
+
+
+
+
+
+  right:0;
+
+
+
+
+
+
+
+  bottom:10px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.slide{
+
+
+
+
+
+
+
+  width:8px;
+
+
+
+
+
+
+
+  height:8px;
+
+
+
+
+
+
+
+  border:2px solid #fff;
+
+
+
+
+
+
+
+  -webkit-border-radius: 10px;
+
+
+
+
+
+
+
+     -moz-border-radius: 10px;
+
+
+
+
+
+
+
+          border-radius: 10px;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  margin-left:5px;
+
+
+
+
+
+
+
+  cursor:pointer;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.slide.active{background:white;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+
+POSTS STYLING
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+.post{
+
+
+
+
+
+
+
+  margin-bottom:100px;
+
+
+
+
+
+
+
+  padding-right:20px;
+
+
+
+
+
+
+
+  background: white;
+
+
+
+
+
+
+
+  padding-left: 20px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post h1{
+
+
+
+
+
+
+
+  margin-bottom:30px;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  width:100%;
+
+
+
+
+
+
+
+  display:block;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post h1.quote a{
+
+
+
+
+
+
+
+  font-style:italic;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post h1 a:hover{
+
+
+
+
+
+
+
+  text-decoration:none;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.video{
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  width:100%;
+
+
+
+
+
+
+
+  margin-bottom:30px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.video iframe{width:100%;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.photoset{
+
+
+
+
+
+
+
+    width:100%;
+
+
+
+
+
+
+
+    height:300px;
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    margin-bottom:30px;
+
+
+
+
+
+
+
+    position:relative;
+
+
+
+
+
+
+
+    overflow:hidden;
+
+
+
+
+
+
+
+    border-radius:2px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.photoset img{
+
+
+
+
+
+
+
+    position:absolute;
+
+
+
+
+
+
+
+    top:0;
+
+
+
+
+
+
+
+    left:0;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.photoset-next{
+
+
+
+
+
+
+
+  width:40px;
+
+
+
+
+
+
+
+  height:40px;
+
+
+
+
+
+
+
+  background:#333 url('http://static.tumblr.com/vbjnszm/Gg9mj4132/arrow.png') no-repeat center;
+
+
+
+
+
+
+
+  position:absolute;
+
+
+
+
+
+
+
+  left:50px;
+
+
+
+
+
+
+
+  bottom:5px;
+
+
+
+
+
+
+
+  z-index:999;
+
+
+
+
+
+
+
+  display:block;
+
+
+
+
+
+
+
+  cursor:pointer;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.photoset-previous{
+
+
+
+
+
+
+
+  width:40px;
+
+
+
+
+
+
+
+  height:40px;
+
+
+
+
+
+
+
+  background:#333 url('http://static.tumblr.com/vbjnszm/0Ixmj3h7u/arrow-left.png') no-repeat center;
+
+
+
+
+
+
+
+  position:absolute;
+
+
+
+
+
+
+
+  left:6px;
+
+
+
+
+
+
+
+  bottom:5px;
+
+
+
+
+
+
+
+  display:block;
+
+
+
+
+
+
+
+  z-index:999;
+
+
+
+
+
+
+
+  cursor:pointer;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post-photo{
+
+
+
+
+
+
+
+  padding-top: 10px;
+
+
+
+
+
+
+
+  -webkit-border-radius: 2px;
+
+
+
+
+
+
+
+     -moz-border-radius: 2px;
+
+
+
+
+
+
+
+          border-radius: 2px;
+
+
+
+
+
+
+
+  margin-bottom:30px;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post h2{
+
+
+
+
+
+
+
+  font-size:20px;
+
+
+
+
+
+
+
+  font-weight:100;
+
+
+
+
+
+
+
+  margin-bottom:30px;
+
+
+
+
+
+
+
+  color:#777;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post p{
+
+
+
+
+
+
+
+  color:#333;
+
+
+
+
+
+
+
+  font-size:15px;
+
+
+
+
+
+
+
+  line-height:1.8;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post p img {
+
+
+
+
+
+
+
+ margin-right: auto;
+
+
+
+
+
+
+
+ margin-left: auto;
+
+
+
+
+
+
+
+ display:block;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post blockquote{
+
+
+
+
+
+
+
+  font-size:15px;
+
+
+
+
+
+
+
+  color:#777;
+
+
+
+
+
+  margin-left:30px;
+
+
+
+
+
+
+
+  font-style:italic;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.chat-block{
+
+
+
+
+
+
+
+ margin-bottom:30px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.chat-block .name{
+
+
+
+
+
+
+
+ width:100%;
+
+
+
+
+
+
+
+ display:block;
+
+
+
+
+
+
+
+ margin-bottom:5px;
+
+
+
+
+
+
+
+ font-size:18px;
+
+
+
+
+
+
+
+ color:#999;
+
+
+
+
+
+
+
+ font-weight:400;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.album {
+
+
+
+
+
+
+
+    width: 207px;
+
+
+
+
+
+
+
+    float: left;
+
+
+
+
+
+
+
+    margin-right: 30px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.album img {
+
+
+
+
+
+
+
+    float: left;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.artist a{
+
+
+
+
+
+
+
+    font-weight: 800;
+
+
+
+
+
+
+
+    font-size: 38px;
+
+
+
+
+
+
+
+    display: block;
+
+
+
+
+
+
+
+    color:#333 !important;
+
+
+
+
+
+
+
+    text-shadow:0 2px 0 #eee;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.artist a:hover{text-decoration:underline;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.track{
+
+
+
+
+
+
+
+    display:block;
+
+
+
+
+
+
+
+    font-size:18px;
+
+
+
+
+
+
+
+    margin-bottom:8px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.album-name{
+
+
+
+
+
+
+
+    display:block;
+
+
+
+
+
+
+
+    font-size:16px;
+
+
+
+
+
+
+
+    margin-bottom:8px;
+
+
+
+
+
+
+
+    color:#999;
+
+
+
+
+
+
+
+    font-weight:100;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pre.prettyprint{
+
+
+
+
+
+
+
+    border:none !important;
+
+
+
+
+
+
+
+    padding:10px !important;
+
+
+
+
+
+
+
+    background:#eee;
+
+
+
+
+
+
+
+    margin-bottom:30px;
+
+
+
+
+
+
+
+    border-radius:3px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.post a:hover{text-decoration:underline;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.read_more{
+
+
+
+
+
+
+
+  background:#5AB7DA;
+
+
+
+
+
+
+
+  padding:5px 10px;
+
+
+
+
+
+
+
+  color:#fff;
+
+
+
+
+
+
+
+  border-bottom:2px solid #379ABF;
+
+
+
+
+
+
+
+  -webkit-border-radius: 2px;
+
+
+
+
+
+
+
+     -moz-border-radius: 2px;
+
+
+
+
+
+
+
+          border-radius: 2px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.meta a{
+
+
+
+
+
+
+
+    background:#EEEEEE;
+
+
+
+
+
+
+
+    padding:4px 10px;
+
+
+
+
+
+
+
+    padding-bottom:3px;
+
+
+
+
+
+
+
+    color:#888 !important;
+
+
+
+
+
+
+
+    font-weight:300;
+
+
+
+
+
+
+
+    margin-right:10px;
+
+
+
+
+
+
+
+    border-bottom:1px solid #C9C9C9;
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    font-size:14px;
+
+
+
+
+
+
+
+    border-radius:2px;
+
+
+
+
+
+
+
+    opacity:.6;
+
+
+
+
+
+
+
+    margin-bottom:15px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.meta a:hover{opacity:1;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.date{
+
+
+
+
+
+
+
+    padding-left:30px !important;
+
+
+
+
+
+
+
+    background:#eee url('http://static.tumblr.com/vbjnszm/YXSmj3m5g/date.png') no-repeat 10px 9px !important;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tag{
+
+
+
+
+
+
+
+    margin-left:20px;
+
+
+
+
+
+
+
+    position:relative;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tag img{
+
+
+
+
+
+
+
+    position:absolute;
+
+
+
+
+
+
+
+    top:0;
+
+
+
+
+
+
+
+    left:-18px
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.addthis_toolbox{
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    margin:30px 0;
+
+
+
+
+
+
+
+    width:100%;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page-title {
+
+
+
+
+
+
+
+    width: 100%;
+
+
+
+
+
+
+
+    border-top: 1px solid #ddd;
+
+
+
+
+
+
+
+    border-bottom: 1px solid #ddd;
+
+
+
+
+
+
+
+    padding: 30px 0;
+
+
+
+
+
+
+
+    float: left;
+
+
+
+
+
+
+
+    margin-bottom: 60px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page-title h3{
+
+
+
+
+
+
+
+    color:#555;
+
+
+
+
+
+
+
+    font-weight:100;
+
+
+
+
+
+
+
+    font-size:24px;
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page-title a{
+
+
+
+
+
+
+
+  float:right;
+
+
+
+
+
+
+
+  margin-top:3px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pagination{
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    margin-bottom:50px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pagination a{
+
+
+
+
+
+
+
+    background:#eee;
+
+
+
+
+
+
+
+    padding:5px 12px;
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    margin-right:10px;
+
+
+
+
+
+
+
+    border-radius:3px;
+
+
+
+
+
+
+
+    color:#979797;
+
+
+
+
+
+
+
+    border-bottom:2px solid #DEDEDE;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pagination a.current{
+
+
+
+
+
+
+
+    background:#5AB7DA;
+
+
+
+
+
+
+
+    color:#fff;
+
+
+
+
+
+
+
+    border-bottom:2px solid #379ABF;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+
+
+
+SIDEBAR
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+#posts{
+
+
+
+
+
+
+
+	padding-top: 15px;
+
+
+
+
+
+
+
+  -webkit-box-shadow: 1px 0 0 #eee;
+
+
+
+
+
+
+
+     -moz-box-shadow: 1px 0 0 #eee;
+
+
+
+
+
+
+
+          box-shadow: 1px 0 0 #eee;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sidebar{float:right;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sidebar h4{
+
+
+
+
+
+
+
+  font-size:15px;
+
+
+
+
+
+
+
+  margin-bottom:15px;
+
+
+
+
+
+
+
+  display:block;
+
+
+
+
+
+
+
+  color:#333;
+
+
+
+
+
+
+
+  font-weight:600;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sidebar h4 a{
+
+
+
+
+
+
+
+    margin-left:5px;
+
+
+
+
+
+
+
+    font-size:14px;
+
+
+
+
+
+
+
+    font-weight:400;
+
+
+
+
+
+
+
+    margin-top:2px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sidebar h4 a:hover{text-decoration:underline;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sidebar .block{
+
+
+
+
+
+
+
+  margin-bottom:80px;
+
+
+
+
+
+
+
+  font-size:14px;
+
+
+
+
+
+
+
+  line-height:1.8;
+
+
+
+
+
+
+
+  font-weight:100;
+
+
+
+
+
+
+
+  color:#777;
+
+
+
+
+
+
+
+  padding-left:30px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#search_input{
+
+
+
+
+
+
+
+  outline:none;
+
+
+
+
+
+
+
+  padding:2%;
+
+
+
+
+
+
+
+  width:98%;
+
+
+
+
+
+
+
+  font-weight:400;
+
+
+
+
+
+
+
+  font-size:14px;
+
+
+
+
+
+
+
+  border:1px solid #E0E0E0;
+
+
+
+
+
+
+
+  margin-top:15px;
+
+
+
+
+
+
+
+  -webkit-border-radius: 3px;
+
+
+
+
+
+
+
+     -moz-border-radius: 3px;
+
+
+
+
+
+
+
+          border-radius: 3px;
+
+
+
+
+
+
+
+  -webkit-box-shadow: 0 2px 0 #F4F4F4;
+
+
+
+
+
+
+
+     -moz-box-shadow: 0 2px 0 #F4F4F4;
+
+
+
+
+
+
+
+          box-shadow: 0 2px 0 #F4F4F4;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#categories{clear:both;margin-top:5px;float:left;}
+
+
+
+
+
+
+
+#categories a{
+
+
+
+
+
+
+
+  padding:3px 10px;
+
+
+
+
+
+
+
+  background:#eee;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  color:#777;
+
+
+
+
+
+
+
+  margin-right:10px;
+
+
+
+
+
+
+
+  margin-bottom:10px;
+
+
+
+
+
+
+
+  border-bottom:2px solid #ddd;
+
+
+
+
+
+
+
+  -webkit-border-radius: 2px;
+
+
+
+
+
+
+
+     -moz-border-radius: 2px;
+
+
+
+
+
+
+
+          border-radius: 2px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#dribbble-shots{
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  margin-top:5px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#dribbble-shots a{
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  width:48%;
+
+
+
+
+
+
+
+  margin-right:2%;
+
+
+
+
+
+
+
+  margin-bottom:2%;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#dribbble-shots a img{
+
+
+
+
+
+
+
+  width:100%;
+
+
+
+
+
+
+
+  float:left;
+
+
+
+
+
+
+
+  -webkit-border-radius: 3px;
+
+
+
+
+
+
+
+     -moz-border-radius: 3px;
+
+
+
+
+
+
+
+          border-radius: 3px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#twitter-feed li{
+
+
+
+
+
+
+
+  padding-bottom:20px;
+
+
+
+
+
+
+
+  margin-bottom:20px;
+
+
+
+
+
+
+
+  border-bottom:1px solid #eee;
+
+
+
+
+
+
+
+  font-size:14px;
+
+
+
+
+
+
+
+  line-height:1.8;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#twitter-feed li a{
+
+
+
+
+
+
+
+  font-weight:600;
+
+
+
+
+
+
+
+  color:#777;
+
+
+
+
+
+
+
+  font-size:13px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#twitter-feed li .time-ago{
+
+
+
+
+
+
+
+  font-size:13px;
+
+
+
+
+
+
+
+  color:#aaa;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Footer*/
+
+
+
+
+
+
+
+footer{
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    clear:both;
+
+
+
+
+
+
+
+    padding:50px 0;
+
+
+
+
+
+
+
+    margin-top:60px;
+
+
+
+
+
+
+
+    width:100%;
+
+
+
+
+
+
+
+    background:#f5f5f5;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer .col{
+
+
+
+
+
+
+
+    color:#999;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer .col h5{
+
+
+
+
+
+
+
+    color:#666;
+
+
+
+
+
+
+
+    display:block;
+
+
+
+
+
+
+
+    margin-bottom:10px;
+
+
+
+
+
+
+
+    font-weight:400;
+
+
+
+
+
+
+
+    text-transform:uppercase;
+
+
+
+
+
+
+
+    font-size:14px;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer .col a{
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    margin-right:10px;
+
+
+
+
+
+
+
+    padding-right:10px;
+
+
+
+
+
+
+
+    margin-bottom:10px;
+
+
+
+
+
+
+
+    color:#aaa;
+
+
+
+
+
+
+
+    font-size:14px;
+
+
+
+
+
+
+
+    border-right:1px solid #d5d5d5;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer .col a:last-child{border-right:none;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#bottom-bar{
+
+
+
+
+
+
+
+    clear:both;
+
+
+
+
+
+
+
+    float:left;
+
+
+
+
+
+
+
+    width:100%;
+
+
+
+
+
+
+
+    padding:10px 0;
+
+
+
+
+
+
+
+    background: #edeff2;
+
+
+
+
+
+
+
+    color:#aaa;
+
+
+
+
+
+
+
+    font-weight:100;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#bottom-bar #rights{float:left;}
+
+
+
+
+
+
+
+#bottom-bar #credit{float:right;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*responsive*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:1100px){
+
+
+
+
+
+
+
+  #slider{display:none;}
+
+
+
+
+
+
+
+  header{border-bottom:1px solid #ddd;margin-bottom:50px;}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:700px){
+
+
+
+
+
+
+
+  nav{display:none;}
+
+
+
+
+
+
+
+  .post{padding-right:0;}
+
+
+
+
+
+
+
+  #posts{box-shadow:none;}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
