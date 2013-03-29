@@ -287,3 +287,6 @@ div {
 .right-border .row-fluid {
  @include box-sizing(border-box);
 }
+.normalfont {
+    font-weight: normal;
+}

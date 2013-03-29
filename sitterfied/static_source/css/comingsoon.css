@@ -344,6 +344,11 @@ div, h1, #notharmed, button {
   box-sizing: border-box;
 }
 
+/* line 290, ../sass/_util.scss */
+.normalfont {
+  font-weight: normal;
+}
+
 /* line 7, ../sass/comingsoon.scss */
 h1 {
   width: 150%;

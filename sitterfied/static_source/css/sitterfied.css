@@ -344,6 +344,11 @@ div, p, .header, button {
   box-sizing: border-box;
 }
 
+/* line 290, ../sass/_util.scss */
+.normalfont {
+  font-weight: normal;
+}
+
 /* line 9, ../sass/_base.scss */
 body {
   background-image: url(../img/backgroundtile.png);
@@ -769,6 +774,11 @@ div, p, .header, button {
   box-sizing: border-box;
 }
 
+/* line 290, ../sass/_util.scss */
+.normalfont {
+  font-weight: normal;
+}
+
 /* line 3, ../sass/_howitworks.scss */
 #wheneverwant, #youcantrust {
   position: absolute;
@@ -1160,6 +1170,11 @@ div, p, .header, button {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+/* line 290, ../sass/_util.scss */
+.normalfont {
+  font-weight: normal;
 }
 
 /* line 4, ../sass/_referral.scss */
