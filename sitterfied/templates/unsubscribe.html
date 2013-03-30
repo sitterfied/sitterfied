@@ -14,11 +14,12 @@ id="unsubscribe"
     <h1 class="aqua normalfont">So soon? We're sorry to see you go.</h1>
   </div>
 </div>
+<div class="halfvspacer"></div>
 <div class="row-fluid">
   <div class="span10 offset1 fonteighteen">
     <p>
-    {{email}} has been removed from all Sitterfied email lists.<br><br>
-    if this unsubscribe action was performed in error,  <a href="{% url "cancel_unsubscribe" %}?email={{email}}">click here</a> to
+      <span class="semi-bold">{{email}}</span> has been removed from all Sitterfied email lists.<br><br>
+    If this unsubscribe action was performed in error,  <a href="{% url "cancel_unsubscribe" %}?email={{email}}">click here</a> to
     remain on our list.<br><br>
     We thank you for your interest. Feel free to sign back up at anytime!<br><br>
     <span class="semi-bold">Meantime, you can continue to track our progress on our <a href="http://blog.sitterfied.com/">blog</a>, <a href="http://www.facebook.com/sitterfied">Facebook</a> and <a href="http://www.twitter.com/sitterfied">Twitter</a> pages.</span>
