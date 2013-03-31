@@ -146,6 +146,8 @@ div, p, .header, button {
   width: 30px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
   border-radius: 30px;
   overflow: hidden;
 }
@@ -576,6 +578,8 @@ div, p, .header, button {
   width: 30px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
   border-radius: 30px;
   overflow: hidden;
 }
@@ -974,6 +978,8 @@ div, p, .header, button {
   width: 30px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
   border-radius: 30px;
   overflow: hidden;
 }
@@ -1215,6 +1221,8 @@ button {
 .pillbox {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
   border-radius: 20px;
   -webkit-background-clip: padding;
   -moz-background-clip: padding;
@@ -1267,4 +1275,86 @@ button {
   line-height: 30px;
   vertical-align: middle;
   font-size: 18px;
+}
+
+/* line 1, ../sass/_jquery.tagit.scss */
+ul.tagit {
+  padding: 1px 5px;
+  overflow: auto;
+  margin-left: inherit;
+  /* usually we don't want the regular ul margins. */
+  margin-right: inherit;
+}
+
+/* line 7, ../sass/_jquery.tagit.scss */
+ul.tagit li {
+  display: block;
+  float: left;
+  margin: 2px 5px 2px 0;
+}
+
+/* line 12, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-choice {
+  position: relative;
+  line-height: inherit;
+}
+
+/* line 17, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-choice-read-only {
+  padding: .2em .5em .2em .5em;
+}
+
+/* line 21, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-choice-editable {
+  padding: .2em 18px .2em .5em;
+}
+
+/* line 25, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-new {
+  padding: .25em 4px .25em 0;
+}
+
+/* line 29, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-choice a.tagit-label {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* line 33, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-choice .tagit-close {
+  cursor: pointer;
+  position: absolute;
+  right: .1em;
+  top: 50%;
+  margin-top: -8px;
+  line-height: 17px;
+}
+
+/* used for some custom themes that don't need image icons */
+/* line 43, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+  display: none;
+}
+
+/* line 47, ../sass/_jquery.tagit.scss */
+ul.tagit li.tagit-choice input {
+  display: block;
+  float: left;
+  margin: 2px 5px 2px 0;
+}
+
+/* line 52, ../sass/_jquery.tagit.scss */
+ul.tagit input[type="text"] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: inherit;
+  background-color: inherit;
+  outline: none;
 }
