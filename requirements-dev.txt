@@ -53,3 +53,4 @@ dozer
 
 ipython
 django-mandrill
+https://github.com/django/django-localflavor-us/zipball/master
