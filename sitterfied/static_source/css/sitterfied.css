@@ -217,136 +217,141 @@ div, p, .header, button {
 }
 
 /* line 197, ../sass/_util.scss */
+.vcenter img {
+  display: block;
+}
+
+/* line 202, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 200, ../sass/_util.scss */
+/* line 205, ../sass/_util.scss */
 .rigthtalign {
   text-align: right;
 }
 
-/* line 203, ../sass/_util.scss */
+/* line 208, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 214, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 213, ../sass/_util.scss */
+/* line 218, ../sass/_util.scss */
 .hundredwidth {
   width: 100%;
 }
 
-/* line 218, ../sass/_util.scss */
+/* line 223, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 222, ../sass/_util.scss */
+/* line 227, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 233, ../sass/_util.scss */
 .allwidth {
   width: 100%;
 }
 
-/* line 232, ../sass/_util.scss */
+/* line 237, ../sass/_util.scss */
 .bgdarkblue {
   background-color: #003366;
 }
 
-/* line 235, ../sass/_util.scss */
+/* line 240, ../sass/_util.scss */
 .bgaqua {
   background-color: #35a5b5;
 }
 
-/* line 239, ../sass/_util.scss */
+/* line 244, ../sass/_util.scss */
 .darkblue {
   color: #003366;
 }
 
-/* line 242, ../sass/_util.scss */
+/* line 247, ../sass/_util.scss */
 .lightblue {
   color: #81abb0;
 }
 
-/* line 245, ../sass/_util.scss */
+/* line 250, ../sass/_util.scss */
 .aqua {
   color: #35a5b5;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 254, ../sass/_util.scss */
 .lightgray {
   color: #e1e3e5;
 }
 
-/* line 252, ../sass/_util.scss */
+/* line 257, ../sass/_util.scss */
 .greenblue {
   color: #104952;
 }
 
-/* line 256, ../sass/_util.scss */
+/* line 261, ../sass/_util.scss */
 .white {
   color: white;
 }
 
-/* line 260, ../sass/_util.scss */
+/* line 265, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 263, ../sass/_util.scss */
+/* line 268, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 266, ../sass/_util.scss */
+/* line 271, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 269, ../sass/_util.scss */
+/* line 274, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 272, ../sass/_util.scss */
+/* line 277, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 276, ../sass/_util.scss */
+/* line 281, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 279, ../sass/_util.scss */
+/* line 284, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
 }
 
-/* line 283, ../sass/_util.scss */
+/* line 288, ../sass/_util.scss */
 .right-padding {
   padding-right: 20px;
 }
 
-/* line 287, ../sass/_util.scss */
+/* line 292, ../sass/_util.scss */
 .right-border .row-fluid {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 290, ../sass/_util.scss */
+/* line 295, ../sass/_util.scss */
 .normalfont {
   font-weight: normal;
 }
@@ -649,136 +654,141 @@ div, p, .header, button {
 }
 
 /* line 197, ../sass/_util.scss */
+.vcenter img {
+  display: block;
+}
+
+/* line 202, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 200, ../sass/_util.scss */
+/* line 205, ../sass/_util.scss */
 .rigthtalign {
   text-align: right;
 }
 
-/* line 203, ../sass/_util.scss */
+/* line 208, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 214, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 213, ../sass/_util.scss */
+/* line 218, ../sass/_util.scss */
 .hundredwidth {
   width: 100%;
 }
 
-/* line 218, ../sass/_util.scss */
+/* line 223, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 222, ../sass/_util.scss */
+/* line 227, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 233, ../sass/_util.scss */
 .allwidth {
   width: 100%;
 }
 
-/* line 232, ../sass/_util.scss */
+/* line 237, ../sass/_util.scss */
 .bgdarkblue {
   background-color: #003366;
 }
 
-/* line 235, ../sass/_util.scss */
+/* line 240, ../sass/_util.scss */
 .bgaqua {
   background-color: #35a5b5;
 }
 
-/* line 239, ../sass/_util.scss */
+/* line 244, ../sass/_util.scss */
 .darkblue {
   color: #003366;
 }
 
-/* line 242, ../sass/_util.scss */
+/* line 247, ../sass/_util.scss */
 .lightblue {
   color: #81abb0;
 }
 
-/* line 245, ../sass/_util.scss */
+/* line 250, ../sass/_util.scss */
 .aqua {
   color: #35a5b5;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 254, ../sass/_util.scss */
 .lightgray {
   color: #e1e3e5;
 }
 
-/* line 252, ../sass/_util.scss */
+/* line 257, ../sass/_util.scss */
 .greenblue {
   color: #104952;
 }
 
-/* line 256, ../sass/_util.scss */
+/* line 261, ../sass/_util.scss */
 .white {
   color: white;
 }
 
-/* line 260, ../sass/_util.scss */
+/* line 265, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 263, ../sass/_util.scss */
+/* line 268, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 266, ../sass/_util.scss */
+/* line 271, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 269, ../sass/_util.scss */
+/* line 274, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 272, ../sass/_util.scss */
+/* line 277, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 276, ../sass/_util.scss */
+/* line 281, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 279, ../sass/_util.scss */
+/* line 284, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
 }
 
-/* line 283, ../sass/_util.scss */
+/* line 288, ../sass/_util.scss */
 .right-padding {
   padding-right: 20px;
 }
 
-/* line 287, ../sass/_util.scss */
+/* line 292, ../sass/_util.scss */
 .right-border .row-fluid {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 290, ../sass/_util.scss */
+/* line 295, ../sass/_util.scss */
 .normalfont {
   font-weight: normal;
 }
@@ -1049,136 +1059,141 @@ div, p, .header, button {
 }
 
 /* line 197, ../sass/_util.scss */
+.vcenter img {
+  display: block;
+}
+
+/* line 202, ../sass/_util.scss */
 .centeralign {
   text-align: center;
 }
 
-/* line 200, ../sass/_util.scss */
+/* line 205, ../sass/_util.scss */
 .rigthtalign {
   text-align: right;
 }
 
-/* line 203, ../sass/_util.scss */
+/* line 208, ../sass/_util.scss */
 .centeralign-image {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* line 209, ../sass/_util.scss */
+/* line 214, ../sass/_util.scss */
 .heighthundred {
   height: 100px;
 }
 
-/* line 213, ../sass/_util.scss */
+/* line 218, ../sass/_util.scss */
 .hundredwidth {
   width: 100%;
 }
 
-/* line 218, ../sass/_util.scss */
+/* line 223, ../sass/_util.scss */
 .nodisplay {
   display: none;
 }
 
-/* line 222, ../sass/_util.scss */
+/* line 227, ../sass/_util.scss */
 .marginten {
   margin-right: 10px;
   margin-left: 10px;
 }
 
-/* line 228, ../sass/_util.scss */
+/* line 233, ../sass/_util.scss */
 .allwidth {
   width: 100%;
 }
 
-/* line 232, ../sass/_util.scss */
+/* line 237, ../sass/_util.scss */
 .bgdarkblue {
   background-color: #003366;
 }
 
-/* line 235, ../sass/_util.scss */
+/* line 240, ../sass/_util.scss */
 .bgaqua {
   background-color: #35a5b5;
 }
 
-/* line 239, ../sass/_util.scss */
+/* line 244, ../sass/_util.scss */
 .darkblue {
   color: #003366;
 }
 
-/* line 242, ../sass/_util.scss */
+/* line 247, ../sass/_util.scss */
 .lightblue {
   color: #81abb0;
 }
 
-/* line 245, ../sass/_util.scss */
+/* line 250, ../sass/_util.scss */
 .aqua {
   color: #35a5b5;
 }
 
-/* line 249, ../sass/_util.scss */
+/* line 254, ../sass/_util.scss */
 .lightgray {
   color: #e1e3e5;
 }
 
-/* line 252, ../sass/_util.scss */
+/* line 257, ../sass/_util.scss */
 .greenblue {
   color: #104952;
 }
 
-/* line 256, ../sass/_util.scss */
+/* line 261, ../sass/_util.scss */
 .white {
   color: white;
 }
 
-/* line 260, ../sass/_util.scss */
+/* line 265, ../sass/_util.scss */
 .fontthirtysix {
   font-size: 36pt;
 }
 
-/* line 263, ../sass/_util.scss */
+/* line 268, ../sass/_util.scss */
 .fonttwentyfour {
   font-size: 24pt;
 }
 
-/* line 266, ../sass/_util.scss */
+/* line 271, ../sass/_util.scss */
 .fonteighteen {
   font-size: 18px;
 }
 
-/* line 269, ../sass/_util.scss */
+/* line 274, ../sass/_util.scss */
 .seventeen {
   font-size: 17px;
 }
 
-/* line 272, ../sass/_util.scss */
+/* line 277, ../sass/_util.scss */
 .fontsixteen {
   font-size: 16px;
 }
 
-/* line 276, ../sass/_util.scss */
+/* line 281, ../sass/_util.scss */
 .pointer {
   cursor: pointer;
 }
 
-/* line 279, ../sass/_util.scss */
+/* line 284, ../sass/_util.scss */
 .vishidden {
   visibility: hidden;
 }
 
-/* line 283, ../sass/_util.scss */
+/* line 288, ../sass/_util.scss */
 .right-padding {
   padding-right: 20px;
 }
 
-/* line 287, ../sass/_util.scss */
+/* line 292, ../sass/_util.scss */
 .right-border .row-fluid {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 290, ../sass/_util.scss */
+/* line 295, ../sass/_util.scss */
 .normalfont {
   font-weight: normal;
 }
