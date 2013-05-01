@@ -62,7 +62,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.eot);
+  src: url(http://www.sitterfied.com/static/css/fonts/marketotbold.eot);
 
 
 
@@ -70,55 +70,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/marketotbold.svg) format('svg');
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@font-face {
-
-
-
-
-
-
-
-  font-family: "Proxima Nova";
-
-
-
-
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.eot);
-
-
-
-
-
-
-
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg-webfont.svg) format('svg');
+  src: url(http://www.sitterfied.com/static/css/fonts/marketotbold.eot?#iefix) format('eot'), url(http://www.sitterfied.com/static/css/fonts/marketotbold.woff) format('woff'), url(http://www.sitterfied.com/static/css/fonts/marketotbold.ttf) format('truetype'), url(http://www.sitterfied.com/static/css/fonts/marketotbold.svg) format('svg');
 
 
 
@@ -158,7 +110,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.eot);
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg-webfont.eot);
 
 
 
@@ -166,7 +118,55 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold-webfont.svg) format('svg');
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg-webfont.eot?#iefix) format('eot'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg-webfont.woff) format('woff'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg-webfont.ttf) format('truetype'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg-webfont.svg) format('svg');
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+
+
+
+
+
+
+
+  font-family: "Proxima Nova";
+
+
+
+
+
+
+
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold-webfont.eot);
+
+
+
+
+
+
+
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold-webfont.eot?#iefix) format('eot'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold-webfont.woff) format('woff'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold-webfont.ttf) format('truetype'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold-webfont.svg) format('svg');
 
 
 
@@ -214,7 +214,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.eot);
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg_it-webfont.eot);
 
 
 
@@ -222,7 +222,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_reg_it-webfont.svg) format('svg');
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg_it-webfont.eot?#iefix) format('eot'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg_it-webfont.woff) format('woff'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg_it-webfont.ttf) format('truetype'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_reg_it-webfont.svg) format('svg');
 
 
 
@@ -278,7 +278,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.eot);
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold_it-webfont.eot);
 
 
 
@@ -286,7 +286,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_bold_it-webfont.svg) format('svg');
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold_it-webfont.eot?#iefix) format('eot'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold_it-webfont.woff) format('woff'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold_it-webfont.ttf) format('truetype'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_bold_it-webfont.svg) format('svg');
 
 
 
@@ -342,7 +342,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.eot);
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold-webfont.eot);
 
 
 
@@ -350,7 +350,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold-webfont.svg) format('svg');
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold-webfont.eot?#iefix) format('eot'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold-webfont.woff) format('woff'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold-webfont.ttf) format('truetype'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold-webfont.svg) format('svg');
 
 
 
@@ -390,7 +390,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot);
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot);
 
 
 
@@ -398,7 +398,7 @@ body {
 
 
 
-  src: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot?#iefix) format('eot'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.woff) format('woff'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.ttf) format('truetype'), url(http://sitterfieddev-jnanscawen.dotcloud.com/static/css/fonts/proxima_nova_sbold_it-webfont.svg) format('svg');
+  src: url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold_it-webfont.eot?#iefix) format('eot'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold_it-webfont.woff) format('woff'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold_it-webfont.ttf) format('truetype'), url(http://www.sitterfied.com/static/css/fonts/proxima_nova_sbold_it-webfont.svg) format('svg');
 
 
 
@@ -870,7 +870,7 @@ p {
 
 
 
-            background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss.png) no-repeat center center;
+            background: url(http://www.sitterfied.com/static/img/rss.png) no-repeat center center;
 
 
 
@@ -934,7 +934,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/rss-hover.png) no-repeat center center;
 
 
 
@@ -974,7 +974,7 @@ p {
 
 
 
-            background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook.png) no-repeat center center;
+            background: url(http://www.sitterfied.com/static/img/facebook.png) no-repeat center center;
 
 
 
@@ -1038,7 +1038,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/facebook-hover.png) no-repeat center center;
 
 
 
@@ -1070,7 +1070,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/twitter.png) no-repeat center center;
 
 
 
@@ -1142,7 +1142,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/twitter-hover.png) no-repeat center center;
 
 
 
@@ -1166,7 +1166,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/mail.png) no-repeat center center;
 
 
 
@@ -1230,7 +1230,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/mail-hover.png) no-repeat center center;
 
 
 
@@ -1270,7 +1270,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/facebook-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/facebook-hover.png) no-repeat center center;
 
 
 
@@ -1310,7 +1310,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/twitter-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/twitter-hover.png) no-repeat center center;
 
 
 
@@ -1342,7 +1342,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/mail-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/mail-hover.png) no-repeat center center;
 
 
 
@@ -1374,7 +1374,7 @@ p {
 
 
 
-    background: url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/rss-hover.png) no-repeat center center;
+    background: url(http://www.sitterfied.com/static/img/rss-hover.png) no-repeat center center;
 
 
 
@@ -1594,7 +1594,7 @@ header{
 
 
 
-    background-image:  url(http://sitterfieddev-jnanscawen.dotcloud.com/static/img/backgroundtile.png);
+    background-image:  url(http://www.sitterfied.com/static/img/backgroundtile.png);
 
 
 
@@ -6137,10 +6137,3 @@ footer .col a:last-child{border-right:none;}
 
 
 }
-
-
-
-
-
-
-
