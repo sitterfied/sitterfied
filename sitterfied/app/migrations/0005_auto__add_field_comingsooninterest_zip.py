@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'ComingSoonInterest.zip'
         db.add_column(u'app_comingsooninterest', 'zip',
-                      self.gf('app.models.USZipCodeField')(default='', max_length=20),
+                      self.gf('django.db.models.fields.CharField')(default='', max_length=9),
                       keep_default=False)
 
 
@@ -29,7 +29,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '80'}),
             'parent_or_sitter': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
             'referred_by': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.ComingSoonInterest']", 'null': 'True'}),
-            'zip': ('app.models.USZipCodeField', [], {'max_length': '20'})
+            'zip': ('django.db.models.fields.CharField', [], {'max_length': '9'})
         },
         u'app.emailblacklist': {
             'Meta': {'object_name': 'EmailBlacklist'},
