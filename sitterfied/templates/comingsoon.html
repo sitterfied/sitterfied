@@ -184,7 +184,7 @@ Come back to <a href="/">Sitterfied</a> anytime to track your progress
         <div id="invitebynetwork" style="margin-top:70px;">
           <div class="row-fluid">
             <div class="span12">
-              <textarea cols="40" rows="3" id="sharetext">Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free:</textarea>
+              <textarea cols="40" rows="3" id="sharetext">Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free!</textarea>
               <div class="span1 offset10"></div>
             <div class="halfvspacer"></div>
 
@@ -292,7 +292,8 @@ $(window).resize(function(){
 tweet = function() {
     totweet = $("#sharetext").val()
     totweet = encodeURIComponent(totweet)
-    tweet_link = "https://twitter.com/share?related=sitterfied&text=" + totweet
+    link="url=" + refer_url
+    tweet_link = "https://twitter.com/share?" + link + "&related=sitterfied&text=" + totweet
     newwindow=window.open(tweet_link,'tweet this','height=260,width=510');
 	if (window.focus) {newwindow.focus()}
 	return false;
@@ -387,8 +388,6 @@ $(document).ready(function() {
             $(".idcode").attr('value',refer_url)
             $(".copy-button").attr("data-clipboard-text", refer_url)
             $("#referral_link").attr("value", refer_url)
-            val = $("#sharetext").val()
-            $("#sharetext").val(val + " " + refer_url)
             val = $("#emailtext").val()
             $("#emailtext").val("Hey check this out - " + refer_url + "\n" + val)
 
