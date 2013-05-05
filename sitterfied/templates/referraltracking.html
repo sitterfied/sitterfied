@@ -186,7 +186,7 @@ refer_url = "{{refer_url}}"
 tweet = function() {
     totweet = $("#sharetext").val()
     totweet = encodeURIComponent(totweet)
-    var link="url=" + refer_url
+    var link="url=" + window.location.origin + refer_url
     tweet_link = "https://twitter.com/share?" + link + "&related=sitterfied&text=" + totweet
     newwindow=window.open(tweet_link,'tweet this','height=260,width=510');
 	if (window.focus) {newwindow.focus()}
@@ -198,7 +198,7 @@ facebook = function(){
     toshare = encodeURIComponent(toshare)
 
     app_id="app_id=141907389308388"
-    link="link=" + refer_url
+    link="link=" + window.location.origin + refer_url
 
     picture="picture=" + window.location.origin + "{{STATIC_URL}}img/heart.png"
     redirect_uri="redirect_uri=https://www.facebook.com"
