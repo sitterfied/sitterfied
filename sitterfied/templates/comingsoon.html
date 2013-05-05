@@ -292,7 +292,7 @@ $(window).resize(function(){
 tweet = function() {
     totweet = $("#sharetext").val()
     totweet = encodeURIComponent(totweet)
-    link="url=" + refer_url
+    var link="url=" + refer_url
     tweet_link = "https://twitter.com/share?" + link + "&related=sitterfied&text=" + totweet
     newwindow=window.open(tweet_link,'tweet this','height=260,width=510');
 	if (window.focus) {newwindow.focus()}

@@ -145,7 +145,7 @@ A new way to see all of our babysitters and book them online!
       <div class="row-fluid">
         <div class="span12">
           <b class="lightblue fontsixteen">Invite friends from Facebook or Twitter</b>
-          <textarea class="span12 inputborder" rows="3" id="sharetext" style="margin-top:5px" >Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free: http://{{request.get_host}}{{refer_url}}</textarea>
+          <textarea class="span12 inputborder" rows="3" id="sharetext" style="margin-top:5px" >Join me @sitterfied for an early invite to find and book trusted sitters online! Sign up for free!</textarea>
           <div class="span1 offset10"><p id="twittercount"></p></div>
           <div class="halfvspacer"></div>
         </div>
@@ -186,7 +186,8 @@ refer_url = ""
 tweet = function() {
     totweet = $("#sharetext").val()
     totweet = encodeURIComponent(totweet)
-    tweet_link = "https://twitter.com/share?related=sitterfied&text=" + totweet
+    var link="url=" + refer_url
+    tweet_link = "https://twitter.com/share?" + link + "&related=sitterfied&text=" + totweet
     newwindow=window.open(tweet_link,'tweet this','height=260,width=510');
 	if (window.focus) {newwindow.focus()}
 	return false;
