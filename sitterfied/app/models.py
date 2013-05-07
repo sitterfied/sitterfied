@@ -3,135 +3,57 @@ from model_utils.models import TimeStampedModel
 # Create your models here.
  
 from django.contrib.auth.models import AbstractUser
+from django_localflavor_us.us_states import STATE_CHOICES
 
 
 class User(TimeStampedModel, AbstractUser):
     home_address = models.ForeignKey('Address')
-    phone = models.ForeignKey('Phone')
-    parent_info = models.OneToOneField('ParentInfo', null=True)
-    sitter_info = models.OneToOneField('SitterInfo', null=True)
-    parents_in_network = models.ForeignKey('ParentsInNetwork')
-    sitters_in_network = models.ForeignKey('SittersInNetwork')
-    invited_by = models.ManyToManyField('self',  symmetrical = 'false') #invited by one and only one user?
-    languages_spoken = models.OneToOneField('LanguagesSpoken')
+    parents_in_network = models.ManyToManyField('self', symmetrical = 'false')
+    sitters_in_network = models.ManyToManyField('self', symmetrical = 'false')
+    fave_sitters = models.ManyToManyField('self', symmetrical = 'false')
+    friends =  models.ManyToManyField('self')
+    invited_by = models.ManyToManyField('self',  symmetrical = 'false') 
     email = models.EmailField()
     email_settings = models.OneToOneField('EmailSettings')
-    mobile_notifications = models.OneToOneField('MobileNotifications')
+    mobile_settings = models.OneToOneField('MobileSettings')
     membership_status = models.OneToOneField('MembershipStatus')
-    membership_join_date = models.DateField(auto_now_add = True)
-    membership_exp_date = models.DateField()
 
 
-class Address(models.Model):
+class Address(models.Model, TimeStampedModel):
     address1 = models.CharField(max_length=255)
     address2 = models.CharField(max_length=255)
     city = models.CharField(max_length=50)
-    state = models.CharField(max_length=2)
-    zip = models.CharField(max_length=9)
+    state = models.USStateField()
+    zip = models.CharField(max_length=9)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
 
 
 PHONE_TYPES = (
-    ('work', 'Work'),
-    ('home', 'Home'),
-    ('cell', 'Cell'),
-    ('other', 'Other'),
+    ('work',      'Work'),
+    ('home',      'Home'),
+    ('cell',      'Cell'),
+    ('emergency', 'Emergency'),
+    ('contact',   'Contact'),
+    ('other',     'Other'),
 )
 
-class Phone(models.Model):
-    phone_type = models.CharField(max_length=5, choices=PHONE_TYPES)
+class Phone(models.Model, TimeStampedModel):
+    user = models.ForeignKey('User')
+    phone_type = models.CharField(max_length=10, choices=PHONE_TYPES)
     number = models.CharField(max_length=25)
     primary = models.BooleanField()
 
 
-class ParentInfo(models.Model):
-    service_location = models.ForeignKey('Address')
-    child = models.ForeignKey('Child')
+class ParentInfo(models.Model, TimeStampedModel):
+    user = models.OneToOneField('User')
     parking = models.OneToOneField('Parking')	
-    emergency_phone = models.CharField(max_length=25)
     emergency_contact = models.OneToOneField('Contact')
     physician_contact = models.OneToOneField('Contact')
-
-
-class SitterInfo(models.Model):
-    sitter_profile = OneToOneField('SitterProfile')
-
-
-class AddedParent(models.Model):
-added_by = models.ForeignKey('User')
-parent = models.ForeignKey('User')
-
-
-class AddedSitter(models.Model):
-added_by = models.ForeignKey('User')
-sitter = models.ForeignKey('User')
-
-
-class AddedFriend(models.Model):
-added_by = models.ForeignKey('User')
-friend = models.ForeignKey('User')
-
-
-class FaveSitter(models.Model):
-added_by = models.ForeignKey('User')
-fave_sitter = models.ForeignKey('User')
-
-
-class LanguagesSpoken(models.Model):
-    arabic = models.BooleanField()
-    bengali = models.BooleanField()
-    cantonese = models.BooleanField()
-    english = models.BooleanField()
-    spanish = models.BooleanField()
-    tamil = models.BooleanField()
-    turkish = models.BooleanField()
-    german = models.BooleanField()
-
-
-class EmailSettings(models.Model):
-    upcoming_booking = models.BooleanField()
-    new_review = models.BooleanField()
-    new_reference = models.BooleanField()
-    new_reference_request = models.BooleanField()
-
-
-class MobileNotifications(models.Model):
-    message_received = models.BooleanField()
-    booking_accepted_denied = models.BooleanField()
-
-
-class MembershipStatus(models.Model):
-    level = models.Charfield(max_length=20)
-
-
-class Child(models.Model):
-    name = models.CharField(max_length=50)
-    dob = models.DateField()
-    school = models.CharField(max_length=50)
-    sitter_instructions = models.TextField()
-    special_needs = OneToOneField('SpecialNeeds')
-    #allergies = OneToOneField('Allergies')
-
-
-class SpecialNeeds(models.Model):
-    add = models.BooleanField()
-    asthma = models.BooleanField()
-    behaviour_challenges = models.BooleanField()
-    autism = models.BooleanField()
-    down_syndrome = models.BooleanField()
-    sleep_disorders = models.BooleanField()
-
-
-class Parking(models.Model):
     parking_area = models.BooleanField()
     parking_for_sitter = models.BooleanField()
 
 
-class Contact(models.Model):
-    name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=25)
-
-
-class SitterProfile(models.Model):
+class SitterInfo(models.Model, TimeStampedModel):
+    user = models.OneToOneField('User')
     biography = models.TextField()
     id_verification = models.OneToOneField('IdVerification')
 
@@ -142,19 +64,19 @@ class SitterProfile(models.Model):
     smoker = models.BooleanField()
     will_transport = models.BooleanField()
 
-    total_exp = models.IntegerField()
-    infant_exp = models.IntegerField()
-    toddler_exp = models.IntegerField()
-    preschool_exp = models.IntegerField()
-    school_age_exp = models.IntegerField()
-    pre_teen_exp = models.IntegerField()
-    teen_exp = models.IntegerField()
+    total_exp = models.SmallIntegerField()
+    infant_exp = models.SmallIntegerField()
+    toddler_exp = models.SmallIntegerField()
+    preschool_exp = models.SmallIntegerField()
+    school_age_exp = models.SmallIntegerField()
+    pre_teen_exp = models.SmallIntegerField()
+    teen_exp = models.SmallIntegerField()
 
     highest_education = models.CharField(max_length=50)
     last_school = models.CharField(max_length=50)
     current_student = models.BooleanField()
 
-    certification =  = models.CharField(max_length=50)
+    certification = models.CharField(max_length=50)
     other_services = models.CharField(max_length=100)
 
     one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2)
@@ -171,7 +93,50 @@ class SitterProfile(models.Model):
     general_avail = models.OneToOneField(GeneralAvail)
 
 
-class GeneralAvail(models.Model):
+class Languages(models.Model, TimeStampedModel):
+    user = models.ManyToManyField('User')
+    language = models.CharField(max_length=100)
+
+
+class EmailSettings(models.Model, TimeStampedModel):
+    upcoming_booking = models.BooleanField()
+    new_review = models.BooleanField()
+    new_reference = models.BooleanField()
+    new_reference_request = models.BooleanField()
+
+
+class MobileSettings(models.Model, TimeStampedModel):
+    message_received = models.BooleanField()
+    booking_accepted_denied = models.BooleanField()
+
+
+MEMBERSHIP_STATUS_CHOICES=(
+    ('trial', 'trial'),    
+    ('paid',  'paid')
+)
+
+
+class MembershipStatus(models.Model, TimeStampedModel):
+    status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS_CHOICES)
+    membership_exp_date = models.DateField()
+
+
+class Child(models.Model, TimeStampedModel):
+    parent = models.ForeignKey('ParentInfo')
+    name = models.CharField(max_length=50)
+    dob = models.DateField()
+    school = models.CharField(max_length=50)
+    sitter_instructions = models.TextField()
+    special_needs = models.CharField(max_length=100)
+    allergies = models.CharField(max_length=100)
+
+
+class Contact(models.Model, TimeStampedModel):
+    name = models.CharField(max_length=50)
+    phone = models.ForeignKey('Phone')
+
+
+class GeneralAvail(models.Model, TimeStampedModel):
     last_updated = models.DateTimeField(auto_now=True)
     mon_avail_start = models.TimeField()  
     mon_avail_stop = models.TimeField()  
@@ -189,16 +154,20 @@ class GeneralAvail(models.Model):
     sun_avail_stop = models.TimeField()  
 
 
-class IdVerification(models.Model):
+class IdVerification(models.Model, TimeStampedModel):
     id_verified = models.BooleanField()
-    id_scan_path = models.FilePathField("/home/blahblah")
+    id_scan_path = models.FilePathField("/home/blahblah")  # avatar?
 
 
-class SitterReview
+class SitterReview(models.Model, TimeStampedModel):
     parent = models.OneToOneField('User')
     sitter  = models.OneToOneField('User')
     recommended = models.BooleanField()
-    review =  = models.TextField()
+    review = models.TextField()
+    rating = models.SmallIntegerField()
+
+    class Meta:
+        unique_together = ("parent", "sitter")
 
 
 BOOKING_STATUS_CHOICES=(
@@ -210,17 +179,17 @@ BOOKING_STATUS_CHOICES=(
     ('canceled', 'Canceled')    
 )
 
-class Booking(models.Model):
-    parent = models.OneToOneField('User')
-    sitter = models.OneToOneField('User')
+class Booking(models.Model, TimeStampedModel):
+    parent = models.ForeignKey('User')
+    sitter = models.ForeignKey('User')
     notes = models.TextField()
     respond_by = models.DateTimeField()
     start_date_time = models.DateTimeField()
     stop_date_time = models.DateTimeField()
-    location = models.OneToOneField('Address')
-    kid_count = models.SmallIntegerField()
-    emergency_phone = models.CharField(max_length=25)
-    booking_status = models.CharField(blank=False, max_length=10, choices=BOOKING_STATUS_CHOICES)
+    child = models.ManyToManyField('Child')
+    emergency_phone = models.ForeignKey('Phone')
+    booking_status = models.CharField(blank=max_length=10, choices=BOOKING_STATUS_CHOICES, default='active')
+    location = models.ForeignKey('Address')
 
 
 PARENTING_CHOICES=(
@@ -257,6 +226,7 @@ class ComingSoonInterest(TimeStampedModel):
     @staticmethod
     def static_referrals(id):
         return ComingSoonInterest.objects.filter(referred_by_id=id)
+
 
 class EmailBlacklist(TimeStampedModel):
     email = models.EmailField()
