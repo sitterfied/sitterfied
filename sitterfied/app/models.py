@@ -8,7 +8,10 @@ from model_utils.choices import Choices
 
 from django.contrib.auth.models import AbstractUser
 from django_localflavor_us.us_states import STATE_CHOICES
+
 from django_localflavor_us.models import USStateField
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 
 
 class User(AbstractUser, TimeStampedModel):
