@@ -18,74 +18,13 @@ from django.template.loader import render_to_string
 
 from django.http import HttpResponseRedirect
 
-def send_html_email(subject, frm, address, text, html):
-    try:
-        EmailBlacklist.objects.get(email=address)
-        return
-    except:
-        pass
-    msg = EmailMultiAlternatives(subject, text, frm, [address])
-    msg.attach_alternative(html, "text/html")
-    msg.send()
 
-
-
-@render_to('comingsoon.html')
+@render_to('home.html')
 def index(request, referred_by=None):
-    if request.session.get('id', False):
-        pass #return HttpResponseRedirect("/referrals")
-    return {"referred_by":referred_by}
+    return {}
 
 
-@csrf_exempt
-@ajax_request
-@require_POST
-def comingsoon_email_submit(request):
-    form = ComingSoonInterestForm(request.POST)
-    if form.is_valid():
-        coming_soon_interest = form.save()
-        if coming_soon_interest.parent_or_sitter == "s":
-            email_template = "welcome_email_sitter.html"
-        else:
-            email_template = "welcome_email_parent.html"
-
-        text = html = render_to_string(email_template,
-                                       {'first_name':coming_soon_interest.first_name,
-                                        'signup_url': coming_soon_interest.invite_url,
-                                        'interest_id': coming_soon_interest.id,
-                                        'email': coming_soon_interest.email,
-                                        'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
-                                        })
-
-        send_html_email("Welcome to Sitterfied!",
-                        "hello@sitterfied.com",
-                        coming_soon_interest.email, text, html)
-        request.session['full_name'] = coming_soon_interest.name
-        request.session['first_name'] = coming_soon_interest.first_name
-        request.session['id'] = coming_soon_interest.id
-
-
-        if coming_soon_interest.referred_by:
-            email = coming_soon_interest.referred_by.email
-            text = html = render_to_string("referral_signed_up_email.html",
-                                       {'invited_full_name':coming_soon_interest.name,
-                                        'first_name': coming_soon_interest.referred_by.first_name,
-                                        'interest_id': coming_soon_interest.referred_by.id,
-                                        'email': coming_soon_interest.email,
-                                        'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
-                                        })
-
-
-            send_html_email("Your friend signed up for Sitterfied!",
-                            "hello@sitterfied.com",
-                            email, text, html)
-
-
-        return {'url':coming_soon_interest.invite_url}
-    else:
-        return HttpResponse(status=400)
-
-@csrf_exempt
+#invite tracking
 @ajax_request
 @require_POST
 def invite_email_submit(request):
@@ -108,18 +47,19 @@ def invite_email_submit(request):
 
     return {}
 
-@render_to('referraltracking.html')
-def referral_tracking(request, interest_id=None):
-    interest_id = interest_id or request.session.get('id', False)
-    if not interest_id:
-        return HttpResponseRedirect("/")
-    refer_url = ComingSoonInterest.static_invite_url(interest_id)
 
-    referrals = ComingSoonInterest.static_referrals(interest_id)
-    if len(referrals) > 5:
-        referrals = range(5)
-    padding_left = len(referrals) * 75
-    return {"refer_url":refer_url, "referrals":referrals, 'padding_left':padding_left}
+
+#email
+def send_html_email(subject, frm, address, text, html):
+    try:
+        EmailBlacklist.objects.get(email=address)
+        return
+    except:
+        pass
+    msg = EmailMultiAlternatives(subject, text, frm, [address])
+    msg.attach_alternative(html, "text/html")
+    msg.send()
+
 
 
 @render_to('unsubscribe.html')
