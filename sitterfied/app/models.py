@@ -49,9 +49,8 @@ class Phone(TimeStampedModel):
 
 class ParentInfo(TimeStampedModel):
     user = models.OneToOneField('User')
-    parking = models.OneToOneField('Parking')
-    emergency_contact = models.OneToOneField('Contact')
-    physician_contact = models.OneToOneField('Contact')
+    emergency_contact = models.OneToOneField('Contact', related_name="emergencies")
+    physician_contact = models.OneToOneField('Contact', related_name="physicians")
     parking_area = models.BooleanField()
     parking_for_sitter = models.BooleanField()
 
@@ -164,8 +163,8 @@ class IdVerification(TimeStampedModel):
 
 
 class SitterReview(TimeStampedModel):
-    parent = models.OneToOneField('User')
-    sitter  = models.OneToOneField('User')
+    parent = models.ForeignKey('User', related_name="reviewed")
+    sitter  = models.ForeignKey('User', related_name="reviews")
     recommended = models.BooleanField()
     review = models.TextField()
     rating = models.SmallIntegerField()
@@ -184,8 +183,8 @@ BOOKING_STATUS_CHOICES=(
 )
 
 class Booking(TimeStampedModel):
-    parent = models.ForeignKey('User')
-    sitter = models.ForeignKey('User')
+    parent = models.ForeignKey('User', related_name="parent_bookings")
+    sitter = models.ForeignKey('User', related_name="sitter_bookings")
     notes = models.TextField()
     respond_by = models.DateTimeField()
     start_date_time = models.DateTimeField()
