@@ -2,10 +2,18 @@ from django.conf.urls import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 from django.views.generic.base import TemplateView
 from .views import StaticView
+import api
+
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'sitter', api.SitterViewSet)
+router.register(r'parent', api.ParentViewSet)
+
 
 urlpatterns = patterns('app.views',
     # Examples:
-    url(r'^$', 'home', name='home'),
+    url(r'^api/', include(router.urls)),
+    url(r'^$', 'index', name='index'),
 
 
     url(r'^invite_email_submit/$', 'invite_email_submit', name='invite_email_submit'),

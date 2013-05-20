@@ -23,7 +23,8 @@ django-model-utils
 unipath
 pytz
 feedparser
-
+d
+djangorestframework
 
 #REDIS CACHING
 hiredis

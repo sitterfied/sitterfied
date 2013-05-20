@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'floppyforms',
     'annoying',
+    'rest_framework',
     'django_extensions',
     'model_utils',
     'south',

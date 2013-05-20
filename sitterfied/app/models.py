@@ -15,18 +15,20 @@ add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 
 
 class User(AbstractUser, TimeStampedModel):
-    home_address = models.ForeignKey('Address')
-    parents_in_network = models.ManyToManyField('self', symmetrical = 'false')
-    sitters_in_network = models.ManyToManyField('self', symmetrical = 'false')
-    fave_sitters = models.ManyToManyField('self', symmetrical = 'false')
-    friends =  models.ManyToManyField('self')
+    MEMBERSHIP_STATUS = Choices("Trial", "paid")
+    parents_in_network = models.ManyToManyField('Parent')
+    sitters_in_network = models.ManyToManyField('Sitter')
+    fave_sitters = models.ManyToManyField('Sitter', related_name="favored_by")
     invited_by = models.ManyToManyField('self',  symmetrical = 'false')
-    email_settings = models.OneToOneField('EmailSettings')
-    mobile_settings = models.OneToOneField('MobileSettings')
-    membership_status = models.OneToOneField('MembershipStatus')
+    languages = models.ManyToManyField('Language')
+
+    status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
+    membership_exp_date = models.DateField(null=True)
+
 
 
 class Address(TimeStampedModel):
+    user = models.ForeignKey(User)
     address1 = models.CharField(max_length=255)
     address2 = models.CharField(max_length=255)
     city = models.CharField(max_length=50)
@@ -34,34 +36,32 @@ class Address(TimeStampedModel):
     zip = models.CharField(max_length=9)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
 
 
-PHONE_TYPES = (
-    ('work',      'Work'),
-    ('home',      'Home'),
-    ('cell',      'Cell'),
-    ('emergency', 'Emergency'),
-    ('contact',   'Contact'),
-    ('other',     'Other'),
-)
 
 class Phone(TimeStampedModel):
-    user = models.ForeignKey('User')
-    phone_type = models.CharField(max_length=10, choices=PHONE_TYPES)
+    PHONE_TYPES = Choices("Work", "Home", "Cell", "Emergency", "Contact", "Other")
+
+    phone_type = models.CharField(max_length=10, choices=PHONE_TYPES, default="work")
     number = models.CharField(max_length=25)
+    #TODO: use a unique partial index to ensure that a user only has a single primary
     primary = models.BooleanField()
+    user = models.ForeignKey(User)
 
 
-class ParentInfo(TimeStampedModel):
-    user = models.OneToOneField('User')
-    emergency_contact = models.OneToOneField('Contact', related_name="emergencies")
-    physician_contact = models.OneToOneField('Contact', related_name="physicians")
+
+class Parent(User):
+    emergency_contact = models.OneToOneField('Contact', related_name="emergencies", null=True)
+    physician_contact = models.OneToOneField('Contact', related_name="physicians", null=True)
     parking_area = models.BooleanField()
     parking_for_sitter = models.BooleanField()
 
+    class Meta:
+         verbose_name = "Parent"
 
-class SitterInfo(TimeStampedModel):
-    user = models.OneToOneField('User')
+class Sitter(User):
     biography = models.TextField()
-    id_verification = models.OneToOneField('IdVerification')
+    id_verified = models.BooleanField()
+    id_scan_path = models.FilePathField("/home/blahblah")  # avatar?
+
 
     live_zip = models.CharField(max_length=9)
     work_zip = models.CharField(max_length=9)
@@ -96,15 +96,23 @@ class SitterInfo(TimeStampedModel):
     dogs_ok = models.BooleanField()
     cats_ok = models.BooleanField()
     other_animals_ok = models.BooleanField()
-    general_avail = models.OneToOneField('GeneralAvail')
+
+    class Meta:
+         verbose_name = "Sitter"
 
 
-class Languages(TimeStampedModel):
-    user = models.ManyToManyField('User')
+
+
+class Language(TimeStampedModel):
     language = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.language
 
 
 class EmailSettings(TimeStampedModel):
+    user =  models.OneToOneField('User')
+
     upcoming_booking = models.BooleanField()
     new_review = models.BooleanField()
     new_reference = models.BooleanField()
@@ -112,29 +120,22 @@ class EmailSettings(TimeStampedModel):
 
 
 class MobileSettings(TimeStampedModel):
+    user =  models.OneToOneField('User')
     message_received = models.BooleanField()
     booking_accepted_denied = models.BooleanField()
 
-
-MEMBERSHIP_STATUS_CHOICES=(
-    ('trial', 'trial'),
-    ('paid',  'paid')
-)
-
-
-class MembershipStatus(TimeStampedModel):
-    status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS_CHOICES)
-    membership_exp_date = models.DateField()
-
-
 class Child(TimeStampedModel):
-    parent = models.ForeignKey('ParentInfo')
+    parent = models.ForeignKey(Parent)
     name = models.CharField(max_length=50)
     dob = models.DateField()
     school = models.CharField(max_length=50)
     sitter_instructions = models.TextField()
     special_needs = models.CharField(max_length=100)
     allergies = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = "children"
+
 
 
 class Contact(TimeStampedModel):
@@ -143,6 +144,7 @@ class Contact(TimeStampedModel):
 
 
 class GeneralAvail(TimeStampedModel):
+    sitter = models.OneToOneField(Sitter)
     last_updated = models.DateTimeField(auto_now=True)
     mon_avail_start = models.TimeField()
     mon_avail_stop = models.TimeField()
@@ -160,14 +162,9 @@ class GeneralAvail(TimeStampedModel):
     sun_avail_stop = models.TimeField()
 
 
-class IdVerification(TimeStampedModel):
-    id_verified = models.BooleanField()
-    id_scan_path = models.FilePathField("/home/blahblah")  # avatar?
-
-
 class SitterReview(TimeStampedModel):
-    parent = models.ForeignKey('User', related_name="reviewed")
-    sitter  = models.ForeignKey('User', related_name="reviews")
+    parent = models.ForeignKey(Parent)
+    sitter  = models.ForeignKey(Sitter)
     recommended = models.BooleanField()
     review = models.TextField()
     rating = models.SmallIntegerField()
@@ -176,29 +173,16 @@ class SitterReview(TimeStampedModel):
         unique_together = ("parent", "sitter")
 
 
-BOOKING_STATUS_CHOICES=(
-    ('active',   'Active'),
-    ('pending',  'Pending'),
-    ('completed','Completed'),
-    ('expired',  'Expired'),
-    ('declined', 'Declined'),
-    ('canceled', 'Canceled')
-)
 
 class Booking(TimeStampedModel):
-    parent = models.ForeignKey('User', related_name="parent_bookings")
-    sitter = models.ForeignKey('User', related_name="sitter_bookings")
+    BOOKING_STATUS = Choices('Active', 'Pending', 'Completed', 'Expired', 'Declined', 'Canceled',)
+    parent = models.ForeignKey(Parent, related_name="bookings")
+    sitter = models.ForeignKey(Sitter, related_name="bookings")
     notes = models.TextField()
     respond_by = models.DateTimeField()
     start_date_time = models.DateTimeField()
     stop_date_time = models.DateTimeField()
     child = models.ManyToManyField('Child')
     emergency_phone = models.ForeignKey('Phone')
-    booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS_CHOICES, default='active')
+    booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
     location = models.ForeignKey('Address')
-
-
-PARENTING_CHOICES=(
-    ('s', 'sitter'),
-    ('p', 'parent')
-    )

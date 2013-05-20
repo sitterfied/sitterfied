@@ -9,11 +9,6 @@ from annoying.decorators import render_to, ajax_request
 
 from django.views.decorators.http import require_POST
 
-from .forms import ComingSoonInterestForm
-from .models import ComingSoonInterest, EmailBlacklist
-
-from django.core.mail import EmailMultiAlternatives
-
 from django.template.loader import render_to_string
 
 from django.http import HttpResponseRedirect
