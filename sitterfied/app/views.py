@@ -14,7 +14,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect
 
 
-@render_to('home.html')
+@render_to('index.html')
 def index(request, referred_by=None):
     return {}
 

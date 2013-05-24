@@ -10,6 +10,7 @@ from rest_framework import viewsets
 
 class SitterSerializer(serializers.HyperlinkedModelSerializer):
 
+    #todo general availablity
     class Meta:
         model = models.Sitter
         fields = ('biography', 'live_zip',
@@ -31,6 +32,7 @@ class SitterSerializer(serializers.HyperlinkedModelSerializer):
 
 class ParentSerializer(serializers.HyperlinkedModelSerializer):
 
+    #contacts
     class Meta:
         model = models.Parent
         fields = ('emergency_contact', 'physician_contact',
