@@ -1,10 +1,87 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<title>Sitterfied</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-{% block title %}
-Sitterfied
-{% endblock title %}
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-{% block header %}{% endblock header %}
+	<!-- Favicon -->
+	<link href="images/favicon.ico" rel="icon" type="image/x-icon">
 
-{% block content %}
-{% endblock content %}
+	<!-- Stylesheets -->
+    {% load compressed %}
+    {% compressed_css 'sitterfied' %}
+    {% block extra_head %}
+    {% endblock extra_head %}
+
+	<!-- JavaScript -->
+    <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
+
+	<!--[if lt IE9]><script src="js/ie9.js">IE7_PNG_SUFFIX=".png";</script><![end if]-->
+
+  </head>
+  <body>
+    <script type="text/x-handlebars">
+      <!-- header -->
+        <header class="header">
+	      <div class="wraper">
+            {% verbatim %}
+		    {{# linkTo index class="logo"}}
+            {% endverbatim %}
+            <img src="{{STATIC_URL}}img/logo.png" alt="" />
+            {% verbatim %}
+            {{/linkTo}}
+            {% endverbatim %}
+		    <!-- top menu -->
+            <div class="menu_trigger"></div>
+            <nav>
+              <ul>
+                {% verbatim %}
+                <li>{{#linkTo search }} Search {{/linkTo}}</li>
+	            <li><a href="#">Bookings</a></li>
+	            <li><a href="#"><img src="{{STATIC_URL}}img/demo/img.jpg" alt="" /> Alex</a></li>
+                {% endverbatim %}
+              </ul>
+            </nav>
+		    <!-- /top menu -->
+		    <!-- top note -->
+		    <div class="top_note">
+              {% verbatim %}
+              {{outlet topNote}}
+              {% endverbatim %}
+		    </div>
+		    <!-- /top note -->
+		    <div class="top_info clear">
+              {% verbatim %}
+              {{outlet topInfo}}
+              {% endverbatim %}
+            </div>
+	      </div>
+        </header>
+        <!-- /header -->
+
+        <div class="container clear">
+	      <div class="wraper">
+            {% verbatim %}
+            {{outlet container}}
+            {% endverbatim %}
+          </div>
+        </div>
+
+        <footer class="footer">
+	      <div class="wraper">
+		    <a href="#" class="logo_bottom"><img src="{{STATIC_URL}}img/logo_bottom.png" alt="" /></a>
+		    <!-- bottom menu -->
+            {% verbatim %}
+            {{outlet footer}}
+            {% endverbatim %}
+		    <!-- /bottom menu -->
+	      </div>
+        </footer>
+      </script>
+  </body>
+</html>

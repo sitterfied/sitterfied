@@ -15,7 +15,7 @@ PIPELINE_CSS = {
     },
     'sitterfied': {
         'source_filenames': (
-          'css/sitterfied.css',
+          'css/style.css',
           'css/vendor/*.css',
         ),
         'output_filename': 'css/sitterfied.css',

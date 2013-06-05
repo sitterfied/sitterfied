@@ -1,10 +1,33 @@
-define ["cs!sitterfied"], (Sitterfied) ->
+define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
     Sitterfied.Router.map(() ->
         this.route('sitter')
-        this.route('parent')
+        this.resource('parents', {path: '/parent/:parent_id'})
+        this.route('search')
+        this.route('parentBook')
+        this.route('parentBookMultiple')
+        this.route('done')
+        this.route('about')
     )
 
-    Sitterfied.IndexRoute = Em.Route.extend(
-      model: () ->
-        return ['red', 'yellow', 'blue']
-    );
+    Sitterfied.ParentsRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render({outlet: 'topInfo'})
+    )
+
+
+    Sitterfied.SearchRoute = Em.Route.extend(
+        renderTemplate: () ->
+            noResults = true
+            debugger
+            if noResults
+                this.render('noSearchResultsTop', {     # the template to render
+                    outlet: 'topInfo',              # the name of the outlet in that template
+                })
+                this.render('noSearchResults', {     # the template to render
+                    outlet: 'container',              # the name of the outlet in that template
+                })
+            else
+                this.render('searchResultsTop', {     # the template to render
+                    outlet: 'topInfo',              # the name of the outlet in that template
+                })
+    )

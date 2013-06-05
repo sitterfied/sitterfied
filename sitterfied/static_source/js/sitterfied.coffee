@@ -3,10 +3,18 @@ define ['jquery'
         '_'
         ], ($, Em, _) ->
 
-    Sitterfied = Em.Application.create(
-        location: 'history'
+    Sitterfied = Em.Application.createWithMixins(
         LOG_TRANSITIONS: true
+        LOG_VIEW_LOOKUPS: true
+        init:  () ->
+            this.deferReadiness()
+            this._super()
     )
+
+    Sitterfied.Router.reopen(
+      location: 'history'
+    )
+
     Sitterfied.ApplicationController = Ember.Controller.extend();
-    Sitterfied.deferReadiness()
+
     return Sitterfied

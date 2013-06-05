@@ -1,12 +1,14 @@
 require({
     paths: {
         "cs": "require/cs",
-        "ember": "lib/ember-1.0.0-rc.3",
-        "ember_data": "lib/ember-data-latest",
-        "handlebars" : "lib/handlebars-1.0.0-rc.3",
+        "ember": "lib/ember",
+        "emberData": "lib/ember-data-latest",
+        "handlebars" : "lib/handlebars",
         "_": "lib/underscore-min",
         "jquery": "lib/jquery-1.9.1",
         "jqueryui": "lib/jquery-ui-1.10.0.custom.min",
+        "chosen": "lib/chosen.jquery.min",
+        "djangoRestAdapter": "lib/adapter",
     },
     shim:{
         jquery: {
@@ -19,22 +21,29 @@ require({
         handlebars: {
             exports: "Handlebars",
         },
-        ember_data: {
+        emberData: {
             deps: ['ember'],
             exports: "DS"
         },
-
+        djangoRestAdapter: {
+            deps: ['emberData'],
+        },
         jqueryui: {
             deps: ['jquery']
         },
         _: {
             exports: "_",
+        },
+        chosen: {
+            deps: ['jquery']
         }
     },
         urlArgs: "bust=" +  (new Date()).getTime(),
 },
-        ["jquery", "cs!sitterfied", "cs!routes", "cs!models"], function($, Sitterfied){
+        ["jquery", "cs!sitterfied", "cs!routes", "cs!models", "vasilli"], function($, Sitterfied){
+            Sitterfied.runInitializers()
             Sitterfied.advanceReadiness()
+            window.Sitterfied = Sitterfied //take out when finished developing
             $(function(){
             })
         });

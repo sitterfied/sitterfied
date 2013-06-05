@@ -1,112 +1,120 @@
 define [
     "ember"
     "cs!sitterfied"
-    'ember_data'
+    'emberData'
+    'djangoRestAdapter'
     ], (Em, Sitterfied, DS) ->
 
 
     Sitterfied.Store = DS.Store.extend(
         revision: 12
+        adapter: DS.DjangoRESTAdapter.extend({
+            namespace: 'api'
+        })
+        isDefaultStore:true
     )
 
     Sitterfied.UserMixin = Em.Mixin.create(
         #django builtins
-        id: DS.attr('number'),
         last_login: DS.attr('date'),
         is_superuser: DS.attr('boolean'),
         username: DS.attr('string'),
-        firstName: DS.attr('string'),
-        lastName: DS.attr('string'),
+        first_name: DS.attr('string'),
+        last_name: DS.attr('string'),
         email: DS.attr('string'),
 
-
         status: DS.attr('string'),
-        parentsInNetwork: DS.hasMany('Sitterfied.Parent')
-        sittersInNetwork: DS.hasMany('Sitterfied.Sitter')
+        parents_inNetwork: DS.hasMany('Sitterfied.Parent')
+        sitters_inNetwork: DS.hasMany('Sitterfied.Sitter')
         languages: DS.hasMany('Sitterfied.Language')
 
 
-        fullName: (() ->
-            return @get('firstName') + ' ' + @get('lastName');
-        ).property('firstName', 'lastName')
+        full_name: (() ->
+            return @get('first_name') + ' ' + @get('last_name');
+        ).property('first_name', 'last_name')
+    )
+
+    Sitterfied.Contact = DS.Model.extend(
+        #flush out later
     )
 
     Sitterfied.Parent = DS.Model.extend(Sitterfied.UserMixin,
-        emergencyContact : DS.belongsTo('Sitterfied.Contact'),
-        physicianContact : DS.belongsTo('Sitterfied.Contact'),
-        parkingArea : DS.attr('boolean'),
-        parkingForSitter: DS.attr('boolean'),
+        emergency_contact : DS.belongsTo('Sitterfied.Contact'),
+        physician_contact : DS.belongsTo('Sitterfied.Contact'),
+        parking_area : DS.attr('boolean'),
+        parking_forSitter: DS.attr('boolean'),
     )
 
     Sitterfied.Sitter = DS.Model.extend(Sitterfied.UserMixin,
         biography: DS.attr('string'),
-        idVerified: DS.attr('boolean'),
-        idScanPath: DS.attr('string'),
-        liveZip: DS.attr('string'),
-        workZip: DS.attr('string'),
+        id_verified: DS.attr('boolean'),
+        id_scanPath: DS.attr('string'),
+        live_zip: DS.attr('string'),
+        work_zip: DS.attr('string'),
         dob: DS.attr('date'),
         smoker: DS.attr('boolean'),
-        willTransport: DS.attr('boolean'),
-        infantExp: DS.attr('number'),
-        toddlerExp: DS.attr('number'),
-        preschoolExp: DS.attr('number'),
-        schoolAgeExp: DS.attr('number'),
-        preTeenExp: DS.attr('number'),
-        teenExp: DS.attr('number'),
+        will_transport: DS.attr('boolean'),
+        infant_exp: DS.attr('number'),
+        toddler_exp: DS.attr('number'),
+        preschool_exp: DS.attr('number'),
+        school_ageExp: DS.attr('number'),
+        pre_teenExp: DS.attr('number'),
+        teen_exp: DS.attr('number'),
 
-        highestEducation: DS.attr('string'),
-        lastSchool: DS.attr('string'),
-        currentStudent: DS.attr('boolean'),
+        highest_education: DS.attr('string'),
+        last_school: DS.attr('string'),
+        current_student: DS.attr('boolean'),
         certification: DS.attr('string'),
-        otherServices: DS.attr('string'),
-        oneChildMinRate: DS.attr('number'),
-        oneChildMaxRate: DS.attr('number'),
-        twoChildMinRate: DS.attr('number'),
-        twoChildMaxRate: DS.attr('number'),
-        threeChildMinRate: DS.attr('number'),
-        threeChildMaxRate: DS.attr('number'),
+        other_services: DS.attr('string'),
+        one_childMin_rate: DS.attr('number'),
+        one_childMax_rate: DS.attr('number'),
+        two_childMin_rate: DS.attr('number'),
+        two_childMax_rate: DS.attr('number'),
+        three_childMin_rate: DS.attr('number'),
+        three_childMax_rate: DS.attr('number'),
 
-        smokersOk: DS.attr('boolean'),
-        dogsOk: DS.attr('boolean'),
-        catsOk: DS.attr('boolean'),
-        otherAnimalsOk: DS.attr('boolean'),
+        smokers_ok: DS.attr('boolean'),
+        dogs_ok: DS.attr('boolean'),
+        cats_ok: DS.attr('boolean'),
+        other_animalsOk: DS.attr('boolean'),
 
-        totalExp: (() ->
-            return @get('infantExp') + @get('toddlerExp') + @get('preschoolExp') + @get('schoolAgeExp') + @get('preTeenExp') + @get('teenExp')
-        ).property('infantExp','toddlerExp','preschoolExp', 'schoolAgeExp', 'preTeenExp', 'teenExp')
+        total_exp: (() ->
+            return @get('infant_exp') + @get('toddler_exp') + @get('preschool_exp') + @get('school_ageExp') + @get('pre_teenExp') + @get('teen_exp')
+        ).property('infant_exp','toddler_exp','preschool_exp', 'school_ageExp', 'pre_teenExp', 'teen_exp')
+    )
 
     Sitterfied.Language = DS.Model.extend(
         language: DS.attr('string'),
     )
+
 
     Sitterfied.Child = DS.Model.extend(
         parent: DS.belongsTo('Sitterfied.Parent'),
         name: DS.attr('string'),
         dob: DS.attr('date'),
         school: DS.attr('string'),
-        sitterInstructions: DS.attr('string'),
-        specialNeeds: DS.attr('string'),
+        sitter_instructions: DS.attr('string'),
+        special_needs: DS.attr('string'),
         allergies: DS.attr('string'),
     )
 
-    Sitterfied.SitterReview = DS.Model.extend(
+    Sitterfied.Sitter_review = DS.Model.extend(
         parent: DS.belongsTo('Sitterfied.Parent'),
         sitter: DS.belongsTo('Sitterfied.Sitter'),
         recommended: DS.attr('boolean'),
         review: DS.belongsTo('string'),
         rating: DS.belongsTo('number'),
-
     )
 
     Sitterfied.Booking = DS.Model.extend(
         parent: DS.belongsTo('Sitterfid.Parent'),
         sitter: DS.belongsTo('Sitterfied.Sitter'),
         notes: DS.attr('string'),
-        respondBy: DS.attr('date'),
-        startDateTime: DS.attr('date'),
-        stopDateTime: DS.attr('date'),
-        child: DS.hasMany("Sitterfied.Child")
-        #emergency_phone: models.ForeignKey('Phone')
-        bookingStatus:DS.attr('string'),
-        #location: models.ForeignKey('Address')
+        respond_by: DS.attr('date'),
+        start_dateTime: DS.attr('date'),
+        stop_dateTime: DS.attr('date'),
+        child: DS.hasMany("Sitterfied.Child"),
+        #emergency_phone: models.Foreign_key('Phone')
+        #location: models.Foreign_key('Address')
+        booking_status:DS.attr('string'),
     )

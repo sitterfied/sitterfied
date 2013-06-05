@@ -6,20 +6,16 @@ import api
 
 from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
-router.register(r'sitter', api.SitterViewSet)
-router.register(r'parent', api.ParentViewSet)
+router.register(r'sitters', api.SitterViewSet)
+router.register(r'parents', api.ParentViewSet)
 
 
 urlpatterns = patterns('app.views',
     # Examples:
     url(r'^api/', include(router.urls)),
-    url(r'^$', 'index', name='index'),
-
-
     url(r'^invite_email_submit/$', 'invite_email_submit', name='invite_email_submit'),
-
     url(r'^unsubscribe/$', 'unsubscribe', name='unsubscribe'),
     url(r'^cancel-unsubscribe/$', 'cancel_unsubscribe', name='cancel_unsubscribe'),
-
     url(r'^email/$', StaticView.as_view(template_name='invitation_email.html'), name="email"),
+    url(r'^.*', 'index', name='index'),
 )

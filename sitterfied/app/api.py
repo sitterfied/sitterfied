@@ -8,12 +8,15 @@ from rest_framework import viewsets
 #         model = models.User
 #         fields = ('first_name', 'last_name', 'username', 'email')
 
+user_fields = ('first_name', 'last_name', 'username', 'last_login', 'date_joined')
+
+
 class SitterSerializer(serializers.HyperlinkedModelSerializer):
 
     #todo general availablity
     class Meta:
         model = models.Sitter
-        fields = ('biography', 'live_zip',
+        fields = user_fields + ('biography', 'live_zip',
                   'work_zip', 'smoker',
                   'will_transport', 'total_exp',
                   'infant_exp',  'toddler_exp',
@@ -35,7 +38,7 @@ class ParentSerializer(serializers.HyperlinkedModelSerializer):
     #contacts
     class Meta:
         model = models.Parent
-        fields = ('emergency_contact', 'physician_contact',
+        fields = user_fields + ('emergency_contact', 'physician_contact',
                   'parking_area', 'parking_for_sitter'
                   )
 
