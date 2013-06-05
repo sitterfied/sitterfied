@@ -1,7 +1,7 @@
 define [
     "ember"
     "cs!sitterfied"
-    'emberData'
+    'data'
     'djangoRestAdapter'
     ], (Em, Sitterfied, DS) ->
 

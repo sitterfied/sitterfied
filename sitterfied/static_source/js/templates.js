@@ -1,35 +1,10 @@
-define(['ember'], function(Ember){define(['ember'], function(Ember){Ember.TEMPLATES["footer"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+define(['ember'], function(Ember){Ember.TEMPLATES["footer"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   
 
 
   data.buffer.push("		    <nav>\n			  <ul>\n				<li><a href=\"#\">About Us</a></li>\n				<li><a href=\"#\">Contact</a></li>\n				<li><a href=\"#\">Blog</a></li>\n				<li><a href=\"#\">Privacy Policy</a></li>\n				<li><a href=\"#\">Terms of Service</a></li>\n			  </ul>\n		    </nav>\n");
-  
-});
-Ember.TEMPLATES["nav"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [3,'>= 1.0.0-rc.4'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-
-function program1(depth0,data) {
-  
-  
-  data.buffer.push(" Search ");
-  }
-
-  data.buffer.push("<div class=\"menu_trigger\"></div>\n<nav>\n  <ul>\n    <li>");
-  hashTypes = {};
-  hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "search", options) : helperMissing.call(depth0, "linkTo", "search", options));
-  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("</li>\n	  <li><a href=\"#\">Bookings</a></li>\n	  <li><a href=\"#\"><img src=\"");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "STATIC_URL", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("img/demo/img.jpg\" alt=\"\" /> Alex</a></li>\n  </ul>\n</nav>\n");
-  return buffer;
   
 });
 Ember.TEMPLATES["noSearchResults"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -50,6 +25,23 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   data.buffer.push("	  <div class=\"find_form_block\">\n		<p>Where and when do you need your sitter?</p>\n		<form method=\"post\" action=\"#\">\n		  <ul class=\"clear\">\n			<li>\n			  <label for=\"where\">Where</label>\n			  <input id=\"where\" type=\"text\" value=\"Enter town or zipcode\" />\n			</li>\n			<li>\n			  <label for=\"when\">When</label>\n			  <input type=\"text\" id=\"datepicker\" />\n			  <p><input type=\"checkbox\" id=\"check\" name=\"check\" /><label for=\"check\">Overnight / Multiday booking?</label></p>\n			</li>\n			<li>\n			  <label for=\"from\">From</label>\n			  <select id=\"from\" data-placeholder=\"\" tabindex=\"8\"><option>6:00 PM</option><option>7:00 PM</option></select>\n			</li>\n			<li>\n			  <label for=\"to\">To</label>\n			  <select id=\"to\" data-placeholder=\"\" tabindex=\"9\"><option>11:00 PM</option><option>12:00 PM</option></select>\n			</li>\n			<li>\n			  <label>&nbsp;</label>\n			  <select data-placeholder=\"\" tabindex=\"10\"><option>2 Kids</option><option>3 Kids</option></select>\n			</li>\n			<li><input type=\"submit\" value=\"FIND MY SITTER\" /></li>\n		  </ul>\n		</form>\n		<p class=\"hide\"><a href=\"#\">Hide Search Bar</a></p>\n		<p class=\"show\"><a href=\"#\">Show Search Bar</a></p>\n	  </div>\n");
   
 });
+Ember.TEMPLATES["parents"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', hashTypes, hashContexts, escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("parking area: ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "parking_area", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\nparking for sitter: ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "parking_for_sitter", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  return buffer;
+  
+});
 Ember.TEMPLATES["searchResultsTop"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -68,4 +60,4 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   data.buffer.push("	  Hi Alex, you have 6 free months\n	  <div>\n		<p>Invite more frıends</p>\n		<span>&nbsp;</span>\n	  </div>\n");
   
 });
-})})
+})

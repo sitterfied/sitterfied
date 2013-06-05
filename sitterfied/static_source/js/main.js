@@ -2,7 +2,7 @@ require({
     paths: {
         "cs": "require/cs",
         "ember": "lib/ember",
-        "emberData": "lib/ember-data-latest",
+        "data": "lib/ember-data-latest",
         "handlebars" : "lib/handlebars",
         "_": "lib/underscore-min",
         "jquery": "lib/jquery-1.9.1",
@@ -11,6 +11,10 @@ require({
         "djangoRestAdapter": "lib/adapter",
     },
     shim:{
+        data: {
+            exports: 'DS',
+            deps: ['ember'],
+        },
         jquery: {
             exports: "$",
         },
@@ -21,12 +25,8 @@ require({
         handlebars: {
             exports: "Handlebars",
         },
-        emberData: {
-            deps: ['ember'],
-            exports: "DS"
-        },
         djangoRestAdapter: {
-            deps: ['emberData'],
+            deps: ['data'],
         },
         jqueryui: {
             deps: ['jquery']

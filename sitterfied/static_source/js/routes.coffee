@@ -18,7 +18,6 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
     Sitterfied.SearchRoute = Em.Route.extend(
         renderTemplate: () ->
             noResults = true
-            debugger
             if noResults
                 this.render('noSearchResultsTop', {     # the template to render
                     outlet: 'topInfo',              # the name of the outlet in that template
