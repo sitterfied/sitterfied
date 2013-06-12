@@ -21,13 +21,25 @@ class SitterUserCreationForm(UserCreationForm):
             return username
         raise forms.ValidationError(self.error_messages['duplicate_username'])
 
-    class Meta:
-        model = User
-        fields = ("username",)
 
-class SitterUserChangeForm(UserChangeForm):
+class SitterCreationForm(SitterUserCreationForm):
     class Meta:
-        model = User
+        model = Sitter
+
+class ParentCreationForm(SitterUserCreationForm):
+    class Meta:
+        model = Parent
+
+
+class SitterChangeForm(UserChangeForm):
+    class Meta:
+        model = Sitter
+
+class ParentChangeForm(UserChangeForm):
+    class Meta:
+        model = Parent
+
+
 
 class EmailSettingsInline(admin.TabularInline):
     model = EmailSettings
@@ -38,7 +50,7 @@ class MobileSettingsInline(admin.TabularInline):
 
 class PhoneInline(admin.TabularInline):
     model = Phone
-
+    extra = 0
 class AddressInline(admin.TabularInline):
     model = Address
 
@@ -59,8 +71,6 @@ class BookingInline(admin.StackedInline):
 
 
 class UserAdmin(DjangoUserAdmin):
-    form = SitterUserChangeForm
-    add_form = SitterUserCreationForm
     inlines = [
         MobileSettingsInline,
         EmailSettingsInline,
@@ -70,11 +80,19 @@ class UserAdmin(DjangoUserAdmin):
     ]
 
 
+
+
+
 class ParentAdmin(UserAdmin):
     inlines = copy.copy(UserAdmin.inlines) + [SittersReviewedInline, ChildInline]
+    form = ParentChangeForm
+    add_form = ParentCreationForm
+
 
 class SitterAdmin(UserAdmin):
     inlines = copy.copy(UserAdmin.inlines) + [ReviewsInline]
+    form = SitterChangeForm
+    add_form = SitterCreationForm
 
 
 class BookingAdmin(admin.ModelAdmin):
@@ -87,8 +105,6 @@ class BookingAdmin(admin.ModelAdmin):
     # exclude = ('actions', 'creator')
     # list_display = ('name', 'slug', 'active', 'over',)
     # list_filter = ('over', 'active',)
-
-
 
 
 admin.site.register(Parent, ParentAdmin)

@@ -8,16 +8,29 @@ modules = ['sitterfied']
 thisdir = os.path.dirname(os.path.realpath(__file__))
 module_dirs =  [os.path.join(thisdir, mod, "static_source", "js", "templates") for mod in modules]
 
+
+import fnmatch
+import os
+
+
+
+
+
+
 def compile_templates():
     print "compiling templates..."
     for template_dir in module_dirs:
         #html_files = os.path.join(template_dir "*.html")
-        all_files = os.path.join(template_dir, "*")
+        all_files = []
+        for root, dirnames, filenames in os.walk(template_dir):
+              for filename in fnmatch.filter(filenames, '*.hbs'):
+                  all_files.append(os.path.join(root, filename))
 
         dest_path = os.path.join(template_dir,  "..", "templates.js")
 
         print "compiling ", template_dir
-        os.system("ember-precompile %s -f %s" % (all_files, dest_path))
+        print all_files
+        os.system("ember-precompile %s -f %s" % (" ".join(all_files), dest_path))
         print "compiled ", template_dir
         with open(dest_path, 'r+') as fsock:
             content = fsock.read()

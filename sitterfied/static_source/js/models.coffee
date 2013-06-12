@@ -42,7 +42,7 @@ define [
         emergency_contact : DS.belongsTo('Sitterfied.Contact'),
         physician_contact : DS.belongsTo('Sitterfied.Contact'),
         parking_area : DS.attr('boolean'),
-        parking_forSitter: DS.attr('boolean'),
+        parking_for_sitter: DS.attr('boolean'),
     )
 
     Sitterfied.Sitter = DS.Model.extend(Sitterfied.UserMixin,
