@@ -1,7 +1,7 @@
 define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
     Sitterfied.Router.map(() ->
-        this.resource('sitter', {path: '/parent/:parent_id'}, () ->
-            this.resource('edit', () ->
+        this.resource('sitter', {path: '/sitter/:sitter_id'}, () ->
+            this.resource('sitterEdit', () ->
                 this.route('profile')
                 this.route('schedlue')
                 this.route('bookings')
@@ -10,7 +10,7 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
             )
         )
         this.resource('parent', {path: '/parent/:parent_id'}, () ->
-            this.resource('edit', () ->
+            this.resource('parentEdit', {path: '/edit'}, () ->
                 this.route('profile')
                 this.route('bookings')
                 this.route('sitterTeam')
@@ -23,45 +23,47 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
         this.route('book')
         this.route('done')
         this.route('about')
+        this.route('tos')
+        this.route('privacy')
+
+        #redirects
+        this.route('settings')
+        this.route('find friends')
+        this.route('rusitterfied')
+        this.route('support')
+        this.route('sign out')
+
+
     )
 
 
 
-    Sitterfied.EditIndexParentRoute = Em.Route.extend(
-        renderTemplate: () ->
-            this.render({outlet: 'topInfo'})
-
-    )
-    Sitterfied.EditParentIndexRoute = Em.Route.extend(
-        renderTemplate: () ->
-            this.render({outlet: 'topInfo'})
-    )
     Sitterfied.ParentEditIndexRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("parent/edit/index", {outlet: 'topInfo'})
+            this.render("parentEdit/index", {outlet: 'topInfo'})
     )
-
-    Sitterfied.EditIndexRoute = Em.Route.extend(
-        renderTemplate: () ->
-            this.render({outlet: 'topInfo'})
-    )
-
 
     Sitterfied.ParentRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render({outlet: 'topInfo'})
     )
 
+    Sitterfied.SettingsRoute = Em.Route.extend(
+        redirect: () ->
+            this.transitionTo('parentEdit');
+
+    )
+
+
     Sitterfied.editRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render({outlet: 'topInfo'})
     )
 
-
     Sitterfied.IndexRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render('index', {outlet: 'topInfo'})
-    )
+            this.render('footer', {outlet: 'footer'})
+        )
 
 
     Sitterfied.SearchRoute = Em.Route.extend(

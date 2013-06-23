@@ -21,18 +21,34 @@
 	<!-- JavaScript -->
     <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
 
+    <script>
+      var user_id = {{request.user.id}}
+    </script>
 	<!--[if lt IE9]><script src="js/ie9.js">IE7_PNG_SUFFIX=".png";</script><![end if]-->
 
   </head>
   <body>
     <script type="text/x-handlebars">
+
+      <!-- <div id="recommend_popup"> -->
+	  <!--   <div class="tit"><span>Recommend Ellen</span></div> -->
+	  <!--   <div class="info"> -->
+	  <!--     <form method="post" action="#" class="form_style"> -->
+	  <!--   	<p><span class="pad">How do you know Ellen?</span><select><option>Sat for my kids</option></select></p> -->
+	  <!--   	<p><span class="icon_review3">&nbsp;</span><label for="review">Review</label><textarea id="review">Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia.</textarea></p> -->
+	  <!--   	<p><a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Post</a><a class="button button_cancel button_small" href="#"><span class="icon_cancel">&nbsp;</span>Cancel</a></p> -->
+	  <!--     </form> -->
+	  <!--   </div> -->
+      <!-- </div> -->
+
+
       <!-- header -->
         <header class="header">
 	      <div class="wraper">
             {% verbatim %}
 		    {{# linkTo index class="logo"}}
             {% endverbatim %}
-            <img src="{{STATIC_URL}}img/logo.png" alt="" />
+            <img src="{{STATIC_URL}}images/logo.png" alt="" />
             {% verbatim %}
             {{/linkTo}}
             {% endverbatim %}
@@ -42,8 +58,18 @@
               <ul>
                 {% verbatim %}
                 <li>{{#linkTo search }} Search {{/linkTo}}</li>
-	            <li><a href="#">Bookings</a></li>
-	            <li><a href="#"><img src="{{STATIC_URL}}img/demo/img.jpg" alt="" /> Alex</a></li>
+	            <li>{{#linkTo book }}Bookings{{/linkTo}}</li>
+		        <li>
+					<a href="#"><img src="/static/images/demo/img.jpg" alt="" /> Alex</a>
+					<ul>
+						<li><span class="menu_icon_setting">&nbsp;</span>{{#linkTo settings }}Account Settings{{/linkTo}}</li>
+						<li><span class="menu_icon_profile">&nbsp;</span><a href="#">Profile</a></li>
+						<li><span class="menu_icon_friends">&nbsp;</span><a href="#">Find Friends</a></li>
+						<li><span class="menu_icon_members">&nbsp;</span><a href="#">Are you Sitterfied?</a></li>
+						<li><span class="menu_icon_support">&nbsp;</span><a href="#">Support</a></li>
+						<li><span class="menu_icon_signout">&nbsp;</span><a href="#">Sign Out</a></li>
+					</ul>
+				</li>
                 {% endverbatim %}
               </ul>
             </nav>
@@ -74,11 +100,19 @@
 
         <footer class="footer">
 	      <div class="wraper">
-		    <a href="#" class="logo_bottom"><img src="{{STATIC_URL}}img/logo_bottom.png" alt="" /></a>
+		    <a href="#" class="logo_bottom"><img src="{{STATIC_URL}}images/logo_bottom.png" alt="" /></a>
 		    <!-- bottom menu -->
-            {% verbatim %}
-            {{outlet footer}}
-            {% endverbatim %}
+		    <nav>
+			  <ul>
+                {% verbatim %}
+				<li>{{#linkTo about }}About Us{{/linkTo}}</li>
+				<li><a href="mailto:hello@sitterfied.com">Contact</a></li>
+				<li><a href="http://blog.sitterfied.com/">Blog</a></li>
+				<li>{{#linkTo privacy }}Privacy Policy{{/linkTo}}</li>
+				<li>{{#linkTo tos }}Terms of Service{{/linkTo}}</li>
+                {% endverbatim %}
+			  </ul>
+		    </nav>
 		    <!-- /bottom menu -->
 	      </div>
         </footer>

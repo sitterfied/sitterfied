@@ -26,7 +26,6 @@ class User(AbstractUser, TimeStampedModel):
     membership_exp_date = models.DateField(null=True)
 
 
-
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
     address1 = models.CharField(max_length=255)
