@@ -13,10 +13,18 @@ from django.template.loader import render_to_string
 
 from django.http import HttpResponseRedirect
 
+from rest_framework.renderers import JSONRenderer
+from api import ParentSerializer, SitterSerializer
 
 @render_to('index.html')
 def index(request, referred_by=None):
-    return {}
+    if hasattr(request.user, 'sitter'):
+        pass
+    elif hasattr(request.user, 'parent'):
+        serialized = ParentSerializer(request.user.parent)
+        user_json = JSONRenderer().render(serialized.data)
+        parent_or_sitter = "Parent"
+    return {'user_json':user_json, 'parent_or_sitter': parent_or_sitter}
 
 
 #invite tracking

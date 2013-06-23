@@ -14,6 +14,9 @@ from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 
 
+from model_utils.managers import InheritanceManager
+
+
 class User(AbstractUser, TimeStampedModel):
     MEMBERSHIP_STATUS = Choices("Trial", "paid")
     parents_in_network = models.ManyToManyField('Parent')
@@ -25,6 +28,10 @@ class User(AbstractUser, TimeStampedModel):
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateField(null=True)
 
+    objects = InheritanceManager()
+
+    def __unicode__(self):
+        return self.get_full_name()
 
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
@@ -50,8 +57,8 @@ class Phone(TimeStampedModel):
 class Parent(User):
     emergency_contact = models.OneToOneField('Contact', related_name="emergencies", null=True)
     physician_contact = models.OneToOneField('Contact', related_name="physicians", null=True)
-    parking_area = models.BooleanField()
-    parking_for_sitter = models.BooleanField()
+    parking_area = models.BooleanField(default=False)
+    parking_for_sitter = models.BooleanField(default=False)
 
     class Meta:
          verbose_name = "Parent"

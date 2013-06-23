@@ -65,6 +65,16 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
             this.render('footer', {outlet: 'footer'})
         )
 
+    Sitterfied.ApplicationRoute = Em.Route.extend(
+        activate: () ->
+            store = this.get("store")
+            user_data = JSON.parse(user_json)
+            model = Sitterfied.get(parent_or_sitter)
+            ref = store.load(model, user_data)
+            Sitterfied.currentUser = model.find(ref.id)
+    )
+
+
 
     Sitterfied.SearchRoute = Em.Route.extend(
         renderTemplate: () ->

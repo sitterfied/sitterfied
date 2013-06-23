@@ -22,7 +22,8 @@
     <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
 
     <script>
-      var user_id = {{request.user.id}}
+      var user_json = '{{user_json|safe}}'
+      var parent_or_sitter = '{{parent_or_sitter}}'
     </script>
 	<!--[if lt IE9]><script src="js/ie9.js">IE7_PNG_SUFFIX=".png";</script><![end if]-->
 

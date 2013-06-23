@@ -8,7 +8,7 @@ define [
 
     Sitterfied.Store = DS.Store.extend(
         revision: 12
-        adapter: DS.DjangoRESTAdapter.extend({
+        adapter: DS.DjangoRESTAdapter.create({
             namespace: 'api'
         })
         isDefaultStore:true
