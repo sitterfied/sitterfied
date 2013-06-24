@@ -49,10 +49,18 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
     )
 
     Sitterfied.SettingsRoute = Em.Route.extend(
-        redirect: () ->
-            this.transitionTo('parentEdit');
-
+        model: () ->
+            Sitterfied.currentUser
     )
+
+    Sitterfied.ProfileRoute = Em.Route.extend(
+        redirect: () ->
+            if parent_or_sitter == "Parent"
+                this.transitionTo('parentEdit', Sitterfied.currentUser)
+            else if parent_or_sitter == "Sitter"
+                this.transitionTo('sitterEdit', Sitterfied.currentUser)
+    )
+
 
 
     Sitterfied.editRoute = Em.Route.extend(
@@ -66,6 +74,7 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
         )
 
     Sitterfied.ApplicationRoute = Em.Route.extend(
+        ## load currentUser
         activate: () ->
             store = this.get("store")
             user_data = JSON.parse(user_json)

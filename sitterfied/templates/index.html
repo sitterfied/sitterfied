@@ -64,7 +64,7 @@
 					<a href="#"><img src="/static/images/demo/img.jpg" alt="" /> Alex</a>
 					<ul>
 						<li><span class="menu_icon_setting">&nbsp;</span>{{#linkTo settings }}Account Settings{{/linkTo}}</li>
-						<li><span class="menu_icon_profile">&nbsp;</span><a href="#">Profile</a></li>
+						<li><span class="menu_icon_profile">&nbsp;</span>{{#linkTo profile }}Profile{{/linkTo}}</li>
 						<li><span class="menu_icon_friends">&nbsp;</span><a href="#">Find Friends</a></li>
 						<li><span class="menu_icon_members">&nbsp;</span><a href="#">Are you Sitterfied?</a></li>
 						<li><span class="menu_icon_support">&nbsp;</span><a href="#">Support</a></li>
@@ -87,6 +87,14 @@
               {{outlet topInfo}}
               {% endverbatim %}
             </div>
+            <div class="top_title clear">
+              {% verbatim %}
+              {{outlet topTitle}}
+              {% endverbatim %}
+
+			  <span class="icon_settings">&nbsp;</span>My Account Settings
+		    </div>
+
 	      </div>
         </header>
         <!-- /header -->
