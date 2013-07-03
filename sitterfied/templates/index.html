@@ -76,36 +76,19 @@
             </nav>
 		    <!-- /top menu -->
 		    <!-- top note -->
-		    <div class="top_note">
               {% verbatim %}
-              {{outlet topNote}}
-              {% endverbatim %}
-		    </div>
-		    <!-- /top note -->
-		    <div class="top_info clear">
-              {% verbatim %}
-              {{outlet topInfo}}
-              {% endverbatim %}
-            </div>
-            <div class="top_title clear">
-              {% verbatim %}
-              {{outlet topTitle}}
+              {{outlet top}}
               {% endverbatim %}
 
-			  <span class="icon_settings">&nbsp;</span>My Account Settings
-		    </div>
 
 	      </div>
         </header>
         <!-- /header -->
 
-        <div class="container clear">
-	      <div class="wraper">
-            {% verbatim %}
-            {{outlet container}}
-            {% endverbatim %}
-          </div>
-        </div>
+
+        {% verbatim %}
+        {{outlet content}}
+        {% endverbatim %}
 
         <footer class="footer">
 	      <div class="wraper">

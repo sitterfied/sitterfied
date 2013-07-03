@@ -37,23 +37,54 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
     )
 
 
+    Sitterfied.DoneRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("done", {outlet: 'content'})
+            this.render('done.topNotify', { outlet: 'top' })
+
+    )
+
 
     Sitterfied.ParentEditIndexRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("parentEdit/index", {outlet: 'topInfo'})
+            this.render("parentEdit/index", {outlet: 'top'})
     )
 
     Sitterfied.ParentRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render({outlet: 'topInfo'})
+            this.render({outlet: 'top'})
+    )
+
+    Sitterfied.SitterRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render('sitter.topInfo', {     # the template to render
+                outlet: 'top',              # the name of the outlet in that template
+            })
+            this.render('sitter.container', {     # the template to render
+                    outlet: 'content',              # the name of the outlet in that template
+                })
+
+
+
     )
 
     Sitterfied.SettingsRoute = Em.Route.extend(
         model: () ->
             Sitterfied.currentUser
+
+        renderTemplate: () ->
+            this.render('settings.top', {     # the template to render
+                outlet: 'top',              # the name of the outlet in that template
+            })
+
+            if parent_or_sitter == "Parent"
+                this.render('settings.parentContent', {     # the template to render
+                    outlet: 'content',              # the name of the outlet in that template
+                })
+
     )
 
-    Sitterfied.ProfileRoute = Em.Route.extend(
+    Sitterfied.profileRoute = Em.Route.extend(
         redirect: () ->
             if parent_or_sitter == "Parent"
                 this.transitionTo('parentEdit', Sitterfied.currentUser)
@@ -65,7 +96,7 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
 
     Sitterfied.editRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render({outlet: 'topInfo'})
+            this.render({outlet: 'top'})
     )
 
     Sitterfied.IndexRoute = Em.Route.extend(
@@ -90,13 +121,13 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
             noResults = true
             if noResults
                 this.render('noSearchResultsTop', {     # the template to render
-                    outlet: 'topInfo',              # the name of the outlet in that template
+                    outlet: 'top',              # the name of the outlet in that template
                 })
                 this.render('noSearchResults', {     # the template to render
-                    outlet: 'container',              # the name of the outlet in that template
+                    outlet: 'content',              # the name of the outlet in that template
                 })
             else
                 this.render('searchResultsTop', {     # the template to render
-                    outlet: 'topInfo',              # the name of the outlet in that template
+                    outlet: 'top',              # the name of the outlet in that template
                 })
     )

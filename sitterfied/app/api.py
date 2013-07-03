@@ -34,6 +34,7 @@ class SitterSerializer(serializers.HyperlinkedModelSerializer):
                   )
 
 
+
 class ParentSerializer(serializers.HyperlinkedModelSerializer):
 
     #contacts
@@ -41,19 +42,20 @@ class ParentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Parent
         fields = user_fields + ('id', 'emergency_contact', 'physician_contact',
-                  'parking_area', 'parking_for_sitter'
+                  'parking_area', 'parking_for_sitter',
                   )
 
 class SitterViewSet(viewsets.ModelViewSet):
     queryset = models.Sitter.objects.all()
     serializer_class = SitterSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('id', )
 
 class ParentViewSet(viewsets.ModelViewSet):
     queryset = models.Parent.objects.all()
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
+    filter_fields = ('id', )
 
 #bookings
 #languages

@@ -22,7 +22,6 @@ define [
         first_name: DS.attr('string'),
         last_name: DS.attr('string'),
         email: DS.attr('string'),
-
         status: DS.attr('string'),
         parents_inNetwork: DS.hasMany('Sitterfied.Parent')
         sitters_inNetwork: DS.hasMany('Sitterfied.Sitter')

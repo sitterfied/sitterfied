@@ -19,19 +19,24 @@ from model_utils.managers import InheritanceManager
 
 class User(AbstractUser, TimeStampedModel):
     MEMBERSHIP_STATUS = Choices("Trial", "paid")
-    parents_in_network = models.ManyToManyField('Parent')
-    sitters_in_network = models.ManyToManyField('Sitter')
-    fave_sitters = models.ManyToManyField('Sitter', related_name="favored_by")
-    invited_by = models.ManyToManyField('self',  symmetrical = 'false')
+    parents_in_network = models.ManyToManyField('Parent', related_name="parents_in_network")
+    sitters_in_network = models.ManyToManyField('Sitter', related_name="sitters_in_network")
+    invited_by = models.ManyToManyField('self',  symmetrical =False)
     languages = models.ManyToManyField('Language')
 
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateField(null=True)
 
-    objects = InheritanceManager()
+
+    #objects = InheritanceManager()
 
     def __unicode__(self):
         return self.get_full_name()
+
+    def save(self, *args, **kwargs):
+        if self.slug == "":
+            self.slug = self.username
+        return super(User, self).save(*args, **kwargs)
 
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
@@ -55,41 +60,40 @@ class Phone(TimeStampedModel):
 
 
 class Parent(User):
-    emergency_contact = models.OneToOneField('Contact', related_name="emergencies", null=True)
-    physician_contact = models.OneToOneField('Contact', related_name="physicians", null=True)
+    emergency_contact = models.OneToOneField('Contact', related_name="emergencies", null=True, blank=True)
+    physician_contact = models.OneToOneField('Contact', related_name="physicians", null=True, blank=True)
     parking_area = models.BooleanField(default=False)
     parking_for_sitter = models.BooleanField(default=False)
+    fave_sitters = models.ManyToManyField('Sitter', related_name="favored_by", blank=True)
 
     class Meta:
          verbose_name = "Parent"
 
 class Sitter(User):
-    biography = models.TextField()
-    id_verified = models.BooleanField()
-    id_scan_path = models.FilePathField("/home/blahblah")  # avatar?
-
+    biography = models.TextField(blank=True)
+    id_verified = models.BooleanField(default=False)
 
     live_zip = models.CharField(max_length=9)
     work_zip = models.CharField(max_length=9)
 
-    dob = models.DateField()
-    smoker = models.BooleanField()
-    will_transport = models.BooleanField()
+    dob = models.DateField(blank=False)
+    smoker = models.BooleanField(default=True)
+    will_transport = models.BooleanField(default=False)
 
-    total_exp = models.SmallIntegerField()
-    infant_exp = models.SmallIntegerField()
-    toddler_exp = models.SmallIntegerField()
-    preschool_exp = models.SmallIntegerField()
-    school_age_exp = models.SmallIntegerField()
-    pre_teen_exp = models.SmallIntegerField()
-    teen_exp = models.SmallIntegerField()
+    total_exp = models.SmallIntegerField(default=0)
+    infant_exp = models.SmallIntegerField(default=0)
+    toddler_exp = models.SmallIntegerField(default=0)
+    preschool_exp = models.SmallIntegerField(default=0)
+    school_age_exp = models.SmallIntegerField(default=0)
+    pre_teen_exp = models.SmallIntegerField(default=0)
+    teen_exp = models.SmallIntegerField(default=0)
 
-    highest_education = models.CharField(max_length=50)
-    last_school = models.CharField(max_length=50)
-    current_student = models.BooleanField()
+    highest_education = models.CharField(max_length=50, blank=True)
+    last_school = models.CharField(max_length=50, blank=True)
+    current_student = models.BooleanField(default=False)
 
-    certification = models.CharField(max_length=50)
-    other_services = models.CharField(max_length=100)
+    certification = models.CharField(max_length=50, blank=True)
+    other_services = models.CharField(max_length=100, blank=True)
 
     one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2)
     one_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2)
@@ -98,10 +102,10 @@ class Sitter(User):
     three_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2)
     three_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2)
 
-    smokers_ok = models.BooleanField()
-    dogs_ok = models.BooleanField()
-    cats_ok = models.BooleanField()
-    other_animals_ok = models.BooleanField()
+    smokers_ok = models.BooleanField(default=True)
+    dogs_ok = models.BooleanField(default=True)
+    cats_ok = models.BooleanField(default=True)
+    other_animals_ok = models.BooleanField(default=True)
 
     class Meta:
          verbose_name = "Sitter"
