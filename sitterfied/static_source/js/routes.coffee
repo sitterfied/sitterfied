@@ -1,23 +1,24 @@
-define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
+define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
     Sitterfied.Router.map(() ->
-        this.resource('sitter', {path: '/sitter/:sitter_id'}, () ->
-            this.resource('sitterEdit', () ->
-                this.route('profile')
-                this.route('schedlue')
-                this.route('bookings')
-                this.route('network')
-                this.route('reviews')
+        this.resource('sitter', {path: '/sitter/:sitter_id'})
+        this.resource('sitterEdit', {path: '/sitter/:sitter_id/edit'}, () ->
+            this.route('profile')
+            this.route('schedlue')
+            this.route('bookings')
+            this.route('network')
+            this.route('reviews')
             )
+
+        this.route('parent', {path: '/parent/:parent_id'})
+
+        this.resource('parentEdit', {path: '/parent/:parent_id/edit'}, () ->
+            this.route('profile')
+            this.route('bookings')
+            this.route('sitterTeam')
+            this.route('network')
+            this.route('reviews')
         )
-        this.resource('parent', {path: '/parent/:parent_id'}, () ->
-            this.resource('parentEdit', {path: '/edit'}, () ->
-                this.route('profile')
-                this.route('bookings')
-                this.route('sitterTeam')
-                this.route('network')
-                this.route('reviews')
-            )
-        )
+
         this.route('search')
         this.route('profile')
         this.route('book')
@@ -40,32 +41,43 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
     Sitterfied.DoneRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render("done", {outlet: 'content'})
-            this.render('done.topNotify', { outlet: 'top' })
+            this.render('done.top', { outlet: 'top' })
+
+    )
+
+    Sitterfied.BookRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("book.multiple", {outlet: 'content'})
+            this.render('book.top', { outlet: 'top' })
 
     )
 
 
-    Sitterfied.ParentEditIndexRoute = Em.Route.extend(
+    Sitterfied.ParentEditRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("parentEdit/index", {outlet: 'top'})
+            this.render("parentEdit", {outlet: 'content'})
+            this.render("parentEdit.top", {outlet: 'top'})
     )
 
     Sitterfied.ParentRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render({outlet: 'top'})
+            this.render("parent", {outlet: 'content'})
+            this.render("parent.top", {outlet: 'top'})
+
     )
+
+
+    Sitterfied.SitterEditRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("sitterEdit", {outlet: 'content'})
+            this.render("sitterEdit.top", {outlet: 'top'})
+    )
+
 
     Sitterfied.SitterRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render('sitter.topInfo', {     # the template to render
-                outlet: 'top',              # the name of the outlet in that template
-            })
-            this.render('sitter.container', {     # the template to render
-                    outlet: 'content',              # the name of the outlet in that template
-                })
-
-
-
+            this.render("sitter", {outlet: 'content'})
+            this.render("sitter.top", {outlet: 'top'})
     )
 
     Sitterfied.SettingsRoute = Em.Route.extend(
@@ -73,47 +85,33 @@ define ["cs!sitterfied", "cs!models", "templates"], (Sitterfied) ->
             Sitterfied.currentUser
 
         renderTemplate: () ->
-            this.render('settings.top', {     # the template to render
-                outlet: 'top',              # the name of the outlet in that template
-            })
-
-            if parent_or_sitter == "Parent"
-                this.render('settings.parentContent', {     # the template to render
-                    outlet: 'content',              # the name of the outlet in that template
-                })
-
+            this.render("settings", {outlet: 'content'})
+            this.render("settings.top", {outlet: 'top'})
     )
 
-    Sitterfied.profileRoute = Em.Route.extend(
+    Sitterfied.ProfileRoute = Em.Route.extend(
         redirect: () ->
-            if parent_or_sitter == "Parent"
+            if Sitterfied.get('isParent')
                 this.transitionTo('parentEdit', Sitterfied.currentUser)
-            else if parent_or_sitter == "Sitter"
+            else
                 this.transitionTo('sitterEdit', Sitterfied.currentUser)
     )
 
 
-
-    Sitterfied.editRoute = Em.Route.extend(
-        renderTemplate: () ->
-            this.render({outlet: 'top'})
-    )
-
     Sitterfied.IndexRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render('footer', {outlet: 'footer'})
-        )
+    )
 
     Sitterfied.ApplicationRoute = Em.Route.extend(
         ## load currentUser
         activate: () ->
             store = this.get("store")
             user_data = JSON.parse(user_json)
-            model = Sitterfied.get(parent_or_sitter)
+            model = Sitterfied.get('accountType')
             ref = store.load(model, user_data)
-            Sitterfied.currentUser = model.find(ref.id)
+            Sitterfied.currentUser = Sitterfied[model].find(ref.id)
     )
-
 
 
     Sitterfied.SearchRoute = Em.Route.extend(

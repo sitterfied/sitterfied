@@ -7,7 +7,8 @@
 			<li><span class="icon_friends5">&nbsp;</span>2 Kids</li>
 			<li><span class="icon_pin3">&nbsp;</span>33 Nassau Ave Suite #2 NY, New York</li>
 		</ul>
-		<p><a href="#" class="button button_small button_edit"><span class="icon_edit">&nbsp;</span>Edit</a><a href="#" class="button button_small button_cancel"><span class="icon_cancel">&nbsp;</span>Cancel</a></p>
-		<p><a href="#" class="button">Go to bookings</a></p>
+		<p><a {{action 'edit' }} class="button button_small button_edit"><span class="icon_edit">&nbsp;</span>Edit</a><a {{action 'cancel' }} class="button button_small button_cancel"><span class="icon_cancel">&nbsp;</span>Cancel</a></p>
+
+        <p>{{#linkTo book class="button" }}Go to bookings{{/linkTo}}</p>
 	</div>
 </div>

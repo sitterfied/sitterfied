@@ -40,7 +40,7 @@ require({
     },
         urlArgs: "bust=" +  (new Date()).getTime(),
 },
-        ["jquery", "cs!sitterfied", "cs!routes", "cs!models", "vasilli"], function($, Sitterfied){
+        ["jquery", 'ember', "cs!sitterfied", "cs!routes", "cs!models", "cs!controllers", "vasilli"], function($, Em, Sitterfied){
             Sitterfied.runInitializers()
             Sitterfied.advanceReadiness()
             window.Sitterfied = Sitterfied //take out when finished developing

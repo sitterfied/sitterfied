@@ -9,6 +9,15 @@ define ['jquery'
         init:  () ->
             this.deferReadiness()
             this._super()
+
+        accountType: parent_or_sitter
+        isSitter: (() ->
+            Sitterfied.accountType == "Sitter"
+        ).property('parent_or_sitter')
+        isParent: (() ->
+            Sitterfied.accountType == "Parent"
+        ).property('parent_or_sitter')
+
     )
 
     Sitterfied.Router.reopen(

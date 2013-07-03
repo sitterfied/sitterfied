@@ -23,8 +23,8 @@ def compile_templates():
         #html_files = os.path.join(template_dir "*.html")
         all_files = []
         for root, dirnames, filenames in os.walk(template_dir):
-              for filename in fnmatch.filter(filenames, '*.hbs'):
-                  all_files.append(os.path.join(root, filename))
+            for filename in fnmatch.filter(filenames, '*.hbs'):
+                all_files.append(os.path.join(root, filename))
 
         dest_path = os.path.join(template_dir,  "..", "templates.js")
 
