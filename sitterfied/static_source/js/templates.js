@@ -436,7 +436,7 @@ function program14(depth0,data) {
   options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "profile", options) : helperMissing.call(depth0, "linkTo", "profile", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("/p>\n		  </li>\n		  <li>Notify me when</li>\n		  <li>\n            ");
+  data.buffer.push("</p>\n		  </li>\n		  <li>Notify me when</li>\n		  <li>\n            ");
   hashTypes = {};
   hashContexts = {};
   stack2 = helpers['with'].call(depth0, "settings", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
