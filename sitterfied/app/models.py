@@ -33,10 +33,6 @@ class User(AbstractUser, TimeStampedModel):
     def __unicode__(self):
         return self.get_full_name()
 
-    def save(self, *args, **kwargs):
-        if self.slug == "":
-            self.slug = self.username
-        return super(User, self).save(*args, **kwargs)
 
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
