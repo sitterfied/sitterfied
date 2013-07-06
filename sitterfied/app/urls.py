@@ -8,6 +8,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r'sitters', api.SitterViewSet)
 router.register(r'parents', api.ParentViewSet)
+router.register(r'settings', api.SettingsViewSet)
 
 
 urlpatterns = patterns('app.views',

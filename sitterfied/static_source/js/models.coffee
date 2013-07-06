@@ -16,21 +16,30 @@ define [
 
     Sitterfied.UserMixin = Em.Mixin.create(
         #django builtins
-        last_login: DS.attr('date'),
-        is_superuser: DS.attr('boolean'),
-        username: DS.attr('string'),
-        first_name: DS.attr('string'),
-        last_name: DS.attr('string'),
-        email: DS.attr('string'),
-        status: DS.attr('string'),
+        last_login: DS.attr('date')
+        is_superuser: DS.attr('boolean')
+        username: DS.attr('string')
+        first_name: DS.attr('string')
+        last_name: DS.attr('string')
+        email: DS.attr('string')
+        status: DS.attr('string')
         parents_inNetwork: DS.hasMany('Sitterfied.Parent')
         sitters_inNetwork: DS.hasMany('Sitterfied.Sitter')
         languages: DS.hasMany('Sitterfied.Language')
-
+        settings  : DS.belongsTo('Sitterfied.Settings')
 
         full_name: (() ->
             return @get('first_name') + ' ' + @get('last_name');
         ).property('first_name', 'last_name')
+    )
+
+    Sitterfied.Settings = DS.Model.extend(
+        upcoming_booking: DS.attr('boolean')
+        new_review: DS.attr('boolean')
+        new_reference: DS.attr('boolean')
+        new_reference_request: DS.attr('boolean')
+        message_received: DS.attr('boolean')
+        booking_accepted_denied: DS.attr('boolean')
     )
 
     Sitterfied.Contact = DS.Model.extend(

@@ -39,12 +39,8 @@ class ParentChangeForm(UserChangeForm):
 
 
 
-class EmailSettingsInline(admin.TabularInline):
-    model = EmailSettings
-
-class MobileSettingsInline(admin.TabularInline):
-    model = MobileSettings
-
+class SettingsInline(admin.TabularInline):
+    model = Settings
 
 class PhoneInline(admin.TabularInline):
     model = Phone
@@ -70,8 +66,7 @@ class BookingInline(admin.StackedInline):
 
 class UserAdmin(DjangoUserAdmin):
     inlines = [
-        MobileSettingsInline,
-        EmailSettingsInline,
+        SettingsInline,
         AddressInline,
         BookingInline,
         PhoneInline,

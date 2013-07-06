@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+
 from model_utils.models import TimeStampedModel
 # Create your models here.
 
@@ -26,7 +28,7 @@ class User(AbstractUser, TimeStampedModel):
 
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateField(null=True)
-
+    settings =  models.OneToOneField('Settings', null=True)
 
     #objects = InheritanceManager()
 
@@ -107,8 +109,6 @@ class Sitter(User):
          verbose_name = "Sitter"
 
 
-
-
 class Language(TimeStampedModel):
     language = models.CharField(max_length=100)
 
@@ -116,17 +116,13 @@ class Language(TimeStampedModel):
         return self.language
 
 
-class EmailSettings(TimeStampedModel):
-    user =  models.OneToOneField('User')
+class Settings(TimeStampedModel):
+
 
     upcoming_booking = models.BooleanField()
     new_review = models.BooleanField()
     new_reference = models.BooleanField()
     new_reference_request = models.BooleanField()
-
-
-class MobileSettings(TimeStampedModel):
-    user =  models.OneToOneField('User')
     message_received = models.BooleanField()
     booking_accepted_denied = models.BooleanField()
 
@@ -192,3 +188,10 @@ class Booking(TimeStampedModel):
     emergency_phone = models.ForeignKey('Phone')
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
     location = models.ForeignKey('Address')
+
+
+def create_user_settings(sender, instance, created, **kwargs):
+    if created and not Settings.objects.filter(user=instance).exists():
+        Settings.objects.create(user=instance)
+
+post_save.connect(create_user_settings, sender=User)

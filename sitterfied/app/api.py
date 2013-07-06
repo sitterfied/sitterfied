@@ -8,7 +8,7 @@ from rest_framework import viewsets
 #         model = models.User
 #         fields = ('first_name', 'last_name', 'username', 'email')
 
-user_fields = ('first_name', 'last_name', 'username', 'last_login', 'date_joined')
+user_fields = ('first_name', 'last_name', 'username', 'last_login', 'date_joined', 'settings')
 
 
 class SitterSerializer(serializers.HyperlinkedModelSerializer):
@@ -45,6 +45,12 @@ class ParentSerializer(serializers.HyperlinkedModelSerializer):
                   'parking_area', 'parking_for_sitter',
                   )
 
+
+class SettingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Settings
+
+
 class SitterViewSet(viewsets.ModelViewSet):
     queryset = models.Sitter.objects.all()
     serializer_class = SitterSerializer
@@ -56,6 +62,13 @@ class ParentViewSet(viewsets.ModelViewSet):
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
+
+
+class SettingsViewSet(viewsets.ModelViewSet):
+    queryset = models.Settings.objects.all()
+    serializer_class = SettingsSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
 
 #bookings
 #languages
