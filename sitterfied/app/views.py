@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib.auth.decorators import login_required
+
 from annoying.decorators import render_to, ajax_request
 
 from django.views.decorators.http import require_POST
@@ -13,9 +15,13 @@ from django.template.loader import render_to_string
 
 from django.http import HttpResponseRedirect
 
+
+
+
 from rest_framework.renderers import JSONRenderer
 from api import ParentSerializer, SitterSerializer
 
+@login_required
 @render_to('index.html')
 def index(request, referred_by=None):
     parent_or_sitter = user_json = ""

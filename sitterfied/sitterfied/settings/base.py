@@ -155,6 +155,8 @@ LOGGING = {
 
 
 AUTH_USER_MODEL = 'app.User'
+LOGIN_URL = '/login/'
+
 
 from .pipeline import *
 from .grappelli import *

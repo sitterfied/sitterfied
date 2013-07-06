@@ -17,5 +17,9 @@ urlpatterns = patterns('app.views',
     url(r'^unsubscribe/$', 'unsubscribe', name='unsubscribe'),
     url(r'^cancel-unsubscribe/$', 'cancel_unsubscribe', name='cancel_unsubscribe'),
     url(r'^email/$', StaticView.as_view(template_name='invitation_email.html'), name="email"),
-    url(r'^.*', 'index', name='index'),
+)
+
+urlpatterns += patterns('',
+    url(r'^login/$', 'django.contrib.auth.views.login', name="login", ),
+    url(r'^.*', 'app.views.index', name='index'),
 )

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <form method="post" action=".">
+      {% csrf_token %}
+      <p>
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+      </p>
+      <p>
+        <label for="id_password">Password:</label>
+        {{ form.password }}
+      </p>
+        <input type="hidden" name="next" value="/" />
+      <input type="submit" value="login" />
+    </form>
+  </section>
+  </body>
+</html>
