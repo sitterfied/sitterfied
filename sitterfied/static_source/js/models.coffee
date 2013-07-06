@@ -33,7 +33,7 @@ define [
                 return @get('first_name') + ' ' + @get('last_name')
 
             else
-                [first_name, last_name] = value.split(" ", 2)
+                [first_name, last_name] = value.trim().split(" ", 2)
                 this.set('first_name', first_name)
                 this.set('last_name', last_name)
                 return value
