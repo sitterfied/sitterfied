@@ -8,7 +8,11 @@ from rest_framework import viewsets
 #         model = models.User
 #         fields = ('first_name', 'last_name', 'username', 'email')
 
-user_fields = ('first_name', 'last_name', 'username', 'last_login', 'date_joined', 'settings')
+user_fields = ('first_name', 'last_name',
+               'username', 'last_login',
+               'date_joined', 'settings',
+               'sitters_in_network',
+               'parents_in_network', 'sitter_groups', 'bookings')
 
 
 class SitterSerializer(serializers.ModelSerializer):

@@ -23,11 +23,34 @@ define [
         last_name: DS.attr('string')
         email: DS.attr('string')
         status: DS.attr('string')
-        parents_inNetwork: DS.hasMany('Sitterfied.Parent')
-        sitters_inNetwork: DS.hasMany('Sitterfied.Sitter')
+        parents_in_network: DS.hasMany('Sitterfied.Parent')
+        sitters_in_network: DS.hasMany('Sitterfied.Sitter')
+        sitter_groups: DS.hasMany('Sitterfied.Group')
         languages: DS.hasMany('Sitterfied.Language')
         settings  : DS.belongsTo('Sitterfied.Setting')
-
+        bookings: DS.hasMany('Sitterfied.Booking'),
+        sorted_bookings: (() ->
+            return this.get('bookings').toArray().sort((booking1, booking2) ->
+                if booking1.get('start_date_time') > booking2.get('start_date_time')
+                    return 1
+                else
+                    return -1
+            )
+        ).property('bookings.@each')
+        weeks_since_last_booking: (() ->
+            if this.get('sorted_bookings').length == 0
+                return 0
+            else
+                debugger
+                most_recent_booking = this.get('sorted_bookings')[0]
+        ).property('sorted_bookings')
+        days_since_last_booking: (() ->
+            if this.get('sorted_bookings').length == 0
+                return 0
+            else
+                debugger
+                most_recent_booking = this.get('sorted_bookings')[0]
+        ).property('sorted_bookings')
         full_name: ((key, value) ->
             if arguments.length == 1
                 return @get('first_name') + ' ' + @get('last_name')
@@ -71,11 +94,16 @@ define [
         #flush out later
     )
 
+    Sitterfied.Group = DS.Model.extend(
+        name: DS.attr('string')
+    )
+
     Sitterfied.Parent = DS.Model.extend(Sitterfied.UserMixin,
         emergency_contact : DS.belongsTo('Sitterfied.Contact'),
         physician_contact : DS.belongsTo('Sitterfied.Contact'),
         parking_area : DS.attr('boolean'),
         parking_for_sitter: DS.attr('boolean'),
+
     )
 
     Sitterfied.Sitter = DS.Model.extend(Sitterfied.UserMixin,
@@ -140,12 +168,12 @@ define [
     )
 
     Sitterfied.Booking = DS.Model.extend(
-        parent: DS.belongsTo('Sitterfid.Parent'),
+        parent: DS.belongsTo('Sitterfied.Parent'),
         sitter: DS.belongsTo('Sitterfied.Sitter'),
         notes: DS.attr('string'),
         respond_by: DS.attr('date'),
-        start_dateTime: DS.attr('date'),
-        stop_dateTime: DS.attr('date'),
+        start_date_time: DS.attr('date'),
+        stop_date_time: DS.attr('date'),
         child: DS.hasMany("Sitterfied.Child"),
         #emergency_phone: models.Foreign_key('Phone')
         #location: models.Foreign_key('Address')

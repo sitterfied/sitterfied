@@ -13,10 +13,6 @@ import fnmatch
 import os
 
 
-
-
-
-
 def compile_templates():
     print "compiling templates..."
     for template_dir in module_dirs:
@@ -24,6 +20,8 @@ def compile_templates():
         all_files = []
         for root, dirnames, filenames in os.walk(template_dir):
             for filename in fnmatch.filter(filenames, '*.hbs'):
+                if "#" in filename:
+                    continue
                 all_files.append(os.path.join(root, filename))
 
         dest_path = os.path.join(template_dir,  "..", "templates.js")
@@ -51,8 +49,12 @@ if __name__ == "__main__":
     compile_templates()
     observer = Observer()
     compiler = Compiler()
+    print module_dirs
     for module_dir in module_dirs:
-         observer.schedule(compiler, module_dir)
+        for root, dirnames, filenames in os.walk(module_dir):
+            for dirname in dirnames:
+                dir = os.path.join(root, dirname)
+                observer.schedule(compiler, dir)
     observer.start()
     try:
         while True:

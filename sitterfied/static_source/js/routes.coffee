@@ -33,8 +33,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
         this.route('rusitterfied')
         this.route('support')
         this.route('sign out')
-
-
     )
 
 
@@ -52,25 +50,62 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
 
     )
 
-
     Sitterfied.ParentEditRoute = Em.Route.extend(
+        model: () ->
+            return Sitterfied.currentUser
+
         renderTemplate: () ->
-            this.render("parentEdit", {outlet: 'content'})
-            this.render("parentEdit.top", {outlet: 'top'})
+            this.render("parentEdit", {outlet: 'content', controller: 'currentUser'})
+            this.render("parentEdit.top", {outlet: 'top', controller: 'currentUser'})
     )
 
+    Sitterfied.ParentEditProfileRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("parentEdit/profile", {into:"parentEdit", controller: 'currentUser'})
+    )
+    Sitterfied.ParentEditBookingsRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("parentEdit/bookings", {into:"parentEdit", controller: 'currentUser'})
+    )
+    Sitterfied.ParentEditSitterTeamRoute = Em.Route.extend(
+        model: () ->
+            return Sitterfied.currentUser
+
+        renderTemplate: () ->
+            this.render("parentEdit/sitterTeam", {into:"parentEdit"})
+    )
+    Sitterfied.ParentEditNetworkRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("parentEdit/network", {into:"parentEdit", controller: 'currentUser'})
+    )
+    Sitterfied.ParentEditReviewsRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("parentEdit/reviews", {into:"parentEdit", controller: 'currentUser'})
+    )
+    Sitterfied.ParentEditIndexRoute = Em.Route.extend(
+        redirect: () ->
+            this.transitionTo('parentEdit.profile')
+
+    )
     Sitterfied.ParentRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render("parent", {outlet: 'content'})
             this.render("parent.top", {outlet: 'top'})
-
     )
 
-
     Sitterfied.SitterEditRoute = Em.Route.extend(
+        model: () ->
+            return Sitterfied.currentUser
+
         renderTemplate: () ->
-            this.render("sitterEdit", {outlet: 'content'})
+            this.render("sitterEdit", {outlet: 'content', controller: 'currentUser'})
             this.render("sitterEdit.top", {outlet: 'top'})
+    )
+    Sitterfied.SitterEditIndexRoute = Em.Route.extend(
+
+        redirect: () ->
+            this.transitionTo('sitterEdit.profile')
+
     )
 
 
@@ -81,11 +116,8 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
     )
 
     Sitterfied.SettingsRoute = Em.Route.extend(
-        model: () ->
-            return Sitterfied.currentUser
-
         renderTemplate: () ->
-            this.render("settings", {outlet: 'content'})
+            this.render("settings", {outlet: 'content', controller: 'currentUser'})
             this.render("settings.top", {outlet: 'top'})
     )
 
@@ -103,20 +135,10 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
             this.render('footer', {outlet: 'footer'})
     )
 
-    Sitterfied.ApplicationRoute = Em.Route.extend(
-        ## load currentUser
-        activate: () ->
-            store = this.get("store")
-            user_data = JSON.parse(user_json)
-            model = Sitterfied.get('accountType')
-            ref = store.load(model, user_data)
-            Sitterfied.currentUser = Sitterfied[model].find(ref.id)
-    )
-
-
     Sitterfied.SearchRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render('search.top', {outlet: 'top'})
             this.render('emptysearch', {outlet: 'content'})
             #this.render('search', { outlet: 'content'})
     )
+    Sitterfied.ApplicationRoute = Em.Route.extend()

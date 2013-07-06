@@ -1,26 +1,14 @@
 define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
-    Sitterfied.BookController = Em.ArrayController.extend(
-        cancel: () ->
-            alert('cancel')
-            this.transitionTo('search');
-        book: () ->
-            alert('send')
-            this.transitionTo('done');
-    )
-
-
-    Sitterfied.DoneController = Em.ArrayController.extend(
-        cancel: () ->
-            alert('cancel')
-            this.transitionTo('search');
-        edit: () ->
-            alert('edit')
-            this.transitionTo('book');
-    )
-
-    Sitterfied.SettingsController = Em.ObjectController.extend(
-        save: () ->
+    Sitterfied.CurrentUserController = Em.ObjectController.extend({
+        accountType: parent_or_sitter
+        isSitter: (() ->
+            Sitterfied.accountType == "Sitter"
+        ).property('parent_or_sitter')
+        isParent: (() ->
+            Sitterfied.accountType == "Parent"
+        ).property('parent_or_sitter')
+        saveSettings: () ->
             settings =  this.get('settings')
             if settings.get('isDirty')
                 settings.save()
@@ -42,4 +30,40 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
                 old_password: @get('old_password')
             }
             $.post('password_change/', data).success(alert('password changed'))
+
+        facebookConnect: () ->
+            alert('facebook connect')
+
+        gmailConnect: () ->
+            alert('gmail connect')
+
+        newFriendName:  ""
+        addFriend: () ->
+            newFriendName = @get('newFriendName')
+            alert('add Friend, ' + newFriendName)
+
+        invite: () ->
+            alert("invite friends")
+
+        deleteGroup: (group) ->
+            alert("delete group, " + group)
+    })
+
+    Sitterfied.BookController = Em.ArrayController.extend(
+        cancel: () ->
+            alert('cancel')
+            this.transitionTo('search');
+        book: () ->
+            alert('send')
+            this.transitionTo('done');
+    )
+
+
+    Sitterfied.DoneController = Em.ArrayController.extend(
+        cancel: () ->
+            alert('cancel')
+            this.transitionTo('search');
+        edit: () ->
+            alert('edit')
+            this.transitionTo('book');
     )

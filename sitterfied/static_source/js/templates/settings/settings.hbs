@@ -11,7 +11,7 @@
 			<li><label for="">STATUS</label></li>
 			<li>
 			  <div class="member_since">Feb 2013</div>
-              {{# if Sitterfied.isParent }}
+              {{# if isParent }}
 			    <a class="button button_smaller button_edit" href="#"><span class="icon_settings2">&nbsp;</span>PAYMENT OPTIONS</a>
                 {{ else }}
                 <span class="ur">You are <strong>Sitterfied</strong></span>
@@ -32,6 +32,7 @@
 		</div>
 		<p><a {{action 'deleteAccount'}}>DELETE MY ACCOUNT</a> Having problems? <strong><a href="mailto:hello@sitterfied.com">talk to us</a></strong>. Maybe we can work this out.</p>
 		<h4><span class="icon_mobile">&nbsp;</span>Mobile Notifications / Text Messages</h4>
+        {{#with settings}}
 		<ul class="clear">
 		  <li>Mobile Phone</li>
 		  <li>
@@ -39,7 +40,6 @@
 		  </li>
 		  <li>Notify me when</li>
 		  <li>
-            {{#with settings}}
               {{# if Sitterfied.isParent }}
 			    <p>{{view Ember.Checkbox id="mn_check" checkedBinding="mobile_booking_accepted_denied"}}<label for="mn_check">My outstanding booking request is accepted or declined</label></p>
 			    <p>{{view Ember.Checkbox id="mn_check2" checkedBinding="mobile_friend_joined"}}<label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
@@ -55,7 +55,7 @@
 		  <li>
 			<p>{{view Ember.Checkbox id="mn_check4" checkedBinding="mobile_upcoming_booking_remind"}}<label for="mn_check4">I have an upcoming booking</label></p>
 		  </li>
-		  <li><a class="button button_small" {{action 'save'}}><span class="icon_ok2">&nbsp;</span>Save</a></li>
+		  <li><a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a></li>
 		</ul>
 		<h4><span class="icon_eset">&nbsp;</span>Email Settings</h4>
         <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>
@@ -82,9 +82,10 @@
 			<p>{{view Ember.Checkbox id="es_check5" checkedBinding="email_news"}}<label for="es_check5">Sitterfied has fun company news, as well as periodic emails</label></p>
 			<p>{{view Ember.Checkbox id="es_check6" checkedBinding="email_blog"}}<label for="es_check6">There’s a new blog post</label></p>
 		  </li>
-		  <li><a class="button button_small" {{action 'save'}}><span class="icon_ok2">&nbsp;</span>Save</a></li>
-            {{/with}}
+		  <li><a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a></li>
+
 		</ul>
+        {{/with}}
 	  </form>
 	</div>
 	<!-- /account_settings_block -->

@@ -23,12 +23,12 @@ class User(AbstractUser, TimeStampedModel):
     MEMBERSHIP_STATUS = Choices("Trial", "paid")
     parents_in_network = models.ManyToManyField('Parent', related_name="parents_in_network")
     sitters_in_network = models.ManyToManyField('Sitter', related_name="sitters_in_network")
+    sitter_groups = models.ManyToManyField('Group')
     invited_by = models.ManyToManyField('self',  symmetrical =False)
     languages = models.ManyToManyField('Language')
 
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateField(null=True)
-    settings =  models.OneToOneField('Settings', null=True)
 
     #objects = InheritanceManager()
 
@@ -118,6 +118,8 @@ class Language(TimeStampedModel):
 
 class Settings(TimeStampedModel):
     #parent specific
+    user =  models.OneToOneField('User', null=True)
+
     mobile_booking_accepted_denied = models.BooleanField()
 
     #sitter specific
@@ -204,6 +206,9 @@ class Booking(TimeStampedModel):
     emergency_phone = models.ForeignKey('Phone')
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
     location = models.ForeignKey('Address')
+
+class Group(TimeStampedModel):
+    name = models.CharField(max_length=128, blank=False)
 
 
 def create_user_settings(sender, instance, created, **kwargs):
