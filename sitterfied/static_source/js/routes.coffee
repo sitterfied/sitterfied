@@ -81,9 +81,8 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
     )
 
     Sitterfied.SettingsRoute = Em.Route.extend(
-        setupController: (controller) ->
-            debugger
-            controller.set('model', );
+        model: () ->
+            return Sitterfied.currentUser
 
         renderTemplate: () ->
             this.render("settings", {outlet: 'content'})

@@ -16,7 +16,7 @@ define [
 
     Sitterfied.UserMixin = Em.Mixin.create(
         #django builtins
-        last_login: DS.attr('date')
+        #last_login: DS.attr('date')
         is_superuser: DS.attr('boolean')
         username: DS.attr('string')
         first_name: DS.attr('string')
@@ -26,20 +26,45 @@ define [
         parents_inNetwork: DS.hasMany('Sitterfied.Parent')
         sitters_inNetwork: DS.hasMany('Sitterfied.Sitter')
         languages: DS.hasMany('Sitterfied.Language')
-        settings  : DS.belongsTo('Sitterfied.Settings')
+        settings  : DS.belongsTo('Sitterfied.Setting')
 
-        full_name: (() ->
-            return @get('first_name') + ' ' + @get('last_name');
+        full_name: ((key, value) ->
+            if arguments.length == 1
+                return @get('first_name') + ' ' + @get('last_name')
+
+            else
+                [first_name, last_name] = value.split(" ", 2)
+                this.set('first_name', first_name)
+                this.set('last_name', last_name)
+                return value
         ).property('first_name', 'last_name')
     )
 
-    Sitterfied.Settings = DS.Model.extend(
-        upcoming_booking: DS.attr('boolean')
-        new_review: DS.attr('boolean')
-        new_reference: DS.attr('boolean')
-        new_reference_request: DS.attr('boolean')
-        message_received: DS.attr('boolean')
-        booking_accepted_denied: DS.attr('boolean')
+    Sitterfied.Setting = DS.Model.extend(
+        #parent specific
+        mobile_booking_accepted_denied: DS.attr('boolean')
+
+        #sitter specific
+        mobile_new_review : DS.attr('boolean')
+        mobile_booking_request: DS.attr('boolean')
+
+        mobile_friend_joined: DS.attr('boolean')
+        mobile_groups_added_network: DS.attr('boolean')
+        mobile_upcoming_booking_remind: DS.attr('boolean')
+
+        #parent specific
+        email_booking_accepted_denied: DS.attr('boolean')
+
+        #sitter specific
+        email_new_review : DS.attr('boolean')
+        email_booking_request: DS.attr('boolean')
+
+        email_friend_joined: DS.attr('boolean')
+        email_groups_added_network: DS.attr('boolean')
+        email_upcoming_booking_remind: DS.attr('boolean')
+
+        email_news: DS.attr('boolean')
+        email_blog: DS.attr('boolean')
     )
 
     Sitterfied.Contact = DS.Model.extend(

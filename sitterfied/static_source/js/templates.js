@@ -192,7 +192,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 Ember.TEMPLATES["settings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, self=this;
+  var buffer = '', stack1, stack2, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -209,43 +209,239 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   
-  data.buffer.push("\n			  <p><input type=\"checkbox\" id=\"mn_check\" /><label for=\"mn_check\">My outstanding booking request is accepted or declined</label></p>\n			  <p><input type=\"checkbox\" id=\"mn_check2\" /><label for=\"mn_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			  <p><input type=\"checkbox\" id=\"mn_check3\" /><label for=\"mn_check3\">Someone has added one of my groups to their network</label></p>\n            ");
+  data.buffer.push("profile page");
   }
 
 function program7(depth0,data) {
   
+  var buffer = '', stack1, hashTypes, hashContexts;
+  data.buffer.push("\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		  </li>\n		  <li>Remind me when</li>\n		  <li>\n			<p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check4"),
+    'checkedBinding': ("mobile_upcoming_booking_remind")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check4\">I have an upcoming booking</label></p>\n		  </li>\n		  <li><a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "save", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a></li>\n		</ul>\n		<h4><span class=\"icon_eset\">&nbsp;</span>Email Settings</h4>\n        <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>\n		<ul class=\"clear\">\n		  <li>Notify me when</li>\n		  <li>\n            ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(14, program14, data),fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		  </li>\n		  <li>Remind me when</li>\n		  <li>\n			<p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check4"),
+    'checkedBinding': ("email_upcoming_booking_remind")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check4\">I have an upcoming booking</label></p>\n		  </li>\n		  <li>EMAIL me when</li>\n		  <li>\n			<p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check5"),
+    'checkedBinding': ("email_news")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check5\">Sitterfied has fun company news, as well as periodic emails</label></p>\n			<p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check6"),
+    'checkedBinding': ("email_blog")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check6\">There’s a new blog post</label></p>\n		  </li>\n		  <li><a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "save", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a></li>\n            ");
+  return buffer;
+  }
+function program8(depth0,data) {
   
-  data.buffer.push("\n              <p><input type=\"checkbox\" id=\"mn_check\" /><label for=\"mn_check\">I receive a booking request</label></p>\n			  <p><input type=\"checkbox\" id=\"mn_check5\" /><label for=\"mn_check5\">A new review has been added</label></p>\n			  <p><input type=\"checkbox\" id=\"mn_check2\" /><label for=\"mn_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			  <p><input type=\"checkbox\" id=\"mn_check3\" /><label for=\"mn_check3\">Someone has added one of my groups to their network</label></p>\n             ");
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n			    <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check"),
+    'checkedBinding': ("mobile_booking_accepted_denied")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check\">My outstanding booking request is accepted or declined</label></p>\n			    <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check2"),
+    'checkedBinding': ("mobile_friend_joined")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			    <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check3"),
+    'checkedBinding': ("mobile_groups_added_network")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check3\">Someone has added one of my groups to their network</label></p>\n                ");
+  return buffer;
   }
 
-function program9(depth0,data) {
+function program10(depth0,data) {
   
-  
-  data.buffer.push("\n			<p><input type=\"checkbox\" id=\"es_check\" /><label for=\"es_check\">My outstanding booking request is accepted or declined</label></p>\n			<p><input type=\"checkbox\" id=\"es_check2\" /><label for=\"es_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			<p><input type=\"checkbox\" id=\"es_check3\" /><label for=\"es_check3\">Someone has added one of my groups to their network</label></p>\n            ");
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n                <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check"),
+    'checkedBinding': ("mobile_booking_request")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check\">I receive a booking request</label></p>\n			    <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check5"),
+    'checkedBinding': ("mobile_new_reivew")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check5\">A new review has been added</label></p>\n			    <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check2"),
+    'checkedBinding': ("mobile_friend_joined")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			    <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("mn_check3"),
+    'checkedBinding': ("mobile_groups_added_network")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mn_check3\">Someone has added one of my groups to their network</label></p>\n                ");
+  return buffer;
   }
 
-function program11(depth0,data) {
+function program12(depth0,data) {
   
-  
-  data.buffer.push("\n            <p><input type=\"checkbox\" id=\"es_check\" /><label for=\"es_check\">I receive a booking request</label></p>\n			<p><input type=\"checkbox\" id=\"es_check7\" /><label for=\"es_check7\">A new review has been added</label></p>\n			<p><input type=\"checkbox\" id=\"es_check2\" /><label for=\"es_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			<p><input type=\"checkbox\" id=\"es_check3\" /><label for=\"es_check3\">Someone has added one of my groups to their network</label></p>\n            ");
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n			  <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check"),
+    'checkedBinding': ("email_booking_accepted_denied")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check\">My outstanding booking request is accepted or declined</label></p>\n			  <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check2"),
+    'checkedBinding': ("email_friend_joined")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			  <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check3"),
+    'checkedBinding': ("email_groups_added_network")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check3\">Someone has added one of my groups to their network</label></p>\n              ");
+  return buffer;
   }
 
-  data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper settings_topmarg\">\n\n	<!-- account_settings_block -->\n	<div class=\"account_settings_block clear\">\n	  <form method=\"post\" action=\"#\" class=\"form_style\">\n		<div class=\"left\">\n		  <ul>\n			<li><label for=\"\">NAME</label></li>\n			<li><p><input type=\"text\" /></p></li>\n			<li><label for=\"\">STATUS</label></li>\n			<li>\n			  <div class=\"member_since\">Feb 2013</div>\n              ");
+function program14(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n              <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check"),
+    'checkedBinding': ("email_booking_request")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check\">I receive a booking request</label></p>\n			  <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check7"),
+    'checkedBinding': ("email_new_review")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check7\">A new review has been added</label></p>\n			  <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check2"),
+    'checkedBinding': ("email_friend_joined")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check2\">A Facebook or Gmail friend has joined Sitterfied</label></p>\n			  <p>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("es_check3"),
+    'checkedBinding': ("email_groups_added_network")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"es_check3\">Someone has added one of my groups to their network</label></p>\n              ");
+  return buffer;
+  }
+
+  data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper settings_topmarg\">\n\n	<!-- account_settings_block -->\n	<div class=\"account_settings_block clear\">\n	  <form class=\"form_style\">\n		<div class=\"left\">\n		  <ul>\n			<li><label for=\"\">NAME</label></li>\n			<li><p>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("full_name")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p></li>\n			<li><label for=\"\">STATUS</label></li>\n			<li>\n			  <div class=\"member_since\">Feb 2013</div>\n              ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</li>\n		  </ul>\n		</div>\n		<div class=\"right\">\n		  <ul>\n			<li><label for=\"\">PASSWORD</label></li>\n			<li><p><input type=\"password\" /></p></li>\n			<li><label for=\"\">NEW PASSWORD</label></li>\n			<li><p><input type=\"password\" /></p></li>\n			<li><label for=\"\">NEW PASSWORD (CONFIRM)</label></li>\n			<li><p><input type=\"password\" /></p></li>\n			<li><a class=\"button button_small button_cancel\" href=\"#\">Reset</a></li>\n		  </ul>\n		</div>\n		<p><a href=\"#\">DELETE MY ACCOUNT</a> Having problems? <strong><a href=\"#\">talk to us</a></strong>. Maybe we can work this out.</p>\n		<h4><span class=\"icon_mobile\">&nbsp;</span>Mobile Notifications / Text Messages</h4>\n		<ul class=\"clear\">\n		  <li>Mobile Phone</li>\n		  <li>\n			<p class=\"mobile_info\"><span>(123) 456-7890</span>You can edit the phone number on your account from your <a href=\"#\">profile page</a></p>\n		  </li>\n		  <li>Notify me when</li>\n		  <li>\n            ");
+  data.buffer.push("\n			</li>\n		  </ul>\n		</div>\n		<div class=\"right\">\n		  <ul>\n			<li><label for=\"\">PASSWORD</label></li>\n			<li><p>");
+  hashContexts = {'type': depth0,'valueBinding': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'type': ("password"),
+    'valueBinding': ("old_password")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p></li>\n			<li><label for=\"\">NEW PASSWORD</label></li>\n			<li><p>");
+  hashContexts = {'type': depth0,'valueBinding': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'type': ("password"),
+    'valueBinding': ("new_password1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p></li>\n			<li><label for=\"\">NEW PASSWORD (CONFIRM)</label></li>\n			<li><p>");
+  hashContexts = {'type': depth0,'valueBinding': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'type': ("password"),
+    'valueBinding': ("new_password2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p></li>\n			<li><a class=\"button button_small button_cancel\" ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  </li>\n		  <li>Remind me when</li>\n		  <li>\n			<p><input type=\"checkbox\" id=\"mn_check4\" /><label for=\"mn_check4\">I have an upcoming booking</label></p>\n		  </li>\n		  <li><a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a></li>\n		</ul>\n		<h4><span class=\"icon_eset\">&nbsp;</span>Email Settings</h4>\n        <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>\n		<ul class=\"clear\">\n		  <li>Notify me when</li>\n		  <li>\n            ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "resetPassword", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Reset</a></li>\n		  </ul>\n		</div>\n		<p><a ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  </li>\n		  <li>Remind me when</li>\n		  <li>\n			<p><input type=\"checkbox\" id=\"es_check4\" /><label for=\"es_check4\">I have an upcoming booking</label></p>\n		  </li>\n		  <li>EMAIL me when</li>\n		  <li>\n			<p><input type=\"checkbox\" id=\"es_check5\" /><label for=\"es_check5\">Sitterfied has fun company news, as well as periodic emails</label></p>\n			<p><input type=\"checkbox\" id=\"es_check6\" /><label for=\"es_check6\">There’s a new blog post</label></p>\n		  </li>\n		  <li><a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a></li>\n		</ul>\n	  </form>\n	</div>\n	<!-- /account_settings_block -->\n\n  </div>\n</div>\n");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteAccount", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">DELETE MY ACCOUNT</a> Having problems? <strong><a href=\"mailto:hello@sitterfied.com\">talk to us</a></strong>. Maybe we can work this out.</p>\n		<h4><span class=\"icon_mobile\">&nbsp;</span>Mobile Notifications / Text Messages</h4>\n		<ul class=\"clear\">\n		  <li>Mobile Phone</li>\n		  <li>\n			<p class=\"mobile_info\"><span>(123) 456-7890</span>You can edit the phone number on your account from your ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "profile", options) : helperMissing.call(depth0, "linkTo", "profile", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("/p>\n		  </li>\n		  <li>Notify me when</li>\n		  <li>\n            ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers['with'].call(depth0, "settings", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n		</ul>\n	  </form>\n	</div>\n	<!-- /account_settings_block -->\n\n  </div>\n</div>\n");
   return buffer;
   
 });

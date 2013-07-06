@@ -117,14 +117,30 @@ class Language(TimeStampedModel):
 
 
 class Settings(TimeStampedModel):
+    #parent specific
+    mobile_booking_accepted_denied = models.BooleanField()
 
+    #sitter specific
+    mobile_new_review  = models.BooleanField()
+    mobile_booking_request = models.BooleanField()
 
-    upcoming_booking = models.BooleanField()
-    new_review = models.BooleanField()
-    new_reference = models.BooleanField()
-    new_reference_request = models.BooleanField()
-    message_received = models.BooleanField()
-    booking_accepted_denied = models.BooleanField()
+    mobile_friend_joined = models.BooleanField()
+    mobile_groups_added_network = models.BooleanField()
+    mobile_upcoming_booking_remind = models.BooleanField()
+
+    #parent specific
+    email_booking_accepted_denied = models.BooleanField()
+
+    #sitter specific
+    email_new_review  = models.BooleanField()
+    email_booking_request = models.BooleanField()
+
+    email_friend_joined = models.BooleanField()
+    email_groups_added_network = models.BooleanField()
+    email_upcoming_booking_remind = models.BooleanField()
+
+    email_news = models.BooleanField()
+    email_blog = models.BooleanField()
 
 class Child(TimeStampedModel):
     parent = models.ForeignKey(Parent)

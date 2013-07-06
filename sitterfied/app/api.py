@@ -11,7 +11,7 @@ from rest_framework import viewsets
 user_fields = ('first_name', 'last_name', 'username', 'last_login', 'date_joined', 'settings')
 
 
-class SitterSerializer(serializers.HyperlinkedModelSerializer):
+class SitterSerializer(serializers.ModelSerializer):
 
     #todo general availablity
     parent_or_sitter = "Sitter"
@@ -35,7 +35,7 @@ class SitterSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class ParentSerializer(serializers.HyperlinkedModelSerializer):
+class ParentSerializer(serializers.ModelSerializer):
 
     #contacts
     parent_or_sitter = "Parent"
