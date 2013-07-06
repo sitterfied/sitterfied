@@ -21,9 +21,9 @@ from model_utils.managers import InheritanceManager
 
 class User(AbstractUser, TimeStampedModel):
     MEMBERSHIP_STATUS = Choices("Trial", "paid")
-    parents_in_network = models.ManyToManyField('Parent', related_name="parents_in_network")
-    sitters_in_network = models.ManyToManyField('Sitter', related_name="sitters_in_network")
-    sitter_groups = models.ManyToManyField('Group')
+    parents_in_network = models.ManyToManyField('Parent', related_name="parents_in_network", blank=True)
+    sitters_in_network = models.ManyToManyField('Sitter', related_name="sitters_in_network", blank=True)
+    sitter_groups = models.ManyToManyField('Group', blank=True)
     invited_by = models.ManyToManyField('self',  symmetrical =False)
     languages = models.ManyToManyField('Language')
 

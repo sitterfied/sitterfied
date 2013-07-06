@@ -64,6 +64,7 @@ define [
     )
 
     Sitterfied.Setting = DS.Model.extend(
+        user  : DS.belongsTo('Sitterfied.' + parent_or_sitter)
         #parent specific
         mobile_booking_accepted_denied: DS.attr('boolean')
 

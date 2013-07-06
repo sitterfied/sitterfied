@@ -1,7 +1,10 @@
 import models
 
+
 from rest_framework import serializers, viewsets, permissions
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.decorators import action, link
 
 # class MyselfSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
@@ -19,6 +22,9 @@ class SitterSerializer(serializers.ModelSerializer):
 
     #todo general availablity
     parent_or_sitter = "Sitter"
+
+    parents_in_network = serializers.ManyPrimaryKeyRelatedField()
+
     class Meta:
         model = models.Sitter
         fields = user_fields + ('id', 'biography', 'live_zip',
@@ -55,17 +61,28 @@ class SettingsSerializer(serializers.ModelSerializer):
         model = models.Settings
 
 
-class SitterViewSet(viewsets.ModelViewSet):
+class UserViewSet(object):
+    @link()
+    def parents_in_network(self, request, pk=None):
+        queryset = models.User.objects.get(pk=pk).parents_in_network.all()
+        serializer = ParentSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class SitterViewSet(viewsets.ModelViewSet, UserViewSet):
     queryset = models.Sitter.objects.all()
     serializer_class = SitterSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
-class ParentViewSet(viewsets.ModelViewSet):
+class ParentViewSet(viewsets.ModelViewSet, UserViewSet):
     queryset = models.Parent.objects.all()
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
     filter_fields = ('id', )
+
+
 
 
 class SettingsViewSet(viewsets.ModelViewSet):

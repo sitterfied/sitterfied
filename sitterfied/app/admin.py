@@ -85,6 +85,9 @@ class ParentAdmin(UserAdmin):
                 'parking_area',
                 'parking_for_sitter',
                 'fave_sitters',
+                'parents_in_network',
+                'sitters_in_network',
+                'sitter_groups',
                 )}
 
                         ),
@@ -170,6 +173,7 @@ admin.site.register(Booking, BookingAdmin)
 
 admin.site.register(Address)
 admin.site.register(Phone)
+admin.site.register(Group)
 
 
 #TODO: contact and general avaialbilty

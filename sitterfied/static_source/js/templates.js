@@ -457,7 +457,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 Ember.TEMPLATES["parentEdit/network"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -466,15 +466,19 @@ function program1(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "id", options) : helperMissing.call(depth0, "linkTo", "parent", "id", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n        ");
   return buffer;
   }
 function program2(depth0,data) {
   
-  
-  data.buffer.push("<img src=\"images/demo/img15.jpg\" alt=\"\" />Mika Pinna");
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("<img src=\"images/demo/img15.jpg\" alt=\"\" />");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  return buffer;
   }
 
   data.buffer.push("<!-- network_block -->\n<div class=\"mob_tab_trigger\">Network</div>\n<div class=\"tab_content network_block\" id=\"tab-4\">\n  <div class=\"soc_list clear\">\n	<p>Find people you know on Sitterfied</p>\n	<ul>\n	  <li>\n		<p class=\"clear\"><a ");
