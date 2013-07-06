@@ -1,0 +1,60 @@
+<div class="container clear">
+  <div class="wraper">
+
+	<!-- parent_book_block -->
+	<form action="#" method="post" class="form_style">
+	  <div class="parent_book_block clear">
+		<ul>
+		  <li><div><span class="icon_date2">&nbsp;</span>Schedule</div>
+		  <ul>
+			<li><span class="icon_date2">&nbsp;</span>Schedule</li>
+			<li><p><input type="text" class="datepicker" id="datepicker" /></p></li>
+			<li>
+			  <p><label for="from">FROM</label><select id="from" data-placeholder="" tabindex="8"><option>6:00 PM</option><option>7:00 PM</option></select></p>
+			  <p><label for="to">TO</label><select id="to" data-placeholder="" tabindex="9"><option>11:00 PM</option><option>12:00 PM</option></select></p>
+			  <p><input type="checkbox" id="check" /><label for="check">Overnight/Multiday booking</label></p>
+			</li>
+			<li>&nbsp;</li>
+		  </ul>
+		  </li>
+		  <li class="lng"><div><span class="icon_pin4">&nbsp;</span>Location</div>
+		  <ul>
+			<li><span class="icon_pin4">&nbsp;</span>Location</li>
+			<li>
+			  <p><input type="text" value="33 Nassau Ave" /> <input type="text" value="Suite#2" class="small" /></p>
+			  <p><input type="text" value="10007" class="small" /> <select data-placeholder="Hoboken" tabindex="1"><option>Hoboken</option><option>Hoboken</option></select> <select class="small" data-placeholder="NJ" tabindex="2"><option>NJ</option><option>NJ</option></select></p>
+			</li>
+			<li>&nbsp;</li>
+		  </ul>
+		  </li>
+		  <li><div><span class="icon_friends6">&nbsp;</span># of kids</div>
+		  <ul>
+			<li><span class="icon_friends6">&nbsp;</span>Number of kids</li>
+			<li><p><select data-placeholder="" tabindex="10"><option>2 Kids</option><option>3 Kids</option></select></p></li>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+		  </ul>
+		  </li>
+		  <li class="lng"><div><span class="icon_phone2">&nbsp;</span>Emergency Contact</div>
+		  <ul>
+			<li><span class="icon_phone2">&nbsp;</span>Emergency Contact</li>
+			<li><p><input type="text" value="(123)" class="small" /> <input type="text" value="456-7890" /></p></li>
+			<li>&nbsp;</li>
+		  </ul>
+		  </li>
+		</ul>
+		<p>
+          <a class="button button_small button_cancel" {{action 'cancel'}}>
+            <span class="icon_cancel">&nbsp;</span>
+            CANCEL
+          </a>
+          <a class="button button_small" {{action 'book'}}>
+            <span class="icon_ok2">&nbsp;</span>
+            SEND
+          </a>
+        </p>
+	  </div>
+	</form>
+	<!-- /parent_book_block -->
+  </div>
+</div>

@@ -116,16 +116,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
 
     Sitterfied.SearchRoute = Em.Route.extend(
         renderTemplate: () ->
-            noResults = true
-            if noResults
-                this.render('noSearchResultsTop', {     # the template to render
-                    outlet: 'top',              # the name of the outlet in that template
-                })
-                this.render('noSearchResults', {     # the template to render
-                    outlet: 'content',              # the name of the outlet in that template
-                })
-            else
-                this.render('searchResultsTop', {     # the template to render
-                    outlet: 'top',              # the name of the outlet in that template
-                })
+            this.render('search.top', {outlet: 'top'})
+            this.render('emptysearch', {outlet: 'content'})
+            #this.render('search', { outlet: 'content'})
     )

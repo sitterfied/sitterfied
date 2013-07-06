@@ -1,0 +1,91 @@
+<div class="container clear">
+  <div class="wraper settings_topmarg">
+
+	<!-- account_settings_block -->
+	<div class="account_settings_block clear">
+	  <form method="post" action="#" class="form_style">
+		<div class="left">
+		  <ul>
+			<li><label for="">NAME</label></li>
+			<li><p><input type="text" /></p></li>
+			<li><label for="">STATUS</label></li>
+			<li>
+			  <div class="member_since">Feb 2013</div>
+              {{# if Sitterfied.isParent }}
+			    <a class="button button_smaller button_edit" href="#"><span class="icon_settings2">&nbsp;</span>PAYMENT OPTIONS</a>
+                {{ else }}
+                <span class="ur">You are <strong>Sitterfied</strong></span>
+                {{/if}}
+			</li>
+		  </ul>
+		</div>
+		<div class="right">
+		  <ul>
+			<li><label for="">PASSWORD</label></li>
+			<li><p><input type="password" /></p></li>
+			<li><label for="">NEW PASSWORD</label></li>
+			<li><p><input type="password" /></p></li>
+			<li><label for="">NEW PASSWORD (CONFIRM)</label></li>
+			<li><p><input type="password" /></p></li>
+			<li><a class="button button_small button_cancel" href="#">Reset</a></li>
+		  </ul>
+		</div>
+		<p><a href="#">DELETE MY ACCOUNT</a> Having problems? <strong><a href="#">talk to us</a></strong>. Maybe we can work this out.</p>
+		<h4><span class="icon_mobile">&nbsp;</span>Mobile Notifications / Text Messages</h4>
+		<ul class="clear">
+		  <li>Mobile Phone</li>
+		  <li>
+			<p class="mobile_info"><span>(123) 456-7890</span>You can edit the phone number on your account from your <a href="#">profile page</a></p>
+		  </li>
+		  <li>Notify me when</li>
+		  <li>
+            {{# if Sitterfied.isParent }}
+			  <p><input type="checkbox" id="mn_check" /><label for="mn_check">My outstanding booking request is accepted or declined</label></p>
+			  <p><input type="checkbox" id="mn_check2" /><label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+			  <p><input type="checkbox" id="mn_check3" /><label for="mn_check3">Someone has added one of my groups to their network</label></p>
+            {{ else }}
+              <p><input type="checkbox" id="mn_check" /><label for="mn_check">I receive a booking request</label></p>
+			  <p><input type="checkbox" id="mn_check5" /><label for="mn_check5">A new review has been added</label></p>
+			  <p><input type="checkbox" id="mn_check2" /><label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+			  <p><input type="checkbox" id="mn_check3" /><label for="mn_check3">Someone has added one of my groups to their network</label></p>
+             {{/if}}
+		  </li>
+		  <li>Remind me when</li>
+		  <li>
+			<p><input type="checkbox" id="mn_check4" /><label for="mn_check4">I have an upcoming booking</label></p>
+		  </li>
+		  <li><a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a></li>
+		</ul>
+		<h4><span class="icon_eset">&nbsp;</span>Email Settings</h4>
+        <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>
+		<ul class="clear">
+		  <li>Notify me when</li>
+		  <li>
+            {{# if Sitterfied.isParent }}
+			<p><input type="checkbox" id="es_check" /><label for="es_check">My outstanding booking request is accepted or declined</label></p>
+			<p><input type="checkbox" id="es_check2" /><label for="es_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+			<p><input type="checkbox" id="es_check3" /><label for="es_check3">Someone has added one of my groups to their network</label></p>
+            {{ else }}
+            <p><input type="checkbox" id="es_check" /><label for="es_check">I receive a booking request</label></p>
+			<p><input type="checkbox" id="es_check7" /><label for="es_check7">A new review has been added</label></p>
+			<p><input type="checkbox" id="es_check2" /><label for="es_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+			<p><input type="checkbox" id="es_check3" /><label for="es_check3">Someone has added one of my groups to their network</label></p>
+            {{/if}}
+		  </li>
+		  <li>Remind me when</li>
+		  <li>
+			<p><input type="checkbox" id="es_check4" /><label for="es_check4">I have an upcoming booking</label></p>
+		  </li>
+		  <li>EMAIL me when</li>
+		  <li>
+			<p><input type="checkbox" id="es_check5" /><label for="es_check5">Sitterfied has fun company news, as well as periodic emails</label></p>
+			<p><input type="checkbox" id="es_check6" /><label for="es_check6">There’s a new blog post</label></p>
+		  </li>
+		  <li><a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a></li>
+		</ul>
+	  </form>
+	</div>
+	<!-- /account_settings_block -->
+
+  </div>
+</div>
