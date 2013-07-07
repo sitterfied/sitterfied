@@ -126,7 +126,6 @@ class SitterAdmin(UserAdmin):
                            'last_school',
                            'current_student',
 
-                           'certification',
                            'other_services',
 
                            'one_child_min_rate',

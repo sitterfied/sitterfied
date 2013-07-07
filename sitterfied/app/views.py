@@ -26,7 +26,10 @@ from api import ParentSerializer, SitterSerializer
 def index(request, referred_by=None):
     parent_or_sitter = user_json = ""
     if hasattr(request.user, 'sitter'):
-        pass
+        serialized = SitterSerializer(request.user.sitter)
+        user_json = JSONRenderer().render(serialized.data)
+        parent_or_sitter = "Sitter"
+
     elif hasattr(request.user, 'parent'):
         serialized = ParentSerializer(request.user.parent)
         user_json = JSONRenderer().render(serialized.data)

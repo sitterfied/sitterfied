@@ -7,14 +7,14 @@
 	</div>
   </div>
   <div class="ranking_info">
-	<p>Ellen Vukelich</p>
+	<p>{{full_name}}</p>
 	<p>Ranking: <span>14th</span> of 137</p>
-	<a class="db_button" href="#"><span class="icon_eye">&nbsp;</span>VIEW PROFILE</a>
+	{{#linkTo sitter this class="db_button"}}<span class="icon_eye">&nbsp;</span>VIEW PROFILE{{/linkTo}}
 	<fieldset>
 	  <legend>Here are some simple ways to improve your ranking:</legend>
 	  <ul class="clear">
 		<li><a href="#">Add more connections</a></li>
-		<li><a href="#">Accept more booking requests</a></li>
+		<li>{{#linkTo sitterEdit.bookings}}Accept more booking requests{{/linkTo}}</li>
 		<li><a href="#">Get more recommendations</a></li>
 	  </ul>
 	</fieldset>

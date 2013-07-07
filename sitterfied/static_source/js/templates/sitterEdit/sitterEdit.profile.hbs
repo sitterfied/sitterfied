@@ -1,0 +1,256 @@
+<!-- profile_block -->
+	  <div class="mob_tab_trigger active">Profile</div>
+	  <div class="tab_content profile_block" id="tab-1">
+		<form class="form_style">
+		  <ul>
+			<li>
+			  <ul>
+				<li><span class="icon_bio2">&nbsp;</span>Biography</li>
+				<li>
+				  <p><i class="char">1100 CHAR</i>{{view Ember.TextArea valueBinding="biography" }}</p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_gender2">&nbsp;</span>Gender</li>
+				<li>
+				  <p>
+                    {{view Ember.RadioButton id="female" selectionBinding="gender" value="female" name="gender" }}
+                    <label for="female">Female</label>
+                    {{view Ember.RadioButton id="male" selectionBinding="gender" value="male" name="gender" }}
+                    <label for="male">Male</label>
+                  </p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_pin4">&nbsp;</span>Home Address</li>
+				<li>
+				  <p>
+                    {{view Ember.TextField placeholder="Street address" valueBinding="address1"}}
+                    {{view Ember.TextField placeholder="Apt/Suite" valueBinding="address2" class="small"}}
+                  </p>
+				  <p>
+                    {{view Ember.TextField placeholder="Zip Code" valueBinding="live_zip" class="small"}}
+                    {{view Ember.TextField placeholder="City" valueBinding="city"}}
+                    {{view Ember.Select
+                      contentBinding="Ember.States"
+                      valueBinding="state"
+                       }}
+                  </p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_iphone2">&nbsp;</span>Cell Phone Number</li>
+				<li>
+				  <p>
+                    {{view Ember.TextField placeholder="(123) 456-7890" valueBinding="cell" }}
+                  </p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_email3">&nbsp;</span>Email Address</li>
+				<li>
+				  <p>{{view Ember.TextField placeholder="Email" valueBinding="email"}}</p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_age2">&nbsp;</span>Age</li>
+				<li>
+				  <p><span class="short">DATE OF BIRTH</span>{{view Ember.DatePicker valueBinding="dob"}} </p>
+				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_smoker2">&nbsp;</span>Smoker</li>
+				<li>
+				  <p>
+                    {{view Ember.RadioButton id="yes" selectionBinding="smoker" value="true" name="smoker" }}
+                    <label for="yes">YES</label>
+                    {{view Ember.RadioButton id="no" selectionBinding="smoker" value="false" name="smoker" }}
+                    <label for="no">NO</label>
+                  </p>
+				  <a class="button button_small" {{action "saveSettings"}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_sick2">&nbsp;</span>Sick Kids</li>
+				<li>
+				  <p>
+                    <span>willing to care for sick kids?</span>
+                    {{view Ember.RadioButton id="yes2" selectionBinding="sick" value="true" name="sick" }}
+                    <label for="yes2">YES</label>
+                    {{view Ember.RadioButton id="no2" selectionBinding="sick" value="false" name="sick" }}
+                    <label for="no2">NO</label>
+                  </p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_transportation2">&nbsp;</span>Transportation</li>
+				<li>
+                  <p><span>distance willing to travel:</span>{{view Ember.TextField id="distance" placeholder="Distance" valueBinding="travel_distance" class="small"}}<label for="distance">Miles</label></p>
+				  <p><span>have a current driver’s license?</span>{{view Ember.Checkbox id="no3" checkedBinding="has_drivers_licence" }}<label for="no3"></label></p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_experience2">&nbsp;</span>General Experience</li>
+				<li>
+				  <p><span>TOTAL years of experience:</span>{{view Ember.TextField placeholder="0" valueBinding="total_exp"}}</p>
+				  <p><span>Experience with infants:</span>{{view Ember.TextField placeholder="0" valueBinding="infant_exp"}}</p>
+				  <p><span>Experience with toddlers:</span>{{view Ember.TextField placeholder="0" valueBinding="toddler_exp"}}</p>
+				  <p><span>Experience with preschoolers:</span>{{view Ember.TextField placeholder="0" valueBinding="preschool_exp"}}</p>
+				  <p><span>Experience with School age:</span>{{view Ember.TextField placeholder="0" valueBinding="school_age_exp"}}</p>
+				  <p><span>Experience with Pre Teens:</span>{{view Ember.TextField placeholder="0." valueBinding="pre_teen_exp"}}</p>
+				  <p><span>Experience with teenagers:</span>{{view Ember.TextField placeholder="0" valueBinding="teen_exp"}}</p>
+				  <p><span>Experience with special needs?</span>{{view Ember.Checkbox id="special_needs" checkedBinding="special_needs_exp"}}<label for="special_needs"></label></p>
+				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="extra_exp"}}
+                  {{# comment }}<a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
+				    <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+                    {{/comment}}
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_education3">&nbsp;</span>Education Level</li>
+				<li>
+				  <p><span>Education level:</span>
+                  {{view Ember.Select
+                  contentBinding="Ember.Educations"
+                  valueBinding="highest_education"
+                  }}
+                  </p>
+				  <p><span>last school attended:</span>{{view Ember.TextField placeholder="School Name" valueBinding="last_school"}}</p>
+				  {{# comment }}<p><span>add school (if not listed above):</span><input type="text" /><a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>{{/comment}}
+				    <p>
+
+                      <span>Still in school?</span>
+                      {{view Ember.RadioButton id="yes3" selectionBinding="current_student" value="true" name="student"}}
+                      <label for="yes3">YES</label>
+                      {{view Ember.RadioButton id="no5" selectionBinding="current_student" value="false" name="student"}}
+                      <label for="no5">NO</label>
+                    </p>
+				  <p><span>Major (if yes):</span>{{view Ember.TextField placeholder="major" valueBinding="major"}}</p>
+				  <p><span>occupation (if no):</span>{{view Ember.TextField placeholder="occupation" valueBinding="occupation"}}</p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_certification3">&nbsp;</span>Certification or Training</li>
+				<li>
+				  <p>
+                    <span>&nbsp;</span>
+                    {{view Ember.Select
+                    contentBinding="Sitterfied.certificationsController"
+                    optionLabelPath="model.certification"
+                    valueBinding="id"
+                    }}
+                  </p>
+				  <p>
+                    <span>add another (if not listed above):</span>
+                    {{view Ember.TextField valueBinding="Sitterfied.certificationController.newcert"}}
+                    <a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a>
+                  </p>
+				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_rates2">&nbsp;</span>Standard Rates</li>
+				<li>
+				  <p><span>Minimum for 1 child:</span>{{view Ember.TextField valueBinding="one_child_min_rate"}}</p>
+				  <p><span>Maximum for 1 child:</span>{{view Ember.TextField valueBinding="one_child_max_rate"}}</p>
+				  <p><span>Minimum for 2 children:</span>{{view Ember.TextField valueBinding="two_child_min_rate"}}</p>
+				  <p><span>Maximum for 2 children:</span>{{view Ember.TextField valueBinding="two_child_max_rate"}}</p>
+				  <p><span>Minimum for 3 or more children</span>{{view Ember.TextField valueBinding="three_child_min_rate"}}</p>
+				  <p><span>Maximum for 3 or more children</span>{{view Ember.TextField valueBinding="three_child_max_rate"}}</p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_lng2">&nbsp;</span>Languages</li>
+				<li>
+				  <p><span>I speak:</span><select multiple data-placeholder="English" tabindex="25"><option>English</option><option>English</option></select></p>
+				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_other2">&nbsp;</span>Other Services</li>
+				<li>
+				  <p><span>&nbsp;</span>{{view Ember.TextField valueBinding="other_services"}}</p>
+				  <p><span>add another (if not listed above):</span><input type="text" /><a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_preferences2">&nbsp;</span>Job Preferences</li>
+				<li class="long_headers">
+				  <p>
+                    <span>Will you babysit in a home of smokers?</span>
+                    {{view Ember.RadioButton id="yes4" selectionBinding="smokers_ok" value="true" name="pref" }}
+                    <label for="yes4">YES</label>
+                    {{view Ember.RadioButton id="no6" selectionBinding="smokers_ok" value="false" name="pref" }}
+                    <label for="no6">NO</label>
+                  </p>
+				  <p>
+                    <span>Will you babysit in a home with dogs?                    </span>
+                    {{view Ember.RadioButton id="yes5" selectionBinding="dogs_ok" value="true" name="pref2" }}
+                    <label for="yes5">YES</label>
+                    {{view Ember.RadioButton id="no7" selectionBinding="dogs_ok" value="false" name="pref2" }}
+                    <label for="no7">NO</label>
+                  </p>
+				  <p>
+                    <span>Will you babysit in a home with cats?
+                    </span>
+                    {{view Ember.RadioButton id="yes6" selectionBinding="cats_ok" value="true" name="pref3" }}
+                    <label for="yes6">YES</label>
+                    {{view Ember.RadioButton id="no8" selectionBinding="cats_ok" value="false" name="pref3" }}
+                    <label for="no8">NO</label>
+                  </p>
+				  <p>
+                    <span>Will you babysit in a home that has other animals?</span>
+                    {{view Ember.RadioButton id="yes7" selectionBinding="other_animals_ok" value="true" name="pref4" }}
+                    <label for="yes7">YES</label>
+                    {{view Ember.RadioButton id="no9" selectionBinding="other_animals_ok" value="false" name="pref4" }}
+                    <label for="no9">NO</label>
+                  </p>
+				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				</li>
+			  </ul>
+			</li>
+		  </ul>
+		</form>
+	  </div>
+	  <!-- /profile_block -->

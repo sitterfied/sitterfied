@@ -102,11 +102,37 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
             this.render("sitterEdit.top", {outlet: 'top'})
     )
     Sitterfied.SitterEditIndexRoute = Em.Route.extend(
-
         redirect: () ->
             this.transitionTo('sitterEdit.profile')
 
     )
+    Sitterfied.SitterEditProfileRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("sitterEdit/profile", {into:"sitterEdit", controller: 'currentUser'})
+    )
+    Sitterfied.SitterEditSchedlueRoute = Em.Route.extend(
+        model: () ->
+            return Sitterfied.currentUser.get('schedlue')
+
+        setupController: (controller, model) ->
+            controller.set('model', model);
+
+        renderTemplate: () ->
+            this.render("sitterEdit/schedlue", {into:"sitterEdit"})
+    )
+    Sitterfied.SitterEditBookingsRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("sitterEdit/bookings", {into:"sitterEdit", controller: 'currentUser'})
+    )
+    Sitterfied.SitterEditNetworkRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("sitterEdit/network", {into:"sitterEdit", controller: 'currentUser'})
+    )
+    Sitterfied.SitterEditReviewsRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("sitterEdit/reviews", {into:"sitterEdit", controller: 'currentUser'})
+    )
+
 
 
     Sitterfied.SitterRoute = Em.Route.extend(

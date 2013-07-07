@@ -47,6 +47,9 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
         deleteGroup: (group) ->
             alert("delete group, " + group)
+
+        saveSchedlue: () ->
+            alert("save schedlue")
     })
 
     Sitterfied.BookController = Em.ArrayController.extend(
@@ -58,12 +61,35 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             this.transitionTo('done');
     )
 
+    Sitterfied.SitterEditSchedlueController =  Em.ObjectController.extend({
+        saveSchedlue: () ->
+            @get('model').save()
+        checkAll: () ->
+            model = @get('model')
+            attrs = Object.keys(model.serialize())
+            attrs.pop('sitter')
+            for x in attrs
+                @set(x, true)
+        clearAll: () ->
+            model = @get('model')
+            attrs = Object.keys(model.serialize())
+            attrs.pop('sitter')
+            for x in attrs
+                @set(x, false)
+
+    })
 
     Sitterfied.DoneController = Em.ArrayController.extend(
         cancel: () ->
             alert('cancel')
             this.transitionTo('search');
         edit: () ->
+            alert('edit')
+            this.transitionTo('book');
+    )
+    Sitterfied.CertificationsController = Em.ArrayController.extend(
+        newcert: ""
+        add: () ->
             alert('edit')
             this.transitionTo('book');
     )

@@ -162,22 +162,1057 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper\">\n\n	<!-- parent_book_block -->\n	<form action=\"#\" method=\"post\" class=\"form_style\">\n	  <div class=\"parent_book_block clear\">\n		<ul>\n		  <li><div><span class=\"icon_heart\">&nbsp;</span>Recipients</div>\n		  <ul>\n			<li><span class=\"icon_heart\">&nbsp;</span>Recipients</li>\n			<li><select data-placeholder=\"Names\" multiple tabindex=\"1\"><option>Ellen Vukelich</option><option>Sandy Thompson</option><option>Amy Randall</option><option>Amelia Hart</option><option>Erica Sanders</option></select></li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li><div><span class=\"icon_date2\">&nbsp;</span>Schedule</div>\n		  <ul>\n			<li><span class=\"icon_date2\">&nbsp;</span>Schedule</li>\n			<li><p><input type=\"text\" class=\"datepicker\" id=\"datepicker\" /></p></li>\n			<li>\n			  <p><label for=\"from\">FROM</label><select id=\"from\" data-placeholder=\"\" tabindex=\"8\"><option>6:00 PM</option><option>7:00 PM</option></select></p>\n			  <p><label for=\"to\">TO</label><select id=\"to\" data-placeholder=\"\" tabindex=\"9\"><option>11:00 PM</option><option>12:00 PM</option></select></p>\n			  <p><input type=\"checkbox\" id=\"check\" /><label for=\"check\">Overnight/Multiday booking</label></p>\n			</li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li class=\"lng\"><div><span class=\"icon_pin4\">&nbsp;</span>Location</div>\n		  <ul>\n			<li><span class=\"icon_pin4\">&nbsp;</span>Location</li>\n			<li>\n			  <p><input type=\"text\" value=\"33 Nassau Ave\" /> <input type=\"text\" value=\"Suite#2\" class=\"small\" /></p>\n			  <p><input type=\"text\" value=\"10007\" class=\"small\" /> <select data-placeholder=\"Hoboken\" tabindex=\"1\"><option>Hoboken</option><option>Hoboken</option></select> <select class=\"small\" data-placeholder=\"NJ\" tabindex=\"2\"><option>NJ</option><option>NJ</option></select></p>\n			</li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li><div><span class=\"icon_friends6\">&nbsp;</span># of kids</div>\n		  <ul>\n			<li><span class=\"icon_friends6\">&nbsp;</span>Number of kids</li>\n			<li><p><select data-placeholder=\"\" tabindex=\"10\"><option>2 Kids</option><option>3 Kids</option></select></p></li>\n			<li>&nbsp;</li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li class=\"lng\"><div><span class=\"icon_phone2\">&nbsp;</span>Emergency Contact</div>\n		  <ul>\n			<li><span class=\"icon_phone2\">&nbsp;</span>Emergency Contact</li>\n			<li><p><input type=\"text\" value=\"(123)\" class=\"small\" /> <input type=\"text\" value=\"456-7890\" /></p></li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		</ul>\n		<p><a class=\"button button_small button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a><a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>SEND</a></p>\n	  </div>\n	</form>\n	<!-- /parent_book_block -->\n\n  </div>\n</div>");
   
 });
+Ember.TEMPLATES["sitterEdit/network"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n		        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n              ");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("<img src=\"images/demo/img15.jpg\" alt=\"\" />");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  return buffer;
+  }
+
+function program4(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n		        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n              ");
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = '', stack1, options, hashTypes, hashContexts;
+  data.buffer.push("\n		        <li>");
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  if (stack1 = helpers.linkTo) { stack1 = stack1.call(depth0, options); }
+  else { stack1 = depth0.linkTo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  hashTypes = {};
+  hashContexts = {};
+  if (!helpers.linkTo) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</li><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteGroup", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"delete\">&nbsp;</a>\n              ");
+  return buffer;
+  }
+function program7(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("<img src=\"images/demo/img15.jpg\" alt=\"\" />");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  return buffer;
+  }
+
+  data.buffer.push("	  <!-- network_block -->\n	  <div class=\"mob_tab_trigger\">Network</div>\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\"><a href=\"#\"><img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook</a><a href=\"#\"><img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail</a></p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p><input type=\"text\" value=\"Search a person or group\" /><input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n		  <li>\n			<ul>\n			  <li>Parents</li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "parents_in_network", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Sitters</li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "sitter_in_network", {hash:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Groups</li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "sitter_groups", {hash:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n		</ul>\n	  </div>\n	  <!-- /network_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["sitterEdit/schedlue"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', hashTypes, hashContexts, escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("	  <!-- schedule_block -->\n	  <div class=\"mob_tab_trigger\">Schedule</div>\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n		<p>Please indicate your typical availability here.\n          <span>\n            <img src=\"/static/images/available.jpg\" alt=\"\" />Available\n            <img src=\"/static/images/unavailable.jpg\" alt=\"\" />Unavailable\n          </span>\n          <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSchedlue", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a></p>\n		<ul>\n		  <li>\n			<ul>\n			  <li><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "checkAll", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Check All</a> | <a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "clearAll", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Clear All</a></li>\n			  <li>Sun</li>\n			  <li>Mon</li>\n			  <li>Tues</li>\n			  <li>Wed</li>\n			  <li>Thurs</li>\n			  <li>Fri</li>\n			  <li>Sat</li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Early Morning</strong> (6am - 9am)<span>6 - 9 AM</span></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sun_early_morning"),
+    'id': ("sun_1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sun_1\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("mon_early_morning"),
+    'id': ("mon_1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mon_1\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("tues_early_morning"),
+    'id': ("tues_1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"tues_1\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("wed_early_morning"),
+    'id': ("wed_1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"wed_1\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("thurs_early_morning"),
+    'id': ("thurs_1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"thurs_1\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("fri_early_morning"),
+    'id': ("fri_1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"fri_1\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sat_early_morning"),
+    'id': ("sat_1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sat_1\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Late Morning</strong> (9am - 12pm)<span>9 - 12 PM</span></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sun_late_morning"),
+    'id': ("sun_2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sun_2\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("mon_late_morning"),
+    'id': ("mon_2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mon_2\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("tues_late_morning"),
+    'id': ("tues_2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"tues_2\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("wed_late_morning"),
+    'id': ("wed_2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"wed_2\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("thurs_late_morning"),
+    'id': ("thurs_2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"thurs_2\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("fri_late_morning"),
+    'id': ("fri_2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"fri_2\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sat_late_morning"),
+    'id': ("sat_2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sat_2\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Early Afternoon</strong> (12pm - 3pm)<span>12 - 3 PM</span></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sun_early_afternoon"),
+    'id': ("sun_3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sun_3\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("mon_early_afternoon"),
+    'id': ("mon_3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mon_3\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("tues_early_afternoon"),
+    'id': ("tues_3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"tues_3\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("wed_early_afternoon"),
+    'id': ("wed_3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"wed_3\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("thurs_early_afternoon"),
+    'id': ("thurs_3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"thurs_3\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("fri_early_afternoon"),
+    'id': ("fri_3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"fri_3\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sat_early_afternoon"),
+    'id': ("sat_3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sat_3\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Late Afternoon</strong> (3pm - 6pm)<span>3 - 6 PM</span></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sun_late_afternoon"),
+    'id': ("sun_4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sun_4\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("mon_late_afternoon"),
+    'id': ("mon_4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mon_4\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("tues_late_afternoon"),
+    'id': ("tues_4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"tues_4\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("wed_late_afternoon"),
+    'id': ("wed_4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"wed_4\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("thurs_late_afternoon"),
+    'id': ("thurs_4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"thurs_4\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("fri_late_afternoon"),
+    'id': ("fri_4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"fri_4\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sat_late_afternoon"),
+    'id': ("sat_4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sat_4\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Early Evening</strong> (6pm - 9pm)<span>6 - 9 PM</span></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sun_early_evening"),
+    'id': ("sun_5")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sun_5\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("mon_early_evening"),
+    'id': ("mon_5")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mon_5\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("tues_early_evening"),
+    'id': ("tues_5")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"tues_5\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("wed_early_evening"),
+    'id': ("wed_5")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"wed_5\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("thurs_early_evening"),
+    'id': ("thurs_5")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"thurs_5\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("fri_early_evening"),
+    'id': ("fri_5")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"fri_5\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sat_early_evening"),
+    'id': ("sat_5")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sat_5\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Late Evening</strong> (9pm - 12am)<span>9 - 12 AM</span></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sun_late_evening"),
+    'id': ("sun_6")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sun_6\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("mon_late_evening"),
+    'id': ("mon_6")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mon_6\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("tues_late_evening"),
+    'id': ("tues_6")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"tues_6\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("wed_late_evening"),
+    'id': ("wed_6")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"wed_6\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("thurs_late_evening"),
+    'id': ("thurs_6")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"thurs_6\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("fri_late_evening"),
+    'id': ("fri_6")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"fri_6\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sat_late_evening"),
+    'id': ("sat_6")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sat_6\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Overnight</strong> (12am - 6am)<span>12 - 6 AM</span></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sun_overnight"),
+    'id': ("sun_7")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sun_7\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("mon_overnight"),
+    'id': ("mon_7")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"mon_7\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("tues_overnight"),
+    'id': ("tues_7")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"tues_7\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("wed_overnight"),
+    'id': ("wed_7")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"wed_7\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("thurs_overnight"),
+    'id': ("thurs_7")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"thurs_7\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("fri_overnight"),
+    'id': ("fri_7")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"fri_7\">&nbsp;</label></li>\n			  <li>");
+  hashContexts = {'checkedBinding': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("sat_overnight"),
+    'id': ("sat_7")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"sat_7\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		</ul>\n		<div><a href=\"#\">Check All</a> | <a href=\"#\">Clear All</a><br /><a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a></div>\n	  </div>\n	  <!-- /schedule_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["sitterEdit/profile"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, self=this, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("<a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				    <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n                    ");
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("<p><span>add school (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>");
+  }
+
+  data.buffer.push("<!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile</div>\n	  <div class=\"tab_content profile_block\" id=\"tab-1\">\n		<form class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li><span class=\"icon_bio2\">&nbsp;</span>Biography</li>\n				<li>\n				  <p><i class=\"char\">1100 CHAR</i>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextArea", {hash:{
+    'valueBinding': ("biography")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_gender2\">&nbsp;</span>Gender</li>\n				<li>\n				  <p>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("female"),
+    'selectionBinding': ("gender"),
+    'value': ("female"),
+    'name': ("gender")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"female\">Female</label>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("male"),
+    'selectionBinding': ("gender"),
+    'value': ("male"),
+    'name': ("gender")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"male\">Male</label>\n                  </p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_pin4\">&nbsp;</span>Home Address</li>\n				<li>\n				  <p>\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Street address"),
+    'valueBinding': ("address1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Apt/Suite"),
+    'valueBinding': ("address2"),
+    'class': ("small")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n				  <p>\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Zip Code"),
+    'valueBinding': ("live_zip"),
+    'class': ("small")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("City"),
+    'valueBinding': ("city")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    ");
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'contentBinding': ("Ember.States"),
+    'valueBinding': ("state")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_iphone2\">&nbsp;</span>Cell Phone Number</li>\n				<li>\n				  <p>\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("(123) 456-7890"),
+    'valueBinding': ("cell")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_email3\">&nbsp;</span>Email Address</li>\n				<li>\n				  <p>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Email"),
+    'valueBinding': ("email")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_age2\">&nbsp;</span>Age</li>\n				<li>\n				  <p><span class=\"short\">DATE OF BIRTH</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.DatePicker", {hash:{
+    'valueBinding': ("dob")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_smoker2\">&nbsp;</span>Smoker</li>\n				<li>\n				  <p>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("yes"),
+    'selectionBinding': ("smoker"),
+    'value': ("true"),
+    'name': ("smoker")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"yes\">YES</label>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("no"),
+    'selectionBinding': ("smoker"),
+    'value': ("false"),
+    'name': ("smoker")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"no\">NO</label>\n                  </p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_sick2\">&nbsp;</span>Sick Kids</li>\n				<li>\n				  <p>\n                    <span>willing to care for sick kids?</span>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("yes2"),
+    'selectionBinding': ("sick"),
+    'value': ("true"),
+    'name': ("sick")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"yes2\">YES</label>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("no2"),
+    'selectionBinding': ("sick"),
+    'value': ("false"),
+    'name': ("sick")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"no2\">NO</label>\n                  </p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_transportation2\">&nbsp;</span>Transportation</li>\n				<li>\n                  <p><span>distance willing to travel:</span>");
+  hashContexts = {'id': depth0,'placeholder': depth0,'valueBinding': depth0,'class': depth0};
+  hashTypes = {'id': "STRING",'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'id': ("distance"),
+    'placeholder': ("Distance"),
+    'valueBinding': ("travel_distance"),
+    'class': ("small")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"distance\">Miles</label></p>\n				  <p><span>have a current driver’s license?</span>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("no3"),
+    'checkedBinding': ("has_drivers_licence")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"no3\"></label></p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_experience2\">&nbsp;</span>General Experience</li>\n				<li>\n				  <p><span>TOTAL years of experience:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("0"),
+    'valueBinding': ("total_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Experience with infants:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("0"),
+    'valueBinding': ("infant_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Experience with toddlers:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("0"),
+    'valueBinding': ("toddler_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Experience with preschoolers:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("0"),
+    'valueBinding': ("preschool_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Experience with School age:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("0"),
+    'valueBinding': ("school_age_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Experience with Pre Teens:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("0."),
+    'valueBinding': ("pre_teen_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Experience with teenagers:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("0"),
+    'valueBinding': ("teen_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Experience with special needs?</span>");
+  hashContexts = {'id': depth0,'checkedBinding': depth0};
+  hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'id': ("special_needs"),
+    'checkedBinding': ("special_needs_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<label for=\"special_needs\"></label></p>\n				  <p><span>add another (if not listed above):</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("extra_exp")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  ");
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  if (stack1 = helpers.comment) { stack1 = stack1.call(depth0, options); }
+  else { stack1 = depth0.comment; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  hashTypes = {};
+  hashContexts = {};
+  if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_education3\">&nbsp;</span>Education Level</li>\n				<li>\n				  <p><span>Education level:</span>\n                  ");
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'contentBinding': ("Ember.Educations"),
+    'valueBinding': ("highest_education")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n				  <p><span>last school attended:</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("School Name"),
+    'valueBinding': ("last_school")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  ");
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  if (stack1 = helpers.comment) { stack1 = stack1.call(depth0, options); }
+  else { stack1 = depth0.comment; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  hashTypes = {};
+  hashContexts = {};
+  if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n				    <p>\n\n                      <span>Still in school?</span>\n                      ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("yes3"),
+    'selectionBinding': ("current_student"),
+    'value': ("true"),
+    'name': ("student")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                      <label for=\"yes3\">YES</label>\n                      ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("no5"),
+    'selectionBinding': ("current_student"),
+    'value': ("false"),
+    'name': ("student")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                      <label for=\"no5\">NO</label>\n                    </p>\n				  <p><span>Major (if yes):</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("major"),
+    'valueBinding': ("major")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>occupation (if no):</span>");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("occupation"),
+    'valueBinding': ("occupation")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_certification3\">&nbsp;</span>Certification or Training</li>\n				<li>\n				  <p>\n                    <span>&nbsp;</span>\n                    ");
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'contentBinding': ("Sitterfied.certificationsController"),
+    'optionLabelPath': ("model.certification"),
+    'valueBinding': ("id")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n				  <p>\n                    <span>add another (if not listed above):</span>\n                    ");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("Sitterfied.certificationController.newcert")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a>\n                  </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>Minimum for 1 child:</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("one_child_min_rate")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Maximum for 1 child:</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("one_child_max_rate")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Minimum for 2 children:</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("two_child_min_rate")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Maximum for 2 children:</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("two_child_max_rate")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Minimum for 3 or more children</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("three_child_min_rate")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>Maximum for 3 or more children</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("three_child_max_rate")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_lng2\">&nbsp;</span>Languages</li>\n				<li>\n				  <p><span>I speak:</span><select multiple data-placeholder=\"English\" tabindex=\"25\"><option>English</option><option>English</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				  <p><span>&nbsp;</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("other_services")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n				  <p><span>add another (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_preferences2\">&nbsp;</span>Job Preferences</li>\n				<li class=\"long_headers\">\n				  <p>\n                    <span>Will you babysit in a home of smokers?</span>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("yes4"),
+    'selectionBinding': ("smokers_ok"),
+    'value': ("true"),
+    'name': ("pref")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"yes4\">YES</label>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("no6"),
+    'selectionBinding': ("smokers_ok"),
+    'value': ("false"),
+    'name': ("pref")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"no6\">NO</label>\n                  </p>\n				  <p>\n                    <span>Will you babysit in a home with dogs?                    </span>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("yes5"),
+    'selectionBinding': ("dogs_ok"),
+    'value': ("true"),
+    'name': ("pref2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"yes5\">YES</label>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("no7"),
+    'selectionBinding': ("dogs_ok"),
+    'value': ("false"),
+    'name': ("pref2")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"no7\">NO</label>\n                  </p>\n				  <p>\n                    <span>Will you babysit in a home with cats?\n                    </span>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("yes6"),
+    'selectionBinding': ("cats_ok"),
+    'value': ("true"),
+    'name': ("pref3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"yes6\">YES</label>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("no8"),
+    'selectionBinding': ("cats_ok"),
+    'value': ("false"),
+    'name': ("pref3")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"no8\">NO</label>\n                  </p>\n				  <p>\n                    <span>Will you babysit in a home that has other animals?</span>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("yes7"),
+    'selectionBinding': ("other_animals_ok"),
+    'value': ("true"),
+    'name': ("pref4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"yes7\">YES</label>\n                    ");
+  hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
+  hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'id': ("no9"),
+    'selectionBinding': ("other_animals_ok"),
+    'value': ("false"),
+    'name': ("pref4")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    <label for=\"no9\">NO</label>\n                  </p>\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n");
+  return buffer;
+  
+});
 Ember.TEMPLATES["sitterEdit/top"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("<span class=\"icon_eye\">&nbsp;</span>VIEW PROFILE");
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Accept more booking requests");
+  }
+
+  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img src=\"images/demo/img2.jpg\" alt=\"\" />\n	  <p><span class=\"icon_pen\">&nbsp;</span><a href=\"#edit_photo_popup\">Edit Photo</a></p>\n	</div>\n  </div>\n  <div class=\"ranking_info\">\n	<p>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n	<p>Ranking: <span>14th</span> of 137</p>\n	");
+  hashContexts = {'class': depth0};
+  hashTypes = {'class': "STRING"};
+  options = {hash:{
+    'class': ("db_button")
+  },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	<fieldset>\n	  <legend>Here are some simple ways to improve your ranking:</legend>\n	  <ul class=\"clear\">\n		<li><a href=\"#\">Add more connections</a></li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.bookings", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.bookings", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li><a href=\"#\">Get more recommendations</a></li>\n	  </ul>\n	</fieldset>\n  </div>\n</div>\n<!-- /top info -->\n<!-- profile_completion -->\n<div class=\"profile_completion clear\" id=\"fixed_tabs\">\n  <p>Your profile is <span>ACTIVE</span> but incomplete</p>\n  <div><span>&nbsp;</span></div>\n  <p>Fill in the gaps below so parents can see how great you are!</p>\n</div>\n<!-- /profile_completion -->");
+  return buffer;
+  
+});
+Ember.TEMPLATES["sitterEdit/bookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   
 
 
-  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img src=\"images/demo/img2.jpg\" alt=\"\" />\n	  <p><span class=\"icon_pen\">&nbsp;</span><a href=\"#edit_photo_popup\">Edit Photo</a></p>\n	</div>\n  </div>\n  <div class=\"ranking_info\">\n	<p>Ellen Vukelich</p>\n	<p>Ranking: <span>14th</span> of 137</p>\n	<a class=\"db_button\" href=\"#\"><span class=\"icon_eye\">&nbsp;</span>VIEW PROFILE</a>\n	<fieldset>\n	  <legend>Here are some simple ways to improve your ranking:</legend>\n	  <ul class=\"clear\">\n		<li><a href=\"#\">Add more connections</a></li>\n		<li><a href=\"#\">Accept more booking requests</a></li>\n		<li><a href=\"#\">Get more recommendations</a></li>\n	  </ul>\n	</fieldset>\n  </div>\n</div>\n<!-- /top info -->\n<!-- profile_completion -->\n<div class=\"profile_completion clear\" id=\"fixed_tabs\">\n  <p>Your profile is <span>ACTIVE</span> but incomplete</p>\n  <div><span>&nbsp;</span></div>\n  <p>Fill in the gaps below so parents can see how great you are!</p>\n</div>\n<!-- /profile_completion -->");
+  data.buffer.push("	  <!-- bookings_block -->\n	  <div class=\"mob_tab_trigger\">Bookings</div>\n	  <div class=\"tab_content bookings_block\" id=\"tab-3\">\n		<ul class=\"subtab_select\">\n		  <li><a href=\"#tab-1-1\"><span>4</span>Pending Requests</a></li>\n		  <li><a href=\"#tab-1-2\"><span>3</span>Upcoming Jobs</a></li>\n		  <li><a href=\"#tab-1-3\"><span>7</span>Completed Jobs</a></li>\n		  <li><a href=\"#tab-1-4\"><span>12</span>Missed Requests</a></li>\n		  <li><a href=\"#tab-1-5\"><span>2</span>Expired Requests</a></li>\n		  <li><a href=\"#tab-1-6\"><span>3</span>Declined Jobs</a></li>\n		  <li><a href=\"#tab-1-7\"><span>2</span>Canceled Jobs</a></li>\n		</ul>\n\n		<div class=\"mob_tab_trigger active\"><span>4</span>Pending Requests</div>\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">By Phone</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /pending_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Upcoming Jobs</div>\n		<!-- upcoming_jobs_block -->\n		<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"price\"><span><strong>$25</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /upcoming_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>7</span>Completed Jobs</div>\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n		  Completed Jobs\n		</div>\n		<!-- /completed_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>12</span>Missed Requests</div>\n		<!-- missed_requests_block -->\n		<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n		  Missed Requests\n		</div>\n		<!-- /missed_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Expired Requests</div>\n		<!-- expired_requests_block -->\n		<div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n		  Expired Requests\n		</div>\n		<!-- /expired_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Declined Jobs</div>\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n		  Declined Jobs\n		</div>\n		<!-- /declined_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Canceled Jobs</div>\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n		  Canceled Jobs\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n");
   
 });
 Ember.TEMPLATES["sitterEdit"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
   
+  
+  data.buffer.push("Profile");
+  }
 
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Schedule");
+  }
 
-  data.buffer.push("<!-- container -->\n<div class=\"container clear\">\n  <div class=\"wraper\">\n\n	<!-- tabs_wrap -->\n	<div class=\"tabs_wrap\">\n	  <ul class=\"tab_select\">\n		<li><a href=\"#tab-1\">Profile</a></li>\n		<li><a href=\"#tab-2\">Schedule</a></li>\n		<li><a href=\"#tab-3\">Bookings</a></li>\n		<li><a href=\"#tab-4\">Network</a></li>\n		<li><a href=\"#tab-5\">Reviews</a></li>\n	  </ul>\n\n	  <!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile</div>\n	  <div class=\"tab_content profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li><span class=\"icon_bio2\">&nbsp;</span>Biography</li>\n				<li>\n				  <p><i class=\"char\">1100 CHAR</i><textarea></textarea></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_gender2\">&nbsp;</span>Gender</li>\n				<li>\n				  <p><input type=\"checkbox\" id=\"female\" name=\"gender\" /><label for=\"female\">Female</label> <input type=\"checkbox\" id=\"male\" name=\"gender\" /><label for=\"male\">Male</label></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_pin4\">&nbsp;</span>Home Address</li>\n				<li>\n				  <p><input type=\"text\" value=\"Street address\" /> <input type=\"text\" value=\"Apt/Suite\" class=\"small\" /></p>\n				  <p><input type=\"text\" value=\"Zip Code\" class=\"small\" /> <select data-placeholder=\"Hoboken\" tabindex=\"1\"><option>Hoboken</option><option>Hoboken</option></select> <select class=\"small\" data-placeholder=\"NJ\" tabindex=\"2\"><option>NJ</option><option>NJ</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_iphone2\">&nbsp;</span>Cell Phone Number</li>\n				<li>\n				  <p><input type=\"text\" value=\"(123)\" class=\"small\" /> <input type=\"text\" value=\"456-7890\" /></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_email3\">&nbsp;</span>Email Address</li>\n				<li>\n				  <p><input type=\"text\" value=\"\" /></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_age2\">&nbsp;</span>Age</li>\n				<li>\n				  <p><span class=\"short\">DATE OF BIRTH</span> <select data-placeholder=\"MONTH\" tabindex=\"3\"><option>MONTH</option><option>MONTH</option></select> <select data-placeholder=\"DAY\" tabindex=\"4\"><option>DAY</option><option>DAY</option></select> <select data-placeholder=\"YEAR\" tabindex=\"5\"><option>YEAR</option><option>YEAR</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_smoker2\">&nbsp;</span>Smoker</li>\n				<li>\n				  <p><input type=\"checkbox\" id=\"yes\" name=\"smoker\" /><label for=\"yes\">YES</label> <input type=\"checkbox\" id=\"no\" name=\"smoker\" /><label for=\"no\">NO</label></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_sick2\">&nbsp;</span>Sick Kids</li>\n				<li>\n				  <p><span>willing to care for sick kids?</span><input type=\"checkbox\" id=\"yes2\" name=\"sick\" /><label for=\"yes2\">YES</label> <input type=\"checkbox\" id=\"no2\" name=\"sick\" /><label for=\"no2\">NO</label></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_transportation2\">&nbsp;</span>Transportation</li>\n				<li>\n				  <p><span>distance willing to travel:</span><select data-placeholder=\"\" tabindex=\"6\"><option>text</option><option>text</option></select></p>\n				  <p><span>have a current driver’s license?</span><select data-placeholder=\"\" tabindex=\"7\"><option>text</option><option>text</option></select> <input type=\"checkbox\" id=\"no3\" /><label for=\"no3\">NO</label></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_experience2\">&nbsp;</span>General Experience</li>\n				<li>\n				  <p><span>TOTAL years of experience:</span><select data-placeholder=\"\" tabindex=\"8\"><option>text</option><option>text</option></select></p>\n				  <p><span>Experience with infants:</span><select data-placeholder=\"\" tabindex=\"9\"><option>text</option><option>text</option></select></p>\n				  <p><span>Experience with toddlers:</span><select data-placeholder=\"\" tabindex=\"10\"><option>text</option><option>text</option></select></p>\n				  <p><span>Experience with preschoolers:</span><select data-placeholder=\"\" tabindex=\"11\"><option>text</option><option>text</option></select></p>\n				  <p><span>Experience with School age:</span><select data-placeholder=\"\" tabindex=\"12\"><option>text</option><option>text</option></select></p>\n				  <p><span>Experience with Pre Teens:</span><select data-placeholder=\"\" tabindex=\"13\"><option>text</option><option>text</option></select></p>\n				  <p><span>Experience with teenagers:</span><select data-placeholder=\"\" tabindex=\"14\"><option>text</option><option>text</option></select></p>\n				  <p><span>Experience with special needs?</span><select multiple data-placeholder=\"Choose all that apply\" tabindex=\"15\"><option>text</option><option>text</option></select> <input type=\"checkbox\" id=\"no4\" /><label for=\"no4\">NO</label></p>\n				  <p><span>add another (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_education3\">&nbsp;</span>Education Level</li>\n				<li>\n				  <p><span>Education level:</span><select data-placeholder=\"\" tabindex=\"16\"><option>text</option><option>text</option></select></p>\n				  <p><span>last school attended:</span><select data-placeholder=\"\" tabindex=\"17\"><option>text</option><option>text</option></select></p>\n				  <p><span>add school (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <p><span>Still in school?</span><input type=\"checkbox\" id=\"yes3\" name=\"edu\" /><label for=\"yes3\">YES</label> <input type=\"checkbox\" id=\"no5\" name=\"edu\" /><label for=\"no5\">NO</label></p>\n				  <p><span>Major (if yes):</span><input type=\"text\" /></p>\n				  <p><span>occupation (if no):</span><input type=\"text\" /></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_certification3\">&nbsp;</span>Certification or Training</li>\n				<li>\n				  <p><span>&nbsp;</span><select multiple data-placeholder=\"Choose all that apply\" tabindex=\"18\"><option>text</option><option>text</option></select> <input type=\"checkbox\" id=\"none\" /><label for=\"none\">NONE</label></p>\n				  <p><span>add another (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>MInimum for 1 child:</span><select data-placeholder=\"\" tabindex=\"19\"><option>text</option><option>text</option></select></p>\n				  <p><span>Maximum for 1 child:</span><select data-placeholder=\"\" tabindex=\"20\"><option>text</option><option>text</option></select></p>\n				  <p><span>MInimum for 2 children:</span><select data-placeholder=\"\" tabindex=\"21\"><option>text</option><option>text</option></select></p>\n				  <p><span>Maximum for 2 children:</span><select data-placeholder=\"\" tabindex=\"22\"><option>text</option><option>text</option></select></p>\n				  <p><span>Minimum for 3 or more children</span><select data-placeholder=\"\" tabindex=\"23\"><option>text</option><option>text</option></select></p>\n				  <p><span>Maximum for 3 or more children</span><select data-placeholder=\"\" tabindex=\"24\"><option>text</option><option>text</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_lng2\">&nbsp;</span>Languages</li>\n				<li>\n				  <p><span>I speak:</span><select multiple data-placeholder=\"English\" tabindex=\"25\"><option>English</option><option>English</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				  <p><span>&nbsp;</span><select multiple data-placeholder=\"Choose all that apply\" tabindex=\"26\"><option>text</option><option>text</option></select> <input type=\"checkbox\" id=\"none2\" /><label for=\"none2\">NONE</label></p>\n				  <p><span>add another (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_preferences2\">&nbsp;</span>Job Preferences</li>\n				<li class=\"long_headers\">\n				  <p><span>Will you babysit in a home of smokers?</span><input type=\"checkbox\" id=\"yes4\" name=\"pref\" /><label for=\"yes4\">YES</label> <input type=\"checkbox\" id=\"no6\" name=\"pref\" /><label for=\"no6\">NO</label></p>\n				  <p><span>Will you babysit in a home with dogs?</span><input type=\"checkbox\" id=\"yes5\" name=\"pref2\" /><label for=\"yes5\">YES</label> <input type=\"checkbox\" id=\"no7\" name=\"pref2\" /><label for=\"no7\">NO</label></p>\n				  <p><span>Will you babysit in a home with cats?</span><input type=\"checkbox\" id=\"yes6\" name=\"pref3\" /><label for=\"yes6\">YES</label> <input type=\"checkbox\" id=\"no8\" name=\"pref3\" /><label for=\"no8\">NO</label></p>\n				  <p><span>Will you babysit in a home that has other animals?</span><input type=\"checkbox\" id=\"yes7\" name=\"pref4\" /><label for=\"yes7\">YES</label> <input type=\"checkbox\" id=\"no9\" name=\"pref4\" /><label for=\"no9\">NO</label></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n\n	  <!-- schedule_block -->\n	  <div class=\"mob_tab_trigger\">Schedule</div>\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n		<p>Please indicate your typical availability here. <span><img src=\"images/available.jpg\" alt=\"\" />Available <img src=\"images/unavailable.jpg\" alt=\"\" />Unavailable</span><a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a></p>\n		<ul>\n		  <li>\n			<ul>\n			  <li><a href=\"#\">Check All</a> | <a href=\"#\">Clear All</a></li>\n			  <li>Sun</li>\n			  <li>Mon</li>\n			  <li>Tues</li>\n			  <li>Wed</li>\n			  <li>Thurs</li>\n			  <li>Fri</li>\n			  <li>Sat</li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Early Morning</strong> (6am - 9am)<span>6 - 9 AM</span></li>\n			  <li><input type=\"checkbox\" id=\"sun_1\" /><label for=\"sun_1\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"mon_1\" /><label for=\"mon_1\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"tues_1\" /><label for=\"tues_1\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"wed_1\" /><label for=\"wed_1\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"thurs_1\" /><label for=\"thurs_1\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"fri_1\" /><label for=\"fri_1\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"sat_1\" /><label for=\"sat_1\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Late Morning</strong> (9am - 12pm)<span>9 - 12 PM</span></li>\n			  <li><input type=\"checkbox\" id=\"sun_2\" /><label for=\"sun_2\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"mon_2\" /><label for=\"mon_2\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"tues_2\" /><label for=\"tues_2\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"wed_2\" /><label for=\"wed_2\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"thurs_2\" /><label for=\"thurs_2\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"fri_2\" /><label for=\"fri_2\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"sat_2\" /><label for=\"sat_2\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Early Afternoon</strong> (12pm - 3pm)<span>12 - 3 PM</span></li>\n			  <li><input type=\"checkbox\" id=\"sun_3\" /><label for=\"sun_3\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"mon_3\" /><label for=\"mon_3\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"tues_3\" /><label for=\"tues_3\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"wed_3\" /><label for=\"wed_3\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"thurs_3\" /><label for=\"thurs_3\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"fri_3\" /><label for=\"fri_3\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"sat_3\" /><label for=\"sat_3\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Late Afternoon</strong> (3pm - 6pm)<span>3 - 6 PM</span></li>\n			  <li><input type=\"checkbox\" id=\"sun_4\" /><label for=\"sun_4\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"mon_4\" /><label for=\"mon_4\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"tues_4\" /><label for=\"tues_4\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"wed_4\" /><label for=\"wed_4\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"thurs_4\" /><label for=\"thurs_4\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"fri_4\" /><label for=\"fri_4\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"sat_4\" /><label for=\"sat_4\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Early Evening</strong> (6pm - 9pm)<span>6 - 9 PM</span></li>\n			  <li><input type=\"checkbox\" id=\"sun_5\" /><label for=\"sun_5\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"mon_5\" /><label for=\"mon_5\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"tues_5\" /><label for=\"tues_5\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"wed_5\" /><label for=\"wed_5\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"thurs_5\" /><label for=\"thurs_5\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"fri_5\" /><label for=\"fri_5\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"sat_5\" /><label for=\"sat_5\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Late Evening</strong> (9pm - 12am)<span>9 - 12 AM</span></li>\n			  <li><input type=\"checkbox\" id=\"sun_6\" /><label for=\"sun_6\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"mon_6\" /><label for=\"mon_6\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"tues_6\" /><label for=\"tues_6\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"wed_6\" /><label for=\"wed_6\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"thurs_6\" /><label for=\"thurs_6\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"fri_6\" /><label for=\"fri_6\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"sat_6\" /><label for=\"sat_6\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li><strong>Overnight</strong> (12am - 6am)<span>12 - 6 AM</span></li>\n			  <li><input type=\"checkbox\" id=\"sun_7\" /><label for=\"sun_7\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"mon_7\" /><label for=\"mon_7\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"tues_7\" /><label for=\"tues_7\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"wed_7\" /><label for=\"wed_7\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"thurs_7\" /><label for=\"thurs_7\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"fri_7\" /><label for=\"fri_7\">&nbsp;</label></li>\n			  <li><input type=\"checkbox\" id=\"sat_7\" /><label for=\"sat_7\">&nbsp;</label></li>\n			</ul>\n		  </li>\n		</ul>\n		<div><a href=\"#\">Check All</a> | <a href=\"#\">Clear All</a><br /><a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a></div>\n	  </div>\n	  <!-- /schedule_block -->\n\n	  <!-- bookings_block -->\n	  <div class=\"mob_tab_trigger\">Bookings</div>\n	  <div class=\"tab_content bookings_block\" id=\"tab-3\">\n		<ul class=\"subtab_select\">\n		  <li><a href=\"#tab-1-1\"><span>4</span>Pending Requests</a></li>\n		  <li><a href=\"#tab-1-2\"><span>3</span>Upcoming Jobs</a></li>\n		  <li><a href=\"#tab-1-3\"><span>7</span>Completed Jobs</a></li>\n		  <li><a href=\"#tab-1-4\"><span>12</span>Missed Requests</a></li>\n		  <li><a href=\"#tab-1-5\"><span>2</span>Expired Requests</a></li>\n		  <li><a href=\"#tab-1-6\"><span>3</span>Declined Jobs</a></li>\n		  <li><a href=\"#tab-1-7\"><span>2</span>Canceled Jobs</a></li>\n		</ul>\n\n		<div class=\"mob_tab_trigger active\"><span>4</span>Pending Requests</div>\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">By Phone</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /pending_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Upcoming Jobs</div>\n		<!-- upcoming_jobs_block -->\n		<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"price\"><span><strong>$25</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /upcoming_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>7</span>Completed Jobs</div>\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n		  Completed Jobs\n		</div>\n		<!-- /completed_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>12</span>Missed Requests</div>\n		<!-- missed_requests_block -->\n		<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n		  Missed Requests\n		</div>\n		<!-- /missed_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Expired Requests</div>\n		<!-- expired_requests_block -->\n		<div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n		  Expired Requests\n		</div>\n		<!-- /expired_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Declined Jobs</div>\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n		  Declined Jobs\n		</div>\n		<!-- /declined_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Canceled Jobs</div>\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n		  Canceled Jobs\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n\n	  <!-- network_block -->\n	  <div class=\"mob_tab_trigger\">Network</div>\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\"><a href=\"#\"><img src=\"images/icons/facebook.png\" alt=\"\" />Facebook</a><a href=\"#\"><img src=\"images/icons/gmail.png\" alt=\"\" />Gmail</a></p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p><input type=\"text\" value=\"Search a person or group\" /><input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n		  <li>\n			<ul>\n			  <li>Parents</li>\n			  <li><a href=\"#\"><img src=\"images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Mika Pinna</a></li>\n			  <li><a href=\"#\"><img src=\"images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Lakeisha Powanda</a></li>\n			  <li><a href=\"#\"><img src=\"images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Connie Takach</a></li>\n			  <li><a href=\"#\"><img src=\"images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Jane Eyre</a></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Sitters</li>\n			  <li><a href=\"#\"><img src=\"images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Lakeisha Powanda</a></li>\n			  <li><a href=\"#\"><img src=\"images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Connie Takach</a></li>\n			  <li><a href=\"#\"><img src=\"images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Jane Eyre</a></li>\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Groups</li>\n			  <li><a href=\"#\">Hoboken Catholic Church</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n			  <li><a href=\"#\">St Francis Prep School</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n			  <li><a href=\"#\">Hoboken Mommies</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n			</ul>\n		  </li>\n		</ul>\n	  </div>\n	  <!-- /network_block -->\n\n	  <!-- reviews_block -->\n	  <div class=\"mob_tab_trigger\">Reviews</div>\n	  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n		<div class=\"reco clear\"><a href=\"#recommend_popup\"><span class=\"icon_team2\">&nbsp;</span>REQUEST RECOMMENDATION</a></div>\n		<ul class=\"clear\">\n		  <li>\n			<a href=\"#\"><img src=\"images/demo/img11.jpg\" alt=\"\" /></a>\n			<div class=\"desc\">\n			  <p><a href=\"#\">Marcie Silk</a></p>\n			  <div class=\"reco_btn\"><span class=\"icon_ok\">&nbsp;</span>Recommends</div>\n			  <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. </p>\n			  <p>Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet.</p>\n			</div>\n		  </li>\n		  <li>\n			<a href=\"#\"><img src=\"images/demo/img12.jpg\" alt=\"\" /></a>\n			<div class=\"desc\">\n			  <p><a href=\"#\">Otis Devin</a></p>\n			  <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. </p>\n			</div>\n		  </li>\n		</ul>\n	  </div>\n	  <!-- /reviews_block -->\n\n	</div>\n	<!-- /tabs_wrap -->\n\n  </div>\n</div>\n<!-- /container -->");
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("Bookings");
+  }
+
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("Network");
+  }
+
+function program9(depth0,data) {
+  
+  
+  data.buffer.push("Reviews");
+  }
+
+  data.buffer.push("<!-- container -->\n<div class=\"container clear\">\n  <div class=\"wraper\">\n\n	<!-- tabs_wrap -->\n	<div class=\"tabs_wrap\">\n	  <ul class=\"tab_select\">\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.profile", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.profile", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedlue", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedlue", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.bookings", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.bookings", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.network", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.network", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.reviews", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.reviews", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n	  </ul>\n\n\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n\n	</div>\n	<!-- /tabs_wrap -->\n\n  </div>\n</div>\n<!-- /container -->");
+  return buffer;
+  
+});
+Ember.TEMPLATES["sitterEdit/reviews"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n            ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "review", options) : helperMissing.call(depth0, "partial", "review", options))));
+  data.buffer.push("\n          ");
+  return buffer;
+  }
+
+  data.buffer.push("	  <!-- reviews_block -->\n	  <div class=\"mob_tab_trigger\">Reviews</div>\n	  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n		<div class=\"reco clear\"><a href=\"#recommend_popup\"><span class=\"icon_team2\">&nbsp;</span>REQUEST RECOMMENDATION</a></div>\n		<ul class=\"clear\">\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "reviews", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		</ul>\n	  </div>\n	  <!-- /reviews_block -->\n");
+  return buffer;
   
 });
 Ember.TEMPLATES["settings/top"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -442,6 +1477,44 @@ function program14(depth0,data) {
   stack1 = helpers['with'].call(depth0, "settings", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	  </form>\n	</div>\n	<!-- /account_settings_block -->\n\n  </div>\n</div>\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["_review"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var hashTypes, hashContexts;
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "parent.full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("<div class=\"reco_btn\"><span class=\"icon_ok\">&nbsp;</span>Recommends</div>");
+  }
+
+  data.buffer.push("<li>\n  <a href=\"#\"><img src=\"images/demo/img11.jpg\" alt=\"\" /></a>\n  <div class=\"desc\">\n	<p>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "parent", options) : helperMissing.call(depth0, "linkTo", "parent", "parent", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</p>\n	");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers['if'].call(depth0, "recommended", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	<p>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "review", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n  </div>\n</li>\n");
   return buffer;
   
 });
