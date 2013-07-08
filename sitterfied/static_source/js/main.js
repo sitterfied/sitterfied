@@ -10,7 +10,7 @@ require({
         "chosen": "lib/chosen.jquery.min",
         "djangoRestAdapter": "lib/adapter",
     },
-    waitSeconds: 15,
+    waitSeconds: 0,
     shim:{
         data: {
             exports: 'DS',
