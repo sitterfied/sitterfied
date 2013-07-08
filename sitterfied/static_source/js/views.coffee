@@ -17,6 +17,11 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
                 @.$().trigger('change')
     })
 
+    Ember.ChosenSelect = Em.Select.extend({
+        didInsertElement: ()->
+            @.$().chosen()
+    })
+
     Ember.States = [
             'AL',
             'AK',

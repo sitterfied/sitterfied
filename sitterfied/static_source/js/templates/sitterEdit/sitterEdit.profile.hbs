@@ -37,7 +37,7 @@
 				  <p>
                     {{view Ember.TextField placeholder="Zip Code" valueBinding="live_zip" class="small"}}
                     {{view Ember.TextField placeholder="City" valueBinding="city"}}
-                    {{view Ember.Select
+                    {{view Ember.ChosenSelect
                       contentBinding="Ember.States"
                       valueBinding="state"
                        }}
@@ -138,7 +138,7 @@
 				<li><span class="icon_education3">&nbsp;</span>Education Level</li>
 				<li>
 				  <p><span>Education level:</span>
-                  {{view Ember.Select
+                  {{view Ember.ChosenSelect
                   contentBinding="Ember.Educations"
                   valueBinding="highest_education"
                   }}
@@ -165,7 +165,7 @@
 				<li>
 				  <p>
                     <span>&nbsp;</span>
-                    {{view Ember.Select
+                    {{view Ember.ChosenSelect
                     contentBinding="Sitterfied.certificationsController"
                     optionLabelPath="model.certification"
                     valueBinding="id"

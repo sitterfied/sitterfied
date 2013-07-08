@@ -45,7 +45,8 @@ require({
          "cs!sitterfied", "csrf",
          "cs!routes", "cs!models",
          "cs!injections", "cs!controllers",
-         "cs!views", "vasilli"], function($, Em, Sitterfied){
+         "cs!views",
+         "vasilli",  'facebook',], function($, Em, Sitterfied){
             // using jQuery
             Sitterfied.runInitializers()
             Sitterfied.advanceReadiness()

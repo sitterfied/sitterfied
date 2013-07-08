@@ -696,7 +696,7 @@ function program3(depth0,data) {
   data.buffer.push("\n                    ");
   hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
   hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.ChosenSelect", {hash:{
     'contentBinding': ("Ember.States"),
     'valueBinding': ("state")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -869,7 +869,7 @@ function program3(depth0,data) {
   data.buffer.push("\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_education3\">&nbsp;</span>Education Level</li>\n				<li>\n				  <p><span>Education level:</span>\n                  ");
   hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
   hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.ChosenSelect", {hash:{
     'contentBinding': ("Ember.Educations"),
     'valueBinding': ("highest_education")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -927,7 +927,7 @@ function program3(depth0,data) {
   data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_certification3\">&nbsp;</span>Certification or Training</li>\n				<li>\n				  <p>\n                    <span>&nbsp;</span>\n                    ");
   hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'valueBinding': depth0};
   hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.ChosenSelect", {hash:{
     'contentBinding': ("Sitterfied.certificationsController"),
     'optionLabelPath': ("model.certification"),
     'valueBinding': ("id")
