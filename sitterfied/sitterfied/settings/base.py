@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'django_mandrill',
+    'registration',
     'crispy_forms',
     'floppyforms',
     'annoying',
@@ -121,6 +122,8 @@ INSTALLED_APPS = (
     'south',
     'pipeline',
     'app',
+
+
 
 )
 
@@ -157,8 +160,8 @@ LOGGING = {
 AUTH_USER_MODEL = 'app.User'
 LOGIN_URL = '/login/'
 
+ACCOUNT_ACTIVATION_DAYS = 30
 
 from .pipeline import *
 from .grappelli import *
-from .mandrill import *
 from .rest_framework import *

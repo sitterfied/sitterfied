@@ -4,6 +4,7 @@ require({
         "ember": "lib/ember",
         "data": "lib/ember-data-latest",
         "handlebars" : "lib/handlebars",
+        "ajaxfileupload": 'lib/ajaxfileupload.js',
         "_": "lib/underscore-min",
         "jquery": "lib/jquery-1.9.1",
         "jqueryui": "lib/jquery-ui-1.10.0.custom.min",

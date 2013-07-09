@@ -48,8 +48,6 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         deleteGroup: (group) ->
             alert("delete group, " + group)
 
-        saveSchedlue: () ->
-            alert("save schedlue")
     })
 
     Sitterfied.BookController = Em.ArrayController.extend(

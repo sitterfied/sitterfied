@@ -10,7 +10,7 @@ from model_utils.fields import StatusField
 from model_utils.choices import Choices
 
 
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django_localflavor_us.us_states import STATE_CHOICES
 
 from django_localflavor_us.models import USStateField
@@ -19,9 +19,24 @@ add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 
 
 from model_utils.managers import InheritanceManager
+import re
+import time
+
+UPLOADS_DIR = 'uploads/{0}/{1.year:04}/{1.month:02}/{1.day:02}/{2}/{3}'
+def file_url(name):
+    def inner(instance, filename):
+        r = re.compile(r'[^\S]')
+        filename = r.sub('', filename)
+        now = datetime.now()
+        timestamp = int(time.time())
+        return  UPLOADS_DIR.format(name, now, timestamp, filename)
+    return inner
+
 
 
 class User(AbstractUser, TimeStampedModel):
+    objects = UserManager()
+
     MEMBERSHIP_STATUS = Choices("Trial", "paid")
     parents_in_network = models.ManyToManyField('Parent', related_name="parents_in_network", blank=True)
     sitters_in_network = models.ManyToManyField('Sitter', related_name="sitters_in_network", blank=True)
@@ -38,7 +53,10 @@ class User(AbstractUser, TimeStampedModel):
     zip = models.CharField(max_length=9, blank=True)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
     cell = models.CharField(max_length=12, blank=True)
 
+
+    avatar = models.ImageField(upload_to=file_url("avatar"), null=True)
     #objects = InheritanceManager()
+
 
     def __unicode__(self):
         return self.get_full_name()
@@ -271,16 +289,3 @@ class Booking(TimeStampedModel):
 
 class Group(TimeStampedModel):
     name = models.CharField(max_length=128, blank=False)
-
-
-def create_user_settings(sender, instance, created, **kwargs):
-    if created and not Settings.objects.filter(user=instance).exists():
-        Settings.objects.create(user=instance)
-
-def create_sitter_schedlue(sender, instance, created, **kwargs):
-    if created and not Schedlue.objects.filter(sitter=instance).exists():
-        Schedlue.objects.create(sitter=instance)
-
-post_save.connect(create_user_settings, sender=Parent)
-post_save.connect(create_user_settings, sender=Sitter)
-post_save.connect(create_sitter_schedlue, sender=Sitter)

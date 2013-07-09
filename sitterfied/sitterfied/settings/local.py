@@ -57,3 +57,6 @@ DEVSERVER_MODULES = (
     'devserver.modules.cache.CacheSummaryModule',
     'devserver.modules.profile.LineProfilerModule',
 )
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

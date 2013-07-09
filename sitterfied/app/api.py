@@ -19,7 +19,7 @@ user_fields = ('first_name', 'last_name',
                'sitters_in_network', 'email',
                'parents_in_network', 'sitter_groups',
                'address1', 'address2',
-               'city', 'state',
+               'city', 'state', 'avatar',
                'zip','bookings', 'cell' )
 
 

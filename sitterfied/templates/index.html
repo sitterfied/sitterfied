@@ -34,16 +34,26 @@
   <body>
     <script type="text/x-handlebars">
 
-      <!-- <div id="recommend_popup"> -->
-	  <!--   <div class="tit"><span>Recommend Ellen</span></div> -->
-	  <!--   <div class="info"> -->
-	  <!--     <form method="post" action="#" class="form_style"> -->
-	  <!--   	<p><span class="pad">How do you know Ellen?</span><select><option>Sat for my kids</option></select></p> -->
-	  <!--   	<p><span class="icon_review3">&nbsp;</span><label for="review">Review</label><textarea id="review">Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia.</textarea></p> -->
-	  <!--   	<p><a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Post</a><a class="button button_cancel button_small" href="#"><span class="icon_cancel">&nbsp;</span>Cancel</a></p> -->
-	  <!--     </form> -->
-	  <!--   </div> -->
-      <!-- </div> -->
+      <!-- edit_photo_popup -->
+      <div id="edit_photo_popup">
+	    <div class="photo_wrap">
+		  <img src="" alt="" />
+	    </div>
+	    <p><a class="button button_edit" href="#">Upload from Computer</a><span>(4 MB file limit)</span><a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a></p>
+      </div>
+      <!-- edit_photo_popup -->
+
+
+      <div id="recommend_popup">
+	    <div class="tit"><span>Recommend Ellen</span></div>
+	    <div class="info">
+	      <form method="post" action="#" class="form_style">
+	    	<p><span class="pad">How do you know Ellen?</span><select><option>Sat for my kids</option></select></p>
+	    	<p><span class="icon_review3">&nbsp;</span><label for="review">Review</label><textarea id="review">Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia.</textarea></p>
+	    	<p><a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Post</a><a class="button button_cancel button_small" href="#"><span class="icon_cancel">&nbsp;</span>Cancel</a></p>
+	      </form>
+	    </div>
+      </div>
 
 
       <!-- header -->
@@ -64,7 +74,7 @@
                 <li>{{#linkTo search }} Search {{/linkTo}}</li>
 	            <li>{{#linkTo book }}Bookings{{/linkTo}}</li>
 		        <li>
-					{{#linkTo profile }}<img src="/static/images/demo/img.jpg" alt="" /> Alex{{/linkTo}}
+					{{#linkTo profile }}<img src="/static/images/demo/img.jpg" alt="" /> {{Sitterfied.currentUser.first_name}}{{/linkTo}}
 					<ul>
 						<li><span class="menu_icon_setting">&nbsp;</span>{{#linkTo settings }}Account Settings{{/linkTo}}</li>
 						<li><span class="menu_icon_profile">&nbsp;</span>{{#linkTo profile }}Profile{{/linkTo}}</li>

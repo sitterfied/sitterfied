@@ -25,7 +25,7 @@
 	<div class="wraper">
 		<a href="#" class="logo"><img src="/static/images/logo.png" alt="" /></a>
 		<div class="top_title clear">
-			<span class="icon_settings">&nbsp;</span>Log in here
+			<span class="icon_settings">&nbsp;</span>Sign up here
 		</div>
 		<!-- /top_title -->
 	</div>
@@ -38,16 +38,37 @@
 		<div class="account_settings_block clear">
           <form method="post" action=".">
             {% csrf_token %}
-
+              <p>{{ form.non_field_errors }}</p>
+              <p>{{ form.username.errors }}</p>
 		      <label for="id_username">Username:</label>
 		      <p>{{ form.username }}</p>
-		      <label for="id_password">Password:</label>
-		      <p>{{ form.password }}</p>
 
-            <input type="hidden" name="next" value="/" />
-            <input type="submit" value="login" />
+              <p>{{ form.email.errors }}</p>
+		      <label for="id_email">E-mail:</label>
+		      <p>{{ form.email }}</p>
+
+              <p>{{ form.password1.errors }}</p>
+		      <label for="id_password1">password:</label>
+		      <p>{{ form.password1 }}</p>
+
+              <p>{{ form.password2.errors }}</p>
+		      <label for="id_password2">password(again):</label>
+		      <p>{{ form.password2 }}</p>
+              </br>
+              <p>{{ form.parent_or_sitter.errors }}</p>
+              <input id="id_parent_or_sitter_0"
+                     name="parent_or_sitter" type="radio"
+                     value="sitter">
+              <label for="id_parent_or_sitter_0">Sitter</label>
+              <input id="id_parent_or_sitter_1"
+                     name="parent_or_sitter" type="radio"
+                     value="parent">
+              <label for="id_parent_or_sitter_1">parent</label>
+              <input type="hidden" name="next" value="/" />
+              </br>
+</br>
+            <input type="submit" value="signup" />
           </form>
-          Don't have an account? <a href="{% url "signup" %}">Sign up here</a>
 
 	    </div>
     </div>

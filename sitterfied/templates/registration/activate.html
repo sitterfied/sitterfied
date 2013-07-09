@@ -25,7 +25,7 @@
 	<div class="wraper">
 		<a href="#" class="logo"><img src="/static/images/logo.png" alt="" /></a>
 		<div class="top_title clear">
-			<span class="icon_settings">&nbsp;</span>Log in here
+			<span class="icon_settings">&nbsp;</span>Thanks For joining!
 		</div>
 		<!-- /top_title -->
 	</div>
@@ -36,18 +36,10 @@
 <div class="container clear">
 	<div class="wraper settings_topmarg">
 		<div class="account_settings_block clear">
-          <form method="post" action=".">
-            {% csrf_token %}
-
-		      <label for="id_username">Username:</label>
-		      <p>{{ form.username }}</p>
-		      <label for="id_password">Password:</label>
-		      <p>{{ form.password }}</p>
-
-            <input type="hidden" name="next" value="/" />
-            <input type="submit" value="login" />
-          </form>
-          Don't have an account? <a href="{% url "signup" %}">Sign up here</a>
+Thanks {{ account }}, activation complete!  You may now <a href='{% url 'auth_login' %}'>login</a> using the username and password you set at registration.
+{% else %}
+Oops &ndash; it seems that your activation key is invalid.  Please check the url again.
+{% endif %}
 
 	    </div>
     </div>

@@ -54,6 +54,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
         model: () ->
             return Sitterfied.currentUser
 
+        events:
+            openPhotoPopup: ->
+                $("#edit_photo_popup").show()
+
+
         renderTemplate: () ->
             this.render("parentEdit", {outlet: 'content', controller: 'currentUser'})
             this.render("parentEdit.top", {outlet: 'top', controller: 'currentUser'})
@@ -96,6 +101,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
     Sitterfied.SitterEditRoute = Em.Route.extend(
         model: () ->
             return Sitterfied.currentUser
+
+        events:
+            openPhotoPopup: ->
+                $("#edit_photo_popup").show()
+
 
         renderTemplate: () ->
             this.render("sitterEdit", {outlet: 'content', controller: 'currentUser'})

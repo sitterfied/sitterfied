@@ -51,3 +51,4 @@ MIDDLEWARE_CLASSES += (
 )
 
 SECRET_KEY =  os.environ['DJANGO_SECRET_KEY']
+from .mandrill import *

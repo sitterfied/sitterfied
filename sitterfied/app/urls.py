@@ -14,6 +14,11 @@ router.register(r'schedlues', api.SchedlueViewSet)
 router.register(r'sitter_reviews', api.ReviewViewSet)
 
 
+# Core Django Imports
+from django.conf.urls import patterns, url, include
+
+from .signup import RegistrationView
+
 urlpatterns = patterns('app.views',
     # Examples:
     url(r'^api/', include(router.urls)),
@@ -21,11 +26,15 @@ urlpatterns = patterns('app.views',
     url(r'^unsubscribe/$', 'unsubscribe', name='unsubscribe'),
     url(r'^cancel-unsubscribe/$', 'cancel_unsubscribe', name='cancel_unsubscribe'),
     url(r'^email/$', StaticView.as_view(template_name='invitation_email.html'), name="email"),
+    url(r'^signup/$',RegistrationView.as_view(), name='signup'),
+
 )
 
 urlpatterns += patterns('',
-    url(r'^login/$', 'django.contrib.auth.views.login', name="login", ),
+                        (r'^accounts/', include('registration.backends.default.urls')),
+                        url(r'^login/$', 'django.contrib.auth.views.login', name="login", ),
     url(r'^password_change/$', 'django.contrib.auth.views.password_change', {'post_change_redirect':'/'}, name="password_change", ),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}, name="logout", ),
+
     url(r'^.*', 'app.views.index', name='index'),
 )
