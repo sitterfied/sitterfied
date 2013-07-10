@@ -17,10 +17,22 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
                 @.$().trigger('change')
     })
 
+
+
     Ember.ChosenSelect = Em.Select.extend({
-        didInsertElement: ()->
-            @.$().chosen()
+        didInsertElement: () ->
+            this._super();
+            this.$().chosen();
+
+        selectionChanged: (() ->
+            this.$().trigger('liszt:updated');
+        ).observes('selection')
     })
+
+    Ember.ChosenMultipleSelect = Ember.ChosenSelect.extend({
+        multiple: true,
+        attributeBindings: [ 'multiple' ],
+    });
 
     Ember.States = [
             'AL',
@@ -83,3 +95,10 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
         "Some College"
         "College Degree"
         ]
+
+    Sitterfied.BookingView = Em.View.extend()
+    #showNote
+    #isNoteShown
+    # action
+    # decline
+    # cancel

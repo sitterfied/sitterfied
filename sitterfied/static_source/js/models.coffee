@@ -255,7 +255,8 @@ define [
 
     Sitterfied.Booking = DS.Model.extend(
         parent: DS.belongsTo('Sitterfied.Parent'),
-        sitter: DS.belongsTo('Sitterfied.Sitter'),
+        created: DS.attr("date")
+        sitter: DS.hasMany('Sitterfied.Sitter'),
         notes: DS.attr('string'),
         respond_by: DS.attr('date'),
         start_date_time: DS.attr('date'),
@@ -264,4 +265,16 @@ define [
         #emergency_phone: models.Foreign_key('Phone')
         #location: models.Foreign_key('Address')
         booking_status:DS.attr('string'),
+        booking_type: DS.attr('string'),
+
+    )
+
+    Sitterfied.BookingRequest = DS.Model.extend(
+        booking: DS.belongsTo("Sitterfied.Booking"),
+        sitter: DS.hasMany('Sitterfied.Sitter'),
+        sitter_accepted: DS.attr('boolean'),
+        rate: DS.attr('number'),
+
+    )
+
     )

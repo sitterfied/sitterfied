@@ -1,0 +1,76 @@
+<li>
+  <header>
+    Request Sent: {{booking.created}}
+    <span>{{booking.booking_type}}</span>
+  </header>
+  <div class="img">
+    {{# comment }}avatar {{/comment}}
+    <a href="#"><img src="images/demo/img16.jpg" alt=""></a>
+    <p><span><a href="#">{{booking.parent.full_name}}</a></span></p>
+    <div>
+      <a href="#">0 mutual friends</a>
+      <ul>
+        <li>Friends you have in common</li>
+
+        {{# comment }}
+          {{each booking.parent.friends_in_common}}
+          <li>{{# linkTo parent this }}<img src="images/demo/img3.jpg" alt=""></a><span> {{full_name}}</span></li>
+          {{/comment}}
+      </ul>
+    </div>
+  </div>
+  <div class="desc clear">
+    <ul>
+      <li><span class="icon_date">&nbsp;</span>{{booking.start_date_time}}&nbsp; <span>{{booking.start_date_time}}</span></li>
+      <li><span class="icon_friends5">&nbsp;</span>{{booking.child.length}} Kids</li>
+      <li><span class="icon_pin3">&nbsp;</span>New York, NY</li>
+      <li>
+        <p><a href="#">Need more info?<br>Email {{booking.parent.first_name}}</a></p>
+        <span class="icon_email2">&nbsp;</span><a href="mailto:jeyre@gmail.com">{{booking.parent.email}}</a>
+      </li>
+    </ul>
+    <div class="price">
+      <span>
+        <strong>$
+        </strong>{{view Ember.TextField valueBinding rate}}/hr
+      </span>
+      <a class="edit_button" href="#">edit
+      </a>
+    </div>
+    {{# if sitter_accepted }}
+    <div class="btn_wrap">
+      <a class="button button_smaller button_cancel" {{action 'cancel'}}>
+        <span class="icon_cancel">&nbsp;
+        </span>CANCEL
+      </a>
+    </div>
+    {{ else }}
+    <div class="btn_wrap">
+      <a class="button button_smaller" {{action 'accept'}}>
+        <span class="icon_ok2">&nbsp;
+        </span>ACCEPT
+      </a>
+      <a class="button button_smaller button_cancel" {{action 'decline'}}>
+        <span class="icon_cancel">&nbsp;
+        </span>DECLINE
+      </a>
+    </div>
+    {{/if }}
+    <div class="note_wrap">
+      <a {{action 'showNote'}}>
+        {{# if isNoteShown}}
+        <span class="show">Show</span>
+        {{ else }}
+        <span class="hide">Hide</span>
+        {{/if}}
+        Note
+      </a>
+    </div>
+  </div>
+  <div class="note_desc clear">
+    <p>{{booking.note}}</p>
+  </div>
+  <footer>
+    Request Sent: {{booking.created}}
+  </footer>
+</li>

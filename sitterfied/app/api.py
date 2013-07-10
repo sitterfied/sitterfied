@@ -82,6 +82,14 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SitterReview
 
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Booking
+
+class BookingRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.BookingRequest
+
 
 class UserViewSet(object):
 
@@ -135,6 +143,19 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = models.SitterReview.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset = models.Booking.objects.all()
+    serializer_class = BookingSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+class BookingRequestViewSet(viewsets.ModelViewSet):
+    queryset = models.BookingRequest.objects.all()
+    serializer_class = BookingRequestSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
 
 
 #bookings

@@ -3,6 +3,9 @@ from datetime import datetime
 from django.db import models
 from django.db.models.signals import post_save
 
+from django.utils.functional import cached_property
+
+
 from model_utils.models import TimeStampedModel
 # Create your models here.
 
@@ -19,6 +22,7 @@ add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 
 
 from model_utils.managers import InheritanceManager
+
 import re
 import time
 
@@ -273,19 +277,39 @@ class SitterReview(TimeStampedModel):
         unique_together = ("parent", "sitter")
 
 
+class BookingRequest(TimeStampedModel):
+    ##TODO:
+    #unique index to prevent more than one sitter accepting a booking request
+    booking = models.ForeignKey("Booking")
+    sitter = models.ForeignKey("Sitter")
+    sitter_accepted= models.BooleanField(default=False)
+    rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+
 
 class Booking(TimeStampedModel):
     BOOKING_STATUS = Choices('Active', 'Pending', 'Completed', 'Expired', 'Declined', 'Canceled',)
+    BOOKING_TYPES = Choices('Job', 'Interview')
     parent = models.ForeignKey(Parent, related_name="bookings")
-    sitter = models.ForeignKey(Sitter, related_name="bookings")
+    sitters = models.ManyToManyField(Sitter, related_name="bookings", through=BookingRequest)
     notes = models.TextField()
     respond_by = models.DateTimeField()
     start_date_time = models.DateTimeField()
     stop_date_time = models.DateTimeField()
     child = models.ManyToManyField('Child')
-    emergency_phone = models.ForeignKey('Phone')
+    emergency_phone = models.ForeignKey('Phone', null=True)
+
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
+    booking_type =  models.CharField(max_length=10, choices=BOOKING_TYPES, default='Job')
+
+
     location = models.ForeignKey('Address')
+
+
+    @cached_property
+    def accepted(self):
+        return bool(BookingRequest.objects.filter(booking=self, sitter_accepted=True))
+
+
 
 class Group(TimeStampedModel):
     name = models.CharField(max_length=128, blank=False)
