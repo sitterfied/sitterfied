@@ -631,6 +631,22 @@ function program3(depth0,data) {
   data.buffer.push("<p><span>add school (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>");
   }
 
+function program5(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n                    ");
+  hashContexts = {'controllerBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
+  hashTypes = {'controllerBinding': "ID",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.MultipleChosenSelect", {hash:{
+    'controllerBinding': ("Sitterfied.certificationController"),
+    'optionLabelPath': ("certification"),
+    'optionValuePath': ("id"),
+    'valueBinding': ("certification")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    ");
+  return buffer;
+  }
+
   data.buffer.push("<!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile</div>\n	  <div class=\"tab_content profile_block\" id=\"tab-1\">\n		<form class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li><span class=\"icon_bio2\">&nbsp;</span>Biography</li>\n				<li>\n				  <p><i class=\"char\">1100 CHAR</i>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
@@ -694,11 +710,11 @@ function program3(depth0,data) {
     'valueBinding': ("city")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    ");
-  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.ChosenSelect", {hash:{
-    'contentBinding': ("Ember.States"),
-    'valueBinding': ("state")
+  hashContexts = {'controllerBinding': depth0,'selectionBinding': depth0};
+  hashTypes = {'controllerBinding': "ID",'selectionBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ChosenSelect", {hash:{
+    'controllerBinding': ("Sitterfied.stateController"),
+    'selectionBinding': ("state")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                  </p>\n				  <a class=\"button button_small\" ");
   hashTypes = {};
@@ -867,11 +883,11 @@ function program3(depth0,data) {
   if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_education3\">&nbsp;</span>Education Level</li>\n				<li>\n				  <p><span>Education level:</span>\n                  ");
-  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.ChosenSelect", {hash:{
-    'contentBinding': ("Ember.Educations"),
-    'valueBinding': ("highest_education")
+  hashContexts = {'controllerBinding': depth0,'selectionBinding': depth0};
+  hashTypes = {'controllerBinding': "ID",'selectionBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ChosenSelect", {hash:{
+    'controllerBinding': ("Sitterfied.educationController"),
+    'selectionBinding': ("highest_education")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                  </p>\n				  <p><span>last school attended:</span>");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
@@ -925,20 +941,24 @@ function program3(depth0,data) {
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_certification3\">&nbsp;</span>Certification or Training</li>\n				<li>\n				  <p>\n                    <span>&nbsp;</span>\n                    ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.ChosenSelect", {hash:{
-    'contentBinding': ("Sitterfied.certificationsController"),
-    'optionLabelPath': ("model.certification"),
-    'valueBinding': ("id")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  if (stack1 = helpers.comment) { stack1 = stack1.call(depth0, options); }
+  else { stack1 = depth0.comment; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  hashTypes = {};
+  hashContexts = {};
+  if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n                  </p>\n				  <p>\n                    <span>add another (if not listed above):</span>\n                    ");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'valueBinding': ("Sitterfied.certificationController.newcert")
+    'valueBinding': ("Sitterfied.certificationController.newCert")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                    <a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a>\n                  </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>Minimum for 1 child:</span>");
+  data.buffer.push("\n                    <a class=\"button button_smaller button_edit certbutton\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveCertification", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" >\n                      <span class=\"icon_plus\">&nbsp;</span>ADD\n                    </a>\n                  </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>Minimum for 1 child:</span>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -1210,7 +1230,11 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("	  <!-- reviews_block -->\n	  <div class=\"mob_tab_trigger\">Reviews</div>\n	  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n		<div class=\"reco clear\"><a href=\"#recommend_popup\"><span class=\"icon_team2\">&nbsp;</span>REQUEST RECOMMENDATION</a></div>\n		<ul class=\"clear\">\n          ");
+  data.buffer.push("	  <!-- reviews_block -->\n	  <div class=\"mob_tab_trigger\">Reviews</div>\n	  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n		<div class=\"reco clear\"><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openReccomendPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_team2\">&nbsp;</span>REQUEST RECOMMENDATION</a></div>\n		<ul class=\"clear\">\n          ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "reviews", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -1519,6 +1543,160 @@ function program3(depth0,data) {
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "review", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("</p>\n  </div>\n</li>\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["_booking"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("avatar ");
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.each.call(depth0, "booking.parent.friends_in_common", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n          <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n          ");
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("<img src=\"images/demo/img3.jpg\" alt=\"\"></a><span> ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>");
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n    <div class=\"btn_wrap\">\n      <a class=\"button button_smaller button_cancel\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "cancel", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n        <span class=\"icon_cancel\">&nbsp;\n        </span>CANCEL\n      </a>\n    </div>\n    ");
+  return buffer;
+  }
+
+function program8(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n    <div class=\"btn_wrap\">\n      <a class=\"button button_smaller\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "accept", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n        <span class=\"icon_ok2\">&nbsp;\n        </span>ACCEPT\n      </a>\n      <a class=\"button button_smaller button_cancel\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "decline", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n        <span class=\"icon_cancel\">&nbsp;\n        </span>DECLINE\n      </a>\n    </div>\n    ");
+  return buffer;
+  }
+
+function program10(depth0,data) {
+  
+  
+  data.buffer.push("\n        <span class=\"show\">Show</span>\n        ");
+  }
+
+function program12(depth0,data) {
+  
+  
+  data.buffer.push("\n        <span class=\"hide\">Hide</span>\n        ");
+  }
+
+  data.buffer.push("<li>\n  <header>\n    Request Sent: ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.created", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n    <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.booking_type", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>\n  </header>\n  <div class=\"img\">\n    ");
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  if (stack1 = helpers.comment) { stack1 = stack1.call(depth0, options); }
+  else { stack1 = depth0.comment; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  hashTypes = {};
+  hashContexts = {};
+  if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    <a href=\"#\"><img src=\"images/demo/img16.jpg\" alt=\"\"></a>\n    <p><span><a href=\"#\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.parent.full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</a></span></p>\n    <div>\n      <a href=\"#\">0 mutual friends</a>\n      <ul>\n        <li>Friends you have in common</li>\n\n        ");
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  if (stack1 = helpers.comment) { stack1 = stack1.call(depth0, options); }
+  else { stack1 = depth0.comment; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  hashTypes = {};
+  hashContexts = {};
+  if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n      </ul>\n    </div>\n  </div>\n  <div class=\"desc clear\">\n    <ul>\n      <li><span class=\"icon_date\">&nbsp;</span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.start_date_time", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("&nbsp; <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.start_date_time", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span></li>\n      <li><span class=\"icon_friends5\">&nbsp;</span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.child.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" Kids</li>\n      <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n      <li>\n        <p><a href=\"#\">Need more info?<br>Email ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.parent.first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</a></p>\n        <span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.parent.email", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</a>\n      </li>\n    </ul>\n    <div class=\"price\">\n      <span>\n        <strong>$\n        </strong>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", "valueBinding", "rate", {hash:{},contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("/hr\n      </span>\n      <a class=\"edit_button\" href=\"#\">edit\n      </a>\n    </div>\n    ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "sitter_accepted", {hash:{},inverse:self.program(8, program8, data),fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    <div class=\"note_wrap\">\n      <a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "showNote", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n        ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "isNoteShown", {hash:{},inverse:self.program(12, program12, data),fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n        Note\n      </a>\n    </div>\n  </div>\n  <div class=\"note_desc clear\">\n    <p>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.note", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n  </div>\n  <footer>\n    Request Sent: ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "booking.created", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n  </footer>\n</li>\n");
   return buffer;
   
 });

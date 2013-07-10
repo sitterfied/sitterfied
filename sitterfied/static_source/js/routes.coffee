@@ -1,4 +1,4 @@
-define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
+define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sitterfied) ->
     Sitterfied.Router.map(() ->
         this.resource('sitter', {path: '/sitter/:sitter_id'})
         this.resource('sitterEdit', {path: '/sitter/:sitter_id/edit'}, () ->
@@ -54,11 +54,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
         model: () ->
             return Sitterfied.currentUser
 
-        events:
-            openPhotoPopup: ->
-                $("#edit_photo_popup").show()
-
-
         renderTemplate: () ->
             this.render("parentEdit", {outlet: 'content', controller: 'currentUser'})
             this.render("parentEdit.top", {outlet: 'top', controller: 'currentUser'})
@@ -101,11 +96,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
     Sitterfied.SitterEditRoute = Em.Route.extend(
         model: () ->
             return Sitterfied.currentUser
-
-        events:
-            openPhotoPopup: ->
-                $("#edit_photo_popup").show()
-
 
         renderTemplate: () ->
             this.render("sitterEdit", {outlet: 'content', controller: 'currentUser'})
@@ -177,4 +167,38 @@ define ["ember","cs!sitterfied", "cs!models", "templates"], (Em, Sitterfied) ->
             this.render('emptysearch', {outlet: 'content'})
             #this.render('search', { outlet: 'content'})
     )
-    Sitterfied.ApplicationRoute = Em.Route.extend()
+    Sitterfied.ApplicationRoute = Em.Route.extend(
+        events:{
+            openReccomendPopup: ()->
+                console.log("")
+                $.fancybox
+                    href: "#recommend_popup"
+                    maxWidth: 960
+                    maxHeight: 800
+                    minWidth: 700
+                    minHeight: 480
+                    fitToView: false
+                    width: "90%"
+                    height: "90%"
+
+
+            saveCertification: () ->
+                newCert = Sitterfied.certificationController.get('newCert')
+                if newCert == ''
+                    return
+                certification = Sitterfied.Certification.createRecord({certification:newCert})
+                certification.get('transaction').commit();
+                Sitterfied.certificationController.set('newCert', '')
+
+            openPhotoPopup: ->
+                $.fancybox
+                    href:"#edit_photo_popup"
+                    maxWidth    : 960
+                    maxHeight   : 800
+                    minWidth    : 600
+                    minHeight   : 580
+                    fitToView   : false
+                    width       : '90%'
+                    height      : '90%'
+        }
+    )

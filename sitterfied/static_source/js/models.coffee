@@ -14,7 +14,7 @@ define [
         isDefaultStore:true
     )
 
-    Sitterfied.UserMixin = Em.Mixin.create(
+    Sitterfied.User = DS.Model.extend(
         #django builtins
         #last_login: DS.attr('date')
         is_superuser: DS.attr('boolean')
@@ -36,6 +36,7 @@ define [
         zip: DS.attr('string')
         cell: DS.attr('string')
         reviews: DS.hasMany('Sitterfied.SitterReview')
+        avatar: DS.attr('string')
 
         sorted_bookings: (() ->
             return this.get('bookings').toArray().sort((booking1, booking2) ->
@@ -107,7 +108,7 @@ define [
         name: DS.attr('string')
     )
 
-    Sitterfied.Parent = DS.Model.extend(Sitterfied.UserMixin,
+    Sitterfied.Parent = Sitterfied.User.extend(
         emergency_contact : DS.belongsTo('Sitterfied.Contact'),
         physician_contact : DS.belongsTo('Sitterfied.Contact'),
         parking_area : DS.attr('boolean'),
@@ -174,7 +175,7 @@ define [
         sun_overnight: DS.attr('boolean')
     )
 
-    Sitterfied.Sitter = DS.Model.extend(Sitterfied.UserMixin,
+    Sitterfied.Sitter = Sitterfied.User.extend(
         biography: DS.attr('string'),
         gender:  DS.attr('string'),
         id_verified: DS.attr('boolean'),
@@ -274,7 +275,5 @@ define [
         sitter: DS.hasMany('Sitterfied.Sitter'),
         sitter_accepted: DS.attr('boolean'),
         rate: DS.attr('number'),
-
-    )
 
     )

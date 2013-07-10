@@ -23,6 +23,11 @@ user_fields = ('first_name', 'last_name',
                'zip','bookings', 'cell' )
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        models.User
+        fields = user_fields
+
 class SitterSerializer(serializers.ModelSerializer):
 
     #todo general availablity
@@ -91,7 +96,11 @@ class BookingRequestSerializer(serializers.ModelSerializer):
         model = models.BookingRequest
 
 
-class UserViewSet(object):
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = models.Sitter.objects.all()
+    serializer_class = SitterSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('id', )
 
     @link()
     def reviews(self, request, pk=None):
@@ -107,13 +116,13 @@ class UserViewSet(object):
         return Response(serializer.data)
 
 
-class SitterViewSet(viewsets.ModelViewSet, UserViewSet):
+class SitterViewSet(viewsets.ModelViewSet):
     queryset = models.Sitter.objects.all()
     serializer_class = SitterSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
-class ParentViewSet(viewsets.ModelViewSet, UserViewSet):
+class ParentViewSet(viewsets.ModelViewSet):
     queryset = models.Parent.objects.all()
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

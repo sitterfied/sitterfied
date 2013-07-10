@@ -1,7 +1,7 @@
 	  <!-- reviews_block -->
 	  <div class="mob_tab_trigger">Reviews</div>
 	  <div class="tab_content reviews_block" id="tab-5">
-		<div class="reco clear"><a href="#recommend_popup"><span class="icon_team2">&nbsp;</span>REQUEST RECOMMENDATION</a></div>
+		<div class="reco clear"><a {{action 'openReccomendPopup'}}><span class="icon_team2">&nbsp;</span>REQUEST RECOMMENDATION</a></div>
 		<ul class="clear">
           {{# each reviews}}
             {{partial "review"}}

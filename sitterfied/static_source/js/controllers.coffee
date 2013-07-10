@@ -1,6 +1,9 @@
 define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
+
+
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
+        needs: ['certifications']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -85,9 +88,13 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             alert('edit')
             this.transitionTo('book');
     )
-    Sitterfied.CertificationsController = Em.ArrayController.extend(
-        newcert: ""
-        add: () ->
-            alert('edit')
-            this.transitionTo('book');
+
+    Sitterfied.stateController  = Em.ArrayController.create(
+        content: Sitterfied.States
+    )
+    Sitterfied.educationController  = Em.ArrayController.create(
+        content: Sitterfied.Educations
+    )
+    Sitterfied.CertificationsController  = Em.ArrayController.extend(
+        newCert: ''
     )

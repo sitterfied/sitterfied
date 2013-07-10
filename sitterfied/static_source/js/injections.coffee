@@ -18,3 +18,16 @@ define ['ember'
                 Sitterfied.set('currentUserController', controller)
 
         )
+
+
+        Em.Application.initializer(
+            name: "certificationController"
+            initialize: (container, application) ->
+                certController = Sitterfied.CertificationsController.create()
+                Sitterfied.set('certificationsController',certController)
+                Sitterfied.set('certificationsController.content',Sitterfied.Certification.find())
+                # controller = container.lookup('controller:currentUser').set('model', user)
+                # container.typeInjection('controller', 'currentUser', 'controller:currentUser')
+                # Sitterfied.set('currentUserController', controller)
+
+        )

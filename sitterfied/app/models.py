@@ -151,7 +151,8 @@ class Sitter(User):
 
 
 class Certification(TimeStampedModel):
-    certification = models.CharField(max_length=128)
+    certification = models.CharField(max_length=128, unique=True)
+
 
 
 class Language(TimeStampedModel):

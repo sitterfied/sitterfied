@@ -37,10 +37,7 @@
 				  <p>
                     {{view Ember.TextField placeholder="Zip Code" valueBinding="live_zip" class="small"}}
                     {{view Ember.TextField placeholder="City" valueBinding="city"}}
-                    {{view Ember.ChosenSelect
-                      contentBinding="Ember.States"
-                      valueBinding="state"
-                       }}
+                    {{view Sitterfied.ChosenSelect controllerBinding=Sitterfied.stateController selectionBinding="state"}}
                   </p>
 				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
@@ -138,9 +135,9 @@
 				<li><span class="icon_education3">&nbsp;</span>Education Level</li>
 				<li>
 				  <p><span>Education level:</span>
-                  {{view Ember.ChosenSelect
-                  contentBinding="Ember.Educations"
-                  valueBinding="highest_education"
+                  {{view Sitterfied.ChosenSelect
+                  controllerBinding=Sitterfied.educationController
+                  selectionBinding="highest_education"
                   }}
                   </p>
 				  <p><span>last school attended:</span>{{view Ember.TextField placeholder="School Name" valueBinding="last_school"}}</p>
@@ -165,16 +162,21 @@
 				<li>
 				  <p>
                     <span>&nbsp;</span>
-                    {{view Ember.ChosenSelect
-                    contentBinding="Sitterfied.certificationsController"
-                    optionLabelPath="model.certification"
-                    valueBinding="id"
+                    {{# comment }}
+                    {{view Sitterfied.MultipleChosenSelect
+                    controllerBinding=Sitterfied.certificationController
+                    optionLabelPath="certification"
+                    optionValuePath="id"
+                    valueBinding="certification"
                     }}
+                    {{/comment}}
                   </p>
 				  <p>
                     <span>add another (if not listed above):</span>
-                    {{view Ember.TextField valueBinding="Sitterfied.certificationController.newcert"}}
-                    <a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a>
+                    {{view Ember.TextField valueBinding="Sitterfied.certificationController.newCert"}}
+                    <a class="button button_smaller button_edit certbutton" {{action 'saveCertification' }} >
+                      <span class="icon_plus">&nbsp;</span>ADD
+                    </a>
                   </p>
 				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>

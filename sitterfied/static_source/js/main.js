@@ -10,6 +10,7 @@ require({
         "jqueryui": "lib/jquery-ui-1.10.0.custom.min",
         "chosen": "lib/chosen.jquery.min",
         "djangoRestAdapter": "lib/adapter",
+        'fancybox':'lib/jquery.fancybox.pack'
     },
     waitSeconds: 0,
     shim:{
@@ -30,6 +31,10 @@ require({
         djangoRestAdapter: {
             deps: ['data'],
         },
+        fancybox: {
+            deps: ['jquery'],
+        },
+
         jqueryui: {
             deps: ['jquery']
         },
