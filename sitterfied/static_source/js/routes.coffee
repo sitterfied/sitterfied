@@ -190,6 +190,13 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 certification.get('transaction').commit();
                 Sitterfied.certificationController.set('newCert', '')
 
+
+            previewAvatar: () ->
+                alert("preview img")
+
+            uploadAvatar: () ->
+                alert("uploadimg")
+
             openPhotoPopup: ->
                 $.fancybox
                     href:"#edit_photo_popup"

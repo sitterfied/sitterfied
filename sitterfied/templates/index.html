@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 	<!-- Favicon -->
-	<link href="images/favicon.ico" rel="icon" type="image/x-icon">
+	<link href="{{STATIC_URL}}images/favicon.ico" rel="icon" type="image/x-icon">
 
 	<!-- Stylesheets -->
     {% load compressed %}
@@ -35,13 +35,20 @@
     <script type="text/x-handlebars">
 
       <!-- edit_photo_popup -->
+            {% verbatim %}
 <div id="edit_photo_popup">
 	<div class="edit_photo_popup_wrap">
 		<div class="photo_wrap">
-			<img src="images/demo/img17.jpg" alt="" />
+			<img src="/static/images/demo/img17.jpg" alt="" />
 		</div>
-		<p><a class="button button_edit" href="#">Upload from Computer</a><span>(4 MB file limit)</span><a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a></p>
+		<p><a class="button button_edit" {{action 'previewAvatar'}}>Upload from Computer</a>
+          <span>(4 MB file limit)</span><a class="button button_small" {{action 'uploadAvatar'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+        </p>
 	</div>
+
+    <form id="avatar_form" style="display:none">
+      <input type="file">
+    </form>
 </div>
 
 
@@ -55,7 +62,7 @@
 	      </form>
 	    </div>
       </div>
-
+{% endverbatim %}
 
       <!-- header -->
         <header class="header">

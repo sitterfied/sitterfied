@@ -23,7 +23,7 @@
 			<ul>
 			  <li>Parents</li>
               {{# each parents_in_network}}
-		        <li>{{#linkTo parent this}}<img src="images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
+		        <li>{{#linkTo parent this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
               {{/each}}
 			</ul>
 		  </li>
@@ -31,7 +31,7 @@
 			<ul>
 			  <li>Sitters</li>
               {{# each sitter_in_network}}
-		        <li>{{#linkTo sitter this}}<img src="images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
+		        <li>{{#linkTo sitter this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
               {{/each}}
 			</ul>
 		  </li>
@@ -39,7 +39,7 @@
 			<ul>
 			  <li>Groups</li>
               {{# each sitter_groups}}
-		        <li>{{#linkTo }}<img src="images/demo/img15.jpg" alt="" />{{name}}{{/linkTo}}</li><a {{action deleteGroup this}} class="delete">&nbsp;</a>
+		        <li>{{#linkTo }}<img src="/static/images/demo/img15.jpg" alt="" />{{name}}{{/linkTo}}</li><a {{action deleteGroup this}} class="delete">&nbsp;</a>
               {{/each}}
 			</ul>
 		  </li>

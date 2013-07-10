@@ -5,7 +5,7 @@
   </header>
   <div class="img">
     {{# comment }}avatar {{/comment}}
-    <a href="#"><img src="images/demo/img16.jpg" alt=""></a>
+    <a href="#"><img src="/static/images/demo/img16.jpg" alt=""></a>
     <p><span><a href="#">{{booking.parent.full_name}}</a></span></p>
     <div>
       <a href="#">0 mutual friends</a>
@@ -14,7 +14,7 @@
 
         {{# comment }}
           {{each booking.parent.friends_in_common}}
-          <li>{{# linkTo parent this }}<img src="images/demo/img3.jpg" alt=""></a><span> {{full_name}}</span>{{/linkTo}}</li>
+          <li>{{# linkTo parent this }}<img src="/static/images/demo/img3.jpg" alt=""></a><span> {{full_name}}</span>{{/linkTo}}</li>
           {{/comment}}
       </ul>
     </div>
