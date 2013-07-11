@@ -3,7 +3,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        needs: ['certifications', 'languages', 'otherServices']
+        needs: ['certifications', 'languages', 'otherServices', 'usersInNetwork']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -149,6 +149,32 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     Sitterfied.OtherServicesController  = Em.ArrayController.extend(
         newService: ''
     )
+    Sitterfied.OtherServicesController  = Em.ArrayController.extend(
+        newService: ''
+    )
+
     Sitterfied.LanguagesController  = Em.ArrayController.extend(
         newLanguage: ''
+    )
+    Sitterfied.UsersInNetworkController  = Em.ArrayController.extend(
+
+        parentsInNetwork: (() ->
+            content = this.get('content');
+            if not content or not content.isLoaded
+                return []
+            parents = content.filter (item) ->
+                item.get('parent_or_sitter') == "Parent"
+            return parents
+        ).property('model.isLoaded', 'model')
+        sittersInNetwork: (() ->
+            content = this.get('content');
+
+            if not content or not content.isLoaded
+                return []
+
+            sitters = content.filter (item) ->
+                item.get('parent_or_sitter') == "Sitter"
+            return sitters
+        ).property('model.isLoaded', 'model')
+
     )

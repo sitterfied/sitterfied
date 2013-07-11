@@ -69,6 +69,14 @@ class User(AbstractUser, TimeStampedModel):
     def __unicode__(self):
         return self.get_full_name()
 
+    def is_parent_or_sitter(self):
+        if hasattr(self, 'sitter'):
+            return 'Sitter'
+        elif hasattr(self, 'parent'):
+            return 'Parent'
+
+
+
 
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
@@ -152,6 +160,7 @@ class Sitter(User):
 
     class Meta:
          verbose_name = "Sitter"
+
 
 
 class Certification(TimeStampedModel):

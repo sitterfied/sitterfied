@@ -6,6 +6,7 @@ from django.db.models import Q
 
 
 from rest_framework import serializers, viewsets, permissions
+from rest_framework import serializers
 from rest_framework.parsers import FileUploadParser
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -36,15 +37,13 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
 
     class Meta:
         model = models.User
-        fields = user_fields
+        fields = user_fields + ('parent_or_sitter',)
 
 class SitterSerializer(serializers.ModelSerializer):
-
-    #todo general availablity
-    parent_or_sitter = "Sitter"
 
     class Meta:
         model = models.Sitter
@@ -111,10 +110,11 @@ class BookingRequestSerializer(serializers.ModelSerializer):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = models.Sitter.objects.all()
-    serializer_class = SitterSerializer
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
+
 
     @action()
     def avatar_upload(self, request, pk=None):
@@ -129,11 +129,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
         response = Response(data={'avatar':user.avatar.name})
         return response
-
-    @action()
-    def languages(self, request, pk=None):
-        import pdb
-        pdb.set_trace()
 
 
 

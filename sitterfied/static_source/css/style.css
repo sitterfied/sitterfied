@@ -930,6 +930,11 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .network_block .soc_list ul li p a:nth-child(2) img {margin-right:26px;}
 .network_block .soc_list ul li p input[type="text"] {vertical-align:middle;border:1px solid #bfced5;min-height:34px;padding:0 45px 0 20px;width:210px;font:17px 'ProximaNova';color:#c5c5c5;margin-right:12px;box-shadow:rgba(0,0,0,.15) 0 0 5px 0 inset;background:#fff url(../images/icons/search2.png) right center no-repeat;}
 .network_block .soc_list ul li p input[type="submit"] {cursor:pointer;vertical-align:middle;color:#fff;font:14px/28px 'ProximaNovaCond';border:1px solid #135964;background:#1c8292 url(../images/reco_bg.gif) repeat-x;width:46px;height:31px;border-radius:2px;box-shadow:rgba(0,0,0,.25) 1px 1px 1px;text-align:center;}
+
+.add-friend {vertical-align:middle;border:1px solid #bfced5;min-height:34px;padding:0 45px 0 20px;width:210px;font:17px 'ProximaNova';color:#c5c5c5;margin-right:12px;box-shadow:rgba(0,0,0,.15) 0 0 5px 0 inset;background:#fff url(../images/icons/search2.png) right center no-repeat;}
+
+
+
 .network_block .soc_psg_list {margin-left:70px;}
 .network_block .soc_psg_list > li {float:left;width:220px;margin-right:60px;}
 .network_block .soc_psg_list > li > ul > li {font-size:17px;color:#146470;padding:0 25px 10px 0;line-height:34px;position:relative;}

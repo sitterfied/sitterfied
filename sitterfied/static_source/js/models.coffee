@@ -24,6 +24,7 @@ define [
         last_name: DS.attr('string')
         email: DS.attr('string')
         status: DS.attr('string')
+        parent_or_sitter: DS.attr('string')
         users_in_network: DS.hasMany('Sitterfied.User')
         sitter_groups: DS.hasMany('Sitterfied.Group')
         languages: DS.hasMany('Sitterfied.Language')
