@@ -181,15 +181,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     width: "90%"
                     height: "90%"
 
-
-            saveCertification: () ->
-                newCert = Sitterfied.certificationController.get('newCert')
-                if newCert == ''
-                    return
-                certification = Sitterfied.Certification.createRecord({certification:newCert})
-                certification.get('transaction').commit();
-                Sitterfied.certificationController.set('newCert', '')
-
             gmailConnect: () ->
                 alert('gmail connect')
 
@@ -210,8 +201,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                         $.fancybox.close()
                     error: () ->
                         alert("There was a problem uploading your avatar. Please try again")
-
-
 
 
             openPhotoPopup: ->
