@@ -11,12 +11,12 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         isParent: (() ->
             Sitterfied.accountType == "Parent"
         ).property('parent_or_sitter')
+
         saveSettings: () ->
             settings =  this.get('settings')
-            if settings.get('isDirty')
-                settings.save()
-            if this.get('model.isDirty')
-                this.get('model').save()
+            transaction = settings.get('transaction')
+            transaction.add(this.get('model'))
+            transaction.commit()
 
         deleteAccount: () ->
             alert('delete')
@@ -44,6 +44,32 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
         deleteGroup: (group) ->
             alert("delete group, " + group)
+
+        saveCertification: () ->
+            newCert = Sitterfied.certificationsController.get('newCert')
+            if newCert == ''
+                return
+            certification = Sitterfied.Certification.createRecord({certification:newCert})
+            certification.get('transaction').commit();
+            Sitterfied.certificationsController.set('newCert', '')
+
+        saveService: () ->
+            newService = Sitterfied.otherServicesController.get('newService')
+            if newService == ''
+                return
+            service = Sitterfied.OtherService.createRecord({service:newService})
+            service.get('transaction').commit();
+            Sitterfied.otherServicesController.set('newService', '')
+
+        saveLanguage: () ->
+            newLanguage = Sitterfied.languagesController.get('newLanguage')
+            if newLanguage == ''
+                return
+            language = Sitterfied.Language.createRecord({language:newLanguage})
+            language.get('transaction').commit();
+            Sitterfied.languagesController.set('newLanguage', '')
+
+
 
         facebookConnect: ()->
                 console.log("get fb data")
@@ -114,4 +140,10 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.CertificationsController  = Em.ArrayController.extend(
         newCert: ''
+    )
+    Sitterfied.OtherServicesController  = Em.ArrayController.extend(
+        newService: ''
+    )
+    Sitterfied.LanguagesController  = Em.ArrayController.extend(
+        newLanguage: ''
     )
