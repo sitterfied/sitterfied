@@ -3,7 +3,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        needs: ['certifications']
+        needs: ['certifications', 'languages', 'otherServices', 'usersInNetwork']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -11,12 +11,15 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         isParent: (() ->
             Sitterfied.accountType == "Parent"
         ).property('parent_or_sitter')
+
         saveSettings: () ->
+            model = this.get('model')
+            #force a save
+            model.get('stateManager').goToState('updated')
             settings =  this.get('settings')
-            if settings.get('isDirty')
-                settings.save()
-            if this.get('model.isDirty')
-                this.get('model').save()
+            transaction = model.get('transaction')
+            transaction.add(settings)
+            transaction.commit()
 
         deleteAccount: () ->
             alert('delete')
@@ -44,6 +47,34 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
         deleteGroup: (group) ->
             alert("delete group, " + group)
+
+        saveCertification: () ->
+
+            newCert = this.get('controllers.certifications.newCert')
+            if newCert == ''
+                return
+            certification = Sitterfied.Certification.createRecord({certification:newCert})
+            certification.get('transaction').commit()
+            this.set('controllers.certifications.newCert', '')
+
+        saveService: () ->
+
+            newService = this.get('controllers.otherServices.newService')
+            if newService == ''
+                return
+            service = Sitterfied.OtherService.createRecord({service:newService})
+            service.get('transaction').commit();
+            this.set('controllers.otherServices.newService', '')
+
+        saveLanguage: () ->
+            newLanguage = this.get('controllers.languages.newLanguage')
+            if newLanguage == ''
+                return
+            language = Sitterfied.Language.createRecord({language:newLanguage})
+            language.get('transaction').commit();
+            this.set('controllers.languages.newLanguage', '')
+
+
 
         facebookConnect: ()->
                 console.log("get fb data")
@@ -114,4 +145,36 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.CertificationsController  = Em.ArrayController.extend(
         newCert: ''
+    )
+    Sitterfied.OtherServicesController  = Em.ArrayController.extend(
+        newService: ''
+    )
+    Sitterfied.OtherServicesController  = Em.ArrayController.extend(
+        newService: ''
+    )
+
+    Sitterfied.LanguagesController  = Em.ArrayController.extend(
+        newLanguage: ''
+    )
+    Sitterfied.UsersInNetworkController  = Em.ArrayController.extend(
+
+        parentsInNetwork: (() ->
+            content = this.get('content');
+            if not content or not content.isLoaded
+                return []
+            parents = content.filter (item) ->
+                item.get('parent_or_sitter') == "Parent"
+            return parents
+        ).property('model.isLoaded', 'model')
+        sittersInNetwork: (() ->
+            content = this.get('content');
+
+            if not content or not content.isLoaded
+                return []
+
+            sitters = content.filter (item) ->
+                item.get('parent_or_sitter') == "Sitter"
+            return sitters
+        ).property('model.isLoaded', 'model')
+
     )

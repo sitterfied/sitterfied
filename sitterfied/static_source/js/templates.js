@@ -169,17 +169,33 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 
 function program1(depth0,data) {
   
+  var buffer = '', stack1, hashTypes, hashContexts;
+  data.buffer.push("\n		  <li>\n			<ul>\n			  <li>Parents</li>\n\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "parentsInNetwork", {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Sitters</li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "sittersInNetwork", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n          ");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
   var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
   data.buffer.push("\n		        <li>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n              ");
   return buffer;
   }
-function program2(depth0,data) {
+function program3(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("<img src=\"/static/images/demo/img15.jpg\" alt=\"\" />");
@@ -189,24 +205,24 @@ function program2(depth0,data) {
   return buffer;
   }
 
-function program4(depth0,data) {
+function program5(depth0,data) {
   
   var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
   data.buffer.push("\n		        <li>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n              ");
   return buffer;
   }
 
-function program6(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = '', stack1, options, hashTypes, hashContexts;
   data.buffer.push("\n		        <li>");
-  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   if (stack1 = helpers.linkTo) { stack1 = stack1.call(depth0, options); }
   else { stack1 = depth0.linkTo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   hashTypes = {};
@@ -220,7 +236,7 @@ function program6(depth0,data) {
   data.buffer.push(" class=\"delete\">&nbsp;</a>\n              ");
   return buffer;
   }
-function program7(depth0,data) {
+function program8(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("<img src=\"/static/images/demo/img15.jpg\" alt=\"\" />");
@@ -236,20 +252,21 @@ function program7(depth0,data) {
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookConnect", {hash:{
     'bubbles': (false)
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n                    <img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook\n                </a>\n                <a href=\"#\">\n                  <img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail\n                </a>\n              </p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p><input type=\"text\" value=\"Search a person or group\" /><input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n		  <li>\n			<ul>\n			  <li>Parents</li>\n              ");
+  data.buffer.push(">\n                    <img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook\n                </a>\n                <a href=\"#\">\n                  <img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail\n                </a>\n              </p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p>\n                ");
+  hashContexts = {'placeholder': depth0};
+  hashTypes = {'placeholder': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Search a person or group")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                <input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n          ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "parents_in_network", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['with'].call(depth0, "controllers.usersInNetwork", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Sitters</li>\n              ");
+  data.buffer.push("\n		  <li>\n			<ul>\n			  <li>Groups</li>\n              ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "sitter_in_network", {hash:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Groups</li>\n              ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "sitter_groups", {hash:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "sitter_groups", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n			</ul>\n		  </li>\n		</ul>\n	  </div>\n	  <!-- /network_block -->\n");
   return buffer;
@@ -640,16 +657,55 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n                    ");
-  hashContexts = {'controllerBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
-  hashTypes = {'controllerBinding': "ID",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.MultipleChosenSelect", {hash:{
-    'controllerBinding': ("Sitterfied.certificationController"),
-    'optionLabelPath': ("certification"),
-    'optionValuePath': ("id"),
-    'valueBinding': ("certification")
+  data.buffer.push("\n                    <span>&nbsp;</span>\n                    ");
+  hashContexts = {'contentBinding': depth0,'controllerBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "STRING",'controllerBinding': "STRING",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("controllers.certifications"),
+    'controllerBinding': ("controllers.certifications"),
+    'prompt': ("Select certifications"),
+    'optionLabelPath': ("content.certification"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("certifications"),
+    'multiple': ("multiple")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    ");
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n                      ");
+  hashContexts = {'contentBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("controllers.languages"),
+    'prompt': ("Select languages"),
+    'optionLabelPath': ("content.language"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("languages"),
+    'multiple': ("multiple")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                     ");
+  return buffer;
+  }
+
+function program9(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n                      <span>&nbsp;</span>\n                      ");
+  hashContexts = {'contentBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("controllers.otherServices"),
+    'prompt': ("Select services"),
+    'optionLabelPath': ("content.service"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("other_services"),
+    'multiple': ("multiple")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                      ");
   return buffer;
   }
 
@@ -716,13 +772,18 @@ function program5(depth0,data) {
     'valueBinding': ("city")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    ");
-  hashContexts = {'controllerBinding': depth0,'selectionBinding': depth0};
-  hashTypes = {'controllerBinding': "ID",'selectionBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ChosenSelect", {hash:{
-    'controllerBinding': ("Sitterfied.stateController"),
-    'selectionBinding': ("state")
+  hashContexts = {'viewName': depth0,'prompt': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'required': depth0};
+  hashTypes = {'viewName': "STRING",'prompt': "STRING",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'required': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'viewName': ("fieldValueSelect2"),
+    'prompt': ("Select State"),
+    'contentBinding': ("Sitterfied.States"),
+    'optionLabelPath': ("content"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("state"),
+    'required': ("")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                  </p>\n				  <a class=\"button button_small\" ");
+  data.buffer.push("\n\n                  </p>\n				  <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -889,10 +950,10 @@ function program5(depth0,data) {
   if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_education3\">&nbsp;</span>Education Level</li>\n				<li>\n				  <p><span>Education level:</span>\n                  ");
-  hashContexts = {'controllerBinding': depth0,'selectionBinding': depth0};
-  hashTypes = {'controllerBinding': "ID",'selectionBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ChosenSelect", {hash:{
-    'controllerBinding': ("Sitterfied.educationController"),
+  hashContexts = {'contentBinding': depth0,'selectionBinding': depth0};
+  hashTypes = {'contentBinding': "ID",'selectionBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("Sitterfied.Educations"),
     'selectionBinding': ("highest_education")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                  </p>\n				  <p><span>last school attended:</span>");
@@ -946,25 +1007,22 @@ function program5(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_certification3\">&nbsp;</span>Certification or Training</li>\n				<li>\n				  <p>\n                    <span>&nbsp;</span>\n                    ");
-  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  if (stack1 = helpers.comment) { stack1 = stack1.call(depth0, options); }
-  else { stack1 = depth0.comment; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_certification3\">&nbsp;</span>Certification or Training</li>\n				<li>\n				  <p>\n                    ");
   hashTypes = {};
   hashContexts = {};
-  if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  stack1 = helpers['if'].call(depth0, "controllers.certifications.content.content", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n                  </p>\n				  <p>\n                    <span>add another (if not listed above):</span>\n                    ");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'valueBinding': ("Sitterfied.certificationController.newCert")
+    'valueBinding': ("controllers.certifications.newCert")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    <a class=\"button button_smaller button_edit certbutton\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveCertification", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" >\n                      <span class=\"icon_plus\">&nbsp;</span>ADD\n                    </a>\n                  </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>Minimum for 1 child:</span>");
+  data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;</span>ADD\n                    </a>\n                  </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>Minimum for 1 child:</span>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -1004,13 +1062,37 @@ function program5(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_lng2\">&nbsp;</span>Languages</li>\n				<li>\n				  <p><span>I speak:</span><select multiple data-placeholder=\"English\" tabindex=\"25\"><option>English</option><option>English</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				  <p><span>&nbsp;</span>");
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_lng2\">&nbsp; </span>Languages\n                </li>\n				<li>\n				  <p>\n                    <span>I speak:</span>\n                   </p>\n                      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "controllers.languages.content.content", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n                    </p>\n				  <p><span>add another (if not listed above):</span>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'valueBinding': ("other_services")
+    'valueBinding': ("controllers.languages.newLanguage")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p>\n				  <p><span>add another (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" ");
+  data.buffer.push("<a class=\"button button_smaller button_edit\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveLanguage", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				</lpi>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				    <p>\n                      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "controllers.otherServices.content.content", {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n                    </p>\n				  <p><span>add another (if not listed above):</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("controllers.otherServices.newService")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<a class=\"button button_smaller button_edit\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveService", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -1153,7 +1235,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   
 
 
-  data.buffer.push("p	  <!-- bookings_block -->\n	  <div class=\"mob_tab_trigger\">Bookings</div>\n	  <div class=\"tab_content bookings_block\" id=\"tab-3\">\n		<ul class=\"subtab_select\">\n		  <li><a href=\"#tab-1-1\"><span>4</span>Pending Requests</a></li>\n		  <li><a href=\"#tab-1-2\"><span>3</span>Upcoming Jobs</a></li>\n		  <li><a href=\"#tab-1-3\"><span>7</span>Completed Jobs</a></li>\n		  <li><a href=\"#tab-1-4\"><span>12</span>Missed Requests</a></li>\n		  <li><a href=\"#tab-1-5\"><span>2</span>Expired Requests</a></li>\n		  <li><a href=\"#tab-1-6\"><span>3</span>Declined Jobs</a></li>\n		  <li><a href=\"#tab-1-7\"><span>2</span>Canceled Jobs</a></li>\n		</ul>\n\n		<div class=\"mob_tab_trigger active\"><span>4</span>Pending Requests</div>\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">By Phone</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /pending_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Upcoming Jobs</div>\n		<!-- upcoming_jobs_block -->\n		<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"price\"><span><strong>$25</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /upcoming_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>7</span>Completed Jobs</div>\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n		  Completed Jobs\n		</div>\n		<!-- /completed_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>12</span>Missed Requests</div>\n		<!-- missed_requests_block -->\n		<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n		  Missed Requests\n		</div>\n		<!-- /missed_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Expired Requests</div>\n		<!-- expired_requests_block -->\n		<div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n		  Expired Requests\n		</div>\n		<!-- /expired_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Declined Jobs</div>\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n		  Declined Jobs\n		</div>\n		<!-- /declined_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Canceled Jobs</div>\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n		  Canceled Jobs\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n");
+  data.buffer.push("	  <!-- bookings_block -->\n	  <div class=\"mob_tab_trigger\">Bookings</div>\n	  <div class=\"tab_content bookings_block\" id=\"tab-3\">\n		<ul class=\"subtab_select\">\n		  <li><a href=\"#tab-1-1\"><span>4</span>Pending Requests</a></li>\n		  <li><a href=\"#tab-1-2\"><span>3</span>Upcoming Jobs</a></li>\n		  <li><a href=\"#tab-1-3\"><span>7</span>Completed Jobs</a></li>\n		  <li><a href=\"#tab-1-4\"><span>12</span>Missed Requests</a></li>\n		  <li><a href=\"#tab-1-5\"><span>2</span>Expired Requests</a></li>\n		  <li><a href=\"#tab-1-6\"><span>3</span>Declined Jobs</a></li>\n		  <li><a href=\"#tab-1-7\"><span>2</span>Canceled Jobs</a></li>\n		</ul>\n\n		<div class=\"mob_tab_trigger active\"><span>4</span>Pending Requests</div>\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">By Phone</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /pending_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Upcoming Jobs</div>\n		<!-- upcoming_jobs_block -->\n		<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"price\"><span><strong>$25</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /upcoming_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>7</span>Completed Jobs</div>\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n		  Completed Jobs\n		</div>\n		<!-- /completed_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>12</span>Missed Requests</div>\n		<!-- missed_requests_block -->\n		<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n		  Missed Requests\n		</div>\n		<!-- /missed_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Expired Requests</div>\n		<!-- expired_requests_block -->\n		<div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n		  Expired Requests\n		</div>\n		<!-- /expired_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Declined Jobs</div>\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n		  Declined Jobs\n		</div>\n		<!-- /declined_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Canceled Jobs</div>\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n		  Canceled Jobs\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n");
   
 });
 Ember.TEMPLATES["sitterEdit"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -1527,7 +1609,7 @@ function program14(depth0,data) {
 Ember.TEMPLATES["_review"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, stack2, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -1543,10 +1625,16 @@ function program3(depth0,data) {
   data.buffer.push("<div class=\"reco_btn\"><span class=\"icon_ok\">&nbsp;</span>Recommends</div>");
   }
 
-  data.buffer.push("<li>\n  <a href=\"#\"><img src=\"/static/images/demo/img11.jpg\" alt=\"\" /></a>\n  <div class=\"desc\">\n	<p>");
+  data.buffer.push("<li>\n  <a ><img ");
+  hashContexts = {'src': depth0};
+  hashTypes = {'src': "STRING"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'src': ("avatarUrl")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" alt=\"\" /></a>\n  <div class=\"desc\">\n	<p>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "parent", options) : helperMissing.call(depth0, "linkTo", "parent", "parent", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</p>\n	");

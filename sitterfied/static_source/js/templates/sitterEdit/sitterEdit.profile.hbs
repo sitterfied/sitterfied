@@ -37,7 +37,15 @@
 				  <p>
                     {{view Ember.TextField placeholder="Zip Code" valueBinding="live_zip" class="small"}}
                     {{view Ember.TextField placeholder="City" valueBinding="city"}}
-                    {{view Sitterfied.ChosenSelect controllerBinding=Sitterfied.stateController selectionBinding="state"}}
+                    {{ view Sitterfied.Select2
+                         viewName="fieldValueSelect2"
+        	             prompt="Select State"
+                         contentBinding="Sitterfied.States"
+                         optionLabelPath="content"
+                         optionValuePath="content"
+                         selectionBinding="state"
+                         required="" }}
+
                   </p>
 				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
@@ -135,9 +143,9 @@
 				<li><span class="icon_education3">&nbsp;</span>Education Level</li>
 				<li>
 				  <p><span>Education level:</span>
-                  {{view Sitterfied.ChosenSelect
-                  controllerBinding=Sitterfied.educationController
-                  selectionBinding="highest_education"
+                  {{view Sitterfied.Select2
+                     contentBinding=Sitterfied.Educations
+                     selectionBinding="highest_education"
                   }}
                   </p>
 				  <p><span>last school attended:</span>{{view Ember.TextField placeholder="School Name" valueBinding="last_school"}}</p>
@@ -161,20 +169,23 @@
 				<li><span class="icon_certification3">&nbsp;</span>Certification or Training</li>
 				<li>
 				  <p>
+                    {{# if controllers.certifications.content.content }}
                     <span>&nbsp;</span>
-                    {{# comment }}
-                    {{view Sitterfied.MultipleChosenSelect
-                    controllerBinding=Sitterfied.certificationController
-                    optionLabelPath="certification"
-                    optionValuePath="id"
-                    valueBinding="certification"
+                    {{view Sitterfied.Select2
+                    contentBinding="controllers.certifications"
+                    controllerBinding="controllers.certifications"
+                    prompt="Select certifications"
+                    optionLabelPath="content.certification"
+                    optionValuePath="content"
+                    selectionBinding="certifications"
+                    multiple="multiple"
                     }}
-                    {{/comment}}
+                    {{/if}}
                   </p>
 				  <p>
                     <span>add another (if not listed above):</span>
-                    {{view Ember.TextField valueBinding="Sitterfied.certificationController.newCert"}}
-                    <a class="button button_smaller button_edit certbutton" {{action 'saveCertification' }} >
+                    {{view Ember.TextField valueBinding="controllers.certifications.newCert"}}
+                    <a class="button button_smaller button_edit certbutton" {{action 'saveCertification'}}>
                       <span class="icon_plus">&nbsp;</span>ADD
                     </a>
                   </p>
@@ -198,19 +209,46 @@
 			</li>
 			<li>
 			  <ul>
-				<li><span class="icon_lng2">&nbsp;</span>Languages</li>
 				<li>
-				  <p><span>I speak:</span><select multiple data-placeholder="English" tabindex="25"><option>English</option><option>English</option></select></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
-				</li>
+                  <span class="icon_lng2">&nbsp; </span>Languages
+                </li>
+				<li>
+				  <p>
+                    <span>I speak:</span>
+                   </p>
+                      {{# if controllers.languages.content.content }}
+                      {{view Sitterfied.Select2
+                      contentBinding=controllers.languages
+        	          prompt="Select languages"
+                      optionLabelPath="content.language"
+                      optionValuePath="content"
+                      selectionBinding="languages"
+                      multiple="multiple"
+                      }}
+                     {{/if}}
+                    </p>
+				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}<a class="button button_smaller button_edit" {{action 'saveLanguage'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
+				</lpi>
 			  </ul>
 			</li>
 			<li>
 			  <ul>
 				<li><span class="icon_other2">&nbsp;</span>Other Services</li>
 				<li>
-				  <p><span>&nbsp;</span>{{view Ember.TextField valueBinding="other_services"}}</p>
-				  <p><span>add another (if not listed above):</span><input type="text" /><a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
+				    <p>
+                      {{# if controllers.otherServices.content.content }}
+                      <span>&nbsp;</span>
+                      {{view Sitterfied.Select2
+                      contentBinding=controllers.otherServices
+                      prompt="Select services"
+                      optionLabelPath="content.service"
+                      optionValuePath="content"
+                      selectionBinding="other_services"
+                      multiple="multiple"
+                      }}
+                      {{/if}}
+                    </p>
+				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.otherServices.newService"}}<a class="button button_smaller button_edit" {{action 'saveService'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
 				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
 			  </ul>

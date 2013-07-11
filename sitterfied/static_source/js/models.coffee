@@ -14,6 +14,7 @@ define [
         isDefaultStore:true
     )
 
+
     Sitterfied.User = DS.Model.extend(
         #django builtins
         #last_login: DS.attr('date')
@@ -23,6 +24,7 @@ define [
         last_name: DS.attr('string')
         email: DS.attr('string')
         status: DS.attr('string')
+        parent_or_sitter: DS.attr('string')
         users_in_network: DS.hasMany('Sitterfied.User')
         sitter_groups: DS.hasMany('Sitterfied.Group')
         languages: DS.hasMany('Sitterfied.Language')
@@ -209,8 +211,8 @@ define [
         major: DS.attr('string'),
         occupation:  DS.attr('string'),
 
-        certification: DS.hasMany('Sitterfied.Certification'),
-        other_services: DS.attr('string'),
+        certifications: DS.hasMany('Sitterfied.Certification'),
+        other_services: DS.hasMany('Sitterfied.OtherService'),
         one_child_min_rate: DS.attr('number'),
         one_child_max_rate: DS.attr('number'),
         two_child_min_rate: DS.attr('number'),
@@ -239,9 +241,15 @@ define [
 
     Sitterfied.Language = DS.Model.extend(
         language: DS.attr('string'),
+        users: DS.hasMany("Sitterfied.User")
     )
     Sitterfied.Certification = DS.Model.extend(
         certification: DS.attr('string'),
+        sitters: DS.hasMany("Sitterfied.Sitter")
+    )
+    Sitterfied.OtherService = DS.Model.extend(
+        service: DS.attr('string'),
+        sitters: DS.hasMany("Sitterfied.Sitter")
     )
 
 

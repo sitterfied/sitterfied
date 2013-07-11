@@ -57,6 +57,23 @@ DS.DjangoRESTSerializer = DS.RESTSerializer.extend({
         return pJSON;
     },
 
+
+  addHasMany: function(hash, record, key, relationship) {
+    var embeddedType, manyArray, name, serializedHasMany, type;
+    type = record.constructor;
+    name = relationship.key;
+    serializedHasMany = [];
+    embeddedType = this.embeddedType(type, name);
+
+    manyArray = record.get(name);
+    manyArray.forEach(function(record) {
+      return serializedHasMany.push(record.get('id'));
+    }, this);
+    return hash[this.singularize(key) + 's'] = serializedHasMany;
+  },
+
+
+
     keyForHasMany: function(type, name) {
         return this.keyForAttributeName(type, name);
     },

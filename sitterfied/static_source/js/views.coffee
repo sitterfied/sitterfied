@@ -142,17 +142,17 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
     # Author: http://github.com/aboma
     Sitterfied.Select2 = Ember.Select.extend(
       defaultTemplate: Ember.Handlebars.compile("<option>{{#if prompt}}{{unbound prompt}}{{/if}}</option>{{#each view.content}}{{view Ember.SelectOption contentBinding=\"this\"}}{{/each}}")
-      attributeBindings: ["required"]
+      attributeBindings: ["required", "multiple"]
       required: false
       width: "resolve"
       allowClear: true
       closeOnSelect: true
-
+      prompt: "Please make a selection"
       # initialize Select2 once view is inserted in DOM
       didInsertElement: ->
 
         #this._super();
-        placeholderText = @get("prompt") or ""
+        placeholderText = @get("prompt")
         throw new Exception("select2 is required for Sitterfied.Select2 control")  unless @$().select2
         @$().select2
           containerCssClass: "select2-portfolio"

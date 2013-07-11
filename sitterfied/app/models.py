@@ -69,6 +69,14 @@ class User(AbstractUser, TimeStampedModel):
     def __unicode__(self):
         return self.get_full_name()
 
+    def is_parent_or_sitter(self):
+        if hasattr(self, 'sitter'):
+            return 'Sitter'
+        elif hasattr(self, 'parent'):
+            return 'Parent'
+
+
+
 
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
@@ -131,7 +139,7 @@ class Sitter(User):
     current_student = models.BooleanField(default=False)
 
 
-    other_services = models.CharField(max_length=100, blank=True)
+    other_services = models.ManyToManyField('OtherService')
 
     one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     one_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
@@ -154,9 +162,19 @@ class Sitter(User):
          verbose_name = "Sitter"
 
 
+
 class Certification(TimeStampedModel):
     certification = models.CharField(max_length=128, unique=True)
 
+    def __unicode__(self):
+        return self.certification
+
+
+class OtherService(TimeStampedModel):
+    service = models.CharField(max_length=128, unique=True)
+
+    def __unicode__(self):
+        return self.service
 
 
 class Language(TimeStampedModel):

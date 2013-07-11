@@ -39,7 +39,7 @@
 <div id="edit_photo_popup">
 	<div class="edit_photo_popup_wrap">
 		<div class="photo_wrap">
-			<img width=352 height=277 id="imgPreview" src="/static/images/demo/img17.jpg" alt="" />
+			<img width=352 height=277 id="imgPreview" {{bindAttr src=Sitterfied.currentUser.avatarUrl}} />
 		</div>
 		<p><a class="button button_edit" {{action 'previewAvatar'}}>Upload from Computer</a>
           <span>(4 MB file limit)</span><a class="button button_small" {{action 'uploadAvatar'}}><span class="icon_ok2">&nbsp;</span>Save</a>

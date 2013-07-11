@@ -16,7 +16,9 @@
 			  <p>Connect</p>
 			</li>
 			<li>
-			  <p><input type="text" value="Search a person or group" /><input type="submit" value="ADD" /></p>
+			  <p>
+                {{view Ember.TextField placeholder="Search a person or group"}}
+                <input type="submit" value="ADD" /></p>
 			  <p>Search</p>
 			</li>
 			<li>
@@ -26,10 +28,12 @@
 		  </ul>
 		</div>
 		<ul class="soc_psg_list clear">
+          {{# with controllers.usersInNetwork }}
 		  <li>
 			<ul>
 			  <li>Parents</li>
-              {{# each parents_in_network}}
+
+              {{# each parentsInNetwork }}
 		        <li>{{#linkTo parent this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
               {{/each}}
 			</ul>
@@ -37,11 +41,12 @@
 		  <li>
 			<ul>
 			  <li>Sitters</li>
-              {{# each sitter_in_network}}
+              {{# each sittersInNetwork }}
 		        <li>{{#linkTo sitter this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
               {{/each}}
 			</ul>
 		  </li>
+          {{/with}}
 		  <li>
 			<ul>
 			  <li>Groups</li>

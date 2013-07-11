@@ -174,6 +174,8 @@ admin.site.register(Parent, ParentAdmin)
 admin.site.register(Sitter, SitterAdmin)
 
 admin.site.register(Language)
+admin.site.register(OtherService)
+admin.site.register(Certification)
 admin.site.register(SitterReview)
 admin.site.register(Booking, BookingAdmin)
 

@@ -107,6 +107,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
     )
     Sitterfied.SitterEditProfileRoute = Em.Route.extend(
+        setupController: (controller, model) ->
+            this.controllerFor('languages').set('model', Sitterfied.Language.find())
+            this.controllerFor('certifications').set('model', Sitterfied.Certification.find())
+            this.controllerFor('otherServices').set('model', Sitterfied.OtherService.find())
+
         renderTemplate: () ->
             this.render("sitterEdit/profile", {into:"sitterEdit", controller: 'currentUser'})
     )
@@ -125,6 +130,10 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.render("sitterEdit/bookings", {into:"sitterEdit", controller: 'currentUser'})
     )
     Sitterfied.SitterEditNetworkRoute = Em.Route.extend(
+        setupController: (controller, model) ->
+            this.controllerFor('usersInNetwork').set('model', Sitterfied.currentUser.get("users_in_network"))
+
+
         renderTemplate: () ->
             this.render("sitterEdit/network", {into:"sitterEdit", controller: 'currentUser'})
     )
@@ -181,15 +190,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     width: "90%"
                     height: "90%"
 
-
-            saveCertification: () ->
-                newCert = Sitterfied.certificationController.get('newCert')
-                if newCert == ''
-                    return
-                certification = Sitterfied.Certification.createRecord({certification:newCert})
-                certification.get('transaction').commit();
-                Sitterfied.certificationController.set('newCert', '')
-
             gmailConnect: () ->
                 alert('gmail connect')
 
@@ -210,8 +210,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                         $.fancybox.close()
                     error: () ->
                         alert("There was a problem uploading your avatar. Please try again")
-
-
 
 
             openPhotoPopup: ->

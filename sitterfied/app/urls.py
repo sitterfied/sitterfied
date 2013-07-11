@@ -11,8 +11,10 @@ router.register(r'users', api.UserViewSet)
 router.register(r'parents', api.ParentViewSet)
 router.register(r'settings', api.SettingsViewSet)
 router.register(r'certifications', api.CertificationViewSet)
+router.register(r'other_services', api.OtherServiceViewSet)
 router.register(r'schedlues', api.SchedlueViewSet)
 router.register(r'sitter_reviews', api.ReviewViewSet)
+router.register(r'languages', api.LanguageViewSet)
 
 
 
