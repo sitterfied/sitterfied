@@ -52,7 +52,7 @@ class User(AbstractUser, TimeStampedModel):
     membership_exp_date = models.DateField(null=True)
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
-    facebook_id = models.IntegerField(null=True)
+    facebook_id = models.IntegerField(null=True, blank=True)
 
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)
