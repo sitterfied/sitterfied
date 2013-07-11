@@ -68,7 +68,7 @@ class UserAdmin(DjangoUserAdmin):
     inlines = [
         SettingsInline,
         AddressInline,
-        BookingInline,
+#        BookingInline,
         PhoneInline,
     ]
 
@@ -80,13 +80,14 @@ class ParentAdmin(UserAdmin):
     parent_fieldsets = ('Parent Details',
                         {
             'fields': (
+                'avatar',
                 'emergency_contact',
                 'physician_contact',
                 'parking_area',
                 'parking_for_sitter',
                 'fave_sitters',
-                'parents_in_network',
-                'sitters_in_network',
+                'users_in_network',
+                'friends',
                 'sitter_groups',
                 )}
 
@@ -121,7 +122,7 @@ class SitterAdmin(UserAdmin):
                            'school_age_exp',
                            'pre_teen_exp',
                            'teen_exp',
-
+                           'avatar',
                            'highest_education',
                            'last_school',
                            'current_student',
@@ -139,6 +140,12 @@ class SitterAdmin(UserAdmin):
                            'dogs_ok',
                            'cats_ok',
                            'other_animals_ok',
+
+                           'users_in_network',
+                           'friends',
+
+
+
                            )}
                         ),
 

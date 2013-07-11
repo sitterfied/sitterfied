@@ -20,6 +20,7 @@ django-floppyforms
 django-annoying
 django-extensions
 django-model-utils
+django-registration
 unipath
 pytz
 feedparser
@@ -48,4 +49,8 @@ https://github.com/django/django-localflavor-us/zipball/master
 
 #EMBERJS ADAPTER
 django-filter
-django-registration
+
+
+python-magic
+twilio
+ecl-facebook

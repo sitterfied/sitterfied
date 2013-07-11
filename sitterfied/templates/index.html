@@ -39,7 +39,7 @@
 <div id="edit_photo_popup">
 	<div class="edit_photo_popup_wrap">
 		<div class="photo_wrap">
-			<img src="/static/images/demo/img17.jpg" alt="" />
+			<img width=352 height=277 id="imgPreview" src="/static/images/demo/img17.jpg" alt="" />
 		</div>
 		<p><a class="button button_edit" {{action 'previewAvatar'}}>Upload from Computer</a>
           <span>(4 MB file limit)</span><a class="button button_small" {{action 'uploadAvatar'}}><span class="icon_ok2">&nbsp;</span>Save</a>
@@ -47,7 +47,7 @@
 	</div>
 
     <form id="avatar_form" style="display:none">
-      <input type="file">
+      {{view Sitterfied.AvatarFileField id="avatar_field"}}
     </form>
 </div>
 
@@ -82,7 +82,7 @@
                 <li>{{#linkTo search }} Search {{/linkTo}}</li>
 	            <li>{{#linkTo book }}Bookings{{/linkTo}}</li>
 		        <li>
-					{{#linkTo profile }}<img src="/static/images/demo/img.jpg" alt="" /> {{Sitterfied.currentUser.first_name}}{{/linkTo}}
+					{{#linkTo profile }}<img {{bindAttr src=Sitterfied.currentUser.avatarUrl}} alt="" /> {{Sitterfied.currentUser.first_name}}{{/linkTo}}
 					<ul>
 						<li><span class="menu_icon_setting">&nbsp;</span>{{#linkTo settings }}Account Settings{{/linkTo}}</li>
 						<li><span class="menu_icon_profile">&nbsp;</span>{{#linkTo profile }}Profile{{/linkTo}}</li>

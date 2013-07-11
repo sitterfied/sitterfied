@@ -165,7 +165,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 Ember.TEMPLATES["sitterEdit/network"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
 
 function program1(depth0,data) {
   
@@ -230,7 +230,13 @@ function program7(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("	  <!-- network_block -->\n	  <div class=\"mob_tab_trigger\">Network</div>\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\"><a href=\"#\"><img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook</a><a href=\"#\"><img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail</a></p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p><input type=\"text\" value=\"Search a person or group\" /><input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n		  <li>\n			<ul>\n			  <li>Parents</li>\n              ");
+  data.buffer.push("	  <!-- network_block -->\n	  <div class=\"mob_tab_trigger\">Network</div>\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\">\n                <a ");
+  hashContexts = {'bubbles': depth0};
+  hashTypes = {'bubbles': "BOOLEAN"};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookConnect", {hash:{
+    'bubbles': (false)
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                    <img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook\n                </a>\n                <a href=\"#\">\n                  <img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail\n                </a>\n              </p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p><input type=\"text\" value=\"Search a person or group\" /><input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n		  <li>\n			<ul>\n			  <li>Parents</li>\n              ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "parents_in_network", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -1091,7 +1097,7 @@ function program5(depth0,data) {
 Ember.TEMPLATES["sitterEdit/top"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, stack2, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -1105,7 +1111,17 @@ function program3(depth0,data) {
   data.buffer.push("Accept more booking requests");
   }
 
-  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img src=\"/static/images/demo/img2.jpg\" alt=\"\" />\n	  <p><span class=\"icon_pen\">&nbsp;</span><a ");
+  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img ");
+  hashContexts = {'src': depth0};
+  hashTypes = {'src': "ID"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'src': ("avatarUrl")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" alt=\"\" />\n	  <p ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openPhotoPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_pen\">&nbsp;</span><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "openPhotoPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -1943,10 +1959,29 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 Ember.TEMPLATES["sitter/top"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  
+  var buffer = '', hashContexts, hashTypes, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"bookmark\"></div>\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n	<div class=\"heart_wrap\">\n	  <div class=\"heart\"></div>\n	  <span>Add to my sitter team</span>\n	</div>\n	<img src=\"/static/images/demo/img2.jpg\" alt=\"\" />\n  </div>\n  <div class=\"desc\">\n	<p><a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a></p>\n	<p><span>Hi, I'm <strong>Ellen Vukelich</strong></span></p>\n	<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum  <a href=\"#\" class=\"read_more\">Read More</a></p>\n	<div class=\"full_desc\">\n	  <p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus.</p>\n	  <p>In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. n pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus.</p>\n	  <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus.</p>\n	  <p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus.</p>\n	  <p>In pellentesque faucibus!</p>\n	</div>\n  </div>\n  <div class=\"ico\">\n	<ul>\n	  <li><span class=\"icon_friends\">&nbsp;</span><span class=\"number\">5</span>mutual friends\n	  <ul>\n		<li>Friends you have in common with Ellen</li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n	  </ul>\n	  </li>\n	  <li><span class=\"icon_recommend\">&nbsp;</span><span class=\"number\">4</span>recommends\n	  <ul>\n		<li>Friends who recommend Ellen</li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n	  </ul>\n	  </li>\n	  <li><span class=\"icon_team\">&nbsp;</span><span class=\"number\">9</span>sitter teams\n	  <ul>\n		<li>Friends who added Ellen to their sitter team</li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n	  </ul>\n	  </li>\n	</ul>\n  </div>\n</div>");
+  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"bookmark\"></div>\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n	<div class=\"heart_wrap\">\n	  <div class=\"heart\"></div>\n	  <span>Add to my sitter team</span>\n	</div>\n	<img ");
+  hashContexts = {'src': depth0};
+  hashTypes = {'src': "STRING"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'src': ("avatarUrl")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" alt=\"\" />\n  </div>\n  <div class=\"desc\">\n	<p><a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a></p>\n	<p><span>Hi, I'm <strong>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</strong></span></p>\n    ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "biography", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<a href=\"#\" class=\"read_more\">Read More</a></p>\n	<div class=\"full_desc\">\n	  <p>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "biography", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n	</div>\n  </div>\n  <div class=\"ico\">\n	<ul>\n	  <li><span class=\"icon_friends\">&nbsp;</span><span class=\"number\">5</span>mutual friends\n	  <ul>\n		<li>Friends you have in common with Ellen</li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n	  </ul>\n	  </li>\n	  <li><span class=\"icon_recommend\">&nbsp;</span><span class=\"number\">4</span>recommends\n	  <ul>\n		<li>Friends who recommend Ellen</li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n	  </ul>\n	  </li>\n	  <li><span class=\"icon_team\">&nbsp;</span><span class=\"number\">9</span>sitter teams\n	  <ul>\n		<li>Friends who added Ellen to their sitter team</li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n	  </ul>\n	  </li>\n	</ul>\n  </div>\n</div>");
+  return buffer;
   
 });
 Ember.TEMPLATES["profile/topInfo"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {

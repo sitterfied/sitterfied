@@ -34,12 +34,6 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             }
             $.post('password_change/', data).success(alert('password changed'))
 
-        facebookConnect: () ->
-            alert('facebook connect')
-
-        gmailConnect: () ->
-            alert('gmail connect')
-
         newFriendName:  ""
         addFriend: () ->
             newFriendName = @get('newFriendName')
@@ -50,6 +44,29 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
         deleteGroup: (group) ->
             alert("delete group, " + group)
+
+        facebookConnect: ()->
+                console.log("get fb data")
+                use_fb_data = () ->
+                    access_token = FB.getAccessToken()
+                    facebook_id = FB.getUserID()
+                    Sitterfied.currentUser.set('facebook_token', access_token)
+                    Sitterfied.currentUser.set('facebook_id', facebook_id)
+                    Sitterfied.currentUser.save()
+                    Sitterfied.currentUser.one('didUpdate', () ->
+                        $.ajax
+                            url: "/facebook_import/"
+                            success: () ->
+                                alert("facebook friends imported")
+                                Sitterfied.currentUser.reload()
+                    )
+
+                FB.getLoginStatus (response) ->
+                  if response.status is "connected"
+                    use_fb_data()
+                  else if response.status is "not_authorized"
+                    FB.login ->
+                        use_fb_data()
 
     })
 

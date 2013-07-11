@@ -23,8 +23,7 @@ define [
         last_name: DS.attr('string')
         email: DS.attr('string')
         status: DS.attr('string')
-        parents_in_network: DS.hasMany('Sitterfied.Parent')
-        sitters_in_network: DS.hasMany('Sitterfied.Sitter')
+        users_in_network: DS.hasMany('Sitterfied.User')
         sitter_groups: DS.hasMany('Sitterfied.Group')
         languages: DS.hasMany('Sitterfied.Language')
         settings  : DS.belongsTo('Sitterfied.Setting')
@@ -37,6 +36,13 @@ define [
         cell: DS.attr('string')
         reviews: DS.hasMany('Sitterfied.SitterReview')
         avatar: DS.attr('string')
+
+        facebook_token: DS.attr('string')
+        facebook_id: DS.attr('number')
+
+        avatarUrl: (() ->
+            return "/media/" + @get('avatar')
+        ).property('avatar')
 
         sorted_bookings: (() ->
             return this.get('bookings').toArray().sort((booking1, booking2) ->
@@ -224,6 +230,8 @@ define [
         has_drivers_licence: DS.attr('string'),
 
 
+        booking_requests: DS.hasMany("Sitterfied.BookingRequest"),
+
         calc_total_exp: ((value) ->
             return @get('infant_exp') + @get('toddler_exp') + @get('preschool_exp') + @get('school_ageExp') + @get('pre_teenExp') + @get('teen_exp')
         ).property('infant_exp','toddler_exp','preschool_exp', 'school_ageExp', 'pre_teenExp', 'teen_exp')
@@ -257,7 +265,6 @@ define [
     Sitterfied.Booking = DS.Model.extend(
         parent: DS.belongsTo('Sitterfied.Parent'),
         created: DS.attr("date")
-        sitter: DS.hasMany('Sitterfied.Sitter'),
         notes: DS.attr('string'),
         respond_by: DS.attr('date'),
         start_date_time: DS.attr('date'),
@@ -267,12 +274,12 @@ define [
         #location: models.Foreign_key('Address')
         booking_status:DS.attr('string'),
         booking_type: DS.attr('string'),
-
+        booking_requests: DS.hasMany("Sitterfied.BookingRequest"),
     )
 
     Sitterfied.BookingRequest = DS.Model.extend(
         booking: DS.belongsTo("Sitterfied.Booking"),
-        sitter: DS.hasMany('Sitterfied.Sitter'),
+        sitter: DS.belongsTo('Sitterfied.Sitter'),
         sitter_accepted: DS.attr('boolean'),
         rate: DS.attr('number'),
 

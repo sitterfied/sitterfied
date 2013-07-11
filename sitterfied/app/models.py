@@ -42,13 +42,17 @@ class User(AbstractUser, TimeStampedModel):
     objects = UserManager()
 
     MEMBERSHIP_STATUS = Choices("Trial", "paid")
-    parents_in_network = models.ManyToManyField('Parent', related_name="parents_in_network", blank=True)
-    sitters_in_network = models.ManyToManyField('Sitter', related_name="sitters_in_network", blank=True)
+    users_in_network = models.ManyToManyField('self',  blank=True, symmetrical=True)
+    friends = models.ManyToManyField('self',  blank=True)
+
     sitter_groups = models.ManyToManyField('Group', blank=True)
     invited_by = models.ManyToManyField('self',  symmetrical =False)
     languages = models.ManyToManyField('Language')
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateField(null=True)
+
+    facebook_token = models.CharField(max_length=256, null=True, blank=True)
+    facebook_id = models.IntegerField(null=True)
 
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)
@@ -58,7 +62,7 @@ class User(AbstractUser, TimeStampedModel):
     cell = models.CharField(max_length=12, blank=True)
 
 
-    avatar = models.ImageField(upload_to=file_url("avatar"), null=True)
+    avatar = models.ImageField(upload_to=file_url("avatar"), null=True, blank=True)
     #objects = InheritanceManager()
 
 
@@ -282,7 +286,7 @@ class BookingRequest(TimeStampedModel):
     ##TODO:
     #unique index to prevent more than one sitter accepting a booking request
     booking = models.ForeignKey("Booking")
-    sitter = models.ForeignKey("Sitter")
+    sitter = models.ForeignKey("Sitter", related_name="booking_requests")
     sitter_accepted= models.BooleanField(default=False)
     rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
@@ -309,6 +313,17 @@ class Booking(TimeStampedModel):
     @cached_property
     def accepted(self):
         return bool(BookingRequest.objects.filter(booking=self, sitter_accepted=True))
+
+
+class IncomingSMSMessage(TimeStampedModel):
+    sid = models.CharField(max_length=34)
+    date_created = models.DateTimeField()
+    date_updated = models.DateTimeField()
+    date_sent = models.DateTimeField()
+    to = models.CharField(max_length=16)
+    body = models.CharField(max_length=161)
+    status = models.CharField(max_length=12)
+    #dealt_with = models.
 
 
 

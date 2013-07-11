@@ -1,9 +1,11 @@
 import models
+from forms import AvatarForm
 
 from django.db.models import Q
 
 
 from rest_framework import serializers, viewsets, permissions
+from rest_framework.parsers import FileUploadParser
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action, link
@@ -16,16 +18,17 @@ from rest_framework.decorators import action, link
 user_fields = ('first_name', 'last_name',
                'username', 'last_login',
                'date_joined', 'settings',
-               'sitters_in_network', 'email',
-               'parents_in_network', 'sitter_groups',
-               'address1', 'address2',
+                'email',
+                'sitter_groups',
+               'address1', 'address2', 'facebook_id',
+               'facebook_token', 'friends', 'users_in_network',
                'city', 'state', 'avatar',
-               'zip','bookings', 'cell' )
+               'zip','cell' )
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        models.User
+        model = models.User
         fields = user_fields
 
 class SitterSerializer(serializers.ModelSerializer):
@@ -55,7 +58,7 @@ class SitterSerializer(serializers.ModelSerializer):
                                 'gender', 'sick',
                                 'has_drivers_licence', 'travel_distance',
                                 'special_needs_exp', 'extra_exp', 'major',
-                                'occupation', 'reviews'
+                                'occupation', 'reviews', 'booking_requests'
                                 )
 
 
@@ -67,7 +70,7 @@ class ParentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Parent
         fields = user_fields + ('id', 'emergency_contact', 'physician_contact',
-                  'parking_area', 'parking_for_sitter', 'reviews'
+                  'parking_area', 'parking_for_sitter', 'reviews', 'bookings'
                   )
 
 
@@ -102,11 +105,34 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
+    @action()
+    def avatar_upload(self, request, pk=None):
+        form = AvatarForm(request.POST)
+        user = request.user
+
+        if not form.is_valid():
+            return Response(status=400)
+
+        user.avatar = form.cleaned_data['avatar']
+        user.save()
+
+        response = Response(data={'avatar':user.avatar.name})
+        return response
+
+
+
     @link()
     def reviews(self, request, pk=None):
         queryset = models.SitterReview.objects.filter(Q(parent_id=pk)|Q(sitter_id=pk))
         serializer = ReviewSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @link()
+    def users_in_network(self, request, pk=None):
+        queryset = models.User.objects.filter(users_in_network=pk)
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 
     @link()
@@ -163,8 +189,6 @@ class BookingRequestViewSet(viewsets.ModelViewSet):
     queryset = models.BookingRequest.objects.all()
     serializer_class = BookingRequestSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-
 
 
 #bookings

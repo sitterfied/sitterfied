@@ -1,4 +1,4 @@
-define(['jquery', 'jqueryui', 'chosen', 'fancybox'], function($){
+define(['jquery', 'jqueryui', 'select2', 'fancybox'], function($){
     $(function() {
 	// Logo hover
 		    $('.logo img').hover(function(){
@@ -56,7 +56,7 @@ define(['jquery', 'jqueryui', 'chosen', 'fancybox'], function($){
 			});
 
 	// Select/datapicker styling
-			$("select").chosen();
+			$("select").select2();
 			$( "#datepicker, #datepicker2, #datepicker3" ).datepicker({
 				numberOfMonths: 2,
 				showOtherMonths: true,

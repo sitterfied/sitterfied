@@ -9,6 +9,7 @@ require({
         "jquery": "lib/jquery-1.9.1",
         "jqueryui": "lib/jquery-ui-1.10.0.custom.min",
         "chosen": "lib/chosen.jquery.min",
+        "select2": "lib/select2",
         "djangoRestAdapter": "lib/adapter",
         'fancybox':'lib/jquery.fancybox.pack'
     },
@@ -43,7 +44,11 @@ require({
         },
         chosen: {
             deps: ['jquery']
+        },
+        select2: {
+            deps: ['jquery']
         }
+
     },
         urlArgs: "bust=" +  (new Date()).getTime(),
 },

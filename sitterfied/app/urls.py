@@ -7,11 +7,13 @@ import api
 from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r'sitters', api.SitterViewSet)
+router.register(r'users', api.UserViewSet)
 router.register(r'parents', api.ParentViewSet)
 router.register(r'settings', api.SettingsViewSet)
 router.register(r'certifications', api.CertificationViewSet)
 router.register(r'schedlues', api.SchedlueViewSet)
 router.register(r'sitter_reviews', api.ReviewViewSet)
+
 
 
 # Core Django Imports
@@ -21,6 +23,8 @@ from .signup import RegistrationView
 
 urlpatterns = patterns('app.views',
     # Examples:
+    url(r'^error/', 'error', name='error'),
+    url(r'^facebook_import/', 'facebook_import', name='facebook_import'),
     url(r'^api/', include(router.urls)),
     url(r'^invite_email_submit/$', 'invite_email_submit', name='invite_email_submit'),
     url(r'^unsubscribe/$', 'unsubscribe', name='unsubscribe'),

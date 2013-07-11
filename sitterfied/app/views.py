@@ -1,5 +1,7 @@
 # Create your views here.
 from time import sleep
+from itertools import chain
+
 from django.conf import settings
 from django.http import HttpResponse
 from django.core.mail import send_mail
@@ -15,11 +17,13 @@ from django.template.loader import render_to_string
 
 from django.http import HttpResponseRedirect
 
-
+from ecl_facebook import Facebook
 
 
 from rest_framework.renderers import JSONRenderer
 from api import ParentSerializer, SitterSerializer
+
+from .models import User
 
 @login_required
 @render_to('index.html')
@@ -39,7 +43,30 @@ def index(request, referred_by=None):
     return {'user_json':user_json, 'parent_or_sitter': parent_or_sitter}
 
 
-#invite tracking
+
+def error(request):
+    """for testing purposes"""
+    raise Exception
+
+@ajax_request
+@login_required
+def facebook_import(request):
+    user = request.user
+    fb = Facebook(user.facebook_token)
+    response = fb.me.friends()
+    facebook_ids = [friend['id'] for friend in response['data']]
+    friends = User.objects.filter(facebook_id__in=facebook_ids)
+    ThroughModel = user.users_in_network.through
+    models_to = (ThroughModel(from_user_id=user.id,
+                              to_user_id=friend.id) for friend in friends)
+    models_frm = (ThroughModel(to_user_id=user.id,
+                               from_user_id=friend.id) for friend in friends)
+    models = chain(models_to, models_frm)
+    ThroughModel.objects.bulk_create(models)
+    return {}
+
+
+
 @ajax_request
 @require_POST
 def invite_email_submit(request):

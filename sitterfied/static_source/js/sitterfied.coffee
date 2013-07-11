@@ -33,7 +33,7 @@ define ['jquery'
         "Some College"
         "College Degree"
     ]
-
+    Sitterfied.onDeckAvatar = ''
     Sitterfied.States = [
             'AL',
             'AK',

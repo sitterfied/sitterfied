@@ -190,12 +190,29 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 certification.get('transaction').commit();
                 Sitterfied.certificationController.set('newCert', '')
 
+            gmailConnect: () ->
+                alert('gmail connect')
+
 
             previewAvatar: () ->
-                alert("preview img")
+                $("#avatar_field").click()
 
             uploadAvatar: () ->
-                alert("uploadimg")
+                $.ajax
+                    type: "POST"
+                    url:"/api/users/" + Sitterfied.currentUser.id + "/avatar_upload/"
+                    dataType: 'json'
+                    data: {
+                        avatar: Sitterfied.get('onDeckAvatar')
+                    }
+                    success: (response) ->
+                        Sitterfied.currentUser.set('avatar', response.avatar)
+                        $.fancybox.close()
+                    error: () ->
+                        alert("There was a problem uploading your avatar. Please try again")
+
+
+
 
             openPhotoPopup: ->
                 $.fancybox

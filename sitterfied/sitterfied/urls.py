@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     url(r'^admin/filebrowser/?', include(site.urls)),
     url(r'^grappelli/?', include('grappelli.urls')),
     url(r'^admin/?', include(admin.site.urls)),
-    url(r'', include('app.urls')),
+
 
 )
 
@@ -25,3 +25,6 @@ if settings.DEBUG:
             'document_root': settings.MEDIA_ROOT,
         }),
    )
+urlpatterns += patterns('',
+    url(r'', include('app.urls')),
+                        )
