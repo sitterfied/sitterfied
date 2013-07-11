@@ -210,7 +210,7 @@ define [
         occupation:  DS.attr('string'),
 
         certification: DS.hasMany('Sitterfied.Certification'),
-        other_services: DS.attr('string'),
+        other_services: DS.hasMany('Sitterfied.OtherService'),
         one_child_min_rate: DS.attr('number'),
         one_child_max_rate: DS.attr('number'),
         two_child_min_rate: DS.attr('number'),
@@ -242,6 +242,9 @@ define [
     )
     Sitterfied.Certification = DS.Model.extend(
         certification: DS.attr('string'),
+    )
+    Sitterfied.OtherService = DS.Model.extend(
+        service: DS.attr('string'),
     )
 
 

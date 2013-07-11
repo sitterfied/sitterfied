@@ -168,6 +168,12 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             #this.render('search', { outlet: 'content'})
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
+
+        setupController: (controller, model) ->
+            this.controllerFor('languages').set('model', Sitterfied.Language.find())
+            this.controllerFor('certifications').set('model', Sitterfied.Certification.find())
+            this.controllerFor('otherServices').set('model', Sitterfied.OtherService.find())
+
         events:{
             openReccomendPopup: ()->
                 console.log("")

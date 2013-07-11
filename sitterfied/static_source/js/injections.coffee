@@ -20,21 +20,21 @@ define ['ember'
         )
 
 
-        Em.Application.initializer
-            name: "certificationController"
-            initialize: (container, application) ->
-                certController = Sitterfied.CertificationsController.create()
-                Sitterfied.set('certificationsController',certController)
-                Sitterfied.set('certificationsController.content',Sitterfied.Certification.find())
-        Em.Application.initializer
-            name: "otherServicesController"
-            initialize: (container, application) ->
-                otherController = Sitterfied.OtherServicesController.create()
-                Sitterfied.set('otherServicesController', otherController)
-                Sitterfied.set('otherServicesController.content', Sitterfied.OtherService.find())
-        Em.Application.initializer
-            name: "languagesController"
-            initialize: (container, application) ->
-                languagesController = Sitterfied.LanguagesController.create()
-                Sitterfied.set('languagesController', languagesController)
-                Sitterfied.set('languagesController.content', Sitterfied.languages.find())
+        # Em.Application.initializer
+        #     name: "certificationController"
+        #     initialize: (container, application) ->
+        #         certController = Sitterfied.CertificationsController.create()
+        #         Sitterfied.set('certificationsController',certController)
+        #         Sitterfied.set('certificationsController.content',Sitterfied.Certification.find())
+        # Em.Application.initializer
+        #     name: "otherServicesController"
+        #     initialize: (container, application) ->
+        #         otherController = Sitterfied.OtherServicesController.create()
+        #         Sitterfied.set('otherServicesController', otherController)
+        #         Sitterfied.set('otherServicesController.content', Sitterfied.OtherService.find())
+        # Em.Application.initializer
+        #     name: "languagesController"
+        #     initialize: (container, application) ->
+        #         languagesController = Sitterfied.LanguagesController.create()
+        #         Sitterfied.set('languagesController', languagesController)
+        #         Sitterfied.set('languagesController.content', Sitterfied.Language.find())

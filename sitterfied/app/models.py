@@ -131,7 +131,7 @@ class Sitter(User):
     current_student = models.BooleanField(default=False)
 
 
-    other_services = models.CharField(max_length=100, blank=True)
+    other_services = models.ManyToManyField('OtherService')
 
     one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     one_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)

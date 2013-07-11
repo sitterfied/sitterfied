@@ -3,7 +3,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        needs: ['certifications']
+        needs: ['certifications', 'languages', 'otherServices']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -13,9 +13,10 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         ).property('parent_or_sitter')
 
         saveSettings: () ->
+            model = this.get('model')
             settings =  this.get('settings')
-            transaction = settings.get('transaction')
-            transaction.add(this.get('model'))
+            transaction = model.get('transaction')
+            transaction.add(settings)
             transaction.commit()
 
         deleteAccount: () ->
@@ -46,28 +47,30 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             alert("delete group, " + group)
 
         saveCertification: () ->
-            newCert = Sitterfied.certificationsController.get('newCert')
+
+            newCert = this.get('controllers.certifications.newCert')
             if newCert == ''
                 return
             certification = Sitterfied.Certification.createRecord({certification:newCert})
-            certification.get('transaction').commit();
-            Sitterfied.certificationsController.set('newCert', '')
+            certification.get('transaction').commit()
+            this.set('controllers.certifications.newCert', '')
 
         saveService: () ->
-            newService = Sitterfied.otherServicesController.get('newService')
+
+            newService = this.get('controllers.otherServices.newService')
             if newService == ''
                 return
             service = Sitterfied.OtherService.createRecord({service:newService})
             service.get('transaction').commit();
-            Sitterfied.otherServicesController.set('newService', '')
+            this.set('controllers.otherServices.newService', '')
 
         saveLanguage: () ->
-            newLanguage = Sitterfied.languagesController.get('newLanguage')
+            newLanguage = this.get('controllers.languages.newLanguage')
             if newLanguage == ''
                 return
             language = Sitterfied.Language.createRecord({language:newLanguage})
             language.get('transaction').commit();
-            Sitterfied.languagesController.set('newLanguage', '')
+            this.set('controllers.languages.newLanguage', '')
 
 
 

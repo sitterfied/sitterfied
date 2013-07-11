@@ -147,12 +147,12 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
       width: "resolve"
       allowClear: true
       closeOnSelect: true
-
+      prompt: "Please make a selection"
       # initialize Select2 once view is inserted in DOM
       didInsertElement: ->
 
         #this._super();
-        placeholderText = @get("prompt") or ""
+        placeholderText = @get("prompt")
         throw new Exception("select2 is required for Sitterfied.Select2 control")  unless @$().select2
         @$().select2
           containerCssClass: "select2-portfolio"

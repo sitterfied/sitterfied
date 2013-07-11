@@ -171,16 +171,17 @@
 				  <p>
                     <span>&nbsp;</span>
                     {{view Sitterfied.Select2
-                    contentBinding=Sitterfied.certificationsController
+                    contentBinding=controllers.certifications
+                    prompt="Select certifications"
                     optionLabelPath="content.certification"
-                    optionValuePath="content.id"
+                    optionValuePath="content"
                     selectionBinding="certifications"
                     multiple="multiple"
                     }}
                   </p>
 				  <p>
                     <span>add another (if not listed above):</span>
-                    {{view Ember.TextField valueBinding="Sitterfied.certificationsController.newCert"}}
+                    {{view Ember.TextField valueBinding="controllers.certifications.newCert"}}
                     <a class="button button_smaller button_edit certbutton" {{action 'saveCertification'}}>
                       <span class="icon_plus">&nbsp;</span>ADD
                     </a>
@@ -213,14 +214,15 @@
                     <span>I speak:</span>
                    </p>
                       {{view Sitterfied.Select2
-                      contentBinding=Sitterfied.languagesController.content
+                      contentBinding=controllers.languages
+        	          prompt="Select languages"
                       optionLabelPath="content.language"
-                      optionValuePath="content.id"
+                      optionValuePath="content"
                       selectionBinding="languages"
                       multiple="multiple"
                       }}
                     </p>
-				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="Sitterfied.languagesController.newLanguage"}}<a class="button button_smaller button_edit" {{action 'saveLanguage'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
+				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}<a class="button button_smaller button_edit" {{action 'saveLanguage'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
 				</lpi>
 			  </ul>
 			</li>
@@ -231,14 +233,15 @@
 				    <p>
                       <span>&nbsp;</span>
                       {{view Sitterfied.Select2
-                      contentBinding=Sitterfied.otherServicesController.content
+                      contentBinding=controllers.otherServices
+                      prompt="Select services"
                       optionLabelPath="content.service"
-                      optionValuePath="content.id"
+                      optionValuePath="content"
                       selectionBinding="other_services"
                       multiple="multiple"
                       }}`
                     </p>
-				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="Sitterfied.otherServicesController.newService"}}<a class="button button_smaller button_edit" {{action 'saveService'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
+				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.otherServices.newService"}}<a class="button button_smaller button_edit" {{action 'saveService'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
 				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
 			  </ul>

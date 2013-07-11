@@ -1,5 +1,6 @@
 import models
 from forms import AvatarForm
+from django_filters import filters, filterset
 
 from django.db.models import Q
 
@@ -9,6 +10,7 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action, link
+from app.models import Language
 
 # class MyselfSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
@@ -18,15 +20,23 @@ from rest_framework.decorators import action, link
 user_fields = ('first_name', 'last_name',
                'username', 'last_login',
                'date_joined', 'settings',
-                'email',
+                'email', 'languages',
                 'sitter_groups',
                'address1', 'address2', 'facebook_id',
                'facebook_token', 'friends', 'users_in_network',
                'city', 'state', 'avatar',
                'zip','cell' )
 
+class OtherServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.OtherService
+class LanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Language
+
 
 class UserSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = models.User
         fields = user_fields
@@ -35,8 +45,6 @@ class SitterSerializer(serializers.ModelSerializer):
 
     #todo general availablity
     parent_or_sitter = "Sitter"
-
-    parents_in_network = serializers.ManyPrimaryKeyRelatedField()
 
     class Meta:
         model = models.Sitter
@@ -48,11 +56,11 @@ class SitterSerializer(serializers.ModelSerializer):
                                 'pre_teen_exp', 'teen_exp',
                                 'highest_education', 'last_school',
                                 'current_student','certifications',
-                                'other_services','one_child_min_rate',
+                                'one_child_min_rate',
                                 'one_child_max_rate', 'two_child_min_rate',
                                 'two_child_max_rate',  'three_child_min_rate',
                                 'three_child_max_rate',  'smokers_ok',
-                                'dob', 'schedlue',
+                                'dob', 'schedlue', 'other_services',
                                 'dogs_ok', 'cats_ok',
                                 'other_animals_ok',
                                 'gender', 'sick',
@@ -86,6 +94,7 @@ class CertificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Certification
 
+
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SitterReview
@@ -97,6 +106,8 @@ class BookingSerializer(serializers.ModelSerializer):
 class BookingRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BookingRequest
+
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -118,6 +129,11 @@ class UserViewSet(viewsets.ModelViewSet):
 
         response = Response(data={'avatar':user.avatar.name})
         return response
+
+    @action()
+    def languages(self, request, pk=None):
+        import pdb
+        pdb.set_trace()
 
 
 
@@ -142,6 +158,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+
 class SitterViewSet(viewsets.ModelViewSet):
     queryset = models.Sitter.objects.all()
     serializer_class = SitterSerializer
@@ -159,7 +176,12 @@ class CertificationViewSet(viewsets.ModelViewSet):
     queryset = models.Certification.objects.all()
     serializer_class = CertificationSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', )
+
+
+class OtherServiceViewSet(viewsets.ModelViewSet):
+    queryset = models.OtherService.objects.all()
+    serializer_class = OtherServiceSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 
@@ -178,16 +200,24 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = models.SitterReview.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('id', )
 
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = models.Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('id', )
 
 
 class BookingRequestViewSet(viewsets.ModelViewSet):
     queryset = models.BookingRequest.objects.all()
     serializer_class = BookingRequestSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('id', )
+
+class LanguageViewSet(viewsets.ModelViewSet):
+    queryset = models.Language.objects.all()
+    serializer_class = LanguageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
