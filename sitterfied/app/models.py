@@ -46,8 +46,8 @@ class User(AbstractUser, TimeStampedModel):
     friends = models.ManyToManyField('self',  blank=True)
 
     sitter_groups = models.ManyToManyField('Group', blank=True)
-    invited_by = models.ManyToManyField('self',  symmetrical =False)
-    languages = models.ManyToManyField('Language')
+    invited_by = models.ManyToManyField('self',  symmetrical =False, blank=True)
+    languages = models.ManyToManyField('Language', blank=True)
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateField(null=True)
 
@@ -128,18 +128,18 @@ class Sitter(User):
     teen_exp = models.SmallIntegerField(default=0)
 
     special_needs_exp = models.BooleanField(default=True)
-    extra_exp = models.TextField(blank=True)
+    extra_exp = models.TextField(blank=True, default="", null=True)
 
-    highest_education = models.CharField(max_length=50, blank=True)
-    last_school = models.CharField(max_length=50, blank=True)
+    highest_education = models.CharField(max_length=50, blank=True, default="", null=True)
+    last_school = models.CharField(max_length=50, blank=True, default="", null=True)
 
-    major = models.CharField(max_length=50, blank=True)
-    occupation = models.CharField(max_length=50, blank=True)
+    major = models.CharField(max_length=50, blank=True, default="", null=True)
+    occupation = models.CharField(max_length=50, blank=True, default="", null=True)
 
     current_student = models.BooleanField(default=False)
 
 
-    other_services = models.ManyToManyField('OtherService')
+    other_services = models.ManyToManyField('OtherService', blank=True)
 
     one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     one_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
