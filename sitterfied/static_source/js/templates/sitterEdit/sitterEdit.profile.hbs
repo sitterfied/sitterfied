@@ -169,15 +169,18 @@
 				<li><span class="icon_certification3">&nbsp;</span>Certification or Training</li>
 				<li>
 				  <p>
+                    {{# if controllers.certifications.content.content }}
                     <span>&nbsp;</span>
                     {{view Sitterfied.Select2
-                    contentBinding=controllers.certifications
+                    contentBinding="controllers.certifications"
+                    controllerBinding="controllers.certifications"
                     prompt="Select certifications"
                     optionLabelPath="content.certification"
                     optionValuePath="content"
                     selectionBinding="certifications"
                     multiple="multiple"
                     }}
+                    {{/if}}
                   </p>
 				  <p>
                     <span>add another (if not listed above):</span>
@@ -213,6 +216,7 @@
 				  <p>
                     <span>I speak:</span>
                    </p>
+                      {{# if controllers.languages.content.content }}
                       {{view Sitterfied.Select2
                       contentBinding=controllers.languages
         	          prompt="Select languages"
@@ -221,6 +225,7 @@
                       selectionBinding="languages"
                       multiple="multiple"
                       }}
+                     {{/if}}
                     </p>
 				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}<a class="button button_smaller button_edit" {{action 'saveLanguage'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
 				</lpi>
@@ -231,6 +236,7 @@
 				<li><span class="icon_other2">&nbsp;</span>Other Services</li>
 				<li>
 				    <p>
+                      {{# if controllers.otherServices.content.content }}
                       <span>&nbsp;</span>
                       {{view Sitterfied.Select2
                       contentBinding=controllers.otherServices
@@ -239,7 +245,8 @@
                       optionValuePath="content"
                       selectionBinding="other_services"
                       multiple="multiple"
-                      }}`
+                      }}
+                      {{/if}}
                     </p>
 				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.otherServices.newService"}}<a class="button button_smaller button_edit" {{action 'saveService'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
 				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
