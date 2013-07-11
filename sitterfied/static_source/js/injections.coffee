@@ -20,14 +20,21 @@ define ['ember'
         )
 
 
-        Em.Application.initializer(
+        Em.Application.initializer
             name: "certificationController"
             initialize: (container, application) ->
                 certController = Sitterfied.CertificationsController.create()
                 Sitterfied.set('certificationsController',certController)
                 Sitterfied.set('certificationsController.content',Sitterfied.Certification.find())
-                # controller = container.lookup('controller:currentUser').set('model', user)
-                # container.typeInjection('controller', 'currentUser', 'controller:currentUser')
-                # Sitterfied.set('currentUserController', controller)
-
-        )
+        Em.Application.initializer
+            name: "otherServicesController"
+            initialize: (container, application) ->
+                otherController = Sitterfied.OtherServicesController.create()
+                Sitterfied.set('otherServicesController', otherController)
+                Sitterfied.set('otherServicesController.content', Sitterfied.OtherService.find())
+        Em.Application.initializer
+            name: "languagesController"
+            initialize: (container, application) ->
+                languagesController = Sitterfied.LanguagesController.create()
+                Sitterfied.set('languagesController', languagesController)
+                Sitterfied.set('languagesController.content', Sitterfied.languages.find())
