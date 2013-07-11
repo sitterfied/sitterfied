@@ -637,22 +637,6 @@ function program3(depth0,data) {
   data.buffer.push("<p><span>add school (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>");
   }
 
-function program5(depth0,data) {
-  
-  var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n                    ");
-  hashContexts = {'controllerBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
-  hashTypes = {'controllerBinding': "ID",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.MultipleChosenSelect", {hash:{
-    'controllerBinding': ("Sitterfied.certificationController"),
-    'optionLabelPath': ("certification"),
-    'optionValuePath': ("id"),
-    'valueBinding': ("certification")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                    ");
-  return buffer;
-  }
-
   data.buffer.push("<!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile</div>\n	  <div class=\"tab_content profile_block\" id=\"tab-1\">\n		<form class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li><span class=\"icon_bio2\">&nbsp;</span>Biography</li>\n				<li>\n				  <p><i class=\"char\">1100 CHAR</i>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
@@ -716,13 +700,18 @@ function program5(depth0,data) {
     'valueBinding': ("city")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    ");
-  hashContexts = {'controllerBinding': depth0,'selectionBinding': depth0};
-  hashTypes = {'controllerBinding': "ID",'selectionBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ChosenSelect", {hash:{
-    'controllerBinding': ("Sitterfied.stateController"),
-    'selectionBinding': ("state")
+  hashContexts = {'viewName': depth0,'prompt': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'required': depth0};
+  hashTypes = {'viewName': "STRING",'prompt': "STRING",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'required': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'viewName': ("fieldValueSelect2"),
+    'prompt': ("Select State"),
+    'contentBinding': ("Sitterfied.States"),
+    'optionLabelPath': ("content"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("state"),
+    'required': ("")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                  </p>\n				  <a class=\"button button_small\" ");
+  data.buffer.push("\n\n                  </p>\n				  <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -889,10 +878,10 @@ function program5(depth0,data) {
   if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_education3\">&nbsp;</span>Education Level</li>\n				<li>\n				  <p><span>Education level:</span>\n                  ");
-  hashContexts = {'controllerBinding': depth0,'selectionBinding': depth0};
-  hashTypes = {'controllerBinding': "ID",'selectionBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ChosenSelect", {hash:{
-    'controllerBinding': ("Sitterfied.educationController"),
+  hashContexts = {'contentBinding': depth0,'selectionBinding': depth0};
+  hashTypes = {'contentBinding': "ID",'selectionBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("Sitterfied.Educations"),
     'selectionBinding': ("highest_education")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                  </p>\n				  <p><span>last school attended:</span>");
@@ -947,24 +936,26 @@ function program5(depth0,data) {
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_certification3\">&nbsp;</span>Certification or Training</li>\n				<li>\n				  <p>\n                    <span>&nbsp;</span>\n                    ");
-  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  if (stack1 = helpers.comment) { stack1 = stack1.call(depth0, options); }
-  else { stack1 = depth0.comment; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  hashTypes = {};
-  hashContexts = {};
-  if (!helpers.comment) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("Sitterfied.certificationsController"),
+    'optionLabelPath': ("content.certification"),
+    'optionValuePath': ("content.id"),
+    'selectionBinding': ("certifications"),
+    'multiple': ("multiple")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                  </p>\n				  <p>\n                    <span>add another (if not listed above):</span>\n                    ");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'valueBinding': ("Sitterfied.certificationController.newCert")
+    'valueBinding': ("Sitterfied.certificationsController.newCert")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    <a class=\"button button_smaller button_edit certbutton\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveCertification", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" >\n                      <span class=\"icon_plus\">&nbsp;</span>ADD\n                    </a>\n                  </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>Minimum for 1 child:</span>");
+  data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;</span>ADD\n                    </a>\n                  </p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_rates2\">&nbsp;</span>Standard Rates</li>\n				<li>\n				  <p><span>Minimum for 1 child:</span>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -1004,13 +995,47 @@ function program5(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_lng2\">&nbsp;</span>Languages</li>\n				<li>\n				  <p><span>I speak:</span><select multiple data-placeholder=\"English\" tabindex=\"25\"><option>English</option><option>English</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				  <p><span>&nbsp;</span>");
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_lng2\">&nbsp; </span>Languages\n                </li>\n				<li>\n				  <p>\n                    <span>I speak:</span>\n                   </p>\n                      ");
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("Sitterfied.languagesController.content"),
+    'optionLabelPath': ("content.language"),
+    'optionValuePath': ("content.id"),
+    'selectionBinding': ("languages"),
+    'multiple': ("multiple")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    </p>\n				  <p><span>add another (if not listed above):</span>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'valueBinding': ("other_services")
+    'valueBinding': ("Sitterfied.languagesController.newLanguage")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p>\n				  <p><span>add another (if not listed above):</span><input type=\"text\" /><a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" ");
+  data.buffer.push("<a class=\"button button_smaller button_edit\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveLanguage", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				</lpi>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				    <p>\n                      <span>&nbsp;</span>\n                      ");
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("Sitterfied.otherServicesController.content"),
+    'optionLabelPath': ("content.service"),
+    'optionValuePath': ("content.id"),
+    'selectionBinding': ("other_services"),
+    'multiple': ("multiple")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("`\n                    </p>\n				  <p><span>add another (if not listed above):</span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("Sitterfied.otherServicesController.newService")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("<a class=\"button button_smaller button_edit\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveService", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				  <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));

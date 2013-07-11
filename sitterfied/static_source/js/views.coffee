@@ -142,7 +142,7 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
     # Author: http://github.com/aboma
     Sitterfied.Select2 = Ember.Select.extend(
       defaultTemplate: Ember.Handlebars.compile("<option>{{#if prompt}}{{unbound prompt}}{{/if}}</option>{{#each view.content}}{{view Ember.SelectOption contentBinding=\"this\"}}{{/each}}")
-      attributeBindings: ["required"]
+      attributeBindings: ["required", "multiple"]
       required: false
       width: "resolve"
       allowClear: true
