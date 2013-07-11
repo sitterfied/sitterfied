@@ -239,12 +239,15 @@ define [
 
     Sitterfied.Language = DS.Model.extend(
         language: DS.attr('string'),
+        users: DS.hasMany("Sitterfied.User")
     )
     Sitterfied.Certification = DS.Model.extend(
         certification: DS.attr('string'),
+        sitters: DS.hasMany("Sitterfied.Sitter")
     )
     Sitterfied.OtherService = DS.Model.extend(
         service: DS.attr('string'),
+        sitters: DS.hasMany("Sitterfied.Sitter")
     )
 
 
