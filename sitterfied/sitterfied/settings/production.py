@@ -11,10 +11,10 @@ DEBUG = True
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': env['DOTCLOUD_CACHE_REDIS_HOST'] + ":" + env['DOTCLOUD_CACHE_REDIS_PORT'],
+        'LOCATION': env.get('DOTCLOUD_CACHE_REDIS_HOST','') + ":" + env.get('DOTCLOUD_CACHE_REDIS_PORT', ''),
         'OPTIONS': {
             'DB': 1,
-            'PASSWORD': env['DOTCLOUD_CACHE_REDIS_PASSWORD'],
+            'PASSWORD': env.get('DOTCLOUD_CACHE_REDIS_PASSWORD', ''),
             'PARSER_CLASS': 'redis.connection.HiredisParser',
             'PICKLE_VERSION': 2,
         },
@@ -25,10 +25,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sitterfied',
-        'USER': env['DOTCLOUD_DATA_SQL_LOGIN'],
-        'PASSWORD': env['DOTCLOUD_DATA_SQL_PASSWORD'],
-        'HOST': env['DOTCLOUD_DATA_SQL_HOST'],
-        'PORT': int(env['DOTCLOUD_DATA_SQL_PORT']),
+        'USER': env.get('DOTCLOUD_DATA_SQL_LOGIN', ''),
+        'PASSWORD': env.get('DOTCLOUD_DATA_SQL_PASSWORD', ''),
+        'HOST': env.get('DOTCLOUD_DATA_SQL_HOST', ''),
+        'PORT': int(env.get('DOTCLOUD_DATA_SQL_PORT', '0')),
     }
 }
 
@@ -50,5 +50,5 @@ MIDDLEWARE_CLASSES += (
    'pipeline.middleware.MinifyHTMLMiddleware',
 )
 
-SECRET_KEY =  os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY =  os.environ.get('DJANGO_SECRET_KEY','boo')
 from .mandrill import *

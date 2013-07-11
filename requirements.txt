@@ -54,3 +54,4 @@ django-filter
 python-magic
 twilio
 ecl-facebook
+django_twilio
