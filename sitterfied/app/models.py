@@ -157,6 +157,15 @@ class Sitter(User):
 class Certification(TimeStampedModel):
     certification = models.CharField(max_length=128, unique=True)
 
+    def __unicode__(self):
+        return self.certification
+
+
+class OtherService(TimeStampedModel):
+    service = models.CharField(max_length=128, unique=True)
+
+    def __unicode__(self):
+        return self.service
 
 
 class Language(TimeStampedModel):
