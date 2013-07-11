@@ -14,6 +14,7 @@ define [
         isDefaultStore:true
     )
 
+
     Sitterfied.User = DS.Model.extend(
         #django builtins
         #last_login: DS.attr('date')
@@ -209,7 +210,7 @@ define [
         major: DS.attr('string'),
         occupation:  DS.attr('string'),
 
-        certification: DS.hasMany('Sitterfied.Certification'),
+        certifications: DS.hasMany('Sitterfied.Certification'),
         other_services: DS.hasMany('Sitterfied.OtherService'),
         one_child_min_rate: DS.attr('number'),
         one_child_max_rate: DS.attr('number'),

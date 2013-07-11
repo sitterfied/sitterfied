@@ -14,6 +14,8 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
         saveSettings: () ->
             model = this.get('model')
+            #force a save
+            model.get('stateManager').goToState('updated')
             settings =  this.get('settings')
             transaction = model.get('transaction')
             transaction.add(settings)
