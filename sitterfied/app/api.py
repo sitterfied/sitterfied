@@ -1,12 +1,12 @@
 import models
 from forms import AvatarForm
-from django_filters import filters, filterset
 
 from django.db.models import Q
 
 
 from rest_framework import serializers, viewsets, permissions
 from rest_framework import serializers
+from rest_framework import filters
 from rest_framework.parsers import FileUploadParser
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -21,10 +21,10 @@ from app.models import Language
 user_fields = ('first_name', 'last_name',
                'username', 'last_login',
                'date_joined', 'settings',
-                'email', 'languages',
-                'sitter_groups',
+               'email', 'languages',
+               'sitter_groups',
                'address1', 'address2', 'facebook_id',
-               'facebook_token', 'friends', 'users_in_network',
+               'facebook_token', 'friends',
                'city', 'state', 'avatar',
                'zip','cell' )
 
@@ -106,14 +106,11 @@ class BookingRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BookingRequest
 
-
-
-
 class UserViewSet(viewsets.ModelViewSet):
     queryset = models.User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', )
+    filter_fields = ('id', 'friends')
 
 
     @action()
@@ -144,12 +141,10 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
 
-
-
     @link()
-    def parents_in_network(self, request, pk=None):
-        queryset = models.User.objects.get(pk=pk).parents_in_network.all()
-        serializer = ParentSerializer(queryset, many=True)
+    def friends(self, request, pk=None):
+        queryset = models.User.objects.filter(friends=pk)
+        serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
 
 

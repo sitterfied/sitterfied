@@ -1,66 +1,209 @@
 	  <!-- profile_block -->
-	  <div class="mob_tab_trigger active">Profile</div>
+	  <div class="mob_tab_trigger active">Profile
+      </div>
 	  <div class="tab_content profile_block parent_profile_block" id="tab-1">
 		<form method="post" action="#" class="form_style">
 		  <ul>
 			<li>
 			  <ul>
-				<li><span class="icon_friends6">&nbsp;</span>Children</li>
 				<li>
-				  <p class="child_number">CHILD 1 <a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD ANOTHER CHILD</a></p>
-				  <p class="small_selects"><span>FIRST NAME</span> <input type="text" value="" /><span>DATE OF BIRTH</span> <select data-placeholder="MONTH" tabindex="3"><option>MONTH</option><option>MONTH</option></select> <select data-placeholder="DAY" tabindex="4"><option>DAY</option><option>DAY</option></select> <select data-placeholder="YEAR" tabindex="5"><option>YEAR</option><option>YEAR</option></select></p>
-				  <p><span>SCHOOL</span> <input type="text" class="long" value="" /></p>
-				  <p><span>Special needs?</span> <select multiple data-placeholder="Choose all that apply" tabindex="18"><option>text</option><option>text</option></select> <input type="checkbox" id="none" /><label for="none">NONE</label></p>
-				  <p><span class="two_row">Not listed?<br />Add another</span> <input type="text" value="Add special need" /></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+                  <span class="icon_friends6">&nbsp;
+                  </span>Children
+                </li>
+				<li>
+				  <p class="child_number">CHILD 1
+                    <a class="button button_smaller button_edit" href="#">
+                      <span class="icon_plus">&nbsp;
+                      </span>ADD ANOTHER CHILD
+                    </a>
+                  </p>
+				  <p class="small_selects">
+                    <span>FIRST NAME
+                    </span>
+                    <input type="text" value="" />
+                    <span>DATE OF BIRTH
+                    </span>
+                    <select data-placeholder="MONTH" tabindex="3">
+                      <option>MONTH
+                      </option>
+                      <option>MONTH
+                      </option>
+                    </select>
+                    <select data-placeholder="DAY" tabindex="4">
+                      <option>DAY
+                      </option>
+                      <option>DAY
+                      </option>
+                    </select>
+                    <select data-placeholder="YEAR" tabindex="5">
+                      <option>YEAR
+                      </option>
+                      <option>YEAR
+                      </option>
+                    </select>
+                  </p>
+				  <p>
+                    <span>SCHOOL
+                    </span>
+                    <input type="text" class="long" value="" />
+                  </p>
+				  <p>
+                    <span>Special needs?
+                    </span>
+                    <select multiple data-placeholder="Choose all that apply" tabindex="18">
+                      <option>text
+                      </option>
+                      <option>text
+                      </option>
+                    </select>
+                    <input type="checkbox" id="none" />
+                    <label for="none">NONE
+                    </label>
+                  </p>
+				  <p>
+                    <span class="two_row">Not listed?
+                      <br />Add another
+                    </span>
+                    <input type="text" value="Add special need" />
+                  </p>
+				  <a class="button button_small" href="#">
+                    <span class="icon_ok2">&nbsp;
+                    </span>Save
+                  </a>
 				</li>
 			  </ul>
 			</li>
 			<li>
 			  <ul>
-				<li><span class="icon_pin4">&nbsp;</span>Home Address</li>
 				<li>
-				  <p><span>&nbsp;</span> <input type="text" value="Street address" /> <input type="text" value="Apt/Suite" class="small" /></p>
-				  <p><span>&nbsp;</span> <input type="text" value="07030" class="small" /> <select data-placeholder="Hoboken" tabindex="1"><option>Hoboken</option><option>Hoboken</option></select> <select class="small" data-placeholder="NJ" tabindex="2"><option>NJ</option><option>NJ</option></select></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+                  <span class="icon_pin4">&nbsp;
+                  </span>Home Address
+                </li>
+				<li>
+				  <p>
+                    <span>&nbsp;
+                    </span>
+                    {{view Ember.TextField placeholder="Street address" valueBinding="address1"}}
+                    {{view Ember.TextField placeholder="Apt/Suite" valueBinding="address2" class="small"}}
+                  </p>
+				  <p>
+                    <span>&nbsp;
+                    </span>
+                    {{view Ember.TextField placeholder="Zip Code" valueBinding="live_zip" class="small"}}
+                    {{view Ember.TextField placeholder="City" valueBinding="city"}}
+                    {{ view Sitterfied.Select2
+                         viewName="fieldValueSelect2"
+        	             prompt="Select State"
+                         contentBinding="Sitterfied.States"
+                         optionLabelPath="content"
+                         optionValuePath="content"
+                         selectionBinding="state"
+                         required="" }}
+                  </p>
+                  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
 			  </ul>
 			</li>
 			<li>
 			  <ul>
-				<li><span class="icon_iphone2">&nbsp;</span>Cell Phone Number</li>
 				<li>
-				  <p><span>&nbsp;</span> <input type="text" value="(123)" class="small" /> <input type="text" value="456-7890" /></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+                  <span class="icon_iphone2">&nbsp;
+                  </span>Cell Phone Number
+                </li>
+				<li>
+				  <p>
+                    <span>&nbsp;
+                    </span>
+                    {{view Ember.TextField placeholder="(123) 456-7890" valueBinding="cell" }}
+                  </p>
+                  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
 			  </ul>
 			</li>
 			<li>
 			  <ul>
-				<li><span class="icon_email3">&nbsp;</span>Email Address</li>
 				<li>
-				  <p><span>&nbsp;</span> <input type="text" value="" /></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+                  <span class="icon_email3">&nbsp;
+                  </span>Email Address
+                </li>
+				<li>
+				  <p>
+                    <span>&nbsp;
+                    </span>
+                    {{view Ember.TextField placeholder="Email" valueBinding="email"}}
+                  </p>
+                  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
 			  </ul>
 			</li>
 			<li>
 			  <ul>
-				<li><span class="icon_emergency2">&nbsp;</span>Emergency Contacts</li>
 				<li>
-				  <p><span>NAME</span> <input type="text" value="" /><span>PHONE</span> <input type="text" value="" /></p>
-				  <p><span class="two_row">PEDIATRICIAN’S NAME</span> <input type="text" value="" /><span class="two_row">PEDIATRICIAN’S PHONE</span> <input type="text" value="" /></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+                  <span class="icon_emergency2">&nbsp;
+                  </span>Emergency Contacts
+                </li>
+				<li>
+				  <p>
+                    <span>NAME
+                    </span>
+                    <input type="text" value="" />
+                    <span>PHONE
+                    </span>
+                    <input type="text" value="" />
+                  </p>
+				  <p>
+                    <span class="two_row">PEDIATRICIAN’S NAME
+                    </span>
+                    <input type="text" value="" />
+                    <span class="two_row">PEDIATRICIAN’S PHONE
+                    </span>
+                    <input type="text" value="" />
+                  </p>
+				  <a class="button button_small" href="#">
+                    <span class="icon_ok2">&nbsp;
+                    </span>Save
+                  </a>
 				</li>
 			  </ul>
 			</li>
 			<li>
 			  <ul>
-				<li><span class="icon_lng2">&nbsp;</span>Languages</li>
 				<li>
-				  <p><span>I speak:</span><select multiple data-placeholder="English" tabindex="25"><option>English</option><option>English</option></select></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
-				</li>
+                  <span class="icon_lng2">&nbsp;
+                  </span>Languages
+                </li>
+				<li>
+			      <ul>
+				    <li>
+				      <p>
+                        <span>I speak:</span>
+                      </p>
+                      {{# if controllers.languages.content.content }}
+                        {{view Sitterfied.Select2
+                        contentBinding=controllers.languages
+        	            prompt="Select languages"
+                        optionLabelPath="content.language"
+                        optionValuePath="content"
+                        selectionBinding="languages"
+                        multiple="multiple"
+                        }}
+                        {{/if}}
+                        </p>
+				        <p>
+                          <span>add another (if not listed above):
+                          </span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}
+                          <a class="button button_smaller button_edit" style="top:0px;" {{action 'saveLanguage'}}>
+                            <span class="icon_plus">&nbsp;</span>
+                            ADD
+                          </a>
+                        </p>
+                    </li>
+                    <li>
+                      <a class="button button_small"  {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				    </li>
+			      </ul>
+                  <li>
+				  </li>
 			  </ul>
 			</li>
 		  </ul>

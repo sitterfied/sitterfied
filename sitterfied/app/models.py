@@ -183,6 +183,12 @@ class Language(TimeStampedModel):
     def __unicode__(self):
         return self.language
 
+class SpecialNeeds(TimeStampedModel):
+    need = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.need
+
 
 class Settings(TimeStampedModel):
     #parent specific

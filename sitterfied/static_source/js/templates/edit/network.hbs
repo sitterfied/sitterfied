@@ -28,12 +28,12 @@
 		  </ul>
 		</div>
 		<ul class="soc_psg_list clear">
-          {{# with controllers.usersInNetwork }}
+          {{# with controllers.friends }}
 		  <li>
 			<ul>
 			  <li>Parents</li>
 
-              {{# each parentsInNetwork }}
+              {{# each parents }}
 		        <li>{{#linkTo parent this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
               {{/each}}
 			</ul>
@@ -41,7 +41,7 @@
 		  <li>
 			<ul>
 			  <li>Sitters</li>
-              {{# each sittersInNetwork }}
+              {{# each sitters }}
 		        <li>{{#linkTo sitter this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
               {{/each}}
 			</ul>

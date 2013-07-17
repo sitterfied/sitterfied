@@ -162,116 +162,6 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper\">\n\n	<!-- parent_book_block -->\n	<form action=\"#\" method=\"post\" class=\"form_style\">\n	  <div class=\"parent_book_block clear\">\n		<ul>\n		  <li><div><span class=\"icon_heart\">&nbsp;</span>Recipients</div>\n		  <ul>\n			<li><span class=\"icon_heart\">&nbsp;</span>Recipients</li>\n			<li><select data-placeholder=\"Names\" multiple tabindex=\"1\"><option>Ellen Vukelich</option><option>Sandy Thompson</option><option>Amy Randall</option><option>Amelia Hart</option><option>Erica Sanders</option></select></li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li><div><span class=\"icon_date2\">&nbsp;</span>Schedule</div>\n		  <ul>\n			<li><span class=\"icon_date2\">&nbsp;</span>Schedule</li>\n			<li><p><input type=\"text\" class=\"datepicker\" id=\"datepicker\" /></p></li>\n			<li>\n			  <p><label for=\"from\">FROM</label><select id=\"from\" data-placeholder=\"\" tabindex=\"8\"><option>6:00 PM</option><option>7:00 PM</option></select></p>\n			  <p><label for=\"to\">TO</label><select id=\"to\" data-placeholder=\"\" tabindex=\"9\"><option>11:00 PM</option><option>12:00 PM</option></select></p>\n			  <p><input type=\"checkbox\" id=\"check\" /><label for=\"check\">Overnight/Multiday booking</label></p>\n			</li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li class=\"lng\"><div><span class=\"icon_pin4\">&nbsp;</span>Location</div>\n		  <ul>\n			<li><span class=\"icon_pin4\">&nbsp;</span>Location</li>\n			<li>\n			  <p><input type=\"text\" value=\"33 Nassau Ave\" /> <input type=\"text\" value=\"Suite#2\" class=\"small\" /></p>\n			  <p><input type=\"text\" value=\"10007\" class=\"small\" /> <select data-placeholder=\"Hoboken\" tabindex=\"1\"><option>Hoboken</option><option>Hoboken</option></select> <select class=\"small\" data-placeholder=\"NJ\" tabindex=\"2\"><option>NJ</option><option>NJ</option></select></p>\n			</li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li><div><span class=\"icon_friends6\">&nbsp;</span># of kids</div>\n		  <ul>\n			<li><span class=\"icon_friends6\">&nbsp;</span>Number of kids</li>\n			<li><p><select data-placeholder=\"\" tabindex=\"10\"><option>2 Kids</option><option>3 Kids</option></select></p></li>\n			<li>&nbsp;</li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		  <li class=\"lng\"><div><span class=\"icon_phone2\">&nbsp;</span>Emergency Contact</div>\n		  <ul>\n			<li><span class=\"icon_phone2\">&nbsp;</span>Emergency Contact</li>\n			<li><p><input type=\"text\" value=\"(123)\" class=\"small\" /> <input type=\"text\" value=\"456-7890\" /></p></li>\n			<li>&nbsp;</li>\n		  </ul>\n		  </li>\n		</ul>\n		<p><a class=\"button button_small button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a><a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>SEND</a></p>\n	  </div>\n	</form>\n	<!-- /parent_book_block -->\n\n  </div>\n</div>");
   
 });
-Ember.TEMPLATES["sitterEdit/network"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [3,'>= 1.0.0-rc.4'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
-
-function program1(depth0,data) {
-  
-  var buffer = '', stack1, hashTypes, hashContexts;
-  data.buffer.push("\n		  <li>\n			<ul>\n			  <li>Parents</li>\n\n              ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "parentsInNetwork", {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Sitters</li>\n              ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "sittersInNetwork", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</ul>\n		  </li>\n          ");
-  return buffer;
-  }
-function program2(depth0,data) {
-  
-  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
-  data.buffer.push("\n		        <li>");
-  hashTypes = {};
-  hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
-  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("</li>\n              ");
-  return buffer;
-  }
-function program3(depth0,data) {
-  
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("<img src=\"/static/images/demo/img15.jpg\" alt=\"\" />");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  return buffer;
-  }
-
-function program5(depth0,data) {
-  
-  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
-  data.buffer.push("\n		        <li>");
-  hashTypes = {};
-  hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
-  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("</li>\n              ");
-  return buffer;
-  }
-
-function program7(depth0,data) {
-  
-  var buffer = '', stack1, options, hashTypes, hashContexts;
-  data.buffer.push("\n		        <li>");
-  options = {hash:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  if (stack1 = helpers.linkTo) { stack1 = stack1.call(depth0, options); }
-  else { stack1 = depth0.linkTo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  hashTypes = {};
-  hashContexts = {};
-  if (!helpers.linkTo) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li><a ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteGroup", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" class=\"delete\">&nbsp;</a>\n              ");
-  return buffer;
-  }
-function program8(depth0,data) {
-  
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("<img src=\"/static/images/demo/img15.jpg\" alt=\"\" />");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  return buffer;
-  }
-
-  data.buffer.push("	  <!-- network_block -->\n	  <div class=\"mob_tab_trigger\">Network</div>\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\">\n                <a ");
-  hashContexts = {'bubbles': depth0};
-  hashTypes = {'bubbles': "BOOLEAN"};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookConnect", {hash:{
-    'bubbles': (false)
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n                    <img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook\n                </a>\n                <a href=\"#\">\n                  <img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail\n                </a>\n              </p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p>\n                ");
-  hashContexts = {'placeholder': depth0};
-  hashTypes = {'placeholder': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'placeholder': ("Search a person or group")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                <input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n          ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers['with'].call(depth0, "controllers.usersInNetwork", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  <li>\n			<ul>\n			  <li>Groups</li>\n              ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "sitter_groups", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</ul>\n		  </li>\n		</ul>\n	  </div>\n	  <!-- /network_block -->\n");
-  return buffer;
-  
-});
 Ember.TEMPLATES["sitterEdit/schedlue"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -1067,7 +957,7 @@ function program9(depth0,data) {
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "controllers.languages.content.content", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n                    </p>\n				  <p><span>add another (if not listed above):</span>");
+  data.buffer.push("\n                     </p>\n				</li>\n                <li>\n				  <p><span>add another (if not listed above):</span>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -1077,7 +967,7 @@ function program9(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveLanguage", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n				</lpi>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				    <p>\n                      ");
+  data.buffer.push("><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n                  </li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_other2\">&nbsp;</span>Other Services</li>\n				<li>\n				    <p>\n                      ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "controllers.otherServices.content.content", {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -1229,15 +1119,6 @@ function program3(depth0,data) {
   return buffer;
   
 });
-Ember.TEMPLATES["sitterEdit/bookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [3,'>= 1.0.0-rc.4'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  
-
-
-  data.buffer.push("	  <!-- bookings_block -->\n	  <div class=\"mob_tab_trigger\">Bookings</div>\n	  <div class=\"tab_content bookings_block\" id=\"tab-3\">\n		<ul class=\"subtab_select\">\n		  <li><a href=\"#tab-1-1\"><span>4</span>Pending Requests</a></li>\n		  <li><a href=\"#tab-1-2\"><span>3</span>Upcoming Jobs</a></li>\n		  <li><a href=\"#tab-1-3\"><span>7</span>Completed Jobs</a></li>\n		  <li><a href=\"#tab-1-4\"><span>12</span>Missed Requests</a></li>\n		  <li><a href=\"#tab-1-5\"><span>2</span>Expired Requests</a></li>\n		  <li><a href=\"#tab-1-6\"><span>3</span>Declined Jobs</a></li>\n		  <li><a href=\"#tab-1-7\"><span>2</span>Canceled Jobs</a></li>\n		</ul>\n\n		<div class=\"mob_tab_trigger active\"><span>4</span>Pending Requests</div>\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price\"><span><strong>$</strong><input type=\"text\" value=\"25\" />/hr</span><a class=\"edit_button\" href=\"#\">edit</a></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">By Phone</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>ACCEPT</a><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>DECLINE</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /pending_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Upcoming Jobs</div>\n		<!-- upcoming_jobs_block -->\n		<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"price\"><span><strong>$25</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /upcoming_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>7</span>Completed Jobs</div>\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n		  Completed Jobs\n		</div>\n		<!-- /completed_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>12</span>Missed Requests</div>\n		<!-- missed_requests_block -->\n		<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n		  Missed Requests\n		</div>\n		<!-- /missed_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Expired Requests</div>\n		<!-- expired_requests_block -->\n		<div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n		  Expired Requests\n		</div>\n		<!-- /expired_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Declined Jobs</div>\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n		  Declined Jobs\n		</div>\n		<!-- /declined_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Canceled Jobs</div>\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n		  Canceled Jobs\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n");
-  
-});
 Ember.TEMPLATES["sitterEdit"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -1308,36 +1189,6 @@ function program9(depth0,data) {
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n\n	</div>\n	<!-- /tabs_wrap -->\n\n  </div>\n</div>\n<!-- /container -->");
-  return buffer;
-  
-});
-Ember.TEMPLATES["sitterEdit/reviews"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [3,'>= 1.0.0-rc.4'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
-
-function program1(depth0,data) {
-  
-  var buffer = '', stack1, hashTypes, hashContexts, options;
-  data.buffer.push("\n            ");
-  hashTypes = {};
-  hashContexts = {};
-  options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "review", options) : helperMissing.call(depth0, "partial", "review", options))));
-  data.buffer.push("\n          ");
-  return buffer;
-  }
-
-  data.buffer.push("	  <!-- reviews_block -->\n	  <div class=\"mob_tab_trigger\">Reviews</div>\n	  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n		<div class=\"reco clear\"><a ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openReccomendPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_team2\">&nbsp;</span>REQUEST RECOMMENDATION</a></div>\n		<ul class=\"clear\">\n          ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "reviews", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		</ul>\n	  </div>\n	  <!-- /reviews_block -->\n");
   return buffer;
   
 });
@@ -1804,33 +1655,96 @@ function program12(depth0,data) {
   return buffer;
   
 });
-Ember.TEMPLATES["parentEdit/profile"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["reviews"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  
-
-
-  data.buffer.push("	  <!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile</div>\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li><span class=\"icon_friends6\">&nbsp;</span>Children</li>\n				<li>\n				  <p class=\"child_number\">CHILD 1 <a class=\"button button_smaller button_edit\" href=\"#\"><span class=\"icon_plus\">&nbsp;</span>ADD ANOTHER CHILD</a></p>\n				  <p class=\"small_selects\"><span>FIRST NAME</span> <input type=\"text\" value=\"\" /><span>DATE OF BIRTH</span> <select data-placeholder=\"MONTH\" tabindex=\"3\"><option>MONTH</option><option>MONTH</option></select> <select data-placeholder=\"DAY\" tabindex=\"4\"><option>DAY</option><option>DAY</option></select> <select data-placeholder=\"YEAR\" tabindex=\"5\"><option>YEAR</option><option>YEAR</option></select></p>\n				  <p><span>SCHOOL</span> <input type=\"text\" class=\"long\" value=\"\" /></p>\n				  <p><span>Special needs?</span> <select multiple data-placeholder=\"Choose all that apply\" tabindex=\"18\"><option>text</option><option>text</option></select> <input type=\"checkbox\" id=\"none\" /><label for=\"none\">NONE</label></p>\n				  <p><span class=\"two_row\">Not listed?<br />Add another</span> <input type=\"text\" value=\"Add special need\" /></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_pin4\">&nbsp;</span>Home Address</li>\n				<li>\n				  <p><span>&nbsp;</span> <input type=\"text\" value=\"Street address\" /> <input type=\"text\" value=\"Apt/Suite\" class=\"small\" /></p>\n				  <p><span>&nbsp;</span> <input type=\"text\" value=\"07030\" class=\"small\" /> <select data-placeholder=\"Hoboken\" tabindex=\"1\"><option>Hoboken</option><option>Hoboken</option></select> <select class=\"small\" data-placeholder=\"NJ\" tabindex=\"2\"><option>NJ</option><option>NJ</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_iphone2\">&nbsp;</span>Cell Phone Number</li>\n				<li>\n				  <p><span>&nbsp;</span> <input type=\"text\" value=\"(123)\" class=\"small\" /> <input type=\"text\" value=\"456-7890\" /></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_email3\">&nbsp;</span>Email Address</li>\n				<li>\n				  <p><span>&nbsp;</span> <input type=\"text\" value=\"\" /></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_emergency2\">&nbsp;</span>Emergency Contacts</li>\n				<li>\n				  <p><span>NAME</span> <input type=\"text\" value=\"\" /><span>PHONE</span> <input type=\"text\" value=\"\" /></p>\n				  <p><span class=\"two_row\">PEDIATRICIAN’S NAME</span> <input type=\"text\" value=\"\" /><span class=\"two_row\">PEDIATRICIAN’S PHONE</span> <input type=\"text\" value=\"\" /></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_lng2\">&nbsp;</span>Languages</li>\n				<li>\n				  <p><span>I speak:</span><select multiple data-placeholder=\"English\" tabindex=\"25\"><option>English</option><option>English</option></select></p>\n				  <a class=\"button button_small\" href=\"#\"><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n");
-  
-});
-Ember.TEMPLATES["parentEdit/network"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [3,'>= 1.0.0-rc.4'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, hashTypes, hashContexts, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
-  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
-  data.buffer.push("\n		  <li>");
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n            ");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
-  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("</li>\n        ");
+  options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "review", options) : helperMissing.call(depth0, "partial", "review", options))));
+  data.buffer.push("\n          ");
+  return buffer;
+  }
+
+  data.buffer.push("	  <!-- reviews_block -->\n	  <div class=\"mob_tab_trigger\">Reviews</div>\n	  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n		<div class=\"reco clear\"><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openReccomendPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_team2\">&nbsp;</span>REQUEST RECOMMENDATION</a></div>\n		<ul class=\"clear\">\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "reviews", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		</ul>\n	  </div>\n	  <!-- /reviews_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["bookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "booking", options) : helperMissing.call(depth0, "partial", "booking", options))));
+  data.buffer.push("\n            ");
+  return buffer;
+  }
+
+  data.buffer.push("	  <!-- bookings_block -->\n	  <div class=\"mob_tab_trigger\">Bookings</div>\n	  <div class=\"tab_content bookings_block\" id=\"tab-3\">\n		<ul class=\"subtab_select\">\n		  <li><a href=\"#tab-1-1\"><span>4</span>Pending Requests</a></li>\n		  <li><a href=\"#tab-1-2\"><span>3</span>Upcoming Jobs</a></li>\n		  <li><a href=\"#tab-1-3\"><span>7</span>Completed Jobs</a></li>\n		  <li><a href=\"#tab-1-4\"><span>12</span>Missed Requests</a></li>\n		  <li><a href=\"#tab-1-5\"><span>2</span>Expired Requests</a></li>\n		  <li><a href=\"#tab-1-6\"><span>3</span>Declined Jobs</a></li>\n		  <li><a href=\"#tab-1-7\"><span>2</span>Canceled Jobs</a></li>\n		</ul>\n\n		<div class=\"mob_tab_trigger active\"><span>4</span>Pending Requests</div>\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n            ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "booking", "in", "bookings", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		  </ul>\n		</div>\n		<!-- /upcoming_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>7</span>Completed Jobs</div>\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n		  Completed Jobs\n		</div>\n		<!-- /completed_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>12</span>Missed Requests</div>\n		<!-- missed_requests_block -->\n		<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n		  Missed Requests\n		</div>\n		<!-- /missed_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Expired Requests</div>\n		<!-- expired_requests_block -->\n		<div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n		  Expired Requests\n		</div>\n		<!-- /expired_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Declined Jobs</div>\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n		  Declined Jobs\n		</div>\n		<!-- /declined_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Canceled Jobs</div>\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n		  Canceled Jobs\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["network"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing, functionType="function", blockHelperMissing=helpers.blockHelperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts;
+  data.buffer.push("\n		  <li>\n			<ul>\n			  <li>Parents</li>\n\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "parents", {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n		  <li>\n			<ul>\n			  <li>Sitters</li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "sitters", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n          ");
   return buffer;
   }
 function program2(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n		        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n              ");
+  return buffer;
+  }
+function program3(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("<img src=\"/static/images/demo/img15.jpg\" alt=\"\" />");
@@ -1840,45 +1754,185 @@ function program2(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<!-- network_block -->\n<div class=\"mob_tab_trigger\">Network</div>\n<div class=\"tab_content network_block\" id=\"tab-4\">\n  <div class=\"soc_list clear\">\n	<p>Find people you know on Sitterfied</p>\n	<ul>\n	  <li>\n		<p class=\"clear\"><a ");
+function program5(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n		        <li>");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookConnect", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook</a><a ");
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n              ");
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = '', stack1, options, hashTypes, hashContexts;
+  data.buffer.push("\n		        <li>");
+  options = {hash:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  if (stack1 = helpers.linkTo) { stack1 = stack1.call(depth0, options); }
+  else { stack1 = depth0.linkTo; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "gmailConnect", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail</a></p>\n		<p>Connect</p>\n	  </li>\n	  <li>\n		<p>");
-  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
-  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'placeholder': ("Search a person or group"),
-    'valueBinding': ("newFriendName")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<input ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "addFriend", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("type=\"submit\" value=\"ADD\" /></p>\n		<p>Search</p>\n	  </li>\n	  <li>\n		<p><a ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "invite", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">Invite Your Friends</a></p>\n		<p>Invite</p>\n	  </li>\n	</ul>\n  </div>\n  <ul class=\"soc_psg_list clear\">\n	<li>\n	  <ul>\n		<li>Parents</li>\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "parents_in_network", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if (!helpers.linkTo) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  </ul>\n	</li>\n	<li>\n	  <ul>\n		<li>Sitters</li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Lakeisha Powanda</a></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Connie Takach</a></li>\n		<li><a href=\"#\"><img src=\"/static/images/demo/img15.jpg\" alt=\"\" /></a><a href=\"#\">Jane Eyre</a></li>\n	  </ul>\n	</li>\n	<li>\n	  <ul>\n		<li>Groups</li>\n		<li><a href=\"#\">Hoboken Catholic Church</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n		<li><a href=\"#\">St Francis Prep School</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n		<li><a href=\"#\">Hoboken Mommies</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n	  </ul>\n	</li>\n  </ul>\n</div>\n<!-- /network_block -->\n");
+  data.buffer.push("</li><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteGroup", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"delete\">&nbsp;</a>\n              ");
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("<img src=\"/static/images/demo/img15.jpg\" alt=\"\" />");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  return buffer;
+  }
+
+  data.buffer.push("	  <!-- network_block -->\n	  <div class=\"mob_tab_trigger\">Network</div>\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\">\n                <a ");
+  hashContexts = {'bubbles': depth0};
+  hashTypes = {'bubbles': "BOOLEAN"};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookConnect", {hash:{
+    'bubbles': (false)
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                    <img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook\n                </a>\n                <a href=\"#\">\n                  <img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail\n                </a>\n              </p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p>\n                ");
+  hashContexts = {'placeholder': depth0};
+  hashTypes = {'placeholder': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Search a person or group")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                <input type=\"submit\" value=\"ADD\" /></p>\n			  <p>Search</p>\n			</li>\n			<li>\n			  <p><a href=\"#\">Invite Your Friends</a></p>\n			  <p>Invite</p>\n			</li>\n		  </ul>\n		</div>\n		<ul class=\"soc_psg_list clear\">\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['with'].call(depth0, "controllers.friends", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		  <li>\n			<ul>\n			  <li>Groups</li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "sitter_groups", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			</ul>\n		  </li>\n		</ul>\n	  </div>\n	  <!-- /network_block -->\n");
   return buffer;
   
 });
-Ember.TEMPLATES["parentEdit/index"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["parentEdit/profile"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
   
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n                        ");
+  hashContexts = {'contentBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("controllers.languages"),
+    'prompt': ("Select languages"),
+    'optionLabelPath': ("content.language"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("languages"),
+    'multiple': ("multiple")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                        ");
+  return buffer;
+  }
 
-
-  data.buffer.push("edit index");
+  data.buffer.push("	  <!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile\n      </div>\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_friends6\">&nbsp;\n                  </span>Children\n                </li>\n				<li>\n				  <p class=\"child_number\">CHILD 1\n                    <a class=\"button button_smaller button_edit\" href=\"#\">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n				  <p class=\"small_selects\">\n                    <span>FIRST NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span>DATE OF BIRTH\n                    </span>\n                    <select data-placeholder=\"MONTH\" tabindex=\"3\">\n                      <option>MONTH\n                      </option>\n                      <option>MONTH\n                      </option>\n                    </select>\n                    <select data-placeholder=\"DAY\" tabindex=\"4\">\n                      <option>DAY\n                      </option>\n                      <option>DAY\n                      </option>\n                    </select>\n                    <select data-placeholder=\"YEAR\" tabindex=\"5\">\n                      <option>YEAR\n                      </option>\n                      <option>YEAR\n                      </option>\n                    </select>\n                  </p>\n				  <p>\n                    <span>SCHOOL\n                    </span>\n                    <input type=\"text\" class=\"long\" value=\"\" />\n                  </p>\n				  <p>\n                    <span>Special needs?\n                    </span>\n                    <select multiple data-placeholder=\"Choose all that apply\" tabindex=\"18\">\n                      <option>text\n                      </option>\n                      <option>text\n                      </option>\n                    </select>\n                    <input type=\"checkbox\" id=\"none\" />\n                    <label for=\"none\">NONE\n                    </label>\n                  </p>\n				  <p>\n                    <span class=\"two_row\">Not listed?\n                      <br />Add another\n                    </span>\n                    <input type=\"text\" value=\"Add special need\" />\n                  </p>\n				  <a class=\"button button_small\" href=\"#\">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_pin4\">&nbsp;\n                  </span>Home Address\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Street address"),
+    'valueBinding': ("address1")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Apt/Suite"),
+    'valueBinding': ("address2"),
+    'class': ("small")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Zip Code"),
+    'valueBinding': ("live_zip"),
+    'class': ("small")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("City"),
+    'valueBinding': ("city")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                    ");
+  hashContexts = {'viewName': depth0,'prompt': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'required': depth0};
+  hashTypes = {'viewName': "STRING",'prompt': "STRING",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'required': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'viewName': ("fieldValueSelect2"),
+    'prompt': ("Select State"),
+    'contentBinding': ("Sitterfied.States"),
+    'optionLabelPath': ("content"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("state"),
+    'required': ("")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n                  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_iphone2\">&nbsp;\n                  </span>Cell Phone Number\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("(123) 456-7890"),
+    'valueBinding': ("cell")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n                  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_email3\">&nbsp;\n                  </span>Email Address\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Email"),
+    'valueBinding': ("email")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n                  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_emergency2\">&nbsp;\n                  </span>Emergency Contacts\n                </li>\n				<li>\n				  <p>\n                    <span>NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span>PHONE\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                  </p>\n				  <p>\n                    <span class=\"two_row\">PEDIATRICIAN’S NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span class=\"two_row\">PEDIATRICIAN’S PHONE\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                  </p>\n				  <a class=\"button button_small\" href=\"#\">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_lng2\">&nbsp;\n                  </span>Languages\n                </li>\n				<li>\n			      <ul>\n				    <li>\n				      <p>\n                        <span>I speak:</span>\n                      </p>\n                      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "controllers.languages.content.content", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n                        </p>\n				        <p>\n                          <span>add another (if not listed above):\n                          </span>");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("controllers.languages.newLanguage")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                          <a class=\"button button_smaller button_edit\" style=\"top:0px;\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveLanguage", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                            <span class=\"icon_plus\">&nbsp;</span>\n                            ADD\n                          </a>\n                        </p>\n                    </li>\n                    <li>\n                      <a class=\"button button_small\"  ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				    </li>\n			      </ul>\n                  <li>\n				  </li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n");
+  return buffer;
   
 });
 Ember.TEMPLATES["parentEdit/top"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -1899,7 +1953,21 @@ function program1(depth0,data) {
   },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "search", options) : helperMissing.call(depth0, "linkTo", "search", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n<!-- top info -->\n<div class=\"top_info clear\">\n  <div class=\"member_since guest\"></div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img src=\"/static/images/demo/img2.jpg\" alt=\"\" />\n	  <p><span class=\"icon_pen\">&nbsp;</span><a href=\"#edit_photo_popup\">Edit Photo</a></p>\n	</div>\n  </div>\n  <div class=\"guest_top_info\">\n	<p>");
+  data.buffer.push("\n<!-- top info -->\n<div class=\"top_info clear\">\n  <div class=\"member_since guest\"></div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img ");
+  hashContexts = {'src': depth0};
+  hashTypes = {'src': "ID"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'src': ("avatarUrl")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" alt=\"\" />\n	  <p ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openPhotoPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_pen\">&nbsp;</span><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openPhotoPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Edit Photo</a></p>\n	</div>\n  </div>\n  <div class=\"guest_top_info\">\n	<p>");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -2006,24 +2074,6 @@ function program9(depth0,data) {
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n\n	</div>\n  </div>\n</div>");
   return buffer;
-  
-});
-Ember.TEMPLATES["parentEdit/bookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [3,'>= 1.0.0-rc.4'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  
-
-
-  data.buffer.push("	  <!-- bookings_block -->\n	  <div class=\"mob_tab_trigger\">Bookings</div>\n	  <div class=\"tab_content bookings_block parent_bookings_block\" id=\"tab-2\">\n		<ul class=\"subtab_select\">\n		  <li><a href=\"#tab-1-1\"><span>4</span>Pending Requests</a></li>\n		  <li><a href=\"#tab-1-2\"><span>3</span>Upcoming Jobs</a></li>\n		  <li><a href=\"#tab-1-3\"><span>7</span>Completed Jobs</a></li>\n		  <li><a href=\"#tab-1-5\"><span>2</span>Expired Requests</a></li>\n		  <li><a href=\"#tab-1-6\"><span>3</span>Declined Requests</a></li>\n		  <li><a href=\"#tab-1-7\"><span>2</span>Canceled Jobs</a></li>\n		</ul>\n\n		<div class=\"mob_tab_trigger active\"><span>4</span>Pending Requests</div>\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price_lng\"><span><strong>$12 -15</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"price_lng\"><span><strong>$12 -15</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane E</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span></li>\n				  <li><span class=\"icon_friends5\">&nbsp;</span>2 Kids</li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>New York, NY</li>\n				  <li>\n					<p><a href=\"#\">Need more info?<br />Email Jane.</a></p>\n					<span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a>\n				  </li>\n				</ul>\n				<div class=\"additional_info\">By Phone</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Note</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /pending_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Upcoming Jobs</div>\n		<!-- upcoming_jobs_block -->\n		<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n		  <ul class=\"booking_list\">\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Job</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"price\"><span><strong>$25</strong> /hr</span></div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n			<li>\n			  <header>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n				<span>Interview</span>\n			  </header>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img16.jpg\" alt=\"\" /></a>\n				<p><span><a href=\"#\">Jane Eyre</a></span></p>\n				<div>\n				  <a href=\"#\">8 mutual friends</a>\n				  <ul>\n					<li>Friends you have in common</li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n					<li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  </ul>\n				</div>\n			  </div>\n			  <div class=\"desc clear\">\n				<ul>\n				  <li><span class=\"icon_date\">&nbsp;</span>Wednesday, August 1 &nbsp; <span>4:00 pm — 6:00 pm</span> <a href=\"#\" class=\"rlink\">Save to my calendar</a></li>\n				  <li><span class=\"icon_phone\">&nbsp;</span>(125) 898-6891</li>\n				  <li><span class=\"icon_email2\">&nbsp;</span><a href=\"mailto:jeyre@gmail.com\">jeyre@gmail.com</a> <a href=\"#\" class=\"rlink\">Add to my contacts</a></li>\n				  <li><span class=\"icon_pin3\">&nbsp;</span>33 Nassau Ave Suite #2 New York, NY <a href=\"#\" class=\"rlink\">Map this</a></li>\n				</ul>\n				<div class=\"children\"><span class=\"icon_friends5\">&nbsp;</span>2 Kids</div>\n				<div class=\"additional_info\">Meet Up</div>\n				<div class=\"btn_wrap\"><a class=\"button button_smaller button_cancel\" href=\"#\"><span class=\"icon_cancel\">&nbsp;</span>CANCEL</a></div>\n				<div class=\"note_wrap\"><a href=\"#\"><span class=\"show\">Show</span><span class=\"hide\">Hide</span> Notes</a></div>\n			  </div>\n			  <div class=\"note_desc clear\">\n				<p>Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Quisque eget odio ac lectus vestibulum faucibus eget in metus. </p>\n			  </div>\n			  <footer>\n				Request Sent: Friday 21 July 2012 at 4:40pm\n			  </footer>\n			</li>\n		  </ul>\n		</div>\n		<!-- /upcoming_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>7</span>Completed Jobs</div>\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n		  Completed Jobs\n		</div>\n		<!-- /completed_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Expired Requests</div>\n		<!-- expired_requests_block -->\n		<div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n		  Expired Requests\n		</div>\n		<!-- /expired_requests_block -->\n\n		<div class=\"mob_tab_trigger\"><span>3</span>Declined Requests</div>\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n		  Declined Requests\n		</div>\n		<!-- /declined_jobs_block -->\n\n		<div class=\"mob_tab_trigger\"><span>2</span>Canceled Jobs</div>\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n		  Canceled Jobs\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n");
-  
-});
-Ember.TEMPLATES["parentEdit/reviews"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [3,'>= 1.0.0-rc.4'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  
-
-
-  data.buffer.push("	  <!-- reviews_block -->\n	  <div class=\"mob_tab_trigger\">Reviews</div>\n	  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n		<ul class=\"clear\">\n		  <li>\n			<a href=\"#\"><img src=\"/static/images/demo/img11.jpg\" alt=\"\" /></a>\n			<div class=\"desc\">\n			  <p><a href=\"#\">Marcie Silk</a></p>\n			  <div class=\"reco_btn\"><span class=\"icon_ok\">&nbsp;</span>Recommends</div>\n			  <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. </p>\n			  <p>Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet.</p>\n			</div>\n		  </li>\n		  <li>\n			<a href=\"#\"><img src=\"/static/images/demo/img12.jpg\" alt=\"\" /></a>\n			<div class=\"desc\">\n			  <p><a href=\"#\">Otis Devin</a></p>\n			  <p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. </p>\n			</div>\n		  </li>\n		</ul>\n	  </div>\n	  <!-- /reviews_block -->\n");
   
 });
 Ember.TEMPLATES["parentEdit/sitterTeam"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
