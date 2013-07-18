@@ -3,7 +3,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        needs: ['certifications', 'languages', 'otherServices', 'friends']
+        needs: ['certifications', 'languages', 'otherServices', 'friends', 'children']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -48,6 +48,11 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         deleteGroup: (group) ->
             alert("delete group, " + group)
 
+        newChild: () ->
+            newChild = Sitterfied.Child.createRecord(parent: this.get('content'))
+            this.get('controllers.children').pushObject(newChild)
+
+
         saveCertification: () ->
 
             newCert = this.get('controllers.certifications.newCert')
@@ -73,6 +78,10 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             language = Sitterfied.Language.createRecord({language:newLanguage})
             language.get('transaction').commit();
             this.set('controllers.languages.newLanguage', '')
+
+        addChild: () ->
+            Sitterfied.Child.createRecord({parent:Sitterfied.currentUser})
+
 
 
 
@@ -157,6 +166,8 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         newLanguage: ''
     )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
+    )
+    Sitterfied.ChildrenController  = Em.ArrayController.extend(
     )
 
 

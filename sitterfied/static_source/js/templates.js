@@ -1457,6 +1457,15 @@ function program14(depth0,data) {
   return buffer;
   
 });
+Ember.TEMPLATES["_child"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  
+
+
+  data.buffer.push("				  <p class=\"child_number\">CHILD 1\n                  </p>\n				  <p class=\"small_selects\">\n                    <span>FIRST NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span>DATE OF BIRTH\n                    </span>\n                    <select data-placeholder=\"MONTH\" tabindex=\"3\">\n                      <option>MONTH\n                      </option>\n                      <option>MONTH\n                      </option>\n                    </select>\n                    <select data-placeholder=\"DAY\" tabindex=\"4\">\n                      <option>DAY\n                      </option>\n                      <option>DAY\n                      </option>\n                    </select>\n                    <select data-placeholder=\"YEAR\" tabindex=\"5\">\n                      <option>YEAR\n                      </option>\n                      <option>YEAR\n                      </option>\n                    </select>\n                  </p>\n				  <p>\n                    <span>SCHOOL\n                    </span>\n                    <input type=\"text\" class=\"long\" value=\"\" />\n                  </p>\n				  <p>\n                    <span>Special needs?\n                    </span>\n                    <select multiple data-placeholder=\"Choose all that apply\" tabindex=\"18\">\n                      <option>text\n                      </option>\n                      <option>text\n                      </option>\n                    </select>\n                    <input type=\"checkbox\" id=\"none\" />\n                    <label for=\"none\">NONE\n                    </label>\n                  </p>\n				  <p>\n                    <span class=\"two_row\">Not listed?\n                      <br />Add another\n                    </span>\n                    <input type=\"text\" value=\"Add special need\" />\n                  </p>\n");
+  
+});
 Ember.TEMPLATES["_review"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -1824,12 +1833,24 @@ function program8(depth0,data) {
 Ember.TEMPLATES["parentEdit/profile"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, hashTypes, hashContexts, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n                    ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "child", options) : helperMissing.call(depth0, "partial", "child", options))));
+  data.buffer.push("\n                  ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
   var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n                        ");
+  data.buffer.push("\n                      ");
   hashContexts = {'contentBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
   hashTypes = {'contentBinding': "ID",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
@@ -1840,11 +1861,20 @@ function program1(depth0,data) {
     'selectionBinding': ("languages"),
     'multiple': ("multiple")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                        ");
+  data.buffer.push("\n                     ");
   return buffer;
   }
 
-  data.buffer.push("	  <!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile\n      </div>\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_friends6\">&nbsp;\n                  </span>Children\n                </li>\n				<li>\n				  <p class=\"child_number\">CHILD 1\n                    <a class=\"button button_smaller button_edit\" href=\"#\">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n				  <p class=\"small_selects\">\n                    <span>FIRST NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span>DATE OF BIRTH\n                    </span>\n                    <select data-placeholder=\"MONTH\" tabindex=\"3\">\n                      <option>MONTH\n                      </option>\n                      <option>MONTH\n                      </option>\n                    </select>\n                    <select data-placeholder=\"DAY\" tabindex=\"4\">\n                      <option>DAY\n                      </option>\n                      <option>DAY\n                      </option>\n                    </select>\n                    <select data-placeholder=\"YEAR\" tabindex=\"5\">\n                      <option>YEAR\n                      </option>\n                      <option>YEAR\n                      </option>\n                    </select>\n                  </p>\n				  <p>\n                    <span>SCHOOL\n                    </span>\n                    <input type=\"text\" class=\"long\" value=\"\" />\n                  </p>\n				  <p>\n                    <span>Special needs?\n                    </span>\n                    <select multiple data-placeholder=\"Choose all that apply\" tabindex=\"18\">\n                      <option>text\n                      </option>\n                      <option>text\n                      </option>\n                    </select>\n                    <input type=\"checkbox\" id=\"none\" />\n                    <label for=\"none\">NONE\n                    </label>\n                  </p>\n				  <p>\n                    <span class=\"two_row\">Not listed?\n                      <br />Add another\n                    </span>\n                    <input type=\"text\" value=\"Add special need\" />\n                  </p>\n				  <a class=\"button button_small\" href=\"#\">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_pin4\">&nbsp;\n                  </span>Home Address\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
+  data.buffer.push("	  <!-- profile_block -->\n	  <div class=\"mob_tab_trigger active\">Profile\n      </div>\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_friends6\">&nbsp;\n                  </span>Children\n                </li>\n				<li>\n				  <p class=\"child_number\">\n                    <a class=\"button button_smaller button_edit\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "newChild", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n                  ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "child", "in", "controllers.children", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n				  <a class=\"button button_small\" href=\"#\">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_pin4\">&nbsp;\n                  </span>Home Address\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -1912,26 +1942,26 @@ function program1(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_emergency2\">&nbsp;\n                  </span>Emergency Contacts\n                </li>\n				<li>\n				  <p>\n                    <span>NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span>PHONE\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                  </p>\n				  <p>\n                    <span class=\"two_row\">PEDIATRICIAN’S NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span class=\"two_row\">PEDIATRICIAN’S PHONE\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                  </p>\n				  <a class=\"button button_small\" href=\"#\">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_lng2\">&nbsp;\n                  </span>Languages\n                </li>\n				<li>\n			      <ul>\n				    <li>\n				      <p>\n                        <span>I speak:</span>\n                      </p>\n                      ");
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_emergency2\">&nbsp;\n                  </span>Emergency Contacts\n                </li>\n				<li>\n				  <p>\n                    <span>NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span>PHONE\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                  </p>\n				  <p>\n                    <span class=\"two_row\">PEDIATRICIAN’S NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span class=\"two_row\">PEDIATRICIAN’S PHONE\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                  </p>\n				  <a class=\"button button_small\" href=\"#\">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_lng2\">&nbsp; </span>Languages\n                </li>\n				<li>\n				  <p>\n                    <span>I speak:</span>\n                      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "controllers.languages.content.content", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "controllers.languages.content.content", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n                        </p>\n				        <p>\n                          <span>add another (if not listed above):\n                          </span>");
+  data.buffer.push("\n                    </p>\n				    <p><span>add another (if not listed above):</span>");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
     'valueBinding': ("controllers.languages.newLanguage")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                          <a class=\"button button_smaller button_edit\" style=\"top:0px;\" ");
+  data.buffer.push("<a class=\"button button_smaller button_edit\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveLanguage", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n                            <span class=\"icon_plus\">&nbsp;</span>\n                            ADD\n                          </a>\n                        </p>\n                    </li>\n                    <li>\n                      <a class=\"button button_small\"  ");
+  data.buffer.push("><span class=\"icon_plus\">&nbsp;</span>ADD</a></p>\n                    <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				    </li>\n			      </ul>\n                  <li>\n				  </li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n");
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n");
   return buffer;
   
 });

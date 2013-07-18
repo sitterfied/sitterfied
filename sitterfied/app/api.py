@@ -106,6 +106,12 @@ class BookingRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BookingRequest
 
+class ChildSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Child
+
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = models.User.objects.all()
     serializer_class = UserSerializer
@@ -209,6 +215,13 @@ class LanguageViewSet(viewsets.ModelViewSet):
     queryset = models.Language.objects.all()
     serializer_class = LanguageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+class ChildrenViewSet(viewsets.ModelViewSet):
+    queryset = models.Child.objects.all()
+    serializer_class = ChildSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('id', 'parent')
 
 
 #bookings
