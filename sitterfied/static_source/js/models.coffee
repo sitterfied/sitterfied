@@ -2,21 +2,31 @@ define [
     "ember"
     "cs!sitterfied"
     'data'
+    'moment'
     'djangoRestAdapter'
     ], (Em, Sitterfied, DS) ->
 
 
+    Sitterfied.Adapter  = DS.DjangoRESTAdapter.extend
+        namespace: 'api'
+
+    Sitterfied.Adapter.registerTransform "date",
+        serialize: (date) ->
+            if date then moment(date).format("YYYY-MM-DD") else null
+
+        deserialize: (date) ->
+            return moment(date).toDate()
+
+
     Sitterfied.Store = DS.Store.extend(
         revision: 12
-        adapter: DS.DjangoRESTAdapter.create({
-            namespace: 'api'
-        })
+        adapter: Sitterfied.Adapter.create()
         isDefaultStore:true
     )
 
 
     Sitterfied.User = DS.Model.extend(
-        last_login: DS.attr('date')
+        #last_login: DS.attr('date')
         is_superuser: DS.attr('boolean')
         username: DS.attr('string')
         first_name: DS.attr('string')
@@ -120,6 +130,7 @@ define [
         emergency_contact_one_phone : DS.attr("string")
         emergency_contact_two_name : DS.attr("string")
         emergency_contact_two_phone : DS.attr("string")
+        children: DS.hasMany("Sitterfied.Child")
 
     )
 
@@ -250,16 +261,45 @@ define [
         service: DS.attr('string'),
         sitters: DS.hasMany("Sitterfied.Sitter")
     )
-
+    Sitterfied.SpecialNeed = DS.Model.extend(
+        need: DS.attr('string'),
+        children: DS.hasMany("Sitterfied.Child")
+    )
 
     Sitterfied.Child = DS.Model.extend(
         parent: DS.belongsTo('Sitterfied.Parent'),
         name: DS.attr('string'),
         dob: DS.attr('date'),
         school: DS.attr('string'),
-        sitter_instructions: DS.attr('string'),
-        special_needs: DS.attr('string'),
-        allergies: DS.attr('string'),
+        special_needs: DS.hasMany("Sitterfied.SpecialNeed")
+
+        birthMonth: ((key, value) ->
+            if arguments.length == 1
+                return @get('dob').getMonth()
+            else
+                date = @get('dob')
+                date.setMonth(value)
+                @set('dob', date)
+        ).property('dob')
+
+        birthDay: ((key, value) ->
+            if arguments.length ==1
+                return @get('dob').getDay()
+            else
+                date = @get('dob')
+                date.setDay(value)
+                @set('dob', date)
+        )
+        birthYear: ((key, value) ->
+            if arguments.length ==1
+                return @get('dob').getFullYear()
+            else
+                date = @get('dob')
+                date.setDay(value)
+                @set('dob', date)
+
+        )
+
     )
 
     Sitterfied.SitterReview = DS.Model.extend(
@@ -267,6 +307,7 @@ define [
         sitter: DS.belongsTo('Sitterfied.Sitter'),
         recommended: DS.attr('boolean'),
         review: DS.attr('string'),
+
     )
 
     Sitterfied.Booking = DS.Model.extend(

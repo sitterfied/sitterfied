@@ -1460,10 +1460,57 @@ function program14(depth0,data) {
 Ember.TEMPLATES["_child"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  
+  var buffer = '', hashContexts, hashTypes, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("				  <p class=\"child_number\">CHILD 1\n                  </p>\n				  <p class=\"small_selects\">\n                    <span>FIRST NAME\n                    </span>\n                    <input type=\"text\" value=\"\" />\n                    <span>DATE OF BIRTH\n                    </span>\n                    <select data-placeholder=\"MONTH\" tabindex=\"3\">\n                      <option>MONTH\n                      </option>\n                      <option>MONTH\n                      </option>\n                    </select>\n                    <select data-placeholder=\"DAY\" tabindex=\"4\">\n                      <option>DAY\n                      </option>\n                      <option>DAY\n                      </option>\n                    </select>\n                    <select data-placeholder=\"YEAR\" tabindex=\"5\">\n                      <option>YEAR\n                      </option>\n                      <option>YEAR\n                      </option>\n                    </select>\n                  </p>\n				  <p>\n                    <span>SCHOOL\n                    </span>\n                    <input type=\"text\" class=\"long\" value=\"\" />\n                  </p>\n				  <p>\n                    <span>Special needs?\n                    </span>\n                    <select multiple data-placeholder=\"Choose all that apply\" tabindex=\"18\">\n                      <option>text\n                      </option>\n                      <option>text\n                      </option>\n                    </select>\n                    <input type=\"checkbox\" id=\"none\" />\n                    <label for=\"none\">NONE\n                    </label>\n                  </p>\n				  <p>\n                    <span class=\"two_row\">Not listed?\n                      <br />Add another\n                    </span>\n                    <input type=\"text\" value=\"Add special need\" />\n                  </p>\n");
+  data.buffer.push("<p class=\"child_number\">CHILD 1\n</p>\n<p class=\"small_selects\">\n  <span>FIRST NAME\n  </span>\n  ");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("child.name")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n  <span>DATE OF BIRTH\n  </span>\n  ");
+  hashContexts = {'contentBinding': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionValuePath': "STRING",'optionLabelPath': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'contentBinding': ("Sitterfied.Months"),
+    'optionValuePath': ("content.value"),
+    'optionLabelPath': ("content.name"),
+    'valueBinding': ("birthMonth")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n  ");
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'contentBinding': ("Sitterfied.Days"),
+    'valueBinding': ("child.birthDay")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n  ");
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'contentBinding': ("Sitterfied.Years"),
+    'valueBinding': ("child.birthYear")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n</p>\n<p>\n  <span>SCHOOL\n  </span>\n  ");
+  hashContexts = {'valueBinding': depth0};
+  hashTypes = {'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("school")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n</p>\n<p>\n  <span>Special needs?\n  </span>\n  ");
+  hashContexts = {'contentBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("controllers.needs"),
+    'prompt': ("Select special needs"),
+    'optionLabelPath': ("content.need"),
+    'optionValuePath': ("content"),
+    'selectionBinding': ("child.special_needs"),
+    'multiple': ("multiple")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n  <select multiple data-placeholder=\"Choose all that apply\" tabindex=\"18\">\n    <option>text\n    </option>\n    <option>text\n    </option>\n  </select>\n  </p>\n<p>\n  <span class=\"two_row\">Not listed?\n    <br />Add another\n  </span>\n  <input type=\"text\" value=\"Add special need\" />\n</p>\n");
+  return buffer;
   
 });
 Ember.TEMPLATES["_review"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -1872,9 +1919,13 @@ function program3(depth0,data) {
   data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n                  ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "child", "in", "controllers.children", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "child", "in", "controllers.childs", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n				  <a class=\"button button_small\" href=\"#\">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_pin4\">&nbsp;\n                  </span>Home Address\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
+  data.buffer.push("\n				  <a class=\"button button_small\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                    <span class=\"icon_ok2\">&nbsp;\n                    </span>Save\n                  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_pin4\">&nbsp;\n                  </span>Home Address\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{

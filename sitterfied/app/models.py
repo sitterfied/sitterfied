@@ -183,7 +183,7 @@ class Language(TimeStampedModel):
     def __unicode__(self):
         return self.language
 
-class SpecialNeeds(TimeStampedModel):
+class SpecialNeed(TimeStampedModel):
     need = models.CharField(max_length=100)
 
     def __unicode__(self):
@@ -219,13 +219,11 @@ class Settings(TimeStampedModel):
     email_blog = models.BooleanField()
 
 class Child(TimeStampedModel):
-    parent = models.ForeignKey(Parent)
-    name = models.CharField(max_length=50)
-    dob = models.DateField()
-    school = models.CharField(max_length=50)
-    sitter_instructions = models.TextField()
-    special_needs = models.CharField(max_length=100)
-    allergies = models.CharField(max_length=100)
+    parent = models.ForeignKey(Parent, related_name="children")
+    name = models.CharField(max_length=50, blank=True, default="")
+    dob = models.DateField(blank=True, null=True)
+    school = models.CharField(max_length=50, blank=True, default="")
+    special_needs = models.ManyToManyField(SpecialNeed, blank=True)
 
     class Meta:
         verbose_name_plural = "children"

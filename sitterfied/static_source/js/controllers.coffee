@@ -3,7 +3,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        needs: ['certifications', 'languages', 'otherServices', 'friends', 'children']
+        needs: ['certifications', 'languages', 'otherServices', 'friends', 'childs', 'needs']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -14,12 +14,16 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
         saveSettings: () ->
             model = this.get('model')
-            #force a save
+
+            #force a save since we might have m2m associations
             model.get('stateManager').goToState('updated')
+            model.save()
             settings =  this.get('settings')
-            transaction = model.get('transaction')
-            transaction.add(settings)
-            transaction.commit()
+            settings.save()
+
+            this.get('controllers.children').map (child)->
+                child.save()
+
 
         deleteAccount: () ->
             alert('delete')
@@ -49,7 +53,13 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             alert("delete group, " + group)
 
         newChild: () ->
-            newChild = Sitterfied.Child.createRecord(parent: this.get('content'))
+
+            newChild = Sitterfied.Child.createRecord(
+                parent: this.get('content')
+                name:""
+                school: ""
+                dob: new Date
+            )
             this.get('controllers.children').pushObject(newChild)
 
 
@@ -78,12 +88,6 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             language = Sitterfied.Language.createRecord({language:newLanguage})
             language.get('transaction').commit();
             this.set('controllers.languages.newLanguage', '')
-
-        addChild: () ->
-            Sitterfied.Child.createRecord({parent:Sitterfied.currentUser})
-
-
-
 
         facebookConnect: ()->
                 console.log("get fb data")
@@ -167,7 +171,13 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
-    Sitterfied.ChildrenController  = Em.ArrayController.extend(
+    Sitterfied.ChildsController  = Em.ArrayController.extend(
+    )
+    Sitterfied.NeedsController  = Em.ArrayController.extend(
+        c: (() ->
+            debugger
+            return this.get('content')
+        ).property('content.[]')
     )
 
 

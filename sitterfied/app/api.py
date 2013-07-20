@@ -77,7 +77,7 @@ class ParentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Parent
         fields = user_fields + ('id', 'emergency_contact', 'physician_contact',
-                  'parking_area', 'parking_for_sitter', 'reviews', 'bookings'
+                  'parking_area', 'parking_for_sitter', 'reviews', 'bookings', 'children',
                   )
 
 
@@ -92,6 +92,10 @@ class SchedlueSerializer(serializers.ModelSerializer):
 class CertificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Certification
+
+class SpecialNeedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SpecialNeed
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -168,6 +172,14 @@ class ParentViewSet(viewsets.ModelViewSet):
 
     filter_fields = ('id', )
 
+    @link()
+    def children(self, request, pk=None):
+        queryset = models.Child.objects.filter(parent=pk)
+        serializer = ChildSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
 class CertificationViewSet(viewsets.ModelViewSet):
     queryset = models.Certification.objects.all()
     serializer_class = CertificationSerializer
@@ -214,6 +226,11 @@ class BookingRequestViewSet(viewsets.ModelViewSet):
 class LanguageViewSet(viewsets.ModelViewSet):
     queryset = models.Language.objects.all()
     serializer_class = LanguageSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+class SpecialNeedViewSet(viewsets.ModelViewSet):
+    queryset = models.SpecialNeed.objects.all()
+    serializer_class = SpecialNeedSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
