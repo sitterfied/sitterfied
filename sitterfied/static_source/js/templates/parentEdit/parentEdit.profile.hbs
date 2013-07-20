@@ -17,10 +17,10 @@
                       </span>ADD ANOTHER CHILD
                     </a>
                   </p>
-                  {{# each child in controllers.children}}
+                  {{# each child in controllers.childs }}
                     {{partial "child"}}
                   {{/each}}
-				  <a class="button button_small" href="#">
+				  <a class="button button_small" {{action "saveSettings"}}>
                     <span class="icon_ok2">&nbsp;
                     </span>Save
                   </a>

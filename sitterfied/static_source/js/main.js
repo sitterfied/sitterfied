@@ -11,7 +11,8 @@ require({
         "chosen": "lib/chosen.jquery.min",
         "select2": "lib/select2",
         "djangoRestAdapter": "lib/adapter",
-        'fancybox':'lib/jquery.fancybox.pack'
+        'fancybox':'lib/jquery.fancybox.pack',
+        'moment': 'lib/moment.min'
     },
     waitSeconds: 0,
     shim:{
@@ -41,6 +42,9 @@ require({
         },
         _: {
             exports: "_",
+        },
+        moment: {
+            exports: "moment",
         },
         chosen: {
             deps: ['jquery']

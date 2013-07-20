@@ -34,6 +34,25 @@ define ['jquery'
         "College Degree"
     ]
     Sitterfied.onDeckAvatar = ''
+
+
+    Sitterfied.Years = (num for num in [2013..1995])
+    Sitterfied.Days = (num for num in [1..31])
+    Sitterfied.Months = [
+        {value:1, name: "January"}
+        {value:2, name: "February"}
+        {value:3, name: "March"}
+        {value:4, name: "April"}
+        {value:5, name: "May"}
+        {value:6, name: "June"}
+        {value:7, name: "July"}
+        {value:8, name: "August"}
+        {value:9, name: "September"}
+        {value:10, name: "October"}
+        {value:11, name: "November"}
+        {value:12, name: "December"}
+    ]
+
     Sitterfied.States = [
             'AL',
             'AK',
@@ -89,7 +108,7 @@ define ['jquery'
         ]
 
 
-    Sitterfied.ApplicationController = Ember.Controller.extend();
+
 
 
 
