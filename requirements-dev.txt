@@ -1,44 +1,5 @@
-django
-django-pipeline
-django-pipeline-compass
-cssmin
-slimit
-django-grappelli
-django-filebrowser
+-r requirements.txt
 
-
-#DB
-psycopg2
-south
-pillow
-#FORMS
-django-crispy-forms
-django-floppyforms
-
-#GENERAL TOOLS
-django-annoying
-django-extensions
-django-model-utils
-unipath
-pytz
-feedparser
-
-#REDIS CACHING
-hiredis
-redis
-django-redis-cache
-django-redis-sessions
-
-## AWS
-boto
-django-storages
-django-ses
-django_smtp_ssl
-
-#OPTIONAL TOOLS
-
-#whoosh
-#django-haystack
 
 # Debug Tools
 
@@ -52,16 +13,9 @@ line_profiler
 dozer
 
 ipython
-django-mandrill
 https://github.com/django/django-localflavor-us/zipball/master
 
 
 # EMBER precompiles
 watchdog
 #https://github.com/gabrielgrant/node-ember-precompile  npm :(
-
-python-magic
-
-
-twilio
-ecl-facebook
