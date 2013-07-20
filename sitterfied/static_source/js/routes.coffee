@@ -60,12 +60,18 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
 
     Sitterfied.ParentEditProfileRoute = Em.Route.extend(
+        setupController: (controller, model) ->
+            this.controllerFor('languages').set('model', Sitterfied.Language.find())
+
+            children = Sitterfied.Child.find({parent:Sitterfied.currentUser.id})
+            this.controllerFor('chlidren', Sitterfied.Child).set('model', children)
+
         renderTemplate: () ->
             this.render("parentEdit/profile", {into:"parentEdit", controller: 'currentUser'})
     )
     Sitterfied.ParentEditBookingsRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("parentEdit/bookings", {into:"parentEdit", controller: 'currentUser'})
+            this.render("bookings", {into:"parentEdit", controller: 'currentUser'})
     )
     Sitterfied.ParentEditSitterTeamRoute = Em.Route.extend(
         model: () ->
@@ -76,11 +82,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
     Sitterfied.ParentEditNetworkRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("parentEdit/network", {into:"parentEdit", controller: 'currentUser'})
+            this.render("network", {into:"parentEdit", controller: 'currentUser'})
     )
     Sitterfied.ParentEditReviewsRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("parentEdit/reviews", {into:"parentEdit", controller: 'currentUser'})
+            this.render("reviews", {into:"parentEdit", controller: 'currentUser'})
     )
     Sitterfied.ParentEditIndexRoute = Em.Route.extend(
         redirect: () ->
@@ -127,19 +133,15 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
     Sitterfied.SitterEditBookingsRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("sitterEdit/bookings", {into:"sitterEdit", controller: 'currentUser'})
+            this.render("bookings", {into:"sitterEdit", controller: 'currentUser'})
     )
     Sitterfied.SitterEditNetworkRoute = Em.Route.extend(
-        setupController: (controller, model) ->
-            this.controllerFor('usersInNetwork').set('model', Sitterfied.currentUser.get("users_in_network"))
-
-
         renderTemplate: () ->
-            this.render("sitterEdit/network", {into:"sitterEdit", controller: 'currentUser'})
+            this.render("network", {into:"sitterEdit", controller: 'currentUser'})
     )
     Sitterfied.SitterEditReviewsRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("sitterEdit/reviews", {into:"sitterEdit", controller: 'currentUser'})
+            this.render("reviews", {into:"sitterEdit", controller: 'currentUser'})
     )
 
 
@@ -177,6 +179,10 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             #this.render('search', { outlet: 'content'})
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
+
+        postReview: () ->
+            alert("base")
+
         events:{
             openReccomendPopup: ()->
                 console.log("")
@@ -189,6 +195,9 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     fitToView: false
                     width: "90%"
                     height: "90%"
+
+            closeReccomendPopup: ()->
+                $.fancybox.close()
 
             gmailConnect: () ->
                 alert('gmail connect')
@@ -223,4 +232,19 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     width       : '90%'
                     height      : '90%'
         }
+
+
+        setupController: (controller, model) ->
+            if Sitterfied.isParent
+                reivew = Sitterfied.SitterReview.createRecord(parent: Sitterfied.currentUser)
+            else
+                review = Sitterfied.SitterReview.createRecord()
+            this.controllerFor('sitterReview').set('model', review)
+
+            friends = Sitterfied.User.find({friends:Sitterfied.currentUser.id})
+            this.controllerFor('friends').set('model', friends)
+
+
+
+
     )

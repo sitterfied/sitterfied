@@ -3,7 +3,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        needs: ['certifications', 'languages', 'otherServices', 'usersInNetwork']
+        needs: ['certifications', 'languages', 'otherServices', 'friends', 'children']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -48,6 +48,11 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         deleteGroup: (group) ->
             alert("delete group, " + group)
 
+        newChild: () ->
+            newChild = Sitterfied.Child.createRecord(parent: this.get('content'))
+            this.get('controllers.children').pushObject(newChild)
+
+
         saveCertification: () ->
 
             newCert = this.get('controllers.certifications.newCert')
@@ -73,6 +78,10 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             language = Sitterfied.Language.createRecord({language:newLanguage})
             language.get('transaction').commit();
             this.set('controllers.languages.newLanguage', '')
+
+        addChild: () ->
+            Sitterfied.Child.createRecord({parent:Sitterfied.currentUser})
+
 
 
 
@@ -156,25 +165,27 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     Sitterfied.LanguagesController  = Em.ArrayController.extend(
         newLanguage: ''
     )
-    Sitterfied.UsersInNetworkController  = Em.ArrayController.extend(
-
-        parentsInNetwork: (() ->
-            content = this.get('content');
-            if not content or not content.isLoaded
-                return []
-            parents = content.filter (item) ->
-                item.get('parent_or_sitter') == "Parent"
-            return parents
-        ).property('model.isLoaded', 'model')
-        sittersInNetwork: (() ->
-            content = this.get('content');
-
-            if not content or not content.isLoaded
-                return []
-
-            sitters = content.filter (item) ->
-                item.get('parent_or_sitter') == "Sitter"
-            return sitters
-        ).property('model.isLoaded', 'model')
-
+    Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
+    Sitterfied.ChildrenController  = Em.ArrayController.extend(
+    )
+
+
+    Sitterfied.FriendsController  = Em.ArrayController.extend(
+        parents: (() ->
+            return this.get('content').filterProperty("parent_or_sitter", "Parent")
+        ).property('content.@each.parent_or_sitter', 'content.[]')
+        sitters: (() ->
+            return this.get('content').filterProperty("parent_or_sitter", "Sitter")
+        ).property('content.@each.parent_or_sitter', 'content.[]')
+    )
+
+    Sitterfied.ApplicationController = Ember.Controller.extend
+        needs: ['sitterReview', 'friends']
+
+        postReivew: () ->
+            $.fancybox.close()
+            reviewController = this.get("controllers.sitterReview")
+            review = reviewController.get('model')
+            review.save()
+            reviewController.set('model', Sitterfied.SitterReview.createRecord(parent: Sitterfied.currentUser))

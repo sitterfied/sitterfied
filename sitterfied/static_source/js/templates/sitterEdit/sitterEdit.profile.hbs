@@ -226,9 +226,11 @@
                       multiple="multiple"
                       }}
                      {{/if}}
-                    </p>
+                     </p>
+				</li>
+                <li>
 				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}<a class="button button_smaller button_edit" {{action 'saveLanguage'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
-				</lpi>
+                  </li>
 			  </ul>
 			</li>
 			<li>

@@ -16,8 +16,7 @@ define [
 
 
     Sitterfied.User = DS.Model.extend(
-        #django builtins
-        #last_login: DS.attr('date')
+        last_login: DS.attr('date')
         is_superuser: DS.attr('boolean')
         username: DS.attr('string')
         first_name: DS.attr('string')
@@ -25,11 +24,11 @@ define [
         email: DS.attr('string')
         status: DS.attr('string')
         parent_or_sitter: DS.attr('string')
-        users_in_network: DS.hasMany('Sitterfied.User')
         sitter_groups: DS.hasMany('Sitterfied.Group')
         languages: DS.hasMany('Sitterfied.Language')
         settings  : DS.belongsTo('Sitterfied.Setting')
         bookings: DS.hasMany('Sitterfied.Booking'),
+        friends: DS.hasMany('Sitterfied.User'),
         address1: DS.attr('string')
         address2: DS.attr('string')
         city: DS.attr('string')
@@ -117,10 +116,10 @@ define [
     )
 
     Sitterfied.Parent = Sitterfied.User.extend(
-        emergency_contact : DS.belongsTo('Sitterfied.Contact'),
-        physician_contact : DS.belongsTo('Sitterfied.Contact'),
-        parking_area : DS.attr('boolean'),
-        parking_for_sitter: DS.attr('boolean'),
+        emergency_contact_one_name : DS.attr("string")
+        emergency_contact_one_phone : DS.attr("string")
+        emergency_contact_two_name : DS.attr("string")
+        emergency_contact_two_phone : DS.attr("string")
 
     )
 
