@@ -1,10 +1,6 @@
 define [
-    "ember"
-    "cs!sitterfied"
-    'data'
-    'moment'
-    'djangoRestAdapter'
-    ], (Em, Sitterfied, DS) ->
+    'ember', 'cs!sitterfied', 'data', 'moment','djangoRestAdapter'
+    ], (Em, Sitterfied) ->
 
 
     Sitterfied.Adapter  = DS.DjangoRESTAdapter.extend
@@ -274,31 +270,36 @@ define [
         special_needs: DS.hasMany("Sitterfied.SpecialNeed")
 
         birthMonth: ((key, value) ->
+            date = @get('dob')
+            if not date
+                return
             if arguments.length == 1
-                return @get('dob').getMonth()
+                return date.getMonth()
             else
-                date = @get('dob')
                 date.setMonth(value)
                 @set('dob', date)
         ).property('dob')
 
         birthDay: ((key, value) ->
-            if arguments.length ==1
-                return @get('dob').getDay()
+            date = @get('dob')
+            if not date
+                return
+            if arguments.length == 1
+                return date.getDate()
             else
-                date = @get('dob')
-                date.setDay(value)
+                date.setDate(value)
                 @set('dob', date)
-        )
+        ).property('dob')
         birthYear: ((key, value) ->
-            if arguments.length ==1
-                return @get('dob').getFullYear()
+            date = @get('dob')
+            if not date
+                return
+            if arguments.length == 1
+                return date.getFullYear()
             else
-                date = @get('dob')
-                date.setDay(value)
+                date.setFullYear(value)
                 @set('dob', date)
-
-        )
+        ).property('dob')
 
     )
 

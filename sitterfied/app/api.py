@@ -76,9 +76,12 @@ class ParentSerializer(serializers.ModelSerializer):
     parent_or_sitter = "Parent"
     class Meta:
         model = models.Parent
-        fields = user_fields + ('id', 'emergency_contact', 'physician_contact',
-                  'parking_area', 'parking_for_sitter', 'reviews', 'bookings', 'children',
-                  )
+        fields = user_fields + ('id','emergency_contact_one_name',
+                                'emergency_contact_one_phone',
+                                'emergency_contact_two_name',
+                                'emergency_contact_two_phone',
+                                'reviews', 'bookings', 'children',
+        )
 
 
 class SettingsSerializer(serializers.ModelSerializer):

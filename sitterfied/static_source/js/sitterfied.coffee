@@ -39,18 +39,18 @@ define ['jquery'
     Sitterfied.Years = (num for num in [2013..1995])
     Sitterfied.Days = (num for num in [1..31])
     Sitterfied.Months = [
-        {value:1, name: "January"}
-        {value:2, name: "February"}
-        {value:3, name: "March"}
-        {value:4, name: "April"}
-        {value:5, name: "May"}
-        {value:6, name: "June"}
-        {value:7, name: "July"}
-        {value:8, name: "August"}
-        {value:9, name: "September"}
-        {value:10, name: "October"}
-        {value:11, name: "November"}
-        {value:12, name: "December"}
+        {value:0, name: "January"}
+        {value:1, name: "February"}
+        {value:2, name: "March"}
+        {value:3, name: "April"}
+        {value:4, name: "May"}
+        {value:5, name: "June"}
+        {value:6, name: "July"}
+        {value:7, name: "August"}
+        {value:8, name: "September"}
+        {value:9, name: "October"}
+        {value:10, name: "November"}
+        {value:11, name: "December"}
     ]
 
     Sitterfied.States = [

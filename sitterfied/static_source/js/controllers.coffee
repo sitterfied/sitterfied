@@ -3,7 +3,8 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        needs: ['certifications', 'languages', 'otherServices', 'friends', 'childs', 'needs']
+        #I know childs is a bad name, but data has issues with a custom name
+        needs: ['certifications', 'languages','specialneeds', 'otherServices', 'friends', 'childs']
         accountType: parent_or_sitter
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -13,6 +14,9 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         ).property('parent_or_sitter')
 
         saveSettings: () ->
+            this.get('controllers.childs').map (child)->
+                child.save()
+
             model = this.get('model')
 
             #force a save since we might have m2m associations
@@ -21,8 +25,6 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             settings =  this.get('settings')
             settings.save()
 
-            this.get('controllers.children').map (child)->
-                child.save()
 
 
         deleteAccount: () ->
@@ -60,7 +62,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
                 school: ""
                 dob: new Date
             )
-            this.get('controllers.children').pushObject(newChild)
+            #this.get('controllers.childs').pushObject(newChild)
 
 
         saveCertification: () ->
@@ -68,8 +70,9 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             newCert = this.get('controllers.certifications.newCert')
             if newCert == ''
                 return
-            certification = Sitterfied.Certification.createRecord({certification:newCert})
-            certification.get('transaction').commit()
+            transaction = this.get("store").transaction();
+            certification = transaction.createRecord(Sitterfied.Certification,{certification:newCert})
+            transaction.commit()
             this.set('controllers.certifications.newCert', '')
 
         saveService: () ->
@@ -77,20 +80,33 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             newService = this.get('controllers.otherServices.newService')
             if newService == ''
                 return
-            service = Sitterfied.OtherService.createRecord({service:newService})
-            service.get('transaction').commit();
+            transaction = this.get("store").transaction();
+            service = transaction.createRecord(Sitterfied.OtherService,{service:newService})
+            transaction.commit()
             this.set('controllers.otherServices.newService', '')
 
         saveLanguage: () ->
             newLanguage = this.get('controllers.languages.newLanguage')
             if newLanguage == ''
                 return
-            language = Sitterfied.Language.createRecord({language:newLanguage})
-            language.get('transaction').commit();
+            transaction = this.get("store").transaction();
+            language = transaction.createRecord(Sitterfied.Language,{language:newLanguage})
+            transaction.commit()
             this.set('controllers.languages.newLanguage', '')
 
+
+        saveNeed: () ->
+            debugger
+            newNeed = this.get('controllers.specialneeds.newNeed')
+            if newNeed == ''
+                return
+            transaction = this.get("store").transaction();
+            need = transaction.createRecord(Sitterfied.SpecialNeed,{need:newNeed})
+            transaction.commit()
+            this.set('controllers.specialneeds.newNeed', '')
+
+
         facebookConnect: ()->
-                console.log("get fb data")
                 use_fb_data = () ->
                     access_token = FB.getAccessToken()
                     facebook_id = FB.getUserID()
@@ -101,8 +117,7 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
                         $.ajax
                             url: "/facebook_import/"
                             success: () ->
-                                alert("facebook friends imported")
-                                Sitterfied.currentUser.reload()
+                                alert("facebook connected")
                     )
 
                 FB.getLoginStatus (response) ->
@@ -162,22 +177,15 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     Sitterfied.OtherServicesController  = Em.ArrayController.extend(
         newService: ''
     )
-    Sitterfied.OtherServicesController  = Em.ArrayController.extend(
-        newService: ''
+    Sitterfied.SpecialneedsController  = Em.ArrayController.extend(
+        newNeed: ''
     )
-
     Sitterfied.LanguagesController  = Em.ArrayController.extend(
         newLanguage: ''
     )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
     Sitterfied.ChildsController  = Em.ArrayController.extend(
-    )
-    Sitterfied.NeedsController  = Em.ArrayController.extend(
-        c: (() ->
-            debugger
-            return this.get('content')
-        ).property('content.[]')
     )
 
 

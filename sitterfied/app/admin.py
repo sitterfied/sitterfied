@@ -79,19 +79,18 @@ class UserAdmin(DjangoUserAdmin):
 class ParentAdmin(UserAdmin):
     parent_fieldsets = ('Parent Details',
                         {
-            'fields': (
-                'avatar',
-                'emergency_contact',
-                'physician_contact',
-                'parking_area',
-                'parking_for_sitter',
-                'fave_sitters',
-                'users_in_network',
-                'friends',
-                'sitter_groups',
-                )}
-
-                        ),
+                            'fields': (
+                                'avatar',
+                                'emergency_contact_one_name',
+                                'emergency_contact_one_phone',
+                                'emergency_contact_two_name',
+                                'emergency_contact_two_phone',
+                                'fave_sitters',
+                                'users_in_network',
+                                'friends',
+                                'sitter_groups',
+                            )}
+    ),
 
 
 

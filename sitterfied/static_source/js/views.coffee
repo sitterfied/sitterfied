@@ -1,7 +1,4 @@
 define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
-
-
-
     Ember.RadioButton = Em.View.extend({
         tagName : "input",
         type : "radio",
@@ -59,8 +56,8 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
         @$().trigger "liszt:updated"
 
       selectionChanged: (() ->
-            this.$().trigger('liszt:updated');
-        ).observes('selection')
+        this.$().trigger('liszt:updated');
+      ).observes('selection')
 
     )
 
@@ -163,7 +160,6 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
 
 
       willDestroyElement: ->
-        console.log "destroying select2"
         @$().select2 "destroy"
 
 

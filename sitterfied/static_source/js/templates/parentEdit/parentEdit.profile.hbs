@@ -43,7 +43,7 @@
 				  <p>
                     <span>&nbsp;
                     </span>
-                    {{view Ember.TextField placeholder="Zip Code" valueBinding="live_zip" class="small"}}
+                    {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
                     {{view Ember.TextField placeholder="City" valueBinding="city"}}
                     {{ view Sitterfied.Select2
                          viewName="fieldValueSelect2"
@@ -100,18 +100,18 @@
 				  <p>
                     <span>NAME
                     </span>
-                    <input type="text" value="" />
+                    {{view Ember.TextField placeholder="John Smith" valueBinding="emergency_contact_one_name" }}
                     <span>PHONE
                     </span>
-                    <input type="text" value="" />
+                    {{view Ember.TextField placeholder="(123) 456-7890" valueBinding="emergency_contact_one_phone" }}
                   </p>
 				  <p>
                     <span class="two_row">PEDIATRICIAN’S NAME
                     </span>
-                    <input type="text" value="" />
+                    {{view Ember.TextField placeholder="Jane Smith" valueBinding="emergency_contact_two_name" }}
                     <span class="two_row">PEDIATRICIAN’S PHONE
                     </span>
-                    <input type="text" value="" />
+                    {{view Ember.TextField placeholder="(123) 456-7890" valueBinding="emergency_contact_two_phone" }}
                   </p>
 				  <a class="button button_small" href="#">
                     <span class="icon_ok2">&nbsp;
@@ -139,11 +139,21 @@
                       }}
                      {{/if}}
                     </p>
-				    <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}<a class="button button_smaller button_edit" {{action 'saveLanguage'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
-                    <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				    <p>
+                      <span>add another (if not listed above):
+                      </span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}
+                      <a style="top:0px;" class="button button_smaller button_edit" {{action 'saveLanguage'}}>
+                        <span  class="icon_plus">&nbsp;
+                        </span>ADD
+                      </a>
+                    </p>
+                    <a class="button button_small" {{action 'saveSettings'}}>
+                      <span class="icon_ok2">&nbsp;
+                      </span>Save
+                    </a>
 				</li>
 			  </ul>
-			</li>
+            </li>
 		  </ul>
 		</form>
 	  </div>

@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import models
-from django.db.models.signals import post_save
 
 from django.utils.functional import cached_property
 
@@ -9,12 +8,10 @@ from django.utils.functional import cached_property
 from model_utils.models import TimeStampedModel
 # Create your models here.
 
-from model_utils.fields import StatusField
 from model_utils.choices import Choices
 
 
 from django.contrib.auth.models import AbstractUser, UserManager
-from django_localflavor_us.us_states import STATE_CHOICES
 
 from django_localflavor_us.models import USStateField
 from south.modelsinspector import add_introspection_rules
@@ -95,10 +92,11 @@ class Phone(TimeStampedModel):
 
 
 class Parent(User):
-    emergency_contact = models.OneToOneField('Contact', related_name="emergencies", null=True, blank=True)
-    physician_contact = models.OneToOneField('Contact', related_name="physicians", null=True, blank=True)
-    parking_area = models.BooleanField(default=False)
-    parking_for_sitter = models.BooleanField(default=False)
+    emergency_contact_one_name = models.CharField(max_length=128)
+    emergency_contact_one_phone = models.CharField(max_length=10)
+    emergency_contact_two_name = models.CharField(max_length=128)
+    emergency_contact_two_phone = models.CharField(max_length=10)
+
     fave_sitters = models.ManyToManyField('Sitter', related_name="favored_by", blank=True)
 
     class Meta:

@@ -62,7 +62,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     Sitterfied.ParentEditProfileRoute = Em.Route.extend(
         setupController: (controller, model) ->
             this.controllerFor('languages').set('model', Sitterfied.Language.find())
-            this.controllerFor('needs', Sitterfied.SpecialNeed).set('model', Sitterfied.SpecialNeed.find())
+            this.controllerFor('specialneeds', Sitterfied.SpecialNeed).set('model', Sitterfied.SpecialNeed.find())
 
             children = Sitterfied.Child.find({parent:Sitterfied.currentUser.id})
             this.controllerFor('childs').set('model', children)
