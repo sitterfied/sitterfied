@@ -3,74 +3,9 @@
 	  <div class="tab_content my_sitter_team my_sitter_team_tab_bg" id="tab-3">
 		<div class="send_request"><a href="#">Send a job request to the team</a></div>
 		<ul class="clear">
-		  <li>
-			<div class="tit">
-			  <span><strong>$15</strong> /hr</span>
-			  <a href="#">Samantha Chadwick</a>
-			</div>
-			<div class="img">
-			  <a href="#"><img src="/static/images/demo/img13.jpg" alt="" /></a>
-			</div>
-			<ul>
-			  <li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>
-			  <li><span class="icon_reload">&nbsp;</span>4 jobs <span class="friends_span"><span class="icon_friends4">&nbsp;</span><a href="#">24 sitter friends</a></span></li>
-			</ul>
-			<div class="btns clear">
-			  <a class="button" href="#">BOOK</a>
-			  <p><a href="#">REMOVE FROM SITTER TEAM</a></p>
-			</div>
-		  </li>
-		  <li>
-			<div class="tit">
-			  <span><strong>$15</strong> /hr</span>
-			  <a href="#">Samantha Chadwick</a>
-			</div>
-			<div class="img">
-			  <a href="#"><img src="/static/images/demo/img13.jpg" alt="" /></a>
-			</div>
-			<ul>
-			  <li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>
-			  <li><span class="icon_reload">&nbsp;</span>4 jobs <span class="friends_span"><span class="icon_friends4">&nbsp;</span><a href="#">24 sitter friends</a></span></li>
-			</ul>
-			<div class="btns clear">
-			  <a class="button" href="#">BOOK</a>
-			  <p><a href="#">REMOVE FROM SITTER TEAM</a></p>
-			</div>
-		  </li>
-		  <li>
-			<div class="tit">
-			  <span><strong>$15</strong> /hr</span>
-			  <a href="#">Samantha Chadwick</a>
-			</div>
-			<div class="img">
-			  <a href="#"><img src="/static/images/demo/img13.jpg" alt="" /></a>
-			</div>
-			<ul>
-			  <li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>
-			  <li><span class="icon_reload">&nbsp;</span>4 jobs <span class="friends_span"><span class="icon_friends4">&nbsp;</span><a href="#">24 sitter friends</a></span></li>
-			</ul>
-			<div class="btns clear">
-			  <a class="button" href="#">BOOK</a>
-			  <p><a href="#">REMOVE FROM SITTER TEAM</a></p>
-			</div>
-		  </li>
-		  <li>
-			<div class="tit">
-			  <span><strong>$15</strong> /hr</span>
-			  <a href="#">Samantha Chadwick</a>
-			</div>
-			<div class="img">
-			  <a href="#"><img src="/static/images/demo/img13.jpg" alt="" /></a>
-			</div>
-			<ul>
-			  <li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>
-			  <li><span class="icon_reload">&nbsp;</span>4 jobs <span class="friends_span"><span class="icon_friends4">&nbsp;</span><a href="#">24 sitter friends</a></span></li>
-			</ul>
-			<div class="btns clear">
-			  <a class="button" href="#">BOOK</a>
-			  <p><a href="#">REMOVE FROM SITTER TEAM</a></p>
-			</div>
-		  </li>
+          {{# each sitter_team }}
+              {{ partial "sitterTeam" }}
+          {{/each}}
 		</ul>
 	  </div>
 	  <!-- /sitter_team -->

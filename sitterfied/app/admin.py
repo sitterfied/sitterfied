@@ -85,7 +85,7 @@ class ParentAdmin(UserAdmin):
                                 'emergency_contact_one_phone',
                                 'emergency_contact_two_name',
                                 'emergency_contact_two_phone',
-                                'fave_sitters',
+                                'sitter_team',
                                 'users_in_network',
                                 'friends',
                                 'sitter_groups',

@@ -1,14 +1,14 @@
 <div class="container clear">
   <div class="wraper">
-
 	<!-- sitter_tabs_wrap -->
-	<div class="sitter_tabs_wrap my_tabs_style">
+
+    <div class="sitter_tabs_wrap my_tabs_style">
 	  <div class="stabs_block" id="fixed_tabs">
 		<nav>
 		  <ul class="tab_select">
-			<li class="active"><a href="#tab-1">sitter<br />team<span>7</span></a></li>
-			<li><a href="#tab-2">friends'<br />sitters<span>42</span></a></li>
-			<li><a href="#tab-3">local<br />sitters<span>519</span></a></li>
+			<li class="active"><a {{action 'zoomToSitterTeam'}}>sitter<br />team<span>{{sitterTeam.length}}</span></a></li>
+			<li><a {{action 'zoomToFriendTeam'}}>friends'<br />sitters<span>{{friendTeam.length}}</span></a></li>
+			<li><a {{action 'zoomToLocalTeam'}}>local<br />sitters<span>{{localTeam.length}}</span></a></li>
 		  </ul>
 		</nav>
 		<div class="friends_block my_friends_sitters">
@@ -44,7 +44,7 @@
 		  </div>
 		</div>
 	  </div>
-
+      {{# if content }}
 	  <!-- my_sitter_team -->
 	  <section id="tab-1">
 		<div class="mob_tab_trigger my_mob_tab">sitter<br />team<span>7</span></div>
@@ -490,6 +490,27 @@
 
 	</div>
 	<!-- /sitter_tabs_wrap -->
-
+    {{else}}
+	<!-- no_results -->
+	<div class="no_results clear">
+	  <p>We’re not in your neighborhood just yet.</p>
+	  <p>Here are a few things you can do right now.</p>
+	  <ul>
+		<li>
+		  <p><a href="#" class="button">Invite</a></p>
+		  <p>Invite your friends and discover great sitters together. We’ll even reward you and your friends with free months as they join Sitterfied</p>
+		</li>
+		<li>
+		  <p><a href="#" class="button">Connect</a></p>
+		  <p>Connect with your existing social networks to find great sitters through your friends</p>
+		</li>
+		<li>
+		  <p><a href="#" class="button">Sign Up</a></p>
+		  <p>Sign up to follow our progress and we’ll let you know when great sitters are added to your area</p>
+		</li>
+	  </ul>
+	</div>
+	<!-- /no_results -->
+    {{/if}}
   </div>
 </div>

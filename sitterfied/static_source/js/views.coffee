@@ -96,6 +96,11 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
         type: "file"
     )
 
+    Sitterfied.SlideDownView = Ember.View.extend
+        didInsertElement: () ->
+            @$().slideDown()
+        willDestroyElement: () ->
+            @$().slideUp()
 
     Sitterfied.BookingView = Em.View.extend()
     #showNote

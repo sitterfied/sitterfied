@@ -176,8 +176,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     Sitterfied.SearchRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render('search.top', {outlet: 'top'})
-            this.render('emptysearch', {outlet: 'content'})
-            #this.render('search', { outlet: 'content'})
+            this.render('search', { outlet: 'content'})
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
 
@@ -240,6 +239,10 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 reivew = Sitterfied.SitterReview.createRecord(parent: Sitterfied.currentUser)
             else
                 review = Sitterfied.SitterReview.createRecord()
+
+            #load the model once more to get fks set
+            Sitterfied[parent_or_sitter].find({id:Sitterfied.currentUser.id})
+
             this.controllerFor('sitterReview').set('model', review)
 
             friends = Sitterfied.User.find({friends:Sitterfied.currentUser.id})

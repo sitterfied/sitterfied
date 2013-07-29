@@ -1,44 +1,73 @@
 <!-- /top note -->
 <a href="#" class="back">Back to search results</a>
-<!-- top info -->
 <div class="top_info clear">
   <div class="find_form_block">
-    <p>Where and when do you need your sitter?</p>
-    <form method="post" action="#">
-      <ul class="clear">
-        <li>
-          <label for="where">Where</label>
-          <input id="where" type="text" value="Enter town or zipcode" />
-        </li>
-        <li>
-          <label for="when">When</label>
-          <input type="text" class="datepicker" id="datepicker" value="Choose date" />
-          <p><input type="checkbox" id="check" name="check" /><label for="check">Overnight / Multiday booking?</label></p>
-        </li>
-        <li>
-          <label for="from">From</label>
-          <select id="from" data-placeholder="" tabindex="8"><option>6:00 PM</option><option>7:00 PM</option></select>
-        </li>
-        <li>
-          <label for="to">To</label>
-          <select id="to" data-placeholder="" tabindex="9"><option>11:00 PM</option><option>12:00 PM</option></select>
-        </li>
-        <li>
-          <label>&nbsp;</label>
-          <select data-placeholder="" tabindex="10"><option>2 Kids</option><option>3 Kids</option></select>
-        </li>
-        <li class="clear_pad over_form">
-          <label>To</label>
-          <input type="text" class="datepicker" id="datepicker3" value="Choose date" />
-        </li>
-        <li class="over_form">
-          <label>&nbsp;</label>
-          <select id="to2" data-placeholder="" tabindex="92"><option>11:00 PM</option><option>12:00 PM</option></select>
-        </li>
-        <li><input type="submit" value="FIND MY SITTER" /></li>
-      </ul>
-    </form>
-    <p class="hide"><a href="#">Hide Search Bar</a></p>
-    <p class="show"><a href="#">Show Search Bar</a></p>
+	<p>Where and when do you need your sitter?</p>
+	<form>
+	  <ul class="clear">
+		<li>
+		  <label for="where">Where</label>
+          {{view Ember.TextField valueBinding="zip" placeholder="Enter town or zipcode"}}
+		</li>
+		<li>
+		  <label for="when">{{# unless overnight }}When{{else}}From{{/unless}}</label>
+          {{view Ember.DatePicker placeholder="Choose date" id="datepicker" class="datepicker" valueBinding="when"}}
+		  <p>
+            {{view Ember.Checkbox checkedBinding="overnight" id="check"}}
+            <label for="check">Overnight / Multiday booking?</label>
+          </p>
+		</li>
+		<li>
+		  <label for="from">{{# unless overnight }}From{{/unless}}</label>
+          {{view Sitterfied.Select2
+            contentBinding="Sitterfied.SitterTimeRanges"
+            optionLabelPath="content.name"
+            optionValuePath="content.value"
+            valueBinding="from"
+            id="from"
+            }}
+		</li>
+        {{# unless overnight }}
+		<li>
+		  <label for="to">To</label>
+          {{view Sitterfied.Select2
+            contentBinding="Sitterfied.SitterTimeRanges"
+            optionLabelPath="content.name"
+            optionValuePath="content.value"
+            valueBinding="to"
+            id="to"
+            }}
+		</li>
+        {{/unless}}
+		<li>
+		  <label>&nbsp;</label>
+          {{view Sitterfied.Select2
+          contentBinding="Sitterfied.Kids"
+          optionLabelPath="content.name"
+          optionValuePath="content.value"
+          valueBinding="kids"
+          }}
+		</li>
+        {{# if overnight }}
+		  {{#view Sitterfied.SlideDownView class="clear_pad over_form" tagName="li"}}
+		    <label>To</label>
+            {{view Ember.DatePicker placeholder="Choose date" id="datepicker3" class="datepicker" valueBinding="date_to"}}
+
+          {{/view}}
+		  {{#view Sitterfied.SlideDownView class="clear_pad over_form" tagName="li"}}
+		    <label></label>
+            {{view Sitterfied.Select2
+            contentBinding="Sitterfied.SitterTimeRanges"
+            optionLabelPath="content.name"
+            optionValuePath="content.value"
+            valueBinding="to"
+            }}
+          {{/view}}
+        {{/if}}
+		<li><input class="findSitter" type="button" value="FIND MY SITTER" {{action "findSitters"}} /></li>
+	  </ul>
+	</form>
+	<p class="hide"><a href="#">Hide Search Bar</a></p>
+	<p class="show"><a href="#">Show Search Bar</a></p>
   </div>
 </div>

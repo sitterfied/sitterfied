@@ -4,11 +4,18 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
         #I know childs is a bad name, but data has issues with a custom name
-        needs: ['certifications', 'languages','specialneeds', 'otherServices', 'friends', 'childs']
+        needs: ['certifications'
+                'languages'
+                'specialneeds'
+                'otherServices'
+                'friends'
+                'childs']
         accountType: parent_or_sitter
+
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
         ).property('parent_or_sitter')
+
         isParent: (() ->
             Sitterfied.accountType == "Parent"
         ).property('parent_or_sitter')
@@ -186,6 +193,36 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
     Sitterfied.ChildsController  = Em.ArrayController.extend(
+    )
+    Sitterfied.SearchController  = Em.ArrayController.extend(
+        zip : ""
+        when: null
+        from : 2
+        to : 5
+        kids : 1
+        overnight : false
+        date_to : false
+        findSitters : () ->
+            this.set('content', Sitterfied.Sitter.find())
+
+        content: []
+
+        sitterTeam: (() ->
+            return @get('content')
+        ).property('content')
+        friendTeam: (() ->
+            return @get('content')
+        ).property('content')
+        localTeam: (() ->
+            return @get('content')
+        ).property('content')
+        zoomToLocalTeam: () ->
+            alert("zoom to local")
+        zoomToFriendTeam: () ->
+            alert("zoom to friend")
+        zoomToSitterTeam: () ->
+            alert("zoom to Sitter")
+
     )
 
 

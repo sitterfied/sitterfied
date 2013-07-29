@@ -33,6 +33,22 @@ define ['jquery'
         "Some College"
         "College Degree"
     ]
+
+    Sitterfied.SitterTimeRanges = [
+        {value:0, name: "Early Morning"}
+        {value:1, name: "Late Morning"}
+        {value:2, name: "Early Afternoon"}
+        {value:3, name: "Late Afternoon"}
+        {value:4, name: "Early Evening"}
+        {value:5, name: "Late Evening"}
+    ]
+    Sitterfied.Kids = [
+        {value:1, name: "1 Kid"}
+        {value:2, name: "2 Kids"}
+        {value:3, name: "3 Kids"}
+    ]
+
+
     Sitterfied.onDeckAvatar = ''
 
 

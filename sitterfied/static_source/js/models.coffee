@@ -127,6 +127,7 @@ define [
         emergency_contact_two_name : DS.attr("string")
         emergency_contact_two_phone : DS.attr("string")
         children: DS.hasMany("Sitterfied.Child")
+        sitter_team: DS.hasMany("Sitterfied.Sitter")
 
     )
 
