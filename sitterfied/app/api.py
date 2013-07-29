@@ -69,6 +69,33 @@ class SitterSerializer(serializers.ModelSerializer):
                                 )
 
 
+class SitterSearchSerializer(SitterSerializer):
+    in_sitter_team = serializers.SerializerMethodField('is_in_sitter_team')
+    in_friends_team = serializers.SerializerMethodField('is_in_friends_team')
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        self.friends = list(self.user.friends.all())
+        return super(SitterSearchSerializer, self).__init__(*args, **kwargs)
+
+    def is_in_sitter_team(self, sitter):
+        if not self.user.is_authenticated() or self.user.is_parent_or_sitter() != 'Parent':
+            return False
+        return sitter in self.user.parent.sitter_teams.all()
+
+    def is_in_friends_team(self, sitter):
+        if not self.user.is_authenticated() or self.user.is_parent_or_sitter() != 'Parent':
+            return False
+        return sitter.sitter_teams.filter(pk__in=self.friends).exists()
+
+
+
+
+
+    class Meta(SitterSerializer.Meta):
+        fields = SitterSerializer.Meta.fields + ('in_sitter_team', 'in_friends_team')
+
+
 
 class ParentSerializer(serializers.ModelSerializer):
 
@@ -81,7 +108,7 @@ class ParentSerializer(serializers.ModelSerializer):
                                 'emergency_contact_two_name',
                                 'emergency_contact_two_phone',
                                 'reviews', 'bookings', 'children',
-                                'sitter_team',
+                                'sitter_teams',
         )
 
 
@@ -186,7 +213,7 @@ class ParentViewSet(viewsets.ModelViewSet):
                                                                              'bookings',
                                                                              'children',
                                                                              'friends',
-                                                                             'sitter_team',
+                                                                             'sitter_teams',
                                                                              )
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -200,8 +227,17 @@ class ParentViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @link()
-    def sitter_team(self, request, pk=None):
-        queryset = models.Sitter.objects.filter(sitter_teams=pk)
+    def sitter_teams(self, request, pk=None):
+        queryset = models.Sitter.objects.filter(sitter_teams=pk).prefetch_related('reviews',
+                                                                       'languages',
+                                                                       'sitter_groups',
+                                                                       'friends',
+                                                                       'certifications',
+                                                                       'schedlue',
+                                                                       'other_services',
+                                                                       'booking_requests',
+                                                                       'bookings',
+                                                                       'settings').all()
         serializer = SitterSerializer(queryset, many=True)
         return Response(serializer.data)
 

@@ -1309,15 +1309,78 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 Ember.TEMPLATES["search"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, hashTypes, hashContexts, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
+  var buffer = '', stack1, hashTypes, hashContexts;
+  data.buffer.push("\n        <section id=\"tab-1\">\n          <div class=\"mob_tab_trigger my_mob_tab\">sitter<br />team<span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "sitterTeam.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span></div>\n		  <div class=\"my_sitter_team\">\n			<div class=\"sitter_title\">\n			  <p><span><span class=\"icon_heart2\">&nbsp;</span>sitter<br />team</span><strong>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "sitterTeam.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</strong></p>\n			</div>\n\n            <ul class=\"clear\">\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "sitterTeam", {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            </ul>\n          </div>\n        </section>\n\n	  <!-- my_friends_sitters -->\n	  <section id=\"tab-2\">\n		<div class=\"mob_tab_trigger my_mob_tab\">friends'<br />sitters<span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "friendTeam.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span></div>\n		<div class=\"friends_block my_friends_sitters\">\n		  <div class=\"sitter_title\">\n			<p><span><span class=\"icon_heart2\">&nbsp;</span>friends’<br />sitters</span><strong>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "friendTeam.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</strong></p>\n		  </div>\n		  <ul class=\"clear\">\n            ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "friendTeam", {hash:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		  </ul>\n		</div>\n	  </section>\n	  <!-- /my_friends_sitters -->\n\n	  <!-- my_local_sitters -->\n	  <section id=\"tab-3\">\n		<div class=\"mob_tab_trigger my_mob_tab\">local<br />sitters<span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "localTeam.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span></div>\n		<div class=\"friends_block my_local_sitters\">\n		  <div class=\"sitter_title\">\n			<p><span><span class=\"icon_pin2\">&nbsp;</span>local<br />sitters</span><strong>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "localTeam.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</strong></p>\n		  </div>\n		  <ul class=\"clear\">\n            ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "localTeam", {hash:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		  </ul>\n		</div>\n	  </section>\n	  <!-- /my_local_sitters -->\n\n	</div>\n	<!-- /sitter_tabs_wrap -->\n    ");
+  return buffer;
+  }
+function program2(depth0,data) {
   
-  data.buffer.push("\n	  <!-- my_sitter_team -->\n	  <section id=\"tab-1\">\n		<div class=\"mob_tab_trigger my_mob_tab\">sitter<br />team<span>7</span></div>\n		<div class=\"my_sitter_team\">\n		  <div class=\"sitter_title\">\n			<p><span><span class=\"icon_heart2\">&nbsp;</span>sitter<br />team</span><strong>7</strong></p>\n		  </div>\n		  <ul class=\"clear\">\n			<li>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Ellen Vukelich</a>\n			  </div>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_plus_box\">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>\n				<li><span class=\"icon_reload\">&nbsp;</span>4 jobs <span class=\"friends_span\"><span class=\"icon_friends4\">&nbsp;</span><a href=\"#\">24 sitter friends</a></span></li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" checked=\"\" class=\"select1\" id=\"select1\" /><label for=\"select1\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a>\n				<p><a href=\"#\">REMOVE FROM SITTER TEAM</a></p>\n			  </div>\n			</li>\n			<li>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Amy Randall</a>\n			  </div>\n			  <div class=\"img\">\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_plus_box\">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>\n				<li><span class=\"icon_reload\">&nbsp;</span>4 jobs <span class=\"friends_span\"><span class=\"icon_friends4\">&nbsp;</span><a href=\"#\">24 sitter friends</a></span></li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select2\" id=\"select2\" /><label for=\"select2\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a>\n				<p><a href=\"#\">REMOVE FROM SITTER TEAM</a></p>\n			  </div>\n			</li>\n		  </ul>\n		</div>\n	  </section>\n	  <!-- /my_sitter_team -->\n\n	  <!-- my_friends_sitters -->\n	  <section id=\"tab-2\">\n		<div class=\"mob_tab_trigger my_mob_tab\">friends'<br />sitters<span>42</span></div>\n		<div class=\"friends_block my_friends_sitters\">\n		  <div class=\"sitter_title\">\n			<p><span><span class=\"icon_heart2\">&nbsp;</span>friends’<br />sitters</span><strong>42</strong></p>\n		  </div>\n		  <ul class=\"clear\">\n			<li>\n			  <div class=\"bookmark\"></div>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Sandy Thompson</a>\n			  </div>\n			  <div class=\"img\">\n				<div class=\"heart\"></div>\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n				<span>Background Cleared</span>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_friends3\">&nbsp;</span>5 mutual friends\n				<ul>\n				  <li>Friends you have in common</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_recommend2\">&nbsp;</span>4 recommends\n				<ul>\n				  <li>Recommendations</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_team3\">&nbsp;</span>9 sitter teams\n				<ul>\n				  <li>Added to sitter teams and repeatedly hired</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_reviews\">&nbsp;</span>11 reviews\n				<ul>\n				  <li class=\"rev clear\">\n					<a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a>\n					<div>\n					  <p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>\n					  <p><a href=\"#\">Read more reviews </a></p>\n					</div>\n				  </li>\n				</ul>\n				</li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select3\" id=\"select3\" /><label for=\"select3\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a>\n				<p><a href=\"#\">ADD TO SITTER TEAM</a></p>\n				<p><a href=\"#\">BOOKMARK</a></p>\n			  </div>\n			</li>\n			<li>\n			  <div class=\"bookmark\"></div>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Erica Sanders</a>\n			  </div>\n			  <div class=\"img\">\n				<div class=\"heart\"></div>\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n				<span>Background Cleared</span>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_friends3\">&nbsp;</span>5 mutual friends\n				<ul>\n				  <li>Friends you have in common</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_recommend2\">&nbsp;</span>4 recommends\n				<ul>\n				  <li>Recommendations</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_team3\">&nbsp;</span>9 sitter teams\n				<ul>\n				  <li>Added to sitter teams and repeatedly hired</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_reviews\">&nbsp;</span>11 reviews\n				<ul>\n				  <li class=\"rev clear\">\n					<a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a>\n					<div>\n					  <p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>\n					  <p><a href=\"#\">Read more reviews </a></p>\n					</div>\n				  </li>\n				</ul>\n				</li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select4\" id=\"select4\" /><label for=\"select4\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a>\n				<p><a href=\"#\">ADD TO SITTER TEAM</a></p>\n				<p><a href=\"#\">BOOKMARK</a></p>\n			  </div>\n			</li>\n		  </ul>\n		</div>\n	  </section>\n	  <!-- /my_friends_sitters -->\n\n	  <!-- my_local_sitters -->\n	  <section id=\"tab-3\">\n		<div class=\"mob_tab_trigger my_mob_tab\">local<br />sitters<span>519</span></div>\n		<div class=\"friends_block my_local_sitters\">\n		  <div class=\"sitter_title\">\n			<p><span><span class=\"icon_pin2\">&nbsp;</span>local<br />sitters</span><strong>519</strong></p>\n		  </div>\n		  <ul class=\"clear\">\n			<li>\n			  <div class=\"bookmark\"></div>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Amelia Hart</a>\n			  </div>\n			  <div class=\"img\">\n				<div class=\"heart\"></div>\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n				<span>Background Cleared</span>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_recommend2\">&nbsp;</span>4 recommends\n				<ul>\n				  <li>Recommendations</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_team3\">&nbsp;</span>9 sitter teams\n				<ul>\n				  <li>Added to sitter teams and repeatedly hired</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_reviews\">&nbsp;</span>11 reviews\n				<ul>\n				  <li class=\"rev clear\">\n					<a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a>\n					<div>\n					  <p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>\n					  <p><a href=\"#\">Read more reviews </a></p>\n					</div>\n				  </li>\n				</ul>\n				</li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select5\" id=\"select5\" /><label for=\"select5\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a>\n				<p><a href=\"#\">ADD TO SITTER TEAM</a></p>\n				<p><a href=\"#\">BOOKMARK</a></p>\n			  </div>\n			</li>\n			<li>\n			  <div class=\"bookmark\"></div>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Dora Cruz</a>\n			  </div>\n			  <div class=\"img\">\n				<div class=\"heart\"></div>\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n				<span>Background Cleared</span>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_recommend2\">&nbsp;</span>4 recommends\n				<ul>\n				  <li>Recommendations</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_team3\">&nbsp;</span>9 sitter teams\n				<ul>\n				  <li>Added to sitter teams and repeatedly hired</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_reviews\">&nbsp;</span>11 reviews\n				<ul>\n				  <li class=\"rev clear\">\n					<a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a>\n					<div>\n					  <p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>\n					  <p><a href=\"#\">Read more reviews </a></p>\n					</div>\n				  </li>\n				</ul>\n				</li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select6\" id=\"select6\" /><label for=\"select6\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a>\n				<p><a href=\"#\">ADD TO SITTER TEAM</a></p>\n				<p><a href=\"#\">BOOKMARK</a></p>\n			  </div>\n			</li>\n			<li>\n			  <div class=\"bookmark\"></div>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Jane Wayne</a>\n			  </div>\n			  <div class=\"img\">\n				<div class=\"heart\"></div>\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n				<span>Background Cleared</span>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_recommend2\">&nbsp;</span>4 recommends\n				<ul>\n				  <li>Recommendations</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_team3\">&nbsp;</span>9 sitter teams\n				<ul>\n				  <li>Added to sitter teams and repeatedly hired</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_reviews\">&nbsp;</span>11 reviews\n				<ul>\n				  <li class=\"rev clear\">\n					<a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a>\n					<div>\n					  <p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>\n					  <p><a href=\"#\">Read more reviews </a></p>\n					</div>\n				  </li>\n				</ul>\n				</li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select7\" id=\"select7\" /><label for=\"select7\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a>\n				<p><a href=\"#\">ADD TO SITTER TEAM</a></p>\n				<p><a href=\"#\">BOOKMARK</a></p>\n			  </div>\n			</li>\n			<li>\n			  <div class=\"bookmark\"></div>\n			  <div class=\"tit\">\n				<span><strong>$15</strong> /hr</span>\n				<a href=\"#\">Ellen Vukelich</a>\n			  </div>\n			  <div class=\"img\">\n				<div class=\"heart\"></div>\n				<a href=\"#\"><img src=\"/static/images/demo/img13.jpg\" alt=\"\" /></a>\n				<span>Background Cleared</span>\n			  </div>\n			  <ul>\n				<li><span class=\"icon_recommend2\">&nbsp;</span>4 recommends\n				<ul>\n				  <li>Recommendations</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_team3\">&nbsp;</span>9 sitter teams\n				<ul>\n				  <li>Added to sitter teams and repeatedly hired</li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img4.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img5.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img6.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img7.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img8.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img9.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				  <li><a href=\"#\"><img src=\"/static/images/demo/img10.jpg\" alt=\"\" /></a><span>Andrea Barelli</span></li>\n				</ul>\n				</li>\n				<li><span class=\"icon_reviews\">&nbsp;</span>11 reviews\n				<ul>\n				  <li class=\"rev clear\">\n					<a href=\"#\"><img src=\"/static/images/demo/img3.jpg\" alt=\"\" /></a>\n					<div>\n					  <p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>\n					  <p><a href=\"#\">Read more reviews </a></p>\n					</div>\n				  </li>\n				</ul>\n				</li>\n			  </ul>\n			  <div class=\"btns clear\">\n				<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select8\" id=\"select8\" /><label for=\"select8\">Select</label></div>\n				<a class=\"button\" href=\"#\">BOOK</a><a class=\"button button2\" href=\"#\">INTERVIEW</a>\n				<p><a href=\"#\">ADD TO SITTER TEAM</a></p>\n				<p><a href=\"#\">BOOKMARK</a></p>\n			  </div>\n			</li>\n		  </ul>\n		</div>\n	  </section>\n	  <!-- /my_local_sitters -->\n\n	</div>\n	<!-- /sitter_tabs_wrap -->\n    ");
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n                ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "sitterTeam", options) : helperMissing.call(depth0, "partial", "sitterTeam", options))));
+  data.buffer.push("\n                ");
+  return buffer;
   }
 
-function program3(depth0,data) {
+function program4(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "sitterSearch", options) : helperMissing.call(depth0, "partial", "sitterSearch", options))));
+  data.buffer.push("\n            ");
+  return buffer;
+  }
+
+function program6(depth0,data) {
   
   
   data.buffer.push("\n	<!-- no_results -->\n	<div class=\"no_results clear\">\n	  <p>We’re not in your neighborhood just yet.</p>\n	  <p>Here are a few things you can do right now.</p>\n	  <ul>\n		<li>\n		  <p><a href=\"#\" class=\"button\">Invite</a></p>\n		  <p>Invite your friends and discover great sitters together. We’ll even reward you and your friends with free months as they join Sitterfied</p>\n		</li>\n		<li>\n		  <p><a href=\"#\" class=\"button\">Connect</a></p>\n		  <p>Connect with your existing social networks to find great sitters through your friends</p>\n		</li>\n		<li>\n		  <p><a href=\"#\" class=\"button\">Sign Up</a></p>\n		  <p>Sign up to follow our progress and we’ll let you know when great sitters are added to your area</p>\n		</li>\n	  </ul>\n	</div>\n	<!-- /no_results -->\n    ");
@@ -1350,7 +1413,7 @@ function program3(depth0,data) {
   data.buffer.push("</span></a></li>\n		  </ul>\n		</nav>\n		<div class=\"friends_block my_friends_sitters\">\n		  <div class=\"multiple_sitters_block clear\">\n			<a href=\"#\" class=\"close\">&nbsp;</a>\n			<ul>\n			  <li class=\"team select1\"><a href=\"#\">Ellen Vukelich</a><span class=\"remove\"><a href=\"#\" class=\"select1\">&nbsp;</a></span></li>\n			  <li>\n				<p>+ <a href=\"#\" class=\"add_sitters\">ADD ALL FRIENDS’ SITTERS</a></p>\n				<p>- &nbsp;<a href=\"#\" class=\"remove_team\">REMOVE SITTER TEAM</a></p>\n			  </li>\n			</ul>\n			<p>Select from the available sitters below. <a href=\"#\" class=\"button button_small\"><span class=\"icon_ok2\">&nbsp;</span>submit</a></p>\n		  </div>\n		  <div class=\"filter_block\">\n			<p><a href=\"#\">Reset Filters</a></p>\n			<form method=\"post\" action=\"#\">\n			  <ul class=\"clear\">\n				<li><select data-placeholder=\"Choose languages\" multiple tabindex=\"1\"><option>test</option><option>test2</option></select></li>\n				<li><select data-placeholder=\"Education level\" multiple tabindex=\"2\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Training/Certifications\" multiple tabindex=\"3\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Level of Experience\" multiple tabindex=\"4\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Type of Experience\" multiple tabindex=\"5\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Other\" multiple tabindex=\"6\"><option>test</option></select></li>\n			  </ul>\n			</form>\n			<p><a href=\"#\">Hide Filters</a></p>\n		  </div>\n		  <div class=\"sort_filter clear\">\n			<div class=\"sort\"><a href=\"#\">Sort by</a></div>\n			<div class=\"multiple_select\"><a href=\"#\">Select multiple sitters</a></div>\n			<div class=\"filter\"><a href=\"#\">Filter</a> my sitters</div>\n		  </div>\n		</div>\n	  </div>\n      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.program(6, program6, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  </div>\n</div>");
   return buffer;
@@ -1785,6 +1848,209 @@ function program12(depth0,data) {
   return buffer;
   
 });
+Ember.TEMPLATES["_sitterSearch"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var hashTypes, hashContexts;
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("<img ");
+  hashContexts = {'img': depth0,'alt': depth0};
+  hashTypes = {'img': "ID",'alt': "ID"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'img': ("avatar"),
+    'alt': ("full_name")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" />");
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("\n	  <span>Background Cleared</span>\n    ");
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n	    <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "reccomend.parent", options) : helperMissing.call(depth0, "linkTo", "parent", "reccomend.parent", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("<span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "reccomend.parent.full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span></li>\n        ");
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("<img ");
+  hashContexts = {'img': depth0};
+  hashTypes = {'img': "ID"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'img': ("reccomend.parent.avatar")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("  />");
+  return buffer;
+  }
+
+function program10(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n	    <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "", options) : helperMissing.call(depth0, "linkTo", "parent", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("<span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span></li>\n      ");
+  return buffer;
+  }
+function program11(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("<img ");
+  hashContexts = {'img': depth0};
+  hashTypes = {'img': "ID"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'img': ("avatar")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("  />");
+  return buffer;
+  }
+
+function program13(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts;
+  data.buffer.push("\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['with'].call(depth0, "reviews.firstObject", {hash:{},inverse:self.noop,fn:self.program(14, program14, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n      ");
+  return buffer;
+  }
+function program14(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options;
+  data.buffer.push("\n	  <li class=\"rev clear\">\n		");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "parent", options) : helperMissing.call(depth0, "linkTo", "parent", "parent", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n		<div>\n		  <p>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "review", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</p>\n		  <p>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(17, program17, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "sitter", options) : helperMissing.call(depth0, "linkTo", "sitter", "sitter", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</p>\n		</div>\n	  </li>\n      ");
+  return buffer;
+  }
+function program15(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("<img ");
+  hashContexts = {'img': depth0};
+  hashTypes = {'img': "ID"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'img': ("parent.avatar")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("  />");
+  return buffer;
+  }
+
+function program17(depth0,data) {
+  
+  
+  data.buffer.push("Read more reviews ");
+  }
+
+  data.buffer.push("<li>\n  <div class=\"bookmark\"></div>\n  <div class=\"tit\">\n	<span><strong>$");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "one_child_min_rate", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</strong> /hr</span>\n	");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n  </div>\n  <div class=\"img\">\n	<div class=\"heart\"></div>\n	");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n    ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers['if'].call(depth0, "id_verified", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n  </div>\n  <ul>\n	<li><span class=\"icon_recommend2\">&nbsp;</span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "recommends.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" recommends\n    <ul>\n	  <li>Recommendations</li>\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers.each.call(depth0, "reccomends", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	</ul>\n	</li>\n	<li><span class=\"icon_team3\">&nbsp;</span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "sitter_teams.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" sitter teams\n	<ul>\n	  <li>Added to sitter teams and repeatedly hired</li>\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers.each.call(depth0, "sitter_teams", {hash:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	</ul>\n	</li>\n	<li><span class=\"icon_reviews\">&nbsp;</span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "reviews.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" reviews\n	<ul>\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers['if'].call(depth0, "reviews", {hash:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	</ul>\n	</li>\n  </ul>\n  <div class=\"btns clear\">\n	<div class=\"select_wrap\"><input type=\"checkbox\" class=\"select5\" id=\"select5\" /><label for=\"select5\">Select</label></div>\n	<a class=\"button\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "book", "id", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">BOOK</a><a class=\"button button2\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "interview", "id", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">INTERVIEW</a>\n	<p><a href=\"#\">ADD TO SITTER TEAM</a></p>\n	<p><a href=\"#\">BOOKMARK</a></p>\n  </div>\n</li>\n");
+  return buffer;
+  
+});
 Ember.TEMPLATES["_review"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -1864,15 +2130,35 @@ function program3(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "id", options) : helperMissing.call(depth0, "linkTo", "sitter", "id", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n  </div>\n  <div class=\"img\">\n	");
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "id", options) : helperMissing.call(depth0, "linkTo", "sitter", "id", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "", options) : helperMissing.call(depth0, "linkTo", "sitter", "", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n  </div>\n  <ul>\n	<li><span class=\"icon_plus_box\">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>\n	<li><span class=\"icon_reload\">&nbsp;</span>4 jobs <span class=\"friends_span\"><span class=\"icon_friends4\">&nbsp;</span><a href=\"#\">24 sitter friends</a></span></li>\n  </ul>\n  <div class=\"btns clear\">\n	<a class=\"button\" href=\"#\">BOOK</a>\n	<p><a href=\"#\">REMOVE FROM SITTER TEAM</a></p>\n  </div>\n</li>\n");
+  data.buffer.push("\n  </div>\n  <ul>\n	<li><span class=\"icon_plus_box\">&nbsp;</span>Last hired: <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "dateLastHired", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span></li>\n	<li><span class=\"icon_reload\">&nbsp;</span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "bookings.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" jobs <span class=\"friends_span\"><span class=\"icon_friends4\">&nbsp;</span><a href=\"#\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "friends.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" friends</a></span></li>\n  </ul>\n  <div class=\"btns clear\">\n	<a class=\"button\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "book", "id", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">BOOK</a>\n	<p><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "removeFromTeam", "id", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" >REMOVE FROM SITTER TEAM</a></p>\n  </div>\n</li>\n");
   return buffer;
   
 });
@@ -2478,7 +2764,7 @@ function program1(depth0,data) {
   data.buffer.push("	  <!-- sitter_team -->\n	  <div class=\"mob_tab_trigger\">Sitter Team</div>\n	  <div class=\"tab_content my_sitter_team my_sitter_team_tab_bg\" id=\"tab-3\">\n		<div class=\"send_request\"><a href=\"#\">Send a job request to the team</a></div>\n		<ul class=\"clear\">\n          ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "sitter_team", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "sitter_teams", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		</ul>\n	  </div>\n	  <!-- /sitter_team -->\n");
   return buffer;

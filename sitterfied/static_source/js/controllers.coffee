@@ -103,7 +103,6 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
 
         saveNeed: () ->
-            debugger
             newNeed = this.get('controllers.specialneeds.newNeed')
             if newNeed == ''
                 return
@@ -203,19 +202,24 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
         overnight : false
         date_to : false
         findSitters : () ->
-            this.set('content', Sitterfied.Sitter.find())
+            $.ajax("/api/search/").then (response) =>
+                store =  DS.get('defaultStore')
+                ids = _.pluck(response, 'id')
+                sitter_refs = store.loadMany(Sitterfied.Sitter, ids, response)
+                sitters = (store.materializeRecord(sitter_ref) for sitter_ref in sitter_refs)
+                this.set('content', sitters)
 
         content: []
 
         sitterTeam: (() ->
-            return @get('content')
-        ).property('content')
+            return @get('content').filterProperty("in_sitter_team", true)
+        ).property('content.@each')
         friendTeam: (() ->
-            return @get('content')
-        ).property('content')
+            return @get('content').filterProperty("in_friends_team", true)
+        ).property('content.@each')
         localTeam: (() ->
-            return @get('content')
-        ).property('content')
+            return @get('content').filterProperty("in_friends_team", false).filterProperty('in_sitter_team', false)
+        ).property('content.@each')
         zoomToLocalTeam: () ->
             alert("zoom to local")
         zoomToFriendTeam: () ->

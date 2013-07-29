@@ -60,6 +60,9 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
 
     Sitterfied.ParentEditProfileRoute = Em.Route.extend(
+        model: () ->
+            return Sitterfied.currentUser
+
         setupController: (controller, model) ->
             this.controllerFor('languages').set('model', Sitterfied.Language.find())
             this.controllerFor('specialneeds', Sitterfied.SpecialNeed).set('model', Sitterfied.SpecialNeed.find())
@@ -195,6 +198,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     fitToView: false
                     width: "90%"
                     height: "90%"
+
+            removeFromTeam: ()->
+                debugger
+            book: () ->
+                this.transitionTo('book')
 
             closeReccomendPopup: ()->
                 $.fancybox.close()

@@ -1,6 +1,6 @@
 define [
-    'ember', 'cs!sitterfied', 'data', 'moment','djangoRestAdapter'
-    ], (Em, Sitterfied) ->
+    'ember', '_', 'cs!sitterfied', 'data', 'moment','djangoRestAdapter'
+    ], (Em, _, Sitterfied) ->
 
 
     Sitterfied.Adapter  = DS.DjangoRESTAdapter.extend
@@ -127,7 +127,7 @@ define [
         emergency_contact_two_name : DS.attr("string")
         emergency_contact_two_phone : DS.attr("string")
         children: DS.hasMany("Sitterfied.Child")
-        sitter_team: DS.hasMany("Sitterfied.Sitter")
+        sitter_teams: DS.hasMany("Sitterfied.Sitter")
 
     )
 
@@ -218,6 +218,8 @@ define [
         major: DS.attr('string'),
         occupation:  DS.attr('string'),
 
+        sitter_teams: DS.hasMany("Sitterfied.Parent")
+        reviews: DS.hasMany('Sitterfied.SitterReview'),
         certifications: DS.hasMany('Sitterfied.Certification'),
         other_services: DS.hasMany('Sitterfied.OtherService'),
         one_child_min_rate: DS.attr('number'),
@@ -238,8 +240,23 @@ define [
         travel_distance: DS.attr('number'),
         has_drivers_licence: DS.attr('string'),
 
-
         booking_requests: DS.hasMany("Sitterfied.BookingRequest"),
+
+        in_sitter_team: DS.attr('boolean'),
+        in_friends_team: DS.attr('boolean'),
+
+        dateLastHired: (() ->
+            bookings = this.get('sorted_bookings')
+            if bookings.length == 0
+                return "Never"
+            else
+                return bookings.get('firstObject.start_date_time')
+        ).property('sorted_bookings')
+
+        recommends: (() ->
+            return this.get('reviews').filterProperty('recommended', true)
+        ).property('reviews.@each')
+
 
         calc_total_exp: ((value) ->
             return @get('infant_exp') + @get('toddler_exp') + @get('preschool_exp') + @get('school_ageExp') + @get('pre_teenExp') + @get('teen_exp')

@@ -23,7 +23,7 @@ from ecl_facebook import Facebook
 from rest_framework.renderers import JSONRenderer
 from api import ParentSerializer, SitterSerializer
 
-from .models import User
+from .models import User, Sitter
 
 @login_required
 @render_to('index.html')
@@ -42,11 +42,31 @@ def index(request, referred_by=None):
 
     return {'user_json':user_json, 'parent_or_sitter': parent_or_sitter}
 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from api import SitterSearchSerializer
+
+@api_view(['GET'])
+def search(request):
+    sitters = Sitter.objects.select_related().prefetch_related('reviews',
+                                                               'languages',
+                                                               'sitter_groups',
+                                                               'friends',
+                                                               'certifications',
+                                                               'schedlue',
+                                                               'sitter_teams',
+                                                               'other_services',
+                                                               'booking_requests',
+                                                               'bookings',
+                                                               'settings').all()
+    serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
+    return Response(serializer.data)
 
 
 def error(request):
     """for testing purposes"""
     raise Exception
+
 
 @ajax_request
 @login_required

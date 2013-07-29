@@ -97,7 +97,7 @@ class Parent(User):
     emergency_contact_two_name = models.CharField(max_length=128)
     emergency_contact_two_phone = models.CharField(max_length=10)
 
-    sitter_team = models.ManyToManyField('Sitter', related_name="sitter_teams", blank=True)
+    sitter_teams = models.ManyToManyField('Sitter', related_name="sitter_teams", blank=True)
 
     class Meta:
          verbose_name = "Parent"
