@@ -8,10 +8,10 @@ define [
 
     Sitterfied.Adapter.registerTransform "date",
         serialize: (date) ->
-            if date then moment(date).format("YYYY-MM-DD") else null
+            if date then moment(date).format("YYYY-MM-DD hh:mm") else null
 
         deserialize: (date) ->
-            return moment(date).toDate()
+            if date then moment(date).toDate() else null
 
 
     Sitterfied.Store = DS.Store.extend(
@@ -240,7 +240,7 @@ define [
         travel_distance: DS.attr('number'),
         has_drivers_licence: DS.attr('string'),
 
-        booking_requests: DS.hasMany("Sitterfied.BookingRequest"),
+        bookings: DS.hasMany("Sitterfied.Booking"),
 
         in_sitter_team: DS.attr('boolean'),
         in_friends_team: DS.attr('boolean'),
@@ -336,18 +336,80 @@ define [
         respond_by: DS.attr('date'),
         start_date_time: DS.attr('date'),
         stop_date_time: DS.attr('date'),
-        child: DS.hasMany("Sitterfied.Child"),
-        #emergency_phone: models.Foreign_key('Phone')
+        num_chidren:  DS.attr('number'),
+        address1: DS.attr('string')
+        address2: DS.attr('string')
+        city: DS.attr('string')
+        state: DS.attr('string')
+        zip: DS.attr('string')
+        overnight: DS.attr('boolean'),
+
+        sitter_accepted: DS.attr('boolean'),
+        rate: DS.attr('number'),
+
+        emergency_phone: DS.attr('string'),
         #location: models.Foreign_key('Address')
         booking_status:DS.attr('string'),
         booking_type: DS.attr('string'),
-        booking_requests: DS.hasMany("Sitterfied.BookingRequest"),
+        sitter: DS.belongsTo('Sitterfied.Sitter'),
+
+        formattedDate: (() ->
+            date = @get('start_date_time')
+            return moment(date).format('dddd Do MMMM YYYY')
+        ).property("start_date_time")
+        formattedHours: (() ->
+            start = @get('start_date_time')
+            stop = @get('stop_date_time')
+            if not start or not stop
+                return ""
+            startHour = moment(start).format('h:00 a');
+            endHour = moment(stop).format('h:00 a');
+            return startHour + " — " + endHour
+        ).property('start_date_time', 'stop_date_time')
+        startHour: ((key, value) ->
+            date = @get('start_date_time')
+            if not date
+                return
+            if arguments.length == 1
+                return moment(date).hour()
+            else
+                date = moment(date)
+                date.hour(value)
+                @set('start_date_time', date.toDate())
+                return value
+        ).property('start_date_time')
+        endHour: ((key, value) ->
+            date = @get('stop_date_time')
+            if not date
+                return
+            if arguments.length == 1
+                return moment(date).format('h:mm a');
+            else
+                date = moment(date)
+                date.hour(value)
+                @set('stop_date_time', date.toDate())
+                return value
+        ).property('stop_date_time')
+        calendarDate: ((key, value) ->
+            date = @get('start_date_time')
+            date = moment(date)
+            if not date
+                return
+            if arguments.length == 1
+                return date.format("YYYY-MM-DD")
+            else
+                v = moment(value)
+                date.date(v.date())
+                date.year(v.year())
+                date.month(v.month())
+                @set('start_date_time', date.toDate())
+                return v.format("YYYY-MM-DD")
+        ).property('start_date_time')
+
+
     )
 
     Sitterfied.BookingRequest = DS.Model.extend(
         booking: DS.belongsTo("Sitterfied.Booking"),
-        sitter: DS.belongsTo('Sitterfied.Sitter'),
-        sitter_accepted: DS.attr('boolean'),
-        rate: DS.attr('number'),
 
     )

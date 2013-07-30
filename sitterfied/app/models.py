@@ -46,7 +46,7 @@ class User(AbstractUser, TimeStampedModel):
     invited_by = models.ManyToManyField('self',  symmetrical =False, blank=True)
     languages = models.ManyToManyField('Language', blank=True)
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
-    membership_exp_date = models.DateField(null=True)
+    membership_exp_date = models.DateTimeField(null=True)
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
     facebook_id = models.IntegerField(null=True, blank=True)
@@ -112,7 +112,7 @@ class Sitter(User):
     live_zip = models.CharField(max_length=9, blank=True)
     work_zip = models.CharField(max_length=9, blank=True)
 
-    dob = models.DateField(blank=False, default=datetime.now)
+    dob = models.DateTimeField(blank=False, default=datetime.now)
     smoker = models.BooleanField(default=True)
     sick =  models.BooleanField(default=True)
     will_transport = models.BooleanField(default=False)
@@ -219,7 +219,7 @@ class Settings(TimeStampedModel):
 class Child(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="children")
     name = models.CharField(max_length=50, blank=True, default="")
-    dob = models.DateField(blank=True, null=True)
+    dob = models.DateTimeField(blank=True, null=True)
     school = models.CharField(max_length=50, blank=True, default="")
     special_needs = models.ManyToManyField(SpecialNeed, blank=True)
 
@@ -302,33 +302,31 @@ class SitterReview(TimeStampedModel):
         unique_together = ("parent", "sitter")
 
 
-class BookingRequest(TimeStampedModel):
-    ##TODO:
-    #unique index to prevent more than one sitter accepting a booking request
-    booking = models.ForeignKey("Booking")
-    sitter = models.ForeignKey("Sitter", related_name="booking_requests")
-    sitter_accepted= models.BooleanField(default=False)
-    rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+
+
 
 
 class Booking(TimeStampedModel):
     BOOKING_STATUS = Choices('Active', 'Pending', 'Completed', 'Expired', 'Declined', 'Canceled',)
     BOOKING_TYPES = Choices('Job', 'Interview')
     parent = models.ForeignKey(Parent, related_name="bookings")
-    sitters = models.ManyToManyField(Sitter, related_name="bookings", through=BookingRequest)
-    notes = models.TextField()
-    respond_by = models.DateTimeField()
+    sitter = models.ForeignKey(Sitter, related_name="bookings")
+    notes = models.TextField(blank=True)
+    respond_by = models.DateTimeField(blank=True, null=True)
     start_date_time = models.DateTimeField()
     stop_date_time = models.DateTimeField()
-    child = models.ManyToManyField('Child')
-    emergency_phone = models.ForeignKey('Phone', null=True)
-
+    num_children = models.IntegerField(default=1)
+    emergency_phone = models.CharField(max_length=10, blank=True)
+    address1 = models.CharField(max_length=255, blank=True)
+    address2 = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=50, blank=True)
+    state = USStateField(blank=True, default="AZ")
+    zip = models.CharField(max_length=9, blank=True)
+    rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
     booking_type =  models.CharField(max_length=10, choices=BOOKING_TYPES, default='Job')
-
-
-    location = models.ForeignKey('Address')
-
+    sitter_accepted= models.BooleanField(default=False)
+    overnight = models.BooleanField(default=False)
 
     @cached_property
     def accepted(self):

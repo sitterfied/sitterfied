@@ -10,6 +10,8 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             )
 
         this.route('parent', {path: '/parent/:parent_id'})
+        this.route('book', {path: '/book/'})
+        this.route('editBook', {path: '/book/:booking_id'})
 
         this.resource('parentEdit', {path: '/parent/:parent_id/edit'}, () ->
             this.route('profile')
@@ -21,7 +23,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
         this.route('search')
         this.route('profile')
-        this.route('book')
+        this.route('mybookings')
         this.route('done')
         this.route('about')
         this.route('tos')
@@ -37,19 +39,41 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
 
     Sitterfied.DoneRoute = Em.Route.extend(
+        model: () ->
+            return Sitterfied.get('onDeckBooking')
+
         renderTemplate: () ->
             this.render("done", {outlet: 'content'})
             this.render('done.top', { outlet: 'top' })
-
     )
 
     Sitterfied.BookRoute = Em.Route.extend(
-        renderTemplate: () ->
-            this.render("book.multiple", {outlet: 'content'})
-            this.render('book.top', { outlet: 'top' })
+        model: () ->
+            return Sitterfied.get('onDeckBooking')
 
+        redirect: () ->
+            if not this.model()
+                this.transitionTo('search')
+            else
+                return false
+
+        renderTemplate: () ->
+            this.render("book", {outlet: 'content'})
+            this.render('book.top', { outlet: 'top' })
     )
 
+    Sitterfied.EditBookRoute = Em.Route.extend(
+        model: (params) ->
+            Sitterfied.Booking.find(params.booking_id)
+
+        setupController: (controller, model) ->
+            Sitterfied.set('onDeckBooking', model) #for the done screen
+            this.controllerFor('book').set('model', model)
+
+        renderTemplate: () ->
+            this.render("book", {outlet: 'content', controller:'book'})
+            this.render('book.top', { outlet: 'top', controller:'book' })
+    )
     Sitterfied.ParentEditRoute = Em.Route.extend(
         model: () ->
             return Sitterfied.currentUser
@@ -169,6 +193,13 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             else
                 this.transitionTo('sitterEdit', Sitterfied.currentUser)
     )
+    Sitterfied.MybookingsRoute = Em.Route.extend(
+        redirect: () ->
+            if Sitterfied.get('isParent')
+                this.transitionTo('parentEdit.bookings', Sitterfied.currentUser)
+            else
+                this.transitionTo('sitterEdit.bookings', Sitterfied.currentUser)
+    )
 
 
     Sitterfied.IndexRoute = Em.Route.extend(
@@ -201,8 +232,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
             removeFromTeam: ()->
                 debugger
-            book: () ->
-                this.transitionTo('book')
 
             closeReccomendPopup: ()->
                 $.fancybox.close()

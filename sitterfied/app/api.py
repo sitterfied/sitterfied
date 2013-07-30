@@ -65,7 +65,7 @@ class SitterSerializer(serializers.ModelSerializer):
                                 'gender', 'sick',
                                 'has_drivers_licence', 'travel_distance',
                                 'special_needs_exp', 'extra_exp', 'major',
-                                'occupation', 'reviews', 'booking_requests'
+                                'occupation', 'reviews', 'bookings'
                                 )
 
 
@@ -137,10 +137,6 @@ class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Booking
 
-class BookingRequestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.BookingRequest
-
 class ChildSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Child
@@ -153,6 +149,12 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', 'friends')
 
+
+    @link()
+    def bookings(self, request, pk=None):
+        queryset = models.Booking.objects.filter(Q(parent=pk) | Q(bookingrequest__sitter=pk))
+        serializer = BookingSerializer(queryset, many=True)
+        return Response(serializer.data)
 
     @action()
     def avatar_upload(self, request, pk=None):
@@ -198,7 +200,6 @@ class SitterViewSet(viewsets.ModelViewSet):
                                                                        'certifications',
                                                                        'schedlue',
                                                                        'other_services',
-                                                                       'booking_requests',
                                                                        'bookings',
                                                                        'settings').all()
     serializer_class = SitterSerializer
@@ -235,7 +236,6 @@ class ParentViewSet(viewsets.ModelViewSet):
                                                                        'certifications',
                                                                        'schedlue',
                                                                        'other_services',
-                                                                       'booking_requests',
                                                                        'bookings',
                                                                        'settings').all()
         serializer = SitterSerializer(queryset, many=True)
@@ -279,12 +279,6 @@ class BookingViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
-
-class BookingRequestViewSet(viewsets.ModelViewSet):
-    queryset = models.BookingRequest.objects.all()
-    serializer_class = BookingRequestSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', )
 
 class LanguageViewSet(viewsets.ModelViewSet):
     queryset = models.Language.objects.all()

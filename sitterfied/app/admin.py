@@ -162,7 +162,6 @@ class BookingAdmin(admin.ModelAdmin):
     search_fields = ('name', 'slug',)
     ordering = ('start_date_time',)
     list_filter = ('booking_status',)
-
     # prepopulated_fields = {'slug': ('name',)}
     # exclude = ('actions', 'creator')
     # list_display = ('name', 'slug', 'active', 'over',)

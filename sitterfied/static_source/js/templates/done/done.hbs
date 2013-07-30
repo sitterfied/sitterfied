@@ -1,14 +1,10 @@
 
 <div class="container clear">
 	<div class="wraper notify_wraper">
-		<p>Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
-		<ul>
-			<li><span class="icon_date">&nbsp;</span>Wednesday 1 August 2012 &nbsp; <span>4:00 pm — 6:00 pm</span></li>
-			<li><span class="icon_friends5">&nbsp;</span>2 Kids</li>
-			<li><span class="icon_pin3">&nbsp;</span>33 Nassau Ave Suite #2 NY, New York</li>
-		</ul>
-		<p><a {{action 'edit' }} class="button button_small button_edit"><span class="icon_edit">&nbsp;</span>Edit</a><a {{action 'cancel' }} class="button button_small button_cancel"><span class="icon_cancel">&nbsp;</span>Cancel</a></p>
+	  <p>{{note}}</p>
+      {{partial "smallBooking"}}
+	  <p><a {{action 'edit' this }} class="button button_small button_edit"><span class="icon_edit">&nbsp;</span>Edit</a><a {{action 'cancel' this }} class="button button_small button_cancel"><span class="icon_cancel">&nbsp;</span>Cancel</a></p>
 
-        <p>{{#linkTo book class="button" }}Go to bookings{{/linkTo}}</p>
+        <p>{{#linkTo mybookings class="button" }}Go to bookings{{/linkTo}}</p>
 	</div>
 </div>

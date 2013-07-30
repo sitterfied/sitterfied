@@ -152,7 +152,6 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
       prompt: "Please make a selection"
       # initialize Select2 once view is inserted in DOM
       didInsertElement: ->
-
         #this._super();
         placeholderText = @get("prompt")
         throw new Exception("select2 is required for Sitterfied.Select2 control")  unless @$().select2

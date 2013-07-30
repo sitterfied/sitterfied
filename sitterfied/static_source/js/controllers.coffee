@@ -1,4 +1,4 @@
-define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
+define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
 
 
@@ -135,13 +135,17 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
     })
 
-    Sitterfied.BookController = Em.ArrayController.extend(
+    Sitterfied.BookController = Em.ObjectController.extend(
         cancel: () ->
-            alert('cancel')
+            this.get('content.transaction').rollback()
             this.transitionTo('search');
         book: () ->
-            alert('send')
+            this.get('content.transaction').commit()
             this.transitionTo('done');
+
+        multiple: (() ->
+            return false
+        ).property()
     )
 
     Sitterfied.SitterEditSchedlueController =  Em.ObjectController.extend({
@@ -162,13 +166,15 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
 
     })
 
-    Sitterfied.DoneController = Em.ArrayController.extend(
-        cancel: () ->
-            alert('cancel')
-            this.transitionTo('search');
-        edit: () ->
-            alert('edit')
-            this.transitionTo('book');
+    Sitterfied.DoneController = Em.ObjectController.extend(
+        edit: (booking)  ->
+            this.transitionTo('editBook', booking)
+
+        cancel: (booking) ->
+            cancel = confirm("are you sure you want to cancel this booking request?")
+            if cancel
+                this.get('content').deleteRecord()
+                this.transitionTo('search', booking)
     )
 
     Sitterfied.stateController  = Em.ArrayController.create(
@@ -195,12 +201,12 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.SearchController  = Em.ArrayController.extend(
         zip : ""
-        when: null
+        when: undefined
         from : 2
         to : 5
         kids : 1
         overnight : false
-        date_to : false
+        date_to : undefined
         findSitters : () ->
             $.ajax("/api/search/").then (response) =>
                 store =  DS.get('defaultStore')
@@ -226,6 +232,42 @@ define ["ember", "cs!sitterfied", "cs!models"], (Em, Sitterfied) ->
             alert("zoom to friend")
         zoomToSitterTeam: () ->
             alert("zoom to Sitter")
+
+
+        book: (sitter) ->
+            # if not Sitterfied.typeIsArray sitters
+            #     sitters = [sitters]
+            if @get('overnight')
+                stop_date_time = moment(@get('date_to')).toDate()
+            else
+                stop_date_time = moment(@get('when')).toDate()
+
+
+            store = this.get('store')
+            transaction = store.transaction()
+
+            booking = Sitterfied.Booking.createRecord
+                parent: Sitterfied.currentUser
+                notes: ""
+                overnight: false
+                booking_status: "Pending"
+                booking_type: "Job"
+                start_date_time: moment(@get('when')).toDate()
+                stop_date_time: stop_date_time
+                address1: Sitterfied.get('currentUser.address1')
+                address2: Sitterfied.get('currentUser.address2')
+                city: Sitterfied.get('currentUser.city')
+                state: Sitterfied.get('currentUser.state')
+                zip: Sitterfied.get('currentUser.zip')
+                num_children: Sitterfied.get('currentUser.children.length')
+                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                sitter: sitter
+                rate: sitter.one_child_min_rate
+
+            transaction.add(booking)
+
+            Sitterfied.set('onDeckBooking', booking)
+            this.transitionTo('book')
 
     )
 

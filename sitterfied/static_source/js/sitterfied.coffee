@@ -3,6 +3,7 @@ define ['jquery'
         '_'
         ], ($, Em, _) ->
 
+
     Sitterfied = Em.Application.createWithMixins(
         LOG_TRANSITIONS: true
         LOG_VIEW_LOOKUPS: true
@@ -123,11 +124,34 @@ define ['jquery'
             'WY',
         ]
 
+    Sitterfied.HourBlocks = [
+            {value:"0", name:"12:00 AM"}
+            {value:"1", name:"1:00 AM"}
+            {value:"2", name:"2:00 AM"}
+            {value:"3", name:"3:00 AM"}
+            {value:"4", name:"4:00 AM"}
+            {value:"5", name:"5:00 AM"}
+            {value:"6", name:"6:00 AM"}
+            {value:"7", name:"7:00 AM"}
+            {value:"8", name:"8:00 AM"}
+            {value:"9", name:"9:00 AM"}
+            {value:"10", name:"10:00 AM"}
+            {value:"11", name:"11:00 AM"}
+            {value:"12", name:"12:00 PM"}
+            {value:"13", name:"1:00 PM"}
+            {value:"14", name:"2:00 PM"}
+            {value:"15", name:"3:00 PM"}
+            {value:"16", name:"4:00 PM"}
+            {value:"17", name:"5:00 PM"}
+            {value:"18", name:"6:00 PM"}
+            {value:"19", name:"7:00 PM"}
+            {value:"20", name:"8:00 PM"}
+            {value:"21", name:"9:00 PM"}
+            {value:"22", name:"10:00 PM"}
+            {value:"23", name:"11:00 PM"}
+    ]
 
-
-
-
-
-
+    Sitterfied.OnDeckBooking = null
+    Sitterfied.typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
 
     return Sitterfied

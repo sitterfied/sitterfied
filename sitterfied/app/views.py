@@ -56,7 +56,6 @@ def search(request):
                                                                'schedlue',
                                                                'sitter_teams',
                                                                'other_services',
-                                                               'booking_requests',
                                                                'bookings',
                                                                'settings').all()
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)

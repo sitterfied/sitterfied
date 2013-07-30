@@ -2,7 +2,7 @@
 <!-- top note form -->
 <div class="top_note_form clear">
   <div class="add_note"><span class="icon_note">&nbsp;</span>Add a note</div>
-  <textarea></textarea>
+  {{view Ember.TextArea valueBinding=notes}}
   <p>
     <span>If everything looks good below, send away!</span>
     <a class="button button_small button_cancel" {{ action 'cancel' }}>
@@ -19,15 +19,16 @@
 <!-- top_personal_info -->
 <div id="fixed_tabs">
   <div class="top_personal_info clear">
-	<div class="img_name">
-	  <img src="/static/images/demo/img14.jpg" alt="" />
-	  <span>Book Ellen</span>
+    {{# if multiple }}
+	<div class="my">
+	  Request<br />multiple<br />sitters
 	</div>
-	<ul>
-	  <li><span class="icon_date">&nbsp;</span>Wednesday 1 August 2012 &nbsp; <span>4:00 pm — 6:00 pm</span></li>
-	  <li><span class="icon_friends5">&nbsp;</span>2 Kids</li>
-	  <li><span class="icon_pin3">&nbsp;</span>33 Nassau Ave Suite #2 NY, New York</li>
-	  <li><span class="icon_phone">&nbsp;</span>1258 986 89</li>
-	</ul>
+    {{else}}
+	<div class="img_name">
+	  <img {{bindAttr src=sitter.avatar alt=sitter.full_name}} />
+	  <span>Book {{sitter.first_name}}</span>
+	</div>
+    {{/if}}
+    {{partial "smallBooking"}}
   </div>
 </div>
