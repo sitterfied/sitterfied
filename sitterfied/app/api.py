@@ -152,7 +152,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @link()
     def bookings(self, request, pk=None):
-        queryset = models.Booking.objects.filter(Q(parent=pk) | Q(bookingrequest__sitter=pk))
+        queryset = models.Booking.objects.filter(Q(parent=pk) | Q(sitters=pk))
         serializer = BookingSerializer(queryset, many=True)
         return Response(serializer.data)
 

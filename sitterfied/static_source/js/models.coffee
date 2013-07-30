@@ -240,7 +240,7 @@ define [
         travel_distance: DS.attr('number'),
         has_drivers_licence: DS.attr('string'),
 
-        bookings: DS.hasMany("Sitterfied.Booking"),
+
 
         in_sitter_team: DS.attr('boolean'),
         in_friends_team: DS.attr('boolean'),
@@ -351,7 +351,7 @@ define [
         #location: models.Foreign_key('Address')
         booking_status:DS.attr('string'),
         booking_type: DS.attr('string'),
-        sitter: DS.belongsTo('Sitterfied.Sitter'),
+        sitters: DS.hasMany('Sitterfied.Sitter'),
 
         formattedDate: (() ->
             date = @get('start_date_time')

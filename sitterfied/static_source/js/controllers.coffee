@@ -234,9 +234,10 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             alert("zoom to Sitter")
 
 
-        book: (sitter) ->
-            # if not Sitterfied.typeIsArray sitters
-            #     sitters = [sitters]
+        book: (sitters) ->
+            if not Sitterfied.typeIsArray sitters
+                sitters = [sitters]
+
             if @get('overnight')
                 stop_date_time = moment(@get('date_to')).toDate()
             else
@@ -245,7 +246,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
             store = this.get('store')
             transaction = store.transaction()
-
             booking = Sitterfied.Booking.createRecord
                 parent: Sitterfied.currentUser
                 notes: ""
@@ -261,9 +261,9 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 zip: Sitterfied.get('currentUser.zip')
                 num_children: Sitterfied.get('currentUser.children.length')
                 emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
-                sitter: sitter
-                rate: sitter.one_child_min_rate
+                rate: 0
 
+            booking.get('sitters').addObjects(sitters)
             transaction.add(booking)
 
             Sitterfied.set('onDeckBooking', booking)
