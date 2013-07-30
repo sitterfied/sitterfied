@@ -23,7 +23,7 @@
     <ul>
       <li><span class="icon_date">&nbsp;</span>{{booking.formattedDate}}&nbsp; <span>{{booking.formattedHours}}</span></li>
       <li><span class="icon_friends5">&nbsp;</span>{{booking.num_children}} {{booking.kidsString}}</li>
-      <li><a {{bindAttr href=booking.googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span>{{address1}} {{address2}} {{city}}, {{state}}</a></li>
+      <li><a {{bindAttr href=booking.googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span>{{booking.address1}} {{booking.address2}} {{booking.city}}, {{booking.state}}</a></li>
       <li>
         <p><a {{bindAttr href=booking.otherPerson.mailTo}} >Need more info?<br>Email {{booking.otherPerson.first_name}}</a></p>
         <span class="icon_email2">&nbsp;</span><a {{bindAttr href=booking.otherPerson.mailTo}} >{{booking.otherPerson.email}}</a>
