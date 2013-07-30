@@ -276,11 +276,13 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
 
         setupController: (controller, model) ->
+            store = this.get('store')
+            transaction = store.transaction()
             if Sitterfied.isParent
                 reivew = Sitterfied.SitterReview.createRecord(parent: Sitterfied.currentUser)
             else
                 review = Sitterfied.SitterReview.createRecord()
-
+            transaction.add(review)
             #load the model once more to get fks set
             Sitterfied[parent_or_sitter].find({id:Sitterfied.currentUser.id})
 

@@ -174,7 +174,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             cancel = confirm("are you sure you want to cancel this booking request?")
             if cancel
                 this.get('content').deleteRecord()
-                this.transitionTo('search', booking)
+                this.transitionTo('search')
     )
 
     Sitterfied.stateController  = Em.ArrayController.create(
