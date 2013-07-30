@@ -280,6 +280,14 @@ class BookingViewSet(viewsets.ModelViewSet):
     filter_fields = ('id', )
 
 
+
+    @link()
+    def sitters(self, request, pk=None):
+        queryset = models.Sitter.objects.filter(bookings=pk)
+        serializer = SitterSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
 class LanguageViewSet(viewsets.ModelViewSet):
     queryset = models.Language.objects.all()
     serializer_class = LanguageSerializer

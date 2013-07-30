@@ -5,8 +5,8 @@
   </header>
   <div class="img">
     {{# comment }}avatar {{/comment}}
-    <a href="#"><img src="/static/images/demo/img16.jpg" alt=""></a>
-    <p><span><a href="#">{{booking.parent.full_name}}</a></span></p>
+    <a href="#"><img {{bindAttr src=booking.otherPerson.avatar alt=booking.otherPerson.full_name}}></a>
+    <p><span><a href="#">{{booking.otherPerson.full_name}}</a></span></p>
     <div>
       <a href="#">0 mutual friends</a>
       <ul>
@@ -21,21 +21,23 @@
   </div>
   <div class="desc clear">
     <ul>
-      <li><span class="icon_date">&nbsp;</span>{{booking.start_date_time}}&nbsp; <span>{{booking.start_date_time}}</span></li>
-      <li><span class="icon_friends5">&nbsp;</span>{{booking.child.length}} Kids</li>
-      <li><span class="icon_pin3">&nbsp;</span>New York, NY</li>
+      <li><span class="icon_date">&nbsp;</span>{{booking.formattedDate}}&nbsp; <span>{{booking.formattedHours}}</span></li>
+      <li><span class="icon_friends5">&nbsp;</span>{{booking.num_children}} {{booking.kidsString}}</li>
+      <li><a {{bindAttr href=booking.googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span>{{address1}} {{address2}} {{city}}, {{state}}</a></li>
       <li>
-        <p><a href="#">Need more info?<br>Email {{booking.parent.first_name}}</a></p>
-        <span class="icon_email2">&nbsp;</span><a href="mailto:jeyre@gmail.com">{{booking.parent.email}}</a>
+        <p><a {{bindAttr href=booking.otherPerson.mailTo}} >Need more info?<br>Email {{booking.otherPerson.first_name}}</a></p>
+        <span class="icon_email2">&nbsp;</span><a {{bindAttr href=booking.otherPerson.mailTo}} >{{booking.otherPerson.email}}</a>
       </li>
     </ul>
     <div class="price">
       <span>
         <strong>$
-        </strong>{{view Ember.TextField valueBinding=rate}}/hr
+        </strong>{{view Ember.TextField valueBinding=booking.rate}}/hr
       </span>
-      <a class="edit_button" href="#">edit
+      {{# if Sitterfied.isParent }}
+      <a class="edit_button" {{action 'editBooking' booking }}>edit
       </a>
+      {{/if}}
     </div>
     {{# if sitter_accepted }}
     <div class="btn_wrap">

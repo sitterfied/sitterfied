@@ -233,6 +233,10 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             removeFromTeam: ()->
                 debugger
 
+            editBooking: (booking)  ->
+                this.transitionTo('editBook', booking)
+
+
             closeReccomendPopup: ()->
                 $.fancybox.close()
 

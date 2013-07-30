@@ -47,6 +47,10 @@ define [
         facebook_token: DS.attr('string')
         facebook_id: DS.attr('number')
 
+
+        mailTo:  (() ->
+            return "mailto:" +@get('email')
+        ).property('email')
         avatarUrl: (() ->
             return "/media/" + @get('avatar')
         ).property('avatar')
@@ -63,15 +67,15 @@ define [
             if this.get('sorted_bookings').length == 0
                 return 0
             else
-                debugger
-                most_recent_booking = this.get('sorted_bookings')[0]
+                date = this.get('sorted_bookings.firstObject.stop_date_time')
+                return moment().diff(date, 'weeks')
         ).property('sorted_bookings')
         days_since_last_booking: (() ->
             if this.get('sorted_bookings').length == 0
                 return 0
             else
-                debugger
-                most_recent_booking = this.get('sorted_bookings')[0]
+                date = this.get('sorted_bookings.firstObject.stop_date_time')
+                return moment().diff(date, 'days')
         ).property('sorted_bookings')
         full_name: ((key, value) ->
             if arguments.length == 1
@@ -336,14 +340,14 @@ define [
         respond_by: DS.attr('date'),
         start_date_time: DS.attr('date'),
         stop_date_time: DS.attr('date'),
-        num_chidren:  DS.attr('number'),
+        num_children:  DS.attr('number'),
         address1: DS.attr('string')
         address2: DS.attr('string')
         city: DS.attr('string')
         state: DS.attr('string')
         zip: DS.attr('string')
         overnight: DS.attr('boolean'),
-
+        accepted_sitter: DS.belongsTo('Sitterfied.Sitter'),
         sitter_accepted: DS.attr('boolean'),
         rate: DS.attr('number'),
 
@@ -352,6 +356,34 @@ define [
         booking_status:DS.attr('string'),
         booking_type: DS.attr('string'),
         sitters: DS.hasMany('Sitterfied.Sitter'),
+
+        kidsString: (() ->
+            if @get('num_children') ==1
+                return "Kid"
+            return "Kids"
+        ).property('num_children')
+
+        googleMapsLink: (() ->
+            address1 = @get('address1')
+            address2 = @get('address2')
+            city = @get('city')
+            state = @get('state')
+            zip = @get('zip')
+            query = "#{address1} #{address2}, #{state} #{city}, #{zip}"
+            query = encodeURIComponent(query)
+            return "http://maps.google.com/?q=" + query
+        ).property("address1", "address2", "city", "state", "zip")
+
+        otherPerson: (() ->
+            if Sitterfied.accountType =="Parent"
+                return @get('sitter')
+            else
+                return @get('parent')
+        ).property('parent', 'sitter')
+
+        sitter: (() ->
+            return this.get('sitters.firstObject')
+        ).property('sitters.firstObject')
 
         formattedDate: (() ->
             date = @get('start_date_time')
