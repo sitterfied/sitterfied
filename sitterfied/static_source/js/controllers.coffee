@@ -227,11 +227,11 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             return @get('content').filterProperty("in_friends_team", false).filterProperty('in_sitter_team', false)
         ).property('content.@each')
         zoomToLocalTeam: () ->
-            alert("zoom to local")
+            $.scrollTo("#localteam", 500)
         zoomToFriendTeam: () ->
-            alert("zoom to friend")
+            $.scrollTo("#friendteam", 500)
         zoomToSitterTeam: () ->
-            alert("zoom to Sitter")
+            $.scrollTo("#sitterteam", 500)
 
 
         book: (sitters) ->

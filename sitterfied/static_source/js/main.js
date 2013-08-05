@@ -12,7 +12,8 @@ require({
         "select2": "lib/select2",
         "djangoRestAdapter": "lib/adapter",
         'fancybox':'lib/jquery.fancybox.pack',
-        'moment': 'lib/moment.min'
+        'moment': 'lib/moment.min',
+        'scrollto': 'lib/jquery.scrollTo-1.4.3.1-min'
     },
     waitSeconds: 0,
     shim:{
@@ -36,7 +37,9 @@ require({
         fancybox: {
             deps: ['jquery'],
         },
-
+        scrollto: {
+            deps: ['jquery'],
+        },
         jqueryui: {
             deps: ['jquery']
         },
@@ -61,6 +64,7 @@ require({
          "cs!routes", "cs!models",
          "cs!injections", "cs!controllers",
          "cs!views",
+         'scrollto',
          "vasilli",  'facebook',], function($, Em, Sitterfied){
             // using jQuery
             Sitterfied.runInitializers()

@@ -292,6 +292,4 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.controllerFor('friends').set('model', friends)
 
 
-
-
     )
