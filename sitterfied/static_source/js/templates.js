@@ -2326,10 +2326,10 @@ function program3(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("<img ");
-  hashContexts = {'img': depth0,'alt': depth0};
-  hashTypes = {'img': "ID",'alt': "ID"};
+  hashContexts = {'src': depth0,'alt': depth0};
+  hashTypes = {'src': "ID",'alt': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
-    'img': ("avatarUrl"),
+    'src': ("avatarUrl"),
     'alt': ("full_name")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push(" />");
@@ -2362,10 +2362,10 @@ function program8(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("<img ");
-  hashContexts = {'img': depth0};
-  hashTypes = {'img': "ID"};
+  hashContexts = {'src': depth0};
+  hashTypes = {'src': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
-    'img': ("reccomend.parent.avatarUrl")
+    'src': ("reccomend.parent.avatarUrl")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("  />");
   return buffer;
@@ -2391,10 +2391,10 @@ function program11(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("<img ");
-  hashContexts = {'img': depth0};
-  hashTypes = {'img': "ID"};
+  hashContexts = {'src': depth0};
+  hashTypes = {'src': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
-    'img': ("avatarUrl")
+    'src': ("avatarUrl")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("  />");
   return buffer;
@@ -2437,10 +2437,10 @@ function program15(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("<img ");
-  hashContexts = {'img': depth0};
-  hashTypes = {'img': "ID"};
+  hashContexts = {'src': depth0};
+  hashTypes = {'src': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
-    'img': ("parent.avatarUrl")
+    'src': ("parent.avatarUrl")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("  />");
   return buffer;
