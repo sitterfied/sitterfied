@@ -133,6 +133,59 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                     FB.login ->
                         use_fb_data()
 
+
+        pendingRequests: (() ->
+            return @get('bookings').filter (item, index, bookings) ->
+                if item.get('canceled')
+                    return false
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return not accepted and future
+
+        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
+        upcomingJobs: (() ->
+            return @get('bookings').filter (item, index, bookings) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  accepted and future
+        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
+        completedJobs: (() ->
+            return @get('bookings').filter (item, index, bookings) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  accepted and not future
+        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
+        missedRequests: (() ->
+            return @get('bookings').filter (item, index, bookings) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  not accepted and not future
+        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
+        canceledRequests: (() ->
+            return @get('bookings').filter (item, index, bookings) ->
+                return item.get('canceled')
+        ).property('bookings.@each.canceled')
+        declinedRequests: (() ->
+            return @get('bookings').filter (item, index, bookings) ->
+                declined_sitters = item.get('declined_sitters')
+                return declined_sitters.indexOf(item.get('content')) != -1
+        ).property('bookings.@each.declined_sitters')
+
+
+
     })
 
     Sitterfied.BookController = Em.ObjectController.extend(
@@ -198,6 +251,15 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
     Sitterfied.SearchSitterController  = Em.ObjectController.extend(
+        selectTeamClass: (() ->
+            if @get('inSitterTeam')
+                return 'team'
+            if @get('inFriendsTeam')
+                return 'friends'
+            if @get('inLocalTeam')
+                return 'local'
+        ).property('inSitterTeam', 'inFriendsTeam', 'inLocalTeam')
+
         inSitterTeam: (() ->
             return @get('in_sitter_team')
         ).property()

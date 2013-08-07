@@ -311,6 +311,8 @@ class Booking(TimeStampedModel):
     BOOKING_TYPES = Choices('Job', 'Interview')
     parent = models.ForeignKey(Parent, related_name="bookings")
     sitters = models.ManyToManyField(Sitter, related_name="bookings")
+    declined_sitters = models.ManyToManyField(Sitter, related_name="declined_bookings")
+
     notes = models.TextField(blank=True)
     respond_by = models.DateTimeField(blank=True, null=True)
     start_date_time = models.DateTimeField()
@@ -325,12 +327,13 @@ class Booking(TimeStampedModel):
     rate = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=True)
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
     booking_type =  models.CharField(max_length=10, choices=BOOKING_TYPES, default='Job')
-    sitter_accepted= models.BooleanField(default=False)
+    accepted_sitter= models.ForeignKey(Sitter, blank=True, null=True)
     overnight = models.BooleanField(default=False)
+    canceled = models.BooleanField(default=False)
 
     @cached_property
     def accepted(self):
-        return bool(BookingRequest.objects.filter(booking=self, sitter_accepted=True))
+        return bool(self.accept_sitter)
 
 
 class IncomingSMSMessage(TimeStampedModel):

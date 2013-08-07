@@ -5,10 +5,11 @@ from django.db.models import Q
 
 
 from rest_framework import serializers, viewsets, permissions
-from rest_framework import serializers
 from rest_framework import filters
 from rest_framework.parsers import FileUploadParser
+
 from rest_framework import viewsets
+
 from rest_framework.response import Response
 from rest_framework.decorators import action, link
 from app.models import Language
@@ -286,6 +287,13 @@ class BookingViewSet(viewsets.ModelViewSet):
         queryset = models.Sitter.objects.filter(bookings=pk)
         serializer = SitterSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @link()
+    def declined_sitters(self, request, pk=None):
+        queryset = models.Sitter.objects.filter(declined_bookings=pk)
+        serializer = SitterSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 
 class LanguageViewSet(viewsets.ModelViewSet):

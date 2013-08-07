@@ -16,8 +16,10 @@
 		  <div class="multiple_sitters_block clear">
 			<a {{action "toggleMultipleSitters"}} class="close">&nbsp;</a>
 			<ul>
-              {{# each selectedSitters}}
-			    <li {{bindAttr class=":team selectTeamClass"}}>{{# linkTo sitter this}}{{full_name}}{{/ linkTo}}<span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span></li>
+              {{# each controller}}
+                {{#if isSelected}}
+			    <li {{bindAttr class="selectTeamClass"}}>{{# linkTo sitter this}}{{full_name}}{{/ linkTo}}<span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span></li>
+                {{/ if}}
               {{/ each}}
               <li>
 				<p>+ <a {{action "addFriendsSitters"}}class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>

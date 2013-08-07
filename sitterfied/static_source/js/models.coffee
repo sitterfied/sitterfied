@@ -348,7 +348,6 @@ define [
         zip: DS.attr('string')
         overnight: DS.attr('boolean'),
         accepted_sitter: DS.belongsTo('Sitterfied.Sitter'),
-        sitter_accepted: DS.attr('boolean'),
         rate: DS.attr('number'),
 
         emergency_phone: DS.attr('string'),
@@ -356,6 +355,9 @@ define [
         booking_status:DS.attr('string'),
         booking_type: DS.attr('string'),
         sitters: DS.hasMany('Sitterfied.Sitter'),
+        declined_sitters: DS.hasMany('Sitterfied.Sitter'),
+        canceled: DS.attr('boolean'),
+
 
         kidsString: (() ->
             if @get('num_children') ==1
