@@ -12,17 +12,22 @@
 		  </ul>
 		</nav>
 		<div class="friends_block my_friends_sitters">
+          {{#view Sitterfied.SlideDownView toggleBinding="multipleSitters"}}
 		  <div class="multiple_sitters_block clear">
-			<a href="#" class="close">&nbsp;</a>
+			<a {{action "toggleMultipleSitters"}} class="close">&nbsp;</a>
 			<ul>
-			  <li class="team select1"><a href="#">Ellen Vukelich</a><span class="remove"><a href="#" class="select1">&nbsp;</a></span></li>
-			  <li>
-				<p>+ <a href="#" class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
-				<p>- &nbsp;<a href="#" class="remove_team">REMOVE SITTER TEAM</a></p>
+              {{# each selectedSitters}}
+			    <li {{bindAttr class=":team selectTeamClass"}}>{{# linkTo sitter this}}{{full_name}}{{/ linkTo}}<span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span></li>
+              {{/ each}}
+              <li>
+				<p>+ <a {{action "addFriendsSitters"}}class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
+				<p>- &nbsp;<a {{action "clearSelected"}} class="remove_team">REMOVE SITTER TEAM</a></p>
 			  </li>
 			</ul>
-			<p>Select from the available sitters below. <a href="#" class="button button_small"><span class="icon_ok2">&nbsp;</span>submit</a></p>
+			<p>Select from the available sitters below. <a {{action book selectedSitters.content }} class="button button_small"><span class="icon_ok2">&nbsp;</span>submit</a></p>
 		  </div>
+          {{/view}}
+
 		  <div class="filter_block">
 			<p><a href="#">Reset Filters</a></p>
 			<form method="post" action="#">
@@ -37,9 +42,10 @@
 			</form>
 			<p><a href="#">Hide Filters</a></p>
 		  </div>
+
 		  <div class="sort_filter clear">
 			<div class="sort"><a href="#">Sort by</a></div>
-			<div class="multiple_select"><a href="#">Select multiple sitters</a></div>
+			<div class="multiple_select"><a {{action "toggleMultipleSitters"}}>Select multiple sitters</a></div>
 			<div class="filter"><a href="#">Filter</a> my sitters</div>
 		  </div>
 		</div>
@@ -51,11 +57,12 @@
 			<div class="sitter_title">
 			  <p><span><span class="icon_heart2">&nbsp;</span>sitter<br />team</span><strong>{{sitterTeam.length}}</strong></p>
 			</div>
-
             <ul class="clear">
-              {{# each sitterTeam}}
-                {{ partial sitterTeam }}
-                {{/each}}
+              {{# each sitter in controller}}
+                {{# if sitter.inSitterTeam }}
+                  {{ partial sitterTeam }}
+                {{/ if}}
+              {{/each}}
             </ul>
           </div>
         </section>
@@ -68,9 +75,11 @@
 			<p><span><span class="icon_heart2">&nbsp;</span>friends’<br />sitters</span><strong>{{friendTeam.length}}</strong></p>
 		  </div>
 		  <ul class="clear">
-            {{# each friendTeam }}
-              {{ partial sitterSearch }}
-            {{/each}}
+            {{# each controller }}
+              {{# if inFriendsTeam }}
+                  {{ partial sitterSearch }}
+                {{/ if}}
+              {{/ each}}
 		  </ul>
 		</div>
 	  </section>
@@ -84,9 +93,11 @@
 			<p><span><span class="icon_pin2">&nbsp;</span>local<br />sitters</span><strong>{{localTeam.length}}</strong></p>
 		  </div>
 		  <ul class="clear">
-            {{# each localTeam}}
-              {{partial sitterSearch}}
-            {{/each}}
+            {{# each controller }}
+                {{# if inLocalTeam }}
+                  {{ partial sitterSearch }}
+                {{/ if}}
+              {{/ each}}
 		  </ul>
 		</div>
 	  </section>

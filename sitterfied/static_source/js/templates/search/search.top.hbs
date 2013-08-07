@@ -48,13 +48,12 @@
           valueBinding="kids"
           }}
 		</li>
-        {{# if overnight }}
-		  {{#view Sitterfied.SlideDownView class="clear_pad over_form" tagName="li"}}
+
+		  {{#view Sitterfied.SlideDownView toggleBinding="overnight" tagName="li"}}
 		    <label>To</label>
             {{view Ember.DatePicker placeholder="Choose date" id="datepicker3" class="datepicker" valueBinding="date_to"}}
-
           {{/view}}
-		  {{#view Sitterfied.SlideDownView class="clear_pad over_form" tagName="li"}}
+		  {{#view Sitterfied.SlideDownView toggleBinding="overnight" tagName="li"}}
 		    <label></label>
             {{view Sitterfied.Select2
             contentBinding="Sitterfied.SitterTimeRanges"
@@ -63,7 +62,6 @@
             valueBinding="to"
             }}
           {{/view}}
-        {{/if}}
 		<li><input class="findSitter" type="button" value="FIND MY SITTER" {{action "findSitters"}} /></li>
 	  </ul>
 	</form>

@@ -6,7 +6,7 @@
   </div>
   <div class="img">
 	<div class="heart"></div>
-	{{#linkTo sitter this}}<img {{bindAttr img=avatar alt=full_name}} />{{/linkTo}}
+	{{#linkTo sitter this}}<img {{bindAttr img=avatarUrl alt=full_name}} />{{/linkTo}}
     {{# if id_verified }}
 	  <span>Background Cleared</span>
     {{/if}}
@@ -16,7 +16,7 @@
     <ul>
 	  <li>Recommendations</li>
       {{# each reccomends }}
-	    <li>{{#linkTo parent reccomend.parent}}<img {{bindAttr img=reccomend.parent.avatar}}  />{{/linkTo}}<span>{{reccomend.parent.full_name}}</span></li>
+	    <li>{{#linkTo parent reccomend.parent}}<img {{bindAttr img=reccomend.parent.avatarUrl}}  />{{/linkTo}}<span>{{reccomend.parent.full_name}}</span></li>
         {{/each}}
 	</ul>
 	</li>
@@ -24,7 +24,7 @@
 	<ul>
 	  <li>Added to sitter teams and repeatedly hired</li>
       {{# each sitter_teams }}
-	    <li>{{#linkTo parent this}}<img {{bindAttr img=avatar}}  />{{/linkTo}}<span>{{full_name}}</span></li>
+	    <li>{{#linkTo parent this}}<img {{bindAttr img=avatarUrl}}  />{{/linkTo}}<span>{{full_name}}</span></li>
       {{/each}}
 	</ul>
 	</li>
@@ -33,7 +33,7 @@
       {{# if reviews }}
       {{# with reviews.firstObject}}
 	  <li class="rev clear">
-		{{#linkTo parent parent}}<img {{bindAttr img=parent.avatar}}  />{{/linkTo}}
+		{{#linkTo parent parent}}<img {{bindAttr img=parent.avatarUrl}}  />{{/linkTo}}
 		<div>
 		  <p>{{review}}</p>
 		  <p>{{#linkTo sitter sitter}}Read more reviews {{/linkTo}}</p>

@@ -1,17 +1,39 @@
 <li>
   <div class="tit">
-	<span><strong>{{one_child_min_rate}}</strong> /hr</span>
-	{{# linkTo 'sitter' this}}{{full_name}}{{/linkTo}}
+	<span><strong>{{ sitter.one_child_min_rate}}</strong> /hr</span>
+	{{# linkTo 'sitter' sitter}}{{ sitter.full_name}}{{/linkTo}}
   </div>
   <div class="img">
-	{{# linkTo 'sitter' this}}<img {{bindAttr src="avatar" alt="full_name"}} />{{/linkTo}}
+	{{# linkTo 'sitter' sitter}}<img {{bindAttr src="avatarUrl" alt="full_name"}} />{{/linkTo}}
   </div>
   <ul>
-	<li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>{{dateLastHired}}</span></li>
-	<li><span class="icon_reload">&nbsp;</span>{{bookings.length}} jobs <span class="friends_span"><span class="icon_friends4">&nbsp;</span>{{#linkTo parent this}}{{friends.length}} friends{{/linkTo}}</span></li>
+	<li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>{{ sitter.dateLastHired}}</span></li>
+	<li>
+      <span class="icon_reload">&nbsp;
+      </span>{{ sitter.bookings.length}} jobs
+      <span class="friends_span">
+        <span class="icon_friends4">&nbsp;
+        </span>{{#linkTo sitter sitter}}{{ sitter.friends.length}} friends{{/linkTo}}
+      </span>
+    </li>
   </ul>
   <div class="btns clear">
-	<a class="button" {{action book this}}>BOOK</a>
-	<p><a {{action removeFromTeam this}} >REMOVE FROM SITTER TEAM</a></p>
+    {{# if parentController.multipleSitters }}
+      <div class="select_wrap" {{action "selectSitter" sitter}}>
+        <input type="checkbox" {{bindAttr checked=isSelected}}/>
+        <label>
+          {{# if isSelected }}
+            Unselect
+          {{ else }}
+            Select
+          {{/ if}}
+        </label>
+      </div>
+    {{ else }}
+	<a class="button" {{action book sitter}}>BOOK</a>
+    {{/ if}}
+	<p>
+      <a {{action removeFromTeam sitter}} >REMOVE FROM SITTER TEAM</a>
+    </p>
   </div>
 </li>

@@ -144,8 +144,8 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             this.transitionTo('done');
 
         multiple: (() ->
-            return false
-        ).property()
+            return @get('sitters.length') > 1
+        ).property("sitters.@each")
     )
 
     Sitterfied.SitterEditSchedlueController =  Em.ObjectController.extend({
@@ -197,9 +197,31 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
+    Sitterfied.SearchSitterController  = Em.ObjectController.extend(
+        inSitterTeam: (() ->
+            return @get('in_sitter_team')
+        ).property()
+        inFriendsTeam: (() ->
+            return @get('in_friends_team')
+        ).property()
+        inLocalTeam: (() ->
+            return @get('in_friends_team') == false and @get('in_sitter_team') == false
+        ).property()
+        isSelected: (() ->
+            selected = @get('parentController.selectedSitters')
+            return selected.indexOf(@get('content')) != -1
+        ).property('parentController.selectedSitters.@each')
+    )
     Sitterfied.ChildsController  = Em.ArrayController.extend(
     )
     Sitterfied.SearchController  = Em.ArrayController.extend(
+        multipleSitters: false
+        toggleMultipleSitters: () ->
+            isMultipleSitters = @get('multipleSitters')
+            @set('multipleSitters', !isMultipleSitters)
+
+        itemController: 'searchSitter'
+
         zip : ""
         when: undefined
         from : 2
@@ -216,6 +238,8 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 this.set('content', sitters)
 
         content: []
+        selectedSitters:  Ember.ArrayProxy.create
+            content: Ember.A()
 
         sitterTeam: (() ->
             return @get('content').filterProperty("in_sitter_team", true)
@@ -233,6 +257,32 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         zoomToSitterTeam: () ->
             $.scrollTo("#sitterteam", 500)
 
+        selectedTeam: []
+        selectedSitterTeam: (() ->
+            return @get('selectedSitters').filterProperty("in_sitter_team", true)
+        ).property('selectedSitters.@each')
+        selectedFriendTeam: (() ->
+            return @get('selectedSitters').filterProperty("in_friends_team", true)
+        ).property('selectedSitters.@each')
+        selectedLocalTeam: (() ->
+            return @get('selectedSitters').filterProperty("in_friends_team", false).filterProperty('in_sitter_team', false)
+        ).property('selectedSitters.@each')
+
+        selectSitter: (sitter) ->
+            selected = @get('selectedSitters')
+            if selected.indexOf(sitter) == -1
+                selected.pushObject(sitter)
+            else
+                selected.popObject(sitter)
+
+        clearSelected: () ->
+            @set('selectedSitters.content', Em.A())
+
+        addFriendsSitters: () ->
+            selected = @get('selectedSitters')
+            for sitter in @get('friendTeam')
+                if selected.indexOf(sitter) == -1
+                    selected.pushObject(sitter)
 
         book: (sitters) ->
             if not Sitterfied.typeIsArray sitters

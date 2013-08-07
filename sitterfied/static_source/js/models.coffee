@@ -254,7 +254,7 @@ define [
             if bookings.length == 0
                 return "Never"
             else
-                return bookings.get('firstObject.start_date_time')
+                return bookings.get('firstObject.formattedDate')
         ).property('sorted_bookings')
 
         recommends: (() ->

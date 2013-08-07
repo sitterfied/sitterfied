@@ -90,7 +90,7 @@ input[type="radio"] {display:none;}
 input[type="radio"] + label:before {content:'';display:inline-block;width:31px;height:30px;margin:-1px 11px 0 0;vertical-align:middle;background:url(../images/icons/check.png) left top no-repeat;cursor:pointer;}
 input[type="radio"] + label + input[type="radio"] + label:before {margin-left:15px;}
 input[type="radio"]:checked + label:before {background:url(../images/icons/check.png) 0 -30px no-repeat;}
-
+.hidden {display:none !important;}
 
 .form_style p > input[type="text"], .form_style p > input[type="password"] {padding:0 20px;width:188px;height:43px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:17px 'ProximaNova';color:#c5c5c5;background:#fff;margin-right:8px;}
 .form_style p > input[type="text"]:hover, .form_style p > input[type="text"]:focus, .form_style p > input[type="password"]:hover, .form_style p > input[type="password"]:focus {border-color:#3ae4f8;box-shadow:#e9e9e9 5px 3px 5px 0 inset, #3ae4f8 0 0 5px 1px;color:#616161;}
@@ -988,8 +988,6 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .account_settings_block .right + p strong a {color:#4595e0;}
 .account_settings_block .right + p strong a:hover {text-decoration:underline;}
 
-/* Search Results 2 */
-.sitter_tabs_wrap .select_wrap, .sitter_tabs_wrap .multiple_sitters_block {display:none;}
 	/* Titles */
 .sitter_title {text-align:center;position:relative;margin:0 0 60px 0;}
 .sitter_title p {display:inline-block;background:#fff;position:relative;z-index:2;padding:0 20px;}

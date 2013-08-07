@@ -8,7 +8,13 @@
 		  <li><div><span class="icon_heart">&nbsp;</span>Recipients</div>
 		  <ul>
 			<li><span class="icon_heart">&nbsp;</span>Recipients</li>
-			<li><select data-placeholder="Names" multiple tabindex="1"><option>Ellen Vukelich</option><option>Sandy Thompson</option><option>Amy Randall</option><option>Amelia Hart</option><option>Erica Sanders</option></select></li>
+			<li>
+              <select data-placeholder="Names" multiple tabindex="1">
+                {{# each sitters }}
+                <option {{bindAttr value=id }}>{{full_name}}</option>
+                {{/ each }}
+              </select>
+            </li>
 			<li>&nbsp;</li>
 		  </ul>
 		  </li>
