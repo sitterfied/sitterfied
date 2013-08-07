@@ -52,7 +52,10 @@ define [
             return "mailto:" +@get('email')
         ).property('email')
         avatarUrl: (() ->
-            return "/media/" + @get('avatar')
+            if @get('avatar')
+                return "/media/" + @get('avatar')
+            else
+                return "/static/images/WhiteHeart_Avatar.jpg"
         ).property('avatar')
 
         sorted_bookings: (() ->
