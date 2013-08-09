@@ -12,12 +12,11 @@
 		  </ul>
 		</nav>
 		<div class="friends_block my_friends_sitters">
-          {{#view Sitterfied.SlideDownView toggleBinding="multipleSitters"}}
-		  <div class="multiple_sitters_block clear">
+          {{#view Sitterfied.SlideDownView class="multiple_sitters_block clear" toggleBinding="multipleSitters"}}
 			<a {{action "toggleMultipleSitters"}} class="close">&nbsp;</a>
 			<ul>
               {{# each controller}}
-                {{#if isSelected}}
+                {{# if isSelected}}
 			    <li {{bindAttr class="selectTeamClass"}}>{{# linkTo sitter this}}{{full_name}}{{/ linkTo}}<span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span></li>
                 {{/ if}}
               {{/ each}}
@@ -27,10 +26,10 @@
 			  </li>
 			</ul>
 			<p>Select from the available sitters below. <a {{action book selectedSitters.content }} class="button button_small"><span class="icon_ok2">&nbsp;</span>submit</a></p>
-		  </div>
-          {{/view}}
+          {{/ view}}
 
-		  <div class="filter_block">
+
+          {{#view Sitterfied.SlideDownView class="filter_block" toggleBinding="filterSitters"}}
 			<p><a href="#">Reset Filters</a></p>
 			<form method="post" action="#">
 			  <ul class="clear">
@@ -42,13 +41,14 @@
 				<li><select data-placeholder="Other" multiple tabindex="6"><option>test</option></select></li>
 			  </ul>
 			</form>
-			<p><a href="#">Hide Filters</a></p>
-		  </div>
+			<p><a {{action "toggleFilterSitters"}}>Hide Filters</a></p>
+          {{/ view}}
+
 
 		  <div class="sort_filter clear">
 			<div class="sort"><a href="#">Sort by</a></div>
 			<div class="multiple_select"><a {{action "toggleMultipleSitters"}}>Select multiple sitters</a></div>
-			<div class="filter"><a href="#">Filter</a> my sitters</div>
+			<div class="filter"><a {{action "toggleFilterSitters"}}>Filter</a> my sitters</div>
 		  </div>
 		</div>
 	  </div>

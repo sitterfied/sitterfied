@@ -278,9 +278,15 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.SearchController  = Em.ArrayController.extend(
         multipleSitters: false
+        filterSitters: false
         toggleMultipleSitters: () ->
             isMultipleSitters = @get('multipleSitters')
             @set('multipleSitters', !isMultipleSitters)
+
+        toggleFilterSitters: () ->
+            isFilterSitters = @get('filterSitters')
+            @set('filterSitters', !isFilterSitters)
+
 
         itemController: 'searchSitter'
 
