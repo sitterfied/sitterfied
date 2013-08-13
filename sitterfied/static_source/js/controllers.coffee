@@ -273,12 +273,44 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             selected = @get('parentController.selectedSitters')
             return selected.indexOf(@get('content')) != -1
         ).property('parentController.selectedSitters.@each')
+
+        passesFilters: (() ->
+            languages = @get("parentController.languages")
+            highest_education = @get("parentController.highest_education")
+            certifications = @get("parentController.certifications")
+            services = @get("parentController.services")
+            if services.length == 0 and
+            certifications.length == 0 and
+            !highest_education? and
+            languages.length == 0
+                return true
+            sitter_languages = @get('languages')
+            sitter_highest_education = @get('highest_education')
+            sitter_certifications = @get('certifications')
+            sitter_services = @get('services')
+            if highest_education == sitter_highest_education
+                return true
+            if  _.intersection(languages, sitter_languages).length > 0 or
+            _.intersection(certifications, sitter_certifications).length > 0 or
+            _.intersection(services, sitter_services).length > 0
+                return true
+            return false
+
+        ).property("parentController.languages.@each", "parentController.highest_education",
+            "parentController.certifications.@each", "parentController.services.@each",)
+
     )
     Sitterfied.ChildsController  = Em.ArrayController.extend(
     )
     Sitterfied.SearchController  = Em.ArrayController.extend(
         multipleSitters: false
         filterSitters: false
+        needs: ['certifications'
+                'languages'
+                #'specialneeds'
+                'otherServices'
+                ]
+
         toggleMultipleSitters: () ->
             isMultipleSitters = @get('multipleSitters')
             @set('multipleSitters', !isMultipleSitters)
@@ -310,14 +342,30 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             content: Ember.A()
 
         sitterTeam: (() ->
-            return @get('content').filterProperty("in_sitter_team", true)
+            return @filterProperty('in_sitter_team', true)
         ).property('content.@each')
         friendTeam: (() ->
-            return @get('content').filterProperty("in_friends_team", true)
+            return @filterProperty("in_sitter_team", true)
         ).property('content.@each')
         localTeam: (() ->
-            return @get('content').filterProperty("in_friends_team", false).filterProperty('in_sitter_team', false)
+            return @filterProperty("in_friends_team", false).filterProperty('in_sitter_team', false)
         ).property('content.@each')
+
+        filteredSitterTeam: (() ->
+            return @get('sitterTeam').filterProperty("passesFilters", true)
+        ).property('sitterTeam', 'languages.@each',
+            'highest_education', 'certifications.@each', 'services.@each' )
+
+        filteredFriendTeam: (() ->
+            return @get('friendTeam').filterProperty("passesFilters", true)
+        ).property('friendTeam', 'languages.@each',
+            'highest_education', 'certifications.@each', 'services.@each')
+
+        filteredLocalTeam: (() ->
+            return @get('localTeam').filterProperty("passesFilters", true)
+        ).property('localTeam', 'languages.@each',
+            'highest_education', 'certifications.@each', 'services.@each' )
+
         zoomToLocalTeam: () ->
             $.scrollTo("#localteam", 500)
         zoomToFriendTeam: () ->

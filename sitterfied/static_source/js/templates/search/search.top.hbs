@@ -17,7 +17,7 @@
             <label for="check">Overnight / Multiday booking?</label>
           </p>
 		</li>
-		<li>
+		<li class="fatselect">
 		  <label for="from">{{# unless overnight }}From{{/unless}}</label>
           {{view Sitterfied.Select2
             contentBinding="Sitterfied.SitterTimeRanges"
@@ -28,7 +28,7 @@
             }}
 		</li>
         {{# unless overnight }}
-		<li>
+		  <li class="fatselect">
 		  <label for="to">To</label>
           {{view Sitterfied.Select2
             contentBinding="Sitterfied.SitterTimeRanges"
@@ -39,7 +39,8 @@
             }}
 		</li>
         {{/unless}}
-		<li>
+		<li class="fatselect">
+
 		  <label>&nbsp;</label>
           {{view Sitterfied.Select2
           contentBinding="Sitterfied.Kids"
@@ -54,13 +55,16 @@
             {{view Ember.DatePicker placeholder="Choose date" id="datepicker3" class="datepicker" valueBinding="date_to"}}
           {{/view}}
 		  {{#view Sitterfied.SlideDownView toggleBinding="overnight" tagName="li"}}
-		    <label></label>
+		  <label></label>
+          <div class="fatselect">
+
             {{view Sitterfied.Select2
             contentBinding="Sitterfied.SitterTimeRanges"
             optionLabelPath="content.name"
             optionValuePath="content.value"
             valueBinding="to"
             }}
+            </div>
           {{/view}}
 		<li><input class="findSitter" type="button" value="FIND MY SITTER" {{action "findSitters"}} /></li>
 	  </ul>

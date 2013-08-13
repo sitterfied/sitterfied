@@ -6,9 +6,9 @@
 	  <div class="stabs_block" id="fixed_tabs">
 		<nav>
 		  <ul class="tab_select">
-			<li class="active"><a {{action 'zoomToSitterTeam'}}>sitter<br />team<span>{{sitterTeam.length}}</span></a></li>
-			<li><a {{action 'zoomToFriendTeam'}}>friends'<br />sitters<span>{{friendTeam.length}}</span></a></li>
-			<li><a {{action 'zoomToLocalTeam'}}>local<br />sitters<span>{{localTeam.length}}</span></a></li>
+			<li class="active"><a {{action 'zoomToSitterTeam'}}>sitter<br />team<span>{{filteredSitterTeam.length}}</span></a></li>
+			<li><a {{action 'zoomToFriendTeam'}}>friends'<br />sitters<span>{{filteredFriendTeam.length}}</span></a></li>
+			<li><a {{action 'zoomToLocalTeam'}}>local<br />sitters<span>{{filteredLocalTeam.length}}</span></a></li>
 		  </ul>
 		</nav>
 		<div class="friends_block my_friends_sitters">
@@ -33,12 +33,56 @@
 			<p><a href="#">Reset Filters</a></p>
 			<form method="post" action="#">
 			  <ul class="clear">
-				<li><select data-placeholder="Choose languages" multiple tabindex="1"><option>test</option><option>test2</option></select></li>
-				<li><select data-placeholder="Education level" multiple tabindex="2"><option>test</option></select></li>
-				<li><select data-placeholder="Training/Certifications" multiple tabindex="3"><option>test</option></select></li>
-				<li><select data-placeholder="Level of Experience" multiple tabindex="4"><option>test</option></select></li>
-				<li><select data-placeholder="Type of Experience" multiple tabindex="5"><option>test</option></select></li>
-				<li><select data-placeholder="Other" multiple tabindex="6"><option>test</option></select></li>
+                <li>
+                      {{view Sitterfied.Select2
+                      contentBinding=controllers.languages
+        	          prompt="Select languages"
+                      optionLabelPath="content.language"
+                      optionValuePath="content"
+                      selectionBinding="languages"
+                      multiple="multiple"
+                      }}
+                </li>
+                <li>
+                  {{view Sitterfied.Select2
+                     prompt="Education level"
+                     contentBinding=Sitterfied.Educations
+                     selectionBinding="highest_education"
+                  }}
+                </li>
+                <li>
+                      {{view Sitterfied.Select2
+                      contentBinding=controllers.certifications
+        	          prompt="Training/Certifications"
+                      optionLabelPath="content.certification"
+                      optionValuePath="content"
+                      selectionBinding="certifications"
+                      multiple="multiple"
+                      }}
+                </li>
+
+				<li>
+                  {{view Sitterfied.Select2
+                  prompt="Level of Experience"
+                  multiple="multiple"
+                  }}
+                </li>
+                <li>
+                  {{view Sitterfied.Select2
+                  prompt="Type of Experience"
+                  multiple="multiple"
+                  }}
+                </li>
+                <li>
+                    {{view Sitterfied.Select2
+                    contentBinding=controllers.otherServices
+        	        prompt="Other"
+                    optionLabelPath="content.service"
+                    optionValuePath="content"
+                    selectionBinding="services"
+                    multiple="multiple"
+                    }}
+                </li>
 			  </ul>
 			</form>
 			<p><a {{action "toggleFilterSitters"}}>Hide Filters</a></p>
@@ -54,15 +98,17 @@
 	  </div>
       {{# if content }}
         <section id="sitterteam">
-          <div class="mob_tab_trigger my_mob_tab">sitter<br />team<span>{{sitterTeam.length}}</span></div>
+          <div class="mob_tab_trigger my_mob_tab">sitter<br />team<span>{{filteredSitterTeam.length}}</span></div>
 		  <div class="my_sitter_team">
 			<div class="sitter_title">
-			  <p><span><span class="icon_heart2">&nbsp;</span>sitter<br />team</span><strong>{{sitterTeam.length}}</strong></p>
+			  <p><span><span class="icon_heart2">&nbsp;</span>sitter<br />team</span><strong>{{filteredSitterTeam.length}}</strong></p>
 			</div>
             <ul class="clear">
               {{# each sitter in controller}}
                 {{# if sitter.inSitterTeam }}
-                  {{ partial sitterTeam }}
+                  {{# if sitter.passesFilters }}
+                    {{ partial sitterTeam }}
+                  {{/ if}}
                 {{/ if}}
               {{/each}}
             </ul>
@@ -71,17 +117,19 @@
 
 	  <!-- my_friends_sitters -->
 	  <section id="friendteam">
-		<div class="mob_tab_trigger my_mob_tab">friends'<br />sitters<span>{{friendTeam.length}}</span></div>
+		<div class="mob_tab_trigger my_mob_tab">friends'<br />sitters<span>{{filteredFriendTeam.length}}</span></div>
 		<div class="friends_block my_friends_sitters">
 		  <div class="sitter_title">
-			<p><span><span class="icon_heart2">&nbsp;</span>friends’<br />sitters</span><strong>{{friendTeam.length}}</strong></p>
+			<p><span><span class="icon_heart2">&nbsp;</span>friends’<br />sitters</span><strong>{{filteredFriendTeam.length}}</strong></p>
 		  </div>
 		  <ul class="clear">
             {{# each controller }}
               {{# if inFriendsTeam }}
+                {{# if passesFilters }}
                   {{ partial sitterSearch }}
                 {{/ if}}
-              {{/ each}}
+              {{/ if}}
+            {{/ each}}
 		  </ul>
 		</div>
 	  </section>
@@ -89,17 +137,19 @@
 
 	  <!-- my_local_sitters -->
 	  <section id="localteam">
-		<div class="mob_tab_trigger my_mob_tab">local<br />sitters<span>{{localTeam.length}}</span></div>
+		<div class="mob_tab_trigger my_mob_tab">local<br />sitters<span>{{filteredLocalTeam.length}}</span></div>
 		<div class="friends_block my_local_sitters">
 		  <div class="sitter_title">
-			<p><span><span class="icon_pin2">&nbsp;</span>local<br />sitters</span><strong>{{localTeam.length}}</strong></p>
+			<p><span><span class="icon_pin2">&nbsp;</span>local<br />sitters</span><strong>{{filteredLocalTeam.length}}</strong></p>
 		  </div>
 		  <ul class="clear">
             {{# each controller }}
-                {{# if inLocalTeam }}
+              {{# if inLocalTeam }}
+                {{# if passesFilters }}
                   {{ partial sitterSearch }}
                 {{/ if}}
-              {{/ each}}
+              {{/ if}}
+            {{/ each}}
 		  </ul>
 		</div>
 	  </section>
