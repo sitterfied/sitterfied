@@ -157,7 +157,6 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
     #    }, 'value')
     #});
     #
-    # Author: http://github.com/aboma
     Sitterfied.Select2 = Ember.Select.extend(
       defaultTemplate: Ember.Handlebars.compile("<option>{{#if prompt}}{{unbound prompt}}{{/if}}</option>{{#each view.content}}{{view Ember.SelectOption contentBinding=\"this\"}}{{/each}}")
       attributeBindings: ["required", "multiple"]
@@ -196,8 +195,8 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
         Ember.run.next this, ->
           console.log "updating select2 options list"
           @$().change()  if @$()
-
       ).observes("controller.content.isLoaded")
+
       setSelectedValue: (value) ->
         console.log "setting select2 selected value to " + value
         @$().select2 "val", value
@@ -214,17 +213,23 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
       # trigger change event on selectbox once data
       # has been loaded to update options values
       setSelected: (->
+        debugger
         path = @get("optionValuePath")
         s = path.split(".")
         fieldname = s[s.length - 1]
-        fieldvalue = ""
-        selected = @get("controller.selected")
-        sel2Val = @$().select2("val")
-        fieldvalue = selected.get(fieldname)  if selected
-        if sel2Val isnt fieldvalue or fieldvalue is ""
-          Ember.run.sync()
-          Ember.run.next this, ->
-            @setSelectedValue fieldvalue
+        selection = @get('selection')
+        if !selection?
+            if @get('multiple')
+                newval = []
+            else
+                newval = ""
+        else if fieldname == "content"
+            newval = selection
+        else
+            newval =  Em.get(selection, fieldname)
+        Ember.run.sync()
+        Ember.run.next this, ->
+            @setSelectedValue newval
+      ).observes("selection")
 
-      ).observes("controller.selected")
     )

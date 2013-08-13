@@ -30,12 +30,13 @@
 
 
           {{#view Sitterfied.SlideDownView class="filter_block" toggleBinding="filterSitters"}}
-			<p><a href="#">Reset Filters</a></p>
+			<p><a {{action 'resetFilters'}}>Reset Filters</a></p>
 			<form method="post" action="#">
 			  <ul class="clear">
                 <li>
                       {{view Sitterfied.Select2
                       contentBinding=controllers.languages
+                      controllerBinding=controllers.languages
         	          prompt="Select languages"
                       optionLabelPath="content.language"
                       optionValuePath="content"

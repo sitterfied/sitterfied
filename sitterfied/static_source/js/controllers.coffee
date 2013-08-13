@@ -320,6 +320,14 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             @set('filterSitters', !isFilterSitters)
 
 
+        resetFilters: () ->
+            Em.run.begin()
+            @set('highest_education', null)
+            @set('languages', [])
+            @set('services', [])
+            @set('certifications', [])
+            Em.run.end()
+
         itemController: 'searchSitter'
 
         zip : ""
@@ -345,7 +353,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             return @filterProperty('in_sitter_team', true)
         ).property('content.@each')
         friendTeam: (() ->
-            return @filterProperty("in_sitter_team", true)
+            return @filterProperty("in_friends_team", true)
         ).property('content.@each')
         localTeam: (() ->
             return @filterProperty("in_friends_team", false).filterProperty('in_sitter_team', false)
@@ -353,18 +361,15 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
         filteredSitterTeam: (() ->
             return @get('sitterTeam').filterProperty("passesFilters", true)
-        ).property('sitterTeam', 'languages.@each',
-            'highest_education', 'certifications.@each', 'services.@each' )
+        ).property('sitterTeam.@each.passesFilters')
 
         filteredFriendTeam: (() ->
             return @get('friendTeam').filterProperty("passesFilters", true)
-        ).property('friendTeam', 'languages.@each',
-            'highest_education', 'certifications.@each', 'services.@each')
+        ).property('friendTeam.@each.passesFilters')
 
         filteredLocalTeam: (() ->
             return @get('localTeam').filterProperty("passesFilters", true)
-        ).property('localTeam', 'languages.@each',
-            'highest_education', 'certifications.@each', 'services.@each' )
+        ).property('localTeam.@each.passesFilters')
 
         zoomToLocalTeam: () ->
             $.scrollTo("#localteam", 500)

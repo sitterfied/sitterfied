@@ -1632,12 +1632,17 @@ function program4(depth0,data) {
 
 function program6(depth0,data) {
   
-  var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n			<p><a href=\"#\">Reset Filters</a></p>\n			<form method=\"post\" action=\"#\">\n			  <ul class=\"clear\">\n                <li>\n                      ");
-  hashContexts = {'contentBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
-  hashTypes = {'contentBinding': "ID",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n			<p><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "resetFilters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Reset Filters</a></p>\n			<form method=\"post\" action=\"#\">\n			  <ul class=\"clear\">\n                <li>\n                      ");
+  hashContexts = {'contentBinding': depth0,'controllerBinding': depth0,'prompt': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'multiple': depth0};
+  hashTypes = {'contentBinding': "ID",'controllerBinding': "ID",'prompt': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'multiple': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("controllers.languages"),
+    'controllerBinding': ("controllers.languages"),
     'prompt': ("Select languages"),
     'optionLabelPath': ("content.language"),
     'optionValuePath': ("content"),
@@ -1905,13 +1910,13 @@ function program5(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("\n		  <li class=\"fatselect\">\n		  <label for=\"to\">To</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'id': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'id': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'id': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.SitterTimeRanges"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'valueBinding': ("to"),
+    'selectionBinding': ("to"),
     'id': ("to")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		</li>\n        ");
@@ -1938,13 +1943,13 @@ function program9(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("\n		  <label></label>\n          <div class=\"fatselect\">\n\n            ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.SitterTimeRanges"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'valueBinding': ("to")
+    'selectionBinding': ("to")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n            </div>\n          ");
   return buffer;
@@ -1984,13 +1989,13 @@ function program9(depth0,data) {
   stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'id': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'id': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'id': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.SitterTimeRanges"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'valueBinding': ("from"),
+    'selectionBinding': ("from"),
     'id': ("from")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		</li>\n        ");
@@ -1999,13 +2004,13 @@ function program9(depth0,data) {
   stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		<li class=\"fatselect\">\n\n		  <label>&nbsp;</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.Kids"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'valueBinding': ("kids")
+    'selectionBinding': ("kids")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		</li>\n\n		  ");
   hashContexts = {'toggleBinding': depth0,'tagName': depth0};
