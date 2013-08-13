@@ -186,6 +186,22 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
 
 
+
+        zoomToPending: () ->
+            $.scrollTo("#tab-1-1", 500)
+        zoomToUpcoming: () ->
+            $.scrollTo("#tab-1-2", 500)
+        zoomToCompleted: () ->
+            $.scrollTo("#tab-1-3", 500)
+        zoomToMissed: () ->
+            $.scrollTo("#tab-1-4", 500)
+        zoomToDeclined: () ->
+            $.scrollTo("#tab-1-6", 500)
+        zoomToCanceled: () ->
+            $.scrollTo("#tab-1-7", 500)
+
+
+
     })
 
     Sitterfied.BookController = Em.ObjectController.extend(
