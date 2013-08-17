@@ -4,15 +4,14 @@
   <div class="member_since guest"></div>
   <div class="photo">
 	<div class="photo_edit_wrap">
-	  <img src="/static/images/demo/img2.jpg" alt="" />
-	  <p><span class="icon_pen">&nbsp;</span><a href="#edit_photo_popup">Edit Photo</a></p>
+      <img {{bindAttr src=avatarUrl alt=full_name}} />
 	</div>
   </div>
   <div class="guest_top_info">
-	<p>Alex Patrick</p>
-	<p>1 Child &nbsp;|&nbsp; New York, NY</p>
+	<p>{{full_name}}</p>
+	<p>{{children.length}} Children &nbsp;|&nbsp; {{city}}, {{state}}</p>
 	<div class="know">
-	  <p>Do you know Jane?</p>
+	  <p>Do you know {{first_name}}?</p>
 	  <p>Connect with this person via Facebook or Gmail to have them automatically added to your Sitterfied network. <a href="#">Learn more</a>.</p>
 	</div>
   </div>
@@ -21,8 +20,8 @@
 <!-- quick_info_list -->
 {{# view Sitterfied.FixedView class="quick_info_list clear" id="fixed_tabs" }}
   <ul>
-	<li><strong>114</strong> friends</li>
-	<li><strong>5</strong>groups</li>
+	<li><strong>{{friends.length}}</strong> friends</li>
+	<li><strong>{{sitter_groups.length}}</strong>groups</li>
   </ul>
 {{/ view}}
 <!-- /quick_info_list -->

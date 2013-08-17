@@ -47,6 +47,13 @@ define ['jquery'
         {value:1, name: "1 Kid"}
         {value:2, name: "2 Kids"}
         {value:3, name: "3 Kids"}
+        {value:4, name: "4 Kids"}
+        {value:5, name: "5 Kids"}
+        {value:6, name: "6 Kids"}
+        {value:7, name: "7 Kids"}
+        {value:8, name: "8 Kids"}
+        {value:9, name: "9 Kids"}
+        {value:10, name: "10 Kids"}
     ]
 
 

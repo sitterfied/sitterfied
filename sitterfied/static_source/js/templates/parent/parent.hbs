@@ -6,19 +6,18 @@
 	  <ul class="soc_psg_list soc_psg_list_single clear">
 		<li>
 		  <ul>
-			<li>Mutual Parent Friends (4)</li>
-			<li><a href="#"><img src="/static/images/demo/img15.jpg" alt="" /></a><a href="#">Mika Pinna</a></li>
-			<li><a href="#"><img src="/static/images/demo/img15.jpg" alt="" /></a><a href="#">Lakeisha Powanda</a></li>
-			<li><a href="#"><img src="/static/images/demo/img15.jpg" alt="" /></a><a href="#">Connie Takach</a></li>
-			<li><a href="#"><img src="/static/images/demo/img15.jpg" alt="" /></a><a href="#">Jane Eyre</a></li>
+			<li>Mutual Parent Friends ({{parent_friends_in_common.length}})</li>
+            {{# each parent_friends_in_common }}
+			<li>{{# linkTo parent this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}{{# linkTo parent this}}{{full_name}}{{/linkTo}}</li>
+            {{/each }}
 		  </ul>
 		</li>
 		<li>
 		  <ul>
-			<li>Mutual Sitter Friends (3)</li>
-			<li><a href="#"><img src="/static/images/demo/img15.jpg" alt="" /></a><a href="#">Lakeisha Powanda</a></li>
-			<li><a href="#"><img src="/static/images/demo/img15.jpg" alt="" /></a><a href="#">Connie Takach</a></li>
-			<li><a href="#"><img src="/static/images/demo/img15.jpg" alt="" /></a><a href="#">Jane Eyre</a></li>
+			<li>Mutual Sitter Friends ({{sitter_friends_in_common.length}})</li>
+            {{# each sitter_friends_in_common }}
+			<li>{{# linkTo sitter this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}{{# linkTo sitter this}}{{full_name}}{{/linkTo}}</li>
+            {{/each }}
 		  </ul>
 		</li>
 		<li>

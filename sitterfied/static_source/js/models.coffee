@@ -102,6 +102,13 @@ define [
             myFriends = @get('friends')
             return _.intersection(usersFriends, myFriends)
         ).property('friends', 'Sitterfied.currentUser.friends')
+        sitter_friends_in_common: (() ->
+            @get('friends_in_common').filterProperty('isSitter')
+        ).property('friends_in_common')
+        parent_friends_in_common: (() ->
+            @get('friends_in_common').filterProperty('isParent')
+        ).property('friends_in_common')
+
     )
 
     Sitterfied.Setting = DS.Model.extend(
