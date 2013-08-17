@@ -1,13 +1,17 @@
 define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sitterfied) ->
     Sitterfied.Router.map(() ->
-        this.resource('sitter', {path: '/sitter/:sitter_id'})
+        this.resource('sitter', {path: '/sitter/:sitter_id/'}, () ->
+            this.route('about')
+            this.route('reviews')
+            this.route('friends')
+        )
         this.resource('sitterEdit', {path: '/sitter/:sitter_id/edit'}, () ->
             this.route('profile')
             this.route('schedlue')
             this.route('bookings')
             this.route('network')
             this.route('reviews')
-            )
+        )
 
         this.route('parent', {path: '/parent/:parent_id'})
         this.route('book', {path: '/book/'})
@@ -23,6 +27,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
         this.route('search')
         this.route('profile')
+        this.route('user', {path: '/user/:user_id/'})
         this.route('mybookings')
         this.route('done')
         this.route('about')
@@ -127,6 +132,41 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.render("parent.top", {outlet: 'top'})
     )
 
+    Sitterfied.SitterRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("sitter", {outlet: 'content'})
+            this.render("sitter.top", {outlet: 'top'})
+
+
+    )
+
+    Sitterfied.SitterIndexRoute = Em.Route.extend(
+        redirect: () ->
+            this.transitionTo('sitter.about')
+
+    )
+
+
+    Sitterfied.SitterAboutRoute = Em.Route.extend(
+
+        renderTemplate: () ->
+            this.render("sitter.about", {into:"sitter", controller: 'sitter'})
+    )
+
+    Sitterfied.SitterReviewsRoute = Em.Route.extend(
+
+        renderTemplate: () ->
+            this.render("sitter.reviews", {into:"sitter", controller: 'sitter'})
+    )
+
+    Sitterfied.SitterFriendsRoute = Em.Route.extend(
+
+        renderTemplate: () ->
+            this.render("sitter.friends", {into:"sitter", controller: 'sitter'})
+    )
+
+
+
     Sitterfied.SitterEditRoute = Em.Route.extend(
         model: () ->
             return Sitterfied.currentUser
@@ -135,11 +175,16 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.render("sitterEdit", {outlet: 'content', controller: 'currentUser'})
             this.render("sitterEdit.top", {outlet: 'top'})
     )
+
     Sitterfied.SitterEditIndexRoute = Em.Route.extend(
         redirect: () ->
             this.transitionTo('sitterEdit.profile')
 
     )
+
+
+
+
     Sitterfied.SitterEditProfileRoute = Em.Route.extend(
         setupController: (controller, model) ->
             this.controllerFor('languages').set('model', Sitterfied.Language.find())
@@ -174,11 +219,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
 
 
-    Sitterfied.SitterRoute = Em.Route.extend(
-        renderTemplate: () ->
-            this.render("sitter", {outlet: 'content'})
-            this.render("sitter.top", {outlet: 'top'})
-    )
 
     Sitterfied.SettingsRoute = Em.Route.extend(
         renderTemplate: () ->
@@ -193,6 +233,17 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             else
                 this.transitionTo('sitterEdit', Sitterfied.currentUser)
     )
+
+
+    Sitterfied.UserRoute = Em.Route.extend(
+        redirect: (user) ->
+            if user.get('isParent')
+                this.transitionTo('parent', user)
+            else
+                this.transitionTo('sitter', user)
+    )
+
+
     Sitterfied.MybookingsRoute = Em.Route.extend(
         redirect: () ->
             if Sitterfied.get('isParent')
@@ -241,6 +292,18 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
             editBooking: (booking)  ->
                 this.transitionTo('editBook', booking)
+
+            addFriend: (user) ->
+                alert("add friend")
+
+            addSitterTeam: (sitter) ->
+                Sitterfied.currentUser.get('sitter_teams').pushObject(sitter)
+                Em.run.sync()
+                Sitterfied.currentUser.save()
+            bookmark: (sitter) ->
+                Sitterfied.currentUser.get('bookmarks').pushObject(sitter)
+                Em.run.sync()
+                Sitterfied.currentUser.save()
 
 
             closeReccomendPopup: ()->

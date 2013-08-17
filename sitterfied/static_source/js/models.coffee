@@ -44,10 +44,16 @@ define [
         reviews: DS.hasMany('Sitterfied.SitterReview')
         avatar: DS.attr('string')
 
+
         facebook_token: DS.attr('string')
         facebook_id: DS.attr('number')
 
-
+        isSitter: (() ->
+            @get('parent_or_sitter') == "Sitter"
+        ).property('parent_or_sitter')
+        isParent: (() ->
+            @get('parent_or_sitter') == "Parent"
+        ).property('parent_or_sitter')
         mailTo:  (() ->
             return "mailto:" +@get('email')
         ).property('email')
@@ -90,6 +96,12 @@ define [
                 this.set('last_name', last_name)
                 return value
         ).property('first_name', 'last_name')
+
+        friends_in_common: (() ->
+            usersFriends = Sitterfied.get('currentUser.friends')
+            myFriends = @get('friends')
+            return _.intersection(usersFriends, myFriends)
+        ).property('friends', 'Sitterfied.currentUser.friends')
     )
 
     Sitterfied.Setting = DS.Model.extend(
@@ -134,7 +146,8 @@ define [
         emergency_contact_two_name : DS.attr("string")
         emergency_contact_two_phone : DS.attr("string")
         children: DS.hasMany("Sitterfied.Child")
-        sitter_teams: DS.hasMany("Sitterfied.Sitter")
+        sitter_teams: DS.hasMany("Sitterfied.Sitter", {inverse:'sitter_teams'})
+        bookmarks: DS.hasMany("Sitterfied.Sitter", {inverse: 'bookmarks'})
 
     )
 
@@ -208,6 +221,7 @@ define [
         smoker: DS.attr('string'),
         sick: DS.attr('string'),
         will_transport: DS.attr('string'),
+
         total_exp: DS.attr('number'),
         infant_exp: DS.attr('number'),
         toddler_exp: DS.attr('number'),
@@ -218,14 +232,14 @@ define [
 
         highest_education: DS.attr('string'),
         last_school: DS.attr('string'),
-        current_student: DS.attr('string'),
+        current_student: DS.attr('boolean'),
 
         schedlue: DS.belongsTo('Sitterfied.Schedlue'),
 
         major: DS.attr('string'),
         occupation:  DS.attr('string'),
 
-        sitter_teams: DS.hasMany("Sitterfied.Parent")
+        sitter_teams: DS.hasMany("Sitterfied.Parent", {inverse:'sitter_teams'})
         reviews: DS.hasMany('Sitterfied.SitterReview'),
         certifications: DS.hasMany('Sitterfied.Certification'),
         other_services: DS.hasMany('Sitterfied.OtherService'),
@@ -251,6 +265,18 @@ define [
 
         in_sitter_team: DS.attr('boolean'),
         in_friends_team: DS.attr('boolean'),
+        bookmarks: DS.hasMany("Sitterfied.Parent", {inverse: 'bookmarks'})
+        isBookmarked: (() ->
+            bookmarks = Sitterfied.currentUser.get('bookmarks')
+            return bookmarks.indexOf(this) != -1
+        ).property("Sitterfied.currentUser.bookmarks.@each")
+        shortBio: (() ->
+            @get('biography').substring(0, 100)
+        ).property('biography')
+        age: (() ->
+            dob = @get('dob')
+            return moment().diff(moment(dob), 'years')
+        ).property("dob")
 
         dateLastHired: (() ->
             bookings = this.get('sorted_bookings')
@@ -362,6 +388,10 @@ define [
         canceled: DS.attr('boolean'),
 
 
+        isInterview: (() ->
+            return @get('booking_type') == "Interview"
+        ).property('booking_type')
+
         kidsString: (() ->
             if @get('num_children') ==1
                 return "Kid"
@@ -384,7 +414,7 @@ define [
                 return @get('sitter')
             else
                 return @get('parent')
-        ).property('parent', 'sitter')
+        ).property('parent.id', 'sitter.id', 'Sitterfied.accountType')
 
         sitter: (() ->
             return this.get('sitters.firstObject')
@@ -403,6 +433,7 @@ define [
             endHour = moment(stop).format('h:00 a');
             return startHour + " — " + endHour
         ).property('start_date_time', 'stop_date_time')
+
         startHour: ((key, value) ->
             date = @get('start_date_time')
             if not date
@@ -415,6 +446,7 @@ define [
                 @set('start_date_time', date.toDate())
                 return value
         ).property('start_date_time')
+
         endHour: ((key, value) ->
             date = @get('stop_date_time')
             if not date
@@ -427,6 +459,7 @@ define [
                 @set('stop_date_time', date.toDate())
                 return value
         ).property('stop_date_time')
+
         calendarDate: ((key, value) ->
             date = @get('start_date_time')
             date = moment(date)
@@ -443,6 +476,10 @@ define [
                 return v.format("YYYY-MM-DD")
         ).property('start_date_time')
 
+        thisSitterAccepted: (() ->
+            current_user = Sitterfied.currentUser
+            return this.get('accepted_sitter') == current_user
+        ).property('accepted_sitter')
 
     )
 

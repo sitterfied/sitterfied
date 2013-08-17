@@ -115,16 +115,57 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
         didInsertElement: () ->
             @$().hide()
 
+    Sitterfied.SitterAboutView =  Em.View.extend
+        scrollSnapshot: () ->
+            $.scrollTo("#tab-1-1", 300)
+        scrollDetails: () ->
+            $.scrollTo("#tab-1-2", 300)
 
-    Sitterfied.BookingView = Em.View.extend
+
+    Sitterfied.SearchView = Em.View.extend
+
+        shinkDropdowns: () ->
+            @set('controller.multipleSitters', false)
+            @set('controller.filterSitters', false)
+
+        didInsertElement: () ->
+            $(window).bind "scroll", () =>
+                @shinkDropdowns()
 
 
-    #showNote
-    #isNoteShown
-    # action
-    # decline
-    # cancel
-    #
+    Sitterfied.FixedView =  Em.View.extend
+        classNameBindings: ['fixed']
+
+        fixed: (() ->
+            y = $(window).scrollTop();
+            if y >= this.get('top')
+                return true
+            else
+                return false
+        ).property()
+
+        didInsertElement: () ->
+            top = this.$().offset().top
+            auto =  parseFloat(this.$().css('margin-top').replace(/auto/, 0))
+            this.set('top',top - auto)
+            $(window).bind "scroll", () =>
+                @notifyPropertyChange('fixed')
+
+    Sitterfied.SitterTopView = Em.View.extend
+        readMore: () ->
+            $('.header .top_info').addClass('show_full_desc');
+            $('.header .top_info .desc .full_desc').fadeIn();
+
+        didInsertElement: () ->
+            $('.header .top_info .desc .full_desc').on 'click', () ->
+                $('.header .top_info').removeClass('show_full_desc')
+                $('.header .top_info .desc .full_desc').fadeOut()
+
+
+
+    #Sitterfied.BookingView = Em.View.extend
+
+
     # Select box utilizing Select2 functionality that overrides Ember.Select;
     # Define view in the same way that you would an Ember.Select view.
     # Additional attributes supported are: width, allowClear, and closeOnSelect;
@@ -213,7 +254,6 @@ define ["ember", "cs!sitterfied"], (Em, Sitterfied) ->
       # trigger change event on selectbox once data
       # has been loaded to update options values
       setSelected: (->
-        debugger
         path = @get("optionValuePath")
         s = path.split(".")
         fieldname = s[s.length - 1]

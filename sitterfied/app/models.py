@@ -44,7 +44,7 @@ class User(AbstractUser, TimeStampedModel):
 
     sitter_groups = models.ManyToManyField('Group', blank=True)
     invited_by = models.ManyToManyField('self',  symmetrical =False, blank=True)
-    languages = models.ManyToManyField('Language', blank=True)
+    languages = models.ManyToManyField('Language', blank=True, related_name="users")
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateTimeField(null=True)
 
@@ -98,6 +98,7 @@ class Parent(User):
     emergency_contact_two_phone = models.CharField(max_length=10)
 
     sitter_teams = models.ManyToManyField('Sitter', related_name="sitter_teams", blank=True)
+    bookmarks = models.ManyToManyField('Sitter', related_name="bookmarks", blank=True)
 
     class Meta:
          verbose_name = "Parent"

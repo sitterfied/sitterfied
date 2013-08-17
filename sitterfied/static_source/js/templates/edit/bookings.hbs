@@ -7,7 +7,7 @@
 		  <li><a {{action zoomToCompleted}}"><span>{{completedJobs.length}}</span>Completed Jobs</a></li>
 		  <li><a {{action zoomToMissed}}><span>{{missedRequests.length}}</span>Missed Requests</a></li>
 		  <li><a {{action zoomToDeclined}}><span>{{declinedRequests.length}}</span>Declined Jobs</a></li>
-		  <li><a {{action zoomToCancled }}href="#tab-1-7"><span>{{canceledRequests.length}}</span>Canceled Jobs</a></li>
+		  <li><a {{action zoomToCancled }}><span>{{canceledRequests.length}}</span>Canceled Jobs</a></li>
 		</ul>
 
 		<div class="mob_tab_trigger active"><span>{{pendingRequests.length}}</span>Pending Requests</div>
@@ -54,12 +54,11 @@
 		</div>
 		<!-- /missed_requests_block -->
 
-
-        <div class="mob_tab_trigger"><span>2</span>Expired Requests</div>
-        <!-- expired_requests_block -->
+        <!--
+        <div class="mob_tab_trigger"><span>0</span>Expired Requests</div>
         <div class="subtab_content expired_requests_block" id="tab-1-5">
         </div>
-        <!-- /expired_requests_block -->
+        -->
 
 
 		<div class="mob_tab_trigger"><span>{{declinedRequests.length}}</span>Declined Jobs</div>

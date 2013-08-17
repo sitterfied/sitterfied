@@ -1,11 +1,11 @@
 <li>
-  <div class="bookmark"></div>
+  <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}></div>
   <div class="tit">
 	<span><strong>${{one_child_min_rate}}</strong> /hr</span>
 	{{#linkTo sitter this}}{{full_name}}{{/linkTo}}
   </div>
   <div class="img">
-	<div class="heart"></div>
+	<div {{action addSitterTeam this}} class="heart"></div>
 	{{#linkTo sitter this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}
     {{# if id_verified }}
 	  <span>Background Cleared</span>

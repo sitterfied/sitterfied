@@ -1,0 +1,177 @@
+<!-- about_block -->
+	  <div class="tab_content about_block" id="tab-1">
+		<ul class="subtab_select">
+		  <li><a {{action scrollSnapshot target="view"}}>Snapshot</a></li>
+		  <li><a {{action scrollDetails target="view"}}>Details</a></li>
+		</ul>
+		<!-- snapshot_block -->
+		<div class="subtab_content snapshot_block" id="tab-1-1">
+		  <p>Need to know</p>
+		  <ul class="clear">
+            {{# if current_student }}
+			  <li><span class="icon_certification">&nbsp;</span><strong>Studying</strong> at <strong>{{last_school}}</strong></li>
+            {{/ if}}
+            {{# if highest_education}}
+			  <li><span class="icon_education">&nbsp;</span>{{highest_education}}</li>
+            {{/ if}}
+			<li><span class="icon_pin2">&nbsp;</span>Located in <strong>{{city}}, {{state}}</strong></li>
+			{{# comment }}<li><span class="icon_certification2">&nbsp;</span><strong>CPR</strong> and <strong>First Aid</strong> certified</li>{{/comment}}
+			<li><span class="icon_age">&nbsp;</span><strong>{{age}}</strong> years old</li>
+			{{# comment}}<li><span class="icon_other">&nbsp;</span>Will do <strong>light housekeeping</strong></li>{{/comment}}
+            {{#if has_drivers_licence}}
+			  <li><span class="icon_transportation">&nbsp;</span>Has <strong>current driver’s license</strong></li>
+            {{/if}}
+            <li><span class="icon_rates">&nbsp;</span><strong>${{one_child_min_rate}}/hr - ${{one_child_max_rate}}/hr</strong> standard rates</li>
+			<li><span class="icon_experience">&nbsp;</span><strong>{{total_exp}} years</strong> of experience with kids</li>
+		  </ul>
+		</div>
+		<!-- /snapshot_block -->
+		<!-- about_details_block -->
+		<div class="mob_tab_trigger active">About</div>
+		<div class="subtab_content about_details_block" id="tab-1-2">
+		  <ul>
+			<li>
+			  <ul>
+				<li><span class="icon_pin4">&nbsp;</span>Location</li>
+				<li>
+				  <p><span>Lives in</span>{{city}}, {{state}}</p>
+				  <p><span>Will work within</span>{{travel_distance}}</p>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_age2">&nbsp;</span>Age</li>
+				<li>
+				  <p>{{age}}</p>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_smoker2">&nbsp;</span>Smoker</li>
+				<li>
+                  {{# if smoker }}
+                    <p><img src="/static/images/icons/yes.png" alt="" /> <strong>Yes</strong></p>
+                  {{ else }}
+				    <p><img src="/static/images/icons/no.png" alt="" /> <strong>No</strong></p>
+                  {{/ if}}
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_transportation2">&nbsp;</span>Transportation</li>
+				<li>
+                  {{# if will_transport }}
+				    <p>I am willing to transport children to and from events, activities, school, or appointments.</p>
+                    {{ else }}
+                    <p>I am <strong>unable</strong> to transport children.</p>
+                    {{/if}}
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_experience2">&nbsp;</span>General Experience</li>
+				<li>
+				  <p><span>Total years of experience</span>{{total_exp}} Years</p>
+				  <p><span>Experience with Infants</span>{{infant_exp}} years</p>
+				  <p><span>Experience with Toddlers</span>{{toddler_exp}} years</p>
+				  <p><span>Experience with Preschoolers</span>{{preschool_exp}} years</p>
+				  <p><span>Experience with School Age</span>{{school_age_exp}} years</p>
+				  <p><span>Experience with Pre Teens</span>{{pre_teen_exp}} years</p>
+				  <p><span>Experience with Teenagers</span>{{teen_exp}} years</p>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_education3">&nbsp;</span>Education</li>
+				<li>
+                  {{# if highest_education}}
+				    <p><span>Education Level</span>{{highest_education}}</p>
+                  {{/ if}}
+                  {{# if last_school}}
+				    <p><span>Last School Attended</span>{{last_school}}</p>
+                  {{/ if}}
+                  <p><span>Currently</span>{{# unless current_student }}Not{{/unless}} Attending school</p>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_certification3">&nbsp;</span>Certifications</li>
+				<li>
+				  <p>{{# each certifications}}{{certification}}, {{/each}}</p>
+				</li>
+			  </ul>
+			</li>
+            {{# comment }}
+			<li>
+			  <ul>
+				<li><span class="icon_availability2">&nbsp;</span>General Availability</li>
+				<li>
+				  <p>Regular, part-time, Occasional sitting</p>
+				</li>
+			  </ul>
+			</li>
+            {{/comment}}
+			<li>
+			  <ul>
+				<li><span class="icon_other2">&nbsp;</span>Other Services</li>
+				<li>
+				  <p>{{# each other_services}}{{service}}, {{/each}}</p>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_rates2">&nbsp;</span>Standard Rates</li>
+				<li>
+				  <p><span>Standard rates for one child</span>Min Rate: <strong>${{one_child_min_rate}}</strong> /hr &nbsp;  Max Rate: <strong>${{one_child_max_rate}}</strong> /hr </p>
+				  <p><span>Standard rates for two children</span>Min Rate: <strong>${{two_child_min_rate}}</strong> /hr &nbsp;  Max Rate: <strong>${{two_child_max_rate}}</strong> /hr </p>
+                  <p><span>Standard rates for three children</span>Min Rate: <strong>${{three_child_min_rate}}</strong> /hr &nbsp;  Max Rate: <strong>${{three_child_max_rate}}</strong> /hr </p>
+				</li>
+			  </ul>
+			</li>
+			<li>
+			  <ul>
+				<li><span class="icon_preferences2">&nbsp;</span>Job Preferences</li>
+				<li>
+                  <p><span>Will you babysit in the home of smokers</span>
+                  {{# if smokers_ok }}
+                    <img src="/static/images/icons/yes.png" alt="" /> <strong>Yes</strong></p>
+                  {{ else }}
+				    <p><img src="/static/images/icons/no.png" alt="" /> <strong>No</strong></p>
+                  {{/ if}}
+
+				  <p><span>Will you babysit in a home with dogs</span>
+                  {{# if dogs_ok }}
+                    <img src="/static/images/icons/yes.png" alt="" /> <strong>Yes</strong></p>
+                  {{ else }}
+				    <p><img src="/static/images/icons/no.png" alt="" /> <strong>No</strong></p>
+                  {{/ if}}
+
+
+				  <p><span>Will you babysit in a home with cats</span>
+                  {{# if cats_ok }}
+                    <img src="/static/images/icons/yes.png" alt="" /> <strong>Yes</strong></p>
+                  {{ else }}
+				    <p><img src="/static/images/icons/no.png" alt="" /> <strong>No</strong></p>
+                  {{/ if}}
+
+				  <p><span>Will you babysit in a home that has other animals</span>
+                  {{# if other_animals_ok }}
+                    <img src="/static/images/icons/yes.png" alt="" /> <strong>Yes</strong></p>
+                  {{ else }}
+				    <p><img src="/static/images/icons/no.png" alt="" /> <strong>No</strong></p>
+                  {{/ if}}
+				</li>
+			  </ul>
+			</li>
+		  </ul>
+		</div>
+		<!-- /about_details_block -->
+	  </div>
+	  <!-- /about_block -->

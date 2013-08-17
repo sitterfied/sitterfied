@@ -17,7 +17,7 @@
 </div>
 <!-- /top note form -->
 <!-- top_personal_info -->
-<div id="fixed_tabs">
+{{# view Sitterfied.FixedView  id="fixed_tabs" }}
   <div class="top_personal_info clear">
     {{# if multiple }}
 	<div class="my">
@@ -26,9 +26,13 @@
     {{else}}
 	<div class="img_name">
 	  <img {{bindAttr src=sitter.avatar alt=sitter.full_name}} />
-	  <span>Book {{sitter.first_name}}</span>
+      {{# if isInterview}}
+        <span>Interview {{sitter.first_name}}</span>
+      {{ else }}
+	    <span>Book {{sitter.first_name}}</span>
+      {{/if }}
 	</div>
     {{/if}}
     {{partial "smallBooking"}}
   </div>
-</div>
+{{/ view}}

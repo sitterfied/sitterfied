@@ -1,0 +1,12 @@
+	  <!-- friends_block -->
+	  <div class="mob_tab_trigger">Sitter Friends</div>
+	  <div class="tab_content friends_block" id="tab-3">
+		<ul class="clear">
+          {{# each friend }}
+            {{# if isSitter}}
+              {{ partial sitterSearch }}
+            {{/ if}}
+          {{/ each}}
+		</ul>
+	  </div>
+	  <!-- /friends_block -->

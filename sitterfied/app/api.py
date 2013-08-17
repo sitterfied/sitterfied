@@ -66,7 +66,8 @@ class SitterSerializer(serializers.ModelSerializer):
                                 'gender', 'sick',
                                 'has_drivers_licence', 'travel_distance',
                                 'special_needs_exp', 'extra_exp', 'major',
-                                'occupation', 'reviews', 'bookings'
+                                'occupation', 'reviews', 'bookings',
+                                'bookmarks',  'sitter_teams',
                                 )
 
 
@@ -96,8 +97,6 @@ class SitterSearchSerializer(SitterSerializer):
     class Meta(SitterSerializer.Meta):
         fields = SitterSerializer.Meta.fields + ('in_sitter_team', 'in_friends_team')
 
-
-
 class ParentSerializer(serializers.ModelSerializer):
 
     #contacts
@@ -109,7 +108,7 @@ class ParentSerializer(serializers.ModelSerializer):
                                 'emergency_contact_two_name',
                                 'emergency_contact_two_phone',
                                 'reviews', 'bookings', 'children',
-                                'sitter_teams',
+                                'bookmarks',  'sitter_teams',
         )
 
 
@@ -180,6 +179,13 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @link()
+    def languages(self, request, pk=None):
+        queryset = models.Language.objects.filter(users=pk)
+        serializer = LanguageSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+    @link()
     def users_in_network(self, request, pk=None):
         queryset = models.User.objects.filter(users_in_network=pk)
         serializer = UserSerializer(queryset, many=True)
@@ -193,6 +199,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 
+
 class SitterViewSet(viewsets.ModelViewSet):
     queryset = models.Sitter.objects.select_related().prefetch_related('reviews',
                                                                        'languages',
@@ -202,6 +209,8 @@ class SitterViewSet(viewsets.ModelViewSet):
                                                                        'schedlue',
                                                                        'other_services',
                                                                        'bookings',
+                                                                       'sitter_teams',
+                                                                       'bookmarks',
                                                                        'settings').all()
     serializer_class = SitterSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -216,6 +225,7 @@ class ParentViewSet(viewsets.ModelViewSet):
                                                                              'children',
                                                                              'friends',
                                                                              'sitter_teams',
+                                                                             'bookmarks',
                                                                              )
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -241,6 +251,21 @@ class ParentViewSet(viewsets.ModelViewSet):
                                                                        'settings').all()
         serializer = SitterSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @link()
+    def bookmarks(self, request, pk=None):
+        queryset = models.Sitter.objects.filter(bookmarks=pk).prefetch_related('reviews',
+                                                                       'languages',
+                                                                       'sitter_groups',
+                                                                       'friends',
+                                                                       'certifications',
+                                                                       'schedlue',
+                                                                       'other_services',
+                                                                       'bookings',
+                                                                       'settings').all()
+        serializer = SitterSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 
 

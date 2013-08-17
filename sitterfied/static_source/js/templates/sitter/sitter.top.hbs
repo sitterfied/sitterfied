@@ -1,60 +1,52 @@
 <div class="top_info clear">
-  <div class="bookmark"></div>
+  <div {{action bookmark this}}{{bindAttr class=":bookmark isBookmarked:active"}}></div>
   <div class="member_since">Feb 2013</div>
   <div class="photo">
-	<div class="heart_wrap">
+	<div {{action addSitterTeam this}} class="heart_wrap">
 	  <div class="heart"></div>
 	  <span>Add to my sitter team</span>
 	</div>
 	<img {{bindAttr src="avatarUrl"}} alt="" />
   </div>
   <div class="desc">
-	<p><a class="button" href="#">BOOK</a><a class="button button2" href="#">INTERVIEW</a></p>
+	<p><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action interview}}>INTERVIEW</a></p>
 	<p><span>Hi, I'm <strong>{{full_name}}</strong></span></p>
-    {{biography}}<a href="#" class="read_more">Read More</a></p>
+    {{shortBio}}<a class="read_more" {{action "readMore" target="view"}}>Read More</a></p>
 	<div class="full_desc">
 	  <p>{{biography}}</p>
 	</div>
   </div>
   <div class="ico">
 	<ul>
-	  <li><span class="icon_friends">&nbsp;</span><span class="number">5</span>mutual friends
+	  <li><span class="icon_friends">&nbsp;</span><span class="number">{{friends_in_common.length}}</span>mutual friends
 	  <ul>
-		<li>Friends you have in common with Ellen</li>
-		<li><a href="#"><img src="/static/images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+		<li>Friends you have in common with {{first_name}}</li>
 	  </ul>
 	  </li>
-	  <li><span class="icon_recommend">&nbsp;</span><span class="number">4</span>recommends
+	  <li><span class="icon_recommend">&nbsp;</span><span class="number">{{recommends.length}}</span>recommends
 	  <ul>
-		<li>Friends who recommend Ellen</li>
-		<li><a href="#"><img src="/static/images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+        <li>Friends who recommend {{first_name}}</li>
+        {{# each friend in reccomends.parent}}
+		  <li>
+            {{# linkTo parent friend}}
+              <img {{bindAttr src="friend.avatarUrl"}} alt="" />
+            {{/ linkTo}}
+            <span>{{friend.full_name}}</span>
+          </li>
+		{{/ each}}
 	  </ul>
 	  </li>
-	  <li><span class="icon_team">&nbsp;</span><span class="number">9</span>sitter teams
+	  <li><span class="icon_team">&nbsp;</span><span class="number">{{sitter_teams.length}}</span>sitter teams
 	  <ul>
-		<li>Friends who added Ellen to their sitter team</li>
-		<li><a href="#"><img src="/static/images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
-		<li><a href="#"><img src="/static/images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+		<li>Friends who added {{first_name}} to their sitter team</li>
+        {{# each friend in sitter_teams}}
+		  <li>
+            {{# linkTo parent friend}}
+              <img {{bindAttr src="friend.avatarUrl"}} alt="" />
+            {{/ linkTo}}
+            <span>{{friend.full_name}}</span>
+          </li>
+		{{/ each}}
 	  </ul>
 	  </li>
 	</ul>

@@ -57,11 +57,13 @@
                 valueBinding="endHour"
                 }}
               </p>
+              {{# unless isInterview}}
 			  <p>
                 {{view Ember.Checkbox id="check" checkedBinding="overnight"}}
                 <label for="check">Overnight/Multiday booking
                 </label>
               </p>
+              {{/unless}}
 			</li>
 			<li>&nbsp;
             </li>
@@ -99,6 +101,7 @@
             </li>
 		  </ul>
 		  </li>
+          {{# unless isInterview}}
 		  <li>
             <div>
               <span class="icon_friends6">&nbsp;
@@ -144,6 +147,7 @@
             </li>
 		  </ul>
 		  </li>
+          {{/unless}}
 		</ul>
 		<p>
           <a class="button button_small button_cancel" {{action 'cancel'}}>

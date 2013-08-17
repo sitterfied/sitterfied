@@ -1,6 +1,10 @@
 	<ul>
 	  <li><span class="icon_date">&nbsp;</span>{{formattedDate}}&nbsp;<span>{{formattedHours}}</span></li>
-	  <li><span class="icon_friends5">&nbsp;</span>{{num_children}}</li>
-	  <li><span class="icon_pin3">&nbsp;</span>{{address1}} {{address2}} {{city}}, {{state}}</li>
-	  <li><span class="icon_phone">&nbsp;</span>{{emergency_phone}}</li>
+	  <li>{{#unless isInterview}}<span class="icon_friends5">&nbsp;</span>{{num_children}}{{/ unless}}</li>
+	    <li><span class="icon_pin3">&nbsp;</span>{{address1}} {{address2}} {{city}}, {{state}}</li>
+        <li>
+	  {{#unless isInterview}}
+        <span class="icon_phone">&nbsp;</span>{{emergency_phone}}
+      {{/unless}}
+      </li>
 	</ul>

@@ -3,7 +3,7 @@
 	<!-- sitter_tabs_wrap -->
 
     <div class="sitter_tabs_wrap my_tabs_style">
-	  <div class="stabs_block" id="fixed_tabs">
+      {{# view Sitterfied.FixedView class="stabs_block" id="fixed_tabs" }}
 		<nav>
 		  <ul class="tab_select">
 			<li class="active"><a {{action 'zoomToSitterTeam'}}>sitter<br />team<span>{{filteredSitterTeam.length}}</span></a></li>
@@ -93,10 +93,10 @@
 		  <div class="sort_filter clear">
 			<div class="sort"><a href="#">Sort by</a></div>
 			<div class="multiple_select"><a {{action "toggleMultipleSitters"}}>Select multiple sitters</a></div>
-			<div class="filter"><a {{action "toggleFilterSitters"}}>Filter</a> my sitters</div>
+			<div {{action "toggleFilterSitters"}} class="filter"><a>Filter my sitters</a></div>
 		  </div>
 		</div>
-	  </div>
+      {{/ view}}
       {{# if content }}
         <section id="sitterteam">
           <div class="mob_tab_trigger my_mob_tab">sitter<br />team<span>{{filteredSitterTeam.length}}</span></div>

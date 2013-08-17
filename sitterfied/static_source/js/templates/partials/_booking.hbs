@@ -4,18 +4,17 @@
     <span>{{booking.booking_type}}</span>
   </header>
   <div class="img">
-    {{# comment }}avatar {{/comment}}
-    <a href="#"><img {{bindAttr src=booking.otherPerson.avatar alt=booking.otherPerson.full_name}}></a>
-    <p><span><a href="#">{{booking.otherPerson.full_name}}</a></span></p>
+    {{# if booking.otherPerson}}
+    {{#linkTo user booking.otherPerson}}<img width=73 hight=73 {{bindAttr src=booking.otherPerson.avatarUrl alt=booking.otherPerson.full_name}}>{{/linkTo}}
+      <p><span>{{#linkTo user booking.otherPerson}}{{booking.otherPerson.full_name}}{{/linkTo}}}</span></p>
+      {{/ if}}
     <div>
-      <a href="#">0 mutual friends</a>
+      <a>{{friends_in_common.length}} mutual friends</a>
       <ul>
         <li>Friends you have in common</li>
-
-        {{# comment }}
-          {{each booking.parent.friends_in_common}}
-          <li>{{# linkTo parent this }}<img src="/static/images/demo/img3.jpg" alt=""></a><span> {{full_name}}</span>{{/linkTo}}</li>
-          {{/comment}}
+        {{# each booking.otherPerson.friends_in_common}}
+        <li>{{# linkTo user this }}<img {{bindAttr src=avatarUrl alt=full_name}}></a><span> {{full_name}}</span>{{/linkTo}}</li>
+        {{/each}}
       </ul>
     </div>
   </div>
@@ -23,7 +22,7 @@
     <ul>
       <li><span class="icon_date">&nbsp;</span>{{booking.formattedDate}}&nbsp; <span>{{booking.formattedHours}}</span></li>
       <li><span class="icon_friends5">&nbsp;</span>{{booking.num_children}} {{booking.kidsString}}</li>
-      <li><a {{bindAttr href=booking.googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span>{{booking.address1}} {{booking.address2}} {{booking.city}}, {{booking.state}}</a></li>
+      <li><a {{bindAttr href=booking.googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span> {{booking.city}}, {{booking.state}}</a></li>
       <li>
         <p><a {{bindAttr href=booking.otherPerson.mailTo}} >Need more info?<br>Email {{booking.otherPerson.first_name}}</a></p>
         <span class="icon_email2">&nbsp;</span><a {{bindAttr href=booking.otherPerson.mailTo}} >{{booking.otherPerson.email}}</a>
@@ -37,25 +36,38 @@
       </a>
       {{/if}}
     </div>
-    {{# if sitter_accepted }}
-    <div class="btn_wrap">
-      <a class="button button_smaller button_cancel" {{action 'cancel'}}>
-        <span class="icon_cancel">&nbsp;
-        </span>CANCEL
-      </a>
-    </div>
+    {{# if Sitterfied.isParent }}
+      {{# unless booking.canceled}}
+      <div class="btn_wrap">
+        <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+          <span class="icon_cancel">&nbsp;
+          </span>CANCEL
+        </a>
+      </div>
+      {{/ unless}}
     {{ else }}
-    <div class="btn_wrap">
-      <a class="button button_smaller" {{action 'accept'}}>
-        <span class="icon_ok2">&nbsp;
-        </span>ACCEPT
-      </a>
-      <a class="button button_smaller button_cancel" {{action 'decline'}}>
-        <span class="icon_cancel">&nbsp;
-        </span>DECLINE
-      </a>
-    </div>
-    {{/if }}
+      {{# if booking.accepted_sitter }}
+        {{# if booking.thisSitterAccepted }}
+          <div class="btn_wrap">
+            <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+              <span class="icon_cancel">&nbsp;
+              </span>CANCEL
+            </a>
+          </div>
+        {{/ if}}
+      {{ else }}
+      <div class="btn_wrap">
+        <a class="button button_smaller" {{action 'acceptBooking' booking}}>
+          <span class="icon_ok2">&nbsp;
+          </span>ACCEPT
+        </a>
+        <a class="button button_smaller button_cancel" {{action 'declineBooking' booking}}>
+          <span class="icon_cancel">&nbsp;
+          </span>DECLINE
+        </a>
+      </div>
+      {{/ if }}
+    {{/ if}}
     <div class="note_wrap">
       <a {{action 'showNote'}}>
         {{# if isNoteShown}}

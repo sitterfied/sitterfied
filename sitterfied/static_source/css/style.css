@@ -308,6 +308,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .desc {float:right;width:465px;position:relative;}
 .header .top_info .desc p {font-size:14px;line-height:21px;clear:both;padding-right:55px;}
 .header .top_info .desc p a:not(.button) {padding-right:15px;padding-left:5px;color:#32c2bb;font-size:14px;background:url(../images/icons/arrow_bottom3_t.png) right center no-repeat;}
+.read_more {padding-right:15px;padding-left:5px;color:#32c2bb;font-size:14px;background:url(../images/icons/arrow_bottom3_t.png) right center no-repeat;}
+
 .header .top_info .desc > p:first-child {float:left;padding:0 0 15px 35px;}
 .header .top_info .desc > p:first-child a {font:16px/38px 'ProximaNova-Semibold';width:125px;height:38px;border-radius:4px;margin:0 26px 0 0;}
 .header .top_info .desc > p:first-child [class^="icon_"] {top:7px;left:0;}
@@ -538,7 +540,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .about_block .snapshot_block {background:#f2f5f5;border:1px solid #dce0e0;border-radius:10px;margin:0 0 30px 85px;width:770px;padding:12px 9px;box-shadow:rgba(0,0,0,.2) 0 2px 3px 0;}
 .about_block .snapshot_block p {font:bold 20px 'ProximaNova';color:#666;padding:0 10px 13px 10px;background:url(../images/line.gif) 0 bottom repeat-x;margin-bottom:15px;}
 .about_block .snapshot_block ul {margin-left:20px;}
-.about_block .snapshot_block ul li {font-size:18px;color:#3ea7b8;padding:15px 0 15px 52px;width:330px;position:relative;float:left;}
+.about_block .snapshot_block ul li {font-size:18px;color:#3ea7b8;padding:15px 0 15px 52px;width:310px;position:relative;float:left;}
 .about_block .snapshot_block ul li:nth-child(2n) {width:300px;}
 .about_block .snapshot_block ul li strong {font-family:'ProximaNova';}
 		/* About details block */

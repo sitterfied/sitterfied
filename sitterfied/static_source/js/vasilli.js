@@ -147,15 +147,15 @@ define(['jquery', 'jqueryui', 'select2', 'fancybox'], function($){
             });
 
     // top_info full_desc show/hide
-            $('.header .top_info .desc .read_more').on('click', function(){
-                $('.header .top_info').addClass('show_full_desc');
-                $('.header .top_info .desc .full_desc').fadeIn();
-                return false;
-            });
-            $('.header .top_info .desc .full_desc').on('click', function(){
-                $('.header .top_info').removeClass('show_full_desc');
-                $('.header .top_info .desc .full_desc').fadeOut();
-            });
+            // $('.header .top_info .desc .read_more').on('click', function(){
+            //     $('.header .top_info').addClass('show_full_desc');
+            //     $('.header .top_info .desc .full_desc').fadeIn();
+            //     return false;
+            // });
+            // $('.header .top_info .desc .full_desc').on('click', function(){
+            //     $('.header .top_info').removeClass('show_full_desc');
+            //     $('.header .top_info .desc .full_desc').fadeOut();
+            // });
 
     // Fixed my_tabs_style block
             // var top = $('#fixed_tabs').offset().top - parseFloat($('#fixed_tabs').css('margin-top').replace(/auto/, 0));

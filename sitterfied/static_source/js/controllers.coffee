@@ -184,7 +184,20 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 return declined_sitters.indexOf(item.get('content')) != -1
         ).property('bookings.@each.declined_sitters')
 
+        cancelBooking: (booking) ->
+            booking.set('canceled', true)
+            booking.save()
 
+        acceptBooking: (booking) ->
+            sitter = this.get('content')
+            booking.set('accepted_sitter', sitter)
+            booking.save()
+
+        declineBooking: () ->
+
+            sitter = this.get('content')
+            booking.declined_sitters.append(sitter)
+            booking.save()
 
 
         zoomToPending: () ->
@@ -264,6 +277,57 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     Sitterfied.LanguagesController  = Em.ArrayController.extend(
         newLanguage: ''
     )
+    Sitterfied.SitterController  = Em.ObjectController.extend(
+        book: () ->
+            store = this.get('store')
+            transaction = store.transaction()
+            booking = Sitterfied.Booking.createRecord
+                parent: Sitterfied.currentUser
+                notes: ""
+                overnight: false
+                booking_status: "Pending"
+                booking_type: "Job"
+                start_date_time: moment().toDate()
+                stop_date_time: moment().toDate()
+                address1: Sitterfied.get('currentUser.address1')
+                address2: Sitterfied.get('currentUser.address2')
+                city: Sitterfied.get('currentUser.city')
+                state: Sitterfied.get('currentUser.state')
+                zip: Sitterfied.get('currentUser.zip')
+                num_children: Sitterfied.get('currentUser.children.length')
+                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                rate: 0
+            sitters = [@get('content')]
+            booking.get('sitters').addObjects(sitters)
+            Sitterfied.set('onDeckBooking', booking)
+            this.transitionTo('book')
+
+        interview: () ->
+            store = this.get('store')
+            transaction = store.transaction()
+            booking = Sitterfied.Booking.createRecord
+                parent: Sitterfied.currentUser
+                notes: ""
+                overnight: false
+                booking_status: "Pending"
+                booking_type: "Interview"
+                start_date_time: moment().toDate()
+                stop_date_time: moment().toDate()
+                address1: Sitterfied.get('currentUser.address1')
+                address2: Sitterfied.get('currentUser.address2')
+                city: Sitterfied.get('currentUser.city')
+                state: Sitterfied.get('currentUser.state')
+                zip: Sitterfied.get('currentUser.zip')
+                num_children: Sitterfied.get('currentUser.children.length')
+                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                rate: 0
+            sitters = [@get('content')]
+            booking.get('sitters').addObjects(sitters)
+            Sitterfied.set('onDeckBooking', booking)
+            this.transitionTo('book')
+
+
+    )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
     Sitterfied.SearchSitterController  = Em.ObjectController.extend(
@@ -334,7 +398,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         toggleFilterSitters: () ->
             isFilterSitters = @get('filterSitters')
             @set('filterSitters', !isFilterSitters)
-
 
         resetFilters: () ->
             Em.run.begin()
@@ -455,6 +518,33 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
+
+        interview: (sitters) ->
+            if not Sitterfied.typeIsArray sitters
+                sitters = [sitters]
+
+            store = this.get('store')
+            transaction = store.transaction()
+            booking = Sitterfied.Booking.createRecord
+                parent: Sitterfied.currentUser
+                notes: ""
+                overnight: false
+                booking_status: "Pending"
+                booking_type: "Interview"
+                start_date_time: moment(@get('when')).toDate()
+                stop_date_time: moment(@get('date_to')).toDate()
+                address1: Sitterfied.get('currentUser.address1')
+                address2: Sitterfied.get('currentUser.address2')
+                city: Sitterfied.get('currentUser.city')
+                state: Sitterfied.get('currentUser.state')
+                zip: Sitterfied.get('currentUser.zip')
+                num_children: Sitterfied.get('currentUser.children.length')
+                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                rate: 0
+            booking.get('sitters').addObjects(sitters)
+            Sitterfied.set('onDeckBooking', booking)
+            this.transitionTo('book')
+
 
     )
 
