@@ -162,17 +162,32 @@ define ["ember", "cs!sitterfied", 'imgareaselect'], (Em, Sitterfied) ->
 
 
     Sitterfied.SearchView = Em.View.extend
+        init: () ->
+            this._super();
+            @_event = () =>
+                @shinkDropdowns()
+
 
         shinkDropdowns: () ->
             @set('controller.multipleSitters', false)
             @set('controller.filterSitters', false)
 
         didInsertElement: () ->
-            $(window).bind "scroll", () =>
-                @shinkDropdowns()
+            $(window).bind "scroll", @_event
+
+        willDestroyElement: () ->
+            $(window).unbind "scroll", @_event
+
+
 
 
     Sitterfied.FixedView =  Em.View.extend
+        init: () ->
+            this._super();
+            @_event = () =>
+                @notifyPropertyChange('fixed')
+
+
         classNameBindings: ['fixed']
 
         fixed: (() ->
@@ -187,8 +202,12 @@ define ["ember", "cs!sitterfied", 'imgareaselect'], (Em, Sitterfied) ->
             top = this.$().offset().top
             auto =  parseFloat(this.$().css('margin-top').replace(/auto/, 0))
             this.set('top',top - auto)
-            $(window).bind "scroll", () =>
-                @notifyPropertyChange('fixed')
+            $(window).bind "scroll", @_event
+            @notifyPropertyChange('fixed')
+
+        willDestroyElement: () ->
+            $(window).unbind "scroll", @_event
+
 
     Sitterfied.SitterTopView = Em.View.extend
         readMore: () ->
