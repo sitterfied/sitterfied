@@ -33,7 +33,6 @@ define [
         sitter_groups: DS.hasMany('Sitterfied.Group')
         languages: DS.hasMany('Sitterfied.Language')
         settings  : DS.belongsTo('Sitterfied.Setting')
-        bookings: DS.hasMany('Sitterfied.Booking'),
         friends: DS.hasMany('Sitterfied.User'),
         address1: DS.attr('string')
         address2: DS.attr('string')
@@ -155,6 +154,7 @@ define [
         children: DS.hasMany("Sitterfied.Child")
         sitter_teams: DS.hasMany("Sitterfied.Sitter", {inverse:'sitter_teams'})
         bookmarks: DS.hasMany("Sitterfied.Sitter", {inverse: 'bookmarks'})
+        bookings: DS.hasMany('Sitterfied.Booking')
 
     )
 
@@ -268,7 +268,7 @@ define [
         travel_distance: DS.attr('number'),
         has_drivers_licence: DS.attr('string'),
 
-
+        bookings: DS.hasMany('Sitterfied.Booking',  {inverse: 'bookings'}),
 
         in_sitter_team: DS.attr('boolean'),
         in_friends_team: DS.attr('boolean'),
@@ -390,7 +390,7 @@ define [
         #location: models.Foreign_key('Address')
         booking_status:DS.attr('string'),
         booking_type: DS.attr('string'),
-        sitters: DS.hasMany('Sitterfied.Sitter'),
+        sitters: DS.hasMany('Sitterfied.Sitter', {inverse: 'bookings'}),
         declined_sitters: DS.hasMany('Sitterfied.Sitter'),
         canceled: DS.attr('boolean'),
 

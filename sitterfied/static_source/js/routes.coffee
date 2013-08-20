@@ -341,6 +341,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     fitToView   : false
                     width       : '90%'
                     height      : '90%'
+
         }
 
 

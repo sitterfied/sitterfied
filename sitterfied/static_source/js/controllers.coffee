@@ -35,7 +35,12 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
 
         deleteAccount: () ->
-            alert('delete')
+            imsure = confirm("are you sure you want to delete your account? This cannot be undone")
+            if imsure
+                this.set('content.active', false)
+                this.save()
+                location.reload()
+
         old_password : ''
         new_password1 : ''
         new_password2 : ''

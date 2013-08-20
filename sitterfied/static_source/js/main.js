@@ -13,7 +13,8 @@ require({
         "djangoRestAdapter": "lib/adapter",
         'fancybox':'lib/jquery.fancybox.pack',
         'moment': 'lib/moment.min',
-        'scrollto': 'lib/jquery.scrollTo-1.4.3.1-min'
+        'scrollto': 'lib/jquery.scrollTo-1.4.3.1-min',
+		'imgareaselect': 'lib/jquery.imgareaselect.pack',
     },
     waitSeconds: 0,
     shim:{
@@ -53,6 +54,9 @@ require({
             deps: ['jquery']
         },
         select2: {
+            deps: ['jquery']
+        },
+		imgareaselect: {
             deps: ['jquery']
         }
 
