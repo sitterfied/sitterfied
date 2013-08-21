@@ -3,7 +3,7 @@
   <div class="member_since">Feb 2013</div>
   <div class="photo">
 	<div {{action addSitterTeam this}} class="heart_wrap">
-	  <div class="heart"></div>
+	  <div {{bindAttr class="in_sitter_team:active :heart"}}></div>
 	  <span>Add to my sitter team</span>
 	</div>
 	<img {{bindAttr src="avatarUrl"}} alt="" />

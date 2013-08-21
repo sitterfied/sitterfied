@@ -298,6 +298,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
             addSitterTeam: (sitter) ->
                 Sitterfied.currentUser.get('sitter_teams').pushObject(sitter)
+                sitter.set('in_sitter_team', true)
                 Em.run.sync()
                 Sitterfied.currentUser.save()
             bookmark: (sitter) ->
