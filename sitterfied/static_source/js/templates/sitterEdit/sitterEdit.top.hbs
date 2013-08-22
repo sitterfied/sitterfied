@@ -3,7 +3,10 @@
   <div class="photo">
 	<div class="photo_edit_wrap">
 	  <img {{bindAttr src=avatarUrl}} alt="" />
-	  <p {{action 'openPhotoPopup'}}><span class="icon_pen">&nbsp;</span><a {{action 'openPhotoPopup'}}>Edit Photo</a></p>
+	  {{# view Sitterfied.photoPopupView }}
+        <span class="icon_pen">&nbsp;</span>
+        <a>Edit Photo</a>
+      {{/ view }}
 	</div>
   </div>
   <div class="ranking_info">
