@@ -84,7 +84,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
 
 
         click: () ->
-            dialog = uploadcare.openDialog(Sitterfied.currentUser.get('avatar'))
+            dialog = uploadcare.openDialog()
             df = this.dialogFinished
             dialog.done (result) ->
                 result.then(df)
