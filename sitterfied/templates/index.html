@@ -20,6 +20,7 @@
 
 	<!-- JavaScript -->
     <script>
+	  UPLOADCARE_PUBLIC_KEY = "{{UPLOADCARE_PUBLIC_KEY}}";
     </script>
     <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
 
@@ -33,28 +34,7 @@
   <body>
     <script type="text/x-handlebars">
 
-      <!-- edit_photo_popup -->
             {% verbatim %}
-<div id="edit_photo_popup">
-	<div class="edit_photo_popup_wrap">
-		<div class="photo_wrap">
-			<img width=352 height=277 id="imgPreview" {{bindAttr src=Sitterfied.currentUser.avatarUrl}} />
-		</div>
-
-		<p>
-		  {{view Sitterfied.AvatarFileField
-			 name="avatar_uuid"
-		  }}
-		  <!-- <a class="button button_edit" {{action 'previewAvatar'}}>Upload from Computer</a> -->
-          <span>(4 MB file limit)</span><a class="button button_small" {{action 'uploadAvatar'}}><span class="icon_ok2">&nbsp;</span>Save</a>
-        </p>
-	</div>
-
-    <form id="avatar_form" style="display:none">
-	  <input id="avatar_uuid" name="avatar_uuid">
-    </form>
-</div>
-
 
       <div id="recommend_popup">
 	    <div class="tit">

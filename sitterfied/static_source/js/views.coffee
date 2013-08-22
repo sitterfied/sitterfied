@@ -68,15 +68,36 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
 
     )
 
+    Sitterfied.photoPopupView = Ember.View.extend(
+        dialogFinished: (file) =>
+            $.ajax
+                type: "POST"
+                url:"/api/users/" + Sitterfied.currentUser.id + "/avatar_upload/"
+                dataType: 'json'
+                data: {
+                    avatar: file.cdnUrl
+                }
+                success: (response) ->
+                    Sitterfied.currentUser.set('avatar', response.avatar)
+                error: () ->
+                    alert("There was a problem uploading your avatar. Please try again")
 
+
+        click: () ->
+            dialog = uploadcare.openDialog(Sitterfied.currentUser.get('avatar'))
+            df = this.dialogFinished
+            dialog.done (result) ->
+                result.then(df)
+
+        tagName: "p"
+
+    )
     Sitterfied.AvatarFileField = Ember.View.extend(
-
         init: () ->
             this._super()
 
         _elementValueDidChange: () ->
             value = @.$().attr('value')
-            $("#imgPreview").attr('src', value)
             $("#avatar_uuid").attr('value', value)
 
         classNames: ['ember-file-field'],
@@ -84,7 +105,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
         attributeBindings: ['data-images-only', 'data-crop', 'type', 'role', 'data-public-key', 'data-tabs']
         'data-images-only': 'static'
         'data-crop':'174x174 upscale'
-        'data-public-key':"2ca29096885dea0df2a4"
         'data-tabs': "file facebook"
         'role':"uploadcare-uploader"
         'type':"hidden"
@@ -92,8 +112,8 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
 
         didInsertElement: () ->
             uploadcare.start()
-            widget = uploadcare.initialize()[0]
-            widget.onChange () =>
+            Sitterfied.uploadwidget = uploadcare.initialize()[0]
+            Sitterfied.uploadwidget.onChange () =>
                 this._elementValueDidChange()
 
     )
@@ -220,7 +240,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
     #});
     #
     Sitterfied.Select2 = Ember.Select.extend(
-      defaultTemplate: Ember.Handlebars.compile("<option>{{#if prompt}}{{unbound prompt}}{{/if}}</option>{{#each view.content}}{{view Ember.SelectOption contentBinding=\"this\"}}{{/each}}")
       attributeBindings: ["required", "multiple"]
       required: false
       width: "resolve"

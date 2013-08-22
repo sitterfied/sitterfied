@@ -25,6 +25,9 @@ from api import ParentSerializer, SitterSerializer
 
 from .models import User, Sitter
 
+UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
+
+
 @login_required
 @render_to('index.html')
 def index(request, referred_by=None):
@@ -40,7 +43,7 @@ def index(request, referred_by=None):
         parent_or_sitter = "Parent"
 
 
-    return {'user_json':user_json, 'parent_or_sitter': parent_or_sitter}
+    return {'user_json':user_json, 'parent_or_sitter': parent_or_sitter, "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY}
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view

@@ -314,9 +314,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 alert('gmail connect')
 
 
-            previewAvatar: () ->
-                $("#avatar_field").click()
-
             uploadAvatar: () ->
                 $.ajax
                     type: "POST"
@@ -330,18 +327,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                         $.fancybox.close()
                     error: () ->
                         alert("There was a problem uploading your avatar. Please try again")
-
-
-            openPhotoPopup: ->
-                $.fancybox
-                    href:"#edit_photo_popup"
-                    maxWidth    : 960
-                    maxHeight   : 800
-                    minWidth    : 600
-                    minHeight   : 580
-                    fitToView   : false
-                    width       : '90%'
-                    height      : '90%'
 
         }
 

@@ -4140,6 +4140,12 @@ function program1(depth0,data) {
 
 function program3(depth0,data) {
   
+  
+  data.buffer.push("\n        <span class=\"icon_pen\">&nbsp;</span>\n        <a>Edit Photo</a>\n      ");
+  }
+
+function program5(depth0,data) {
+  
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("\n  <ul>\n	<li><strong>&nbsp;</strong>Facebook connected</li>\n	<li><strong>");
   hashTypes = {};
@@ -4174,15 +4180,12 @@ function program3(depth0,data) {
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
     'src': ("avatarUrl")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" alt=\"\" />\n	  <p ");
+  data.buffer.push(" alt=\"\" />\n	  ");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openPhotoPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_pen\">&nbsp;</span><a ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openPhotoPopup", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">Edit Photo</a></p>\n	</div>\n  </div>\n  <div class=\"guest_top_info\">\n	<p>");
+  stack2 = helpers.view.call(depth0, "Sitterfied.photoPopupView", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	</div>\n  </div>\n  <div class=\"guest_top_info\">\n	<p>");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -4204,7 +4207,7 @@ function program3(depth0,data) {
   stack2 = helpers.view.call(depth0, "Sitterfied.FixedView", {hash:{
     'class': ("quick_info_list clear"),
     'id': ("fixed_tabs")
-  },inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   return buffer;
   
