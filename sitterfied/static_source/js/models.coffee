@@ -58,7 +58,7 @@ define [
         ).property('email')
         avatarUrl: (() ->
             if @get('avatar')
-                return "/media/" + @get('avatar')
+                return @get('avatar')
             else
                 return "/static/images/WhiteHeart_Avatar.jpg"
         ).property('avatar')

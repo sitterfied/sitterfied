@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'model_utils',
     'south',
     'pipeline',
+    'pyuploadcare.dj',
     'app',
 
 
@@ -169,3 +170,4 @@ DEFAULT_FROM_EMAIL = 'hello@sitterfied.com'
 from .pipeline import *
 from .grappelli import *
 from .rest_framework import *
+from .uploadcare import *

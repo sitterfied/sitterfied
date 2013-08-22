@@ -55,3 +55,5 @@ python-magic
 twilio
 ecl-facebook
 django_twilio
+
+pyuploadcare

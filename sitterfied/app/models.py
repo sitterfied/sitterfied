@@ -20,6 +20,10 @@ add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 
 from model_utils.managers import InheritanceManager
 
+
+
+from pyuploadcare.dj import ImageField as UploadcareImageField
+
 import re
 import time
 
@@ -59,7 +63,8 @@ class User(AbstractUser, TimeStampedModel):
     cell = models.CharField(max_length=12, blank=True)
 
 
-    avatar = models.ImageField(upload_to=file_url("avatar"), null=True, blank=True)
+    avatar = UploadcareImageField(blank=True, manual_crop="")
+    #avatar_url = models.URLField(blank=True)
     #objects = InheritanceManager()
 
 

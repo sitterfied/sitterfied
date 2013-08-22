@@ -323,7 +323,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     url:"/api/users/" + Sitterfied.currentUser.id + "/avatar_upload/"
                     dataType: 'json'
                     data: {
-                        avatar: Sitterfied.get('onDeckAvatar')
+                        avatar: $("#avatar_uuid").attr('value')
                     }
                     success: (response) ->
                         Sitterfied.currentUser.set('avatar', response.avatar)

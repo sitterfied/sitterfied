@@ -167,7 +167,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user.avatar = form.cleaned_data['avatar']
         user.save()
 
-        response = Response(data={'avatar':user.avatar.name})
+        response = Response(data={'avatar':user.avatar.cdn_url})
         return response
 
 
