@@ -1426,7 +1426,7 @@ function program3(depth0,data) {
   data.buffer.push("</span>Declined Jobs</a></li>\n		  <li><a ");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToCancled", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToCanceled", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("><span>");
   hashTypes = {};
   hashContexts = {};

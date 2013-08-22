@@ -21,7 +21,6 @@
 	<!-- JavaScript -->
     <script>
     </script>
-
     <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
 
     <script>
@@ -41,13 +40,18 @@
 		<div class="photo_wrap">
 			<img width=352 height=277 id="imgPreview" {{bindAttr src=Sitterfied.currentUser.avatarUrl}} />
 		</div>
-		<p><a class="button button_edit" {{action 'previewAvatar'}}>Upload from Computer</a>
+
+		<p>
+		  {{view Sitterfied.AvatarFileField
+			 name="avatar_uuid"
+		  }}
+		  <!-- <a class="button button_edit" {{action 'previewAvatar'}}>Upload from Computer</a> -->
           <span>(4 MB file limit)</span><a class="button button_small" {{action 'uploadAvatar'}}><span class="icon_ok2">&nbsp;</span>Save</a>
         </p>
 	</div>
 
     <form id="avatar_form" style="display:none">
-      {{view Sitterfied.AvatarFileField id="avatar_field"}}
+	  <input id="avatar_uuid">
     </form>
 </div>
 

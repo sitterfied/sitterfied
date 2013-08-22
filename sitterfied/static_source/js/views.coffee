@@ -1,4 +1,4 @@
-define ["ember", "cs!sitterfied", 'imgareaselect'], (Em, Sitterfied) ->
+define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
     Ember.RadioButton = Em.View.extend({
         tagName : "input",
         type : "radio",
@@ -72,67 +72,30 @@ define ["ember", "cs!sitterfied", 'imgareaselect'], (Em, Sitterfied) ->
     Sitterfied.AvatarFileField = Ember.View.extend(
 
         init: () ->
-            this._super();
-            this.on("change", this, this._elementValueDidChange);
-
-
-        cancelSelection: () ->
-            @ias.cancelSelection()
-
-        didInsertElement: ()->
-            @ias = $('#imgPreview').imgAreaSelect
-                handles: true,
-                aspectRatio: "352:277"
-                instance: true
-                zIndex:8031
-                autoHide: true
-                onSelectEnd:@resized
-
-
-        resized: (img, c) ->
-            canvas = document.createElement("canvas")
-            canvas.width = img.width
-            canvas.height = img.height
-
-            srcCanvas = document.createElement("canvas")
-            srcCanvas.width = img.width
-            srcCanvas.height = img.height
-            srcCtx = srcCanvas.getContext("2d")
-
-            i = new Image
-            i.src = img.src
-            i.onload = () ->
-                srcCtx.drawImage(i, 0, 0, srcCanvas.width, srcCanvas.height, )
-
-                i = new Image
-                i.src = srcCanvas.toDataURL("image/jpg")
-                i.onload = () ->
-                        ctx = canvas.getContext("2d")
-                        ctx.drawImage(i, c.x1, c.y1, c.width, c.height, 0, 0, canvas.width, canvas.height);
-                        dataURL = canvas.toDataURL("image/jpg")
-
-                        $("#imgPreview").attr('src', dataURL)
-                        Sitterfied.set('onDeckAvatar', dataURL)
-
+            this._super()
 
         _elementValueDidChange: () ->
-            file = this.$()[0].files[0]
-            if file
-                reader = new FileReader()
-                reader.onload = (e) ->
-                    $("#imgPreview").attr('src', e.target.result)
-                    Sitterfied.set('onDeckAvatar', e.target.result)
-                reader.readAsDataURL(file)
-                @ias.cancelSelection()
-
+            value = @.$().attr('value')
+            $("#imgPreview").attr('src', value)
+            $("#avatar_uuid").attr('value', value)
 
         classNames: ['ember-file-field'],
         tagName: "input",
-        attributeBindings: ['type', 'value', 'size'],
-
+        attributeBindings: ['data-images-only', 'data-crop', 'type', 'role', 'data-public-key', 'data-tabs']
+        'data-images-only': 'static'
+        'data-crop':'174x174 upscale'
+        'data-public-key':"2ca29096885dea0df2a4"
+        'data-tabs': "file facebook"
+        'role':"uploadcare-uploader"
+        'type':"hidden"
         value: ""
 
-        type: "file"
+        didInsertElement: () ->
+            uploadcare.start()
+            widget = uploadcare.initialize()[0]
+            widget.onChange () =>
+                this._elementValueDidChange()
+
     )
 
 

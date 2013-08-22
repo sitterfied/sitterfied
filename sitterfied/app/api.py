@@ -322,7 +322,6 @@ class BookingViewSet(viewsets.ModelViewSet):
     filter_fields = ('id', )
 
 
-
     @link()
     def sitters(self, request, pk=None):
         queryset = models.Sitter.objects.filter(bookings=pk)

@@ -15,6 +15,7 @@ require({
         'moment': 'lib/moment.min',
         'scrollto': 'lib/jquery.scrollTo-1.4.3.1-min',
 		'imgareaselect': 'lib/jquery.imgareaselect.pack',
+		'ucare': 'lib/uploadcare-0.11.2.min'
     },
     waitSeconds: 0,
     shim:{
@@ -58,7 +59,11 @@ require({
         },
 		imgareaselect: {
             deps: ['jquery']
+        },
+		ucare: {
+            deps: ['jquery']
         }
+
 
     },
         urlArgs: "bust=" +  (new Date()).getTime(),
