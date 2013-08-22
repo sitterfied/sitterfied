@@ -216,6 +216,14 @@ class SitterViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
+    @link()
+    def bookings(self, request, pk=None):
+        queryset = models.Booking.objects.filter(Q(parent=pk) | Q(sitters=pk))
+        serializer = BookingSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
 class ParentViewSet(viewsets.ModelViewSet):
     queryset = models.Parent.objects.all().select_related().prefetch_related('reviews',
                                                                              'languages',
@@ -265,6 +273,14 @@ class ParentViewSet(viewsets.ModelViewSet):
                                                                        'settings').all()
         serializer = SitterSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @link()
+    def bookings(self, request, pk=None):
+        queryset = models.Booking.objects.filter(Q(parent=pk) | Q(sitters=pk))
+        serializer = BookingSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
 
 
 
