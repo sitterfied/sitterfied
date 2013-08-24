@@ -21,9 +21,10 @@ from ecl_facebook import Facebook
 
 
 from rest_framework.renderers import JSONRenderer
-from api import ParentSerializer, SitterSerializer
+from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
+from api import UserViewSet, SitterViewSet, ParentViewSet
 
-from .models import User, Sitter
+from .models import User, Sitter, Parent
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
@@ -31,19 +32,34 @@ UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 @login_required
 @render_to('index.html')
 def index(request, referred_by=None):
-    parent_or_sitter = user_json = ""
+
     if hasattr(request.user, 'sitter'):
-        serialized = SitterSerializer(request.user.sitter)
-        user_json = JSONRenderer().render(serialized.data)
+        user_model = Sitter
         parent_or_sitter = "Sitter"
+        seralizer = SitterSerializer
 
     elif hasattr(request.user, 'parent'):
-        serialized = ParentSerializer(request.user.parent)
-        user_json = JSONRenderer().render(serialized.data)
+        user_model = Parent
         parent_or_sitter = "Parent"
+        seralizer = ParentSerializer
 
+    classed_user = user_model.objects.select_related('settings').prefetch_related('children',
+                                                                                  'children__special_needs',
+                                                                                  'bookings',
+                                                                                  'sitter_teams',
+                                                                                  'bookmarks',
+                                                                                  'friends',
+                                                                                  'languages',
+                                                                                  'sitter_groups',
+                                                                                  'reviews',
+                                                                              ).get(id=request.user.id)
+    serialized = seralizer(classed_user)
+    user_json = JSONRenderer().render(serialized.data)
 
-    return {'user_json':user_json, 'parent_or_sitter': parent_or_sitter, "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY}
+    return {'user_json':user_json,
+            'parent_or_sitter': parent_or_sitter,
+            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY
+    }
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view

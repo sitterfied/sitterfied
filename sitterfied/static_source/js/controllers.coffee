@@ -349,8 +349,12 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         date_to : undefined
         findSitters : () ->
             $.ajax("/api/search/").then (response) =>
-                Sitterfied.Sitters.load(response)
-                this.set('content', sitters)
+                sitters = Em.A()
+                for sitter in response
+                    s = Sitterfied.Sitter.create()
+                    s.load(sitter['id'], sitter)
+                    sitters.pushObject(s)
+                this.set('model', sitters)
 
         content: []
         selectedSitters:  Ember.ArrayProxy.create

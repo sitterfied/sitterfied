@@ -300,7 +300,8 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
             addSitterTeam: (sitter) ->
                 sitterTeam = Sitterfied.currentUser.get('sitter_teams')
-                if sitterTeam.indexOf(sitter) >= 0
+                if sitterTeam.findProperty('id', sitter.get('id'))
+                    sitter = sitterTeam.findProperty('id', sitter.get('id'))
                     sitterTeam.removeObject(sitter)
                     sitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
                 else
@@ -332,21 +333,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
         }
 
-
         setupController: (controller, model) ->
-            store = this.get('store')
             #load the model once more to get fks set
-            user_data = JSON.parse(user_json)
-            user = Sitterfied[parent_or_sitter].find(user_data['id'])
-            Sitterfied.currentUser = user
-            Sitterfied.get('currentUserController').set('model', user)
-            friends = user.get('friends')
-            this.controllerFor('friends').set('model', friends)
-
-            user.get('sitter_teams')
-            user.get('children')
-            user.get('bookmarks')
-
-
-
+            user = Sitterfied.currentUser
     )

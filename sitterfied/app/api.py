@@ -159,7 +159,17 @@ class IdFilterViewset(viewsets.ModelViewSet):
 
 
 class UserViewSet(IdFilterViewset):
-    queryset = models.User.objects.all()
+    queryset = models.User.objects.all().prefetch_related('languages',
+                                                          'sitter_groups',
+                                                          'sitter',
+                                                          'parent',
+                                                          'friends',
+                                                          # 'other_services',
+                                                          # 'bookings',
+                                                          # 'sitter_teams',
+                                                          # 'bookmarks',
+                                                          'settings').all()
+
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', 'friends')
@@ -222,7 +232,11 @@ class UserViewSet(IdFilterViewset):
 
     @link()
     def friends(self, request, pk=None):
-        queryset = models.User.objects.filter(friends=pk)
+        queryset = models.User.objects.select_related('settings').prefetch_related('friends',
+                                                                                   'languages',
+                                                                                   'sitter_groups',
+                                                                                   'parent',
+                                                                                   'sitter',).filter(friends=pk)
         serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -245,64 +259,75 @@ class SitterViewSet(IdFilterViewset):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
+
     @link()
     def bookings(self, request, pk=None):
-        queryset = models.Booking.objects.filter(Q(parent=pk) | Q(sitters=pk))
+        queryset = models.Booking.objects.prefetch_related('sitters'
+                                                            ,'declined_sitters'
+                                                            ,).filter(Q(parent=pk) | Q(sitters=pk))
         serializer = BookingSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
+
 class ParentViewSet(IdFilterViewset):
-    queryset = models.Parent.objects.all().select_related().prefetch_related('reviews',
-                                                                             'languages',
-                                                                             'settings',
-                                                                             'sitter_groups',
-                                                                             'bookings',
-                                                                             'children',
-                                                                             'friends',
-                                                                             'sitter_teams',
-                                                                             'bookmarks',
-                                                                             )
+    queryset = models.Parent.objects.all().select_related('settings').prefetch_related('reviews',
+                                                                                       'languages',
+                                                                                       'settings',
+                                                                                       'sitter_groups',
+                                                                                       'bookings',
+                                                                                       'children',
+                                                                                       'friends',
+                                                                                       'sitter_teams',
+                                                                                       'bookmarks',
+                                                                                   )
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     @link()
     def children(self, request, pk=None):
-        queryset = models.Child.objects.filter(parent=pk)
+        queryset = models.Child.objects.select_related('parent').prefetch_related('special_needs').filter(parent=pk)
         serializer = ChildSerializer(queryset, many=True)
         return Response(serializer.data)
 
     @link()
     def sitter_teams(self, request, pk=None):
-        queryset = models.Sitter.objects.filter(sitter_teams=pk).prefetch_related('reviews',
-                                                                       'languages',
-                                                                       'sitter_groups',
-                                                                       'friends',
-                                                                       'certifications',
-                                                                       'schedlue',
-                                                                       'other_services',
-                                                                       'bookings',
-                                                                       'settings').all()
+        queryset = models.Sitter.objects.prefetch_related('reviews',
+                                                          'languages',
+                                                          'sitter_teams',
+                                                          'sitter_groups',
+                                                          'bookmarks',
+                                                           'friends',
+                                                           'certifications',
+                                                           'schedlue',
+                                                           'other_services',
+                                                           'bookings',
+                                                           'settings').filter(sitter_teams=pk)
+
         serializer = SitterSerializer(queryset, many=True)
         return Response(serializer.data)
 
     @link()
     def bookmarks(self, request, pk=None):
-        queryset = models.Sitter.objects.filter(bookmarks=pk).prefetch_related('reviews',
-                                                                       'languages',
-                                                                       'sitter_groups',
-                                                                       'friends',
-                                                                       'certifications',
-                                                                       'schedlue',
-                                                                       'other_services',
-                                                                       'bookings',
-                                                                       'settings').all()
+        queryset = models.Sitter.objects.prefetch_related('reviews',
+                                                          'languages',
+                                                          'sitter_groups',
+                                                          'friends',
+                                                          'certifications',
+                                                          'schedlue',
+                                                          'other_services',
+                                                          'bookings',
+                                                          'bookmarks',
+                                                          'sitter_teams',
+                                                          'settings').filter(bookmarks=pk)
         serializer = SitterSerializer(queryset, many=True)
         return Response(serializer.data)
 
     @link()
     def bookings(self, request, pk=None):
-        queryset = models.Booking.objects.filter(Q(parent=pk) | Q(sitters=pk))
+        queryset = models.Booking.objects.prefetch_related('sitters'
+                                                            ,'declined_sitters'
+                                                            ,).filter(Q(parent=pk) | Q(sitters=pk))
         serializer = BookingSerializer(queryset, many=True)
         return Response(serializer.data)
 

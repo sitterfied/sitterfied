@@ -379,6 +379,11 @@ Ember.Model = Ember.Object.extend(Ember.Evented, {
     return value;
   },
 
+  isEqual: function(obj1, obj2) {
+    return obj1.get('id') === obj2.get('id');
+  },
+
+
   isDirty: function() {
     var dirtyAttributes = get(this, '_dirtyAttributes');
     return dirtyAttributes && dirtyAttributes.length !== 0 || false;

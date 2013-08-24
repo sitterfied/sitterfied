@@ -28,6 +28,12 @@
 
     <script>
       var user_json = '{{user_json|safe}}'
+	  var friends_json = '{{friends_json|safe}}'
+	  var children_json = '{{children_json|safe}}'
+	  var sitter_teams_json = '{{sitter_teams_json|safe}}'
+	  var bookmarks_json = '{{bookmarks_json|safe}}'
+	  var bookings_json = '{{bookings_json|safe}}'
+
       var parent_or_sitter = '{{parent_or_sitter}}'
     </script>
 	<!--[if lt IE9]><script src="js/ie9.js">IE7_PNG_SUFFIX=".png";</script><![end if]-->
@@ -144,8 +150,8 @@
         </footer>
 		{% verbatim %}
 		{{# view Sitterfied.BackToTop class="back-to-top" id="back-top" }}
-		  <a onclick="$.scrollTo(0, 500)" class="back-to-top">Top</a>
-		{{/view}}
+		  <a class="back-to-top">Top</a>
+		{{/ view}}
 		{% endverbatim %}
       </script>
   </body>

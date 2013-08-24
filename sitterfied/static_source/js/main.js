@@ -26,7 +26,6 @@ require({
             deps: ['ember'],
         },
         model: {
-            exports: 'DS',
             deps: ['ember'],
         },
 
