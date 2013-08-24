@@ -27,7 +27,7 @@ user_fields = ('first_name', 'last_name',
                'sitter_groups',
                'address1', 'address2', 'facebook_id',
                'facebook_token', 'friends',
-               'city', 'state', 'avatar',
+               'city', 'state',
                'zip','cell' )
 
 class OtherServiceSerializer(serializers.ModelSerializer):
@@ -40,12 +40,14 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
+    avatar = serializers.Field(source="avatar")
 
     class Meta:
         model = models.User
         fields = user_fields + ('parent_or_sitter',)
 
 class SitterSerializer(serializers.ModelSerializer):
+    avatar = serializers.Field(source="avatar")
 
     class Meta:
         model = models.Sitter
@@ -102,6 +104,8 @@ class ParentSerializer(serializers.ModelSerializer):
 
     #contacts
     parent_or_sitter = "Parent"
+    avatar = serializers.Field(source="avatar")
+
     class Meta:
         model = models.Parent
         fields = user_fields + ('id','emergency_contact_one_name',
@@ -142,9 +146,19 @@ class ChildSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Child
 
+class IdFilterViewset(viewsets.ModelViewSet):
+    def get_queryset(self):
+        queryset = super(IdFilterViewset, self).get_queryset()
+        if 'id' in self.request.GET:
+            ids = self.request.GET.get('id')
+            ids = ids.split(",")
+            queryset = queryset.filter(id__in=ids)
+        return queryset
 
 
-class UserViewSet(viewsets.ModelViewSet):
+
+
+class UserViewSet(IdFilterViewset):
     queryset = models.User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -215,7 +229,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 
-class SitterViewSet(viewsets.ModelViewSet):
+class SitterViewSet(IdFilterViewset):
     queryset = models.Sitter.objects.select_related().prefetch_related('reviews',
                                                                        'languages',
                                                                        'sitter_groups',
@@ -238,8 +252,7 @@ class SitterViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-
-class ParentViewSet(viewsets.ModelViewSet):
+class ParentViewSet(IdFilterViewset):
     queryset = models.Parent.objects.all().select_related().prefetch_related('reviews',
                                                                              'languages',
                                                                              'settings',
@@ -252,8 +265,6 @@ class ParentViewSet(viewsets.ModelViewSet):
                                                                              )
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
-    filter_fields = ('id', )
 
     @link()
     def children(self, request, pk=None):
@@ -300,13 +311,13 @@ class ParentViewSet(viewsets.ModelViewSet):
 
 
 
-class CertificationViewSet(viewsets.ModelViewSet):
+class CertificationViewSet(IdFilterViewset):
     queryset = models.Certification.objects.all()
     serializer_class = CertificationSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class OtherServiceViewSet(viewsets.ModelViewSet):
+class OtherServiceViewSet(IdFilterViewset):
     queryset = models.OtherService.objects.all()
     serializer_class = OtherServiceSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -314,23 +325,23 @@ class OtherServiceViewSet(viewsets.ModelViewSet):
 
 
 
-class SettingsViewSet(viewsets.ModelViewSet):
+class SettingsViewSet(IdFilterViewset):
     queryset = models.Settings.objects.all()
     serializer_class = SettingsSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-class SchedlueViewSet(viewsets.ModelViewSet):
+class SchedlueViewSet(IdFilterViewset):
     queryset = models.Schedlue.objects.all()
     serializer_class = SchedlueSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-class ReviewViewSet(viewsets.ModelViewSet):
+class ReviewViewSet(IdFilterViewset):
     queryset = models.SitterReview.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
-class BookingViewSet(viewsets.ModelViewSet):
+class BookingViewSet(IdFilterViewset):
     queryset = models.Booking.objects.all()
     serializer_class = BookingSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -351,19 +362,19 @@ class BookingViewSet(viewsets.ModelViewSet):
 
 
 
-class LanguageViewSet(viewsets.ModelViewSet):
+class LanguageViewSet(IdFilterViewset):
     queryset = models.Language.objects.all()
     serializer_class = LanguageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-class SpecialNeedViewSet(viewsets.ModelViewSet):
+class SpecialNeedViewSet(IdFilterViewset):
     queryset = models.SpecialNeed.objects.all()
     serializer_class = SpecialNeedSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 
-class ChildrenViewSet(viewsets.ModelViewSet):
+class ChildrenViewSet(IdFilterViewset):
     queryset = models.Child.objects.all()
     serializer_class = ChildSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

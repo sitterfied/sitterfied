@@ -27,10 +27,8 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             model = this.get('model')
 
             #force a save since we might have m2m associations
-            model.get('stateManager').goToState('updated')
             model.save()
-            settings =  this.get('settings')
-            settings.save()
+            model.get('settings').save()
 
 
 
@@ -351,10 +349,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         date_to : undefined
         findSitters : () ->
             $.ajax("/api/search/").then (response) =>
-                store =  DS.get('defaultStore')
-                ids = _.pluck(response, 'id')
-                sitter_refs = store.loadMany(Sitterfied.Sitter, ids, response)
-                sitters = (store.materializeRecord(sitter_ref) for sitter_ref in sitter_refs)
+                Sitterfied.Sitters.load(response)
                 this.set('content', sitters)
 
         content: []

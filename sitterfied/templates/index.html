@@ -142,7 +142,11 @@
 		    <!-- /bottom menu -->
 	      </div>
         </footer>
-        <div class="back-to-top" id="back-top"><a onclick="$.scrollTo(0, 500)" class="back-to-top">Top</a></div>
+		{% verbatim %}
+		{{# view Sitterfied.BackToTop class="back-to-top" id="back-top" }}
+		  <a onclick="$.scrollTo(0, 500)" class="back-to-top">Top</a>
+		{{/view}}
+		{% endverbatim %}
       </script>
   </body>
 </html>

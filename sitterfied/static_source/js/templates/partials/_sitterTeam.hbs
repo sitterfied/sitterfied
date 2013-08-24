@@ -4,7 +4,7 @@
 	{{# linkTo 'sitter' sitter}}{{ sitter.full_name}}{{/linkTo}}
   </div>
   <div class="img">
-	{{# linkTo 'sitter' sitter}}<img {{bindAttr src="avatarUrl" alt="full_name"}} />{{/linkTo}}
+	{{# linkTo 'sitter' sitter}}<img {{bindAttr src="sitter.avatarUrl" alt="sitter.full_name"}} />{{/linkTo}}
   </div>
   <ul>
 	<li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>{{ sitter.dateLastHired}}</span></li>
@@ -33,7 +33,7 @@
 	<a class="button" {{action book sitter}}>BOOK</a>
     {{/ if}}
 	<p>
-      <a {{action removeFromTeam sitter}} >REMOVE FROM SITTER TEAM</a>
+      <a {{action addSitterTeam sitter}} >REMOVE FROM SITTER TEAM</a>
     </p>
   </div>
 </li>

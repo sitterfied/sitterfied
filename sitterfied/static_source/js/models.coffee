@@ -1,51 +1,72 @@
 define [
-    'ember', '_', 'cs!sitterfied', 'data', 'moment','djangoRestAdapter'
+    'ember', '_', 'cs!sitterfied', 'model', 'moment',
     ], (Em, _, Sitterfied) ->
+    attr = Ember.attr
+    hasMany = Ember.hasMany
+    belongsTo = Ember.belongsTo
+    Adapter = Ember.RESTAdapter.extend(
+        buildURL: (klass, id) ->
+            urlRoot = Ember.get(klass, 'url')
+            if not urlRoot
+                k = klass.toString().toLowerCase().slice(1)
+                urlRoot = "/" + k + "s"
+            if not Ember.isEmpty(id)
+                return "/api" + urlRoot + "/" + id + "/"
+            else
+                return "/api" + urlRoot + "/"
+
+        findMany: (klass, records, ids) ->
+            url = this.buildURL(klass)
+            url = url + "?id=" + ids.toString()
+            return this.ajax(url).then (data) ->
+                records.load(klass, data)
 
 
-    Sitterfied.Adapter  = DS.DjangoRESTAdapter.extend
-        namespace: 'api'
+    )
 
-    Sitterfied.Adapter.registerTransform "date",
+    Date = {
         serialize: (date) ->
             if date then moment(date).format("YYYY-MM-DD hh:mm") else null
 
         deserialize: (date) ->
             if date then moment(date).toDate() else null
+    }
+
+    Boolean = {
+        serialize: (bool) ->
+            return bool
+
+        deserialize: (bool) ->
+            return bool
+
+    }
+
+    Sitterfied.User = Ember.Model.extend(
+        id: attr()
+        #last_login: attr(Date)
+        is_superuser: attr(Boolean)
+        username: attr()
+        first_name: attr()
+        last_name: attr()
+        email: attr()
+        status: attr()
+        parent_or_sitter: attr()
+        sitter_groups: hasMany('Sitterfied.Group',{key: "sitter_groups"})
+        languages: hasMany('Sitterfied.Language',{key: "languages"})
+        settings  : belongsTo('Sitterfied.Setting', {key:"settings"})
+        friends: hasMany('Sitterfied.User',{key: "friends"})
+        address1: attr()
+        address2: attr()
+        city: attr()
+        state: attr()
+        zip: attr()
+        cell: attr()
+        reviews: hasMany('Sitterfied.SitterReview',{key: "reviews"})
+        avatar: attr()
 
 
-    Sitterfied.Store = DS.Store.extend(
-        revision: 14
-        adapter: Sitterfied.Adapter.create()
-        isDefaultStore:true
-    )
-
-
-    Sitterfied.User = DS.Model.extend(
-        #last_login: DS.attr('date')
-        is_superuser: DS.attr('boolean')
-        username: DS.attr('string')
-        first_name: DS.attr('string')
-        last_name: DS.attr('string')
-        email: DS.attr('string')
-        status: DS.attr('string')
-        parent_or_sitter: DS.attr('string')
-        sitter_groups: DS.hasMany('Sitterfied.Group')
-        languages: DS.hasMany('Sitterfied.Language')
-        settings  : DS.belongsTo('Sitterfied.Setting')
-        friends: DS.hasMany('Sitterfied.User'),
-        address1: DS.attr('string')
-        address2: DS.attr('string')
-        city: DS.attr('string')
-        state: DS.attr('string')
-        zip: DS.attr('string')
-        cell: DS.attr('string')
-        reviews: DS.hasMany('Sitterfied.SitterReview')
-        avatar: DS.attr('string')
-
-
-        facebook_token: DS.attr('string')
-        facebook_id: DS.attr('number')
+        facebook_token: attr()
+        facebook_id: attr(Number)
 
         isSitter: (() ->
             @get('parent_or_sitter') == "Sitter"
@@ -76,13 +97,17 @@ define [
                 return 0
             else
                 date = this.get('sorted_bookings.firstObject.stop_date_time')
+                if not date
+                    return 0
                 return moment().diff(date, 'weeks')
-        ).property('sorted_bookings')
+        ).property('sorted_bookings.@each')
         days_since_last_booking: (() ->
             if this.get('sorted_bookings').length == 0
                 return 0
             else
                 date = this.get('sorted_bookings.firstObject.stop_date_time')
+                if not date
+                    return 0
                 return moment().diff(date, 'days')
         ).property('sorted_bookings')
         full_name: ((key, value) ->
@@ -109,170 +134,183 @@ define [
         ).property('friends_in_common')
 
     )
+    Sitterfied.User.adapter = Adapter.create()
 
-    Sitterfied.Setting = DS.Model.extend(
-        user  : DS.belongsTo('Sitterfied.' + parent_or_sitter)
+    Sitterfied.Setting = Ember.Model.extend(
+        id: attr()
+        user  : belongsTo('Sitterfied.' + parent_or_sitter, {key:"user"})
         #parent specific
-        mobile_booking_accepted_denied: DS.attr('boolean')
+        mobile_booking_accepted_denied: attr(Boolean)
 
         #sitter specific
-        mobile_new_review : DS.attr('boolean')
-        mobile_booking_request: DS.attr('boolean')
+        mobile_new_review : attr(Boolean)
+        mobile_booking_request: attr(Boolean)
 
-        mobile_friend_joined: DS.attr('boolean')
-        mobile_groups_added_network: DS.attr('boolean')
-        mobile_upcoming_booking_remind: DS.attr('boolean')
+        mobile_friend_joined: attr(Boolean)
+        mobile_groups_added_network: attr(Boolean)
+        mobile_upcoming_booking_remind: attr(Boolean)
 
         #parent specific
-        email_booking_accepted_denied: DS.attr('boolean')
+        email_booking_accepted_denied: attr(Boolean)
 
         #sitter specific
-        email_new_review : DS.attr('boolean')
-        email_booking_request: DS.attr('boolean')
+        email_new_review : attr(Boolean)
+        email_booking_request: attr(Boolean)
 
-        email_friend_joined: DS.attr('boolean')
-        email_groups_added_network: DS.attr('boolean')
-        email_upcoming_booking_remind: DS.attr('boolean')
+        email_friend_joined: attr(Boolean)
+        email_groups_added_network: attr(Boolean)
+        email_upcoming_booking_remind: attr(Boolean)
 
-        email_news: DS.attr('boolean')
-        email_blog: DS.attr('boolean')
+        email_news: attr(Boolean)
+        email_blog: attr(Boolean)
     )
+    Sitterfied.Setting.adapter = Adapter.create()
 
-    Sitterfied.Contact = DS.Model.extend(
+    Sitterfied.Contact = Ember.Model.extend(
+        id: attr()
         #flush out later
     )
 
-    Sitterfied.Group = DS.Model.extend(
-        name: DS.attr('string')
+    Sitterfied.Group = Ember.Model.extend(
+        id: attr()
+        name: attr()
     )
+    Sitterfied.Group.adapter = Adapter.create()
 
     Sitterfied.Parent = Sitterfied.User.extend(
-        emergency_contact_one_name : DS.attr("string")
-        emergency_contact_one_phone : DS.attr("string")
-        emergency_contact_two_name : DS.attr("string")
-        emergency_contact_two_phone : DS.attr("string")
-        children: DS.hasMany("Sitterfied.Child")
-        sitter_teams: DS.hasMany("Sitterfied.Sitter", {inverse:'sitter_teams'})
-        bookmarks: DS.hasMany("Sitterfied.Sitter", {inverse: 'bookmarks'})
-        bookings: DS.hasMany('Sitterfied.Booking')
+        emergency_contact_one_name : attr("string")
+        emergency_contact_one_phone : attr("string")
+        emergency_contact_two_name : attr("string")
+        emergency_contact_two_phone : attr("string")
+        children: hasMany("Sitterfied.Child",{key: "children"})
+        sitter_teams: hasMany("Sitterfied.Sitter", {key:"sitter_teams"})
+        bookmarks: hasMany("Sitterfied.Sitter",{key:"bookmarks"})
+        bookings: hasMany('Sitterfied.Booking',{key:"bookings"})
 
     )
+    Sitterfied.Parent.adapter = Adapter.create()
 
-    Sitterfied.Schedlue = DS.Model.extend(
-        sitter: DS.belongsTo('Sitterfied.Sitter'),
-        mon_early_morning: DS.attr('boolean')
-        tues_early_morning: DS.attr('boolean')
-        wed_early_morning: DS.attr('boolean')
-        thurs_early_morning: DS.attr('boolean')
-        fri_early_morning: DS.attr('boolean')
-        sat_early_morning: DS.attr('boolean')
-        sun_early_morning: DS.attr('boolean')
 
-        mon_late_morning: DS.attr('boolean')
-        tues_late_morning: DS.attr('boolean')
-        wed_late_morning: DS.attr('boolean')
-        thurs_late_morning: DS.attr('boolean')
-        fri_late_morning: DS.attr('boolean')
-        sat_late_morning: DS.attr('boolean')
-        sun_late_morning: DS.attr('boolean')
+    Sitterfied.Schedlue = Ember.Model.extend(
+        id: attr()
+        sitter: belongsTo('Sitterfied.Sitter'), {key:"sitter"},
+        mon_early_morning: attr(Boolean)
+        tues_early_morning: attr(Boolean)
+        wed_early_morning: attr(Boolean)
+        thurs_early_morning: attr(Boolean)
+        fri_early_morning: attr(Boolean)
+        sat_early_morning: attr(Boolean)
+        sun_early_morning: attr(Boolean)
 
-        mon_early_afternoon: DS.attr('boolean')
-        tues_early_afternoon: DS.attr('boolean')
-        wed_early_afternoon: DS.attr('boolean')
-        thurs_early_afternoon: DS.attr('boolean')
-        fri_early_afternoon: DS.attr('boolean')
-        sat_early_afternoon: DS.attr('boolean')
-        sun_early_afternoon: DS.attr('boolean')
+        mon_late_morning: attr(Boolean)
+        tues_late_morning: attr(Boolean)
+        wed_late_morning: attr(Boolean)
+        thurs_late_morning: attr(Boolean)
+        fri_late_morning: attr(Boolean)
+        sat_late_morning: attr(Boolean)
+        sun_late_morning: attr(Boolean)
 
-        mon_late_afternoon: DS.attr('boolean')
-        tues_late_afternoon: DS.attr('boolean')
-        wed_late_afternoon: DS.attr('boolean')
-        thurs_late_afternoon: DS.attr('boolean')
-        fri_late_afternoon: DS.attr('boolean')
-        sat_late_afternoon: DS.attr('boolean')
-        sun_late_afternoon: DS.attr('boolean')
+        mon_early_afternoon: attr(Boolean)
+        tues_early_afternoon: attr(Boolean)
+        wed_early_afternoon: attr(Boolean)
+        thurs_early_afternoon: attr(Boolean)
+        fri_early_afternoon: attr(Boolean)
+        sat_early_afternoon: attr(Boolean)
+        sun_early_afternoon: attr(Boolean)
 
-        mon_early_evening: DS.attr('boolean')
-        tues_early_evening: DS.attr('boolean')
-        wed_early_evening: DS.attr('boolean')
-        thurs_early_evening: DS.attr('boolean')
-        fri_early_evening: DS.attr('boolean')
-        sat_early_evening: DS.attr('boolean')
-        sun_early_evening: DS.attr('boolean')
+        mon_late_afternoon: attr(Boolean)
+        tues_late_afternoon: attr(Boolean)
+        wed_late_afternoon: attr(Boolean)
+        thurs_late_afternoon: attr(Boolean)
+        fri_late_afternoon: attr(Boolean)
+        sat_late_afternoon: attr(Boolean)
+        sun_late_afternoon: attr(Boolean)
 
-        mon_late_evening: DS.attr('boolean')
-        tues_late_evening: DS.attr('boolean')
-        wed_late_evening: DS.attr('boolean')
-        thurs_late_evening: DS.attr('boolean')
-        fri_late_evening: DS.attr('boolean')
-        sat_late_evening: DS.attr('boolean')
-        sun_late_evening: DS.attr('boolean')
+        mon_early_evening: attr(Boolean)
+        tues_early_evening: attr(Boolean)
+        wed_early_evening: attr(Boolean)
+        thurs_early_evening: attr(Boolean)
+        fri_early_evening: attr(Boolean)
+        sat_early_evening: attr(Boolean)
+        sun_early_evening: attr(Boolean)
 
-        mon_overnight: DS.attr('boolean')
-        tues_overnight: DS.attr('boolean')
-        wed_overnight: DS.attr('boolean')
-        thurs_overnight: DS.attr('boolean')
-        fri_overnight: DS.attr('boolean')
-        sat_overnight: DS.attr('boolean')
-        sun_overnight: DS.attr('boolean')
+        mon_late_evening: attr(Boolean)
+        tues_late_evening: attr(Boolean)
+        wed_late_evening: attr(Boolean)
+        thurs_late_evening: attr(Boolean)
+        fri_late_evening: attr(Boolean)
+        sat_late_evening: attr(Boolean)
+        sun_late_evening: attr(Boolean)
+
+        mon_overnight: attr(Boolean)
+        tues_overnight: attr(Boolean)
+        wed_overnight: attr(Boolean)
+        thurs_overnight: attr(Boolean)
+        fri_overnight: attr(Boolean)
+        sat_overnight: attr(Boolean)
+        sun_overnight: attr(Boolean)
     )
+    Sitterfied.Schedlue.adapter = Adapter.create()
+
 
     Sitterfied.Sitter = Sitterfied.User.extend(
-        biography: DS.attr('string'),
-        gender:  DS.attr('string'),
-        id_verified: DS.attr('boolean'),
-        id_scanPath: DS.attr('string'),
-        live_zip: DS.attr('string'),
-        work_zip: DS.attr('string'),
-        dob: DS.attr('string'),
-        smoker: DS.attr('string'),
-        sick: DS.attr('string'),
-        will_transport: DS.attr('string'),
+        biography: attr()
+        gender:  attr()
+        id_verified: attr(Boolean)
+        id_scanPath: attr()
+        live_zip: attr()
+        work_zip: attr()
+        dob: attr(Date)
+        smoker: attr(Boolean)
+        sick: attr(Boolean)
+        will_transport: attr(Boolean)
 
-        total_exp: DS.attr('number'),
-        infant_exp: DS.attr('number'),
-        toddler_exp: DS.attr('number'),
-        preschool_exp: DS.attr('number'),
-        school_age_exp: DS.attr('number'),
-        pre_teen_exp: DS.attr('number'),
-        teen_exp: DS.attr('number'),
+        total_exp: attr(Number)
+        infant_exp: attr(Number)
+        toddler_exp: attr(Number)
+        preschool_exp: attr(Number)
+        school_age_exp: attr(Number)
+        pre_teen_exp: attr(Number)
+        teen_exp: attr(Number)
 
-        highest_education: DS.attr('string'),
-        last_school: DS.attr('string'),
-        current_student: DS.attr('boolean'),
+        highest_education: attr(),
+        last_school: attr(),
+        current_student: attr(Boolean)
 
-        schedlue: DS.belongsTo('Sitterfied.Schedlue'),
+        schedlue: belongsTo('Sitterfied.Schedlue', {key:"schedlue"})
 
-        major: DS.attr('string'),
-        occupation:  DS.attr('string'),
+        major: attr()
+        occupation:  attr()
 
-        sitter_teams: DS.hasMany("Sitterfied.Parent", {inverse:'sitter_teams'})
-        reviews: DS.hasMany('Sitterfied.SitterReview'),
-        certifications: DS.hasMany('Sitterfied.Certification'),
-        other_services: DS.hasMany('Sitterfied.OtherService'),
-        one_child_min_rate: DS.attr('number'),
-        one_child_max_rate: DS.attr('number'),
-        two_child_min_rate: DS.attr('number'),
-        two_child_max_rate: DS.attr('number'),
-        three_child_min_rate: DS.attr('number'),
-        three_child_max_rate: DS.attr('number'),
+        sitter_teams: hasMany("Sitterfied.Parent",{key:"sitter_teams"})
+        reviews: hasMany('Sitterfied.SitterReview', {key:"reviews"})
+        certifications: hasMany('Sitterfied.Certification', {key:"certifications"})
+        other_services: hasMany('Sitterfied.OtherService', {key:"other_services"})
+        one_child_min_rate: attr(Number)
+        one_child_max_rate: attr(Number)
+        two_child_min_rate: attr(Number)
+        two_child_max_rate: attr(Number)
+        three_child_min_rate: attr(Number)
+        three_child_max_rate: attr(Number)
 
 
-        special_needs_exp : DS.attr('string')
-        extra_exp: DS.attr('string')
+        special_needs_exp : attr()
+        extra_exp: attr()
 
-        smokers_ok: DS.attr('string'),
-        dogs_ok: DS.attr('string'),
-        cats_ok: DS.attr('string'),
-        other_animals_ok: DS.attr('string'),
-        travel_distance: DS.attr('number'),
-        has_drivers_licence: DS.attr('string'),
+        smokers_ok: attr(Boolean)
+        dogs_ok: attr(Boolean)
+        cats_ok: attr(Boolean)
+        other_animals_ok: attr(Boolean)
+        travel_distance: attr(Number)
+        has_drivers_licence: attr(Boolean)
 
-        bookings: DS.hasMany('Sitterfied.Booking',  {inverse: 'bookings'}),
+        bookings: hasMany('Sitterfied.Booking',{key:"bookings"})
 
-        in_sitter_team: DS.attr('boolean'),
-        in_friends_team: DS.attr('boolean'),
-        bookmarks: DS.hasMany("Sitterfied.Parent", {inverse: 'bookmarks'})
+        in_sitter_team: attr(Boolean)
+
+
+        in_friends_team: attr(Boolean)
+        bookmarks: hasMany("Sitterfied.Parent",{key:" bookmarks"})
         isBookmarked: (() ->
             bookmarks = Sitterfied.currentUser.get('bookmarks')
             return bookmarks.indexOf(this) != -1
@@ -285,6 +323,8 @@ define [
         ).property('biography')
         age: (() ->
             dob = @get('dob')
+            if not dob?
+                return 0
             return moment().diff(moment(dob), 'years')
         ).property("dob")
 
@@ -300,35 +340,52 @@ define [
             return this.get('reviews').filterProperty('recommended', true)
         ).property('reviews.@each')
 
+        inSitterTeam: (() ->
+            sitterTeam = Sitterfied.currentUser.get('sitter_teams')
+            return sitterTeam.indexOf(this) >= 0
+        ).property("Sitterfied.currentUser.sitter_teams.@each")
 
         calc_total_exp: ((value) ->
             return @get('infant_exp') + @get('toddler_exp') + @get('preschool_exp') + @get('school_ageExp') + @get('pre_teenExp') + @get('teen_exp')
         ).property('infant_exp','toddler_exp','preschool_exp', 'school_ageExp', 'pre_teenExp', 'teen_exp')
     )
+    Sitterfied.Sitter.adapter = Adapter.create()
 
-    Sitterfied.Language = DS.Model.extend(
-        language: DS.attr('string'),
-        users: DS.hasMany("Sitterfied.User")
+    Sitterfied.Language = Ember.Model.extend(
+        id: attr()
+        language: attr()
+        users: hasMany("Sitterfied.User",{key:"users"})
     )
-    Sitterfied.Certification = DS.Model.extend(
-        certification: DS.attr('string'),
-        sitters: DS.hasMany("Sitterfied.Sitter")
-    )
-    Sitterfied.OtherService = DS.Model.extend(
-        service: DS.attr('string'),
-        sitters: DS.hasMany("Sitterfied.Sitter")
-    )
-    Sitterfied.SpecialNeed = DS.Model.extend(
-        need: DS.attr('string'),
-        children: DS.hasMany("Sitterfied.Child")
-    )
+    Sitterfied.Language.adapter = Adapter.create()
 
-    Sitterfied.Child = DS.Model.extend(
-        parent: DS.belongsTo('Sitterfied.Parent'),
-        name: DS.attr('string'),
-        dob: DS.attr('date'),
-        school: DS.attr('string'),
-        special_needs: DS.hasMany("Sitterfied.SpecialNeed")
+    Sitterfied.Certification = Ember.Model.extend(
+        id: attr()
+        certification: attr()
+        sitters: hasMany("Sitterfied.Sitter",{key:"sitters"})
+    )
+    Sitterfied.Certification.adapter = Adapter.create()
+
+    Sitterfied.OtherService = Ember.Model.extend(
+        id: attr()
+        service: attr()
+        sitters: hasMany("Sitterfied.Sitter",{key:"sitters"})
+    )
+    Sitterfied.OtherService.adapter = Adapter.create()
+
+    Sitterfied.SpecialNeed = Ember.Model.extend(
+        id: attr()
+        need: attr()
+        children: hasMany("Sitterfied.Child",{key:"children"})
+    )
+    Sitterfied.SpecialNeed.adapter = Adapter.create()
+
+    Sitterfied.Child = Ember.Model.extend(
+        id: attr()
+        parent: belongsTo('Sitterfied.Parent'), {key:"parent"},
+        name: attr()
+        dob: attr(Date)
+        school: attr()
+        special_needs: hasMany("Sitterfied.SpecialNeed",{key:"special_needs"})
 
         birthMonth: ((key, value) ->
             date = @get('dob')
@@ -363,39 +420,42 @@ define [
         ).property('dob')
 
     )
+    Sitterfied.Child.adapter = Adapter.create()
 
-    Sitterfied.SitterReview = DS.Model.extend(
-        parent: DS.belongsTo('Sitterfied.Parent'),
-        sitter: DS.belongsTo('Sitterfied.Sitter'),
-        recommended: DS.attr('boolean'),
-        review: DS.attr('string'),
+    Sitterfied.SitterReview = Ember.Model.extend(
+        id: attr()
+        parent: belongsTo('Sitterfied.Parent', {key:"parent"})
+        sitter: belongsTo('Sitterfied.Sitter', {key:"sitter"})
+        recommended: attr(Boolean)
+        review: attr()
 
     )
+    Sitterfied.SitterReview.adapter = Adapter.create()
 
-    Sitterfied.Booking = DS.Model.extend(
-        parent: DS.belongsTo('Sitterfied.Parent'),
-        created: DS.attr("date")
-        notes: DS.attr('string'),
-        respond_by: DS.attr('date'),
-        start_date_time: DS.attr('date'),
-        stop_date_time: DS.attr('date'),
-        num_children:  DS.attr('number'),
-        address1: DS.attr('string')
-        address2: DS.attr('string')
-        city: DS.attr('string')
-        state: DS.attr('string')
-        zip: DS.attr('string')
-        overnight: DS.attr('boolean'),
-        accepted_sitter: DS.belongsTo('Sitterfied.Sitter'),
-        rate: DS.attr('number'),
+    Sitterfied.Booking = Ember.Model.extend(
+        id: attr()
+        parent: belongsTo('Sitterfied.Parent', {key:"parent"})
+        created: attr(Date)
+        notes: attr()
+        respond_by: attr(Date)
+        start_date_time: attr(Date)
+        stop_date_time: attr(Date)
+        num_children:  attr(Number)
+        address1: attr()
+        address2: attr()
+        city: attr()
+        state: attr()
+        zip: attr()
+        overnight: attr(Boolean)
+        accepted_sitter: belongsTo('Sitterfied.Sitter', {key:"accepted_sitter"})
+        rate: attr(Number)
 
-        emergency_phone: DS.attr('string'),
-        #location: models.Foreign_key('Address')
-        booking_status:DS.attr('string'),
-        booking_type: DS.attr('string'),
-        sitters: DS.hasMany('Sitterfied.Sitter', {inverse: 'bookings'}),
-        declined_sitters: DS.hasMany('Sitterfied.Sitter'),
-        canceled: DS.attr('boolean'),
+        emergency_phone: attr()
+        booking_status:attr()
+        booking_type: attr()
+        sitters: hasMany('Sitterfied.Sitter', {key: 'sitters'})
+        declined_sitters: hasMany('Sitterfied.Sitter',{key:"declined_sitters"})
+        canceled: attr(Boolean),
 
 
         isInterview: (() ->
@@ -432,6 +492,8 @@ define [
 
         formattedDate: (() ->
             date = @get('start_date_time')
+            if not date
+                return ""
             return moment(date).format('dddd Do MMMM YYYY')
         ).property("start_date_time")
         formattedHours: (() ->
@@ -492,8 +554,10 @@ define [
         ).property('accepted_sitter')
 
     )
+    Sitterfied.Booking.adapter = Adapter.create()
 
-    Sitterfied.BookingRequest = DS.Model.extend(
-        booking: DS.belongsTo("Sitterfied.Booking"),
-
+    Sitterfied.BookingRequest = Ember.Model.extend(
+        id: attr()
+        booking: belongsTo("Sitterfied.Booking", {key:"booking"})
     )
+    Sitterfied.BookingRequest.adapter = Adapter.create()

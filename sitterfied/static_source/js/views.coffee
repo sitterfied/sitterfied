@@ -13,7 +13,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
     Ember.DatePicker = Em.TextField.extend({
         didInsertElement: ()->
             #setup datepicker and keep ember insync with it
-            @.$().datepicker({dateFormat:"yy-mm-dd"}).on 'changeDate', =>
+            @.$().datepicker({dateFormat:"yy-mm-dd", numberOfMonths: [ 1, 2 ], minDate:0}).on 'changeDate', =>
                 @.$().trigger('change')
     })
 
@@ -168,6 +168,31 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
         willDestroyElement: () ->
             this._super();
             $(window).unbind "scroll", @_event
+
+    Sitterfied.BackToTop = Em.View.extend
+        init: () ->
+            this._super();
+            @_event = () =>
+                y = $(window).scrollTop()
+                overflow = $(document).height() > $(window).height()
+                if y > 200 and overflow
+                    @set('show', true)
+                else
+                    @set('show', false)
+
+        show: false
+
+        click: () ->
+            $.scrollTo(0, 500)
+
+        display: (() ->
+            @$().toggle( "bounce", { times: 3 }, "fast" );
+        ).observes('show')
+
+        didInsertElement: () ->
+            @$().hide()
+            $(window).bind "scroll", @_event
+
 
 
 

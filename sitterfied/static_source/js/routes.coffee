@@ -107,16 +107,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.render("bookings", {into:"parentEdit", controller: 'parentEditBookings'})
         model: () ->
             Sitterfied.currentUser.get('bookings')
-        setupController: (controller, models) ->
-            controller.set('model', models)
-            for booking in models
-                debugger
-                bookings.get('sitters')
 
     )
     Sitterfied.ParentEditSitterTeamRoute = Em.Route.extend(
         model: () ->
-            return Sitterfied.currentUser
+            return Sitterfied.currentUser.get('sitter_teams')
 
         renderTemplate: () ->
             this.render("parentEdit/sitterTeam", {into:"parentEdit"})
@@ -272,7 +267,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.controllerFor('certifications').set('model', Sitterfied.Certification.find())
             this.controllerFor('otherServices').set('model', Sitterfied.OtherService.find())
 
-
         renderTemplate: () ->
             this.render('search.top', {outlet: 'top'})
             this.render('search', { outlet: 'content'})
@@ -305,13 +299,27 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 alert("add friend")
 
             addSitterTeam: (sitter) ->
-                Sitterfied.currentUser.get('sitter_teams').pushObject(sitter)
-                sitter.set('in_sitter_team', true)
-                Em.run.sync()
+                sitterTeam = Sitterfied.currentUser.get('sitter_teams')
+                if sitterTeam.indexOf(sitter) >= 0
+                    sitterTeam.removeObject(sitter)
+                    sitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                else
+                    sitterTeam.pushObject(sitter)
+                    sitter.get('sitter_teams').pushObject(Sitterfied.currentUser)
+
+                Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()
+
             bookmark: (sitter) ->
-                Sitterfied.currentUser.get('bookmarks').pushObject(sitter)
-                Em.run.sync()
+                bookmarks = Sitterfied.currentUser.get('bookmarks')
+                if bookmarks.indexOf(sitter) >= 0
+                    bookmarks.removeObject(sitter)
+                    sitter.get('bookmarks').removeObject(Sitterfied.currentUser)
+                else
+                    bookmarks.pushObject(sitter)
+                    sitter.get('bookmarks').pushObject(Sitterfied.currentUser)
+
+                Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()
 
 
@@ -327,19 +335,18 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
         setupController: (controller, model) ->
             store = this.get('store')
-            transaction = store.transaction()
-            if Sitterfied.isParent
-                reivew = Sitterfied.SitterReview.createRecord(parent: Sitterfied.currentUser)
-            else
-                review = Sitterfied.SitterReview.createRecord()
-            transaction.add(review)
             #load the model once more to get fks set
-            Sitterfied[parent_or_sitter].find({id:Sitterfied.currentUser.id})
-
-            this.controllerFor('sitterReview').set('model', review)
-
-            friends = Sitterfied.User.find({friends:Sitterfied.currentUser.id})
+            user_data = JSON.parse(user_json)
+            user = Sitterfied[parent_or_sitter].find(user_data['id'])
+            Sitterfied.currentUser = user
+            Sitterfied.get('currentUserController').set('model', user)
+            friends = user.get('friends')
             this.controllerFor('friends').set('model', friends)
+
+            user.get('sitter_teams')
+            user.get('children')
+            user.get('bookmarks')
+
 
 
     )
