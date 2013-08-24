@@ -1,5 +1,6 @@
 import models
-from forms import AvatarForm
+from forms import AvatarForm, ActiveForm
+from django.contrib.auth import logout
 
 from django.db.models import Q
 
@@ -169,6 +170,20 @@ class UserViewSet(viewsets.ModelViewSet):
 
         response = Response(data={'avatar':user.avatar.cdn_url})
         return response
+
+
+    @action()
+    def active(self, request, pk=None):
+        form = ActiveForm(request.POST)
+        user = request.user
+
+        if not form.is_valid():
+            return Response(status=400)
+
+        user.is_active = form.cleaned_data['active']
+        user.save()
+        logout(request)
+        return Response({})
 
 
 

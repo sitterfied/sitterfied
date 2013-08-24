@@ -43,3 +43,6 @@ from pyuploadcare.dj.forms import ImageField as UploadcareImageField
 
 class AvatarForm(forms.Form):
     avatar = UploadcareImageField()
+
+class ActiveForm(forms.Form):
+    active = forms.BooleanField(required=False)

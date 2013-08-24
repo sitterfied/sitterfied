@@ -104,7 +104,15 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
     Sitterfied.ParentEditBookingsRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("bookings", {into:"parentEdit", controller: 'currentUser'})
+            this.render("bookings", {into:"parentEdit", controller: 'parentEditBookings'})
+        model: () ->
+            Sitterfied.currentUser.get('bookings')
+        setupController: (controller, models) ->
+            controller.set('model', models)
+            for booking in models
+                debugger
+                bookings.get('sitters')
+
     )
     Sitterfied.ParentEditSitterTeamRoute = Em.Route.extend(
         model: () ->
@@ -313,20 +321,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             gmailConnect: () ->
                 alert('gmail connect')
 
-
-            uploadAvatar: () ->
-                $.ajax
-                    type: "POST"
-                    url:"/api/users/" + Sitterfied.currentUser.id + "/avatar_upload/"
-                    dataType: 'json'
-                    data: {
-                        avatar: $("#avatar_uuid").attr('value')
-                    }
-                    success: (response) ->
-                        Sitterfied.currentUser.set('avatar', response.avatar)
-                        $.fancybox.close()
-                    error: () ->
-                        alert("There was a problem uploading your avatar. Please try again")
 
         }
 

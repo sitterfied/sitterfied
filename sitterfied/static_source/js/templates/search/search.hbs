@@ -12,7 +12,7 @@
 		  </ul>
 		</nav>
 		<div class="friends_block my_friends_sitters">
-          {{#view Sitterfied.SlideDownView class="multiple_sitters_block clear" toggleBinding="multipleSitters"}}
+          {{#view Sitterfied.ScrollSlideDownView class="multiple_sitters_block clear" toggleBinding=multipleSitters}}
 			<a {{action "toggleMultipleSitters"}} class="close">&nbsp;</a>
 			<ul>
               {{# each controller}}
@@ -29,7 +29,7 @@
           {{/ view}}
 
 
-          {{#view Sitterfied.SlideDownView class="filter_block" toggleBinding="filterSitters"}}
+          {{#view Sitterfied.ScrollSlideDownView class="filter_block" toggleBinding="filterSitters"}}
 			<p><a {{action 'resetFilters'}}>Reset Filters</a></p>
 			<form method="post" action="#">
 			  <ul class="clear">

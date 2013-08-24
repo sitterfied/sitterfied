@@ -37,9 +37,17 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         deleteAccount: () ->
             imsure = confirm("are you sure you want to delete your account? This cannot be undone")
             if imsure
-                this.set('content.active', false)
-                this.save()
-                location.reload()
+                $.ajax
+                    type: "POST"
+                    url:"/api/users/" + Sitterfied.currentUser.id + "/active/"
+                    dataType: 'json'
+                    data: {
+                        active: false
+                    }
+                    success: (response) ->
+                        location.reload()
+                    error: () ->
+                        alert("There was a problem deleting your account. Please try again")
 
         old_password : ''
         new_password1 : ''
@@ -132,92 +140,11 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                     )
 
                 FB.getLoginStatus (response) ->
-                  if response.status is "connected"
-                    use_fb_data()
-                  else if response.status is "not_authorized"
-                    FB.login ->
+                    if response.status is "connected"
                         use_fb_data()
-
-
-        pendingRequests: (() ->
-            return @get('bookings').filter (item, index, bookings) ->
-                if item.get('canceled')
-                    return false
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return not accepted and future
-
-        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
-        upcomingJobs: (() ->
-            return @get('bookings').filter (item, index, bookings) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and future
-        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
-        completedJobs: (() ->
-            return @get('bookings').filter (item, index, bookings) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and not future
-        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
-        missedRequests: (() ->
-            return @get('bookings').filter (item, index, bookings) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  not accepted and not future
-        ).property('bookings.@each.accepted_sitter', 'bookings.@each.start_date_time', 'bookings.@each.canceled')
-        canceledRequests: (() ->
-            return @get('bookings').filter (item, index, bookings) ->
-                return item.get('canceled')
-        ).property('bookings.@each.canceled')
-        declinedRequests: (() ->
-            return @get('bookings').filter (item, index, bookings) ->
-                declined_sitters = item.get('declined_sitters')
-                return declined_sitters.indexOf(item.get('content')) != -1
-        ).property('bookings.@each.declined_sitters')
-
-        cancelBooking: (booking) ->
-            booking.set('canceled', true)
-            booking.save()
-
-        acceptBooking: (booking) ->
-            sitter = this.get('content')
-            booking.set('accepted_sitter', sitter)
-            booking.save()
-
-        declineBooking: () ->
-
-            sitter = this.get('content')
-            booking.declined_sitters.append(sitter)
-            booking.save()
-
-
-        zoomToPending: () ->
-            $.scrollTo("#tab-1-1", 500)
-        zoomToUpcoming: () ->
-            $.scrollTo("#tab-1-2", 500)
-        zoomToCompleted: () ->
-            $.scrollTo("#tab-1-3", 500)
-        zoomToMissed: () ->
-            $.scrollTo("#tab-1-4", 500)
-        zoomToDeclined: () ->
-            $.scrollTo("#tab-1-6", 500)
-        zoomToCanceled: () ->
-            $.scrollTo("#tab-1-7", 500)
-
+                    else if response.status is "not_authorized"
+                        FB.login ->
+                            use_fb_data()
 
 
     })
@@ -387,6 +314,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.ChildsController  = Em.ArrayController.extend(
     )
+
     Sitterfied.SearchController  = Em.ArrayController.extend(
         multipleSitters: false
         filterSitters: false
@@ -551,6 +479,78 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             this.transitionTo('book')
 
 
+    )
+
+    Sitterfied.BookingController = Em.ObjectController.extend(
+    )
+
+    Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(
+    )
+
+    Sitterfied.ParentEditBookingsController  = Em.ArrayController.extend(
+        pendingRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return not accepted and future
+
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+        upcomingJobs: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  accepted and future
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+        completedJobs: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  accepted and not future
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+        missedRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  not accepted and not future
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+        canceledRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                return item.get('canceled')
+        ).property('content.@each.canceled')
+        declinedRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                declined_sitters = item.get('declined_sitters')
+                return declined_sitters.indexOf(item.get('content')) != -1
+        ).property('content.@each.declined_sitters')
+
+        cancelBooking: (booking) ->
+            booking.set('canceled', true)
+            booking.save()
+
+        acceptBooking: (booking) ->
+            sitter = this.get('content')
+            booking.set('accepted_sitter', sitter)
+            booking.save()
+
+        declineBooking: () ->
+            sitter = this.get('content')
+            booking.declined_sitters.append(sitter)
+            booking.save()
     )
 
 

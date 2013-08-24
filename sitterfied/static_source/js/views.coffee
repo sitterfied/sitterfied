@@ -121,16 +121,24 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
 
     Sitterfied.SlideDownView = Ember.View.extend
         toggle: ((key, value) ->
-            if value != undefined and value != null
-                if value == @.get('_show')
-                    return @.get('_show')
-                if value == true
-                    @$().slideDown()
-                else
-                    @$().slideUp()
-                @.set('_show', value)
-            return @.get('_show')
-        ).property('_show')
+            if value == undefined
+                return
+            @set('_show', value)
+        ).property()
+
+        doSlide: (() ->
+            direction = @get('_show')
+            if direction == false
+                @slideUp()
+            else
+                @slideDown()
+        ).observes("_show")
+
+        slideUp: () ->
+            @$().slideUp()
+        slideDown: () ->
+            @$().slideDown()
+
 
         _show: false
 
@@ -144,21 +152,21 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
             $.scrollTo("#tab-1-2", 300)
 
 
-    Sitterfied.SearchView = Em.View.extend
+    Sitterfied.ScrollSlideDownView = Sitterfied.SlideDownView.extend
         init: () ->
             this._super();
             @_event = () =>
                 @shinkDropdowns()
 
-
         shinkDropdowns: () ->
-            @set('controller.multipleSitters', false)
-            @set('controller.filterSitters', false)
+            @set('_show', false)
 
         didInsertElement: () ->
+            this._super();
             $(window).bind "scroll", @_event
 
         willDestroyElement: () ->
+            this._super();
             $(window).unbind "scroll", @_event
 
 

@@ -15,7 +15,7 @@ define [
 
 
     Sitterfied.Store = DS.Store.extend(
-        revision: 12
+        revision: 14
         adapter: Sitterfied.Adapter.create()
         isDefaultStore:true
     )
@@ -278,7 +278,10 @@ define [
             return bookmarks.indexOf(this) != -1
         ).property("Sitterfied.currentUser.bookmarks.@each")
         shortBio: (() ->
-            @get('biography').substring(0, 100)
+            bio = @get('biography')
+            if not bio?
+                return ""
+            return bio.substring(0, 100)
         ).property('biography')
         age: (() ->
             dob = @get('dob')
