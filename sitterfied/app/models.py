@@ -97,10 +97,10 @@ class Phone(TimeStampedModel):
 
 
 class Parent(User):
-    emergency_contact_one_name = models.CharField(max_length=128)
-    emergency_contact_one_phone = models.CharField(max_length=10)
-    emergency_contact_two_name = models.CharField(max_length=128)
-    emergency_contact_two_phone = models.CharField(max_length=10)
+    emergency_contact_one_name = models.CharField(max_length=128, blank=True)
+    emergency_contact_one_phone = models.CharField(max_length=10, blank=True)
+    emergency_contact_two_name = models.CharField(max_length=128, blank=True)
+    emergency_contact_two_phone = models.CharField(max_length=10, blank=True)
 
     sitter_teams = models.ManyToManyField('Sitter', related_name="sitter_teams", blank=True)
     bookmarks = models.ManyToManyField('Sitter', related_name="bookmarks", blank=True)
