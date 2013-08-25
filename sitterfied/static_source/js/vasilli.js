@@ -114,16 +114,6 @@ define(['jquery', 'jqueryui', 'select2', 'fancybox'], function($){
                 return false;
             });
 
-    // Edit page show/hide note
-            $('.booking_list .desc .note_wrap a').on('click', function(){
-                $(this).toggleClass('hide_text');
-                $(this).parent().parent().parent().find('.note_desc').slideToggle();
-                return false;
-            });
-
-        // Top image popup
-
-        // recommend_popup
 
     // guest_top_info list hide/show
             $(".guest_top_info .hide a").on('click', function(){

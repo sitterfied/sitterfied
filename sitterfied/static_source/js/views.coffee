@@ -13,7 +13,10 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
     Ember.DatePicker = Em.TextField.extend({
         didInsertElement: ()->
             #setup datepicker and keep ember insync with it
-            @.$().datepicker({dateFormat:"yy-mm-dd", numberOfMonths: [ 1, 2 ], minDate:0}).on 'changeDate', =>
+            @.$().datepicker({
+                dateFormat: 'D, dd M yy',
+                numberOfMonths: [ 1, 2 ],
+                minDate:0}).on 'changeDate', =>
                 @.$().trigger('change')
     })
 

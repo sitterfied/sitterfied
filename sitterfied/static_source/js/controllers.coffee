@@ -464,6 +464,10 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
 
     Sitterfied.BookingController = Em.ObjectController.extend(
+        isNoteShown: false
+        toggleNote: () ->
+            isNoteShown = @get('isNoteShown')
+            @set('isNoteShown', !isNoteShown)
     )
 
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(

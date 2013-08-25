@@ -496,7 +496,7 @@ define [
             date = @get('start_date_time')
             if not date
                 return ""
-            return moment(date).format('dddd Do MMMM YYYY')
+            return moment(date).format('dddd, MMMM Do')
         ).property("start_date_time")
         formattedHours: (() ->
             start = @get('start_date_time')
