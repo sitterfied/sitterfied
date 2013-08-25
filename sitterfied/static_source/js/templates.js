@@ -1090,11 +1090,11 @@ function program4(depth0,data) {
 function program6(depth0,data) {
   
   var buffer = '', stack1, hashContexts, hashTypes;
-  data.buffer.push("\n	<div class=\"img_name\">\n	  <img ");
+  data.buffer.push("\n	<div class=\"img_name\">\n	  <img  height=73 width=73 ");
   hashContexts = {'src': depth0,'alt': depth0};
   hashTypes = {'src': "ID",'alt': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
-    'src': ("sitter.avatar"),
+    'src': ("sitter.avatarUrl"),
     'alt': ("sitter.full_name")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push(" />\n      ");
@@ -2289,7 +2289,11 @@ function program1(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleMultipleSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">Select multiple sitters</a></div>\n			<div ");
+  data.buffer.push(">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "multipleSittersText", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</a></div>\n			<div ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleFilterSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -3681,7 +3685,7 @@ function program24(depth0,data) {
   hashContexts = {'class': depth0};
   hashTypes = {'class': "STRING"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
-    'class': ("in_sitter_team:active :heart")
+    'class': ("inSitterTeam:active :heart")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("></div>\n	");
   hashTypes = {};
@@ -4292,7 +4296,7 @@ function program3(depth0,data) {
   data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n                  ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "child", "in", "controllers.childs", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "child", "in", "controllers.children", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n				  <a class=\"button button_small\" ");
   hashTypes = {};

@@ -9,11 +9,11 @@ define [
             urlRoot = Ember.get(klass, 'url')
             if not urlRoot
                 k = klass.toString().toLowerCase().slice(1)
-                urlRoot = "/" + k + "s"
+                urlRoot =  k + "s"
             if not Ember.isEmpty(id)
-                return "/api" + urlRoot + "/" + id + "/"
+                return "/api/" + urlRoot + "/" + id + "/"
             else
-                return "/api" + urlRoot + "/"
+                return "/api/" + urlRoot + "/"
 
         findMany: (klass, records, ids) ->
             url = this.buildURL(klass)
@@ -313,8 +313,8 @@ define [
         bookmarks: hasMany("Sitterfied.Parent",{key:" bookmarks"})
         isBookmarked: (() ->
             bookmarks = Sitterfied.currentUser.get('bookmarks')
-            return bookmarks.indexOf(this) != -1
-        ).property("Sitterfied.currentUser.bookmarks.@each")
+            return bookmarks.findProperty('id', this.get('id'))?
+        ).property("Sitterfied.currentUser.bookmarks.@each", "Sitterfied.currentUser.bookmarks.lenth")
         shortBio: (() ->
             bio = @get('biography')
             if not bio?
@@ -342,13 +342,14 @@ define [
 
         inSitterTeam: (() ->
             sitterTeam = Sitterfied.currentUser.get('sitter_teams')
-            return sitterTeam.indexOf(this) >= 0
-        ).property("Sitterfied.currentUser.sitter_teams.@each")
+            return sitterTeam.findProperty('id', this.get('id'))?
+        ).property("Sitterfied.currentUser.sitter_teams.@each", "Sitterfied.currentUser.sitter_teams.length")
 
         calc_total_exp: ((value) ->
-            return @get('infant_exp') + @get('toddler_exp') + @get('preschool_exp') + @get('school_ageExp') + @get('pre_teenExp') + @get('teen_exp')
+            return @get('infant_exp') + @get('toddler_exp') + @get('preschool_exp') + @get('school_age_exp') + @get('pre_teenExp') + @get('teen_exp')
         ).property('infant_exp','toddler_exp','preschool_exp', 'school_ageExp', 'pre_teenExp', 'teen_exp')
     )
+
     Sitterfied.Sitter.adapter = Adapter.create()
 
     Sitterfied.Language = Ember.Model.extend(
@@ -381,7 +382,7 @@ define [
 
     Sitterfied.Child = Ember.Model.extend(
         id: attr()
-        parent: belongsTo('Sitterfied.Parent'), {key:"parent"},
+        parent: belongsTo('Sitterfied.Parent', {key:"parent"})
         name: attr()
         dob: attr(Date)
         school: attr()
@@ -421,6 +422,7 @@ define [
 
     )
     Sitterfied.Child.adapter = Adapter.create()
+    Sitterfied.Child.url = "children"
 
     Sitterfied.SitterReview = Ember.Model.extend(
         id: attr()

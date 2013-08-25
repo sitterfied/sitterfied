@@ -1,15 +1,12 @@
 define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
-
-
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-        #I know childs is a bad name, but data has issues with a custom name
         needs: ['certifications'
                 'languages'
                 'specialneeds'
                 'otherServices'
                 'friends'
-                'childs']
+                'children']
         accountType: parent_or_sitter
 
         isSitter: (() ->
@@ -21,13 +18,10 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         ).property('parent_or_sitter')
 
         saveSettings: () ->
-            this.get('controllers.childs').map (child)->
-                child.save()
-
             model = this.get('model')
-
-            #force a save since we might have m2m associations
+            model.set('isDirty', true)
             model.save()
+            model.get('children').save()
             model.get('settings').save()
 
 
@@ -73,53 +67,40 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             alert("delete group, " + group)
 
         newChild: () ->
-
-            newChild = Sitterfied.Child.createRecord(
+            newChild = Sitterfied.Child.create(
                 parent: this.get('content')
                 name:""
                 school: ""
                 dob: new Date
             )
-            #this.get('controllers.childs').pushObject(newChild)
 
 
         saveCertification: () ->
-
             newCert = this.get('controllers.certifications.newCert')
             if newCert == ''
                 return
-            transaction = this.get("store").transaction();
-            certification = transaction.createRecord(Sitterfied.Certification,{certification:newCert})
-            transaction.commit()
+            Sitterfied.Certification.create({certification:newCert}).save()
             this.set('controllers.certifications.newCert', '')
 
         saveService: () ->
-
             newService = this.get('controllers.otherServices.newService')
             if newService == ''
                 return
-            transaction = this.get("store").transaction();
-            service = transaction.createRecord(Sitterfied.OtherService,{service:newService})
-            transaction.commit()
+            Sitterfied.OtherService.create({service:newService}).save()
             this.set('controllers.otherServices.newService', '')
 
         saveLanguage: () ->
             newLanguage = this.get('controllers.languages.newLanguage')
             if newLanguage == ''
                 return
-            transaction = this.get("store").transaction();
-            language = transaction.createRecord(Sitterfied.Language,{language:newLanguage})
-            transaction.commit()
+            Sitterfied.Language.create({language:newLanguage}).save()
             this.set('controllers.languages.newLanguage', '')
-
 
         saveNeed: () ->
             newNeed = this.get('controllers.specialneeds.newNeed')
             if newNeed == ''
                 return
-            transaction = this.get("store").transaction();
-            need = transaction.createRecord(Sitterfied.SpecialNeed,{need:newNeed})
-            transaction.commit()
+            Sitterfied.SpecialNeed.create({need:newNeed}).save()
             this.set('controllers.specialneeds.newNeed', '')
 
 
@@ -149,10 +130,11 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
     Sitterfied.BookController = Em.ObjectController.extend(
         cancel: () ->
-            this.get('content.transaction').rollback()
             this.transitionTo('search');
         book: () ->
-            this.get('content.transaction').commit()
+            bookings = Sitterfied.get('onDeckBooking')
+            bookings.save()
+            Sitterfied.currentUser.get('bookings').pushObject(bookings)
             this.transitionTo('done');
 
         multiple: (() ->
@@ -209,9 +191,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.SitterController  = Em.ObjectController.extend(
         book: () ->
-            store = this.get('store')
-            transaction = store.transaction()
-            booking = Sitterfied.Booking.createRecord
+            booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
@@ -233,9 +213,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             this.transitionTo('book')
 
         interview: () ->
-            store = this.get('store')
-            transaction = store.transaction()
-            booking = Sitterfied.Booking.createRecord
+            booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
@@ -270,15 +248,14 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 return 'local'
         ).property('inSitterTeam', 'inFriendsTeam', 'inLocalTeam')
 
-        inSitterTeam: (() ->
-            return @get('in_sitter_team')
-        ).property()
         inFriendsTeam: (() ->
-            return @get('in_friends_team')
-        ).property()
+            return @get('in_friends_team') and not @get('inSitterTeam')
+        ).property('inSitterTeam')
+
         inLocalTeam: (() ->
-            return @get('in_friends_team') == false and @get('in_sitter_team') == false
-        ).property()
+            return not @get('in_friends_team') and not @get('inSitterTeam')
+        ).property('inSitterTeam')
+
         isSelected: (() ->
             selected = @get('parentController.selectedSitters')
             return selected.indexOf(@get('content')) != -1
@@ -310,7 +287,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             "parentController.certifications.@each", "parentController.services.@each",)
 
     )
-    Sitterfied.ChildsController  = Em.ArrayController.extend(
+    Sitterfied.ChildrenController  = Em.ArrayController.extend(
     )
 
     Sitterfied.SearchController  = Em.ArrayController.extend(
@@ -361,26 +338,28 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             content: Ember.A()
 
         sitterTeam: (() ->
-            return @filterProperty('in_sitter_team', true)
-        ).property('content.@each')
+            return @filterProperty('inSitterTeam', true)
+        ).property('content.@each.inSitterTeam')
+
         friendTeam: (() ->
-            return @filterProperty("in_friends_team", true)
-        ).property('content.@each')
+            return @filterProperty("inFriendsTeam", true)
+        ).property('content.@each.inSitterTeam')
+
         localTeam: (() ->
-            return @filterProperty("in_friends_team", false).filterProperty('in_sitter_team', false)
-        ).property('content.@each')
+            return @filterProperty("inLocalTeam", true)
+        ).property('content.@each.inSitterTeam')
 
         filteredSitterTeam: (() ->
             return @get('sitterTeam').filterProperty("passesFilters", true)
-        ).property('sitterTeam.@each.passesFilters')
+        ).property('sitterTeam.@each.passesFilters', 'sitterTeam.length')
 
         filteredFriendTeam: (() ->
             return @get('friendTeam').filterProperty("passesFilters", true)
-        ).property('friendTeam.@each.passesFilters')
+        ).property('friendTeam.@each.passesFilters', 'friendTeam.length')
 
         filteredLocalTeam: (() ->
             return @get('localTeam').filterProperty("passesFilters", true)
-        ).property('localTeam.@each.passesFilters')
+        ).property('localTeam.@each.passesFilters', 'localTeam.length')
 
         zoomToLocalTeam: () ->
             $.scrollTo("#localteam", 500)
@@ -389,7 +368,19 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         zoomToSitterTeam: () ->
             $.scrollTo("#sitterteam", 500)
 
-        selectedTeam: []
+        multipleSittersText: (() ->
+            selectedSitters = @get('selectedSitters')
+
+            if not @get('multipleSitters') or Em.isEmpty(selectedSitters)
+                return "Select multiple sitters"
+            else
+                if selectedSitters.get('length') > 1
+                    return selectedSitters.get('lastObject.full_name') + " and " + (selectedSitters.get('length')-1) + " other sitters"
+                else
+                    return selectedSitters.get('lastObject.full_name')
+
+        ).property("selectedSitters.@each", "multipleSitters")
+
         selectedSitterTeam: (() ->
             return @get('selectedSitters').filterProperty("in_sitter_team", true)
         ).property('selectedSitters.@each')
@@ -426,9 +417,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 stop_date_time = moment(@get('when')).toDate()
 
 
-            store = this.get('store')
-            transaction = store.transaction()
-            booking = Sitterfied.Booking.createRecord
+            booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
@@ -446,7 +435,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 rate: 0
 
             booking.get('sitters').addObjects(sitters)
-            transaction.add(booking)
 
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
@@ -455,9 +443,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             if not Sitterfied.typeIsArray sitters
                 sitters = [sitters]
 
-            store = this.get('store')
-            transaction = store.transaction()
-            booking = Sitterfied.Booking.createRecord
+            booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
@@ -475,9 +461,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 rate: 0
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
-            this.transitionTo('book')
-
-
     )
 
     Sitterfied.BookingController = Em.ObjectController.extend(
@@ -487,6 +470,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
 
     Sitterfied.ParentEditBookingsController  = Em.ArrayController.extend(
+
         pendingRequests: (() ->
             return @get('content').filter (item, index, content) ->
                 if item.get('canceled')
@@ -497,6 +481,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 return not accepted and future
 
         ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
         upcomingJobs: (() ->
             return @get('content').filter (item, index, content) ->
                 if item.get('canceled')
@@ -507,6 +492,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 future = item.get('start_date_time') > now
                 return  accepted and future
         ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
         completedJobs: (() ->
             return @get('content').filter (item, index, content) ->
                 if item.get('canceled')
@@ -517,6 +503,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 future = item.get('start_date_time') > now
                 return  accepted and not future
         ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
         missedRequests: (() ->
             return @get('content').filter (item, index, content) ->
                 if item.get('canceled')
@@ -527,10 +514,12 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 future = item.get('start_date_time') > now
                 return  not accepted and not future
         ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
         canceledRequests: (() ->
             return @get('content').filter (item, index, content) ->
                 return item.get('canceled')
         ).property('content.@each.canceled')
+
         declinedRequests: (() ->
             return @get('content').filter (item, index, content) ->
                 declined_sitters = item.get('declined_sitters')
@@ -546,7 +535,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             booking.set('accepted_sitter', sitter)
             booking.save()
 
-        declineBooking: () ->
+        declineBooking: (booking) ->
             sitter = this.get('content')
             booking.declined_sitters.append(sitter)
             booking.save()
@@ -570,4 +559,4 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             reviewController = this.get("controllers.sitterReview")
             review = reviewController.get('model')
             review.save()
-            reviewController.set('model', Sitterfied.SitterReview.createRecord(parent: Sitterfied.currentUser))
+            reviewController.set('model', Sitterfied.SitterReview.create(parent: Sitterfied.currentUser))

@@ -25,7 +25,7 @@
 	</div>
     {{else}}
 	<div class="img_name">
-	  <img {{bindAttr src=sitter.avatar alt=sitter.full_name}} />
+	  <img  height=73 width=73 {{bindAttr src=sitter.avatarUrl alt=sitter.full_name}} />
       {{# if isInterview}}
         <span>Interview {{sitter.first_name}}</span>
       {{ else }}

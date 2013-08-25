@@ -93,11 +93,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             return Sitterfied.currentUser
 
         setupController: (controller, model) ->
-            this.controllerFor('languages').set('model', Sitterfied.Language.find())
-            this.controllerFor('specialneeds', Sitterfied.SpecialNeed).set('model', Sitterfied.SpecialNeed.find())
+            this.controllerFor('languages').set('model', Sitterfied.Language.findAll())
+            this.controllerFor('specialneeds', Sitterfied.SpecialNeed).set('model', Sitterfied.SpecialNeed.findAll())
 
-            children = Sitterfied.Child.find({parent:Sitterfied.currentUser.id})
-            this.controllerFor('childs').set('model', children)
+            children = Sitterfied.currentUser.get('children')
+            this.controllerFor('children').set('model', children)
 
         renderTemplate: () ->
             this.render("parentEdit/profile", {into:"parentEdit", controller: 'currentUser'})
@@ -190,9 +190,9 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
     Sitterfied.SitterEditProfileRoute = Em.Route.extend(
         setupController: (controller, model) ->
-            this.controllerFor('languages').set('model', Sitterfied.Language.find())
-            this.controllerFor('certifications').set('model', Sitterfied.Certification.find())
-            this.controllerFor('otherServices').set('model', Sitterfied.OtherService.find())
+            this.controllerFor('languages').set('model', Sitterfied.Language.findAll())
+            this.controllerFor('certifications').set('model', Sitterfied.Certification.findAll())
+            this.controllerFor('otherServices').set('model', Sitterfied.OtherService.findAll())
 
         renderTemplate: () ->
             this.render("sitterEdit/profile", {into:"sitterEdit", controller: 'currentUser'})
@@ -299,6 +299,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 alert("add friend")
 
             addSitterTeam: (sitter) ->
+                Em.run.begin()
                 sitterTeam = Sitterfied.currentUser.get('sitter_teams')
                 if sitterTeam.findProperty('id', sitter.get('id'))
                     sitter = sitterTeam.findProperty('id', sitter.get('id'))
@@ -308,12 +309,16 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     sitterTeam.pushObject(sitter)
                     sitter.get('sitter_teams').pushObject(Sitterfied.currentUser)
 
+
                 Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()
+                Em.run.end()
 
             bookmark: (sitter) ->
                 bookmarks = Sitterfied.currentUser.get('bookmarks')
-                if bookmarks.indexOf(sitter) >= 0
+
+                if bookmarks.findProperty('id', sitter.get('id'))
+                    sitter = bookmarks.findProperty('id', sitter.get('id'))
                     bookmarks.removeObject(sitter)
                     sitter.get('bookmarks').removeObject(Sitterfied.currentUser)
                 else
