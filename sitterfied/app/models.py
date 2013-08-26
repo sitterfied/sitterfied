@@ -67,7 +67,6 @@ class User(AbstractUser, TimeStampedModel):
     #avatar_url = models.URLField(blank=True)
     #objects = InheritanceManager()
 
-
     def __unicode__(self):
         return self.get_full_name()
 

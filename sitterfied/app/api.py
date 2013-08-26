@@ -24,7 +24,7 @@ user_fields = ('first_name', 'last_name',
                'username', 'last_login',
                'date_joined', 'settings',
                'email', 'languages',
-               'sitter_groups',
+               'sitter_groups', 'avatar',
                'address1', 'address2', 'facebook_id',
                'facebook_token', 'friends',
                'city', 'state',
@@ -40,14 +40,14 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
-    avatar = serializers.Field(source="avatar")
+    avatar = serializers.Field(source="avatar.cdn_url")
 
     class Meta:
         model = models.User
         fields = user_fields + ('parent_or_sitter',)
 
 class SitterSerializer(serializers.ModelSerializer):
-    avatar = serializers.Field(source="avatar")
+    avatar = serializers.Field(source="avatar.cdn_url")
 
     class Meta:
         model = models.Sitter
@@ -101,10 +101,9 @@ class SitterSearchSerializer(SitterSerializer):
         fields = SitterSerializer.Meta.fields + ('in_sitter_team', 'in_friends_team')
 
 class ParentSerializer(serializers.ModelSerializer):
-
     #contacts
     parent_or_sitter = "Parent"
-    avatar = serializers.Field(source="avatar")
+    avatar = serializers.Field(source="avatar.cdn_url")
 
     class Meta:
         model = models.Parent
