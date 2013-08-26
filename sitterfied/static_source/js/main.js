@@ -85,7 +85,6 @@ require({
             Sitterfied.runInitializers()
             Sitterfied.advanceReadiness()
             window.Sitterfied = Sitterfied //take out when finished developing
-
             $(function(){
             })
         });

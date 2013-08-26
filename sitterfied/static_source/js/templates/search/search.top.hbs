@@ -11,7 +11,7 @@
 		</li>
 		<li>
 		  <label for="when">{{# unless overnight }}When{{else}}From{{/unless}}</label>
-          {{view Ember.DatePicker placeholder="Choose date" id="datepicker" class="datepicker" valueBinding="when"}}
+          {{view Ember.DatePicker placeholder="Choose date" id="datepicker" class="datepicker" valueBinding="start_date"}}
 		  <p>
             {{view Ember.Checkbox checkedBinding="overnight" id="check"}}
             <label for="check">Overnight / Multiday booking?</label>
@@ -20,10 +20,10 @@
 		<li class="fatselect">
 		  <label for="from">{{# unless overnight }}From{{/unless}}</label>
           {{view Sitterfied.Select2
-            contentBinding="Sitterfied.SitterTimeRanges"
+            contentBinding="Sitterfied.HourBlocks"
             optionLabelPath="content.name"
             optionValuePath="content.value"
-            selectionBinding="from"
+            valueBinding="start_time"
             id="from"
             }}
 		</li>
@@ -31,10 +31,10 @@
 		  <li class="fatselect">
 		  <label for="to">To</label>
           {{view Sitterfied.Select2
-            contentBinding="Sitterfied.SitterTimeRanges"
+            contentBinding="Sitterfied.HourBlocks"
             optionLabelPath="content.name"
             optionValuePath="content.value"
-            selectionBinding="to"
+            valueBinding="stop_time"
             id="to"
             }}
 		</li>
@@ -46,23 +46,23 @@
           contentBinding="Sitterfied.Kids"
           optionLabelPath="content.name"
           optionValuePath="content.value"
-          selectionBinding="kids"
+          valueBinding="kids"
           }}
 		</li>
 
 		  {{#view Sitterfied.SlideDownView toggleBinding="overnight" tagName="li"}}
 		    <label>To</label>
-            {{view Ember.DatePicker placeholder="Choose date" id="datepicker3" class="datepicker" valueBinding="date_to"}}
+            {{view Ember.DatePicker placeholder="Choose date" id="datepicker3" class="datepicker" valueBinding="stop_date"}}
           {{/view}}
 		  {{#view Sitterfied.SlideDownView toggleBinding="overnight" tagName="li"}}
 		  <label></label>
           <div class="fatselect">
 
             {{view Sitterfied.Select2
-            contentBinding="Sitterfied.SitterTimeRanges"
+            contentBinding="Sitterfied.HourBlocks"
             optionLabelPath="content.name"
             optionValuePath="content.value"
-            selectionBinding="to"
+            valueBinding="stop_time"
             }}
             </div>
           {{/view}}

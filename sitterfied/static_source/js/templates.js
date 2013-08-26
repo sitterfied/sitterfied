@@ -2608,13 +2608,13 @@ function program5(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("\n		  <li class=\"fatselect\">\n		  <label for=\"to\">To</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'id': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'id': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'id': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
-    'contentBinding': ("Sitterfied.SitterTimeRanges"),
+    'contentBinding': ("Sitterfied.HourBlocks"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'selectionBinding': ("to"),
+    'valueBinding': ("stop_time"),
     'id': ("to")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		</li>\n        ");
@@ -2631,7 +2631,7 @@ function program7(depth0,data) {
     'placeholder': ("Choose date"),
     'id': ("datepicker3"),
     'class': ("datepicker"),
-    'valueBinding': ("date_to")
+    'valueBinding': ("stop_date")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n          ");
   return buffer;
@@ -2641,13 +2641,13 @@ function program9(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
   data.buffer.push("\n		  <label></label>\n          <div class=\"fatselect\">\n\n            ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
-    'contentBinding': ("Sitterfied.SitterTimeRanges"),
+    'contentBinding': ("Sitterfied.HourBlocks"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'selectionBinding': ("to")
+    'valueBinding': ("stop_time")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n            </div>\n          ");
   return buffer;
@@ -2672,7 +2672,7 @@ function program9(depth0,data) {
     'placeholder': ("Choose date"),
     'id': ("datepicker"),
     'class': ("datepicker"),
-    'valueBinding': ("when")
+    'valueBinding': ("start_date")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		  <p>\n            ");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
@@ -2687,13 +2687,13 @@ function program9(depth0,data) {
   stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'id': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'id': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'id': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
-    'contentBinding': ("Sitterfied.SitterTimeRanges"),
+    'contentBinding': ("Sitterfied.HourBlocks"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'selectionBinding': ("from"),
+    'valueBinding': ("start_time"),
     'id': ("from")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		</li>\n        ");
@@ -2702,13 +2702,13 @@ function program9(depth0,data) {
   stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		<li class=\"fatselect\">\n\n		  <label>&nbsp;</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.Kids"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
-    'selectionBinding': ("kids")
+    'valueBinding': ("kids")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		</li>\n\n		  ");
   hashContexts = {'toggleBinding': depth0,'tagName': depth0};
@@ -3161,7 +3161,7 @@ function program3(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("	<ul>\n	  <li><span class=\"icon_date\">&nbsp;</span>");
+  data.buffer.push("<ul>\n  <li><span class=\"icon_date\">&nbsp;</span>");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "formattedDate", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -3169,12 +3169,12 @@ function program3(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "formattedHours", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span></li>\n	  <li>");
+  data.buffer.push("</span></li>\n  <li>");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.unless.call(depth0, "isInterview", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\n	    <li><span class=\"icon_pin3\">&nbsp;</span>");
+  data.buffer.push("</li>\n	<li><span class=\"icon_pin3\">&nbsp;</span>");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "address1", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -3190,12 +3190,12 @@ function program3(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "state", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</li>\n        <li>\n	  ");
+  data.buffer.push("</li>\n    <li>\n	  ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.unless.call(depth0, "isInterview", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n      </li>\n	</ul>\n");
+  data.buffer.push("\n    </li>\n</ul>\n");
   return buffer;
   
 });

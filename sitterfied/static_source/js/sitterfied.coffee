@@ -1,6 +1,7 @@
 define ['jquery'
         'ember'
         '_'
+        'model'
         ], ($, Em, _) ->
 
 
@@ -28,32 +29,32 @@ define ['jquery'
       location: 'history'
     )
 
-    Sitterfied.Educations = [
+    Sitterfied.Educations = Em.A [
         "Some High Scool"
         "High Scool Degree"
         "Some College"
         "College Degree"
     ]
 
-    Sitterfied.SitterTimeRanges = [
-        {value:0, name: "Early Morning"}
-        {value:1, name: "Late Morning"}
-        {value:2, name: "Early Afternoon"}
-        {value:3, name: "Late Afternoon"}
-        {value:4, name: "Early Evening"}
-        {value:5, name: "Late Evening"}
+    Sitterfied.SitterTimeRanges = Em.A [
+        Em.Object.create({value:0, name: "Early Morning"})
+        Em.Object.create({value:1, name: "Late Morning"})
+        Em.Object.create({value:2, name: "Early Afternoon"})
+        Em.Object.create({value:3, name: "Late Afternoon"})
+        Em.Object.create({value:4, name: "Early Evening"})
+        Em.Object.create({value:5, name: "Late Evening"})
     ]
-    Sitterfied.Kids = [
-        {value:1, name: "1 Kid"}
-        {value:2, name: "2 Kids"}
-        {value:3, name: "3 Kids"}
-        {value:4, name: "4 Kids"}
-        {value:5, name: "5 Kids"}
-        {value:6, name: "6 Kids"}
-        {value:7, name: "7 Kids"}
-        {value:8, name: "8 Kids"}
-        {value:9, name: "9 Kids"}
-        {value:10, name: "10 Kids"}
+    Sitterfied.Kids = Em.A [
+        Em.Object.create({value:1, name: "1 Kid"})
+        Em.Object.create({value:2, name: "2 Kids"})
+        Em.Object.create({value:3, name: "3 Kids"})
+        Em.Object.create({value:4, name: "4 Kids"})
+        Em.Object.create({value:5, name: "5 Kids"})
+        Em.Object.create({value:6, name: "6 Kids"})
+        Em.Object.create({value:7, name: "7 Kids"})
+        Em.Object.create({value:8, name: "8 Kids"})
+        Em.Object.create({value:9, name: "9 Kids"})
+        Em.Object.create({value:10, name: "10 Kids"})
     ]
 
 
@@ -62,22 +63,22 @@ define ['jquery'
 
     Sitterfied.Years = (num for num in [2013..1995])
     Sitterfied.Days = (num for num in [1..31])
-    Sitterfied.Months = [
-        {value:0, name: "January"}
-        {value:1, name: "February"}
-        {value:2, name: "March"}
-        {value:3, name: "April"}
-        {value:4, name: "May"}
-        {value:5, name: "June"}
-        {value:6, name: "July"}
-        {value:7, name: "August"}
-        {value:8, name: "September"}
-        {value:9, name: "October"}
-        {value:10, name: "November"}
-        {value:11, name: "December"}
+    Sitterfied.Months = Em.A [
+        Em.Object.create({value:0, name: "January"})
+        Em.Object.create({value:1, name: "February"})
+        Em.Object.create({value:2, name: "March"})
+        Em.Object.create({value:3, name: "April"})
+        Em.Object.create({value:4, name: "May"})
+        Em.Object.create({value:5, name: "June"})
+        Em.Object.create({value:6, name: "July"})
+        Em.Object.create({value:7, name: "August"})
+        Em.Object.create({value:8, name: "September"})
+        Em.Object.create({value:9, name: "October"})
+        Em.Object.create({value:10, name: "November"})
+        Em.Object.create({value:11, name: "December"})
     ]
 
-    Sitterfied.States = [
+    Sitterfied.States = Em.A [
             'AL',
             'AK',
             'AZ',
@@ -131,31 +132,31 @@ define ['jquery'
             'WY',
         ]
 
-    Sitterfied.HourBlocks = [
-            {value:"0", name:"12:00 AM"}
-            {value:"1", name:"1:00 AM"}
-            {value:"2", name:"2:00 AM"}
-            {value:"3", name:"3:00 AM"}
-            {value:"4", name:"4:00 AM"}
-            {value:"5", name:"5:00 AM"}
-            {value:"6", name:"6:00 AM"}
-            {value:"7", name:"7:00 AM"}
-            {value:"8", name:"8:00 AM"}
-            {value:"9", name:"9:00 AM"}
-            {value:"10", name:"10:00 AM"}
-            {value:"11", name:"11:00 AM"}
-            {value:"12", name:"12:00 PM"}
-            {value:"13", name:"1:00 PM"}
-            {value:"14", name:"2:00 PM"}
-            {value:"15", name:"3:00 PM"}
-            {value:"16", name:"4:00 PM"}
-            {value:"17", name:"5:00 PM"}
-            {value:"18", name:"6:00 PM"}
-            {value:"19", name:"7:00 PM"}
-            {value:"20", name:"8:00 PM"}
-            {value:"21", name:"9:00 PM"}
-            {value:"22", name:"10:00 PM"}
-            {value:"23", name:"11:00 PM"}
+    Sitterfied.HourBlocks = Em.A [
+            Em.Object.create({value:0, name:"12:00 AM"})
+            Em.Object.create({value:1, name:"1:00 AM"})
+            Em.Object.create({value:2, name:"2:00 AM"})
+            Em.Object.create({value:3, name:"3:00 AM"})
+            Em.Object.create({value:4, name:"4:00 AM"})
+            Em.Object.create({value:5, name:"5:00 AM"})
+            Em.Object.create({value:6, name:"6:00 AM"})
+            Em.Object.create({value:7, name:"7:00 AM"})
+            Em.Object.create({value:8, name:"8:00 AM"})
+            Em.Object.create({value:9, name:"9:00 AM"})
+            Em.Object.create({value:10, name:"10:00 AM"})
+            Em.Object.create({value:11, name:"11:00 AM"})
+            Em.Object.create({value:12, name:"12:00 PM"})
+            Em.Object.create({value:13, name:"1:00 PM"})
+            Em.Object.create({value:14, name:"2:00 PM"})
+            Em.Object.create({value:15, name:"3:00 PM"})
+            Em.Object.create({value:16, name:"4:00 PM"})
+            Em.Object.create({value:17, name:"5:00 PM"})
+            Em.Object.create({value:18, name:"6:00 PM"})
+            Em.Object.create({value:19, name:"7:00 PM"})
+            Em.Object.create({value:20, name:"8:00 PM"})
+            Em.Object.create({value:21, name:"9:00 PM"})
+            Em.Object.create({value:22, name:"10:00 PM"})
+            Em.Object.create({value:23, name:"11:00 PM"})
     ]
 
     Sitterfied.OnDeckBooking = null

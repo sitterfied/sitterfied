@@ -132,15 +132,36 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         cancel: () ->
             this.transitionTo('search');
         book: () ->
-            bookings = Sitterfied.get('onDeckBooking')
-            bookings.save()
-            Sitterfied.currentUser.get('bookings').pushObject(bookings)
-            this.transitionTo('done');
+            booking = Sitterfied.get('onDeckBooking')
+            promise = booking.save()
+            promise.then (booking) =>
+                #for some reason, this first load strips out start_date and end_date.
+                #it's in the json, just doesn't make it to the object. select2 perhaps?
+                p = booking.reload()
+                p.then =>
+                    Sitterfied.currentUser.get('bookings').pushObject(booking)
+                    this.transitionTo('done', booking);
 
         multiple: (() ->
             return @get('sitters.length') > 1
         ).property("sitters.@each")
     )
+
+
+    Sitterfied.EditBookController = Em.ObjectController.extend(
+        cancel: () ->
+            this.transitionTo('mybookings');
+        book: () ->
+            booking = @get('model')
+            booking.save()
+            this.transitionTo('done', booking);
+        multiple: (() ->
+            return @get('sitters.length') > 1
+        ).property("sitters.@each")
+    )
+
+
+
 
     Sitterfied.SitterEditSchedlueController =  Em.ObjectController.extend({
         saveSchedlue: () ->
@@ -412,28 +433,34 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 sitters = [sitters]
 
             if @get('overnight')
-                stop_date_time = moment(@get('date_to')).toDate()
+                stop_date = @get('stop_date')
             else
-                stop_date_time = moment(@get('when')).toDate()
+                stop_date = @get('start_date')
 
+            start_moment = moment(@get('start_date'))
+            start_moment.hour(@get('start_time'))
+            start_date_time = start_moment.toDate()
+
+            stop_moment = moment(stop_date)
+            stop_moment.hour(@get('stop_time'))
+            stop_date_time = stop_moment.toDate()
 
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
-                overnight: false
+                overnight: @get("overnight")
                 booking_status: "Pending"
                 booking_type: "Job"
-                start_date_time: moment(@get('when')).toDate()
+                start_date_time: start_date_time
                 stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
                 address2: Sitterfied.get('currentUser.address2')
                 city: Sitterfied.get('currentUser.city')
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
-                num_children: Sitterfied.get('currentUser.children.length')
+                num_children: @get('kids')
                 emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
                 rate: 0
-
             booking.get('sitters').addObjects(sitters)
 
             Sitterfied.set('onDeckBooking', booking)
@@ -443,14 +470,28 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             if not Sitterfied.typeIsArray sitters
                 sitters = [sitters]
 
+            if @get('overnight')
+                stop_date = @get('start_date')
+            else
+                stop_date = @get('stop_date')
+
+            start_moment = moment(@get('start_date'))
+            start_moment.hour(@get('start_time'))
+            start_date_time = start_moment.toDate()
+
+            stop_moment = moment(stop_date)
+            stop_moment.hour(@get('stop_time'))
+            stop_date_time = stop_moment.toDate()
+
+
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
                 booking_status: "Pending"
                 booking_type: "Interview"
-                start_date_time: moment(@get('when')).toDate()
-                stop_date_time: moment(@get('date_to')).toDate()
+                start_date_time: start_date_time
+                stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
                 address2: Sitterfied.get('currentUser.address2')
                 city: Sitterfied.get('currentUser.city')
@@ -461,6 +502,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 rate: 0
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
+            this.transitionTo('book')
     )
 
     Sitterfied.BookingController = Em.ObjectController.extend(

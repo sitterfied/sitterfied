@@ -13,11 +13,14 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
     Ember.DatePicker = Em.TextField.extend({
         didInsertElement: ()->
             #setup datepicker and keep ember insync with it
-            @.$().datepicker({
+            @$().datepicker(
                 dateFormat: 'D, dd M yy',
+                showOtherMonths: true,
+                selectOtherMonths: true,
                 numberOfMonths: [ 1, 2 ],
-                minDate:0}).on 'changeDate', =>
-                @.$().trigger('change')
+                minDate:0
+            ).on 'changeDate', =>
+                @$().trigger('change')
     })
 
 
@@ -306,7 +309,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
       # has been loaded to update options values
 
       # trigger change event on select2
-      itemsLoaded: ->(
+      itemsLoaded: (->
         console.log "select2 items loaded"
         Ember.run.sync()
         Ember.run.next this, ->
@@ -316,7 +319,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
 
       setSelectedValue: (value) ->
         console.log "setting select2 selected value to " + value
-        @$().select2 "val", value
+        @$().select2 "val", value if @$()
 
 
       # observe controller selected content and update select2
@@ -339,7 +342,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
                 newval = []
             else
                 newval = ""
-        else if fieldname == "content"
+        else if fieldname == "content" or typeof(selection) != "object"
             newval = selection
         else
             newval =  Em.get(selection, fieldname)

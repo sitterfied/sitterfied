@@ -26,8 +26,7 @@ define [
 
     Date = {
         serialize: (date) ->
-            if date then moment(date).format("YYYY-MM-DD hh:mm") else null
-
+            if date then moment(date).toISOString() else null
         deserialize: (date) ->
             if date then moment(date).toDate() else null
     }
@@ -35,10 +34,8 @@ define [
     Boolean = {
         serialize: (bool) ->
             return bool
-
         deserialize: (bool) ->
             return bool
-
     }
 
     Sitterfied.User = Ember.Model.extend(
@@ -512,7 +509,7 @@ define [
             date = @get('start_date_time')
             if not date
                 return
-            if arguments.length == 1
+            if not value?
                 return moment(date).hour()
             else
                 date = moment(date)
@@ -525,8 +522,8 @@ define [
             date = @get('stop_date_time')
             if not date
                 return
-            if arguments.length == 1
-                return moment(date).format('h:mm a');
+            if not value?
+                return moment(date).hour()
             else
                 date = moment(date)
                 date.hour(value)
@@ -535,20 +532,27 @@ define [
         ).property('stop_date_time')
 
         calendarDate: ((key, value) ->
+            fmt_str = "ddd, Do MMM YYYY"
             date = @get('start_date_time')
             date = moment(date)
             if not date
                 return
             if arguments.length == 1
-                return date.format("YYYY-MM-DD")
+                return date.format(fmt_str)
             else
                 v = moment(value)
                 date.date(v.date())
                 date.year(v.year())
                 date.month(v.month())
                 @set('start_date_time', date.toDate())
-                return v.format("YYYY-MM-DD")
+                return v.format(fmt_str)
         ).property('start_date_time')
+
+        children_binding: ((key, value) ->
+            if value?
+                @set('num_children', value.get('value'))
+            return @get('num_children')
+        ).property('num_children')
 
         thisSitterAccepted: (() ->
             current_user = Sitterfied.currentUser

@@ -29,7 +29,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
         this.route('profile')
         this.route('user', {path: '/user/:user_id/'})
         this.route('mybookings')
-        this.route('done')
+        this.route('done', {path: '/done/:booking_id/'})
         this.route('about')
         this.route('tos')
         this.route('privacy')
@@ -44,20 +44,19 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
 
     Sitterfied.DoneRoute = Em.Route.extend(
-        model: () ->
-            return Sitterfied.get('onDeckBooking')
-
         renderTemplate: () ->
             this.render("done", {outlet: 'content'})
             this.render('done.top', { outlet: 'top' })
     )
 
     Sitterfied.BookRoute = Em.Route.extend(
-        model: () ->
-            return Sitterfied.get('onDeckBooking')
+        setupController: (controller, model) ->
+            controller.set('model',  Sitterfied.get('onDeckBooking'))
+            controller.set('content',  Sitterfied.get('onDeckBooking'))
+
 
         redirect: () ->
-            if not this.model()
+            if not Sitterfied.get('onDeckBooking')?
                 this.transitionTo('search')
             else
                 return false
@@ -72,12 +71,12 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             Sitterfied.Booking.find(params.booking_id)
 
         setupController: (controller, model) ->
-            Sitterfied.set('onDeckBooking', model) #for the done screen
-            this.controllerFor('book').set('model', model)
+            controller.set('model', model)
+            controller.set('content', model)
 
         renderTemplate: () ->
-            this.render("book", {outlet: 'content', controller:'book'})
-            this.render('book.top', { outlet: 'top', controller:'book' })
+            this.render("book", {outlet: 'content', controller:'editBook'})
+            this.render('book.top', { outlet: 'top', controller:'editBook' })
     )
     Sitterfied.ParentEditRoute = Em.Route.extend(
         model: () ->

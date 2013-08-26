@@ -76,6 +76,7 @@ def search(request):
                                                                'sitter_teams',
                                                                'other_services',
                                                                'bookings',
+                                                               'bookmarks',
                                                                'settings').all()
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
