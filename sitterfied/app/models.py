@@ -67,6 +67,10 @@ class User(AbstractUser, TimeStampedModel):
     #avatar_url = models.URLField(blank=True)
     #objects = InheritanceManager()
 
+    @property
+    def avatar_url(self):
+        return getattr(self.avatar, 'cdn_url', None)
+
     def __unicode__(self):
         return self.get_full_name()
 

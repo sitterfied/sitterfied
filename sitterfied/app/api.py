@@ -40,14 +40,14 @@ class LanguageSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
-    avatar = serializers.Field(source="avatar.cdn_url")
+    avatar = serializers.Field(source="avatar_url")
 
     class Meta:
         model = models.User
         fields = user_fields + ('parent_or_sitter',)
 
 class SitterSerializer(serializers.ModelSerializer):
-    avatar = serializers.Field(source="avatar.cdn_url")
+    avatar = serializers.Field(source="avatar_url")
 
     class Meta:
         model = models.Sitter
@@ -103,7 +103,7 @@ class SitterSearchSerializer(SitterSerializer):
 class ParentSerializer(serializers.ModelSerializer):
     #contacts
     parent_or_sitter = "Parent"
-    avatar = serializers.Field(source="avatar.cdn_url")
+    avatar = serializers.Field(source="avatar_url")
 
     class Meta:
         model = models.Parent
