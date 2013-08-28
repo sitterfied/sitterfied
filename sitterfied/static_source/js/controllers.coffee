@@ -444,7 +444,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             if selected.indexOf(sitter) == -1
                 selected.pushObject(sitter)
             else
-                selected.popObject(sitter)
+                selected.removeObject(sitter)
 
         clearSelected: () ->
             @set('selectedSitters.content', Em.A())
