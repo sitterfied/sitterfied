@@ -166,6 +166,13 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
 
         shinkDropdowns: () ->
             @set('_show', false)
+            #ug this is a hack
+            @set('controller.didScrollHide', true)
+
+        slideDown: () ->
+            @$().slideDown()
+            @set('controller.didScrollHide', false)
+
 
         didInsertElement: () ->
             this._super();

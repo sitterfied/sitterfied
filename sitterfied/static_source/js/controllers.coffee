@@ -333,7 +333,11 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
         toggleMultipleSitters: () ->
             isMultipleSitters = @get('multipleSitters')
-            @set('multipleSitters', !isMultipleSitters)
+            #ugly hack :(
+            if @get('didScrollHide') and isMultipleSitters
+                @notifyPropertyChange('multipleSitters')
+            else
+                @set('multipleSitters', !isMultipleSitters)
 
         toggleFilterSitters: () ->
             isFilterSitters = @get('filterSitters')
