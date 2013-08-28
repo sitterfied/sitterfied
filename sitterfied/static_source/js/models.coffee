@@ -280,7 +280,6 @@ define [
         occupation:  attr()
 
         sitter_teams: hasMany("Sitterfied.Parent",{key:"sitter_teams"})
-        reviews: hasMany('Sitterfied.SitterReview', {key:"reviews"})
         certifications: hasMany('Sitterfied.Certification', {key:"certifications"})
         other_services: hasMany('Sitterfied.OtherService', {key:"other_services"})
         one_child_min_rate: attr(Number)
@@ -335,7 +334,7 @@ define [
 
         recommends: (() ->
             return this.get('reviews').filterProperty('recommended', true)
-        ).property('reviews.@each')
+        ).property('reviews.@each.recommended', 'reviews')
 
         inSitterTeam: (() ->
             sitterTeam = Sitterfied.currentUser.get('sitter_teams')

@@ -3,7 +3,8 @@
 	<!-- sitter_tabs_wrap -->
 
     <div class="sitter_tabs_wrap my_tabs_style">
-      {{# view Sitterfied.FixedView class="stabs_block" id="fixed_tabs" }}
+      {{# view Sitterfied.FixedView  tagName="span" id="fixed_tabs"}}
+      <div class="stabs_block" >
 		<nav>
 		  <ul class="tab_select">
 			<li class="active"><a {{action 'zoomToSitterTeam'}}>sitter<br />team<span>{{filteredSitterTeam.length}}</span></a></li>
@@ -89,13 +90,40 @@
 			<p><a {{action "toggleFilterSitters"}}>Hide Filters</a></p>
           {{/ view}}
 
-
 		  <div class="sort_filter clear">
-			<div class="sort"><a href="#">Sort by</a></div>
-			<div class="multiple_select"><a {{action "toggleMultipleSitters"}}>{{multipleSittersText}}</a></div>
+			<div {{action "toggleSortSitters"}} class="sort"><a href="#">Sort by</a></div>
+			<div {{action "toggleMultipleSitters"}} class="multiple_select"><a>{{multipleSittersText}}</a></div>
 			<div {{action "toggleFilterSitters"}} class="filter"><a>Filter my sitters</a></div>
 		  </div>
 		</div>
+      </div>
+      {{#view Sitterfied.ToggleView class="sort_block" toggleBinding="sortSitters" tagName="ul"}}
+      <li {{action sortSet "isBookmarked" false}}>
+        <p>bookmarked</p>
+      </li>
+	  <li><hr></li>
+      {{#view Sitterfied.SortItemView sortProp="rehires" direction=false}}
+		<p>rehires</p>
+	  {{/view}}
+	  <li><hr></li>
+      <li {{action sortSet "total_exp" false}}>
+		<p>experience</p>
+	  </li>
+	  <li><hr></li>
+      <li {{action sortSet "sitter_teams.length" false}}>
+		<p>sitter teams</p>
+	  </li>
+	  <li><hr></li>
+	  {{#view Sitterfied.SortItemView sortProp="one_child_min_rate" direction=true}}
+		<p>rate</p>
+	  {{/view}}
+	  <li><hr></li>
+      <li {{action sortSet "reviews.length" false}}>
+		<p>reviews</p>
+	  </li>
+
+      {{/ view}}
+
       {{/ view}}
       {{# if content }}
         <section id="sitterteam">

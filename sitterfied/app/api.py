@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 
 from django.db.models import Q
 
-
+from django.utils.functional import cached_property
 from rest_framework import serializers, viewsets, permissions
 from rest_framework import filters
 from rest_framework.parsers import FileUploadParser
@@ -77,28 +77,40 @@ class SitterSerializer(serializers.ModelSerializer):
 class SitterSearchSerializer(SitterSerializer):
     in_sitter_team = serializers.SerializerMethodField('is_in_sitter_team')
     in_friends_team = serializers.SerializerMethodField('is_in_friends_team')
+    rehires = serializers.IntegerField(source='rehires', read_only=True)
+
+    @cached_property
+    def is_parent(self):
+        return self.user.is_authenticated() and self.user.is_parent_or_sitter() == 'Parent'
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
-        self.friends = list(self.user.friends.all())
+        self.friends = self.user.friends.select_related('parent') \
+                                        .prefetch_related('parent__sitter_teams') \
+                                        .filter(parent__isnull=False)
+        self.friends_teams  = set()
+
+        for friend in self.friends:
+            [self.friends_teams.add(i.id) for i in friend.parent.sitter_teams.all()]
+
+        if self.is_parent:
+            self.sitter_teams = self.user.parent.sitter_teams.all()
+
         return super(SitterSearchSerializer, self).__init__(*args, **kwargs)
 
     def is_in_sitter_team(self, sitter):
-        if not self.user.is_authenticated() or self.user.is_parent_or_sitter() != 'Parent':
+        if not self.is_parent:
             return False
-        return sitter in self.user.parent.sitter_teams.all()
+        return sitter in self.sitter_teams
 
     def is_in_friends_team(self, sitter):
-        if not self.user.is_authenticated() or self.user.is_parent_or_sitter() != 'Parent':
+        if not self.is_parent:
             return False
-        return sitter.sitter_teams.filter(pk__in=self.friends).exists()
-
-
-
+        return sitter.id in self.friends_teams
 
 
     class Meta(SitterSerializer.Meta):
-        fields = SitterSerializer.Meta.fields + ('in_sitter_team', 'in_friends_team')
+        fields = SitterSerializer.Meta.fields + ('in_sitter_team', 'in_friends_team', 'rehires')
 
 class ParentSerializer(serializers.ModelSerializer):
     #contacts
@@ -136,6 +148,7 @@ class SpecialNeedSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SitterReview
+        fields = ("parent", "sitter", 'recommended', 'review', 'id')
 
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -360,13 +373,13 @@ class SchedlueViewSet(IdFilterViewset):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class ReviewViewSet(IdFilterViewset):
-    queryset = models.SitterReview.objects.all()
+    queryset = models.SitterReview.objects.all().select_related('parent', 'sitter')
     serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )
 
 class BookingViewSet(IdFilterViewset):
-    queryset = models.Booking.objects.all()
+    queryset = models.Booking.objects.all().select_related('parent').prefetch_related('sitters', 'declined_sitters')
     serializer_class = BookingSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('id', )

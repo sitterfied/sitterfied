@@ -1536,3 +1536,47 @@ a {cursor:pointer}
     border-color: #3ae4f8 !important;
     box-shadow: #e9e9e9 5px 3px 5px 0 inset, #3ae4f8 10 -20 5px 1px !important;
 }
+
+.sort_block{
+	position: absolute;
+	width: 100px;
+	border: 1px blue solid;
+	background:#fff;
+	box-shadow:rgba(0,0,0,.16) 0 6px 6px 0;
+	margin-left:40px;
+	margin-top: -20px;
+	z-index: 10;
+}
+
+.sort_block li p{
+	color: #e88649;
+	text-align: center;
+	text-transform:capitalize;
+	padding: 4px;
+
+}
+
+.sort_block li.active p{
+	color: green !important;
+}
+
+
+.sort_block li p:hover{
+	background: gray;
+}
+
+
+.sort_block li hr{
+	margin-left:auto;
+	margin-right:auto;
+
+	width: 20px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	color: gray;
+}
+
+.sort_block {
+	padding-bottom: 4px;
+	padding-top: 4px;
+}

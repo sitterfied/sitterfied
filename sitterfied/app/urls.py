@@ -13,10 +13,11 @@ router.register(r'certifications', api.CertificationViewSet)
 router.register(r'otherservices', api.OtherServiceViewSet)
 router.register(r'special_needs', api.SpecialNeedViewSet)
 router.register(r'schedlues', api.SchedlueViewSet)
-router.register(r'sitter_reviews', api.ReviewViewSet)
+router.register(r'sitterreviews', api.ReviewViewSet)
 router.register(r'languages', api.LanguageViewSet)
 router.register(r'children', api.ChildrenViewSet)
 router.register(r'bookings', api.BookingViewSet)
+
 
 
 

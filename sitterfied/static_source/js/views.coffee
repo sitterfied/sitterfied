@@ -175,6 +175,31 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
             this._super();
             $(window).unbind "scroll", @_event
 
+    Sitterfied.ToggleView = Sitterfied.SlideDownView.extend
+        slideUp: () ->
+            @$().hide( "bounce", { times: 3 }, "fast" )
+        slideDown: () ->
+            @$().show( "bounce", { times: 3 }, "fast" )
+
+
+    Sitterfied.SortItemView = Em.View.extend
+        tagName: "li"
+
+        classNameBindings: ['active']
+
+        click: () ->
+            prop = this.get('sortProp')
+            direction = this.get('direction')
+            this.get('controller').sortSet(prop, direction)
+
+        active: (() ->
+            controller = this.get('controller')
+            sortProp = controller.get('sortProperties')?[0]
+
+            return this.get('sortProp') == sortProp
+        ).property('controller.sortProperties.@each')
+
+
     Sitterfied.BackToTop = Em.View.extend
         init: () ->
             this._super();
@@ -198,9 +223,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
         didInsertElement: () ->
             @$().hide()
             $(window).bind "scroll", @_event
-
-
-
 
 
     Sitterfied.FixedView =  Em.View.extend

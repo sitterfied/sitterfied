@@ -314,11 +314,22 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     Sitterfied.SearchController  = Em.ArrayController.extend(
         multipleSitters: false
         filterSitters: false
+        sortSitters: false
         needs: ['certifications'
                 'languages'
                 #'specialneeds'
                 'otherServices'
                 ]
+
+        toggleSortSitters: () ->
+            isSortSitters = @get('sortSitters')
+            @set('sortSitters', !isSortSitters)
+            #click anywhere else and it disappears
+            Em.run.next () =>
+                $(document).one "click", () =>
+                    @set('sortSitters', false)
+
+
 
         toggleMultipleSitters: () ->
             isMultipleSitters = @get('multipleSitters')
@@ -327,6 +338,23 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         toggleFilterSitters: () ->
             isFilterSitters = @get('filterSitters')
             @set('filterSitters', !isFilterSitters)
+
+        sortSet:(sortProp, direction) ->
+            debugger
+            Em.run.begin()
+            @set('sortProperties', [])
+            @get('sortProperties').push(sortProp)
+            #for hilight
+            @set('sortProperty', sortProp)
+
+            @set('sortAscending', direction)
+            @set('sortSitters', false)
+            #force a resort
+            Em.run.end()
+            @notifyPropertyChange('content')
+
+
+
 
         resetFilters: () ->
             Em.run.begin()

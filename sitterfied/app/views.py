@@ -64,6 +64,7 @@ def index(request, referred_by=None):
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from api import SitterSearchSerializer
+from django.db.models import Count, Max
 
 @api_view(['GET'])
 def search(request):
@@ -77,7 +78,9 @@ def search(request):
                                                                'other_services',
                                                                'bookings',
                                                                'bookmarks',
-                                                               'settings').all()
+                                                               'settings')
+
+    sitters = sitters.annotate(rehires=Count("booking__parent")).all()
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
 
