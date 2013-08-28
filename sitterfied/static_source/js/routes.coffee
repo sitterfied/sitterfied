@@ -1,7 +1,8 @@
 define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sitterfied) ->
     Sitterfied.Router.map(() ->
         this.resource('sitter', {path: '/sitter/:sitter_id/'}, () ->
-            this.route('about')
+            this.route('snapshot')
+            this.route('details')
             this.route('reviews')
             this.route('friends')
         )
@@ -144,15 +145,17 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
     Sitterfied.SitterIndexRoute = Em.Route.extend(
         redirect: () ->
-            this.transitionTo('sitter.about')
-
+            this.transitionTo('sitter.snapshot')
     )
 
 
-    Sitterfied.SitterAboutRoute = Em.Route.extend(
-
+    Sitterfied.SitterSnapshotRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("sitter.about", {into:"sitter", controller: 'sitter'})
+            this.render("sitter.snapshot", {into:"sitter", controller: 'sitter'})
+    )
+    Sitterfied.SitterDetailsRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render("sitter.details", {into:"sitter", controller: 'sitter'})
     )
 
     Sitterfied.SitterReviewsRoute = Em.Route.extend(

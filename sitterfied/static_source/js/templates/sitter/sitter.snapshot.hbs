@@ -1,0 +1,30 @@
+<!-- about_block -->
+	  <div class="tab_content about_block" id="tab-1">
+		<ul class="subtab_select">
+		  <li class="active"><a>Snapshot</a></li>
+		  <li>{{# linkTo sitter.details }}Details{{/linkTo}}</li>
+		</ul>
+		<!-- snapshot_block -->
+		<div class="subtab_content snapshot_block" id="tab-1-1">
+		  <p>Need to know</p>
+		  <ul class="clear">
+            {{# if current_student }}
+			  <li><span class="icon_certification">&nbsp;</span><strong>Studying</strong> at <strong>{{last_school}}</strong></li>
+            {{/ if}}
+            {{# if highest_education}}
+			  <li><span class="icon_education">&nbsp;</span>{{highest_education}}</li>
+            {{/ if}}
+			<li><span class="icon_pin2">&nbsp;</span>Located in <strong>{{city}}, {{state}}</strong></li>
+			{{# comment }}<li><span class="icon_certification2">&nbsp;</span><strong>CPR</strong> and <strong>First Aid</strong> certified</li>{{/comment}}
+			<li><span class="icon_age">&nbsp;</span><strong>{{age}}</strong> years old</li>
+			{{# comment}}<li><span class="icon_other">&nbsp;</span>Will do <strong>light housekeeping</strong></li>{{/comment}}
+            {{#if has_drivers_licence}}
+			  <li><span class="icon_transportation">&nbsp;</span>Has <strong>current driver’s license</strong></li>
+            {{/if}}
+            <li><span class="icon_rates">&nbsp;</span><strong>${{one_child_min_rate}}/hr - ${{one_child_max_rate}}/hr</strong> standard rates</li>
+			<li><span class="icon_experience">&nbsp;</span><strong>{{total_exp}} years</strong> of experience with kids</li>
+		  </ul>
+		</div>
+		<!-- /snapshot_block -->
+	  </div>
+	  <!-- /about_block -->
