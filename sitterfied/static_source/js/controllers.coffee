@@ -340,7 +340,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             @set('filterSitters', !isFilterSitters)
 
         sortSet:(sortProp, direction) ->
-            debugger
             Em.run.begin()
             @set('sortProperties', [])
             @get('sortProperties').push(sortProp)
