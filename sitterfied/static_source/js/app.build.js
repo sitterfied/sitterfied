@@ -1,6 +1,6 @@
 {
     baseUrl: '.',
-	name:"../../../build/almond",
+	name: "../../../build/almond",
     include: ['main'],
     insertRequire: ['main'],
     out: 'sitterfied.js',
