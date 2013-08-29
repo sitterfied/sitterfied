@@ -1,5 +1,6 @@
 require({
     paths: {
+        "require": "require/require",
         "cs": "require/cs",
         "ember": "lib/ember",
         "handlebars" : "lib/handlebars",
@@ -20,6 +21,7 @@ require({
 		'ucare': 'lib/uploadcare-0.11.2.min'
     },
     waitSeconds: 0,
+
     shim:{
         data: {
             exports: 'DS',
@@ -37,6 +39,7 @@ require({
             deps: ['jquery', 'handlebars']
         },
         handlebars: {
+			deps: ['jquery'],
             exports: "Handlebars",
         },
         djangoRestAdapter: {
@@ -72,19 +75,17 @@ require({
 
 
     },
-        urlArgs: "bust=" +  (new Date()).getTime(),
+    //urlArgs: "bust=" +  (new Date()).getTime(),
 },
-        ["jquery", 'ember',
+        ['require', "jquery", 'ember',
          "cs!sitterfied", "csrf",
          "cs!routes", "cs!models",
          "cs!injections", "cs!controllers",
          "cs!views",
          'scrollto',
-         "vasilli",  'facebook',], function($, Em, Sitterfied){
-            // using jQuery
-            Sitterfied.runInitializers()
-            Sitterfied.advanceReadiness()
-            window.Sitterfied = Sitterfied //take out when finished developing
-            $(function(){
-            })
-        });
+         "vasilli",  'facebook'], function(require, $,  Em, Sitterfied){
+             // using jQuery
+             Sitterfied.runInitializers();
+             Sitterfied.advanceReadiness();
+             window.Sitterfied = Sitterfied; //take out when finished developing
+         })

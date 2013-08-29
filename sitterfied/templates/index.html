@@ -24,7 +24,10 @@
 	  UPLOADCARE_TABS = "file facebook"
 	  UPLOADCARE_CROP = "171x171 upscale"
     </script>
-    <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
+
+    <!-- <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script> -->
+	<script src="{{STATIC_URL}}js/lib/handlebars.js"></script>
+	<script src="{{STATIC_URL}}js/sitterfied-min.js"></script>
 
     <script>
       var user_json = '{{user_json|safe}}'
@@ -92,9 +95,9 @@
             <img src="{{STATIC_URL}}images/logo.png" alt="" />
             {% verbatim %}
             {{/linkTo}}
-            {% endverbatim %}
 		    <!-- top menu -->
-            <div class="menu_trigger"></div>
+			{{view Sitterfied.TriggerView class="menu_trigger"}}
+            {% endverbatim %}
             <nav>
               <ul>
                 {% verbatim %}

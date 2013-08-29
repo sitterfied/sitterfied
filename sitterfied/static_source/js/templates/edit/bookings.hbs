@@ -1,5 +1,5 @@
 <!-- bookings_block -->
-	  <div class="mob_tab_trigger">Bookings</div>
+{{# view Sitterfied.MobTriggerView }} Bookings {{/ view}}
 	  <div class="tab_content bookings_block" id="tab-3">
 		<ul class="subtab_select">
 		  <li><a {{action zoomToPending}}><span>{{pendingRequests.length}}</span>Pending Requests</a></li>
@@ -9,7 +9,10 @@
 		  <li><a {{action zoomToDeclined}}><span>{{declinedRequests.length}}</span>Declined Jobs</a></li>
 		  <li><a {{action zoomToCanceled }}><span>{{canceledRequests.length}}</span>Canceled Jobs</a></li>
 		</ul>
-		<div class="mob_tab_trigger active"><span>{{pendingRequests.length}}</span>Pending Requests</div>
+        {{# view Sitterfied.MobTriggerView active=true }}
+          <span>{{pendingRequests.length}}</span>
+          Pending Requests
+        {{/ view}}
 		<!-- pending_requests_block -->
 		<div class="subtab_content pending_requests_block" id="tab-1-1">
 		  <ul class="booking_list">
@@ -20,7 +23,9 @@
 		</div>
 		<!-- /pending_jobs_block -->
 
-		<div class="mob_tab_trigger "><span>{{upcomingJobs.length}}</span>Upcoming Jobs</div>
+        {{# view Sitterfied.MobTriggerView }}
+          <span>{{upcomingJobs.length}}</span>Upcoming Jobs
+        {{/ view}}
 		<!-- pending_requests_block -->
 		<div class="subtab_content upcoming_jobs_block" id="tab-1-2">
 		  <ul class="booking_list">
@@ -30,8 +35,9 @@
 		  </ul>
 		</div>
 		<!-- /upcomingJobs_block -->
-
-		<div class="mob_tab_trigger"><span>{{completedJobs.length}}</span>Completed Jobs</div>
+        {{# view Sitterfied.MobTriggerView }}
+		  <span>{{completedJobs.length}}</span>Completed Jobs
+        {{/ view}}
 		<!-- completed_jobs_block -->
 		<div class="subtab_content completed_jobs_block" id="tab-1-3">
           <ul class="booking_list">
@@ -41,8 +47,9 @@
           </ul>
 		</div>
 		<!-- /completed_jobs_block -->
-
-		<div class="mob_tab_trigger"><span>{{missedRequests.length}}</span>Missed Requests</div>
+        {{# view Sitterfied.MobTriggerView }}
+		  <span>{{missedRequests.length}}</span>Missed Requests
+        {{/ view}}
 		<!-- missed_requests_block -->
 		<div class="subtab_content missed_requests_block" id="tab-1-4">
           <ul class="booking_list">
@@ -53,14 +60,16 @@
 		</div>
 		<!-- /missed_requests_block -->
 
-        <!--
-        <div class="mob_tab_trigger"><span>0</span>Expired Requests</div>
+        {{# view Sitterfied.MobTriggerView }}
+          <span>0</span>Expired Requests
+        {{/ view}}
         <div class="subtab_content expired_requests_block" id="tab-1-5">
         </div>
         -->
 
-
-		<div class="mob_tab_trigger"><span>{{declinedRequests.length}}</span>Declined Jobs</div>
+        {{# view Sitterfied.MobTriggerView }}
+		  <span>{{declinedRequests.length}}</span>Declined Jobs
+        {{/ view}}
 		<!-- declined_jobs_block -->
 		<div class="subtab_content declined_jobs_block" id="tab-1-6">
           <ul class="booking_list">
@@ -70,8 +79,9 @@
           </ul>
 		</div>
 		<!-- /declined_jobs_block -->
-
-		<div class="mob_tab_trigger"><span>{{canceledRequests.length}}</span>Canceled Jobs</div>
+        {{# view Sitterfied.MobTriggerView }}
+		  <span>{{canceledRequests.length}}</span>Canceled Jobs
+        {{/ view}}
 		<!-- canceled_jobs_block -->
 		<div class="subtab_content canceled_jobs_block" id="tab-1-7">
           <ul class="booking_list">

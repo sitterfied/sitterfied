@@ -271,6 +271,21 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
                 $('.header .top_info .desc .full_desc').fadeOut()
 
 
+    Sitterfied.MobTriggerView = Em.View.extend
+        classNameBindings: ['active', ":mob_tab_trigger", "my_mob_tab"]
+        active: false
+        my_mob_tab:  false
+        click: () ->
+            @toggleProperty('active')
+            @$("+ .subtab_content").slideToggle()
+            @$("+ .tab_content").slideToggle()
+
+
+    Sitterfied.TriggerView = Em.View.extend
+        click: () ->
+            @$().toggleClass('active')
+            $('.header nav').fadeToggle()
+
 
     #Sitterfied.BookingView = Em.View.extend
 
