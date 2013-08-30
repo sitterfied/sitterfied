@@ -34,25 +34,23 @@ UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 def index(request, referred_by=None):
 
     if hasattr(request.user, 'sitter'):
-        user_model = Sitter
+        user_model = Sitter.objects
         parent_or_sitter = "Sitter"
         seralizer = SitterSerializer
 
     elif hasattr(request.user, 'parent'):
-        user_model = Parent
+        user_model = Parent.objects.prefetch_related('children', 'children__special_needs')
         parent_or_sitter = "Parent"
         seralizer = ParentSerializer
 
-    classed_user = user_model.objects.select_related('settings').prefetch_related('children',
-                                                                                  'children__special_needs',
-                                                                                  'bookings',
-                                                                                  'sitter_teams',
-                                                                                  'bookmarks',
-                                                                                  'friends',
-                                                                                  'languages',
-                                                                                  'sitter_groups',
-                                                                                  'reviews',
-                                                                              ).get(id=request.user.id)
+    classed_user = user_model.select_related('settings').prefetch_related('bookings',
+                                                                          'sitter_teams',
+                                                                          'bookmarks',
+                                                                          'friends',
+                                                                          'languages',
+                                                                          'sitter_groups',
+                                                                          'reviews',
+                                                                      ).get(id=request.user.id)
     serialized = seralizer(classed_user)
     user_json = JSONRenderer().render(serialized.data)
 
