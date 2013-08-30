@@ -1,6 +1,6 @@
-define [
+define ['jquery'
     'ember', '_', 'cs!sitterfied', 'model', 'moment',
-    ], (Em, _, Sitterfied) ->
+    ], ($,Em, _, Sitterfied) ->
     attr = Ember.attr
     hasMany = Ember.hasMany
     belongsTo = Ember.belongsTo

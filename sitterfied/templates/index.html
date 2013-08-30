@@ -21,14 +21,14 @@
 	<!-- JavaScript -->
     <script>
 	  UPLOADCARE_PUBLIC_KEY = "{{UPLOADCARE_PUBLIC_KEY}}";
-	  UPLOADCARE_TABS = "file facebook"
-	  UPLOADCARE_CROP = "171x171 upscale"
+	  UPLOADCARE_TABS = "file facebook";
+	  UPLOADCARE_CROP = "171x171 upscale";
+	  UPLOADCARE_AUTOSTORE = true;
+
     </script>
 
     <!-- <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script> -->
 	<script src="{{STATIC_URL}}js/lib/handlebars.js"></script>
-	<script src="{{STATIC_URL}}js/sitterfied-min.js"></script>
-
     <script>
       var user_json = '{{user_json|safe}}'
 	  var friends_json = '{{friends_json|safe}}'
@@ -40,6 +40,8 @@
       var parent_or_sitter = '{{parent_or_sitter}}'
     </script>
 	<!--[if lt IE9]><script src="js/ie9.js">IE7_PNG_SUFFIX=".png";</script><![end if]-->
+
+	<script src="{{STATIC_URL}}js/sitterfied-min.js"></script>
 
   </head>
   <body>

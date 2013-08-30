@@ -36,7 +36,7 @@ require({
         },
         ember: {
             exports: "Ember",
-            deps: ['jquery', 'handlebars']
+            deps: ['jquery']
         },
         handlebars: {
 			deps: ['jquery'],
@@ -83,7 +83,7 @@ require({
          "cs!injections", "cs!controllers",
          "cs!views",
          'scrollto',
-         "vasilli",  'facebook'], function(require, $,  Em, Sitterfied){
+         "vasilli",], function(require, $,  Em, Sitterfied){
              // using jQuery
              Sitterfied.runInitializers();
              Sitterfied.advanceReadiness();
