@@ -353,12 +353,12 @@ class Booking(TimeStampedModel):
     def accept(self, sitter):
         self.accepted_sitter = sitter
         self.save()
-        booking_accepted.send(sender=self)
+        booking_accepted.send(sender=self, sitter=sitter)
 
     def decline(self, sitter):
         self.declined_sitters.add(sitter)
         self.save()
-        booking_declined.send(sender=self)
+        booking_declined.send(sender=self, sitter=sitter)
 
     def cancel(self):
         self.canceled = True

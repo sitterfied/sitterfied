@@ -6,16 +6,17 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 'specialneeds'
                 'otherServices'
                 'friends'
+                'bookings'
                 'children']
         accountType: parent_or_sitter
 
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
-        ).property('parent_or_sitter')
+        ).property('parent_or_sitter', 'Sitterfied.accountType')
 
         isParent: (() ->
             Sitterfied.accountType == "Parent"
-        ).property('parent_or_sitter')
+        ).property('parent_or_sitter', 'Sitterfied.accountType')
 
         saveSettings: () ->
             model = this.get('model')
@@ -170,7 +171,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 now = new Date()
                 future = item.get('start_date_time') > now
                 return  not accepted and not future
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+        ).property('content.@each', 'content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
 
         canceledRequests: (() ->
             return @get('content').filter (item, index, content) ->
@@ -235,13 +236,13 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             @get('model').save()
         checkAll: () ->
             model = @get('model')
-            attrs = Object.keys(model.serialize())
+            attrs = Object.keys(model.toJSON())
             attrs.pop('sitter')
             for x in attrs
                 @set(x, true)
         clearAll: () ->
             model = @get('model')
-            attrs = Object.keys(model.serialize())
+            attrs = Object.keys(model.toJSON())
             attrs.pop('sitter')
             for x in attrs
                 @set(x, false)

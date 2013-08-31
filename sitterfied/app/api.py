@@ -360,8 +360,6 @@ class OtherServiceViewSet(IdFilterViewset):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-
-
 class SettingsViewSet(IdFilterViewset):
     queryset = models.Settings.objects.all()
     serializer_class = SettingsSerializer
