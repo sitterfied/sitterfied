@@ -190,7 +190,7 @@ define ['jquery'
 
     Sitterfied.Schedlue = Ember.Model.extend(
         id: attr()
-        sitter: belongsTo('Sitterfied.Sitter'), {key:"sitter"},
+        sitter: belongsTo('Sitterfied.Sitter', {key:"sitter"})
         mon_early_morning: attr(Boolean)
         tues_early_morning: attr(Boolean)
         wed_early_morning: attr(Boolean)
@@ -324,13 +324,16 @@ define ['jquery'
             return moment().diff(moment(dob), 'years')
         ).property("dob")
 
+        lastBooking: (() ->
+            return @get('sorted_bookings.firstObject')
+        ).property('sorted_bookings.@each')
         dateLastHired: (() ->
-            bookings = this.get('sorted_bookings')
-            if bookings.length == 0
-                return "Never"
+            lastBooking = this.get('lastBooking')
+            if lastBooking?.get('start_date_time')?
+                return moment(lastBooking.get('start_date_time')).format('MMMM Do')
             else
-                return bookings.get('firstObject.formattedDate')
-        ).property('sorted_bookings')
+                return "Never"
+        ).property('lastBooking.start_date_time')
 
         recommends: (() ->
             return this.get('reviews').filterProperty('recommended', true)

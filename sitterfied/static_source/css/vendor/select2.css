@@ -467,7 +467,7 @@ disabled look for disabled choices in the results dropdown
   box-shadow        : #3ae4f8 0 0 5px 1px;
   border: 1px solid #3ae4f8;
     outline: none;
-  background:url(../images/icons/search2.png) right center no-repeat;
+  background:url('/static/images/icons/search2.png') right center no-repeat;
 
 }
 .select2-container-multi .select2-choices li {
