@@ -1,11 +1,12 @@
 from .base import *
 import json
 import os
+from .mandrill import *
 
 with open('/home/dotcloud/environment.json') as f:
   env = json.load(f)
 
-DEBUG = False
+DEBUG = True
 
 
 CACHES = {
@@ -44,16 +45,7 @@ MEDIA_ROOT = "/home/dotcloud/data/media/"
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = PROJECT_ROOT.child("static")
 
-
-MIDDLEWARE_CLASSES += (
-   'django.middleware.gzip.GZipMiddleware',
-   'pipeline.middleware.MinifyHTMLMiddleware',
-)
-
 SECRET_KEY =  os.environ.get('DJANGO_SECRET_KEY','boo')
-from .mandrill import *
-
-
 
 INSTALLED_APPS += (
     'debug_toolbar',
@@ -61,7 +53,10 @@ INSTALLED_APPS += (
 )
 
 MIDDLEWARE_CLASSES += (
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+  "debug_toolbar.middleware.DebugToolbarMiddleware",
+   'django.middleware.gzip.GZipMiddleware',
+   'pipeline.middleware.MinifyHTMLMiddleware',
+
 )
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -84,3 +79,5 @@ DEVSERVER_MODULES = (
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+INTERNAL_IPS = ('192.12.88.33',)

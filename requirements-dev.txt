@@ -4,11 +4,11 @@
 # Debug Tools
 
 django-debug-toolbar
--e git+https://github.com/dcramer/django-devserver#egg=django-devserver
+django-devserver
 werkzeug
 sqlparse
 #cheeseshop version doesn't work with 2.7
-https://guppy-pe.svn.sourceforge.net/svnroot/guppy-pe/trunk/guppy
+guppy
 line_profiler
 dozer
 
