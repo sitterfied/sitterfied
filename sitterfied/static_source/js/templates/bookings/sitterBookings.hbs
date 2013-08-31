@@ -1,0 +1,54 @@
+<!-- container -->
+<div class="container clear">
+  <div class="wraper">
+
+	<!-- tabs_wrap -->
+	<div class="tabs_wrap">
+	  <ul class="tab_select">
+		<li>{{#linkTo sitterEdit.profile content }}Profile{{/linkTo}}</li>
+		<li>{{#linkTo sitterEdit.schedlue content }}Schedule{{/linkTo}}</li>
+		<li>{{#linkTo mybookings }}Bookings{{/linkTo}}</li>
+		<li>{{#linkTo sitterEdit.network content }}Network{{/linkTo}}</li>
+		<li>{{#linkTo sitterEdit.reviews content }}Reviews{{/linkTo}}</li>
+	  </ul>
+      {{# view Sitterfied.MobTriggerView }} Bookings {{/ view}}
+        <div class="tab_content bookings_block" id="tab-3">
+	      <ul class="subtab_select">
+	        <li>{{# linkTo mybookings.pending }}
+              <span>{{controllers.bookings.pendingRequests.length}}
+              </span>Pending Requests{{/ linkTo }}
+            </li>
+	        <li>
+              {{# linkTo mybookings.upcoming }}
+                <span>{{controllers.bookings.upcomingJobs.length}}
+                </span>Upcoming Jobs
+              {{/ linkTo}}
+            </li>
+	        <li>
+              {{# linkTo mybookings.completed }}
+                <span>{{controllers.bookings.completedJobs.length}}</span>Completed Jobs
+              {{/ linkTo}}
+            </li>
+	        <li>
+              {{# linkTo mybookings.missed }}
+                <span>{{controllers.bookings.missedRequests.length}}</span>Missed Requests
+              {{/ linkTo}}
+            </li>
+	        <li>
+              {{# linkTo mybookings.declined }}
+                <span>{{controllers.bookings.declinedRequests.length}}
+                </span>Declined Jobs
+              {{/ linkTo}}
+            </li>
+	        <li>
+              {{# linkTo mybookings.canceled }}
+                <span>{{controllers.bookings.canceledRequests.length}}
+                </span>Canceled Jobs
+              {{/ linkTo}}
+            </li>
+	      </ul>
+          {{outlet}}
+        </div>
+	</div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+    {{# view Sitterfied.MobTriggerView }}
+	  <span>{{canceledRequests.length}}</span>Canceled Jobs
+    {{/ view}}
+	<!-- canceled_jobs_block -->
+	<div class="subtab_content canceled_jobs_block" id="tab-1-7">
+      <ul class="booking_list">
+        {{# each booking in canceledRequests }}
+          {{ render "booking" booking }}
+        {{/ each}}
+      </ul>
+	</div>
+	<!-- /canceled_jobs_block -->

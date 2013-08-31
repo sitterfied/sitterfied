@@ -1,0 +1,13 @@
+{{# view Sitterfied.MobTriggerView active=true }}
+      <span>{{pendingRequests.length}}</span>
+      Pending Requests
+    {{/ view}}
+	<!-- pending_requests_block -->
+	<div class="subtab_content pending_requests_block" id="tab-1-1">
+	  <ul class="booking_list">
+        {{# each booking in pendingRequests }}
+          {{ render "booking" booking }}
+        {{/ each}}
+	  </ul>
+	</div>
+	<!-- /pending_jobs_block -->

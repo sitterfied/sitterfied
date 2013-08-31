@@ -28,7 +28,7 @@ DATABASES = {
         'USER': env.get('DOTCLOUD_DATA_SQL_LOGIN', ''),
         'PASSWORD': env.get('DOTCLOUD_DATA_SQL_PASSWORD', ''),
         'HOST': env.get('DOTCLOUD_DATA_SQL_HOST', ''),
-        'PORT': int(env.get('DOTCLOUD_DATA_SQL_PORT', '')),
+        'PORT': int(env.get('DOTCLOUD_DATA_SQL_PORT', '0')),
     }
 }
 

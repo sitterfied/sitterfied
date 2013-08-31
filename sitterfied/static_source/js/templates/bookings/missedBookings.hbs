@@ -1,0 +1,12 @@
+{{# view Sitterfied.MobTriggerView }}
+	  <span>{{missedRequests.length}}</span>Missed Requests
+{{/ view}}
+<!-- missed_requests_block -->
+<div class="subtab_content missed_requests_block" id="tab-1-4">
+  <ul class="booking_list">
+	{{# each booking in missedRequests }}
+      {{ render "booking" booking }}
+    {{/ each}}
+  </ul>
+</div>
+<!-- /missed_requests_block -->

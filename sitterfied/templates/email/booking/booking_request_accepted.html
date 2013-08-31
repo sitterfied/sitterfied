@@ -1,0 +1,9 @@
+{% extends "email_base.html" %}
+
+{% block message %}
+
+<p style="font-size:24px;color:#104952;"><b>Hi there, {{parent.first_name}}</b></p>
+{{sitter_full_name}} has accepted your booking request
+<br><br>
+<br><br>
+{% endblock message %}

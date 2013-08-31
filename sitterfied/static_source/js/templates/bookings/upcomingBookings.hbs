@@ -1,0 +1,12 @@
+    {{# view Sitterfied.MobTriggerView }}
+      <span>{{upcomingJobs.length}}</span>Upcoming Jobs
+    {{/ view}}
+	<!-- pending_requests_block -->
+	<div class="subtab_content upcoming_jobs_block" id="tab-1-2">
+	  <ul class="booking_list">
+        {{# each booking in upcomingJobs }}
+          {{ render "booking" booking }}
+        {{/ each}}
+	  </ul>
+	</div>
+	<!-- /upcomingJobs_block -->

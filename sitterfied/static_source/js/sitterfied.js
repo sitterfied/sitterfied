@@ -42114,10 +42114,9 @@ define("csrf", function(){});
     Sitterfied.Parent.adapter = Adapter.create();
     Sitterfied.Schedlue = Ember.Model.extend({
       id: attr(),
-      sitter: belongsTo('Sitterfied.Sitter')
-    }, {
-      key: "sitter"
-    }, {
+      sitter: belongsTo('Sitterfied.Sitter', {
+        key: "sitter"
+      }),
       mon_early_morning: attr(Boolean),
       tues_early_morning: attr(Boolean),
       wed_early_morning: attr(Boolean),
@@ -42247,15 +42246,18 @@ define("csrf", function(){});
         }
         return moment().diff(moment(dob), 'years');
       }).property("dob"),
+      lastBooking: (function() {
+        return this.get('sorted_bookings.firstObject');
+      }).property('sorted_bookings.@each'),
       dateLastHired: (function() {
-        var bookings;
-        bookings = this.get('sorted_bookings');
-        if (bookings.length === 0) {
-          return "Never";
+        var lastBooking;
+        lastBooking = this.get('lastBooking');
+        if ((lastBooking != null ? lastBooking.get('start_date_time') : void 0) != null) {
+          return moment(lastBooking.get('start_date_time')).format('MMMM Do');
         } else {
-          return bookings.get('firstObject.formattedDate');
+          return "Never";
         }
-      }).property('sorted_bookings'),
+      }).property('lastBooking.start_date_time'),
       recommends: (function() {
         return this.get('reviews').filterProperty('recommended', true);
       }).property('reviews.@each.recommended', 'reviews'),
@@ -42502,10 +42504,15 @@ define("csrf", function(){});
         return this.get('num_children');
       }).property('num_children'),
       thisSitterAccepted: (function() {
-        var current_user;
-        current_user = Sitterfied.currentUser;
-        return this.get('accepted_sitter') === current_user;
-      }).property('accepted_sitter')
+        var current_user_id;
+        current_user_id = Sitterfied.currentUser.get('id');
+        return this.get('accepted_sitter.id') === current_user_id;
+      }).property('accepted_sitter'),
+      isInPast: (function() {
+        var now;
+        now = moment().toDate();
+        return this.get('start_date_time') < now;
+      }).property('start_date_time')
     });
     Sitterfied.Booking.adapter = Adapter.create();
     Sitterfied.BookingRequest = Ember.Model.extend({
@@ -42941,32 +42948,32 @@ function program9(depth0,data) {
   data.buffer.push("<!-- container -->\n<div class=\"container clear\">\n  <div class=\"wraper\">\n\n	<!-- tabs_wrap -->\n	<div class=\"tabs_wrap\">\n	  <ul class=\"tab_select\">\n		<li>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.profile", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.profile", options));
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.profile", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.profile", "content", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedlue", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedlue", options));
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedlue", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedlue", "content", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li>");
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.bookings", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.bookings", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings", options) : helperMissing.call(depth0, "linkTo", "mybookings", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.network", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.network", options));
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.network", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.network", "content", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.reviews", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.reviews", options));
+  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.reviews", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.reviews", "content", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n	  </ul>\n\n\n      ");
   hashTypes = {};
@@ -43582,7 +43589,7 @@ function program7(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.bookings", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.bookings", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings", options) : helperMissing.call(depth0, "linkTo", "mybookings", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li><a href=\"#\">Get more recommendations</a></li>\n	  </ul>\n	</fieldset>\n  </div>\n</div>\n<!-- /top info -->\n<!-- profile_completion -->\n");
   hashContexts = {'class': depth0,'id': depth0};
@@ -43913,136 +43920,97 @@ function program3(depth0,data) {
 Ember.TEMPLATES["bookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
+  
+  
+  data.buffer.push("Profile");
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Bookings");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("Sitter Team");
+  }
+
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("Network");
+  }
+
+function program9(depth0,data) {
+  
+  
+  data.buffer.push("Reviews");
+  }
+
+function program11(depth0,data) {
   
   
   data.buffer.push(" Bookings ");
   }
 
-function program3(depth0,data) {
-  
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n          <span>");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "pendingRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>\n          Pending Requests\n        ");
-  return buffer;
-  }
-
-function program5(depth0,data) {
-  
-  var buffer = '', stack1, hashTypes, hashContexts, options;
-  data.buffer.push("\n              ");
-  hashTypes = {};
-  hashContexts = {};
-  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
-  data.buffer.push("\n            ");
-  return buffer;
-  }
-
-function program7(depth0,data) {
-  
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n          <span>");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "upcomingJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Upcoming Jobs\n        ");
-  return buffer;
-  }
-
-function program9(depth0,data) {
-  
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n		  <span>");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "completedJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Completed Jobs\n        ");
-  return buffer;
-  }
-
-function program11(depth0,data) {
-  
-  var buffer = '', stack1, hashTypes, hashContexts, options;
-  data.buffer.push("\n                ");
-  hashTypes = {};
-  hashContexts = {};
-  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
-  data.buffer.push("\n          ");
-  return buffer;
-  }
-
 function program13(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n		  <span>");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "missedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Missed Requests\n        ");
-  return buffer;
-  }
-
-function program15(depth0,data) {
-  
-  var buffer = '', stack1, hashTypes, hashContexts, options;
-  data.buffer.push("\n              ");
-  hashTypes = {};
-  hashContexts = {};
-  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
-  data.buffer.push("\n          ");
-  return buffer;
-  }
-
-function program17(depth0,data) {
-  
-  
-  data.buffer.push("\n          <span>0</span>Expired Requests\n        ");
-  }
-
-function program19(depth0,data) {
-  
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n		  <span>");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "declinedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Declined Jobs\n        ");
-  return buffer;
-  }
-
-function program21(depth0,data) {
-  
-  var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n		  <span>");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "canceledRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Canceled Jobs\n        ");
-  return buffer;
-  }
-
-  data.buffer.push("<!-- bookings_block -->\n");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content bookings_block\" id=\"tab-3\">\n		<ul class=\"subtab_select\">\n		  <li><a ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToPending", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span>");
+  data.buffer.push("<span>");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "pendingRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Pending Requests</a></li>\n		  <li><a ");
+  data.buffer.push("</span>Pending Requests");
+  return buffer;
+  }
+
+  data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper\">\n	<div class=\"tabs_wrap\">\n	  <ul class=\"tab_select\">\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.profile", options) : helperMissing.call(depth0, "linkTo", "parentEdit.profile", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentBookings", options) : helperMissing.call(depth0, "linkTo", "parentBookings", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.sitterTeam", options) : helperMissing.call(depth0, "linkTo", "parentEdit.sitterTeam", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.network", options) : helperMissing.call(depth0, "linkTo", "parentEdit.network", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.reviews", options) : helperMissing.call(depth0, "linkTo", "parentEdit.reviews", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n	  </ul>\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n        <div class=\"tab_content bookings_block\" id=\"tab-3\">\n	      <ul class=\"subtab_select\">\n	        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentBookings.pending", options) : helperMissing.call(depth0, "linkTo", "parentBookings.pending", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n	          <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToUpcoming", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -44050,7 +44018,7 @@ function program21(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "upcomingJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Upcoming Jobs</a></li>\n		  <li><a ");
+  data.buffer.push("</span>Upcoming Jobs</a></li>\n	          <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToCompleted", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -44058,7 +44026,7 @@ function program21(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "completedJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Completed Jobs</a></li>\n		  <li><a ");
+  data.buffer.push("</span>Completed Jobs</a></li>\n	          <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToMissed", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -44066,7 +44034,7 @@ function program21(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "missedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Missed Requests</a></li>\n		  <li><a ");
+  data.buffer.push("</span>Missed Requests</a></li>\n	          <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToDeclined", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -44074,7 +44042,7 @@ function program21(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "declinedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Declined Jobs</a></li>\n		  <li><a ");
+  data.buffer.push("</span>Declined Jobs</a></li>\n	          <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "zoomToCanceled", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -44082,74 +44050,11 @@ function program21(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "canceledRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</span>Canceled Jobs</a></li>\n		</ul>\n        ");
-  hashContexts = {'active': depth0};
-  hashTypes = {'active': "BOOLEAN"};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{
-    'active': (true)
-  },inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n		  <ul class=\"booking_list\">\n            ");
+  data.buffer.push("</span>Canceled Jobs</a></li>\n	      </ul>\n          ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "booking", "in", "pendingRequests", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  </ul>\n		</div>\n		<!-- /pending_jobs_block -->\n\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<!-- pending_requests_block -->\n		<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n		  <ul class=\"booking_list\">\n            ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "booking", "in", "upcomingJobs", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  </ul>\n		</div>\n		<!-- /upcomingJobs_block -->\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<!-- completed_jobs_block -->\n		<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n          <ul class=\"booking_list\">\n		  ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "booking", "in", "completedJobs", {hash:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n          </ul>\n		</div>\n		<!-- /completed_jobs_block -->\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<!-- missed_requests_block -->\n		<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n          <ul class=\"booking_list\">\n		  ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "booking", "in", "missedRequests", {hash:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n          </ul>\n		</div>\n		<!-- /missed_requests_block -->\n\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(17, program17, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n        <div class=\"subtab_content expired_requests_block\" id=\"tab-1-5\">\n        </div>\n        -->\n\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(19, program19, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<!-- declined_jobs_block -->\n		<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n          <ul class=\"booking_list\">\n		  ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "booking", "in", "declinedRequests", {hash:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n          </ul>\n		</div>\n		<!-- /declined_jobs_block -->\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(21, program21, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<!-- canceled_jobs_block -->\n		<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n          <ul class=\"booking_list\">\n          ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.each.call(depth0, "booking", "in", "canceledRequests", {hash:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n          </ul>\n		</div>\n		<!-- /canceled_jobs_block -->\n	  </div>\n	  <!-- /bookings_block -->\n");
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n        </div>\n	</div>\n  </div>\n</div>\n");
   return buffer;
   
 });
@@ -44248,13 +44153,11 @@ function program10(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\">\n                <a ");
-  hashContexts = {'bubbles': depth0};
-  hashTypes = {'bubbles': "BOOLEAN"};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookConnect", {hash:{
-    'bubbles': (false)
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n                    <img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook\n                </a>\n                <a href=\"#\">\n                  <img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail\n                </a>\n              </p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p>\n                ");
+  data.buffer.push("\n	  <div class=\"tab_content network_block\" id=\"tab-4\">\n		<div class=\"soc_list clear\">\n		  <p>Find people you know on Sitterfied</p>\n		  <ul>\n			<li>\n			  <p class=\"clear\">\n                 <span ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookConnect", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                  <a >\n                    <img src=\"/static/images/icons/facebook.png\" alt=\"\" />Facebook\n                  </a>\n                </span>\n                <a href=\"#\">\n                  <img src=\"/static/images/icons/gmail.png\" alt=\"\" />Gmail\n                </a>\n              </p>\n			  <p>Connect</p>\n			</li>\n			<li>\n			  <p>\n                ");
   hashContexts = {'placeholder': depth0};
   hashTypes = {'placeholder': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -44634,7 +44537,7 @@ function program3(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "review", options) : helperMissing.call(depth0, "partial", "review", options))));
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "_review", options) : helperMissing.call(depth0, "partial", "_review", options))));
   data.buffer.push("\n          ");
   return buffer;
   }
@@ -44675,7 +44578,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
-  data.buffer.push("\n      test1\n      ");
+  data.buffer.push("\n      ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "isSitter", {hash:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -44686,7 +44589,7 @@ function program3(depth0,data) {
 function program4(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts, options;
-  data.buffer.push("\n        test2\n        ");
+  data.buffer.push("\n        ");
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
@@ -44701,10 +44604,6 @@ function program4(depth0,data) {
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n<div class=\"tab_content friends_block\" id=\"tab-3\">\n  <ul class=\"clear\">\n    ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "debugger", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n    ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "friends", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -45564,6 +45463,630 @@ function program9(depth0,data) {
   return buffer;
   
 });
+Ember.TEMPLATES["completedJobs"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n	  <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "completedJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Completed Jobs\n    ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
+  data.buffer.push("\n        ");
+  return buffer;
+  }
+
+  data.buffer.push("    ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	<!-- completed_jobs_block -->\n	<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n      <ul class=\"booking_list\">\n		");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "booking", "in", "completedJobs", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n      </ul>\n	</div>\n	<!-- /completed_jobs_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["declinedJobs"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n	  <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "declinedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Declined Jobs\n    ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
+  data.buffer.push("\n        ");
+  return buffer;
+  }
+
+  data.buffer.push("    ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	<!-- declined_jobs_block -->\n	<div class=\"subtab_content declined_jobs_block\" id=\"tab-1-6\">\n      <ul class=\"booking_list\">\n		");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "booking", "in", "declinedRequests", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n      </ul>\n	</div>\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["canceledBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n	  <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "canceledRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Canceled Jobs\n    ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
+  data.buffer.push("\n        ");
+  return buffer;
+  }
+
+  data.buffer.push("    ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	<!-- canceled_jobs_block -->\n	<div class=\"subtab_content canceled_jobs_block\" id=\"tab-1-7\">\n      <ul class=\"booking_list\">\n        ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "booking", "in", "canceledRequests", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n      </ul>\n	</div>\n	<!-- /canceled_jobs_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["pendingBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n      <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "pendingRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>\n      Pending Requests\n    ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
+  data.buffer.push("\n        ");
+  return buffer;
+  }
+
+  hashContexts = {'active': depth0};
+  hashTypes = {'active': "BOOLEAN"};
+  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{
+    'active': (true)
+  },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	<!-- pending_requests_block -->\n	<div class=\"subtab_content pending_requests_block\" id=\"tab-1-1\">\n	  <ul class=\"booking_list\">\n        ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "booking", "in", "pendingRequests", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	  </ul>\n	</div>\n	<!-- /pending_jobs_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["sitterBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("Profile");
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Schedule");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("Bookings");
+  }
+
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("Network");
+  }
+
+function program9(depth0,data) {
+  
+  
+  data.buffer.push("Reviews");
+  }
+
+function program11(depth0,data) {
+  
+  
+  data.buffer.push(" Bookings ");
+  }
+
+function program13(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n              <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.pendingRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n              </span>Pending Requests");
+  return buffer;
+  }
+
+function program15(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.upcomingJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                </span>Upcoming Jobs\n              ");
+  return buffer;
+  }
+
+function program17(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.completedJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Completed Jobs\n              ");
+  return buffer;
+  }
+
+function program19(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.missedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Missed Requests\n              ");
+  return buffer;
+  }
+
+function program21(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.declinedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                </span>Declined Jobs\n              ");
+  return buffer;
+  }
+
+function program23(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.canceledRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                </span>Canceled Jobs\n              ");
+  return buffer;
+  }
+
+  data.buffer.push("<!-- container -->\n<div class=\"container clear\">\n  <div class=\"wraper\">\n\n	<!-- tabs_wrap -->\n	<div class=\"tabs_wrap\">\n	  <ul class=\"tab_select\">\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.profile", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.profile", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedlue", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedlue", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings", options) : helperMissing.call(depth0, "linkTo", "mybookings", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.network", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.network", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.reviews", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.reviews", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n	  </ul>\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n        <div class=\"tab_content bookings_block\" id=\"tab-3\">\n	      <ul class=\"subtab_select\">\n	        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.pending", options) : helperMissing.call(depth0, "linkTo", "mybookings.pending", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.upcoming", options) : helperMissing.call(depth0, "linkTo", "mybookings.upcoming", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(17, program17, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.completed", options) : helperMissing.call(depth0, "linkTo", "mybookings.completed", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(19, program19, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.missed", options) : helperMissing.call(depth0, "linkTo", "mybookings.missed", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(21, program21, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.declined", options) : helperMissing.call(depth0, "linkTo", "mybookings.declined", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(23, program23, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.canceled", options) : helperMissing.call(depth0, "linkTo", "mybookings.canceled", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	      </ul>\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n        </div>\n	</div>\n  </div>\n</div>\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["parentBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("Profile");
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Bookings");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("Sitter Team");
+  }
+
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("Network");
+  }
+
+function program9(depth0,data) {
+  
+  
+  data.buffer.push("Reviews");
+  }
+
+function program11(depth0,data) {
+  
+  
+  data.buffer.push(" Bookings ");
+  }
+
+function program13(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n              <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.pendingRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n              </span>Pending Requests");
+  return buffer;
+  }
+
+function program15(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.upcomingJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                </span>Upcoming Jobs\n              ");
+  return buffer;
+  }
+
+function program17(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.completedJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Completed Jobs\n              ");
+  return buffer;
+  }
+
+function program19(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.missedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Missed Requests\n              ");
+  return buffer;
+  }
+
+function program21(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.declinedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                </span>Declined Jobs\n              ");
+  return buffer;
+  }
+
+function program23(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.canceledRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                </span>Canceled Jobs\n              ");
+  return buffer;
+  }
+
+  data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper\">\n	<div class=\"tabs_wrap\">\n	  <ul class=\"tab_select\">\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.profile", "content", options) : helperMissing.call(depth0, "linkTo", "parentEdit.profile", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings", options) : helperMissing.call(depth0, "linkTo", "mybookings", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.sitterTeam", "content", options) : helperMissing.call(depth0, "linkTo", "parentEdit.sitterTeam", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.network", "content", options) : helperMissing.call(depth0, "linkTo", "parentEdit.network", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n		<li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.reviews", "content", options) : helperMissing.call(depth0, "linkTo", "parentEdit.reviews", "content", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("</li>\n	  </ul>\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n        <div class=\"tab_content bookings_block\" id=\"tab-3\">\n	      <ul class=\"subtab_select\">\n	        <li>");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.pending", options) : helperMissing.call(depth0, "linkTo", "mybookings.pending", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.upcoming", options) : helperMissing.call(depth0, "linkTo", "mybookings.upcoming", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(17, program17, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.completed", options) : helperMissing.call(depth0, "linkTo", "mybookings.completed", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(19, program19, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.missed", options) : helperMissing.call(depth0, "linkTo", "mybookings.missed", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(21, program21, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.declined", options) : helperMissing.call(depth0, "linkTo", "mybookings.declined", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	        <li>\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(23, program23, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings.canceled", options) : helperMissing.call(depth0, "linkTo", "mybookings.canceled", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n            </li>\n	      </ul>\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n        </div>\n	</div>\n  </div>\n</div>\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["missedBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n	  <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "missedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Missed Requests\n");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n      ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
+  data.buffer.push("\n    ");
+  return buffer;
+  }
+
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n<!-- missed_requests_block -->\n<div class=\"subtab_content missed_requests_block\" id=\"tab-1-4\">\n  <ul class=\"booking_list\">\n	");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "booking", "in", "missedRequests", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n  </ul>\n</div>\n<!-- /missed_requests_block -->\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["upcomingBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n      <span>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "upcomingJobs.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</span>Upcoming Jobs\n    ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, hashTypes, hashContexts, options;
+  data.buffer.push("\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.render),stack1 ? stack1.call(depth0, "booking", "booking", options) : helperMissing.call(depth0, "render", "booking", "booking", options))));
+  data.buffer.push("\n        ");
+  return buffer;
+  }
+
+  data.buffer.push("    ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	<!-- pending_requests_block -->\n	<div class=\"subtab_content upcoming_jobs_block\" id=\"tab-1-2\">\n	  <ul class=\"booking_list\">\n        ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "booking", "in", "upcomingJobs", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	  </ul>\n	</div>\n	<!-- /upcomingJobs_block -->\n");
+  return buffer;
+  
+});
 Ember.TEMPLATES["done"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -45702,12 +46225,12 @@ function program9(depth0,data) {
 function program11(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
-  data.buffer.push("\n      ");
+  data.buffer.push("\n    ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.unless.call(depth0, "canceled", {hash:{},inverse:self.noop,fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(14, program14, data),fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    ");
+  data.buffer.push("\n   ");
   return buffer;
   }
 function program12(depth0,data) {
@@ -45717,7 +46240,7 @@ function program12(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "cancelBooking", "booking", {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n          <span class=\"icon_cancel\">&nbsp;\n          </span>CANCEL\n        </a>\n      </div>\n      ");
+  data.buffer.push(">\n          <span class=\"icon_cancel\">&nbsp;\n          </span>CANCEL\n        </a>\n      </div>\n    ");
   return buffer;
   }
 
@@ -45727,7 +46250,7 @@ function program14(depth0,data) {
   data.buffer.push("\n      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "accepted_sitter", {hash:{},inverse:self.program(18, program18, data),fn:self.program(15, program15, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "accepted_sitter", {hash:{},inverse:self.program(19, program19, data),fn:self.program(15, program15, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    ");
   return buffer;
@@ -45745,16 +46268,27 @@ function program15(depth0,data) {
   }
 function program16(depth0,data) {
   
+  var buffer = '', stack1, hashTypes, hashContexts;
+  data.buffer.push("\n          ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.unless.call(depth0, "isInPast", {hash:{},inverse:self.noop,fn:self.program(17, program17, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n        ");
+  return buffer;
+  }
+function program17(depth0,data) {
+  
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n          <div class=\"btn_wrap\">\n            <a class=\"button button_smaller button_cancel\" ");
+  data.buffer.push("\n            <div class=\"btn_wrap\">\n              <a class=\"button button_smaller button_cancel\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "cancelBooking", "booking", {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n              <span class=\"icon_cancel\">&nbsp;\n              </span>CANCEL\n            </a>\n          </div>\n        ");
+  data.buffer.push(">\n                <span class=\"icon_cancel\">&nbsp;\n                </span>CANCEL\n              </a>\n            </div>\n          ");
   return buffer;
   }
 
-function program18(depth0,data) {
+function program19(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("\n      <div class=\"btn_wrap\">\n        <a class=\"button button_smaller\" ");
@@ -45769,7 +46303,7 @@ function program18(depth0,data) {
   return buffer;
   }
 
-function program20(depth0,data) {
+function program21(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("\n      <p>");
@@ -45860,7 +46394,7 @@ function program20(depth0,data) {
   data.buffer.push("\n    </div>\n    ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(14, program14, data),fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.unless.call(depth0, "canceled", {hash:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    <div class=\"note_wrap\">\n      <a ");
   hashTypes = {};
@@ -45878,7 +46412,7 @@ function program20(depth0,data) {
   stack1 = helpers.view.call(depth0, "Sitterfied.SlideDownView", {hash:{
     'class': ("note_desc clear"),
     'toggleBinding': ("isNoteShown")
-  },inverse:self.noop,fn:self.program(20, program20, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(21, program21, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  <footer>\n    Request Sent: ");
   hashTypes = {};
@@ -47060,7 +47594,7 @@ function program9(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.bookings", options) : helperMissing.call(depth0, "linkTo", "parentEdit.bookings", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "mybookings", options) : helperMissing.call(depth0, "linkTo", "mybookings", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li>");
   hashTypes = {};
@@ -47613,7 +48147,6 @@ define("fancybox", ["jquery"], function(){});
       }, function() {
         this.route('profile');
         this.route('schedlue');
-        this.route('bookings');
         this.route('network');
         return this.route('reviews');
       });
@@ -47630,7 +48163,6 @@ define("fancybox", ["jquery"], function(){});
         path: '/parent/:parent_id/edit'
       }, function() {
         this.route('profile');
-        this.route('bookings');
         this.route('sitterTeam');
         this.route('network');
         return this.route('reviews');
@@ -47640,7 +48172,14 @@ define("fancybox", ["jquery"], function(){});
       this.route('user', {
         path: '/user/:user_id/'
       });
-      this.route('mybookings');
+      this.resource('mybookings', function() {
+        this.route('pending');
+        this.route('missed');
+        this.route('canceled');
+        this.route('upcoming');
+        this.route('completed');
+        return this.route('declined');
+      });
       this.route('done', {
         path: '/done/:booking_id/'
       });
@@ -47655,9 +48194,7 @@ define("fancybox", ["jquery"], function(){});
     });
     Sitterfied.DoneRoute = Em.Route.extend({
       renderTemplate: function() {
-        this.render("done", {
-          outlet: 'content'
-        });
+        this.render("done");
         return this.render('done.top', {
           outlet: 'top'
         });
@@ -47676,9 +48213,7 @@ define("fancybox", ["jquery"], function(){});
         }
       },
       renderTemplate: function() {
-        this.render("book", {
-          outlet: 'content'
-        });
+        this.render("book");
         return this.render('book.top', {
           outlet: 'top'
         });
@@ -47694,7 +48229,6 @@ define("fancybox", ["jquery"], function(){});
       },
       renderTemplate: function() {
         this.render("book", {
-          outlet: 'content',
           controller: 'editBook'
         });
         return this.render('book.top', {
@@ -47709,7 +48243,6 @@ define("fancybox", ["jquery"], function(){});
       },
       renderTemplate: function() {
         this.render("parentEdit", {
-          outlet: 'content',
           controller: 'currentUser'
         });
         return this.render("parentEdit.top", {
@@ -47731,16 +48264,93 @@ define("fancybox", ["jquery"], function(){});
       },
       renderTemplate: function() {
         return this.render("parentEdit/profile", {
-          into: "parentEdit",
           controller: 'currentUser'
         });
       }
     });
-    Sitterfied.ParentEditBookingsRoute = Em.Route.extend({
+    Sitterfied.MybookingsRoute = Em.Route.extend({
+      setupController: function(controller, model) {
+        return this.controllerFor('bookings').set('model', Sitterfied.currentUser.get('bookings'));
+      },
       renderTemplate: function() {
-        return this.render("bookings", {
-          into: "parentEdit",
-          controller: 'parentEditBookings'
+        if (Sitterfied.currentUserController.get('isParent')) {
+          this.render("parentBookings", {
+            controller: 'currentUser'
+          });
+          return this.render("parentEdit.top", {
+            outlet: 'top',
+            controller: 'currentUser'
+          });
+        } else {
+          this.render("sitterBookings", {
+            controller: 'currentUser'
+          });
+          return this.render("sitterEdit.top", {
+            outlet: 'top',
+            controller: 'currentUser'
+          });
+        }
+      }
+    });
+    Sitterfied.MybookingsIndexRoute = Em.Route.extend({
+      redirect: function() {
+        return this.transitionTo('mybookings.pending');
+      }
+    });
+    Sitterfied.MybookingsPendingRoute = Em.Route.extend({
+      renderTemplate: function() {
+        return this.render("pendingBookings", {
+          controller: 'bookings'
+        });
+      },
+      model: function() {
+        return Sitterfied.currentUser.get('bookings');
+      }
+    });
+    Sitterfied.MybookingsUpcomingRoute = Em.Route.extend({
+      renderTemplate: function() {
+        return this.render("upcomingBookings", {
+          controller: 'bookings'
+        });
+      },
+      model: function() {
+        return Sitterfied.currentUser.get('bookings');
+      }
+    });
+    Sitterfied.MybookingsCompletedRoute = Em.Route.extend({
+      renderTemplate: function() {
+        return this.render("completedBookings", {
+          controller: 'bookings'
+        });
+      },
+      model: function() {
+        return Sitterfied.currentUser.get('bookings');
+      }
+    });
+    Sitterfied.MybookingsMissedRoute = Em.Route.extend({
+      renderTemplate: function() {
+        return this.render("missedBookings", {
+          controller: 'bookings'
+        });
+      },
+      model: function() {
+        return Sitterfied.currentUser.get('bookings');
+      }
+    });
+    Sitterfied.MybookingsDeclinedRoute = Em.Route.extend({
+      renderTemplate: function() {
+        return this.render("declinedBookings", {
+          controller: 'bookings'
+        });
+      },
+      model: function() {
+        return Sitterfied.currentUser.get('bookings');
+      }
+    });
+    Sitterfied.MybookingsCanceledRoute = Em.Route.extend({
+      renderTemplate: function() {
+        return this.render("canceledBookings", {
+          controller: 'bookings'
         });
       },
       model: function() {
@@ -47752,15 +48362,12 @@ define("fancybox", ["jquery"], function(){});
         return Sitterfied.currentUser.get('sitter_teams');
       },
       renderTemplate: function() {
-        return this.render("parentEdit/sitterTeam", {
-          into: "parentEdit"
-        });
+        return this.render("parentEdit/sitterTeam");
       }
     });
     Sitterfied.ParentEditNetworkRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("network", {
-          into: "parentEdit",
           controller: 'currentUser'
         });
       }
@@ -47768,7 +48375,6 @@ define("fancybox", ["jquery"], function(){});
     Sitterfied.ParentEditReviewsRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("reviews", {
-          into: "parentEdit",
           controller: 'currentUser'
         });
       }
@@ -47780,9 +48386,7 @@ define("fancybox", ["jquery"], function(){});
     });
     Sitterfied.ParentRoute = Em.Route.extend({
       renderTemplate: function() {
-        this.render("parent", {
-          outlet: 'content'
-        });
+        this.render("parent");
         return this.render("parent.top", {
           outlet: 'top'
         });
@@ -47790,9 +48394,7 @@ define("fancybox", ["jquery"], function(){});
     });
     Sitterfied.SitterRoute = Em.Route.extend({
       renderTemplate: function() {
-        this.render("sitter", {
-          outlet: 'content'
-        });
+        this.render("sitter");
         return this.render("sitter.top", {
           outlet: 'top'
         });
@@ -47806,7 +48408,6 @@ define("fancybox", ["jquery"], function(){});
     Sitterfied.SitterSnapshotRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("sitter.snapshot", {
-          into: "sitter",
           controller: 'sitter'
         });
       }
@@ -47814,7 +48415,6 @@ define("fancybox", ["jquery"], function(){});
     Sitterfied.SitterDetailsRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("sitter.details", {
-          into: "sitter",
           controller: 'sitter'
         });
       }
@@ -47822,7 +48422,6 @@ define("fancybox", ["jquery"], function(){});
     Sitterfied.SitterReviewsRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("sitter.reviews", {
-          into: "sitter",
           controller: 'sitter'
         });
       }
@@ -47830,7 +48429,6 @@ define("fancybox", ["jquery"], function(){});
     Sitterfied.SitterFriendsRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("sitter.friends", {
-          into: "sitter",
           controller: 'sitter'
         });
       }
@@ -47841,7 +48439,6 @@ define("fancybox", ["jquery"], function(){});
       },
       renderTemplate: function() {
         this.render("sitterEdit", {
-          outlet: 'content',
           controller: 'currentUser'
         });
         return this.render("sitterEdit.top", {
@@ -47862,7 +48459,6 @@ define("fancybox", ["jquery"], function(){});
       },
       renderTemplate: function() {
         return this.render("sitterEdit/profile", {
-          into: "sitterEdit",
           controller: 'currentUser'
         });
       }
@@ -47875,23 +48471,22 @@ define("fancybox", ["jquery"], function(){});
         return controller.set('model', model);
       },
       renderTemplate: function() {
-        return this.render("sitterEdit/schedlue", {
-          into: "sitterEdit"
-        });
+        return this.render("sitterEdit/schedlue");
       }
     });
     Sitterfied.SitterEditBookingsRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("bookings", {
-          into: "sitterEdit",
-          controller: 'currentUser'
+          controller: 'sitterEditBookings'
         });
+      },
+      model: function() {
+        return Sitterfied.currentUser.get('bookings');
       }
     });
     Sitterfied.SitterEditNetworkRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("network", {
-          into: "sitterEdit",
           controller: 'currentUser'
         });
       }
@@ -47899,7 +48494,6 @@ define("fancybox", ["jquery"], function(){});
     Sitterfied.SitterEditReviewsRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render("reviews", {
-          into: "sitterEdit",
           controller: 'currentUser'
         });
       }
@@ -47907,7 +48501,6 @@ define("fancybox", ["jquery"], function(){});
     Sitterfied.SettingsRoute = Em.Route.extend({
       renderTemplate: function() {
         this.render("settings", {
-          outlet: 'content',
           controller: 'currentUser'
         });
         return this.render("settings.top", {
@@ -47933,15 +48526,6 @@ define("fancybox", ["jquery"], function(){});
         }
       }
     });
-    Sitterfied.MybookingsRoute = Em.Route.extend({
-      redirect: function() {
-        if (Sitterfied.get('isParent')) {
-          return this.transitionTo('parentEdit.bookings', Sitterfied.currentUser);
-        } else {
-          return this.transitionTo('sitterEdit.bookings', Sitterfied.currentUser);
-        }
-      }
-    });
     Sitterfied.IndexRoute = Em.Route.extend({
       renderTemplate: function() {
         return this.render('footer', {
@@ -47959,9 +48543,7 @@ define("fancybox", ["jquery"], function(){});
         this.render('search.top', {
           outlet: 'top'
         });
-        return this.render('search', {
-          outlet: 'content'
-        });
+        return this.render('search');
       }
     });
     return Sitterfied.ApplicationRoute = Em.Route.extend({
@@ -48062,14 +48644,14 @@ define("fancybox", ["jquery"], function(){});
 
   define('cs!controllers',["ember", "cs!sitterfied", 'moment', "cs!models"], function(Em, Sitterfied) {
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
-      needs: ['certifications', 'languages', 'specialneeds', 'otherServices', 'friends', 'children'],
+      needs: ['certifications', 'languages', 'specialneeds', 'otherServices', 'friends', 'bookings', 'children'],
       accountType: parent_or_sitter,
       isSitter: (function() {
         return Sitterfied.accountType === "Sitter";
-      }).property('parent_or_sitter'),
+      }).property('parent_or_sitter', 'Sitterfied.accountType'),
       isParent: (function() {
         return Sitterfied.accountType === "Parent";
-      }).property('parent_or_sitter'),
+      }).property('parent_or_sitter', 'Sitterfied.accountType'),
       saveSettings: function() {
         var model;
         model = this.get('model');
@@ -48182,13 +48764,13 @@ define("fancybox", ["jquery"], function(){});
       facebookConnect: function() {
         var use_fb_data;
         use_fb_data = function() {
-          var access_token, facebook_id;
+          var access_token, facebook_id, promise;
           access_token = FB.getAccessToken();
           facebook_id = FB.getUserID();
           Sitterfied.currentUser.set('facebook_token', access_token);
           Sitterfied.currentUser.set('facebook_id', facebook_id);
-          Sitterfied.currentUser.save();
-          return Sitterfied.currentUser.one('didUpdate', function() {
+          promise = Sitterfied.currentUser.save();
+          return promise.then(function() {
             return $.ajax({
               url: "/facebook_import/",
               success: function() {
@@ -48204,6 +48786,81 @@ define("fancybox", ["jquery"], function(){});
             return FB.login(function() {
               return use_fb_data();
             });
+          }
+        }, true);
+      }
+    });
+    Sitterfied.BookingsController = Em.ArrayController.extend({
+      pendingRequests: (function() {
+        return this.get('content').filter(function(item, index, content) {
+          var accepted, future, now;
+          if (item.get('canceled')) {
+            return false;
+          }
+          accepted = Boolean(item.get('accepted_sitter'));
+          now = new Date();
+          future = item.get('start_date_time') > now;
+          return !accepted && future;
+        });
+      }).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
+      upcomingJobs: (function() {
+        return this.get('content').filter(function(item, index, content) {
+          var accepted, future, now;
+          if (item.get('canceled')) {
+            return false;
+          }
+          accepted = Boolean(item.get('accepted_sitter'));
+          now = new Date();
+          future = item.get('start_date_time') > now;
+          return accepted && future;
+        });
+      }).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
+      completedJobs: (function() {
+        return this.get('content').filter(function(item, index, content) {
+          var accepted, future, now;
+          if (item.get('canceled')) {
+            return false;
+          }
+          accepted = Boolean(item.get('accepted_sitter'));
+          now = new Date();
+          future = item.get('start_date_time') > now;
+          return accepted && !future;
+        });
+      }).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
+      missedRequests: (function() {
+        return this.get('content').filter(function(item, index, content) {
+          var accepted, future, now;
+          if (item.get('canceled')) {
+            return false;
+          }
+          accepted = Boolean(item.get('accepted_sitter'));
+          now = new Date();
+          future = item.get('start_date_time') > now;
+          return !accepted && !future;
+        });
+      }).property('content.@each', 'content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
+      canceledRequests: (function() {
+        return this.get('content').filter(function(item, index, content) {
+          return item.get('canceled');
+        });
+      }).property('content.@each.canceled'),
+      declinedRequests: (function() {
+        return this.get('content').filter(function(item, index, content) {
+          var declined_sitters;
+          declined_sitters = item.get('declined_sitters');
+          return declined_sitters.indexOf(item.get('content')) !== -1;
+        });
+      }).property('content.@each.declined_sitters'),
+      cancelBooking: function(booking) {
+        return $.ajax({
+          type: "POST",
+          url: "/api/bookings/" + booking.get('id') + "/cancel_booking/",
+          dataType: 'json',
+          success: function(response) {
+            return booking.load(booking.get('id'), response);
+          },
+          error: function() {
+            return alert("There was a problem canceling this booking. Please try again");
           }
         });
       }
@@ -48251,7 +48908,7 @@ define("fancybox", ["jquery"], function(){});
       checkAll: function() {
         var attrs, model, x, _i, _len, _results;
         model = this.get('model');
-        attrs = Object.keys(model.serialize());
+        attrs = Object.keys(model.toJSON());
         attrs.pop('sitter');
         _results = [];
         for (_i = 0, _len = attrs.length; _i < _len; _i++) {
@@ -48263,7 +48920,7 @@ define("fancybox", ["jquery"], function(){});
       clearAll: function() {
         var attrs, model, x, _i, _len, _results;
         model = this.get('model');
-        attrs = Object.keys(model.serialize());
+        attrs = Object.keys(model.toJSON());
         attrs.pop('sitter');
         _results = [];
         for (_i = 0, _len = attrs.length; _i < _len; _i++) {
@@ -48271,6 +48928,37 @@ define("fancybox", ["jquery"], function(){});
           _results.push(this.set(x, false));
         }
         return _results;
+      }
+    });
+    Sitterfied.SitterEditBookingsController = Sitterfied.BookingsController.extend({
+      declineBooking: function(booking) {
+        return $.ajax({
+          type: "POST",
+          url: "/api/bookings/" + booking.get('id') + "/decline_booking/",
+          dataType: 'json',
+          success: function(response) {
+            return booking.load(booking.get('id'), response);
+          },
+          error: function() {
+            return alert("There was a problem declining this booking. Please try again");
+          }
+        });
+      },
+      acceptBooking: function(booking) {
+        return $.ajax({
+          type: "POST",
+          url: "/api/bookings/" + booking.get('id') + "/accept_booking/",
+          dataType: 'json',
+          data: {
+            booking: booking.get('id')
+          },
+          success: function(response) {
+            return booking.load(booking.get('id'), response);
+          },
+          error: function() {
+            return alert("There was a problem accepting this booking. Please try again");
+          }
+        });
       }
     });
     Sitterfied.DoneController = Em.ObjectController.extend({
@@ -48458,7 +49146,6 @@ define("fancybox", ["jquery"], function(){});
       overnight: false,
       date_to: void 0,
       findSitters: function() {
-        debugger;
         var _this = this;
         return $.ajax("/api/search/").then(function(response) {
           var s, sitter, sitters, _i, _len;
@@ -48636,84 +49323,7 @@ define("fancybox", ["jquery"], function(){});
       }
     });
     Sitterfied.ParentEditSitterTeamController = Em.ArrayController.extend();
-    Sitterfied.ParentEditBookingsController = Em.ArrayController.extend({
-      pendingRequests: (function() {
-        return this.get('content').filter(function(item, index, content) {
-          var accepted, future, now;
-          if (item.get('canceled')) {
-            return false;
-          }
-          accepted = Boolean(item.get('accepted_sitter'));
-          now = new Date();
-          future = item.get('start_date_time') > now;
-          return !accepted && future;
-        });
-      }).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
-      upcomingJobs: (function() {
-        return this.get('content').filter(function(item, index, content) {
-          var accepted, future, now;
-          if (item.get('canceled')) {
-            return false;
-          }
-          accepted = Boolean(item.get('accepted_sitter'));
-          now = new Date();
-          future = item.get('start_date_time') > now;
-          return accepted && future;
-        });
-      }).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
-      completedJobs: (function() {
-        return this.get('content').filter(function(item, index, content) {
-          var accepted, future, now;
-          if (item.get('canceled')) {
-            return false;
-          }
-          accepted = Boolean(item.get('accepted_sitter'));
-          now = new Date();
-          future = item.get('start_date_time') > now;
-          return accepted && !future;
-        });
-      }).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
-      missedRequests: (function() {
-        return this.get('content').filter(function(item, index, content) {
-          var accepted, future, now;
-          if (item.get('canceled')) {
-            return false;
-          }
-          accepted = Boolean(item.get('accepted_sitter'));
-          now = new Date();
-          future = item.get('start_date_time') > now;
-          return !accepted && !future;
-        });
-      }).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled'),
-      canceledRequests: (function() {
-        return this.get('content').filter(function(item, index, content) {
-          return item.get('canceled');
-        });
-      }).property('content.@each.canceled'),
-      declinedRequests: (function() {
-        return this.get('content').filter(function(item, index, content) {
-          var declined_sitters;
-          declined_sitters = item.get('declined_sitters');
-          return declined_sitters.indexOf(item.get('content')) !== -1;
-        });
-      }).property('content.@each.declined_sitters'),
-      cancelBooking: function(booking) {
-        booking.set('canceled', true);
-        return booking.save();
-      },
-      acceptBooking: function(booking) {
-        var sitter;
-        sitter = this.get('content');
-        booking.set('accepted_sitter', sitter);
-        return booking.save();
-      },
-      declineBooking: function(booking) {
-        var sitter;
-        sitter = this.get('content');
-        booking.declined_sitters.append(sitter);
-        return booking.save();
-      }
-    });
+    Sitterfied.ParentEditBookingsController = Sitterfied.BookingsController.extend();
     Sitterfied.FriendsController = Em.ArrayController.extend({
       parents: (function() {
         return this.get('content').filterProperty("parent_or_sitter", "Parent");
@@ -49149,6 +49759,47 @@ define("ucare", ["jquery"], function(){});
   });
 
 }).call(this);
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '141907389308388', // App ID
+        channelUrl : '/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true,  // parse XFBML
+        frictionlessRequests : true
+    });
+
+};
+
+// Load the SDK Asynchronously
+
+(function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+}(document));
+
+
+window.FBConnect = function() {
+    // First time someone gets to the page we are going to check if they are connected - if they are we then load up their picture list
+    FB.getLoginStatus(function(response) {
+        debugger
+        if (response.status === 'connected') {
+            var access_token = FB.getAccessToken();
+            debugger
+
+        }
+        else if (response.status === 'not_authorized')
+            FB.login(function(){
+                FBConnect()
+            })
+    });
+}
+;
+define("facebook", function(){});
 
 /**
  * Copyright (c) 2007-2012 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
@@ -52694,14 +53345,13 @@ require({
 
 
     },
-    //urlArgs: "bust=" +  (new Date()).getTime(),
+    urlArgs: "bust=" +  (new Date()).getTime(),
 },
         ['require', "jquery", 'ember',
          "cs!sitterfied", "csrf",
          "cs!routes", "cs!models",
          "cs!injections", "cs!controllers",
-         "cs!views",
-         'scrollto',
+         "cs!views",'facebook', 'scrollto',
          "vasilli",], function(require, $,  Em, Sitterfied){
              // using jQuery
              Sitterfied.runInitializers();
