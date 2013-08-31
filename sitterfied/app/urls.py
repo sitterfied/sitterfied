@@ -50,3 +50,7 @@ urlpatterns += patterns('',
     url(r'^.*/$', 'app.views.index', name='index'),
     url(r'^$', 'app.views.index', name='index'),
 )
+
+
+
+from .signals import * #ensure that the signals are attatched via import

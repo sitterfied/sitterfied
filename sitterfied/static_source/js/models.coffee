@@ -554,9 +554,14 @@ define ['jquery'
         ).property('num_children')
 
         thisSitterAccepted: (() ->
-            current_user = Sitterfied.currentUser
-            return this.get('accepted_sitter') == current_user
+            current_user_id = Sitterfied.currentUser.get('id')
+            return this.get('accepted_sitter.id') == current_user_id
         ).property('accepted_sitter')
+
+        isInPast: (() ->
+            now = moment().toDate()
+            return @get('start_date_time') < now
+        ).property('start_date_time')
 
     )
     Sitterfied.Booking.adapter = Adapter.create()

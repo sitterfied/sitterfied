@@ -36,24 +36,25 @@
       </a>
       {{/if}}
     </div>
+    {{# unless canceled}}
     {{# if Sitterfied.isParent }}
-      {{# unless canceled}}
       <div class="btn_wrap">
         <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
           <span class="icon_cancel">&nbsp;
           </span>CANCEL
         </a>
       </div>
-      {{/ unless}}
     {{ else }}
       {{# if accepted_sitter }}
         {{# if thisSitterAccepted }}
-          <div class="btn_wrap">
-            <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
-              <span class="icon_cancel">&nbsp;
-              </span>CANCEL
-            </a>
-          </div>
+          {{# unless isInPast }}
+            <div class="btn_wrap">
+              <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+                <span class="icon_cancel">&nbsp;
+                </span>CANCEL
+              </a>
+            </div>
+          {{/ unless}}
         {{/ if}}
       {{ else }}
       <div class="btn_wrap">
@@ -68,6 +69,7 @@
       </div>
       {{/ if }}
     {{/ if}}
+   {{/ unless}}
     <div class="note_wrap">
       <a {{action 'toggleNote'}} {{bindAttr class=isNoteShown:hide_text}}>
         <span class="show">Show</span>

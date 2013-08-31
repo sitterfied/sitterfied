@@ -21,6 +21,12 @@ add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 from model_utils.managers import InheritanceManager
 
 
+from django.dispatch import Signal
+
+booking_accepted = Signal(providing_args=['booking'])
+booking_declined = Signal(providing_args=['booking'])
+booking_canceled = Signal(providing_args=['booking'])
+
 
 from pyuploadcare.dj import ImageField as UploadcareImageField
 
@@ -344,6 +350,21 @@ class Booking(TimeStampedModel):
     def accepted(self):
         return bool(self.accept_sitter)
 
+    def accept(self, sitter):
+        self.accepted_sitter = sitter
+        self.save()
+        booking_accepted.send(sender=self)
+
+    def decline(self, sitter):
+        self.declined_sitters.add(sitter)
+        self.save()
+        booking_declined.send(sender=self)
+
+    def cancel(self):
+        self.canceled = True
+        self.save()
+        booking_canceled.send(sender=self)
+
 
 class IncomingSMSMessage(TimeStampedModel):
     sid = models.CharField(max_length=34)
@@ -354,8 +375,6 @@ class IncomingSMSMessage(TimeStampedModel):
     body = models.CharField(max_length=161)
     status = models.CharField(max_length=12)
     #dealt_with = models.
-
-
 
 class Group(TimeStampedModel):
     name = models.CharField(max_length=128, blank=False)

@@ -29,6 +29,8 @@ from .models import User, Sitter, Parent
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
 
+
+
 @login_required
 @render_to('index.html')
 def index(request, referred_by=None):

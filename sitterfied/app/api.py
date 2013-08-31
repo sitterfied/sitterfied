@@ -1,9 +1,9 @@
 import models
-from forms import AvatarForm, ActiveForm
+from forms import AvatarForm, ActiveForm, AcceptBookingForm, DeclineBookingForm
 from django.contrib.auth import logout
 
 from django.db.models import Q
-
+from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 from rest_framework import serializers, viewsets, permissions
 from rest_framework import filters
@@ -313,7 +313,7 @@ class ParentViewSet(IdFilterViewset):
                                                            'certifications',
                                                            'schedlue',
                                                            'other_services',
-                                                           'bookings',
+                                                            'bookings',
                                                            'settings').filter(sitter_teams=pk)
 
         serializer = SitterSerializer(queryset, many=True)
@@ -337,9 +337,9 @@ class ParentViewSet(IdFilterViewset):
 
     @link()
     def bookings(self, request, pk=None):
-        queryset = models.Booking.objects.prefetch_related('sitters'
-                                                            ,'declined_sitters'
-                                                            ,).filter(Q(parent=pk) | Q(sitters=pk))
+        queryset = models.Booking.objects.select_related('parent').prefetch_related('sitters'
+                                                                                    ,'declined_sitters'
+                                                                                    ,).filter(Q(parent=pk) | Q(sitters=pk))
         serializer = BookingSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -396,6 +396,33 @@ class BookingViewSet(IdFilterViewset):
         queryset = models.Sitter.objects.filter(declined_bookings=pk)
         serializer = SitterSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    @action()
+    def accept_booking(self, request, pk=None):
+        booking = get_object_or_404(models.Booking, pk=pk)
+        sitter = request.user.sitter
+        booking.accept(sitter)
+        serializer = BookingSerializer(booking)
+        response = Response(serializer.data)
+        return response
+
+    @action()
+    def cancel_booking(self, request, pk=None):
+        booking = get_object_or_404(models.Booking, pk=pk)
+        booking.cancel()
+        serializer = BookingSerializer(booking)
+        response = Response(serializer.data)
+        return response
+
+    @action()
+    def decline_booking(self, request, pk=None):
+        booking = get_object_or_404(models.Booking, pk=pk)
+        sitter = request.user.sitter
+        booking.decline(sitter)
+        serializer = BookingSerializer(booking)
+        response = Response(serializer.data)
+        return response
+
 
 
 

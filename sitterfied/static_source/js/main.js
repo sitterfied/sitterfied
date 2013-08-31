@@ -75,14 +75,13 @@ require({
 
 
     },
-    //urlArgs: "bust=" +  (new Date()).getTime(),
+    urlArgs: "bust=" +  (new Date()).getTime(),
 },
         ['require', "jquery", 'ember',
          "cs!sitterfied", "csrf",
          "cs!routes", "cs!models",
          "cs!injections", "cs!controllers",
-         "cs!views",
-         'scrollto',
+         "cs!views",'facebook', 'scrollto',
          "vasilli",], function(require, $,  Em, Sitterfied){
              // using jQuery
              Sitterfied.runInitializers();

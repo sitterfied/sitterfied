@@ -211,7 +211,9 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
     Sitterfied.SitterEditBookingsRoute = Em.Route.extend(
         renderTemplate: () ->
-            this.render("bookings", {into:"sitterEdit", controller: 'currentUser'})
+            this.render("bookings", {into:"sitterEdit", controller: 'sitterEditBookings'})
+        model: () ->
+            Sitterfied.currentUser.get('bookings')
     )
     Sitterfied.SitterEditNetworkRoute = Em.Route.extend(
         renderTemplate: () ->

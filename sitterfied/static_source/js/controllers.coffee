@@ -105,28 +105,95 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
 
         facebookConnect: ()->
-                use_fb_data = () ->
-                    access_token = FB.getAccessToken()
-                    facebook_id = FB.getUserID()
-                    Sitterfied.currentUser.set('facebook_token', access_token)
-                    Sitterfied.currentUser.set('facebook_id', facebook_id)
-                    Sitterfied.currentUser.save()
-                    Sitterfied.currentUser.one('didUpdate', () ->
-                        $.ajax
-                            url: "/facebook_import/"
-                            success: () ->
-                                alert("facebook connected")
-                    )
+            use_fb_data = () ->
+                access_token = FB.getAccessToken()
+                facebook_id = FB.getUserID()
+                Sitterfied.currentUser.set('facebook_token', access_token)
+                Sitterfied.currentUser.set('facebook_id', facebook_id)
+                promise = Sitterfied.currentUser.save()
+                promise.then () ->
+                    $.ajax
+                        url: "/facebook_import/"
+                        success: () ->
+                            alert("facebook connected")
 
-                FB.getLoginStatus (response) ->
-                    if response.status is "connected"
+            FB.getLoginStatus((response) ->
+                if response.status is "connected"
+                    use_fb_data()
+                else if response.status is "not_authorized"
+                    FB.login ->
                         use_fb_data()
-                    else if response.status is "not_authorized"
-                        FB.login ->
-                            use_fb_data()
-
+            ,true)
 
     })
+
+    Sitterfied.BookingsController  = Em.ArrayController.extend(
+        pendingRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return not accepted and future
+
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
+        upcomingJobs: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  accepted and future
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
+        completedJobs: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  accepted and not future
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
+        missedRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                if item.get('canceled')
+                    return false
+
+                accepted = Boolean(item.get('accepted_sitter'))
+                now = new Date()
+                future = item.get('start_date_time') > now
+                return  not accepted and not future
+        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+
+        canceledRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                return item.get('canceled')
+        ).property('content.@each.canceled')
+
+        declinedRequests: (() ->
+            return @get('content').filter (item, index, content) ->
+                declined_sitters = item.get('declined_sitters')
+                return declined_sitters.indexOf(item.get('content')) != -1
+        ).property('content.@each.declined_sitters')
+
+        cancelBooking: (booking) ->
+            $.ajax
+                type: "POST"
+                url:"/api/bookings/" + booking.get('id') + "/cancel_booking/"
+                dataType: 'json'
+                success: (response) ->
+                    booking.load(booking.get('id'), response)
+                error: () ->
+                    alert("There was a problem canceling this booking. Please try again")
+
+    )
 
     Sitterfied.BookController = Em.ObjectController.extend(
         cancel: () ->
@@ -180,6 +247,31 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 @set(x, false)
 
     })
+
+    Sitterfied.SitterEditBookingsController =  Sitterfied.BookingsController.extend
+        declineBooking: (booking) ->
+            $.ajax
+                type: "POST"
+                url:"/api/bookings/" + booking.get('id') + "/decline_booking/"
+                dataType: 'json'
+                success: (response) ->
+                    booking.load(booking.get('id'), response)
+                error: () ->
+                    alert("There was a problem declining this booking. Please try again")
+
+        acceptBooking: (booking) ->
+            $.ajax
+                type: "POST"
+                url:"/api/bookings/" + booking.get('id') + "/accept_booking/"
+                dataType: 'json'
+                data:
+                    booking: booking.get('id')
+                success: (response) ->
+                    booking.load(booking.get('id'), response)
+                error: () ->
+                    alert("There was a problem accepting this booking. Please try again")
+
+
 
     Sitterfied.DoneController = Em.ObjectController.extend(
         edit: (booking)  ->
@@ -546,77 +638,8 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(
     )
 
-    Sitterfied.ParentEditBookingsController  = Em.ArrayController.extend(
 
-        pendingRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return not accepted and future
-
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
-
-        upcomingJobs: (() ->
-            return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and future
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
-
-        completedJobs: (() ->
-            return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and not future
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
-
-        missedRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  not accepted and not future
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
-
-        canceledRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('canceled')
-        ).property('content.@each.canceled')
-
-        declinedRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                declined_sitters = item.get('declined_sitters')
-                return declined_sitters.indexOf(item.get('content')) != -1
-        ).property('content.@each.declined_sitters')
-
-        cancelBooking: (booking) ->
-            booking.set('canceled', true)
-            booking.save()
-
-        acceptBooking: (booking) ->
-            sitter = this.get('content')
-            booking.set('accepted_sitter', sitter)
-            booking.save()
-
-        declineBooking: (booking) ->
-            sitter = this.get('content')
-            booking.declined_sitters.append(sitter)
-            booking.save()
-    )
+    Sitterfied.ParentEditBookingsController  = Sitterfied.BookingsController.extend()
 
 
     Sitterfied.FriendsController  = Em.ArrayController.extend(

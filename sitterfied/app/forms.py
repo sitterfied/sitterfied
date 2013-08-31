@@ -46,3 +46,30 @@ class AvatarForm(forms.Form):
 
 class ActiveForm(forms.Form):
     active = forms.BooleanField(required=False)
+
+
+class BookingForm(forms.Form):
+    booking = forms.IntegerField()
+
+    def booking_clean(self):
+        booking_id = self.cleaned_data['booking']
+        booking = Booking.objects.get(pk=booking_id)
+        if booking.accepted_sitter:
+            raise forms.ValidationError("Someone has already accepted that booking")
+        return booking
+
+
+
+class AcceptBookingForm(BookingForm):
+    def save(self):
+        booking = self.cleaned_data['booking']
+        sitter = self.cleaned_data['sitter']
+        booking.accept(sitter)
+        return booking
+
+class DeclineBookingForm(BookingForm):
+    def save(self):
+        booking = self.cleaned_data['booking']
+        sitter = self.cleaned_data['sitter']
+        booking.decline(sitter)
+        return booking
