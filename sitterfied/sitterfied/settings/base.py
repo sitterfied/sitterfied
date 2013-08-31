@@ -167,6 +167,11 @@ ACCOUNT_ACTIVATION_DAYS = 30
 
 DEFAULT_FROM_EMAIL = 'hello@sitterfied.com'
 
+ALLOWED_HOSTS =[
+    ".sitterfied.com"
+    ".sitterfied.com."
+]
+
 from .pipeline import *
 from .grappelli import *
 from .rest_framework import *
