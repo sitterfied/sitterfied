@@ -54,9 +54,6 @@ INSTALLED_APPS += (
 
 MIDDLEWARE_CLASSES += (
   "debug_toolbar.middleware.DebugToolbarMiddleware",
-   'django.middleware.gzip.GZipMiddleware',
-   'pipeline.middleware.MinifyHTMLMiddleware',
-
 )
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -81,3 +78,15 @@ DEVSERVER_MODULES = (
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 INTERNAL_IPS = ('192.12.88.33',)
+
+def custom_show_toolbar(request):
+    return True  # Always show toolbar, for example purposes only.
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+    'EXTRA_SIGNALS': ['app.models.booking_accepted',
+                      'app.models.booking_declined',
+                      'app.models.booking_canceled'],
+    'ENABLE_STACKTRACES' : True,
+}
