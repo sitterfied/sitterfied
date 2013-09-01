@@ -1,1 +1,1 @@
-You have recived a booking request
+You have recived a booking on {{instance.start_date_time}} to {{instance.stop_date_time}}. Please reply '{{instance.id}}:yes' to accept"

@@ -116,6 +116,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **
                                            {
                                                'parent_name':parent.get_full_name(),
                                                'first_name':sitter.first_name,
+                                               'instance': instance
 
                                            })
 
