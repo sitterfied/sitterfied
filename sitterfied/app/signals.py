@@ -116,7 +116,6 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **
                                            {
                                                'parent_name':parent.get_full_name(),
                                                'first_name':sitter.first_name,
-                                               'instance': instance
 
                                            })
 
@@ -124,7 +123,9 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **
 
 
         for sitter in text_sitters:
-            sms = render_to_string("email/booking/booking_request_received.sms",{})
+            sms = render_to_string("email/booking/booking_request_received.sms",{
+                'instance': instance
+            })
             twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
 @receiver(post_save, sender=SitterReview)
