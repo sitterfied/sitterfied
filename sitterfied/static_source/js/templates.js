@@ -4889,7 +4889,7 @@ function program11(depth0,data) {
   hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
     'id': ("mn_check5"),
-    'checkedBinding': ("mobile_new_reivew")
+    'checkedBinding': ("mobile_new_review")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("<label for=\"mn_check5\">A new review has been added</label></p>\n			    <p>");
   hashContexts = {'id': depth0,'checkedBinding': depth0};

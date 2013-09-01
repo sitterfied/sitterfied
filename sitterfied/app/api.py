@@ -184,7 +184,7 @@ class UserViewSet(IdFilterViewset):
 
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('friends')
+    filter_fields = ('friends',)
 
 
     @link()

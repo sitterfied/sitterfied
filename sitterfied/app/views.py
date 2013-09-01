@@ -26,6 +26,8 @@ from api import UserViewSet, SitterViewSet, ParentViewSet
 
 from .models import User, Sitter, Parent
 
+from .utils import send_html_email
+
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
 
@@ -132,17 +134,6 @@ def invite_email_submit(request):
     return {}
 
 
-
-#email
-def send_html_email(subject, frm, address, text, html):
-    try:
-        EmailBlacklist.objects.get(email=address)
-        return
-    except:
-        pass
-    msg = EmailMultiAlternatives(subject, text, frm, [address])
-    msg.attach_alternative(html, "text/html")
-    msg.send()
 
 
 

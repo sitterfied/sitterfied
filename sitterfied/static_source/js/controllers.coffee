@@ -22,8 +22,10 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             model = this.get('model')
             model.set('isDirty', true)
             model.save()
-            model.get('children').save()
+            debugger
             model.get('settings').save()
+            model.get('children')?.save()
+
 
 
 
@@ -184,15 +186,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 return declined_sitters.indexOf(item.get('content')) != -1
         ).property('content.@each.declined_sitters')
 
-        cancelBooking: (booking) ->
-            $.ajax
-                type: "POST"
-                url:"/api/bookings/" + booking.get('id') + "/cancel_booking/"
-                dataType: 'json'
-                success: (response) ->
-                    booking.load(booking.get('id'), response)
-                error: () ->
-                    alert("There was a problem canceling this booking. Please try again")
+
 
     )
 
@@ -250,27 +244,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     })
 
     Sitterfied.SitterEditBookingsController =  Sitterfied.BookingsController.extend
-        declineBooking: (booking) ->
-            $.ajax
-                type: "POST"
-                url:"/api/bookings/" + booking.get('id') + "/decline_booking/"
-                dataType: 'json'
-                success: (response) ->
-                    booking.load(booking.get('id'), response)
-                error: () ->
-                    alert("There was a problem declining this booking. Please try again")
-
-        acceptBooking: (booking) ->
-            $.ajax
-                type: "POST"
-                url:"/api/bookings/" + booking.get('id') + "/accept_booking/"
-                dataType: 'json'
-                data:
-                    booking: booking.get('id')
-                success: (response) ->
-                    booking.load(booking.get('id'), response)
-                error: () ->
-                    alert("There was a problem accepting this booking. Please try again")
 
 
 
@@ -634,6 +607,40 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         toggleNote: () ->
             isNoteShown = @get('isNoteShown')
             @set('isNoteShown', !isNoteShown)
+
+        cancelBooking: (booking) ->
+            $.ajax
+                type: "POST"
+                url:"/api/bookings/" + booking.get('id') + "/cancel_booking/"
+                dataType: 'json'
+                success: (response) ->
+                    booking.load(booking.get('id'), response)
+                error: () ->
+                    alert("There was a problem canceling this booking. Please try again")
+
+        declineBooking: (booking) ->
+            $.ajax
+                type: "POST"
+                url:"/api/bookings/" + booking.get('id') + "/decline_booking/"
+                dataType: 'json'
+                success: (response) ->
+                    booking.load(booking.get('id'), response)
+                error: () ->
+                    alert("There was a problem declining this booking. Please try again")
+
+        acceptBooking: (booking) ->
+            $.ajax
+                type: "POST"
+                url:"/api/bookings/" + booking.get('id') + "/accept_booking/"
+                dataType: 'json'
+                data:
+                    booking: booking.get('id')
+                success: (response) ->
+                    booking.load(booking.get('id'), response)
+                error: () ->
+                    alert("There was a problem accepting this booking. Please try again")
+
+
     )
 
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(

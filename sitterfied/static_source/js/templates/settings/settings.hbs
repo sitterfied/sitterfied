@@ -34,7 +34,7 @@
 		</div>
 		<p><a {{action 'deleteAccount'}}>DELETE MY ACCOUNT</a> Having problems? <strong><a href="mailto:hello@sitterfied.com">talk to us</a></strong>. Maybe we can work this out.</p>
 		<h4><span class="icon_mobile">&nbsp;</span>Mobile Notifications / Text Messages</h4>
-        {{#with settings}}
+        {{# with settings}}
 		<ul class="clear">
 		  <li>Mobile Phone</li>
 		  <li>
@@ -48,7 +48,7 @@
 			    <p>{{view Ember.Checkbox id="mn_check3" checkedBinding="mobile_groups_added_network"}}<label for="mn_check3">Someone has added one of my groups to their network</label></p>
                 {{ else }}
                 <p>{{view Ember.Checkbox id="mn_check" checkedBinding="mobile_booking_request"}}<label for="mn_check">I receive a booking request</label></p>
-			    <p>{{view Ember.Checkbox id="mn_check5" checkedBinding="mobile_new_reivew"}}<label for="mn_check5">A new review has been added</label></p>
+			    <p>{{view Ember.Checkbox id="mn_check5" checkedBinding="mobile_new_review"}}<label for="mn_check5">A new review has been added</label></p>
 			    <p>{{view Ember.Checkbox id="mn_check2" checkedBinding="mobile_friend_joined"}}<label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
 			    <p>{{view Ember.Checkbox id="mn_check3" checkedBinding="mobile_groups_added_network"}}<label for="mn_check3">Someone has added one of my groups to their network</label></p>
                 {{/if}}
