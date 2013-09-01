@@ -19,20 +19,20 @@
       <!-- Save for Web Slices (Email-PreLaunchInvited_Clean.psd) -->
 
       <div id="box" style="margin-left: 10px; width: 500px; padding-left: 30px; padding-right: 30px; -moz-border-radius: 3px 3px 0 0 / 4px 4px 0 0; -webkit-border-radius: 3px 3px 0 0 / 4px 4px 0 0; border-radius: 3px 3px 0 0 / 4px 4px 0 0; -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; background-color: #fff; -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15); -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15); box-shadow: 0 1px 2px rgba(0,0,0,.15);">
-        <img src="{{full_static_url}}email/images/toplogo.jpg" alt=""><br><img id="icon" src="{{full_static_url}}email/images/{%block iconpath%}heartletter.png{% endblock iconpath %}" alt="" style="margin-left: auto; margin-right: auto; height: 80px; width: 90px; display: block;">
+        <img src="http://beta.sitterfied.com/static/email/images/toplogo.jpg" alt=""><br><img id="icon" src="http://beta.sitterfied.com/static/email/images/{%block iconpath%}heartletter.png{% endblock iconpath %}" alt="" style="margin-left: auto; margin-right: auto; height: 80px; width: 90px; display: block;">
         {% block message %}
         {% endblock message %}
-        <br><img id="sig" src="{{full_static_url}}email/images/bottomsig.png" alt="" style="margin-top: 20px;"><div id="ps" style="margin-top: 20px;">
+        <br><img id="sig" src="http://beta.sitterfied.com/static/email/images/bottomsig.png" alt="" style="margin-top: 20px;"><div id="ps" style="margin-top: 20px;">
         {% block ps %}
          
         {% endblock ps %}
         </div>
       </div>
-      <img src="{{full_static_url}}email/images/bottom.png" alt="">
+      <img src="http://beta.sitterfied.com/static/email/images/bottom.png" alt="">
       <div id="bottom" style="margin-left: 10px; margin-right: 20px;">
         {% block unsubscribe %}
         <div class="unsubscribe" style="float: right;">
-          <a href="http://www.sitterfied.com{% url "unsubscribe" %}?email={{email}}"><img src="{{full_static_url}}email/images/unsubscribe.png" alt=""></a>
+          <a href="http://www.sitterfied.com{% url "unsubscribe" %}?email={{email}}"><img src="http://beta.sitterfied.com/static/email/images/unsubscribe.png" alt=""></a>
         </div>
         {% endblock unsubscribe %}
         <div class="address" style="color: #b6b8b8; font-family: 'Proxima Nova'; font-weight: bold;">
