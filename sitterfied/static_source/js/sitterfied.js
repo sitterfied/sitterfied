@@ -47417,7 +47417,7 @@ function program11(depth0,data) {
   hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
     'id': ("mn_check5"),
-    'checkedBinding': ("mobile_new_reivew")
+    'checkedBinding': ("mobile_new_review")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("<label for=\"mn_check5\">A new review has been added</label></p>\n			    <p>");
   hashContexts = {'id': depth0,'checkedBinding': depth0};
@@ -48653,12 +48653,13 @@ define("fancybox", ["jquery"], function(){});
         return Sitterfied.accountType === "Parent";
       }).property('parent_or_sitter', 'Sitterfied.accountType'),
       saveSettings: function() {
-        var model;
+        var model, _ref;
         model = this.get('model');
         model.set('isDirty', true);
         model.save();
-        model.get('children').save();
-        return model.get('settings').save();
+        debugger;
+        model.get('settings').save();
+        return (_ref = model.get('children')) != null ? _ref.save() : void 0;
       },
       deleteAccount: function() {
         var imsure;
@@ -48850,20 +48851,7 @@ define("fancybox", ["jquery"], function(){});
           declined_sitters = item.get('declined_sitters');
           return declined_sitters.indexOf(item.get('content')) !== -1;
         });
-      }).property('content.@each.declined_sitters'),
-      cancelBooking: function(booking) {
-        return $.ajax({
-          type: "POST",
-          url: "/api/bookings/" + booking.get('id') + "/cancel_booking/",
-          dataType: 'json',
-          success: function(response) {
-            return booking.load(booking.get('id'), response);
-          },
-          error: function() {
-            return alert("There was a problem canceling this booking. Please try again");
-          }
-        });
-      }
+      }).property('content.@each.declined_sitters')
     });
     Sitterfied.BookController = Em.ObjectController.extend({
       cancel: function() {
@@ -48930,37 +48918,7 @@ define("fancybox", ["jquery"], function(){});
         return _results;
       }
     });
-    Sitterfied.SitterEditBookingsController = Sitterfied.BookingsController.extend({
-      declineBooking: function(booking) {
-        return $.ajax({
-          type: "POST",
-          url: "/api/bookings/" + booking.get('id') + "/decline_booking/",
-          dataType: 'json',
-          success: function(response) {
-            return booking.load(booking.get('id'), response);
-          },
-          error: function() {
-            return alert("There was a problem declining this booking. Please try again");
-          }
-        });
-      },
-      acceptBooking: function(booking) {
-        return $.ajax({
-          type: "POST",
-          url: "/api/bookings/" + booking.get('id') + "/accept_booking/",
-          dataType: 'json',
-          data: {
-            booking: booking.get('id')
-          },
-          success: function(response) {
-            return booking.load(booking.get('id'), response);
-          },
-          error: function() {
-            return alert("There was a problem accepting this booking. Please try again");
-          }
-        });
-      }
-    });
+    Sitterfied.SitterEditBookingsController = Sitterfied.BookingsController.extend;
     Sitterfied.DoneController = Em.ObjectController.extend({
       edit: function(booking) {
         return this.transitionTo('editBook', booking);
@@ -49320,6 +49278,48 @@ define("fancybox", ["jquery"], function(){});
         var isNoteShown;
         isNoteShown = this.get('isNoteShown');
         return this.set('isNoteShown', !isNoteShown);
+      },
+      cancelBooking: function(booking) {
+        return $.ajax({
+          type: "POST",
+          url: "/api/bookings/" + booking.get('id') + "/cancel_booking/",
+          dataType: 'json',
+          success: function(response) {
+            return booking.load(booking.get('id'), response);
+          },
+          error: function() {
+            return alert("There was a problem canceling this booking. Please try again");
+          }
+        });
+      },
+      declineBooking: function(booking) {
+        return $.ajax({
+          type: "POST",
+          url: "/api/bookings/" + booking.get('id') + "/decline_booking/",
+          dataType: 'json',
+          success: function(response) {
+            return booking.load(booking.get('id'), response);
+          },
+          error: function() {
+            return alert("There was a problem declining this booking. Please try again");
+          }
+        });
+      },
+      acceptBooking: function(booking) {
+        return $.ajax({
+          type: "POST",
+          url: "/api/bookings/" + booking.get('id') + "/accept_booking/",
+          dataType: 'json',
+          data: {
+            booking: booking.get('id')
+          },
+          success: function(response) {
+            return booking.load(booking.get('id'), response);
+          },
+          error: function() {
+            return alert("There was a problem accepting this booking. Please try again");
+          }
+        });
       }
     });
     Sitterfied.ParentEditSitterTeamController = Em.ArrayController.extend();
