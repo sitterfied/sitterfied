@@ -184,7 +184,7 @@ class UserViewSet(IdFilterViewset):
 
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', 'friends')
+    filter_fields = ('friends')
 
 
     @link()
@@ -269,7 +269,6 @@ class SitterViewSet(IdFilterViewset):
                                                                        'settings').all()
     serializer_class = SitterSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', )
 
 
     @link()
@@ -374,13 +373,11 @@ class ReviewViewSet(IdFilterViewset):
     queryset = models.SitterReview.objects.all().select_related('parent', 'sitter')
     serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', )
 
 class BookingViewSet(IdFilterViewset):
     queryset = models.Booking.objects.all().select_related('parent').prefetch_related('sitters', 'declined_sitters')
     serializer_class = BookingSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', )
 
 
     @link()
@@ -440,7 +437,7 @@ class ChildrenViewSet(IdFilterViewset):
     queryset = models.Child.objects.all()
     serializer_class = ChildSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_fields = ('id', 'parent', 'school', 'special_needs')
+    filter_fields = ('parent', 'school', 'special_needs')
 
 
 #bookings
