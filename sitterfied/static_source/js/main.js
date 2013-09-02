@@ -7,7 +7,7 @@ require({
 		"model": "lib/ember-model-latest",
         //"data": "lib/ember-data-latest",
         //"djangoRestAdapter": "lib/adapter",
-
+		'waypoints': 'lib/waypoints',
         "ajaxfileupload": 'lib/ajaxfileupload.js',
         "_": "lib/underscore-min",
         "jquery": "lib/jquery-1.9.1",

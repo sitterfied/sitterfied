@@ -1,4 +1,4 @@
-define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
+define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints'], (Em, Sitterfied) ->
     Ember.RadioButton = Em.View.extend({
         tagName : "input",
         type : "radio",
@@ -285,6 +285,14 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare'], (Em, Sitterfied) ->
         click: () ->
             @$().toggleClass('active')
             $('.header nav').fadeToggle()
+
+    Sitterfied.WaypointActiveView = Em.View.extend
+        didInsertElement: () ->
+            @$().waypoint () =>
+                targetClass = @get('targetClass')
+                $("li.active").removeClass('active')
+                $("." +targetClass).addClass('active')
+
 
 
     #Sitterfied.BookingView = Em.View.extend

@@ -7,9 +7,9 @@
       <div class="stabs_block" >
 		<nav>
 		  <ul class="tab_select">
-			<li class="active"><a {{action 'zoomToSitterTeam'}}>sitter<br />team<span>{{filteredSitterTeam.length}}</span></a></li>
-			<li><a {{action 'zoomToFriendTeam'}}>friends'<br />sitters<span>{{filteredFriendTeam.length}}</span></a></li>
-			<li><a {{action 'zoomToLocalTeam'}}>local<br />sitters<span>{{filteredLocalTeam.length}}</span></a></li>
+			<li class="team"><a {{action 'zoomToSitterTeam'}}>sitter<br />team<span>{{filteredSitterTeam.length}}</span></a></li>
+			<li class="friends"><a {{action 'zoomToFriendTeam'}}>friends'<br />sitters<span>{{filteredFriendTeam.length}}</span></a></li>
+			<li class="local"><a {{action 'zoomToLocalTeam'}}>local<br />sitters<span>{{filteredLocalTeam.length}}</span></a></li>
 		  </ul>
 		</nav>
 		<div class="friends_block my_friends_sitters">
@@ -130,7 +130,7 @@
           {{# view Sitterfied.MobTriggerView my_mob_tab=true}}
             sitter<br />team<span>{{filteredSitterTeam.length}}</span>
           {{/ view}}
-		  <div class="my_sitter_team">
+          {{# view Sitterfied.WaypointActiveView class="my_sitter_team" targetClass="team"}}
 			<div class="sitter_title">
 			  <p><span><span class="icon_heart2">&nbsp;</span>sitter<br />team</span><strong>{{filteredSitterTeam.length}}</strong></p>
 			</div>
@@ -143,7 +143,7 @@
                 {{/ if}}
               {{/each}}
             </ul>
-          </div>
+          {{/ view}}
         </section>
 
 	  <!-- my_friends_sitters -->
@@ -151,7 +151,7 @@
         {{# view Sitterfied.MobTriggerView my_mob_tab=true }}
 		  friends'<br />sitters<span>{{filteredFriendTeam.length}}</span>
         {{/ view}}
-		<div class="friends_block my_friends_sitters">
+        {{# view Sitterfied.WaypointActiveView class="friends_block my_friends_sitters" targetClass="friends"}}
 		  <div class="sitter_title">
 			<p><span><span class="icon_heart2">&nbsp;</span>friends’<br />sitters</span><strong>{{filteredFriendTeam.length}}</strong></p>
 		  </div>
@@ -164,7 +164,7 @@
               {{/ if}}
             {{/ each}}
 		  </ul>
-		</div>
+		{{/ view}}
 	  </section>
 	  <!-- /my_friends_sitters -->
 
@@ -173,7 +173,7 @@
         {{# view Sitterfied.MobTriggerView my_mob_tab=true }}
 		  local<br />sitters<span>{{filteredLocalTeam.length}}</span>
         {{/ view}}
-		<div class="friends_block my_local_sitters">
+        {{# view Sitterfied.WaypointActiveView class="friends_block my_local_sitters" targetClass="local"}}
 		  <div class="sitter_title">
 			<p><span><span class="icon_pin2">&nbsp;</span>local<br />sitters</span><strong>{{filteredLocalTeam.length}}</strong></p>
 		  </div>
@@ -186,7 +186,7 @@
               {{/ if}}
             {{/ each}}
 		  </ul>
-		</div>
+		{{/ view}}
 	  </section>
 	  <!-- /my_local_sitters -->
 
