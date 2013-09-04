@@ -26,9 +26,9 @@ define ['jquery'
 
     Date = {
         serialize: (date) ->
-            if date then moment(date).toISOString() else null
+            if date then moment(date).utc().toISOString() else null
         deserialize: (date) ->
-            if date then moment(date).toDate() else null
+            if date then moment(date).local().toDate() else null
     }
 
     Boolean = {
@@ -502,8 +502,9 @@ define ['jquery'
             stop = @get('stop_date_time')
             if not start or not stop
                 return ""
-            startHour = moment(start).format('h:00 a');
-            endHour = moment(stop).format('h:00 a');
+            debugger
+            startHour = moment(start).format('h:mm a');
+            endHour = moment(stop).format('h:mm a');
             return startHour + " — " + endHour
         ).property('start_date_time', 'stop_date_time')
 
@@ -512,10 +513,12 @@ define ['jquery'
             if not date
                 return
             if not value?
-                return moment(date).hour()
+                return moment(date).format("HHmm")
             else
                 date = moment(date)
-                date.hour(value)
+                value_date = moment(value, "HHmm")
+                date.hour(value_date.hour())
+                date.minute(value_date.minute())
                 @set('start_date_time', date.toDate())
                 return value
         ).property('start_date_time')
@@ -525,10 +528,12 @@ define ['jquery'
             if not date
                 return
             if not value?
-                return moment(date).hour()
+                return moment(date).format("HHmm")
             else
                 date = moment(date)
-                date.hour(value)
+                value_date = moment(value, "HHmm")
+                date.hour(value_date.hour())
+                date.minute(value_date.minute())
                 @set('stop_date_time', date.toDate())
                 return value
         ).property('stop_date_time')

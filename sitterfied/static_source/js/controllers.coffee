@@ -534,11 +534,17 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 stop_date = @get('start_date')
 
             start_moment = moment(@get('start_date'))
-            start_moment.hour(@get('start_time'))
+            start_time = moment(@get('start_time'), "HHmm")
+
+            start_moment.hour(start_time.hour())
+            start_moment.minute(start_time.minutes())
             start_date_time = start_moment.toDate()
 
+
             stop_moment = moment(stop_date)
-            stop_moment.hour(@get('stop_time'))
+            stop_time = moment(@get('stop_time'), "HHmm")
+            stop_moment.hour(stop_time.hour())
+            stop_moment.minute(stop_time.minutes())
             stop_date_time = stop_moment.toDate()
 
             booking = Sitterfied.Booking.create
@@ -572,11 +578,15 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 stop_date = @get('stop_date')
 
             start_moment = moment(@get('start_date'))
-            start_moment.hour(@get('start_time'))
+            start_time = moment(@get('start_time'), "HHmm")
+            start_moment.hour(start_time.hour())
+            start_moment.minute(start_time.minute())
             start_date_time = start_moment.toDate()
 
             stop_moment = moment(stop_date)
-            stop_moment.hour(@get('stop_time'))
+            stop_time = moment(@get('stop_time'), "HHmm")
+            stop_moment.hour(stop_time.hour())
+            stop_moment.minute(stop_time.minute())
             stop_date_time = stop_moment.toDate()
 
 
