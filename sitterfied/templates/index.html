@@ -27,12 +27,7 @@
 
     </script>
     <script>
-      var user_json = '{{user_json|safe}}'
-	  var friends_json = '{{friends_json|safe}}'
-	  var children_json = '{{children_json|safe}}'
-	  var sitter_teams_json = '{{sitter_teams_json|safe}}'
-	  var bookmarks_json = '{{bookmarks_json|safe}}'
-	  var bookings_json = '{{bookings_json|safe}}'
+      var user_json = '{{user_json|escapejs}}'
 
       var parent_or_sitter = '{{parent_or_sitter}}'
     </script>

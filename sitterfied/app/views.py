@@ -57,7 +57,6 @@ def index(request, referred_by=None):
                                                                       ).get(id=request.user.id)
     serialized = seralizer(classed_user)
     user_json = JSONRenderer().render(serialized.data)
-
     return {'user_json':user_json,
             'parent_or_sitter': parent_or_sitter,
             "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY

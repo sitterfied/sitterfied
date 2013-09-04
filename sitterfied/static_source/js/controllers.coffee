@@ -22,7 +22,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             model = this.get('model')
             model.set('isDirty', true)
             model.save()
-            debugger
             model.get('settings').save()
             model.get('children')?.save()
 
