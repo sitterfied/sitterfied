@@ -733,7 +733,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .parent_book_block > ul > li > ul > li select[multiple] {width:540px;}
 .parent_book_block > ul > li:last-child > ul > li span {top:47px;}
 .parent_book_block > ul > li:hover > ul > li, .parent_book_block > ul > li.focus > ul > li {color:#616161;}
-.docsparent_book_block > ul > li:nth-last-child(6):hover > ul > li:first-child span, .parent_book_block > ul > li.focus:nth-last-child(6) > ul > li:first-child span {background-position:0 -2402px;}
+.parent_book_block > ul > li:nth-last-child(6):hover > ul > li:first-child span, .parent_book_block > ul > li.focus:nth-last-child(6) > ul > li:first-child span {background-position:0 -2402px;}
 .parent_book_block > ul > li:nth-last-child(5):hover > ul > li:first-child span, .parent_book_block > ul > li.focus:nth-last-child(5) > ul > li:first-child span {background-position:0 -2531px;}
 .parent_book_block > ul > li:nth-last-child(4) > ul > li:nth-child(2) input[type="text"] {background:#fff url(../images/icons/calendar2.png) right center no-repeat;padding-right:40px;width:170px;}
 .parent_book_block > ul > li:nth-last-child(4):hover > ul > li:first-child span, .parent_book_block > ul > li.focus:nth-last-child(4) > ul > li:first-child span {background-position:0 -2402px;}
