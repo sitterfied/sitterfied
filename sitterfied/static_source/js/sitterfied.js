@@ -40430,10 +40430,7 @@ Ember.ManyArray = Ember.RecordArray.extend({
   save: function() {
     // TODO: loop over dirty records only
     return Ember.RSVP.all(this.map(function(record) {
-		debugger
-		if (record.get('isDirty')){
-			return record.save();
-		}
+      return record.save();
     }));
   },
 
@@ -42533,14 +42530,6 @@ define("csrf", function(){});
       special_needs: hasMany("Sitterfied.SpecialNeed", {
         key: "special_needs"
       }),
-      firstName: (function() {
-        var name;
-        name = this.get('name');
-        if (!name || name === "") {
-          return "Child";
-        }
-        return name.split(" ")[0];
-      }).property('name'),
       birthMonth: (function(key, value) {
         var date;
         date = this.get('dob');
@@ -42671,6 +42660,7 @@ define("csrf", function(){});
         if (!start || !stop) {
           return "";
         }
+        debugger;
         startHour = moment(start).format('h:mm a');
         endHour = moment(stop).format('h:mm a');
         return startHour + " — " + endHour;
@@ -46698,7 +46688,7 @@ function program21(depth0,data) {
 Ember.TEMPLATES["_child"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
@@ -46718,41 +46708,34 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<p class=\"child_number\">");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "child.firstName", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n</p>\n<p class=\"small_selects\">\n  <span>FIRST NAME\n  </span>\n  ");
+  data.buffer.push("<p class=\"child_number\">CHILD 1\n</p>\n<p class=\"small_selects\">\n  <span>FIRST NAME\n  </span>\n  ");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
     'valueBinding': ("child.name")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n  <span>DATE OF BIRTH\n  </span>\n  ");
-  hashContexts = {'contentBinding': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'allowClear': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionValuePath': "STRING",'optionLabelPath': "STRING",'allowClear': "BOOLEAN",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+  hashContexts = {'contentBinding': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionValuePath': "STRING",'optionLabelPath': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
     'contentBinding': ("Sitterfied.Months"),
     'optionValuePath': ("content.value"),
     'optionLabelPath': ("content.name"),
-    'allowClear': (false),
     'valueBinding': ("child.birthMonth")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n  ");
-  hashContexts = {'contentBinding': depth0,'valueBinding': depth0,'allowClear': depth0};
-  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING",'allowClear': "BOOLEAN"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
     'contentBinding': ("Sitterfied.Days"),
-    'valueBinding': ("child.birthDay"),
-    'allowClear': (false)
+    'valueBinding': ("child.birthDay")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n  ");
-  hashContexts = {'contentBinding': depth0,'valueBinding': depth0,'allowClear': depth0};
-  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING",'allowClear': "BOOLEAN"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
     'contentBinding': ("Sitterfied.Years"),
-    'valueBinding': ("child.birthYear"),
-    'allowClear': (false)
+    'valueBinding': ("child.birthYear")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n</p>\n<p>\n  <span>SCHOOL\n  </span>\n  ");
   hashContexts = {'valueBinding': depth0};
@@ -47921,7 +47904,7 @@ function program3(depth0,data) {
   hashContexts = {};
   options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "child", options) : helperMissing.call(depth0, "partial", "child", options))));
-  data.buffer.push("\n                    ");
+  data.buffer.push("\n                  ");
   return buffer;
   }
 
@@ -47950,16 +47933,16 @@ function program5(depth0,data) {
     'active': (true)
   },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_friends6\">&nbsp;\n                  </span>Children\n                </li>\n				<li>\n                  ");
+  data.buffer.push("\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_friends6\">&nbsp;\n                  </span>Children\n                </li>\n				<li>\n				  <p class=\"child_number\">\n                    <a class=\"button button_smaller button_edit\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "newChild", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n                  ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "child", "in", "controllers.children", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n				  <p class=\"child_number\">\n                    <a class=\"button button_smaller button_edit\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "newChild", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n\n				  <a class=\"button button_small\" ");
+  data.buffer.push("\n				  <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -48933,17 +48916,12 @@ define("fancybox", ["jquery"], function(){});
         return Sitterfied.accountType === "Parent";
       }).property('parent_or_sitter', 'Sitterfied.accountType'),
       saveSettings: function() {
-        var model, settings, _ref;
+        var model, _ref;
         model = this.get('model');
         model.set('isDirty', true);
         model.save();
-        settings = model.get('settings');
-        if (settings.get('isDirty')) {
-          settings.save();
-        }
-        return (_ref = model.get('children')) != null ? _ref.save().then(function() {
-          debugger;
-        }) : void 0;
+        model.get('settings').save();
+        return (_ref = model.get('children')) != null ? _ref.save() : void 0;
       },
       deleteAccount: function() {
         var imsure;
@@ -48995,14 +48973,12 @@ define("fancybox", ["jquery"], function(){});
       },
       newChild: function() {
         var newChild;
-        newChild = Sitterfied.Child.create({
+        return newChild = Sitterfied.Child.create({
           parent: this.get('content'),
           name: "",
           school: "",
           dob: new Date
         });
-        newChild.set('_dirtyAttributes', []);
-        return this.get('model.children').insertAt(0, newChild);
       },
       saveCertification: function() {
         var newCert;
