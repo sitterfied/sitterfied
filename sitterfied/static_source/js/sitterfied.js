@@ -40430,7 +40430,10 @@ Ember.ManyArray = Ember.RecordArray.extend({
   save: function() {
     // TODO: loop over dirty records only
     return Ember.RSVP.all(this.map(function(record) {
-      return record.save();
+		debugger
+		if (record.get('isDirty')){
+			return record.save();
+		}
     }));
   },
 
@@ -41766,77 +41769,293 @@ define("model", ["ember"], function(){});
     Sitterfied.States = Em.A(['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']);
     Sitterfied.HourBlocks = Em.A([
       Em.Object.create({
-        value: 0,
+        value: "0001",
         name: "12:00 AM"
       }), Em.Object.create({
-        value: 1,
+        value: "0015",
+        name: "12:15 AM"
+      }), Em.Object.create({
+        value: "0030",
+        name: "12:30 AM"
+      }), Em.Object.create({
+        value: "0045",
+        name: "12:45 AM"
+      }), Em.Object.create({
+        value: "0100",
         name: "1:00 AM"
       }), Em.Object.create({
-        value: 2,
+        value: "0115",
+        name: "1:15 AM"
+      }), Em.Object.create({
+        value: "0130",
+        name: "1:30 AM"
+      }), Em.Object.create({
+        value: "0145",
+        name: "1:45 AM"
+      }), Em.Object.create({
+        value: "0200",
         name: "2:00 AM"
       }), Em.Object.create({
-        value: 3,
+        value: "0215",
+        name: "2:15 AM"
+      }), Em.Object.create({
+        value: "0230",
+        name: "2:30 AM"
+      }), Em.Object.create({
+        value: "0245",
+        name: "2:45 AM"
+      }), Em.Object.create({
+        value: "0300",
         name: "3:00 AM"
       }), Em.Object.create({
-        value: 4,
+        value: "0315",
+        name: "3:15 AM"
+      }), Em.Object.create({
+        value: "0330",
+        name: "3:30 AM"
+      }), Em.Object.create({
+        value: "0345",
+        name: "3:45 AM"
+      }), Em.Object.create({
+        value: "0400",
         name: "4:00 AM"
       }), Em.Object.create({
-        value: 5,
+        value: "0415",
+        name: "4:15 AM"
+      }), Em.Object.create({
+        value: "0430",
+        name: "4:30 AM"
+      }), Em.Object.create({
+        value: "0445",
+        name: "4:45 AM"
+      }), Em.Object.create({
+        value: "0500",
         name: "5:00 AM"
       }), Em.Object.create({
-        value: 6,
+        value: "0515",
+        name: "5:15 AM"
+      }), Em.Object.create({
+        value: "0530",
+        name: "5:30 AM"
+      }), Em.Object.create({
+        value: "0545",
+        name: "5:45 AM"
+      }), Em.Object.create({
+        value: "0600",
         name: "6:00 AM"
       }), Em.Object.create({
-        value: 7,
+        value: "0615",
+        name: "6:15 AM"
+      }), Em.Object.create({
+        value: "0630",
+        name: "6:30 AM"
+      }), Em.Object.create({
+        value: "0645",
+        name: "6:45 AM"
+      }), Em.Object.create({
+        value: "0700",
         name: "7:00 AM"
       }), Em.Object.create({
-        value: 8,
+        value: "0715",
+        name: "7:15 AM"
+      }), Em.Object.create({
+        value: "0730",
+        name: "7:30 AM"
+      }), Em.Object.create({
+        value: "0745",
+        name: "7:45 AM"
+      }), Em.Object.create({
+        value: "0800",
         name: "8:00 AM"
       }), Em.Object.create({
-        value: 9,
+        value: "0815",
+        name: "8:15 AM"
+      }), Em.Object.create({
+        value: "0830",
+        name: "8:30 AM"
+      }), Em.Object.create({
+        value: "0845",
+        name: "8:45 AM"
+      }), Em.Object.create({
+        value: "0900",
         name: "9:00 AM"
       }), Em.Object.create({
-        value: 10,
+        value: "0915",
+        name: "9:15 AM"
+      }), Em.Object.create({
+        value: "0930",
+        name: "9:30 AM"
+      }), Em.Object.create({
+        value: "0945",
+        name: "9:45 AM"
+      }), Em.Object.create({
+        value: "1000",
         name: "10:00 AM"
       }), Em.Object.create({
-        value: 11,
+        value: "1015",
+        name: "10:15 AM"
+      }), Em.Object.create({
+        value: "1030",
+        name: "10:30 AM"
+      }), Em.Object.create({
+        value: "1045",
+        name: "10:45 AM"
+      }), Em.Object.create({
+        value: "1100",
         name: "11:00 AM"
       }), Em.Object.create({
-        value: 12,
+        value: "1115",
+        name: "11:15 AM"
+      }), Em.Object.create({
+        value: "1130",
+        name: "11:30 AM"
+      }), Em.Object.create({
+        value: "1145",
+        name: "11:45 AM"
+      }), Em.Object.create({
+        value: "1200",
         name: "12:00 PM"
       }), Em.Object.create({
-        value: 13,
+        value: "1215",
+        name: "12:15 PM"
+      }), Em.Object.create({
+        value: "1230",
+        name: "12:30 PM"
+      }), Em.Object.create({
+        value: "1245",
+        name: "12:45 PM"
+      }), Em.Object.create({
+        value: "1300",
         name: "1:00 PM"
       }), Em.Object.create({
-        value: 14,
+        value: "1315",
+        name: "1:15 PM"
+      }), Em.Object.create({
+        value: "1330",
+        name: "1:30 PM"
+      }), Em.Object.create({
+        value: "1345",
+        name: "1:45 PM"
+      }), Em.Object.create({
+        value: "1400",
         name: "2:00 PM"
       }), Em.Object.create({
-        value: 15,
+        value: "1415",
+        name: "2:15 PM"
+      }), Em.Object.create({
+        value: "1430",
+        name: "2:30 PM"
+      }), Em.Object.create({
+        value: "1445",
+        name: "2:45 PM"
+      }), Em.Object.create({
+        value: "1500",
         name: "3:00 PM"
       }), Em.Object.create({
-        value: 16,
+        value: "1515",
+        name: "3:15 PM"
+      }), Em.Object.create({
+        value: "1530",
+        name: "3:30 PM"
+      }), Em.Object.create({
+        value: "1545",
+        name: "3:45 PM"
+      }), Em.Object.create({
+        value: "1600",
         name: "4:00 PM"
       }), Em.Object.create({
-        value: 17,
+        value: "1615",
+        name: "4:15 PM"
+      }), Em.Object.create({
+        value: "1630",
+        name: "4:30 PM"
+      }), Em.Object.create({
+        value: "1645",
+        name: "4:45 PM"
+      }), Em.Object.create({
+        value: "1700",
         name: "5:00 PM"
       }), Em.Object.create({
-        value: 18,
+        value: "1715",
+        name: "5:15 PM"
+      }), Em.Object.create({
+        value: "1730",
+        name: "5:30 PM"
+      }), Em.Object.create({
+        value: "1745",
+        name: "5:45 PM"
+      }), Em.Object.create({
+        value: "1800",
         name: "6:00 PM"
       }), Em.Object.create({
-        value: 19,
+        value: "1815",
+        name: "6:15 PM"
+      }), Em.Object.create({
+        value: "1830",
+        name: "6:30 PM"
+      }), Em.Object.create({
+        value: "1845",
+        name: "6:45 PM"
+      }), Em.Object.create({
+        value: "1900",
         name: "7:00 PM"
       }), Em.Object.create({
-        value: 20,
+        value: "1915",
+        name: "7:15 PM"
+      }), Em.Object.create({
+        value: "1930",
+        name: "7:30 PM"
+      }), Em.Object.create({
+        value: "1945",
+        name: "7:45 PM"
+      }), Em.Object.create({
+        value: "2000",
         name: "8:00 PM"
       }), Em.Object.create({
-        value: 21,
+        value: "2015",
+        name: "8:15 PM"
+      }), Em.Object.create({
+        value: "2030",
+        name: "8:30 PM"
+      }), Em.Object.create({
+        value: "2045",
+        name: "8:45 PM"
+      }), Em.Object.create({
+        value: "2100",
         name: "9:00 PM"
       }), Em.Object.create({
-        value: 22,
+        value: "2115",
+        name: "9:15 PM"
+      }), Em.Object.create({
+        value: "2130",
+        name: "9:30 PM"
+      }), Em.Object.create({
+        value: "2145",
+        name: "9:45 PM"
+      }), Em.Object.create({
+        value: "2200",
         name: "10:00 PM"
       }), Em.Object.create({
-        value: 23,
+        value: "2215",
+        name: "10:15 PM"
+      }), Em.Object.create({
+        value: "2230",
+        name: "10:30 PM"
+      }), Em.Object.create({
+        value: "2245",
+        name: "10:45 PM"
+      }), Em.Object.create({
+        value: "2300",
         name: "11:00 PM"
+      }), Em.Object.create({
+        value: "2315",
+        name: "11:15 PM"
+      }), Em.Object.create({
+        value: "2330",
+        name: "11:30 PM"
+      }), Em.Object.create({
+        value: "2345",
+        name: "11:45 PM"
       })
     ]);
     Sitterfied.OnDeckBooking = null;
@@ -41936,14 +42155,14 @@ define("csrf", function(){});
     Date = {
       serialize: function(date) {
         if (date) {
-          return moment(date).toISOString();
+          return moment(date).utc().toISOString();
         } else {
           return null;
         }
       },
       deserialize: function(date) {
         if (date) {
-          return moment(date).toDate();
+          return moment(date).local().toDate();
         } else {
           return null;
         }
@@ -42314,6 +42533,14 @@ define("csrf", function(){});
       special_needs: hasMany("Sitterfied.SpecialNeed", {
         key: "special_needs"
       }),
+      firstName: (function() {
+        var name;
+        name = this.get('name');
+        if (!name || name === "") {
+          return "Child";
+        }
+        return name.split(" ")[0];
+      }).property('name'),
       birthMonth: (function(key, value) {
         var date;
         date = this.get('dob');
@@ -42444,36 +42671,40 @@ define("csrf", function(){});
         if (!start || !stop) {
           return "";
         }
-        startHour = moment(start).format('h:00 a');
-        endHour = moment(stop).format('h:00 a');
+        startHour = moment(start).format('h:mm a');
+        endHour = moment(stop).format('h:mm a');
         return startHour + " — " + endHour;
       }).property('start_date_time', 'stop_date_time'),
       startHour: (function(key, value) {
-        var date;
+        var date, value_date;
         date = this.get('start_date_time');
         if (!date) {
           return;
         }
         if (!(value != null)) {
-          return moment(date).hour();
+          return moment(date).format("HHmm");
         } else {
           date = moment(date);
-          date.hour(value);
+          value_date = moment(value, "HHmm");
+          date.hour(value_date.hour());
+          date.minute(value_date.minute());
           this.set('start_date_time', date.toDate());
           return value;
         }
       }).property('start_date_time'),
       endHour: (function(key, value) {
-        var date;
+        var date, value_date;
         date = this.get('stop_date_time');
         if (!date) {
           return;
         }
         if (!(value != null)) {
-          return moment(date).hour();
+          return moment(date).format("HHmm");
         } else {
           date = moment(date);
-          date.hour(value);
+          value_date = moment(value, "HHmm");
+          date.hour(value_date.hour());
+          date.minute(value_date.minute());
           this.set('stop_date_time', date.toDate());
           return value;
         }
@@ -45505,7 +45736,7 @@ function program9(depth0,data) {
   return buffer;
   
 });
-Ember.TEMPLATES["completedJobs"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["completedBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
@@ -45538,7 +45769,7 @@ function program3(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	<!-- completed_jobs_block -->\n	<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n      <ul class=\"booking_list\">\n		");
+  data.buffer.push("\n	<!-- completed_jobs_block -->\n	<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n      <ul class=\"booking_list\">\n        test\n		");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "booking", "in", "completedJobs", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -45547,7 +45778,7 @@ function program3(depth0,data) {
   return buffer;
   
 });
-Ember.TEMPLATES["declinedJobs"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["declinedBookings"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
@@ -46467,7 +46698,7 @@ function program21(depth0,data) {
 Ember.TEMPLATES["_child"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
@@ -46487,34 +46718,41 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<p class=\"child_number\">CHILD 1\n</p>\n<p class=\"small_selects\">\n  <span>FIRST NAME\n  </span>\n  ");
+  data.buffer.push("<p class=\"child_number\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "child.firstName", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n</p>\n<p class=\"small_selects\">\n  <span>FIRST NAME\n  </span>\n  ");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
     'valueBinding': ("child.name")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n  <span>DATE OF BIRTH\n  </span>\n  ");
-  hashContexts = {'contentBinding': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionValuePath': "STRING",'optionLabelPath': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+  hashContexts = {'contentBinding': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'allowClear': depth0,'valueBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionValuePath': "STRING",'optionLabelPath': "STRING",'allowClear': "BOOLEAN",'valueBinding': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.Months"),
     'optionValuePath': ("content.value"),
     'optionLabelPath': ("content.name"),
+    'allowClear': (false),
     'valueBinding': ("child.birthMonth")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n  ");
-  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0,'allowClear': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING",'allowClear': "BOOLEAN"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.Days"),
-    'valueBinding': ("child.birthDay")
+    'valueBinding': ("child.birthDay"),
+    'allowClear': (false)
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n  ");
-  hashContexts = {'contentBinding': depth0,'valueBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+  hashContexts = {'contentBinding': depth0,'valueBinding': depth0,'allowClear': depth0};
+  hashTypes = {'contentBinding': "STRING",'valueBinding': "STRING",'allowClear': "BOOLEAN"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.Years"),
-    'valueBinding': ("child.birthYear")
+    'valueBinding': ("child.birthYear"),
+    'allowClear': (false)
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n</p>\n<p>\n  <span>SCHOOL\n  </span>\n  ");
   hashContexts = {'valueBinding': depth0};
@@ -47683,7 +47921,7 @@ function program3(depth0,data) {
   hashContexts = {};
   options = {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "child", options) : helperMissing.call(depth0, "partial", "child", options))));
-  data.buffer.push("\n                  ");
+  data.buffer.push("\n                    ");
   return buffer;
   }
 
@@ -47712,16 +47950,16 @@ function program5(depth0,data) {
     'active': (true)
   },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_friends6\">&nbsp;\n                  </span>Children\n                </li>\n				<li>\n				  <p class=\"child_number\">\n                    <a class=\"button button_smaller button_edit\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "newChild", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n                  ");
+  data.buffer.push("\n	  <div class=\"tab_content profile_block parent_profile_block\" id=\"tab-1\">\n		<form method=\"post\" action=\"#\" class=\"form_style\">\n		  <ul>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_friends6\">&nbsp;\n                  </span>Children\n                </li>\n				<li>\n                  ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "child", "in", "controllers.children", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n				  <a class=\"button button_small\" ");
+  data.buffer.push("\n				  <p class=\"child_number\">\n                    <a class=\"button button_smaller button_edit\" ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "newChild", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n                      <span class=\"icon_plus\">&nbsp;\n                      </span>ADD ANOTHER CHILD\n                    </a>\n                  </p>\n\n				  <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -48695,13 +48933,17 @@ define("fancybox", ["jquery"], function(){});
         return Sitterfied.accountType === "Parent";
       }).property('parent_or_sitter', 'Sitterfied.accountType'),
       saveSettings: function() {
-        var model, _ref;
+        var model, settings, _ref;
         model = this.get('model');
         model.set('isDirty', true);
         model.save();
-        debugger;
-        model.get('settings').save();
-        return (_ref = model.get('children')) != null ? _ref.save() : void 0;
+        settings = model.get('settings');
+        if (settings.get('isDirty')) {
+          settings.save();
+        }
+        return (_ref = model.get('children')) != null ? _ref.save().then(function() {
+          debugger;
+        }) : void 0;
       },
       deleteAccount: function() {
         var imsure;
@@ -48753,12 +48995,14 @@ define("fancybox", ["jquery"], function(){});
       },
       newChild: function() {
         var newChild;
-        return newChild = Sitterfied.Child.create({
+        newChild = Sitterfied.Child.create({
           parent: this.get('content'),
           name: "",
           school: "",
           dob: new Date
         });
+        newChild.set('_dirtyAttributes', []);
+        return this.get('model.children').insertAt(0, newChild);
       },
       saveCertification: function() {
         var newCert;
@@ -49240,7 +49484,7 @@ define("fancybox", ["jquery"], function(){});
         return _results;
       },
       book: function(sitters) {
-        var booking, start_date_time, start_moment, stop_date, stop_date_time, stop_moment;
+        var booking, start_date_time, start_moment, start_time, stop_date, stop_date_time, stop_moment, stop_time;
         if (!Sitterfied.typeIsArray(sitters)) {
           sitters = [sitters];
         }
@@ -49250,10 +49494,14 @@ define("fancybox", ["jquery"], function(){});
           stop_date = this.get('start_date');
         }
         start_moment = moment(this.get('start_date'));
-        start_moment.hour(this.get('start_time'));
+        start_time = moment(this.get('start_time'), "HHmm");
+        start_moment.hour(start_time.hour());
+        start_moment.minute(start_time.minutes());
         start_date_time = start_moment.toDate();
         stop_moment = moment(stop_date);
-        stop_moment.hour(this.get('stop_time'));
+        stop_time = moment(this.get('stop_time'), "HHmm");
+        stop_moment.hour(stop_time.hour());
+        stop_moment.minute(stop_time.minutes());
         stop_date_time = stop_moment.toDate();
         booking = Sitterfied.Booking.create({
           parent: Sitterfied.currentUser,
@@ -49277,7 +49525,7 @@ define("fancybox", ["jquery"], function(){});
         return this.transitionTo('book');
       },
       interview: function(sitters) {
-        var booking, start_date_time, start_moment, stop_date, stop_date_time, stop_moment;
+        var booking, start_date_time, start_moment, start_time, stop_date, stop_date_time, stop_moment, stop_time;
         if (!Sitterfied.typeIsArray(sitters)) {
           sitters = [sitters];
         }
@@ -49287,10 +49535,14 @@ define("fancybox", ["jquery"], function(){});
           stop_date = this.get('stop_date');
         }
         start_moment = moment(this.get('start_date'));
-        start_moment.hour(this.get('start_time'));
+        start_time = moment(this.get('start_time'), "HHmm");
+        start_moment.hour(start_time.hour());
+        start_moment.minute(start_time.minute());
         start_date_time = start_moment.toDate();
         stop_moment = moment(stop_date);
-        stop_moment.hour(this.get('stop_time'));
+        stop_time = moment(this.get('stop_time'), "HHmm");
+        stop_moment.hour(stop_time.hour());
+        stop_moment.minute(stop_time.minute());
         stop_date_time = stop_moment.toDate();
         booking = Sitterfied.Booking.create({
           parent: Sitterfied.currentUser,
