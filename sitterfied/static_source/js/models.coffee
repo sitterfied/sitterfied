@@ -347,6 +347,44 @@ define ['jquery'
         calc_total_exp: ((value) ->
             return @get('infant_exp') + @get('toddler_exp') + @get('preschool_exp') + @get('school_age_exp') + @get('pre_teenExp') + @get('teen_exp')
         ).property('infant_exp','toddler_exp','preschool_exp', 'school_ageExp', 'pre_teenExp', 'teen_exp')
+
+
+        birthMonth: ((key, value) ->
+            date = @get('dob')
+            if not date
+                return
+            if arguments.length == 1
+                return date.getMonth()
+            else
+                date.setMonth(value)
+                @set('dob', date)
+            return value
+        ).property('dob')
+
+        birthDay: ((key, value) ->
+            date = @get('dob')
+            if not date
+                return
+            if arguments.length == 1
+                return date.getDate()
+            else
+                date.setDate(value)
+                @set('dob', date)
+        ).property('dob')
+
+        birthYear: ((key, value) ->
+            date = @get('dob')
+            if not date
+                return
+            if arguments.length == 1
+                return date.getFullYear()
+            else
+                date.setFullYear(value)
+                @set('dob', date)
+        ).property('dob')
+
+
+
     )
 
     Sitterfied.Sitter.adapter = Adapter.create()

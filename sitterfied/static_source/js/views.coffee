@@ -24,6 +24,24 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints'], (Em, S
     })
 
 
+    Sitterfied.NetworkDropDown = Em.TextField.extend({
+        didInsertElement: ()->
+            #setup datepicker and keep ember insync with it
+            @$().autocomplete({
+                source: (request, response) ->
+                    $.ajax
+                        url: "/network_search",
+                        data:
+                            search: request.term
+                        success: (data) ->
+                            debugger
+                            response(data)
+            })
+    })
+
+
+
+
     Sitterfied.UnboundSelectOption = Ember.SelectOption.extend(
       template: Ember.Handlebars.compile("{{unbound view.content}}")
       didInsertElement: ->

@@ -1,11 +1,12 @@
 # Create your views here.
 from time import sleep
 from itertools import chain
-
+import json
 from django.conf import settings
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
 
@@ -24,7 +25,7 @@ from rest_framework.renderers import JSONRenderer
 from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
 from api import UserViewSet, SitterViewSet, ParentViewSet
 
-from .models import User, Sitter, Parent
+from .models import User, Sitter, Parent, Group
 
 from .utils import send_html_email
 
@@ -84,6 +85,19 @@ def search(request):
     sitters = sitters.annotate(rehires=Count("booking__parent")).all()
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
+
+
+
+
+@api_view(['GET'])
+def network_search(request):
+    search_term = request.GET.get('search', '')
+    users = [{'label':u.get_full_name(), 'value':'user'} for u in User.objects.filter(Q(first_name__startswith=search_term) | Q(last_name__startswith=search_term))]
+    groups = [{'label':g.name, 'value':'group'} for g in Group.objects.filter(Q(name__startswith=search_term))]
+    users.extend(groups)
+    return Response(users)
+
+
 
 
 def error(request):

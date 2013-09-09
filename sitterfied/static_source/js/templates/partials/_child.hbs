@@ -6,13 +6,23 @@
   {{view Ember.TextField valueBinding="child.name" }}
   <span>DATE OF BIRTH
   </span>
-  {{view Ember.Select
+  {{view Sitterfied.Select2
   contentBinding="Sitterfied.Months"
   optionValuePath="content.value"
   optionLabelPath="content.name"
-  valueBinding="child.birthMonth"}}
-  {{view Ember.Select contentBinding="Sitterfied.Days" valueBinding="child.birthDay"}}
-  {{view Ember.Select contentBinding="Sitterfied.Years" valueBinding="child.birthYear"}}
+  prompt="Month"
+  valueBinding="child.birthMonth"
+  }}
+  {{view Sitterfied.Select2
+  contentBinding="Sitterfied.Days"
+  prompt="Day"
+  selectionBinding="child.birthDay"
+  }}
+  {{view Sitterfied.Select2
+  contentBinding="Sitterfied.Years"
+  prompt="Year"
+  selectionBinding="chlid.birthYear"
+  }}
 </p>
 <p>
   <span>SCHOOL

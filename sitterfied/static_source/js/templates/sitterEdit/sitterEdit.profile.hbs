@@ -75,8 +75,33 @@
 			  <ul>
 				<li><span class="icon_age2">&nbsp;</span>Age</li>
 				<li>
-				  <p><span class="short">DATE OF BIRTH</span>{{view Ember.DatePicker valueBinding="dob"}} </p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+				  <p>
+					<span class="short">DATE OF BIRTH
+					  {{#if isLoaded}}
+					</span>
+                    {{view Sitterfied.Select2
+                    contentBinding="Sitterfied.Months"
+					optionValuePath="content.value"
+					optionLabelPath="content.name"
+					prompt="Month"
+                    valueBinding="birthMonth"
+                    }}
+					{{view Sitterfied.Select2
+					contentBinding="Sitterfied.Days"
+					prompt="Day"
+					selectionBinding="birthDay"
+					}}
+					{{view Sitterfied.Select2
+					contentBinding="Sitterfied.Years"
+					prompt="Year"
+					selectionBinding="birthYear"
+					}}
+				  </p>
+				  {{/if }}
+				  <a class="button button_small" href="#">
+					<span class="icon_ok2">&nbsp;
+					</span>Save
+				  </a>
 				</li>
 			  </ul>
 			</li>

@@ -107,6 +107,8 @@ def booking_request_canceled(sender, **kwargs):
 
 @receiver(m2m_changed, sender=Booking.sitters.through)
 def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **kwargs):
+    if kwargs.get('reverse', False):
+        return
     if action == "post_add":
         parent = instance.parent
         email_sitters = instance.sitters.filter(settings__email_booking_request=True).filter(id__in=pk_set)
