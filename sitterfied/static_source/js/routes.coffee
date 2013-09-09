@@ -305,12 +305,21 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             else
                 this.transitionTo('sitter', user)
     )
+    Sitterfied.TosRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render('tos')
+    )
+    Sitterfied.PrivacyRoute = Em.Route.extend(
+        renderTemplate: () ->
+            this.render('privacy')
+    )
 
 
     Sitterfied.IndexRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render('footer', {outlet: 'footer'})
     )
+
 
     Sitterfied.SearchRoute = Em.Route.extend(
         setupController: (controller, model) ->

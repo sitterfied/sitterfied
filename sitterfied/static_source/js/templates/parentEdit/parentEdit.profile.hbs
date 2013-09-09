@@ -138,14 +138,6 @@
                       }}
                      {{/if}}
                     </p>
-				    <p>
-                      <span>add another (if not listed above):
-                      </span>{{view Ember.TextField valueBinding="controllers.languages.newLanguage"}}
-                      <a style="top:0px;" class="button button_smaller button_edit" {{action 'saveLanguage'}}>
-                        <span  class="icon_plus">&nbsp;
-                        </span>ADD
-                      </a>
-                    </p>
                     <a class="button button_small" {{action 'saveSettings'}}>
                       <span class="icon_ok2">&nbsp;
                       </span>Save

@@ -98,7 +98,9 @@
             <nav>
               <ul>
                 {% verbatim %}
+				{{# unless Sitterfied.isSitter }}
                 <li>{{#linkTo search }} Search {{/linkTo}}</li>
+				{{/unless}}
 	            <li>{{#linkTo mybookings }}Bookings{{/linkTo}}</li>
 		        <li>
 					{{#linkTo profile }}<img {{bindAttr src=Sitterfied.currentUser.avatarUrl}} alt="" /> {{Sitterfied.currentUser.first_name}}{{/linkTo}}
