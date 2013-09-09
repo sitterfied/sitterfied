@@ -442,7 +442,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         overnight : false
         date_to : undefined
         findSitters : () ->
-            $.ajax("/api/search/").then (response) =>
+            $.get("/api/search/", {'zip':@get('zip')}).then (response) =>
                 sitters = Em.A()
                 for sitter in response
                     s = Sitterfied.Sitter.create()
@@ -677,3 +677,23 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             review = reviewController.get('model')
             review.save()
             reviewController.set('model', Sitterfied.SitterReview.create(parent: Sitterfied.currentUser))
+
+
+    Sitterfied.BookingController = Em.ObjectController.extend(
+        rate: ( () ->
+            num_children = @get('num_children')
+            sitter = @get('sitter')
+            if not sitter?
+                return ""
+            if num_children == 1
+                min_rate = sitter.get('one_child_min_rate')
+                max_rate = sitter.get('one_child_max_rate')
+            else if num_children == 2
+                min_rate = sitter.get('two_child_min_rate')
+                max_rate = sitter.get('two_child_max_rate')
+            else
+                min_rate = sitter.get('three_child_min_rate')
+                max_rate = sitter.get('three_child_max_rate')
+            rate = "#{min_rate} - #{max_rate}"
+        ).property('sitter','num_children', 'sitter.one_child_min_rate', 'sitter.one_child_max_rate', 'sitter.two_child_min_rate', 'sitter.two_child_max_rate','sitter.three_child_min_rate', 'sitter.three_child_max_rate')
+    )

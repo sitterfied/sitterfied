@@ -70,17 +70,18 @@ from django.db.models import Count, Max
 
 @api_view(['GET'])
 def search(request):
-    sitters = Sitter.objects.select_related().prefetch_related('reviews',
-                                                               'languages',
-                                                               'sitter_groups',
-                                                               'friends',
-                                                               'certifications',
-                                                               'schedlue',
-                                                               'sitter_teams',
-                                                               'other_services',
-                                                               'bookings',
-                                                               'bookmarks',
-                                                               'settings')
+    zipcode = request.GET.get('zip', '')
+    sitters = Sitter.objects.filter(zip=zipcode).select_related().prefetch_related('reviews',
+                                                                                   'languages',
+                                                                                   'sitter_groups',
+                                                                                   'friends',
+                                                                                   'certifications',
+                                                                                   'schedlue',
+                                                                                   'sitter_teams',
+                                                                                   'other_services',
+                                                                                   'bookings',
+                                                                                   'bookmarks',
+                                                                                   'settings')
 
     sitters = sitters.annotate(rehires=Count("booking__parent")).all()
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)

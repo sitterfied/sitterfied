@@ -540,7 +540,6 @@ define ['jquery'
             stop = @get('stop_date_time')
             if not start or not stop
                 return ""
-            debugger
             startHour = moment(start).format('h:mm a');
             endHour = moment(stop).format('h:mm a');
             return startHour + " — " + endHour

@@ -30,11 +30,8 @@
     </ul>
     <div class="price">
       <span>
+        {{rate}}
       </span>
-      {{# if Sitterfied.isParent }}
-      <a class="edit_button" {{action 'editBooking' booking }}>edit
-      </a>
-      {{/if}}
     </div>
     {{# unless canceled}}
     {{# if Sitterfied.isParent }}
