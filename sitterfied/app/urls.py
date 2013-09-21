@@ -20,7 +20,7 @@ router.register(r'bookings', api.BookingViewSet)
 
 
 
-
+import google
 # Core Django Imports
 from django.conf.urls import patterns, url, include
 
@@ -38,8 +38,8 @@ urlpatterns = patterns('app.views',
     url(r'^cancel-unsubscribe/$', 'cancel_unsubscribe', name='cancel_unsubscribe'),
     url(r'^email/$', StaticView.as_view(template_name='invitation_email.html'), name="email"),
     url(r'^signup/$',RegistrationView.as_view(), name='signup'),
-
-
+    url(r'^googleoauthbegin/$',google.google_oauth_begin, name='googleoauthbegin'),
+    url(r'^oauth2callback/$',google.oauth2callback, name='googlecallback'),
 )
 
 urlpatterns += patterns('',

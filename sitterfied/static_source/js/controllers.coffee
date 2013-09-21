@@ -19,14 +19,15 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         ).property('parent_or_sitter', 'Sitterfied.accountType')
 
         saveSettings: () ->
+            Em.run.begin()
             model = this.get('model')
             model.set('isDirty', true)
             model.save()
             model.get('settings').save()
-            model.get('children')?.save()
-
-
-
+            model.get('children')?.save().then((children) ->
+                Sitterfied.currentUser.get('children').load(Sitterfied.Child, children)
+                Em.run.end()
+            )
 
         deleteAccount: () ->
             imsure = confirm("are you sure you want to delete your account? This cannot be undone")
@@ -68,13 +69,17 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         deleteGroup: (group) ->
             alert("delete group, " + group)
 
+
         newChild: () ->
+            if Sitterfied.currentUser.get('children').objectAt(0).get('isNew')
+                return
             newChild = Sitterfied.Child.create(
                 parent: this.get('content')
                 name:""
                 school: ""
                 dob: new Date
             )
+            Sitterfied.currentUser.get('children').insertAt(0, newChild)
 
 
         saveCertification: () ->

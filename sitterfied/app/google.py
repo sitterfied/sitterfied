@@ -1,32 +1,34 @@
-def google_oauth_begin(request, id):
-    request.session['invite_id'] = id
+from oauth2client.client import OAuth2WebServerFlow
+from django.http import HttpResponseRedirect, HttpResponse
+from annoying.decorators import render_to, ajax_request
 
-    flow = OAuth2WebServerFlow(client_id='1005442510888.apps.googleusercontent.com',
-                               client_secret='aFExwh6yc9oFqYBz0q12HheZ',
+from models import User
+from itertools import chain
+
+import requests
+
+def google_oauth_begin(request):
+
+    flow = OAuth2WebServerFlow(client_id='705373512773.apps.googleusercontent.com',
+                               client_secret='zSdqqjHjyfhs4u28qIL8buy4',
                                scope='http://www.google.com/m8/feeds',
-                               redirect_uri='http://gaggyl.com/oauth2callback',
+                               redirect_uri='http://localhost:8000/oauth2callback',
                                access_type='online')
     auth_uri = flow.step1_get_authorize_url()
     return HttpResponseRedirect(auth_uri)
 
 
-@render_to('invite.html')
 def oauth2callback(request):
-    occurrence_id = request.session['invite_id']
-    hour = request.session['hour']
-    del request.session['invite_id']
-    form = InviteForm()
-    occurrence = Occurrence.objects.get(id=occurrence_id)
-    gaggyl = occurrence.gaggyl
-    emails = None
+
     try:
         code = request.GET['code']
-        flow = OAuth2WebServerFlow(client_id='1005442510888.apps.googleusercontent.com',
-                                   client_secret='aFExwh6yc9oFqYBz0q12HheZ',
+        flow = OAuth2WebServerFlow(client_id='705373512773.apps.googleusercontent.com',
+                                   client_secret='zSdqqjHjyfhs4u28qIL8buy4',
                                    scope='http://www.google.com/m8/feeds',
-                                   redirect_uri='http://gaggyl.com/oauth2callback',
+                                   redirect_uri='http://localhost:8000/oauth2callback',
                                    access_type='online')
         credentials = flow.step2_exchange(code)
+
         access_token = credentials.access_token
         headers={'Authorization':'OAuth %s' % access_token}
         session = requests.session()
@@ -36,11 +38,17 @@ def oauth2callback(request):
         emails.sort()
     except:
         pass
-    return {'emails':emails,
-            'occurrence': occurrence,
-            'hour': hour,
-            'gaggyl': gaggyl,
-            'form': form}
+
+    friends = User.objects.filter(email__in=emails)
+    user = request.user
+    ThroughModel = user.users_in_network.through
+    models_to = (ThroughModel(from_user_id=user.id,
+                              to_user_id=friend.id) for friend in friends)
+    models_frm = (ThroughModel(to_user_id=user.id,
+                               from_user_id=friend.id) for friend in friends)
+    models = chain(models_to, models_frm)
+    ThroughModel.objects.bulk_create(models)
+    return HttpResponse
 
 #in google.py
 from atom.http import ProxiedHttpClient #Google contacts use this client

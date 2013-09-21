@@ -57,3 +57,7 @@ ecl-facebook
 django_twilio
 
 pyuploadcare
+pyatom
+oauth2client
+gdata
+lxml

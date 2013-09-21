@@ -425,6 +425,14 @@ define ['jquery'
         school: attr()
         special_needs: hasMany("Sitterfied.SpecialNeed",{key:"special_needs"})
 
+        displayName: (() ->
+            name = @get('name')
+            if not name? or name == ""
+                return "Child"
+            name.split(' ')[0]
+
+        ).property('name')
+
         birthMonth: ((key, value) ->
             date = @get('dob')
             if not date

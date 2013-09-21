@@ -42569,6 +42569,14 @@ define("csrf", function(){});
       special_needs: hasMany("Sitterfied.SpecialNeed", {
         key: "special_needs"
       }),
+      displayName: (function() {
+        var name;
+        name = this.get('name');
+        if (!(name != null) || name === "") {
+          return "Child";
+        }
+        return name.split(' ')[0];
+      }).property('name'),
       birthMonth: (function(key, value) {
         var date;
         date = this.get('dob');
@@ -45837,7 +45845,7 @@ function program3(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	<!-- completed_jobs_block -->\n	<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n      <ul class=\"booking_list\">\n        test\n		");
+  data.buffer.push("\n	<!-- completed_jobs_block -->\n	<div class=\"subtab_content completed_jobs_block\" id=\"tab-1-3\">\n      <ul class=\"booking_list\">\n		");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "booking", "in", "completedJobs", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -46754,7 +46762,7 @@ function program19(depth0,data) {
 Ember.TEMPLATES["_child"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, hashTypes, hashContexts, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
@@ -46774,7 +46782,11 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<p class=\"child_number\">CHILD 1\n</p>\n<p class=\"small_selects\">\n  <span>FIRST NAME\n  </span>\n  ");
+  data.buffer.push("<p class=\"child_number\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "child.displayName", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n</p>\n<p class=\"small_selects\">\n  <span>FIRST NAME\n  </span>\n  ");
   hashContexts = {'valueBinding': depth0};
   hashTypes = {'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -48988,11 +49000,15 @@ define("fancybox", ["jquery"], function(){});
       }).property('parent_or_sitter', 'Sitterfied.accountType'),
       saveSettings: function() {
         var model, _ref;
+        Em.run.begin();
         model = this.get('model');
         model.set('isDirty', true);
         model.save();
         model.get('settings').save();
-        return (_ref = model.get('children')) != null ? _ref.save() : void 0;
+        return (_ref = model.get('children')) != null ? _ref.save().then(function(children) {
+          Sitterfied.currentUser.get('children').load(Sitterfied.Child, children);
+          return Em.run.end();
+        }) : void 0;
       },
       deleteAccount: function() {
         var imsure;
@@ -49044,12 +49060,16 @@ define("fancybox", ["jquery"], function(){});
       },
       newChild: function() {
         var newChild;
-        return newChild = Sitterfied.Child.create({
+        if (Sitterfied.currentUser.get('children').objectAt(0).get('isNew')) {
+          return;
+        }
+        newChild = Sitterfied.Child.create({
           parent: this.get('content'),
           name: "",
           school: "",
           dob: new Date
         });
+        return Sitterfied.currentUser.get('children').insertAt(0, newChild);
       },
       saveCertification: function() {
         var newCert;
