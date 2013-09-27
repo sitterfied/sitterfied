@@ -44,14 +44,6 @@
                     </span>
                     {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
                     {{view Ember.TextField placeholder="City" valueBinding="city"}}
-                    {{ view Sitterfied.Select2
-                         viewName="fieldValueSelect2"
-        	             prompt="Select State"
-                         contentBinding="Sitterfied.States"
-                         optionLabelPath="content"
-                         optionValuePath="content"
-                         selectionBinding="state"
-                         required="" }}
                   </p>
                   <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
@@ -127,16 +119,6 @@
 				<li>
 				  <p>
                     <span>I speak:</span>
-                      {{# if controllers.languages.content.content }}
-                      {{view Sitterfied.Select2
-                      contentBinding=controllers.languages
-        	          prompt="Select languages"
-                      optionLabelPath="content.language"
-                      optionValuePath="content"
-                      selectionBinding="languages"
-                      multiple="multiple"
-                      }}
-                     {{/if}}
                     </p>
                     <a class="button button_small" {{action 'saveSettings'}}>
                       <span class="icon_ok2">&nbsp;

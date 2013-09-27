@@ -23,7 +23,7 @@ from ecl_facebook import Facebook
 
 from rest_framework.renderers import JSONRenderer
 from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
-from api import UserViewSet, SitterViewSet, ParentViewSet
+from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
 
 from .models import User, Sitter, Parent, Group
 
@@ -81,9 +81,8 @@ def search(request):
                                                                                    'other_services',
                                                                                    'bookings',
                                                                                    'bookmarks',
-                                                                                   'settings')
+                                                                                   'settings').annotate(rehires=Count("booking__parent"))
 
-    sitters = sitters.annotate(rehires=Count("booking__parent")).all()
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
 
@@ -93,8 +92,8 @@ def search(request):
 @api_view(['GET'])
 def network_search(request):
     search_term = request.GET.get('search', '')
-    users = [{'label':u.get_full_name(), 'value':'user'} for u in User.objects.filter(Q(first_name__startswith=search_term) | Q(last_name__startswith=search_term))]
-    groups = [{'label':g.name, 'value':'group'} for g in Group.objects.filter(Q(name__startswith=search_term))]
+    users = [{'label':u.get_full_name(), 'value':u.get_full_name(), "type":"user", "id":u.id} for u in User.objects.filter(Q(first_name__startswith=search_term) | Q(last_name__startswith=search_term))]
+    groups = [{'label':g.name, 'value':g.name, "type":"group", "id":g.id} for g in Group.objects.filter(Q(name__startswith=search_term))]
     users.extend(groups)
     return Response(users)
 

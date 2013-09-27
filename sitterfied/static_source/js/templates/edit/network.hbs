@@ -11,16 +11,17 @@
                     <img src="/static/images/icons/facebook.png" alt="" />Facebook
                   </a>
                 </span>
-                <a href="#">
+                <a {{action gmailConnect}}>
                   <img src="/static/images/icons/gmail.png" alt="" />Gmail
                 </a>
               </p>
 			  <p>Connect</p>
 			</li>
 			<li>
-			  <p>
-                {{view Sitterfied.NetworkDropDown placeholder="Search a person or group"}}
-                <input type="submit" value="ADD" /></p>
+              {{# view Sitterfied.NetworkDropDown tagName="p"}}
+              <input type="text" id="autocomplete" placeholder="Search a person or group">
+              <input type="submit" value="ADD" {{action add target="view"}} /></p>
+              {{/ view}}
 			  <p>Search</p>
 			</li>
 			<li>
@@ -30,21 +31,25 @@
 		  </ul>
 		</div>
 		<ul class="soc_psg_list clear">
-          {{# with controllers.friends }}
+          {{# with friends }}
 		  <li>
 			<ul>
 			  <li>Parents</li>
 
-              {{# each parents }}
-		        <li>{{#linkTo parent this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
+              {{# each }}
+                {{# if isParent }}
+		          <li>{{#linkTo parent this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}</li>
+                {{/ if }}
               {{/each}}
 			</ul>
 		  </li>
 		  <li>
 			<ul>
 			  <li>Sitters</li>
-              {{# each sitters }}
-		        <li>{{#linkTo sitter this}}<img src="/static/images/demo/img15.jpg" alt="" />{{full_name}}{{/linkTo}}</li>
+              {{# each }}
+                {{# if isSitter }}
+		          <li>{{#linkTo sitter this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}</li>
+                {{/ if}}
               {{/each}}
 			</ul>
 		  </li>
@@ -53,7 +58,7 @@
 			<ul>
 			  <li>Groups</li>
               {{# each sitter_groups}}
-		        <li>{{#linkTo }}<img src="/static/images/demo/img15.jpg" alt="" />{{name}}{{/linkTo}}</li><a {{action deleteGroup this}} class="delete">&nbsp;</a>
+		        <li>{{name}}</li><a {{action deleteGroup this}} class="delete">&nbsp;</a>
               {{/each}}
 			</ul>
 		  </li>

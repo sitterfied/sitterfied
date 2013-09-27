@@ -25,8 +25,8 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             model.save()
             model.get('settings').save()
             model.get('children')?.save().then((children) ->
-                Sitterfied.currentUser.get('children').load(Sitterfied.Child, children)
-                Em.run.end()
+                Sitterfied.currentUser.get('children').set('data', children)
+                @newChild()
             )
 
         deleteAccount: () ->
@@ -58,11 +58,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             }
             $.post('password_change/', data).success(alert('password changed'))
 
-        newFriendName:  ""
-        addFriend: () ->
-            newFriendName = @get('newFriendName')
-            alert('add Friend, ' + newFriendName)
-
         invite: () ->
             alert("invite friends")
 
@@ -71,7 +66,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
 
         newChild: () ->
-            if Sitterfied.currentUser.get('children').objectAt(0).get('isNew')
+            if Sitterfied.currentUser.get('children').objectAt(0)?.get('isNew')
                 return
             newChild = Sitterfied.Child.create(
                 parent: this.get('content')
@@ -80,6 +75,41 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 dob: new Date
             )
             Sitterfied.currentUser.get('children').insertAt(0, newChild)
+
+
+        addFriend: (friend_id) ->
+            friends = @get('friends')
+            if friends.findProperty('id', friend_id)
+                return
+            friend = Sitterfied.User.create(id:friend_id)
+            friends.pushObject(friend)
+
+            Sitterfied.currentUser.set('isDirty', true)
+            Sitterfied.currentUser.save()
+
+
+
+        addGroup: (group_id) ->
+            groups = @get('sitter_groups')
+            if groups.findProperty('id', group_id)
+                return
+
+            group = Sitterfied.Group.find(group_id)
+            groups.pushObject(group)
+
+            Sitterfied.currentUser.set('isDirty', true)
+            Sitterfied.currentUser.save()
+
+        createGroup: (groupName) ->
+            groups = @get('sitter_groups')
+
+            group = Sitterfied.Group.create({name:groupName})
+            group.save().then () ->
+                groups.pushObject(group)
+
+                Sitterfied.currentUser.set('isDirty', true)
+                Sitterfied.currentUser.save()
+
 
 
         saveCertification: () ->
@@ -109,6 +139,9 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 return
             Sitterfied.SpecialNeed.create({need:newNeed}).save()
             this.set('controllers.specialneeds.newNeed', '')
+
+        gmailConnect: ()->
+            window.open("/googleoauthbegin/")
 
 
         facebookConnect: ()->

@@ -91,38 +91,37 @@
           {{/ view}}
 
 		  <div class="sort_filter clear">
-			<div {{action "toggleSortSitters"}} class="sort"><a href="#">Sort by</a></div>
+			<a {{action "toggleSortSitters"}} class="sort_trigger">Sort by</a>
+            <a {{action "resetSortSitters"}} class="reset_trigger">Reset Sort</a>
+			<ul>
+              {{# view Sitterfied.ToggleView class="sort_block" toggleBinding="sortSitters" tagName="ul"}}
+              <li {{action sortSet "isBookmarked" false}}>
+                <a>Bookmarked</a>
+              </li>
+              {{# view Sitterfied.SortItemView sortProp="rehires" direction=false}}
+		      <a>Rehires</a>
+	          {{/ view}}
+              <li {{action sortSet "total_exp" false}}>
+		        <a>Experience</a>
+	          </li>
+              <li {{action sortSet "sitter_teams.length" false}}>
+		        <a>sitter teams</a>
+	          </li>
+	          {{# view Sitterfied.SortItemView sortProp="one_child_min_rate" direction=true}}
+		      <a>Rate</a>
+	          {{/ view}}
+              <li {{action sortSet "reviews.length" false}}>
+		        <p>Reviews</p>
+	          </li>
+              {{/ view}}
+			</ul>
+		  </div>
+
 			<div {{action "toggleMultipleSitters"}} class="multiple_select"><a>{{multipleSittersText}}</a></div>
 			<div {{action "toggleFilterSitters"}} class="filter"><a>Filter my sitters</a></div>
 		  </div>
 		</div>
       </div>
-      {{#view Sitterfied.ToggleView class="sort_block" toggleBinding="sortSitters" tagName="ul"}}
-      <li {{action sortSet "isBookmarked" false}}>
-        <p>bookmarked</p>
-      </li>
-	  <li><hr></li>
-      {{#view Sitterfied.SortItemView sortProp="rehires" direction=false}}
-		<p>rehires</p>
-	  {{/view}}
-	  <li><hr></li>
-      <li {{action sortSet "total_exp" false}}>
-		<p>experience</p>
-	  </li>
-	  <li><hr></li>
-      <li {{action sortSet "sitter_teams.length" false}}>
-		<p>sitter teams</p>
-	  </li>
-	  <li><hr></li>
-	  {{#view Sitterfied.SortItemView sortProp="one_child_min_rate" direction=true}}
-		<p>rate</p>
-	  {{/view}}
-	  <li><hr></li>
-      <li {{action sortSet "reviews.length" false}}>
-		<p>reviews</p>
-	  </li>
-
-      {{/ view}}
 
       {{/ view}}
       {{# if content }}

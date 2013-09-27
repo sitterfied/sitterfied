@@ -24,19 +24,38 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints'], (Em, S
     })
 
 
-    Sitterfied.NetworkDropDown = Em.TextField.extend({
+    Sitterfied.NetworkDropDown = Em.View.extend({
+        selected: null
+        add: () ->
+            selected = @get('selected')
+            if not selected?
+                groupName = @$('#autocomplete').val()
+                Sitterfied.currentUserController.createGroup(groupName)
+            else if selected.type == "user"
+                Sitterfied.currentUserController.addFriend(selected.id)
+            else if selected.type == "group"
+                Sitterfied.currentUserController.addGroup(selected.id)
+
+            @$('#autocomplete').val("")
+            @set('selected', null)
+
         didInsertElement: ()->
-            #setup datepicker and keep ember insync with it
-            @$().autocomplete({
+            that = this
+            selected_event = (event, ui) ->
+                that.set('selected', ui.item)
+
+            @$('#autocomplete').autocomplete({
+                select: selected_event
+
                 source: (request, response) ->
                     $.ajax
                         url: "/network_search",
                         data:
                             search: request.term
                         success: (data) ->
-                            debugger
                             response(data)
             })
+            return
     })
 
 

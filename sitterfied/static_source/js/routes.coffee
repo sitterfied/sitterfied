@@ -104,9 +104,12 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
             children = Sitterfied.currentUser.get('children')
             this.controllerFor('children').set('model', children)
+            Sitterfied.currentUserController.newChild()
+
 
         renderTemplate: () ->
             this.render("parentEdit/profile", {controller: 'currentUser'})
+
     )
 
     Sitterfied.MybookingsRoute = Em.Route.extend(

@@ -62,6 +62,8 @@ define ['jquery'
 
 
     Sitterfied.Years = (num for num in [2013..1995])
+    Sitterfied.SitterYears = (num for num in [2013..1940])
+
     Sitterfied.Days = (num for num in [1..31])
     Sitterfied.Months = Em.A [
         Em.Object.create({value:0, name: "January"})

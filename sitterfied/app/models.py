@@ -311,7 +311,7 @@ class SitterReview(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="reviews")
     sitter  = models.ForeignKey(Sitter, related_name="reviews")
     recommended = models.BooleanField()
-    review = models.TextField()
+    review = models.TextField(blank=True)
 
     class Meta:
         unique_together = ("parent", "sitter")
@@ -378,3 +378,6 @@ class IncomingSMSMessage(TimeStampedModel):
 
 class Group(TimeStampedModel):
     name = models.CharField(max_length=128, blank=False)
+
+    def __unicode__(self):
+        return self.name

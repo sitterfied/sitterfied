@@ -1592,3 +1592,18 @@ a {cursor:pointer}
 .text_block ul li {line-height:22px;text-indent:35px;padding-bottom:20px;background:url(../images/dot2.gif) 0 8px no-repeat;}
 .text_block ul.circle_list {padding-bottom:20px;}
 .text_block ul.circle_list li {line-height:22px;padding-bottom:0;background-image:url(../images/circle.gif);}
+
+
+
+
+friends_block .sort_filter {padding:0 20px 20px 20px;color:#81abb0;font:16px 'ProximaNova-Semibold';}
+.friends_block .sort_filter a {color:#e88649;}
+.friends_block .sort_filter .sort {float:left;padding:3px 0;position:relative;width:100px;}
+.friends_block .sort_filter .sort a {padding-right:25px;background:url(../images/icons/arrow_bottom5.png) right center no-repeat;}
+.friends_block .sort_filter .sort .reset_trigger {display:none;}
+.friends_block .sort_filter .sort ul {position:absolute;top:100%;left:-25px;border:1px solid #1c8292;background:#fff;padding:8px 4px;z-index:2;box-shadow:rgba(49,48,48,.25) 4px 4px 15px 0;display:none;}
+.friends_block .sort_filter .sort ul li {text-align:center;position:relative;padding-bottom:5px;margin-bottom:5px;}
+.friends_block .sort_filter .sort ul li:before {content:'';display:block;width:35px;height:0;font-size:0;line-height:0;border-top:1px solid #eef0f0;border-bottom:1px solid #f5f6f6;position:absolute;top:100%;left:50%;margin-left:-17px;}
+.friends_block .sort_filter .sort ul li:last-child {padding-bottom:0;margin-bottom:0;}
+.friends_block .sort_filter .sort ul li:last-child:before {display:none;}
+.friends_block .sort_filter .filter {float:right;padding:3px 0 3px 35px;background:url(../images/icons/filter.png) left center no-repeat;}

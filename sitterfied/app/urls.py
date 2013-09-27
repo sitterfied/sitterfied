@@ -17,6 +17,7 @@ router.register(r'sitterreviews', api.ReviewViewSet)
 router.register(r'languages', api.LanguageViewSet)
 router.register(r'children', api.ChildrenViewSet)
 router.register(r'bookings', api.BookingViewSet)
+router.register(r'groups', api.GroupViewSet)
 
 
 

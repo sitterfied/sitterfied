@@ -158,6 +158,11 @@ class ChildSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Child
 
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Group
+
+
 class IdFilterViewset(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super(IdFilterViewset, self).get_queryset()
@@ -343,15 +348,23 @@ class ParentViewSet(IdFilterViewset):
         return Response(serializer.data)
 
 
+import django_filters
+class GroupFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_type="icontains")
+    class Meta:
+        model = models.Group
+        fields = ('name',)
 
-
-
+class GroupViewSet(IdFilterViewset):
+    queryset = models.Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_class = GroupFilter
 
 class CertificationViewSet(IdFilterViewset):
     queryset = models.Certification.objects.all()
     serializer_class = CertificationSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-
 
 class OtherServiceViewSet(IdFilterViewset):
     queryset = models.OtherService.objects.all()

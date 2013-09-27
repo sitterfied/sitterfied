@@ -39,8 +39,9 @@ def oauth2callback(request):
     except:
         pass
 
-    friends = User.objects.filter(email__in=emails)
     user = request.user
+    friends = User.objects.filter(email__in=emails).exclude(id__in=user.users_in_network.values('id')).exclude(id=request.user.id)
+
     ThroughModel = user.users_in_network.through
     models_to = (ThroughModel(from_user_id=user.id,
                               to_user_id=friend.id) for friend in friends)
@@ -48,7 +49,7 @@ def oauth2callback(request):
                                from_user_id=friend.id) for friend in friends)
     models = chain(models_to, models_frm)
     ThroughModel.objects.bulk_create(models)
-    return HttpResponse
+    return HttpResponse("gmail successfully imported")
 
 #in google.py
 from atom.http import ProxiedHttpClient #Google contacts use this client
