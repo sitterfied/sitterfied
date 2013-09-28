@@ -45258,24 +45258,21 @@ function program1(depth0,data) {
     'toggleBinding': ("filterSitters")
   },inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n		  <div class=\"sort_filter clear\">\n			<a ");
+  data.buffer.push("\n\n		  <div class=\"sort_filter clear\">\n            <div class=\"sort\">\n              ");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleSortSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" class=\"sort_trigger\">Sort by</a>\n            <a ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "resetSortSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" class=\"reset_trigger\">Reset Sort</a>\n			<ul>\n              ");
+  stack1 = helpers.unless.call(depth0, "sortSitters", {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n              ");
   hashContexts = {'class': depth0,'toggleBinding': depth0,'tagName': depth0};
   hashTypes = {'class': "STRING",'toggleBinding': "STRING",'tagName': "STRING"};
   stack1 = helpers.view.call(depth0, "Sitterfied.ToggleView", {hash:{
     'class': ("sort_block"),
     'toggleBinding': ("sortSitters"),
     'tagName': ("ul")
-  },inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</ul>\n		  </div>\n\n			<div ");
+  data.buffer.push("\n		    </div>\n			<div ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleMultipleSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -45431,55 +45428,77 @@ function program7(depth0,data) {
 
 function program9(depth0,data) {
   
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n			    <a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleSortSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"sort_trigger\">Sort by</a>\n                ");
+  return buffer;
+  }
+
+function program11(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n                <a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "toggleSortSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"reset_trigger\"> Reset Sort</a>\n              ");
+  return buffer;
+  }
+
+function program13(depth0,data) {
+  
   var buffer = '', stack1, hashTypes, hashContexts;
-  data.buffer.push("\n              <li ");
+  data.buffer.push("\n                <li ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "sortSet", "isBookmarked", false, {hash:{},contexts:[depth0,depth0,depth0],types:["ID","STRING","BOOLEAN"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n                <a>Bookmarked</a>\n              </li>\n              ");
+  data.buffer.push(">\n                  <a>Bookmarked</a>\n                </li>\n                ");
   hashContexts = {'sortProp': depth0,'direction': depth0};
   hashTypes = {'sortProp': "STRING",'direction': "BOOLEAN"};
   stack1 = helpers.view.call(depth0, "Sitterfied.SortItemView", {hash:{
     'sortProp': ("rehires"),
     'direction': (false)
-  },inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(14, program14, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n              <li ");
+  data.buffer.push("\n                <li ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "sortSet", "total_exp", false, {hash:{},contexts:[depth0,depth0,depth0],types:["ID","STRING","BOOLEAN"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n		        <a>Experience</a>\n	          </li>\n              <li ");
+  data.buffer.push(">\n		          <a>Experience</a>\n	            </li>\n                <li ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "sortSet", "sitter_teams.length", false, {hash:{},contexts:[depth0,depth0,depth0],types:["ID","STRING","BOOLEAN"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n		        <a>sitter teams</a>\n	          </li>\n	          ");
+  data.buffer.push(">\n		          <a>Sitter Teams</a>\n	            </li>\n	            ");
   hashContexts = {'sortProp': depth0,'direction': depth0};
   hashTypes = {'sortProp': "STRING",'direction': "BOOLEAN"};
   stack1 = helpers.view.call(depth0, "Sitterfied.SortItemView", {hash:{
     'sortProp': ("one_child_min_rate"),
     'direction': (true)
-  },inverse:self.noop,fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(16, program16, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n              <li ");
+  data.buffer.push("\n                <li ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "sortSet", "reviews.length", false, {hash:{},contexts:[depth0,depth0,depth0],types:["ID","STRING","BOOLEAN"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n		        <p>Reviews</p>\n	          </li>\n              ");
+  data.buffer.push(">\n		          <a>Reviews</a>\n	            </li>\n                ");
   return buffer;
   }
-function program10(depth0,data) {
-  
-  
-  data.buffer.push("\n		      <a>Rehires</a>\n	          ");
-  }
-
-function program12(depth0,data) {
-  
-  
-  data.buffer.push("\n		      <a>Rate</a>\n	          ");
-  }
-
 function program14(depth0,data) {
+  
+  
+  data.buffer.push("\n		        <a>Rehires</a>\n	            ");
+  }
+
+function program16(depth0,data) {
+  
+  
+  data.buffer.push("\n		        <a>Rate</a>\n	            ");
+  }
+
+function program18(depth0,data) {
   
   var buffer = '', stack1, hashContexts, hashTypes;
   data.buffer.push("\n        <section id=\"sitterteam\">\n          ");
@@ -45487,7 +45506,7 @@ function program14(depth0,data) {
   hashTypes = {'my_mob_tab': "BOOLEAN"};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{
     'my_mob_tab': (true)
-  },inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(19, program19, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n          ");
   hashContexts = {'class': depth0,'targetClass': depth0};
@@ -45495,14 +45514,14 @@ function program14(depth0,data) {
   stack1 = helpers.view.call(depth0, "Sitterfied.WaypointActiveView", {hash:{
     'class': ("my_sitter_team"),
     'targetClass': ("team")
-  },inverse:self.noop,fn:self.program(17, program17, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(21, program21, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n        </section>\n\n	  <!-- my_friends_sitters -->\n	  <section id=\"friendteam\">\n        ");
   hashContexts = {'my_mob_tab': depth0};
   hashTypes = {'my_mob_tab': "BOOLEAN"};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{
     'my_mob_tab': (true)
-  },inverse:self.noop,fn:self.program(22, program22, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(26, program26, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n        ");
   hashContexts = {'class': depth0,'targetClass': depth0};
@@ -45510,14 +45529,14 @@ function program14(depth0,data) {
   stack1 = helpers.view.call(depth0, "Sitterfied.WaypointActiveView", {hash:{
     'class': ("friends_block my_friends_sitters"),
     'targetClass': ("friends")
-  },inverse:self.noop,fn:self.program(24, program24, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(28, program28, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	  </section>\n	  <!-- /my_friends_sitters -->\n\n	  <!-- my_local_sitters -->\n	  <section id=\"localteam\">\n        ");
   hashContexts = {'my_mob_tab': depth0};
   hashTypes = {'my_mob_tab': "BOOLEAN"};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{
     'my_mob_tab': (true)
-  },inverse:self.noop,fn:self.program(29, program29, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(33, program33, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n        ");
   hashContexts = {'class': depth0,'targetClass': depth0};
@@ -45525,12 +45544,12 @@ function program14(depth0,data) {
   stack1 = helpers.view.call(depth0, "Sitterfied.WaypointActiveView", {hash:{
     'class': ("friends_block my_local_sitters"),
     'targetClass': ("local")
-  },inverse:self.noop,fn:self.program(31, program31, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  },inverse:self.noop,fn:self.program(35, program35, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	  </section>\n	  <!-- /my_local_sitters -->\n\n	</div>\n	<!-- /sitter_tabs_wrap -->\n    ");
   return buffer;
   }
-function program15(depth0,data) {
+function program19(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("\n            sitter<br />team<span>");
@@ -45541,7 +45560,7 @@ function program15(depth0,data) {
   return buffer;
   }
 
-function program17(depth0,data) {
+function program21(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n			<div class=\"sitter_title\">\n			  <p><span><span class=\"icon_heart2\">&nbsp;</span>sitter<br />team</span><strong>");
@@ -45551,34 +45570,34 @@ function program17(depth0,data) {
   data.buffer.push("</strong></p>\n			</div>\n            <ul class=\"clear\">\n              ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "sitter", "in", "controller", {hash:{},inverse:self.noop,fn:self.program(18, program18, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "sitter", "in", "controller", {hash:{},inverse:self.noop,fn:self.program(22, program22, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n            </ul>\n          ");
   return buffer;
   }
-function program18(depth0,data) {
+function program22(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n                ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "sitter.inSitterTeam", {hash:{},inverse:self.noop,fn:self.program(19, program19, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "sitter.inSitterTeam", {hash:{},inverse:self.noop,fn:self.program(23, program23, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n              ");
   return buffer;
   }
-function program19(depth0,data) {
+function program23(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n                  ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "sitter.passesFilters", {hash:{},inverse:self.noop,fn:self.program(20, program20, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "sitter.passesFilters", {hash:{},inverse:self.noop,fn:self.program(24, program24, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n                ");
   return buffer;
   }
-function program20(depth0,data) {
+function program24(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts, options;
   data.buffer.push("\n                    ");
@@ -45590,7 +45609,7 @@ function program20(depth0,data) {
   return buffer;
   }
 
-function program22(depth0,data) {
+function program26(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("\n		  friends'<br />sitters<span>");
@@ -45601,7 +45620,7 @@ function program22(depth0,data) {
   return buffer;
   }
 
-function program24(depth0,data) {
+function program28(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n		  <div class=\"sitter_title\">\n			<p><span><span class=\"icon_heart2\">&nbsp;</span>friends’<br />sitters</span><strong>");
@@ -45611,34 +45630,34 @@ function program24(depth0,data) {
   data.buffer.push("</strong></p>\n		  </div>\n		  <ul class=\"clear\">\n            ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "controller", {hash:{},inverse:self.noop,fn:self.program(25, program25, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "controller", {hash:{},inverse:self.noop,fn:self.program(29, program29, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		  </ul>\n		");
   return buffer;
   }
-function program25(depth0,data) {
+function program29(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n              ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "inFriendsTeam", {hash:{},inverse:self.noop,fn:self.program(26, program26, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "inFriendsTeam", {hash:{},inverse:self.noop,fn:self.program(30, program30, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n            ");
   return buffer;
   }
-function program26(depth0,data) {
+function program30(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n                ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "passesFilters", {hash:{},inverse:self.noop,fn:self.program(27, program27, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "passesFilters", {hash:{},inverse:self.noop,fn:self.program(31, program31, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n              ");
   return buffer;
   }
-function program27(depth0,data) {
+function program31(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts, options;
   data.buffer.push("\n                  ");
@@ -45650,7 +45669,7 @@ function program27(depth0,data) {
   return buffer;
   }
 
-function program29(depth0,data) {
+function program33(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("\n		  local<br />sitters<span>");
@@ -45661,7 +45680,7 @@ function program29(depth0,data) {
   return buffer;
   }
 
-function program31(depth0,data) {
+function program35(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n		  <div class=\"sitter_title\">\n			<p><span><span class=\"icon_pin2\">&nbsp;</span>local<br />sitters</span><strong>");
@@ -45671,24 +45690,24 @@ function program31(depth0,data) {
   data.buffer.push("</strong></p>\n		  </div>\n		  <ul class=\"clear\">\n            ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "controller", {hash:{},inverse:self.noop,fn:self.program(32, program32, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "controller", {hash:{},inverse:self.noop,fn:self.program(36, program36, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		  </ul>\n		");
   return buffer;
   }
-function program32(depth0,data) {
+function program36(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
   data.buffer.push("\n              ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "inLocalTeam", {hash:{},inverse:self.noop,fn:self.program(26, program26, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "inLocalTeam", {hash:{},inverse:self.noop,fn:self.program(30, program30, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n            ");
   return buffer;
   }
 
-function program34(depth0,data) {
+function program38(depth0,data) {
   
   
   data.buffer.push("\n	<!-- no_results -->\n	<div class=\"no_results clear\">\n	  <p>We’re not in your neighborhood just yet.</p>\n	  <p>Here are a few things you can do right now.</p>\n	  <ul>\n		<li>\n		  <p><a href=\"#\" class=\"button\">Invite</a></p>\n		  <p>Invite your friends and discover great sitters together. We’ll even reward you and your friends with free months as they join Sitterfied</p>\n		</li>\n		<li>\n		  <p><a href=\"#\" class=\"button\">Connect</a></p>\n		  <p>Connect with your existing social networks to find great sitters through your friends</p>\n		</li>\n		<li>\n		  <p><a href=\"#\" class=\"button\">Sign Up</a></p>\n		  <p>Sign up to follow our progress and we’ll let you know when great sitters are added to your area</p>\n		</li>\n	  </ul>\n	</div>\n	<!-- /no_results -->\n    ");
@@ -45705,7 +45724,7 @@ function program34(depth0,data) {
   data.buffer.push("\n      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.program(34, program34, data),fn:self.program(14, program14, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.program(38, program38, data),fn:self.program(18, program18, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  </div>\n</div>\n");
   return buffer;
@@ -49451,15 +49470,9 @@ define("fancybox", ["jquery"], function(){});
       sortSitters: false,
       needs: ['certifications', 'languages', 'otherServices'],
       toggleSortSitters: function() {
-        var isSortSitters,
-          _this = this;
+        var isSortSitters;
         isSortSitters = this.get('sortSitters');
-        this.set('sortSitters', !isSortSitters);
-        return Em.run.next(function() {
-          return $(document).one("click", function() {
-            return _this.set('sortSitters', false);
-          });
-        });
+        return this.set('sortSitters', !isSortSitters);
       },
       toggleMultipleSitters: function() {
         var isMultipleSitters;
@@ -49481,7 +49494,6 @@ define("fancybox", ["jquery"], function(){});
         this.get('sortProperties').push(sortProp);
         this.set('sortProperty', sortProp);
         this.set('sortAscending', direction);
-        this.set('sortSitters', false);
         Em.run.end();
         return this.notifyPropertyChange('content');
       },
@@ -50572,7 +50584,7 @@ https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
         }, "fast");
       },
       slideDown: function() {
-        return this.$().show("bounce", {
+        debugger;        return this.$().show("bounce", {
           times: 3
         }, "fast");
       }
