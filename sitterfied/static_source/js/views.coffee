@@ -223,6 +223,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints'], (Em, S
         slideUp: () ->
             @$().hide( "bounce", { times: 3 }, "fast" )
         slideDown: () ->
+            debugger
             @$().show( "bounce", { times: 3 }, "fast" )
 
 

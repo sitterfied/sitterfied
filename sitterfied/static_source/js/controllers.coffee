@@ -427,12 +427,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
             @set('sortSitters', !isSortSitters)
-            #click anywhere else and it disappears
-            Em.run.next () =>
-                $(document).one "click", () =>
-                    @set('sortSitters', false)
-
-
 
         toggleMultipleSitters: () ->
             isMultipleSitters = @get('multipleSitters')
@@ -454,7 +448,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             @set('sortProperty', sortProp)
 
             @set('sortAscending', direction)
-            @set('sortSitters', false)
+
             #force a resort
             Em.run.end()
             @notifyPropertyChange('content')
