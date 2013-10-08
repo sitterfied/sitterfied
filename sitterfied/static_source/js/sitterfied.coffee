@@ -23,6 +23,18 @@ define ['jquery'
         isParent: (() ->
             Sitterfied.accountType == "Parent"
         ).property('parent_or_sitter')
+        isAuthenticated: ((key, value) ->
+            return authenticated
+        ).property('authenticated')
+
+        loadUserJson:(user_json) ->
+            user_data = JSON.parse(user_json)
+            user = Sitterfied[user_data.parent_or_sitter].create()
+            user.load(user_data['id'], user_data)
+            Sitterfied.set('currentUser', user)
+            return user
+
+
     )
 
     Sitterfied.Router.reopen(
@@ -235,5 +247,12 @@ define ['jquery'
 
     Sitterfied.OnDeckBooking = null
     Sitterfied.typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
+
+
+
+
+
+
+
 
     return Sitterfied

@@ -690,6 +690,61 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
     Sitterfied.ParentEditBookingsController  = Sitterfied.BookingsController.extend()
 
+    Sitterfied.SignupController  = Em.Controller.extend(
+        parentSitter: "Parent"
+
+        isSitter: (() ->
+            return @get("parentSitter") == "Sitter"
+        ).property("parentSitter")
+
+        signup: () ->
+            username =@get('firstName') + @get('lastName')
+            $.post( "/signup-ajax/",
+                parent_or_sitter: @get('parentSitter').toLowerCase()
+                first_name: @get('firstName')
+                username: username
+                last_name: @get('lastName')
+                zipcode: @get('zipcode')
+                password1: @get('password')
+                password2: @get('password2')
+                email: @get('email')
+
+            ).done( (data) ->
+                user_json = data.user
+                user = Sitterfied.loadUserJson(user_json)
+                Sitterfied.set('currentUserController.model', user)
+                Sitterfied.set('isAuthenticated', true)
+                parent_or_sitter = user.get('parent_or_sitter')
+                $.fancybox.close()
+
+            ).fail( (data) ->
+                alert("there was an error registering you")
+            )
+    )
+
+
+    Sitterfied.LoginController  = Em.Controller.extend
+        login: () ->
+            username = @get('email')
+            password = @get('password')
+            $.post( "/login-ajax/",
+                username:username
+                password:password
+            ).done((data) ->
+                user_json = data.user
+                user = Sitterfied.loadUserJson(user_json)
+                Sitterfied.set('currentUserController.model', user)
+                Sitterfied.set('isAuthenticated', true)
+                parent_or_sitter = user.get('parent_or_sitter')
+                $.fancybox.close()
+            ).fail((data) ->
+                alert("there was an error logging you in. Please try again!")
+            )
+
+
+
+
+
 
     Sitterfied.FriendsController  = Em.ArrayController.extend(
         parents: (() ->

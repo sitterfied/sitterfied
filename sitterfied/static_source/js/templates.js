@@ -1,4 +1,197 @@
-define(['ember'], function(Ember){Ember.TEMPLATES["topNote"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+define(['ember'], function(Ember){Ember.TEMPLATES["signup"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, stack2, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("\n	  By checking this box, you confirm that you are 18 or older:\n      ");
+  hashContexts = {'checkedBinding': depth0,'checked': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'checked': "BOOLEAN",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("over18"),
+    'checked': (false),
+    'id': ("older")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  <label for=\"older\">&nbsp;	  </label>\n	");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("Terms of Use");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("Privacy Policy");
+  }
+
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("\n        Log in\n	  ");
+  }
+
+  data.buffer.push("<div id=\"signup\" class=\"signup_login_block\">\n  <form method=\"post\" action=\"#\">\n	<p>\n	  <img src=\"/static/images/logo2.png\" alt=\"\" />\n	</p>\n	<p class=\"check\">\n      ");
+  hashContexts = {'name': depth0,'selectionBinding': depth0,'value': depth0,'id': depth0};
+  hashTypes = {'name': "STRING",'selectionBinding': "STRING",'value': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'name': ("parentSitter"),
+    'selectionBinding': ("parentSitter"),
+    'value': ("Parent"),
+    'id': ("parent")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  <label for=\"parent\">Parent\n	  </label>\n      ");
+  hashContexts = {'name': depth0,'selectionBinding': depth0,'value': depth0,'id': depth0};
+  hashTypes = {'name': "STRING",'selectionBinding': "STRING",'value': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
+    'name': ("parentSitter"),
+    'selectionBinding': ("parentSitter"),
+    'value': ("Sitter"),
+    'id': ("sitter")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  <label for=\"sitter\">Sitter\n	  </label>\n	</p>\n    ");
+  hashContexts = {'class': depth0,'tagName': depth0,'toggleBinding': depth0};
+  hashTypes = {'class': "STRING",'tagName': "STRING",'toggleBinding': "ID"};
+  stack1 = helpers.view.call(depth0, "Sitterfied.SlideDownView", {hash:{
+    'class': ("page"),
+    'tagName': ("p"),
+    'toggleBinding': ("isSitter")
+  },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	<p>\n	  <a>\n		<img src=\"/static/images/icons/facebook_signup.png\" alt=\"\" />\n	  </a>\n	</p>\n	<div class=\"or\">\n	  <span>Or\n	  </span>\n	</div>\n	<ul>\n	  <li>\n		<span class=\"icon_person\">&nbsp;\n		</span>\n        ");
+  hashContexts = {'valueBinding': depth0,'placeholder': depth0};
+  hashTypes = {'valueBinding': "STRING",'placeholder': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("firstName"),
+    'placeholder': ("First Name")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  </li>\n	  <li>\n		<span class=\"icon_person\">&nbsp;\n		</span>\n        ");
+  hashContexts = {'valueBinding': depth0,'placeholder': depth0};
+  hashTypes = {'valueBinding': "STRING",'placeholder': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("lastName"),
+    'placeholder': ("Last Name")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  </li>\n	  <li>\n		<span class=\"icon_zip\">&nbsp;\n		</span>\n        ");
+  hashContexts = {'valueBinding': depth0,'placeholder': depth0};
+  hashTypes = {'valueBinding': "STRING",'placeholder': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("zipcode"),
+    'placeholder': ("Zip Code")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  </li>\n	  <li>\n		<span class=\"icon_email4\">&nbsp;\n		</span>\n        ");
+  hashContexts = {'valueBinding': depth0,'placeholder': depth0,'type': depth0};
+  hashTypes = {'valueBinding': "STRING",'placeholder': "STRING",'type': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("email"),
+    'placeholder': ("Email"),
+    'type': ("email")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  </li>\n	  <li>\n		<span class=\"icon_pass\">&nbsp;\n		</span>\n        ");
+  hashContexts = {'type': depth0,'valueBinding': depth0,'placeholder': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING",'placeholder': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'type': ("password"),
+    'valueBinding': ("password"),
+    'placeholder': ("Password")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  </li>\n	  <li>\n		<span class=\"icon_pass\">&nbsp;\n		</span>\n        ");
+  hashContexts = {'type': depth0,'valueBinding': depth0,'placeholder': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING",'placeholder': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'type': ("password"),
+    'valueBinding': ("password2"),
+    'placeholder': ("Confirm Password")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n	  </li>\n	</ul>\n	<p>By clicking ‘Sign Up’ you confirm that you accept the\n	  ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "tos", options) : helperMissing.call(depth0, "linkTo", "tos", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	   and\n	  ");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "privacy", options) : helperMissing.call(depth0, "linkTo", "privacy", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	  </a>.\n	</p>\n	<p>\n	  <input ");
+  hashContexts = {'target': depth0};
+  hashTypes = {'target': "STRING"};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "signup", {hash:{
+    'target': ("controller")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" type=\"button\" class=\"button button_edit\" value=\"SIGN UP   (it’s free)\" />\n	</p>\n	<p>Already have a Sitterfied account?\n	  ");
+  hashContexts = {'target': depth0};
+  hashTypes = {'target': "STRING"};
+  stack2 = helpers.view.call(depth0, "Sitterfied.FancyboxButton", {hash:{
+    'target': ("#login")
+  },inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	</p>\n  </form>\n</div>\n");
+  return buffer;
+  
+});
+Ember.TEMPLATES["login"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("\n      Sign up\n      ");
+  }
+
+  data.buffer.push("<!-- login_popup -->\n<div id=\"login\" class=\"signup_login_block\">\n  <form>\n	<p>\n      <img src=\"/static/images/logo2.png\" alt=\"\" />\n    </p>\n	<p>\n      <a href=\"#\">\n        <img src=\"/static/images/icons/facebook_login.png\" alt=\"\" />\n      </a>\n    </p>\n	<div class=\"or\">\n      <span>Or\n      </span>\n    </div>\n	<ul>\n	  <li>\n        <span class=\"icon_email4\">&nbsp;\n        </span>\n        ");
+  hashContexts = {'valueBinding': depth0,'placeholder': depth0,'type': depth0,'id': depth0};
+  hashTypes = {'valueBinding': "STRING",'placeholder': "STRING",'type': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'valueBinding': ("email"),
+    'placeholder': ("Email"),
+    'type': ("email"),
+    'id': ("username")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n      </li>\n	  <li>\n        <span class=\"icon_pass\">&nbsp;\n         </span>\n        ");
+  hashContexts = {'type': depth0,'valueBinding': depth0,'placeholder': depth0,'id': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING",'placeholder': "STRING",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'type': ("password"),
+    'valueBinding': ("password"),
+    'placeholder': ("Password"),
+    'id': ("password")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n      </li>\n	</ul>\n	<p>\n      ");
+  hashContexts = {'checkedBinding': depth0,'checked': depth0,'id': depth0};
+  hashTypes = {'checkedBinding': "STRING",'checked': "BOOLEAN",'id': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("stay"),
+    'checked': (true),
+    'id': ("remember")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n      <label for=\"remember\">Remember me\n      </label>\n      <a href=\"#\">Forgot your password?\n      </a>\n    </p>\n	<p>\n      <input type=\"button\" ");
+  hashContexts = {'target': depth0};
+  hashTypes = {'target': "STRING"};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "login", {hash:{
+    'target': ("controller")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"button button_edit\" value=\"LOG IN\" />\n    </p>\n	<p>Don’t have an account?\n      ");
+  hashContexts = {'target': depth0};
+  hashTypes = {'target': "STRING"};
+  stack1 = helpers.view.call(depth0, "Sitterfied.FancyboxButton", {hash:{
+    'target': ("#signup")
+  },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    </p>\n  </form>\n</div>\n<!-- login_popup -->");
+  return buffer;
+  
+});
+Ember.TEMPLATES["topNote"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   
@@ -670,7 +863,7 @@ function program13(depth0,data) {
   data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_iphone2\">&nbsp;</span>Cell Phone Number</li>\n				<li>\n				  <p>\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.PhoneField", {hash:{
     'placeholder': ("(123) 456-7890"),
     'valueBinding': ("cell")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -1282,7 +1475,7 @@ function program6(depth0,data) {
   data.buffer.push("\n              </p>\n            </li>\n			<li>&nbsp;\n            </li>\n			<li>&nbsp;\n            </li>\n		  </ul>\n		  </li>\n		  <li class=\"lng\">\n            <div>\n              <span class=\"icon_phone2\">&nbsp;\n              </span>Emergency Contact\n            </div>\n		  <ul>\n			<li>\n              <span class=\"icon_phone2\">&nbsp;\n              </span>Emergency Contact\n            </li>\n			<li>\n              <p>\n                ");
   hashContexts = {'valueBinding': depth0,'placeholder': depth0};
   hashTypes = {'valueBinding': "STRING",'placeholder': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.PhoneField", {hash:{
     'valueBinding': ("emergency_phone"),
     'placeholder': ("(123) 456-7890")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -5312,7 +5505,7 @@ function program3(depth0,data) {
   data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li>\n                  <span class=\"icon_iphone2\">&nbsp;\n                  </span>Cell Phone Number\n                </li>\n				<li>\n				  <p>\n                    <span>&nbsp;\n                    </span>\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.PhoneField", {hash:{
     'placeholder': ("(123) 456-7890"),
     'valueBinding': ("cell")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -5341,7 +5534,7 @@ function program3(depth0,data) {
   data.buffer.push("\n                    <span>PHONE\n                    </span>\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.PhoneField", {hash:{
     'placeholder': ("(123) 456-7890"),
     'valueBinding': ("emergency_contact_one_phone")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -5355,7 +5548,7 @@ function program3(depth0,data) {
   data.buffer.push("\n                    <span class=\"two_row\">PEDIATRICIAN’S PHONE\n                    </span>\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.PhoneField", {hash:{
     'placeholder': ("(123) 456-7890"),
     'valueBinding': ("emergency_contact_two_phone")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));

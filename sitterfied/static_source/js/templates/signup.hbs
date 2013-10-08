@@ -1,0 +1,75 @@
+<div id="signup" class="signup_login_block">
+  <form method="post" action="#">
+	<p>
+	  <img src="/static/images/logo2.png" alt="" />
+	</p>
+	<p class="check">
+      {{view Ember.RadioButton name="parentSitter" selectionBinding="parentSitter" value="Parent" id="parent"}}
+	  <label for="parent">Parent
+	  </label>
+      {{view Ember.RadioButton name="parentSitter" selectionBinding="parentSitter" value="Sitter" id="sitter"}}
+	  <label for="sitter">Sitter
+	  </label>
+	</p>
+    {{# view Sitterfied.SlideDownView class="page" tagName="p" toggleBinding=isSitter}}
+	  By checking this box, you confirm that you are 18 or older:
+      {{view Ember.Checkbox checkedBinding="over18" checked=false id="older"}}
+	  <label for="older">&nbsp;	  </label>
+	{{/view}}
+	<p>
+	  <a>
+		<img src="/static/images/icons/facebook_signup.png" alt="" />
+	  </a>
+	</p>
+	<div class="or">
+	  <span>Or
+	  </span>
+	</div>
+	<ul>
+	  <li>
+		<span class="icon_person">&nbsp;
+		</span>
+        {{view Ember.TextField valueBinding="firstName" placeholder="First Name"}}
+	  </li>
+	  <li>
+		<span class="icon_person">&nbsp;
+		</span>
+        {{view Ember.TextField valueBinding="lastName" placeholder="Last Name"}}
+	  </li>
+	  <li>
+		<span class="icon_zip">&nbsp;
+		</span>
+        {{view Ember.TextField valueBinding="zipcode" placeholder="Zip Code"}}
+	  </li>
+	  <li>
+		<span class="icon_email4">&nbsp;
+		</span>
+        {{view Ember.TextField valueBinding="email" placeholder="Email" type="email"}}
+	  </li>
+	  <li>
+		<span class="icon_pass">&nbsp;
+		</span>
+        {{view Ember.TextField type="password" valueBinding="password" placeholder="Password"}}
+	  </li>
+	  <li>
+		<span class="icon_pass">&nbsp;
+		</span>
+        {{view Ember.TextField type="password" valueBinding="password2" placeholder="Confirm Password" }}
+	  </li>
+	</ul>
+	<p>By clicking ‘Sign Up’ you confirm that you accept the
+	  {{#linkTo tos }}Terms of Use{{/linkTo}}
+	   and
+	  {{#linkTo privacy }}Privacy Policy{{/linkTo}}
+	  </a>.
+	</p>
+	<p>
+	  <input {{action signup target="controller"}} type="button" class="button button_edit" value="SIGN UP   (it’s free)" />
+	</p>
+	<p>Already have a Sitterfied account?
+	  {{# view Sitterfied.FancyboxButton target="#login" }}
+        Log in
+	  {{/view}}
+	</p>
+  </form>
+</div>

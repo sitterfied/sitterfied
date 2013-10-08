@@ -1,4 +1,5 @@
-define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints'], (Em, Sitterfied) ->
+define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phoneformat'], (Em, Sitterfied) ->
+
     Ember.RadioButton = Em.View.extend({
         tagName : "input",
         type : "radio",
@@ -58,7 +59,30 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints'], (Em, S
             return
     })
 
+    Sitterfied.SignupView = Ember.View.extend(
+        templateName: "signup"
+    )
+    Sitterfied.LoginView = Ember.View.extend(
+        templateName: "login"
+    )
 
+
+
+    Sitterfied.FancyboxButton = Ember.View.extend(
+        targetDiv: null
+        tagName: "a"
+        click: () ->
+            target = @get('target')
+            $.fancybox
+                scrolling   : "no"
+                wrapCSS     : "onb_final"
+                maxWidth    : 960
+                maxHeight   : 800
+                fitToView   : false
+                width       : '90%'
+                height      : '90%'
+                href        : target
+    )
 
 
     Sitterfied.UnboundSelectOption = Ember.SelectOption.extend(
@@ -70,6 +94,14 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints'], (Em, S
         Ember.run.next ->
           $("select").trigger "liszt:updated"
     )
+
+
+    Sitterfied.PhoneField = Ember.TextField.extend(
+        focusOut: ->
+            phone = @$().val()
+            @$().val(formatE164("US", phone))
+    )
+
 
     Sitterfied.ChosenSelect = Ember.Select.extend(
       chosenOptions: {}

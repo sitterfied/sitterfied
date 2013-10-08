@@ -3,11 +3,16 @@ from django.forms import ModelForm
 from models import User
 from registration.forms import RegistrationFormUniqueEmail as DjangoRegistrationFormUniqueEmail
 
+
 from django.utils.translation import ugettext_lazy as _
 
 class RegistrationForm(DjangoRegistrationFormUniqueEmail):
     parent_or_sitter = forms.ChoiceField(widget = forms.RadioSelect,
                                          choices = ([("sitter", "sitter"), ("parent", "parent") ]),  required = True,)
+
+    first_name = forms.CharField(required=True)
+    last_name  = forms.CharField(required=True)
+    zipcode    = forms.CharField(required=True)
 
 
     def clean_username(self):

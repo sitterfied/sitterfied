@@ -1,0 +1,46 @@
+
+<!-- login_popup -->
+<div id="login" class="signup_login_block">
+  <form>
+	<p>
+      <img src="/static/images/logo2.png" alt="" />
+    </p>
+	<p>
+      <a href="#">
+        <img src="/static/images/icons/facebook_login.png" alt="" />
+      </a>
+    </p>
+	<div class="or">
+      <span>Or
+      </span>
+    </div>
+	<ul>
+	  <li>
+        <span class="icon_email4">&nbsp;
+        </span>
+        {{view Ember.TextField valueBinding="email" placeholder="Email" type="email" id="username"}}
+      </li>
+	  <li>
+        <span class="icon_pass">&nbsp;
+         </span>
+        {{view Ember.TextField type="password" valueBinding="password" placeholder="Password" id="password"}}
+      </li>
+	</ul>
+	<p>
+      {{view Ember.Checkbox checkedBinding="stay" checked=true id="remember"}}
+      <label for="remember">Remember me
+      </label>
+      <a href="#">Forgot your password?
+      </a>
+    </p>
+	<p>
+      <input type="button" {{action login target="controller"}} class="button button_edit" value="LOG IN" />
+    </p>
+	<p>Don’t have an account?
+      {{# view Sitterfied.FancyboxButton target="#signup" }}
+      Sign up
+      {{/view}}
+    </p>
+  </form>
+</div>
+<!-- login_popup -->

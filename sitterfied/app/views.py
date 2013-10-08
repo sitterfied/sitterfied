@@ -10,7 +10,7 @@ from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
 
-from annoying.decorators import render_to, ajax_request
+from annoying.decorators import render_to, ajax_request, JsonResponse
 
 from django.views.decorators.http import require_POST
 
@@ -20,6 +20,7 @@ from django.http import HttpResponseRedirect
 
 from ecl_facebook import Facebook
 
+from signup import RegistrationView
 
 from rest_framework.renderers import JSONRenderer
 from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
@@ -31,21 +32,18 @@ from .utils import send_html_email
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
+class HttpResponseUnauthorized(HttpResponse):
+    status_code = 401
 
 
 
-@login_required
-@render_to('index.html')
-def index(request, referred_by=None):
-
-    if hasattr(request.user, 'sitter'):
+def get_user_json(user):
+    if hasattr(user, 'sitter'):
         user_model = Sitter.objects
-        parent_or_sitter = "Sitter"
         seralizer = SitterSerializer
 
-    elif hasattr(request.user, 'parent'):
+    elif hasattr(user, 'parent'):
         user_model = Parent.objects.prefetch_related('children', 'children__special_needs')
-        parent_or_sitter = "Parent"
         seralizer = ParentSerializer
 
     classed_user = user_model.select_related('settings').prefetch_related('bookings',
@@ -55,12 +53,35 @@ def index(request, referred_by=None):
                                                                           'languages',
                                                                           'sitter_groups',
                                                                           'reviews',
-                                                                      ).get(id=request.user.id)
+                                                                      ).get(id=user.id)
     serialized = seralizer(classed_user)
     user_json = JSONRenderer().render(serialized.data)
+    return user_json
+
+
+
+@render_to('index.html')
+def index(request, referred_by=None):
+    if request.user.is_anonymous():
+        request.session.set_test_cookie()
+        user_json = json.dumps({"parent_or_sitter":"Parent"})
+        return {'user_json':user_json,
+                "parent_or_sitter": "Parent",
+                "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
+        }
+
+    user_json = get_user_json(request.user)
+    if hasattr(request.user, 'sitter'):
+        parent_or_sitter = "Sitter"
+    else:
+        parent_or_sitter = "Parent"
+
+
+
+
     return {'user_json':user_json,
-            'parent_or_sitter': parent_or_sitter,
-            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY
+            "parent_or_sitter": parent_or_sitter,
+            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
     }
 
 from rest_framework.response import Response
@@ -103,6 +124,61 @@ def network_search(request):
 def error(request):
     """for testing purposes"""
     raise Exception
+
+
+from django.contrib.auth import login as auth_login
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.cache import never_cache
+from django.contrib.auth.forms import AuthenticationForm
+
+
+
+@sensitive_post_parameters()
+@csrf_protect
+@never_cache
+@require_POST
+@ajax_request
+def login_ajax(request,
+               authentication_form=AuthenticationForm,
+               current_app=None, extra_context=None):
+    """
+    Displays the login form and handles the login action.
+    """
+    form = authentication_form(data=request.POST)
+    if form.is_valid():
+        auth_login(request, form.get_user())
+
+        if request.session.test_cookie_worked():
+            request.session.delete_test_cookie()
+    else:
+        return HttpResponseUnauthorized()
+    user_json = get_user_json(request.user)
+    return {"user":user_json}
+
+from django.contrib.auth import login
+
+class AjaxRegistrationView(RegistrationView):
+    def register(self, request, **cleaned_data):
+        new_user = super(AjaxRegistrationView, self).register(request, **cleaned_data)
+        new_user.zip = cleaned_data['zipcode']
+        new_user.first_name =cleaned_data['first_name']
+        new_user.last_name =cleaned_data['last_name']
+        new_user.save()
+        return new_user
+
+
+    def form_valid(self, request, form):
+        new_user = self.register(request, **form.cleaned_data)
+
+        user_json = get_user_json(new_user)
+        response =  {"user":user_json}
+        json_response = JsonResponse(response)
+        json_response['content-length'] = len(json_response.content)
+        return json_response
+
+    def form_invalid(self, form):
+        return HttpResponseUnauthorized()
 
 
 @ajax_request

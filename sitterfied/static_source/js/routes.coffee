@@ -341,7 +341,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
         events:{
             openReccomendPopup: ()->
-                console.log("")
                 $.fancybox
                     href: "#recommend_popup"
                     maxWidth: 960

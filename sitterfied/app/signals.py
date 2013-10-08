@@ -10,6 +10,8 @@ from sms import sitterfied_number
 
 from .utils import send_html_email
 
+
+
 #mutual events
 @receiver(post_save, sender=User)
 def friend_joined(sender, **kwargs):

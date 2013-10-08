@@ -18,6 +18,7 @@ require({
         'moment': 'lib/moment.min',
         'scrollto': 'lib/jquery.scrollTo-1.4.3.1-min',
 		'imgareaselect': 'lib/jquery.imgareaselect.pack',
+		'phoneformat': 'lib/PhoneFormat',
 		'ucare': 'lib/uploadcare-0.11.2.min'
     },
     waitSeconds: 0,
@@ -67,6 +68,9 @@ require({
             deps: ['jquery']
         },
 		imgareaselect: {
+            deps: ['jquery']
+        },
+		phoneformat: {
             deps: ['jquery']
         },
 		ucare: {

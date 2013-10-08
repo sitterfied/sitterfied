@@ -7,17 +7,11 @@ define ['ember'
         Em.Application.initializer(
             name: "currentUser"
             initialize: (container, application) ->
-                user_data = JSON.parse(user_json)
-
-                model = parent_or_sitter
-                user = Sitterfied[model].create()
-                user.load(user_data['id'], user_data)
-
+                user = Sitterfied.loadUserJson(user_json)
                 controller = container.lookup('controller:currentUser').set('model', user)
                 container.typeInjection('controller', 'currentUser', 'controller:currentUser')
-                Sitterfied.set('currentUser', user)
+                Sitterfied.set('authenticated', authenticated)
                 Sitterfied.set('currentUserController', controller)
-
 
         )
 

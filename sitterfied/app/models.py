@@ -83,7 +83,7 @@ class User(AbstractUser, TimeStampedModel):
     def is_parent_or_sitter(self):
         if hasattr(self, 'sitter'):
             return 'Sitter'
-        elif hasattr(self, 'parent'):
+        else:
             return 'Parent'
 
 

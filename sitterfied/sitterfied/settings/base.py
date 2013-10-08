@@ -173,6 +173,10 @@ ALLOWED_HOSTS =[
     ".sitterfied.com.",
 ]
 
+
+AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend',)
+
+
 from .pipeline import *
 from .grappelli import *
 from .rest_framework import *

@@ -48,7 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class SitterSerializer(serializers.ModelSerializer):
     avatar = serializers.Field(source="avatar_url")
-
+    parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
     class Meta:
         model = models.Sitter
         fields = user_fields + ('id', 'biography', 'live_zip',
@@ -70,7 +70,7 @@ class SitterSerializer(serializers.ModelSerializer):
                                 'has_drivers_licence', 'travel_distance',
                                 'special_needs_exp', 'extra_exp', 'major',
                                 'occupation', 'reviews', 'bookings',
-                                'bookmarks',  'sitter_teams',
+                                'bookmarks',  'sitter_teams','parent_or_sitter'
                                 )
 
 
@@ -114,9 +114,8 @@ class SitterSearchSerializer(SitterSerializer):
 
 class ParentSerializer(serializers.ModelSerializer):
     #contacts
-    parent_or_sitter = "Parent"
     avatar = serializers.Field(source="avatar_url")
-
+    parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
     class Meta:
         model = models.Parent
         fields = user_fields + ('id','emergency_contact_one_name',
@@ -124,7 +123,7 @@ class ParentSerializer(serializers.ModelSerializer):
                                 'emergency_contact_two_name',
                                 'emergency_contact_two_phone',
                                 'reviews', 'bookings', 'children',
-                                'bookmarks',  'sitter_teams',
+                                'bookmarks',  'sitter_teams', 'parent_or_sitter'
         )
 
 

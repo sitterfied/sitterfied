@@ -30,6 +30,7 @@
       var user_json = '{{user_json|escapejs}}'
 
       var parent_or_sitter = '{{parent_or_sitter}}'
+      var authenticated = {{ user.is_authenticated|yesno:"true,false" }};
     </script>
 	<script src="{{STATIC_URL}}js/lib/handlebars.js"></script>
 	{% if debug %}
@@ -81,6 +82,10 @@
 	      </form>
 	    </div>
       </div>
+
+	  {{render login}}
+	  {{render signup Sitterfied.currentUser}}
+
       {% endverbatim %}
 
       <!-- header -->
@@ -98,10 +103,23 @@
             <nav>
               <ul>
                 {% verbatim %}
-				{{# unless Sitterfied.isSitter }}
+				{{# unless Sitterfied.isAuthenticated }}
+				<li>
+				  {{# view Sitterfied.FancyboxButton target="#login" id="login_trigger" }}
+				  Login
+				  {{/view}}
+				</li>
+				<li>
+				  {{# view Sitterfied.FancyboxButton target="#signup" id="signup_trigger" }}
+				  Signup
+				  {{/view}}
+				{{/ unless}}
+				{{# if Sitterfied.isParent }}
                 <li>{{#linkTo search }} Search {{/linkTo}}</li>
-				{{/unless}}
+				{{/if}}
+				{{# if Sitterfied.isAuthenticated }}
 	            <li>{{#linkTo mybookings }}Bookings{{/linkTo}}</li>
+				{{/ if}}
 		        <li>
 					{{#linkTo profile }}<img {{bindAttr src=Sitterfied.currentUser.avatarUrl}} alt="" /> {{Sitterfied.currentUser.first_name}}{{/linkTo}}
 					<ul>
