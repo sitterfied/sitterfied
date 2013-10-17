@@ -1,0 +1,517 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% include "csrf.html" %}
+
+{% endblock %}
+{% block title %}
+<title>Welcome to Sitterfied!</title>
+{% endblock %}
+{% block body %}
+<!-- header -->
+<header class="header">
+  <div class="wraper">
+	<a href="#" class="logo"><img src="{% static "images/logo.png" %}" alt="" /></a>
+	<ul class="social">
+	  <li><a href="#" class="facebook">facebook</a></li>
+	  <li><a href="#" class="twitter">twitter</a></li>
+	  <li><a href="#" class="tumblr">tumblr</a></li>
+	</ul>
+  </div>
+</header>
+<!-- /header -->
+
+<!-- container -->
+<div class="container clear">
+  <div class="wraper text_topmarg">
+
+	<!-- onboarding_block -->
+	<div class="onboarding_block clear">
+	  <p class="center"><img src="{% static "images/welcome.png" %}" alt="" /></p>
+	  <div class="you_friends clear">
+		<p><span><img src="{% static "images/icons/you.png" %}" alt="" /></span>You</p>
+		<p><span><img src="{% static "images/icons/friends.png" %}" alt="" /></span>Friends</p>
+	  </div>
+	  <form method="post" action="" class="form_style">
+		<div class="profile_block">
+		  <p>Great! Let’s get acquainted. First the basics...</p>
+		  <div class="form_style">
+			{% csrf_token %}
+			<input type="hidden" name="parent_or_sitter" value="sitter">
+			<ul>
+			  <li>
+				<ul>
+				  <li><span class="icon_name">&nbsp;</span>Name</li>
+				  <li>
+					<p>
+					  {% for error in form.first_name.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.first_name}}
+					  {% for error in form.last_name.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.last_name}}
+					</p>
+				  </li>
+
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li><span class="icon_age">&nbsp;</span>Age</li>
+				  <li>
+					<p>
+					  <span class="short">DATE OF BIRTH*
+					  </span>
+					  {% for error in form.dob.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.dob}}
+					</p>
+					<p>
+					  <i>* We hate to turn away good people but our lawyers require us to inform you that you
+						<strong>must
+						</strong> be at least 18 years old to join Sitterfied
+					  </i>
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li>
+					<span class="icon_gender">&nbsp;
+					</span>Gender
+				  </li>
+				  <li>
+					<p>
+					  {% for error in form.gender.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {% for choice in form.gender %}
+					  {{ choice.tag }}
+					  <label for="gender_{{ forloop.counter0 }}">{{ choice.choice_label }}</label>
+					  {% endfor %}
+
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li><span class="icon_pin3">&nbsp;</span>Home Address</li>
+				  <li>
+					<p>
+					{% for error in form.address1.errors %}
+					<strong>{{ error|escape }}</strong>
+					{% endfor %}
+
+					{{form.address1}}
+
+					{% for error in form.address2.errors %}
+					<strong>{{ error|escape }}</strong>
+					{% endfor %}
+
+					{{form.address2}}
+					{% for error in form.zip.errors %}
+					<strong>{{ error|escape }}</strong>
+					{% endfor %}
+					<br>
+					{{form.zip}}
+					  {% for error in form.city.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.city}}
+					  {% for error in form.state.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.state}}
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li><span class="icon_iphone">&nbsp;</span>Cell Phone Number</li>
+				  <li>
+					<p>
+					  {% for error in form.cell.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.cell}}
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li><span class="icon_email">&nbsp;</span>Email Address</li>
+				  <li>
+					<p>
+					  {% for error in form.email.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.email}}
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li><span class="icon_pass2">&nbsp;</span>Password</li>
+				  <li class="pass">
+					<p>
+					  {% for error in form.password1.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.password1}}
+					  <strong>Confirm Password</strong>
+					  {% for error in form.password2.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.password2}}
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			</ul>
+		  </div>
+		  <p>Now for the sell. Tell prospective parents how great you are. And <i>don’t hold back</i>!</p>
+		  <div class="form_style">
+			<ul>
+			  <li>
+				<ul>
+				  <li>
+					<span class="icon_bio">&nbsp;</span>Biography
+					<p>Keep it brief and relevant but show some personality. Remember, you have one shot to stand out!</p>
+					<p>Cover the <strong>Why</strong> (you enjoy babysitting), <strong>Who</strong> (you’ve cared for in the past) and <strong>When</strong> (you did all this).</p>
+				  </li>
+				  <li>
+
+					{% for error in form.biography.errors %}
+					<strong>{{ error|escape }}</strong>
+					{% endfor %}
+
+					<p>
+					  {{form.biography}}
+					</p>
+					<p class="b_styling"><a href="#">Click here</a> for more bio tips</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li><span class="icon_experience">&nbsp;</span>General<br />Experience</li>
+				  <li>
+					<p>
+					  <span>TOTAL years of experience:
+					  </span>
+					  {% for error in form.total_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.total_exp}}
+					</p>
+					<p>
+					  <span>Experience with infants:
+					  </span>
+					  {% for error in form.infant_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.infant_exp}}
+					</p>
+					<p>
+					  <span>Experience with toddlers:
+					  </span>
+					  {% for error in form.toddler_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.toddler_exp}}
+					</p>
+					<p>
+					  <span>Experience with preschoolers:
+					  </span>
+					  {% for error in form.preschool_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.preschool_exp}}
+					</p>
+					<p>
+					  <span>Experience with School age:
+					  </span>
+					  {% for error in form.school_age_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.school_age_exp}}
+					</p>
+					<p>
+					  <span>Experience with Pre Teens:
+					  </span>
+					  {% for error in form.pre_teen_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.pre_teen_exp}}
+					</p>
+					<p>
+					  <span>Experience with teenagers:
+					  </span>
+					  {% for error in form.teen_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.teen_exp}}
+					</p>
+					<p>
+					  <span>Experience with special needs?</span>
+					  {% for error in form.special_needs_exp.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.special_needs_exp}}
+					  <label for="id_special_needs_exp"></label>
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li>
+					<span class="icon_certification">&nbsp;
+					</span>Certification
+					<br />or Training
+				  </li>
+				  <li>
+					<p>
+					  <span>&nbsp;
+					  </span>
+					  {% for error in form.certifications.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.certifications}}
+					</p>
+					<p>
+					  <span>add another (if not listed above):
+					  </span>
+					  <input id="new-cert" type="text" />
+					  <a id="new-cert-button" class="button button_smaller button_edit">
+						<span class="icon_plus">&nbsp;
+						</span>ADD
+					  </a>
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li>
+					<span class="icon_rates">&nbsp;
+					</span>Standard Rates
+					<p>Using a rate range gives you the flexibility to charge more for jobs with additional service requests (like running errands)
+					</p>
+				  </li>
+				  <li>
+					<p>
+					  <span>MInimum for 1 child:
+					  </span>
+					  {% for error in form.one_child_min_rate.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.one_child_min_rate}}
+					</p>
+					<p>
+					  <span>Maximum for 1 child:
+					  </span>
+					  {% for error in form.one_child_max_rate.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.one_child_max_rate}}
+					</p>
+					<p>
+					  <span>MInimum for 2 children:
+					  </span>
+					  {% for error in form.two_child_min_rate.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.two_child_min_rate}}
+					</p>
+					<p>
+					  <span>Maximum for 2 children:
+					  </span>
+					  {% for error in form.two_child_max_rate.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.two_child_max_rate}}
+					</p>
+					<p>
+					  <span>Minimum for 3 or more children
+					  </span>
+					  {% for error in form.three_child_min_rate.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.three_child_min_rate}}
+					</p>
+					<p>
+					  <span>Maximum for 3 or more children
+					  </span>
+					  {% for error in form.three_child_max_rate.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.three_child_max_rate}}
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li>
+					<span class="icon_pic">&nbsp;</span>Profile Picture
+					<p>Like it or not we’re visual beings and adding a photo of yourself breaks down big trust barriers. </p>
+					<p>You’ll have the option to use your Facebook pic or upload your own. </p>
+				  </li>
+				  <li>
+					{{form.avatar}}
+					<div class="add_photo">
+					  <a class="add">
+						<p>Add your photo</p>
+					  </a>
+					  <p class="b_styling"><a href="#">Click here</a> for more photo tips</p>
+					</div>
+					<div class="add_photo_desc">
+					  <p>Use these simple guidelines to get the most out of your photo.</p>
+					  <ol>
+						<li>Smile <i>(really important)</i></li>
+						<li>Just you in the photo</li>
+						<li>Clear and Bright</li>
+						<li>Close up</li>
+					  </ol>
+					</div>
+				  </li>
+				</ul>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </form>
+	  <div class="button_wrap"><button id="register" class="button button_small"><span class="icon_next">&nbsp;</span>next</a></div>
+	</div>
+	<!-- /onboarding_block -->
+
+  </div>
+</div>
+<!-- /container -->
+
+<!-- footer -->
+<footer class="footer">
+  <div class="wraper">
+	<a href="#" class="logo_bottom"><img src="{% static "images/logo_bottom.png" %}" alt="" /></a>
+	<ul class="social">
+	  <li><a href="#" class="twitter">twitter</a></li>
+	  <li><a href="#" class="facebook">facebook</a></li>
+	  <li><a href="#" class="email">email</a></li>
+	</ul>
+	<!-- bottom menu -->
+	<nav>
+	  <ul>
+		<li><a href="#">About Us</a></li>
+		<li><a href="#">Contact</a></li>
+		<li><a href="#">Blog</a></li>
+		<li><a href="#">Privacy Policy</a></li>
+		<li><a href="#">Terms of Service</a></li>
+	  </ul>
+	</nav>
+	<!-- /bottom menu -->
+  </div>
+</footer>
+<!-- /footer -->
+
+<div id="fixed_tabs"></div>
+
+<div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
+<script type="text/javascript">
+ $(function () {
+   var widgets = uploadcare.initialize();
+   var widget = widgets[0]
+   widget.onUploadComplete(function(info) {
+     url = info.cdnUrl
+	 path =  'url(' + url + ')'
+
+	 add = $(".add");
+	 add.css('background', path );
+	 add.css("background-size","cover")
+	 add.css("background-repeat", "no-repeat");
+
+
+   });
+   $("#back-top").hide();
+   $(window).scroll(function () {
+     if ($(this).scrollTop() > 150) {
+       $('#back-top').fadeIn();
+     } else {
+       $('#back-top').fadeOut();
+     }
+   });
+   $(".add_photo").click(function(){
+	 dialog = widget.openDialog();
+   })
+
+   $("#new-cert-button").click(function(){
+	 newcert = $("#new-cert").val()
+	 $.post("/api/certifications/", {certification: newcert}).done(function(data){
+	   newoption = $("<option>");
+	   newoption.attr("value", data.id);
+	   newoption.text(data.certification);
+	   $("#id_certifications").append(newoption);
+	 })
+   });
+
+   $("#register").click(function(){
+	 cell = $("#id_cell")
+	 num = cell.val()
+	 formatted_num = formatE164("US", num);
+	 cell.val(formatted_num)
+	 $("form").submit();
+   });
+   $("#id_cell").blur(function(){
+	 that = $(this)
+	 num = that.val()
+	 formatted_num = formatLocal("US", num);
+	 that.val(formatted_num)
+   })
+
+
+ });
+ jQuery('.back-to-top').click(function () {
+   jQuery('html, body').animate({
+     scrollTop: 0
+   }, 'slow');
+ });
+</script>
+{% endblock %}

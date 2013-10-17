@@ -31,6 +31,10 @@ from .views import AjaxRegistrationView
 urlpatterns = patterns('app.views',
     # Examples:
     url(r'^error/', 'error', name='error'),
+    url(r'^onboarding/$',TemplateView.as_view(template_name="onboarding1.html"), name='onboarding1'),
+    url(r'^onboarding2/$',"onboarding2", name='onboarding2'),
+    url(r'^onboarding3/$',"onboarding3", name='onboarding3'),
+    url(r'^onboarding4/$',"onboarding4", name='onboarding4'),
     url(r'^facebook_import/', 'facebook_import', name='facebook_import'),
     url(r'^api/search/$','search', name='search'),
     url(r'^api/', include(router.urls)),

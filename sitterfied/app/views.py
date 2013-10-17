@@ -1,5 +1,11 @@
 # Create your views here.
-from time import sleep
+from django.contrib.auth import login as auth_login
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.cache import never_cache
+from django.contrib.auth.forms import AuthenticationForm
+
+
 from itertools import chain
 import json
 from django.conf import settings
@@ -27,8 +33,8 @@ from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSeriali
 from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
 
 from .models import User, Sitter, Parent, Group
-
 from .utils import send_html_email
+from .forms import SitterRegisterForm
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
@@ -77,12 +83,50 @@ def index(request, referred_by=None):
         parent_or_sitter = "Parent"
 
 
-
-
     return {'user_json':user_json,
             "parent_or_sitter": parent_or_sitter,
             "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
     }
+
+@render_to()
+def onboarding2(request):
+    if request.method == "POST":
+        if request.POST["parent_or_sitter"] == "sitter":
+            form = SitterRegisterForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                auth_login(request, user)
+            else:
+                return {'TEMPLATE': "onboardingsitter.html",
+                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+        elif request.POST["parent_or_sitter"] == "parent":
+            #form = ParentRegisterForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                auth_login(request, user)
+            else:
+                return {'TEMPLATE': "onboardingparent.html",
+                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+
+    if request.method == "GET":
+        parent_or_sitter = request.GET.get('parent_or_sitter', "parent")
+        if parent_or_sitter.lower() == "sitter":
+            form = SitterRegisterForm()
+            return {'TEMPLATE': "onboardingsitter.html", "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+        else:
+            return {'TEMPLATE': "onboardingparent.html","UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+
+
+
+
+@render_to("onboarding3.html")
+def onboarding3(request):
+    return {}
+
+@render_to("onboarding4.html")
+def onboarding4(request):
+    return {}
+
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -125,12 +169,6 @@ def error(request):
     """for testing purposes"""
     raise Exception
 
-
-from django.contrib.auth import login as auth_login
-from django.views.decorators.debug import sensitive_post_parameters
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.cache import never_cache
-from django.contrib.auth.forms import AuthenticationForm
 
 
 

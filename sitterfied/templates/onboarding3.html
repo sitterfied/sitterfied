@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% endblock %}
+{% block title %}
+<title>Welcome to Sitterfied!</title>
+{% endblock %}
+{% block body %}
+
+<!-- header -->
+<header class="header">
+	<div class="wraper">
+		<a href="#" class="logo"><img src="{% static "images/logo.png" %}" alt="" /></a>
+		<ul class="social">
+			<li><a href="#" class="facebook">facebook</a></li>
+			<li><a href="#" class="twitter">twitter</a></li>
+			<li><a href="#" class="tumblr">tumblr</a></li>
+		</ul>
+	</div>
+</header>
+<!-- /header -->
+
+<!-- container -->
+<div class="container clear">
+	<div class="wraper text_topmarg">
+
+		<!-- onboarding_block -->
+		<div class="onboarding_block clear">
+			<p class="center"><img src="{% static "images/welcome.png" %}" alt="" /></p>
+			<div class="you_friends you_friends2 clear">
+				<p><span><img src="{% static "images/icons/you2.png" %}" alt="" /></span>You</p>
+				<p><span><img src="{% static "images/icons/friends2.png" %}" alt="" /></span>Friends</p>
+			</div>
+			<p class="center">Ever been to a party where you’re the only one who doesn’t know anyone? So have we.</p>
+			<div class="onb_step3_left">
+				<p><select multiple data-placeholder="Enter anything (you know you want to)" tabindex="18"><option>text</option><option>text</option></select><a class="button button_small button2" href="#">Create</a><span>If you can’t find your group, create it</span></p>
+				<p>Find a person, group, school, club or organization</p>
+				<div class="face_disconnected"><a href="#"><img src="{% static "images/icons/facebook8.png" %}" alt="" />Find Friends on Facebook</a></div>
+				<div class="face_connected connected clear"><a href="#"><img src="{% static "images/icons/facebook8.png" %}" alt="" />Connected</a><p>286 friends<br /><span>(2 on Sitterfied)</span></p></div>
+				<div class="gmail_disconnected"><a href="#"><img src="{% static "images/icons/gmail3.png" %}" alt="" />Find Friends on Gmail</a></div>
+				<div class="gmail_connected connected clear"><a href="#"><img src="{% static "images/icons/gmail3.png" %}" alt="" />Connected</a><p>501 contacts<br /><span>(3 on Sitterfied)</span></p></div>
+			</div>
+			<div class="onb_step3_right">
+				<!--<p>This is your network on Sitterfied</p>
+				<p>Friends or groups will be added here</p>-->
+				<ul>
+					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Lakeisha Powanda</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Connie Takach</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Jane Eyre</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Lakeisha Powanda</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Connie Takach</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Jane Eyre</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li class="group"><a href="#">Hoboken Mommies</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li class="group"><a href="#">Hoboken Catholic Church</a> <a href="#" class="delete">&nbsp;</a></li>
+					<li class="group"><a href="#">St. Francis Prep School</a> <a href="#" class="delete">&nbsp;</a></li>
+				</ul>
+			</div>
+			<div class="button_wrap"><a href="#" class="button button_small"><span class="icon_next">&nbsp;</span>next</a><a href="#" class="skip">Skip for now</a></div>
+		</div>
+		<!-- /onboarding_block -->
+
+	</div>
+</div>
+<!-- /container -->
+
+<!-- footer -->
+<footer class="footer">
+	<div class="wraper">
+		<a href="#" class="logo_bottom"><img src="{% static "images/logo_bottom.png" %}" alt="" /></a>
+		<ul class="social">
+			<li><a href="#" class="twitter">twitter</a></li>
+			<li><a href="#" class="facebook">facebook</a></li>
+			<li><a href="#" class="email">email</a></li>
+		</ul>
+		<!-- bottom menu -->
+		<nav>
+			<ul>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Privacy Policy</a></li>
+				<li><a href="#">Terms of Service</a></li>
+			</ul>
+		</nav>
+		<!-- /bottom menu -->
+	</div>
+</footer>
+<!-- /footer -->
+
+<div id="fixed_tabs"></div>
+
+<div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
+<script type="text/javascript">
+$(function () {
+    $("#back-top").hide();
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 150) {
+            $('#back-top').fadeIn();
+        } else {
+            $('#back-top').fadeOut();
+        }
+    });
+});
+jQuery('.back-to-top').click(function () {
+    jQuery('html, body').animate({
+        scrollTop: 0
+    }, 'slow');
+});
+</script>
+{% endblock %}

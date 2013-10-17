@@ -27,6 +27,17 @@ PIPELINE_JS = {
             'js/*.js',
             ),
         'output_filename': 'js/app.js',
+    },
+      'onboarding': {
+        'source_filenames': (
+            'js/lib/jquery-1.9.1.js',
+            'js/lib/jquery.fancybox.pack.js',
+            'js/lib/jquery-ui-1.10.0.custom.min.js',
+            'js/lib/select2.js',
+            'js/lib/uploadcare-0.15.0.min.js',
+            'js/lib/PhoneFormat.js',
+            ),
+        'output_filename': 'js/libs.js',
     }
 }
 PIPELINE_JS_COMPRESSOR = ''#pipeline.compressors.slimit.SlimItCompressor'

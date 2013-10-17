@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% endblock %}
+{% block title %}
+<title>Welcome to Sitterfied!</title>
+{% endblock %}
+{% block body %}
+
+<!-- header -->
+<header class="header">
+	<div class="wraper">
+		<a href="#" class="logo"><img src="{% static "images/logo.png" %}" alt="" /></a>
+		<ul class="social">
+			<li><a href="#" class="facebook">facebook</a></li>
+			<li><a href="#" class="twitter">twitter</a></li>
+			<li><a href="#" class="tumblr">tumblr</a></li>
+		</ul>
+	</div>
+</header>
+<!-- /header -->
+
+<!-- container -->
+<div class="container clear">
+	<div class="wraper text_topmarg">
+
+		<!-- onboarding_block -->
+		<div class="onboarding_block clear">
+			<p class="center"><img src="{% static "images/welcome.png" %}" alt="" /></p>
+			<div class="you_friends clear">
+				<p><span><img src="{% static "images/icons/you.png" %}" alt="" /></span>You</p>
+				<p><span><img src="{% static "images/icons/friends.png" %}" alt="" /></span>Friends</p>
+			</div>
+			<div class="profile_block">
+					<p>Great! Let’s get acquainted...</p>
+					<form method="post" action="#" class="form_style">
+						<ul>
+							<li>
+								<ul>
+									<li><span class="icon_name">&nbsp;</span>Name</li>
+									<li>
+										<p><input type="text" value="First" /><input type="text" value="Last" /></p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li><span class="icon_mom_group">&nbsp;</span>Mom Group<br /><span class="small">(optional)</span></li>
+									<li class="mom_group_items">
+										<p><select multiple data-placeholder="Find your local Mom group" tabindex="18"><option>text</option><option>text</option></select><a class="button button_small button2" href="#">Create</a><span>If you can’t find your group, create it</span></p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li><span class="icon_friends7">&nbsp;</span>Children</li>
+									<li>
+										<div class="child_wrap">
+											<p class="child_number">CHILD 1 </p>
+											<p class="small_selects"><input type="text" value="First Name" class="left" /><span>DATE OF BIRTH</span> <select data-placeholder="MONTH" tabindex="3"><option>MONTH</option><option>MONTH</option></select> <select data-placeholder="DAY" tabindex="4"><option>DAY</option><option>DAY</option></select> <select data-placeholder="YEAR" tabindex="5"><option>YEAR</option><option>YEAR</option></select></p>
+											<p><input type="text" class="long" value="School (if applicable)" /></p>
+											<p><select multiple data-placeholder="Special needs (if applicable)" tabindex="18"><option>text</option><option>text</option></select> <input type="checkbox" id="none" /></p>
+											<p><input type="text" value="If not listed, add another need" class="left" /><a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
+										</div>
+										<p>&nbsp;<br /><br /><a class="button button_smaller button_edit add_child_trigger" href="#"><span class="icon_plus">&nbsp;</span>ADD CHILD</a></p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li><span class="icon_pin3">&nbsp;</span>Home Address</li>
+									<li>
+										<p><input type="text" value="Street address" /> <input type="text" value="Apt/Suite" class="small" /></p>
+										<p><input type="text" value="Zip Code" class="small" /> <select data-placeholder="Hoboken" tabindex="1"><option>Hoboken</option><option>Hoboken</option></select> <select class="small" data-placeholder="NJ" tabindex="2"><option>NJ</option><option>NJ</option></select></p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li><span class="icon_iphone">&nbsp;</span>Cell Phone Number</li>
+									<li>
+										<p><input type="text" value="(123)" class="small" /> <input type="text" value="456-7890" /></p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li><span class="icon_email">&nbsp;</span>Email Address</li>
+									<li>
+										<p><input type="text" value="Email" /></p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li><span class="icon_pass2">&nbsp;</span>Password</li>
+									<li class="pass">
+										<p><input type="password" value="" /><strong>Confirm Password</strong><input type="password" value="" /></p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul>
+									<li>
+										<span class="icon_pic">&nbsp;</span>Profile Picture
+										<p>Like it or not we’re visual beings and adding a photo of yourself breaks down big trust barriers. </p>
+										<p>You’ll have the option to use your Facebook pic or upload your own. </p>
+									</li>
+									<li>
+										<div class="add_photo">
+											<a href="#" class="add">Add your photo</a>
+											<p class="b_styling"><a href="#">Click here</a> for more photo tips</p>
+										</div>
+										<div class="add_photo_desc">
+											<p>Use these simple guidelines to get the most out of your photo.</p>
+											<ol>
+												<li>Smile <i>(really important)</i></li>
+												<li>Just you (can include kids too!)</li>
+												<li>Clear and Bright</li>
+												<li>Close up</li>
+											</ol>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</form>
+			</div>
+			<div class="button_wrap"><a href="#" class="button button_small"><span class="icon_next">&nbsp;</span>next</a></div>
+		</div>
+		<!-- /onboarding_block -->
+
+	</div>
+</div>
+<!-- /container -->
+
+<!-- footer -->
+<footer class="footer">
+	<div class="wraper">
+		<a href="#" class="logo_bottom"><img src="{% static "images/logo_bottom.png" %}" alt="" /></a>
+		<ul class="social">
+			<li><a href="#" class="twitter">twitter</a></li>
+			<li><a href="#" class="facebook">facebook</a></li>
+			<li><a href="#" class="email">email</a></li>
+		</ul>
+		<!-- bottom menu -->
+		<nav>
+			<ul>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Privacy Policy</a></li>
+				<li><a href="#">Terms of Service</a></li>
+			</ul>
+		</nav>
+		<!-- /bottom menu -->
+	</div>
+</footer>
+<!-- /footer -->
+
+<div id="fixed_tabs"></div>
+
+<div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
+<script type="text/javascript">
+$(function () {
+    $("#back-top").hide();
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 150) {
+            $('#back-top').fadeIn();
+        } else {
+            $('#back-top').fadeOut();
+        }
+    });
+});
+jQuery('.back-to-top').click(function () {
+    jQuery('html, body').animate({
+        scrollTop: 0
+    }, 'slow');
+});
+</script>
+{% endblock %}

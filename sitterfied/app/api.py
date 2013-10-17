@@ -363,7 +363,7 @@ class GroupViewSet(IdFilterViewset):
 class CertificationViewSet(IdFilterViewset):
     queryset = models.Certification.objects.all()
     serializer_class = CertificationSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
 
 class OtherServiceViewSet(IdFilterViewset):
     queryset = models.OtherService.objects.all()

@@ -56,7 +56,7 @@ class User(AbstractUser, TimeStampedModel):
     invited_by = models.ManyToManyField('self',  symmetrical =False, blank=True)
     languages = models.ManyToManyField('Language', blank=True, related_name="users")
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
-    membership_exp_date = models.DateTimeField(null=True)
+    membership_exp_date  = models.DateTimeField(null=True)
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
     facebook_id = models.IntegerField(null=True, blank=True)

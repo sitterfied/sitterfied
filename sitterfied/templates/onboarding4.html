@@ -1,0 +1,715 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% endblock %}
+{% block title %}
+<title>Welcome to Sitterfied!</title>
+{% endblock %}
+{% block body %}
+
+<!-- onboarding_final_popup -->
+<div id="onboarding_final">
+		<div class="done_desc clear">
+			<p><img src="images/done.png" alt="" /></p>
+			<ul>
+				<li>Add your favorite sitters here for quick access</li>
+				<li>Sitters your friends have hired</li>
+				<li>Sitters we found in your area</li>
+			</ul>
+		</div>
+		<div class="sitter_tabs_wrap my_tabs_style">
+			<div class="stabs_block">
+				<nav>
+					<ul class="tab_select">
+						<li><a href="#">sitter<br />team<span>7</span></a></li>
+						<li><a href="#">friends'<br />sitters<span>42</span></a></li>
+						<li><a href="#">local<br />sitters<span>519</span></a></li>
+					</ul>
+				</nav>
+				<div class="friends_block my_friends_sitters">
+					<div class="multiple_sitters_block clear">
+						<a href="#" class="close">&nbsp;</a>
+						<ul>
+							<li class="team select1"><a href="#">Ellen Vukelich</a><span class="remove"><a href="#" class="select1">&nbsp;</a></span></li>
+							<li>
+								<p>+ <a href="#" class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
+								<p>- &nbsp;<a href="#" class="remove_team">REMOVE SITTER TEAM</a></p>
+							</li>
+						</ul>
+						<p>Select from the available sitters below. <a href="#" class="button button_small"><span class="icon_ok2">&nbsp;</span>submit</a></p>
+					</div>
+					<div class="filter_block">
+						<p><a href="#">Reset Filters</a></p>
+						<form method="post" action="#">
+							<ul class="clear">
+								<li><select data-placeholder="Choose languages" multiple tabindex="1"><option>test</option><option>test2</option></select></li>
+								<li><select data-placeholder="Education level" multiple tabindex="2"><option>test</option></select></li>
+								<li><select data-placeholder="Training/Certifications" multiple tabindex="3"><option>test</option></select></li>
+								<li><select data-placeholder="Level of Experience" multiple tabindex="4"><option>test</option></select></li>
+								<li><select data-placeholder="Type of Experience" multiple tabindex="5"><option>test</option></select></li>
+								<li><select data-placeholder="Other" multiple tabindex="6"><option>test</option></select></li>
+							</ul>
+						</form>
+						<p><a href="#">Hide Filters</a></p>
+					</div>
+					<div class="sort_filter clear">
+						<div class="sort">
+							<a class="sort_trigger" href="#">Sort by</a>
+							<a class="reset_trigger" href="#">Reset Sort</a>
+							<ul>
+								<li><a href="#">Bookmarked</a></li>
+								<li><a href="#">Rehires</a></li>
+								<li><a href="#">Experience</a></li>
+								<li><a href="#">Sitter Teams</a></li>
+								<li><a href="#">Rate</a></li>
+								<li><a href="#">Reviews</a></li>
+							</ul>
+						</div>
+						<div class="multiple_select"><a href="#">Select multiple sitters</a></div>
+						<div class="filter"><a href="#">Filter</a> my sitters</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p>When you need a sitter <i>FAST</i>,  click here and let sitters compete for your job</p>
+</div>
+<!-- onboarding_final_popup -->
+<a href="#onboarding_final" class="onboarding_final_trigger">onboarding_final_trigger</a>
+
+<!-- header -->
+<header class="header">
+	<div class="wraper">
+		<a href="#" class="logo"><img src="images/logo.png" alt="" /></a>
+		<!-- top menu -->
+		<div class="menu_trigger"></div>
+		<nav>
+			<ul>
+				<li><a href="#">Search</a></li>
+				<li><a href="#">Bookings</a></li>
+				<li>
+					<a href="#"><img src="images/demo/img.jpg" alt="" /> Alex</a>
+					<ul>
+						<li><span class="menu_icon_setting">&nbsp;</span><a href="#">Account Settings</a></li>
+						<li><span class="menu_icon_profile">&nbsp;</span><a href="#">Profile</a></li>
+						<li><span class="menu_icon_friends">&nbsp;</span><a href="#">Find Friends</a></li>
+						<li><span class="menu_icon_members">&nbsp;</span><a href="#">Members Only</a></li>
+						<li><span class="menu_icon_support">&nbsp;</span><a href="#">Support</a></li>
+						<li><span class="menu_icon_signout">&nbsp;</span><a href="#">Sign Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<!-- /top menu -->
+		<!-- top note -->
+		<div class="top_note">
+			Hi Alex, you have 6 free months
+			<div>
+				<p><a href="#">Invite more frıends</a></p>
+				<span>&nbsp;</span>
+			</div>
+		</div>
+		<!-- /top note -->
+		<a href="#" class="back">Back to search results</a>
+		<!-- top info -->
+		<div class="top_info clear">
+			<div class="find_form_block">
+				<p>Where and when do you need your sitter?</p>
+				<form method="post" action="#">
+					<ul class="clear">
+						<li>
+							<label for="where">Where</label>
+							<input id="where" type="text" value="Enter town or zipcode" />
+						</li>
+						<li>
+							<label for="when">When</label>
+							<input type="text" class="datepicker" id="datepicker" value="Choose date" />
+							<p><input type="checkbox" id="check" name="check" /><label for="check">Overnight / Multiday booking?</label></p>
+						</li>
+						<li>
+							<label for="from">From</label>
+							<select id="from" data-placeholder="" tabindex="8"><option>6:00 PM</option><option>7:00 PM</option></select>
+						</li>
+						<li>
+							<label for="to">To</label>
+							<select id="to" data-placeholder="" tabindex="9"><option>11:00 PM</option><option>12:00 PM</option></select>
+						</li>
+						<li>
+							<label>&nbsp;</label>
+							<select data-placeholder="" tabindex="10"><option>2 Kids</option><option>3 Kids</option></select>
+						</li>
+						<li class="clear_pad over_form">
+							<label>To</label>
+							<input type="text" class="datepicker" id="datepicker3" value="Choose date" />
+						</li>
+						<li class="over_form">
+							<label>&nbsp;</label>
+							<select id="to2" data-placeholder="" tabindex="92"><option>11:00 PM</option><option>12:00 PM</option></select>
+						</li>
+						<li><input type="submit" value="FIND MY SITTER" /></li>
+					</ul>
+				</form>
+				<p class="hide"><a href="#">Hide Search Bar</a></p>
+				<p class="show"><a href="#">Show Search Bar</a></p>
+			</div>
+		</div>
+		<!-- /top info -->
+	</div>
+</header>
+<!-- /header -->
+
+<!-- container -->
+<div class="container clear">
+	<div class="wraper">
+
+		<!-- sitter_tabs_wrap -->
+		<div class="sitter_tabs_wrap my_tabs_style">
+			<div class="stabs_block" id="fixed_tabs">
+				<nav>
+					<ul class="tab_select">
+						<li class="active"><a href="#tab-1">sitter<br />team<span>7</span></a></li>
+						<li><a href="#tab-2">friends'<br />sitters<span>42</span></a></li>
+						<li><a href="#tab-3">local<br />sitters<span>519</span></a></li>
+					</ul>
+				</nav>
+				<div class="friends_block my_friends_sitters">
+					<div class="multiple_sitters_block clear">
+						<a href="#" class="close">&nbsp;</a>
+						<ul>
+							<li class="team select1"><a href="#">Ellen Vukelich</a><span class="remove"><a href="#" class="select1">&nbsp;</a></span></li>
+							<li>
+								<p>+ <a href="#" class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
+								<p>- &nbsp;<a href="#" class="remove_team">REMOVE SITTER TEAM</a></p>
+							</li>
+						</ul>
+						<p>Select from the available sitters below. <a href="#" class="button button_small"><span class="icon_ok2">&nbsp;</span>submit</a></p>
+					</div>
+					<div class="filter_block">
+						<p><a href="#">Reset Filters</a></p>
+						<form method="post" action="#">
+							<ul class="clear">
+								<li><select data-placeholder="Choose languages" multiple tabindex="1"><option>test</option><option>test2</option></select></li>
+								<li><select data-placeholder="Education level" multiple tabindex="2"><option>test</option></select></li>
+								<li><select data-placeholder="Training/Certifications" multiple tabindex="3"><option>test</option></select></li>
+								<li><select data-placeholder="Level of Experience" multiple tabindex="4"><option>test</option></select></li>
+								<li><select data-placeholder="Type of Experience" multiple tabindex="5"><option>test</option></select></li>
+								<li><select data-placeholder="Other" multiple tabindex="6"><option>test</option></select></li>
+							</ul>
+						</form>
+						<p><a href="#">Hide Filters</a></p>
+					</div>
+					<div class="sort_filter clear">
+						<div class="sort">
+							<a class="sort_trigger" href="#">Sort by</a>
+							<a class="reset_trigger" href="#">Reset Sort</a>
+							<ul>
+								<li><a href="#">Bookmarked</a></li>
+								<li><a href="#">Rehires</a></li>
+								<li><a href="#">Experience</a></li>
+								<li><a href="#">Sitter Teams</a></li>
+								<li><a href="#">Rate</a></li>
+								<li><a href="#">Reviews</a></li>
+							</ul>
+						</div>
+						<div class="multiple_select"><a href="#">Select multiple sitters</a></div>
+						<div class="filter"><a href="#">Filter</a> my sitters</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- my_sitter_team -->
+			<section id="tab-1">
+			<div class="mob_tab_trigger my_mob_tab">sitter<br />team<span>7</span></div>
+			<div class="my_sitter_team">
+				<div class="sitter_title">
+					<p><span><span class="icon_heart2">&nbsp;</span>sitter<br />team</span><strong>7</strong></p>
+				</div>
+				<ul class="clear">
+					<li>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Ellen Vukelich</a>
+						</div>
+						<div class="img">
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+						</div>
+						<ul>
+							<li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>
+							<li><span class="icon_reload">&nbsp;</span>4 jobs <span class="friends_span"><span class="icon_friends4">&nbsp;</span><a href="#">24 sitter friends</a></span></li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" checked="" class="select1" id="select1" /><label for="select1">Select</label></div>
+							<a class="button" href="#">BOOK</a>
+							<p><a href="#">REMOVE FROM SITTER TEAM</a></p>
+						</div>
+					</li>
+					<li>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Amy Randall</a>
+						</div>
+						<div class="img">
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+						</div>
+						<ul>
+							<li><span class="icon_plus_box">&nbsp;</span>Last hired: <span>April 23, 2013</span></li>
+							<li><span class="icon_reload">&nbsp;</span>4 jobs <span class="friends_span"><span class="icon_friends4">&nbsp;</span><a href="#">24 sitter friends</a></span></li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" class="select2" id="select2" /><label for="select2">Select</label></div>
+							<a class="button" href="#">BOOK</a>
+							<p><a href="#">REMOVE FROM SITTER TEAM</a></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</section>
+			<!-- /my_sitter_team -->
+
+			<!-- my_friends_sitters -->
+			<section id="tab-2">
+			<div class="mob_tab_trigger my_mob_tab">friends'<br />sitters<span>42</span></div>
+			<div class="friends_block my_friends_sitters">
+				<div class="sitter_title">
+					<p><span><span class="icon_heart2">&nbsp;</span>friends’<br />sitters</span><strong>42</strong></p>
+				</div>
+				<ul class="clear">
+					<li>
+						<div class="bookmark"></div>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Sandy Thompson</a>
+						</div>
+						<div class="img">
+							<div class="heart"></div>
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+							<span>Background Cleared</span>
+						</div>
+						<ul>
+							<li><span class="icon_friends3">&nbsp;</span>5 mutual friends
+								<ul>
+									<li>Friends you have in common</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_recommend2">&nbsp;</span>4 recommends
+								<ul>
+									<li>Recommendations</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_team3">&nbsp;</span>9 sitter teams
+								<ul>
+									<li>Added to sitter teams and repeatedly hired</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_reviews">&nbsp;</span>11 reviews
+								<ul>
+									<li class="rev clear">
+										<a href="#"><img src="images/demo/img3.jpg" alt="" /></a>
+										<div>
+											<p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>
+											<p><a href="#">Read more reviews </a></p>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" class="select3" id="select3" /><label for="select3">Select</label></div>
+							<a class="button" href="#">BOOK</a><a class="button button2" href="#">INTERVIEW</a>
+							<p><a href="#">ADD TO SITTER TEAM</a></p>
+							<p><a href="#">BOOKMARK</a></p>
+						</div>
+					</li>
+					<li>
+						<div class="bookmark"></div>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Erica Sanders</a>
+						</div>
+						<div class="img">
+							<div class="heart"></div>
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+							<span>Background Cleared</span>
+						</div>
+						<ul>
+							<li><span class="icon_friends3">&nbsp;</span>5 mutual friends
+								<ul>
+									<li>Friends you have in common</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_recommend2">&nbsp;</span>4 recommends
+								<ul>
+									<li>Recommendations</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_team3">&nbsp;</span>9 sitter teams
+								<ul>
+									<li>Added to sitter teams and repeatedly hired</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_reviews">&nbsp;</span>11 reviews
+								<ul>
+									<li class="rev clear">
+										<a href="#"><img src="images/demo/img3.jpg" alt="" /></a>
+										<div>
+											<p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>
+											<p><a href="#">Read more reviews </a></p>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" class="select4" id="select4" /><label for="select4">Select</label></div>
+							<a class="button" href="#">BOOK</a><a class="button button2" href="#">INTERVIEW</a>
+							<p><a href="#">ADD TO SITTER TEAM</a></p>
+							<p><a href="#">BOOKMARK</a></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</section>
+			<!-- /my_friends_sitters -->
+
+			<!-- my_local_sitters -->
+			<section id="tab-3">
+			<div class="mob_tab_trigger my_mob_tab">local<br />sitters<span>519</span></div>
+			<div class="friends_block my_local_sitters">
+				<div class="sitter_title">
+					<p><span><span class="icon_pin2">&nbsp;</span>local<br />sitters</span><strong>519</strong></p>
+				</div>
+				<ul class="clear">
+					<li>
+						<div class="bookmark"></div>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Amelia Hart</a>
+						</div>
+						<div class="img">
+							<div class="heart"></div>
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+							<span>Background Cleared</span>
+						</div>
+						<ul>
+							<li><span class="icon_recommend2">&nbsp;</span>4 recommends
+								<ul>
+									<li>Recommendations</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_team3">&nbsp;</span>9 sitter teams
+								<ul>
+									<li>Added to sitter teams and repeatedly hired</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_reviews">&nbsp;</span>11 reviews
+								<ul>
+									<li class="rev clear">
+										<a href="#"><img src="images/demo/img3.jpg" alt="" /></a>
+										<div>
+											<p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>
+											<p><a href="#">Read more reviews </a></p>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" class="select5" id="select5" /><label for="select5">Select</label></div>
+							<a class="button" href="#">BOOK</a><a class="button button2" href="#">INTERVIEW</a>
+							<p><a href="#">ADD TO SITTER TEAM</a></p>
+							<p><a href="#">BOOKMARK</a></p>
+						</div>
+					</li>
+					<li>
+						<div class="bookmark"></div>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Dora Cruz</a>
+						</div>
+						<div class="img">
+							<div class="heart"></div>
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+							<span>Background Cleared</span>
+						</div>
+						<ul>
+							<li><span class="icon_recommend2">&nbsp;</span>4 recommends
+								<ul>
+									<li>Recommendations</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_team3">&nbsp;</span>9 sitter teams
+								<ul>
+									<li>Added to sitter teams and repeatedly hired</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_reviews">&nbsp;</span>11 reviews
+								<ul>
+									<li class="rev clear">
+										<a href="#"><img src="images/demo/img3.jpg" alt="" /></a>
+										<div>
+											<p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>
+											<p><a href="#">Read more reviews </a></p>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" class="select6" id="select6" /><label for="select6">Select</label></div>
+							<a class="button" href="#">BOOK</a><a class="button button2" href="#">INTERVIEW</a>
+							<p><a href="#">ADD TO SITTER TEAM</a></p>
+							<p><a href="#">BOOKMARK</a></p>
+						</div>
+					</li>
+					<li>
+						<div class="bookmark"></div>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Jane Wayne</a>
+						</div>
+						<div class="img">
+							<div class="heart"></div>
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+							<span>Background Cleared</span>
+						</div>
+						<ul>
+							<li><span class="icon_recommend2">&nbsp;</span>4 recommends
+								<ul>
+									<li>Recommendations</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_team3">&nbsp;</span>9 sitter teams
+								<ul>
+									<li>Added to sitter teams and repeatedly hired</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_reviews">&nbsp;</span>11 reviews
+								<ul>
+									<li class="rev clear">
+										<a href="#"><img src="images/demo/img3.jpg" alt="" /></a>
+										<div>
+											<p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>
+											<p><a href="#">Read more reviews </a></p>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" class="select7" id="select7" /><label for="select7">Select</label></div>
+							<a class="button" href="#">BOOK</a><a class="button button2" href="#">INTERVIEW</a>
+							<p><a href="#">ADD TO SITTER TEAM</a></p>
+							<p><a href="#">BOOKMARK</a></p>
+						</div>
+					</li>
+					<li>
+						<div class="bookmark"></div>
+						<div class="tit">
+							<span><strong>$15</strong> /hr</span>
+							<a href="#">Ellen Vukelich</a>
+						</div>
+						<div class="img">
+							<div class="heart"></div>
+							<a href="#"><img src="images/demo/img13.jpg" alt="" /></a>
+							<span>Background Cleared</span>
+						</div>
+						<ul>
+							<li><span class="icon_recommend2">&nbsp;</span>4 recommends
+								<ul>
+									<li>Recommendations</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_team3">&nbsp;</span>9 sitter teams
+								<ul>
+									<li>Added to sitter teams and repeatedly hired</li>
+									<li><a href="#"><img src="images/demo/img3.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img4.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img5.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img6.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img7.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img8.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img9.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+									<li><a href="#"><img src="images/demo/img10.jpg" alt="" /></a><span>Andrea Barelli</span></li>
+								</ul>
+							</li>
+							<li><span class="icon_reviews">&nbsp;</span>11 reviews
+								<ul>
+									<li class="rev clear">
+										<a href="#"><img src="images/demo/img3.jpg" alt="" /></a>
+										<div>
+											<p>Ellen has been a sitter for my children fore more than a year and I couldn’t be happier! She arrives on time and my kids light up when they see her!</p>
+											<p><a href="#">Read more reviews </a></p>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<div class="btns clear">
+							<div class="select_wrap"><input type="checkbox" class="select8" id="select8" /><label for="select8">Select</label></div>
+							<a class="button" href="#">BOOK</a><a class="button button2" href="#">INTERVIEW</a>
+							<p><a href="#">ADD TO SITTER TEAM</a></p>
+							<p><a href="#">BOOKMARK</a></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</section>
+			<!-- /my_local_sitters -->
+
+		</div>
+		<!-- /sitter_tabs_wrap -->
+
+	</div>
+</div>
+<!-- /container -->
+
+<!-- footer -->
+<footer class="footer">
+	<div class="wraper">
+		<a href="#" class="logo_bottom"><img src="images/logo_bottom.png" alt="" /></a>
+		<ul class="social">
+			<li><a href="#" class="twitter">twitter</a></li>
+			<li><a href="#" class="facebook">facebook</a></li>
+			<li><a href="#" class="email">email</a></li>
+		</ul>
+		<!-- bottom menu -->
+		<nav>
+			<ul>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Privacy Policy</a></li>
+				<li><a href="#">Terms of Service</a></li>
+			</ul>
+		</nav>
+		<!-- /bottom menu -->
+	</div>
+</footer>
+<!-- /footer -->
+
+<div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
+<script type="text/javascript">
+$(function () {
+    $("#back-top").hide();
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 150) {
+            $('#back-top').fadeIn();
+        } else {
+            $('#back-top').fadeOut();
+        }
+    });
+});
+jQuery('.back-to-top').click(function () {
+    jQuery('html, body').animate({
+        scrollTop: 0
+    }, 'slow');
+});
+</script>
+{% endblock %}

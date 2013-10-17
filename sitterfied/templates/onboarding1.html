@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% endblock %}
+{% block title %}
+<title>Welcome to Sitterfied!</title>
+{% endblock %}
+
+
+
+{% block body %}
+<!-- header -->
+<header class="header">
+  <div class="wraper">
+	<a href="#" class="logo"><img src="{% static "images/logo.png" %}" alt="" /></a>
+	<ul class="social">
+	  <li><a href="#" class="facebook">facebook</a></li>
+	  <li><a href="#" class="twitter">twitter</a></li>
+	  <li><a href="#" class="tumblr">tumblr</a></li>
+	</ul>
+  </div>
+</header>
+<!-- /header -->
+<form action='{% url "onboarding2" %}' method="get">
+<!-- container -->
+<div class="container clear">
+  <div class="wraper text_topmarg">
+
+	<!-- onboarding_block -->
+	<div class="onboarding_block clear">
+	  <p class="center">
+		<img src="{% static "images/welcome.png" %}" alt="" />
+	  </p>
+	  <p class="center">Congratulations. You just took an important first step toward babysitter nirvana.
+	  </p>
+	  <p class="center">You know a bit about us, now we’d love to hear more about you.
+	  </p>
+	  <p class="choose_parent_baby">First, are you a
+		<input type="radio" id="parent" checked name="parent_or_sitter" value="parent" />
+		<label for="parent">Parent
+		</label> or a
+		<input type="radio" id="babysitter" name="parent_or_sitter" value="sitter"/>
+		<label for="babysitter">Babysitter
+		</label>
+	  </p>
+	  <div class="button_wrap">
+		<a class="button button_small" onclick='$("form").submit()'>
+		  <span class="icon_next">&nbsp;
+		  </span>next
+		</a>
+	  </div>
+	</div>
+	<!-- /onboarding_block -->
+
+  </div>
+</div>
+</form>
+<!-- /container -->
+
+<!-- footer -->
+<footer class="footer">
+  <div class="wraper">
+	<a href="#" class="logo_bottom"><img src="{% static "images/logo_bottom.png" %}" alt="" /></a>
+	<ul class="social">
+	  <li><a href="#" class="twitter">twitter</a></li>
+	  <li><a href="#" class="facebook">facebook</a></li>
+	  <li><a href="#" class="email">email</a></li>
+	</ul>
+	<!-- bottom menu -->
+	<nav>
+	  <ul>
+		<li><a href="#">About Us</a></li>
+		<li><a href="#">Contact</a></li>
+		<li><a href="#">Blog</a></li>
+		<li><a href="#">Privacy Policy</a></li>
+		<li><a href="#">Terms of Service</a></li>
+	  </ul>
+	</nav>
+	<!-- /bottom menu -->
+  </div>
+</footer>
+<!-- /footer -->
+
+<div id="fixed_tabs"></div>
+
+<div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
+<script type="text/javascript">
+ $(function () {
+   $("#back-top").hide();
+   $(window).scroll(function () {
+     if ($(this).scrollTop() > 150) {
+       $('#back-top').fadeIn();
+     } else {
+       $('#back-top').fadeOut();
+     }
+   });
+ });
+ jQuery('.back-to-top').click(function () {
+   jQuery('html, body').animate({
+     scrollTop: 0
+   }, 'slow');
+ });
+</script>
+{% endblock %}
