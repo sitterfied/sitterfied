@@ -71,6 +71,14 @@ define ['jquery'
         isParent: (() ->
             @get('parent_or_sitter') == "Parent"
         ).property('parent_or_sitter')
+        myFriends: (() ->
+            debugger
+            friends = this.get('friends')
+            myself = friends.findProperty('id', this.get('id'))
+            if myself
+                friends.removeObject(myself)
+            return friends
+        ).property('friends.@each') 
         mailTo:  (() ->
             return "mailto:" +@get('email')
         ).property('email')
