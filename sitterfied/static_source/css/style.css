@@ -1756,3 +1756,5 @@ a {cursor:pointer}
 .onboarding_block .onb_step3_right ul li .delete {position:absolute;top:11px;right:0;display:none;width:10px;height:10px;background:url(../images/icons/delete.png) no-repeat;}
 .onboarding_block .onb_step3_right ul li:hover .delete {display:block;}
 .onboarding_block .onb_step3_right > p {text-align:center;font-size:13px;color:#c5c5c5;padding:0 25px 14px 25px;}
+.header nav > ul > li:nth-last-child(2) ul li.network_link a {color: #ebf6f8;}
+.header nav > ul > li:nth-last-child(2) ul li.network_link a:hover {color: #deff54;}

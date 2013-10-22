@@ -6,7 +6,7 @@
   <div class="img">
     {{# if otherPerson}}
     {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
-      <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}}</span></p>
+      <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
       {{/ if}}
     <div>
       <a>{{friends_in_common.length}} mutual friends</a>
