@@ -10,6 +10,7 @@ from django.forms import widgets
 from django.forms.extras.widgets import SelectDateWidget
 
 from django.contrib.auth import authenticate
+from .models import User
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, HTML#Fieldset, ButtonHolder, Submit
@@ -20,6 +21,8 @@ from crispy_forms.layout import Layout, Field, HTML#Fieldset, ButtonHolder, Subm
 USER_FIELDS =  ["address1", "address2", "city", "state", "zip", "cell", "first_name", "last_name", "email", "avatar"]
 
 class RegistrationForm(ModelForm):
+    class Meta:
+        model = User
 
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password"}),
                                 label=_("Password"), )

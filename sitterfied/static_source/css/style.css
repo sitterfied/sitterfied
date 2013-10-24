@@ -1961,3 +1961,6 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .form_style textarea {width:180px;padding:0 20px;}
 	/* Ondoarding final popup */
 .onb_final .fancybox-skin .stabs_block {display:block;}
+
+.header nav > ul > li:nth-last-child(2) ul li.network_link a {color: #ebf6f8;}
+.header nav > ul > li:nth-last-child(2) ul li.network_link a:hover {color: #deff54;}
