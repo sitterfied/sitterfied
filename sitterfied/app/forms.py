@@ -2,7 +2,7 @@ import re
 import datetime
 from django import forms
 from django.forms import ModelForm
-from models import User, Sitter, Parent, Booking
+from models import User, Sitter, Parent, Booking, Child
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -147,6 +147,10 @@ class SitterRegisterForm(RegistrationForm):
 
 
 
+class GroupsForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["sitter_groups"]
 
 
 
@@ -154,4 +158,28 @@ class ParentRegisterForm(RegistrationForm):
 
     class Meta:
         model = Parent
-        fields = USER_FIELDS
+        fields = USER_FIELDS + ['sitter_groups']
+        widgets = {
+            "address1":widgets.TextInput(attrs={"placeholder":"Street Address"}),
+            "address2":widgets.TextInput(attrs={"placeholder":"Apt/Suite", "class":"small"}),
+            "city":widgets.TextInput(attrs={"placeholder":"City"}),
+            "zip":widgets.TextInput(attrs={"placeholder":"Zip Code", "class":"small"}),
+            "cell":widgets.TextInput(attrs={"placeholder":"(123) 456-7890"}),
+            "first_name":widgets.TextInput(attrs={"placeholder":"First"}),
+            "last_name":widgets.TextInput(attrs={"placeholder":"Last"}),
+            "email":widgets.TextInput(attrs={"placeholder":"Email"}),
+        }
+
+
+
+class ChildForm(forms.ModelForm):
+
+    class Meta:
+        model = Child
+        fields = ('name', 'dob', 'school', 'special_needs')
+        widgets = {
+            "name":widgets.TextInput(attrs={"placeholder":"Name", "class":"left"}),
+            'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-100, datetime.date.today().year)))),
+            "school":widgets.TextInput(attrs={"placeholder":"School (if applicable)", "class":"long"}),
+            "special_needs": widgets.SelectMultiple(attrs={"placeholder":"Special needs"}),
+        }

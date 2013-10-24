@@ -36,7 +36,10 @@ PIPELINE_JS = {
             'js/lib/select2.js',
             'js/lib/uploadcare-0.15.0.min.js',
             'js/lib/PhoneFormat.js',
-            ),
+            'js/lib/jquery.formset.min.js',
+            'js/facebook.js',
+
+        ),
         'output_filename': 'js/libs.js',
     }
 }

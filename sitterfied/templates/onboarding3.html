@@ -5,6 +5,7 @@
 {% block extra_head %}
 {% load compressed %}
 {% compressed_js 'onboarding' %}
+{% include "csrf.html" %}
 {% endblock %}
 {% block title %}
 <title>Welcome to Sitterfied!</title>
@@ -35,31 +36,90 @@
 				<p><span><img src="{% static "images/icons/you2.png" %}" alt="" /></span>You</p>
 				<p><span><img src="{% static "images/icons/friends2.png" %}" alt="" /></span>Friends</p>
 			</div>
-			<p class="center">Ever been to a party where you’re the only one who doesn’t know anyone? So have we.</p>
-			<div class="onb_step3_left">
-				<p><select multiple data-placeholder="Enter anything (you know you want to)" tabindex="18"><option>text</option><option>text</option></select><a class="button button_small button2" href="#">Create</a><span>If you can’t find your group, create it</span></p>
-				<p>Find a person, group, school, club or organization</p>
-				<div class="face_disconnected"><a href="#"><img src="{% static "images/icons/facebook8.png" %}" alt="" />Find Friends on Facebook</a></div>
-				<div class="face_connected connected clear"><a href="#"><img src="{% static "images/icons/facebook8.png" %}" alt="" />Connected</a><p>286 friends<br /><span>(2 on Sitterfied)</span></p></div>
-				<div class="gmail_disconnected"><a href="#"><img src="{% static "images/icons/gmail3.png" %}" alt="" />Find Friends on Gmail</a></div>
-				<div class="gmail_connected connected clear"><a href="#"><img src="{% static "images/icons/gmail3.png" %}" alt="" />Connected</a><p>501 contacts<br /><span>(3 on Sitterfied)</span></p></div>
+			<p class="center">Ever been to a party where you’re the only one who doesn’t know anyone? So have we.
+			</p>
+			<div class="onb_step3_left form_style">
+			  <p>
+				<form method="post">
+				  {% csrf_token %}
+				{{form.sitter_groups}}
+				</form>
+			  </p>
+			  <p>Find a person, group, school, club or organization
+			  </p>
+			  <p>
+				<br>
+			  </p>
+			  <p>
+
+				<input id="newgroup-input" type="text" placeholder="Create a new group">
+				<a class="button button_small button2" id="newgroup-button">Create</a>
+
+			  </p>
+
+			  {% if request.user.facebook_token %}
+			  <div class="face_connected connected clear">
+				<a >
+				  <img src="{% static "images/icons/facebook8.png" %}" alt="" />Connected
+				</a>
+			  </div>
+
+			  {% else %}
+			  <div class="face_disconnected" id="facebook">
+				<a href="">
+				  <img src="{% static "images/icons/facebook8.png" %}" alt="" />Find Friends on Facebook
+				</a>
+			  </div>
+
+			  {% endif %}
+			  {% if request.user.google_imported %}
+			  <div class="gmail_connected connected clear">
+				<a href="#">
+				  <img src="{% static "images/icons/gmail3.png" %}" alt="" />Connected
+				</a>
+			  </div>
+			  {% else %}
+			  <div class="gmail_disconnected" id="google">
+				<a href="">
+				  <img src="{% static "images/icons/gmail3.png" %}" alt="" />Find Friends on Gmail
+				</a>
+			  </div>
+
+			  {% endif %}
 			</div>
 			<div class="onb_step3_right">
 				<!--<p>This is your network on Sitterfied</p>
 				<p>Friends or groups will be added here</p>-->
 				<ul>
-					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Lakeisha Powanda</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Connie Takach</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Jane Eyre</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Lakeisha Powanda</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Connie Takach</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li><a href="#"><img src="{% static "images/demo/img20.jpg" %}" alt="" /></a><a href="#">Jane Eyre</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li class="group"><a href="#">Hoboken Mommies</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li class="group"><a href="#">Hoboken Catholic Church</a> <a href="#" class="delete">&nbsp;</a></li>
-					<li class="group"><a href="#">St. Francis Prep School</a> <a href="#" class="delete">&nbsp;</a></li>
+				  {% for friend in request.user.friends.all %}
+				  <li>
+					<a href="">
+					  <img src="{{friend.avatar_url}}" alt="" />
+					</a>
+					<a href="">{{friend.get_full_name|title}}
+					</a>
+					<a href="" class="delete">&nbsp;
+					</a>
+				  </li>
+				  {% endfor %}
+				  {% for group in request.user.sitter_groups.all %}
+				  <li class="group">
+					<a href="#">{{group.name}}
+					</a>
+					<a href="#" class="delete">&nbsp;
+					</a>
+				  </li>
+				  {% endfor %}
 				</ul>
 			</div>
-			<div class="button_wrap"><a href="#" class="button button_small"><span class="icon_next">&nbsp;</span>next</a><a href="#" class="skip">Skip for now</a></div>
+			<div class="button_wrap">
+			  <a href="" class="button button_small skip">
+				<span class="icon_next">&nbsp;
+				</span>next
+			  </a>
+			  <a href="" class="skip">Skip for now
+			  </a>
+			</div>
 		</div>
 		<!-- /onboarding_block -->
 
@@ -95,6 +155,25 @@
 
 <div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
 <script type="text/javascript">
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+function setGet(){
+  selected = $("select").select2("val")
+   $.param(selected)
+
+}
+
+
 $(function () {
     $("#back-top").hide();
     $(window).scroll(function () {
@@ -104,11 +183,78 @@ $(function () {
             $('#back-top').fadeOut();
         }
     });
-});
+   $("select").select2({ width: 'resolve' })
+
+
+   $("#newgroup-button").click(function(event){
+	 newGroupName = $("#newgroup-input").val()
+	 $.post("/api/groups/", {name: newGroupName}).done(function(data){
+	   newGroup = $("<option>");
+	   newGroup.attr("value", data.id);
+	   newGroup.text(data.name);
+	   $("#id_sitter_groups").append(newGroup);
+	   $("#newgroup-input").val("")
+	   oldval = $("#id_sitter_groups").select2("val")
+	   oldval.push(data.id)
+	   $("#id_sitter_groups").select2("val", oldval)
+	 })
+   });
+   $("#facebook").click(function(){
+	 FB.getLoginStatus(function(response) {
+	   if (response.status === "connected") {
+		 return use_fb_data();
+	   } else if (response.status === "not_authorized") {
+		 return FB.login(function() {
+		   return use_fb_data();
+		 });
+	   }
+	 }, true);
+	 return false
+   })
+   $("#google").click(function(){
+     google_window = window.open("/googleoauthbegin/")
+	 google_window.onbeforeunload = function(){
+         alert("google connected");
+
+		 location.reload();
+	 }
+	 return false
+   })
+   $(".skip").click(function(){
+	 $("form").submit()
+	 return false
+   })
+
+
+ });
+
+var use_fb_data;
+
+use_fb_data = function() {
+  var access_token, facebook_id, promise;
+  access_token = FB.getAccessToken();
+  facebook_id = FB.getUserID();
+   debugger
+  return $.ajax({
+      url: "/facebook_import/",
+	 type: "POST",
+	  data: {"token":access_token,
+			 "id": facebook_id
+			 },
+      success: function() {
+         alert("facebook connected");
+		 location.reload();
+      }
+    });
+ };
+
+
+
 jQuery('.back-to-top').click(function () {
     jQuery('html, body').animate({
         scrollTop: 0
     }, 'slow');
 });
+
 </script>
 {% endblock %}

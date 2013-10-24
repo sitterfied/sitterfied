@@ -6,6 +6,7 @@
 
       var parent_or_sitter = '{{parent_or_sitter}}'
       var authenticated = {{ user.is_authenticated|yesno:"true,false" }};
+	  var FIRST_TIME = {{ first_time|yesno:"true,false" }};
     </script>
 	<script src="{{STATIC_URL}}js/lib/handlebars.js"></script>
  	{% if debug %}

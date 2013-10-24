@@ -5,6 +5,7 @@
 {% block extra_head %}
 {% load compressed %}
 {% compressed_js 'onboarding' %}
+{% include "csrf.html" %}
 {% endblock %}
 {% block title %}
 <title>Welcome to Sitterfied!</title>
@@ -38,12 +39,32 @@
 			<div class="profile_block">
 					<p>Great! Let’s get acquainted...</p>
 					<form method="post" action="#" class="form_style">
+	<input type="hidden" name="parent_or_sitter" value="parent">
+	{% csrf_token %}
+
 						<ul>
 							<li>
+	{% if form.non_field_errors %}
+<ul>
+    {{ form.non_field_errors.as_ul }}
+</ul>
+{% endif %}
 								<ul>
+
+
 									<li><span class="icon_name">&nbsp;</span>Name</li>
 									<li>
-										<p><input type="text" value="First" /><input type="text" value="Last" /></p>
+										<p>
+										  {% for error in form.first_name.errors %}
+										  <strong>{{ error|escape }}</strong>
+										  {% endfor %}
+
+										  {{form.first_name}}
+										  {% for error in form.last_name.errors %}
+										  <strong>{{ error|escape }}</strong>
+										  {% endfor %}
+										  {{form.last_name}}
+										</p>
 									</li>
 								</ul>
 							</li>
@@ -51,22 +72,60 @@
 								<ul>
 									<li><span class="icon_mom_group">&nbsp;</span>Mom Group<br /><span class="small">(optional)</span></li>
 									<li class="mom_group_items">
-										<p><select multiple data-placeholder="Find your local Mom group" tabindex="18"><option>text</option><option>text</option></select><a class="button button_small button2" href="#">Create</a><span>If you can’t find your group, create it</span></p>
+									  <p>
+										{{form.sitter_groups}}
+									  </p>
+									  <p>
+										<input id="newgroup" type="text">
+										<a class="button button_small button2" id="newgroup-button">Create
+										</a>
+										<span>If you can’t find your group, create it
+										</span>
+									  </p>
 									</li>
 								</ul>
 							</li>
 							<li>
 								<ul>
 									<li><span class="icon_friends7">&nbsp;</span>Children</li>
-									<li>
+									{% for form in formset %}
+
+									<li class="form-container">
 										<div class="child_wrap">
-											<p class="child_number">CHILD 1 </p>
-											<p class="small_selects"><input type="text" value="First Name" class="left" /><span>DATE OF BIRTH</span> <select data-placeholder="MONTH" tabindex="3"><option>MONTH</option><option>MONTH</option></select> <select data-placeholder="DAY" tabindex="4"><option>DAY</option><option>DAY</option></select> <select data-placeholder="YEAR" tabindex="5"><option>YEAR</option><option>YEAR</option></select></p>
-											<p><input type="text" class="long" value="School (if applicable)" /></p>
-											<p><select multiple data-placeholder="Special needs (if applicable)" tabindex="18"><option>text</option><option>text</option></select> <input type="checkbox" id="none" /></p>
-											<p><input type="text" value="If not listed, add another need" class="left" /><a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
+										  <p class="child_number">CHILD 1</p>
+										  <p class="small_selects">
+											{{form.name}}
+											{{form.dob}}
+										  </p>
+										  <p>
+											{{form.school}}
+										  </p>
+										  <p>
+											{{form.special_needs}}
+											<input type="checkbox" id="none" />
+										  </p>
+										  <p>
+											<input type="text" placeholder="Special Need not listed?" class="left" />
+											<a class="button button_smaller button_edit newneed-button">
+											  <span class="icon_plus">&nbsp;
+											  </span>ADD
+											</a>
+										  </p>
 										</div>
-										<p>&nbsp;<br /><br /><a class="button button_smaller button_edit add_child_trigger" href="#"><span class="icon_plus">&nbsp;</span>ADD CHILD</a></p>
+										<p class="add_child_block">&nbsp;
+										  <br />
+										  <br />
+	{% if forloop.last %}
+
+										  <a class="button button_smaller button_edit add_child_trigger">
+											<span class="icon_plus">&nbsp;
+											</span>ADD CHILD
+										  </a>
+	{% endif %}
+										</p>
+
+
+										{% endfor %}
 									</li>
 								</ul>
 							</li>
@@ -74,8 +133,36 @@
 								<ul>
 									<li><span class="icon_pin3">&nbsp;</span>Home Address</li>
 									<li>
-										<p><input type="text" value="Street address" /> <input type="text" value="Apt/Suite" class="small" /></p>
-										<p><input type="text" value="Zip Code" class="small" /> <select data-placeholder="Hoboken" tabindex="1"><option>Hoboken</option><option>Hoboken</option></select> <select class="small" data-placeholder="NJ" tabindex="2"><option>NJ</option><option>NJ</option></select></p>
+
+					<p>
+					{% for error in form.address1.errors %}
+					<strong>{{ error|escape }}</strong>
+					{% endfor %}
+
+					{{form.address1}}
+
+					{% for error in form.address2.errors %}
+					<strong>{{ error|escape }}</strong>
+					{% endfor %}
+
+					{{form.address2}}
+					{% for error in form.zip.errors %}
+					<strong>{{ error|escape }}</strong>
+					{% endfor %}
+					<br>
+					{{form.zip}}
+					  {% for error in form.city.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.city}}
+					  {% for error in form.state.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.state}}
+					</p>
+
 									</li>
 								</ul>
 							</li>
@@ -83,7 +170,13 @@
 								<ul>
 									<li><span class="icon_iphone">&nbsp;</span>Cell Phone Number</li>
 									<li>
-										<p><input type="text" value="(123)" class="small" /> <input type="text" value="456-7890" /></p>
+									  <p>
+									  					  {% for error in form.cell.errors %}
+									  <strong>{{ error|escape }}</strong>
+									  {% endfor %}
+
+									  {{form.cell}}
+									  </p>
 									</li>
 								</ul>
 							</li>
@@ -91,7 +184,13 @@
 								<ul>
 									<li><span class="icon_email">&nbsp;</span>Email Address</li>
 									<li>
-										<p><input type="text" value="Email" /></p>
+										<p>
+										  {% for error in form.email.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.email}}
+										</p>
 									</li>
 								</ul>
 							</li>
@@ -99,7 +198,20 @@
 								<ul>
 									<li><span class="icon_pass2">&nbsp;</span>Password</li>
 									<li class="pass">
-										<p><input type="password" value="" /><strong>Confirm Password</strong><input type="password" value="" /></p>
+										<p>
+										  					  {% for error in form.password1.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.password1}}
+					  <strong>Confirm Password</strong>
+					  {% for error in form.password2.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
+					  {{form.password2}}
+
+										</p>
 									</li>
 								</ul>
 							</li>
@@ -111,8 +223,9 @@
 										<p>You’ll have the option to use your Facebook pic or upload your own. </p>
 									</li>
 									<li>
+									  {{form.avatar}}
 										<div class="add_photo">
-											<a href="#" class="add">Add your photo</a>
+											<a class="add"><p>Add your photo</p></a>
 											<p class="b_styling"><a href="#">Click here</a> for more photo tips</p>
 										</div>
 										<div class="add_photo_desc">
@@ -128,9 +241,10 @@
 								</ul>
 							</li>
 						</ul>
+						{{ formset.management_form }}
 					</form>
 			</div>
-			<div class="button_wrap"><a href="#" class="button button_small"><span class="icon_next">&nbsp;</span>next</a></div>
+			<div class="button_wrap"><a id="register" class="button button_small"><span class="icon_next">&nbsp;</span>next</a></div>
 		</div>
 		<!-- /onboarding_block -->
 
@@ -167,6 +281,20 @@
 <div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
 <script type="text/javascript">
 $(function () {
+   var widgets = uploadcare.initialize();
+   var widget = widgets[0]
+   widget.onUploadComplete(function(info) {
+     url = info.cdnUrl
+	 path =  'url(' + url + ')'
+
+	 add = $(".add");
+	 add.css('background', path );
+	 add.css("background-size","cover")
+	 add.css("background-repeat", "no-repeat");
+
+
+   });
+
     $("#back-top").hide();
     $(window).scroll(function () {
         if ($(this).scrollTop() > 150) {
@@ -175,6 +303,126 @@ $(function () {
             $('#back-top').fadeOut();
         }
     });
+   $(".add_photo").click(function(){
+	 dialog = widget.openDialog();
+   })
+   $("#register").click(function(){
+	 cell = $("#id_cell")
+	 num = cell.val()
+	 formatted_num = formatE164("US", num);
+	 cell.val(formatted_num)
+	 $("form").submit();
+   });
+   $("#id_cell").blur(function(){
+	 that = $(this)
+	 num = that.val()
+	 formatted_num = formatLocal("US", num);
+	 that.val(formatted_num)
+   })
+   $("#newgroup-button").click(function(event){
+	 newGroupName = $("#newgroup").val()
+	 $.post("/api/groups/", {name: newGroupName}).done(function(data){
+	   newGroup = $("<option>");
+	   newGroup.attr("value", data.id);
+	   newGroup.text(data.name);
+	   $("#id_sitter_groups").append(newGroup);
+	   $("#newgroup").val("")
+	   oldval = $("#id_sitter_groups").select2("val")
+	   oldval.push(data.id)
+	   $("#id_sitter_groups").select2("val", oldval)
+
+	 })
+
+   });
+   $(".newneed-button").on("click", function(event){
+	   newNeedInput = $(this).siblings('input')
+	   specialNeedsSelect = newNeedInput.parent().prev().find("select")
+	   newNeed = newNeedInput.val()
+	   $.post("/api/specialneeds/", {need: newNeed}).done(function(data){
+		   newNeedOption = $("<option>");
+		   newNeedOption.attr("value", data.id);
+		   newNeedOption.text(data.need);
+		   specialNeedsSelect.append(newNeedOption);
+		   newNeedInput.val("")
+		   oldval = specialNeedsSelect.select2("val")
+		   oldval.push(data.id)
+		   specialNeedsSelect.select2("val", oldval)
+	 })
+
+   });
+
+
+    $('.form-container').formset({"addText": "", "deleteText":""});
+			updateElementIndex = function(elem, prefix, ndx) {
+                var idRegex = new RegExp('(' + prefix + '-\\d+-)|(^)'),
+                    replacement = prefix + '-' + ndx + '-';
+                if (elem.attr("for")) elem.attr("for", elem.attr("for").replace(idRegex, replacement));
+                if (elem.attr('id')) elem.attr('id', elem.attr('id').replace(idRegex, replacement));
+                if (elem.attr('name')) elem.attr('name', elem.attr('name').replace(idRegex, replacement));
+            },
+
+		applyExtraClasses = function(row, ndx) {
+            if (options.extraClasses) {
+                row.removeClass(flatExtraClasses);
+                row.addClass(options.extraClasses[ndx % options.extraClasses.length]);
+            }
+        }
+		options = {
+			prefix: 'children',                  // The form prefix for your django formset
+			formTemplate: null,              // The jQuery selection cloned to generate new form instances
+			addText: '',          // Text for the add link
+			deleteText: '',            // Text for the delete link
+			addCssClass: 'add-row',          // CSS class applied to the add link
+			deleteCssClass: 'delete-row',    // CSS class applied to the delete link
+			formCssClass: 'dynamic-form',    // CSS class applied to each form in a formset
+			extraClasses: [],                // Additional CSS classes, which will be applied to each form in turn
+			added: null,                     // Function called each time a new form is added
+			removed: null                    // Function called each time a form is deleted
+		};
+		flatExtraClasses = options.extraClasses.join(' ')
+
+		var template;
+		template = $('.' + options.formCssClass + ':last').clone(true).removeAttr('id');
+		template.find(".add_child_trigger").remove()
+
+		template.find('input:hidden[id $= "-DELETE"]').remove();
+		template.find('input,select,textarea,label').each(function() {
+            var elem = $(this);
+            // If this is a checkbox or radiobutton, uncheck it.
+            // This fixes Issue 1, reported by Wilson.Andrew.J:
+            if (elem.is('input:checkbox') || elem.is('input:radio')) {
+                elem.attr('checked', false);
+            } else {
+                elem.val('');
+            }
+        });
+		options.formTemplate = template
+
+
+    $(".add_child_trigger").on("click", function() {
+
+        var formCount = parseInt($('#id_' + options.prefix + '-TOTAL_FORMS').val()),
+            row = options.formTemplate.clone(true).removeClass('formset-custom-template'),
+            buttonRow = $(this).parents('tr.' + options.formCssClass + '-add').get(0) || this;
+        applyExtraClasses(row, formCount);
+        row.insertBefore($(buttonRow)).show();
+        row.find('input,select,textarea,label').each(function() {
+            updateElementIndex($(this), options.prefix, formCount);
+        });
+        $('#id_' + options.prefix + '-TOTAL_FORMS').val(formCount + 1);
+        // If a post-add callback was supplied, call it with the added form:
+        if (options.added) options.added(row);
+		row.find("select").select2({ width: 'resolve' });
+        return false;
+
+
+    });
+	$("select").select2({ width: 'resolve' })
+
+
+
+
+
 });
 jQuery('.back-to-top').click(function () {
     jQuery('html, body').animate({

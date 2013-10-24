@@ -19,4 +19,4 @@ https://github.com/django/django-localflavor-us/zipball/master
 # EMBER precompiles
 watchdog
 #https://github.com/gabrielgrant/node-ember-precompile  npm :(
-# to install - npm install https://github.com/gabrielgrant/node-ember-precompile/tarball/master
+# to install - sudo npm -g install https://github.com/gabrielgrant/node-ember-precompile/tarball/compat-rc5

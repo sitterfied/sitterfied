@@ -4,6 +4,8 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.forms import AuthenticationForm
+from django.forms.models import inlineformset_factory
+from django.shortcuts import redirect
 
 
 from itertools import chain
@@ -32,9 +34,9 @@ from rest_framework.renderers import JSONRenderer
 from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
 from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
 
-from .models import User, Sitter, Parent, Group
+from .models import User, Sitter, Parent, Group, Child
 from .utils import send_html_email
-from .forms import SitterRegisterForm
+from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
@@ -86,42 +88,62 @@ def index(request, referred_by=None):
     return {'user_json':user_json,
             "parent_or_sitter": parent_or_sitter,
             "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
+            "first_time": request.GET.get("first_time", "")
     }
 
 @render_to()
 def onboarding2(request):
+    ChildFormSet = inlineformset_factory(Parent, Child, form=ChildForm, extra=1)
     if request.method == "POST":
         if request.POST["parent_or_sitter"] == "sitter":
             form = SitterRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
                 auth_login(request, user)
+                return redirect("onboarding3")
             else:
                 return {'TEMPLATE': "onboardingsitter.html",
                         "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
         elif request.POST["parent_or_sitter"] == "parent":
-            #form = ParentRegisterForm(request.POST)
+            form = ParentRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
-                auth_login(request, user)
+                formset = ChildFormSet(request.POST, instance=user.parent)
+                if formset.is_valid():
+                    formset.save()
+                    auth_login(request, user)
+                    return redirect("onboarding3")
             else:
+                formset = ChildFormSet(request.POST)
                 return {'TEMPLATE': "onboardingparent.html",
-                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form, "formset":formset}
 
     if request.method == "GET":
         parent_or_sitter = request.GET.get('parent_or_sitter', "parent")
         if parent_or_sitter.lower() == "sitter":
             form = SitterRegisterForm()
-            return {'TEMPLATE': "onboardingsitter.html", "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+            template = "onboardingsitter.html"
+            formset = None
         else:
-            return {'TEMPLATE': "onboardingparent.html","UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+            form = ParentRegisterForm()
+            dummy_user = User()
+            formset = ChildFormSet(instance=dummy_user)
+            template = "onboardingparent.html"
+
+        return {'TEMPLATE': template,"UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form, "formset": formset}
 
 
 
 
 @render_to("onboarding3.html")
 def onboarding3(request):
-    return {}
+    if request.method =="POST":
+        form = GroupsForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("/search?first_time=1")
+    form = GroupsForm(instance=request.user)
+    return {"form":form}
 
 @render_to("onboarding4.html")
 def onboarding4(request):
@@ -223,6 +245,12 @@ class AjaxRegistrationView(RegistrationView):
 @login_required
 def facebook_import(request):
     user = request.user
+    if request.method == "POST":
+        token = request.POST['token']
+        fb_id = request.POST['id']
+        user.facebook_token = token
+        user.facebook_id = fb_id
+        user.save()
     fb = Facebook(user.facebook_token)
     response = fb.me.friends()
     facebook_ids = [friend['id'] for friend in response['data']]

@@ -325,6 +325,8 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
 
     Sitterfied.SearchRoute = Em.Route.extend(
+        help_target:  "#onboarding_final"
+
         setupController: (controller, model) ->
             this.controllerFor('languages').set('model', Sitterfied.Language.find())
             this.controllerFor('certifications').set('model', Sitterfied.Certification.find())
@@ -363,14 +365,13 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             addSitterTeam: (sitter) ->
                 Em.run.begin()
                 sitterTeam = Sitterfied.currentUser.get('sitter_teams')
-                if sitterTeam.findProperty('id', sitter.get('id'))
-                    sitter = sitterTeam.findProperty('id', sitter.get('id'))
-                    sitterTeam.removeObject(sitter)
-                    sitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                dupSitter = sitterTeam.findProperty('id', sitter.get('id'))
+                if dupSitter
+                    sitterTeam.removeObject(dupSitter)
+                    dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
                 else
                     sitterTeam.pushObject(sitter)
                     sitter.get('sitter_teams').pushObject(Sitterfied.currentUser)
-
 
                 Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()

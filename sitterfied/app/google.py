@@ -41,7 +41,8 @@ def oauth2callback(request):
 
     user = request.user
     friends = User.objects.filter(email__in=emails).exclude(id__in=user.users_in_network.values('id')).exclude(id=request.user.id)
-
+    user.google_imported = True
+    user.save()
     ThroughModel = user.users_in_network.through
     models_to = (ThroughModel(from_user_id=user.id,
                               to_user_id=friend.id) for friend in friends)

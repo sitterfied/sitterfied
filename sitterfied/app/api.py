@@ -357,7 +357,6 @@ class GroupFilter(django_filters.FilterSet):
 class GroupViewSet(IdFilterViewset):
     queryset = models.Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_class = GroupFilter
 
 class CertificationViewSet(IdFilterViewset):
@@ -441,7 +440,6 @@ class LanguageViewSet(IdFilterViewset):
 class SpecialNeedViewSet(IdFilterViewset):
     queryset = models.SpecialNeed.objects.all()
     serializer_class = SpecialNeedSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 

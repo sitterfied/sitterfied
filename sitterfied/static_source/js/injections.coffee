@@ -8,6 +8,7 @@ define ['ember'
             name: "currentUser"
             initialize: (container, application) ->
                 user = Sitterfied.loadUserJson(user_json)
+                user.first_time = FIRST_TIME
                 controller = container.lookup('controller:currentUser').set('model', user)
                 container.typeInjection('controller', 'currentUser', 'controller:currentUser')
                 Sitterfied.set('authenticated', authenticated)

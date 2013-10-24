@@ -341,6 +341,25 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                 $('.header .top_info .desc .full_desc').fadeOut()
 
 
+
+
+
+    Sitterfied.SearchTopView = Em.View.extend
+        didInsertElement: () ->
+            if Sitterfied.currentUser.first_time
+                $.fancybox
+                    scrolling   : "no"
+                    wrapCSS     : "onb_final"
+                    maxWidth    : 960
+                    minWidth    : 960
+                    minHeight   : 480
+                    fitToView   : false
+                    width       : '90%'
+                    height      : '90%'
+                    href        : "#onboarding_final"
+                Sitterfied.currentUser.first_time = false
+
+
     Sitterfied.MobTriggerView = Em.View.extend
         classNameBindings: ['active', ":mob_tab_trigger", "my_mob_tab"]
         active: false

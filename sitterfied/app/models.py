@@ -60,6 +60,7 @@ class User(AbstractUser, TimeStampedModel):
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
     facebook_id = models.IntegerField(null=True, blank=True)
+    google_imported = models.BooleanField(default=False)
 
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)
