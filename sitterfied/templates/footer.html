@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!-- footer -->
+<footer class="footer">
+  <div class="wraper">
+	<a href="#" class="logo_bottom"><img src="{% static "images/logo_bottom.png" %}" alt="" /></a>
+	<ul class="social">
+	  <li><a href="http://www.twitter.com/sitterfied" class="twitter">twitter</a></li>
+	  <li><a href="http://www.facebook.com/sitterfied" class="facebook">facebook</a></li>
+	  <li><a href="mailto:hello@sitterfied.com" class="email">email</a></li>
+	</ul>
+	<!-- bottom menu -->
+	<nav>
+      <ul>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+		<li><a href="mailto:hello@sitterfied.com">Contact</a></li>
+		<li><a href="http://sitterfied.tumblr.com/">Blog</a></li>
+        <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+        <li><a href="{% url 'tos' %}">Terms of Service</a></li>
+      </ul>
+	</nav>
+	<!-- /bottom menu -->
+  </div>
+</footer>
+<!-- /footer -->
+
+

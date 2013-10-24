@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% endblock %}
+{% block title %}
+<title>Sitterfied Privacy Policy</title>
+{% endblock %}
+
+
+{% block body %}
+{% include "header.html" %}
+
+<!-- container -->
+<div class="container clear">
+	<div class="wraper text_topmarg">
+
+		<!-- text_block -->
+		<div class="text_block clear">
+			<h1>Privacy Policy</h1>
+			<p>If you have any questions or would like additional information regarding the Website or the Services, or if you need to notify Sitterfied regarding any matters relating to the Website or Services, please contact us at <a href="mailto:hello@sitterfied.com">hello@sitterfied.com</a></p>
+			<p>Sitterfied, Inc. <br />50 Harrison Street<br />Suite PH 427<br />Hoboken, NJ 07030</p>
+		</div>
+		<!-- /text_block -->
+
+	</div>
+</div>
+<!-- /container -->
+
+{% include "footer.html" %}
+
+<div id="fixed_tabs"></div>
+
+<div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
+<script type="text/javascript">
+ $(function () {
+   $("#back-top").hide();
+   $(window).scroll(function () {
+     if ($(this).scrollTop() > 150) {
+       $('#back-top').fadeIn();
+     } else {
+       $('#back-top').fadeOut();
+     }
+   });
+ });
+ jQuery('.back-to-top').click(function () {
+   jQuery('html, body').animate({
+     scrollTop: 0
+   }, 'slow');
+ });
+</script>
+{% endblock %}
