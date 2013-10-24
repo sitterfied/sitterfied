@@ -44,7 +44,6 @@ class HttpResponseUnauthorized(HttpResponse):
     status_code = 401
 
 
-
 def get_user_json(user):
     if hasattr(user, 'sitter'):
         user_model = Sitter.objects
@@ -68,15 +67,10 @@ def get_user_json(user):
 
 
 
-@render_to('index.html')
+@render_to()
 def index(request, referred_by=None):
     if request.user.is_anonymous():
-        request.session.set_test_cookie()
-        user_json = json.dumps({"parent_or_sitter":"Parent"})
-        return {'user_json':user_json,
-                "parent_or_sitter": "Parent",
-                "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
-        }
+        return {'TEMPLATE': "landing.html"}
 
     user_json = get_user_json(request.user)
     if hasattr(request.user, 'sitter'):
@@ -87,6 +81,7 @@ def index(request, referred_by=None):
 
     return {'user_json':user_json,
             "parent_or_sitter": parent_or_sitter,
+            "TEMPLATE":"index.html",
             "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
             "first_time": request.GET.get("first_time", "")
     }

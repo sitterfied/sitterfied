@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% include "csrf.html" %}
+{% endblock %}
+{% block title %}
+<title>Welcome to Sitterfied!</title>
+{% endblock %}
+{%block bodyclass %}class="landing_bg"{% endblock %}
+
+{% block body %}
+
+<div class="landing_top_bar clear">
+	<a href="#" class="landing_logo"><img src="{% static "images/logo4.png" %}" alt="" /><br />Friend Verified. Search Simplified.</a>
+	<ul>
+		<li><a href="#learn_more">How it Works</a></li>
+		<li><a href="{%url "onboarding1" %}" >Sign Up</a></li>
+		<li><a href="{%url "login" %}">Log in</a></li>
+		<li><a href="#" class="facebook">facebook</a></li>
+		<li><a href="#" class="twitter">twitter</a></li>
+		<li><a href="#" class="tumblr">tumblr</a></li>
+	</ul>
+</div>
+
+<!-- landing_block -->
+<div class="landing_block">
+		<div class="landing_top clear">
+
+					<div class="landing_friends_img">
+						<img src="{% static "images/demo/landing_friends_img.png" %}" alt="" />
+					</div>
+
+					<div class="right_info">
+						<h1>Simply the quickest and easiest way to find and book a <span>babysitter</span>.</h1>
+						<div class="facebook_signup">
+							<p><a href="{% url "onboarding1" %}">Sign up with Facebook</a></p>
+							<p>We won’t post to your wall without your permission.</p>
+							<p><i>Or</i> <a href="{% url "onboarding1" %}">sign up with email</a></p>
+						</div>
+						<p>It's completely <i>free</i>.</p>
+					</div>
+
+		</div>
+
+		<div class="landing_bottom clear" id="learn_more" name="learn_more">
+
+			<div class="learn_more"><a href="#learn_more">LEARN MORE</a></div>
+
+			<div class="landing_wrapper">
+				<h2>We exist so that parents get <span>out</span> and <i>sitters</i> get jobs</h2>
+				<h3>It’s ridiculously simple...</h3>
+				<ul class="sfb_list clear">
+					<li>
+						<img src="{% static "images/demo/sfb_img.png" %}" alt="" />
+						<h5>Search</h5>
+						<p>Enter a date and time and let us show you who’s available and how you’re connected</p>
+					</li>
+					<li>
+						<img src="{% static "images/demo/sfb_img2.png" %}" alt="" />
+						<h5>Find</h5>
+						<p>View the profiles of available sitters. See which of your friends have hired them and if they’d hire them again.</p>
+					</li>
+					<li>
+						<img src="{% static "images/demo/sfb_img3.png" %}" alt="" />
+						<h5>Book</h5>
+						<p>Click ‘Book’. We’ll handle the requests, confirmations and reminders via email and text</p>
+					</li>
+				</ul>
+				<hr />
+				<div class="video_wrap"><a class="video fancybox.iframe" href="http://www.youtube.com/embed/uLzpzjanHAY?autoplay=1"><img src="{% static "images/demo/video.png" %}" alt="" /></a></div>
+				<hr />
+				<div class="clear"><a class="button button_edit arrow" href="{% url "onboarding1" %}">i’m ready. Sign me up!</a></div>
+				<hr />
+				<ul class="sfg_list clear">
+					<li>
+						<img src="{% static "images/demo/sfg_img.png" %}" alt="" />
+						<h5>Safety and trust</h5>
+						<p>Safety is everything to us. Sitterfied was built with our own kids in mind. Multiple verification points (social connections, reviews, recommendations, background checks) and privacy measures allow you to connect, meet and hire with confidence.</p>
+					</li>
+					<li>
+						<img src="{% static "images/demo/sfg_img2.png" %}" alt="" />
+						<h5>Friend verified</h5>
+						<p>How many times have you asked a friend for a sitter recommendation? Now Sitterfied does the work for you. Access your existing social networks (like Facebook) to see who knows, who’s hired, and who recommends the sitters you find.</p>
+					</li>
+					<li>
+						<img src="{% static "images/demo/sfg_img3.png" %}" alt="" />
+						<h5>Great sitters at the drop of a hat?</h5>
+						<p>Challenge accepted! We help you grow your sitter dream team so if one’s not available, there’s always another who is. </p>
+					</li>
+				</ul>
+				<hr />
+				<div class="clear"><a class="button button_edit arrow center" href="{% url "onboarding1" %}">sign up now</a></div>
+				<hr />
+				<ul class="sfg_list sfg2_list clear">
+					<li>
+						<img src="{% static "images/demo/sfg_img6.png" %}" alt="" />
+						<h5>Search simplified</h5>
+						<p>Enter a date and time to find and book a trustworthy sitter in minutes.</p>
+					</li>
+					<li>
+						<img src="{% static "images/demo/sfg_img4.png" %}" alt="" />
+						<h5>Your personal assistant</h5>
+						<p>We’ll help you stay on top of your bookings with calendar updates, timely reminders and job details via text, email or both.</p>
+					</li>
+					<li>
+						<img src="{% static "images/demo/sfg_img5.png" %}" alt="" />
+						<h5>We’re mobile</h5>
+						<p>Our site will adapt to any mobile browser so you can access Sitterfied on the go. Because, let’s be honest, when are you ever not on the go?</p>
+					</li>
+				</ul>
+				<hr />
+				<h2>Help sitters. Help yourself. Help your friends.</h2>
+				<div class="free clear"><a class="button" href="{% url "onboarding1" %}">SIGN ME UP</a></div>
+				<hr />
+				<div class="more"><span><a href="#back_2top">BACK TO TOP</a></span></div>
+			</div>
+
+		</div>
+
+</div>
+<!-- /landing_block-->
+
+{% endblock %}
