@@ -181,6 +181,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     Sitterfied.ParentEditNetworkRoute = Em.Route.extend(
         renderTemplate: () ->
             this.render("network", {controller: 'currentUser'})
+
     )
     Sitterfied.ParentEditReviewsRoute = Em.Route.extend(
         renderTemplate: () ->

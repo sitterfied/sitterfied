@@ -31,14 +31,13 @@
 		  </ul>
 		</div>
 		<ul class="soc_psg_list clear">
-          {{# with friends }}
+          {{# with myFriends }}
 		  <li>
 			<ul>
 			  <li>Parents</li>
-
               {{# each }}
                 {{# if isParent }}
-		          <li>{{#linkTo parent this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}</li>
+		          <li>{{#linkTo parent this}}<img class="avatarimage" {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}</li>
                 {{/ if }}
               {{/each}}
 			</ul>
@@ -48,7 +47,7 @@
 			  <li>Sitters</li>
               {{# each }}
                 {{# if isSitter }}
-		          <li>{{#linkTo sitter this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}</li>
+		          <li>{{#linkTo sitter this}}<img class="avatarimage"  {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}</li>
                 {{/ if}}
               {{/each}}
 			</ul>

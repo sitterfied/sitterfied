@@ -13,7 +13,7 @@
 	<p><span>Hi, I'm <strong>{{full_name}}</strong></span></p>
     {{shortBio}}<a class="read_more" {{action "readMore" target="view"}}>Read More</a></p>
 	<div class="full_desc">
-      {{# each p in pBreakBio }}
+      {{# each p in biographyPList }}
 	    <p>{{p}}</p>
       {{/ each}}
 	</div>

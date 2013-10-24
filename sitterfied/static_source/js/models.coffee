@@ -1,6 +1,5 @@
 define ['jquery'
-    'ember', '_', 'cs!sitterfied', 'model', 'moment',
-    ], ($,Em, _, Sitterfied) ->
+        'ember', '_', 'cs!sitterfied', 'model', 'moment','phoneformat'], ($,Em, _, Sitterfied) ->
     attr = Ember.attr
     hasMany = Ember.hasMany
     belongsTo = Ember.belongsTo
@@ -31,6 +30,14 @@ define ['jquery'
             if date then moment(date).local().toDate() else null
     }
 
+    Phone = {
+        serialize: (number) ->
+            return formatE164("US", number)
+        deserialize: (number) ->
+            return formatLocal("US", number)
+    }
+
+
     Boolean = {
         serialize: (bool) ->
             return bool
@@ -57,7 +64,7 @@ define ['jquery'
         city: attr()
         state: attr()
         zip: attr()
-        cell: attr()
+        cell: attr(Phone)
         reviews: hasMany('Sitterfied.SitterReview',{key: "reviews"})
         avatar: attr()
 
@@ -72,13 +79,24 @@ define ['jquery'
             @get('parent_or_sitter') == "Parent"
         ).property('parent_or_sitter')
         myFriends: (() ->
-            debugger
             friends = this.get('friends')
             myself = friends.findProperty('id', this.get('id'))
             if myself
                 friends.removeObject(myself)
             return friends
-        ).property('friends.@each') 
+        ).property('friends.@each', 'friends.length')
+
+        addFriend: (friend) ->
+            friends = @get("friends")
+            if friends.findProperty('id', friend.get("id"))
+                return
+            friends.pushObject(friend)
+            @set('isDirty', true)
+            @save()
+
+
+
+
         mailTo:  (() ->
             return "mailto:" +@get('email')
         ).property('email')
@@ -312,6 +330,11 @@ define ['jquery'
 
         in_sitter_team: attr(Boolean)
 
+
+        biographyPList: (() ->
+            bio = @get('biography')
+            return bio?.split("\n\n")
+        ).property('biography')
 
         in_friends_team: attr(Boolean)
         bookmarks: hasMany("Sitterfied.Parent",{key:" bookmarks"})

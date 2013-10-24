@@ -46,6 +46,24 @@
 */
 
 
+.network_link a {
+	color: #fff !important;
+}
+
+.addfriend {
+	font-family: ProximaNova, Arial, Tahoma !important;
+	font-size: 14px !important;
+	font-style: normal !important;
+	font-variant: normal !important;
+	font-weight: normal !important;
+	border-color: #da9040 !important;
+	background: #dd7c3f url(../images/edit_bg.gif) repeat-x !important;
+}
+
+.networktext {
+margin-left: 10px;
+}
+
 /* Resetting browser default styles */
 @font-face {font-family: "marketo";src: url(fonts/marketotbold.eot);src: url(fonts/marketotbold.eot?#iefix) format('eot'), url(fonts/marketotbold.woff) format('woff'), url(fonts/marketotbold.ttf) format('truetype'), url(fonts/marketotbold.svg) format('svg');}
 @font-face {font-family: "ProximaNova";src: url(fonts/proxima_nova_reg-webfont.eot);src: url(fonts/proxima_nova_reg-webfont.eot?#iefix) format('eot'), url(fonts/proxima_nova_reg-webfont.woff) format('woff'), url(fonts/proxima_nova_reg-webfont.ttf) format('truetype'), url(fonts/proxima_nova_reg-webfont.svg) format('svg');}
@@ -1961,6 +1979,5 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .form_style textarea {width:180px;padding:0 20px;}
 	/* Ondoarding final popup */
 .onb_final .fancybox-skin .stabs_block {display:block;}
-
-.header nav > ul > li:nth-last-child(2) ul li.network_link a {color: #ebf6f8;}
-.header nav > ul > li:nth-last-child(2) ul li.network_link a:hover {color: #deff54;}
+}
+.avatarimage {height: 35px; width: 34px;}

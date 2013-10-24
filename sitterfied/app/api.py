@@ -28,7 +28,7 @@ user_fields = ('first_name', 'last_name',
                'address1', 'address2', 'facebook_id',
                'facebook_token', 'friends',
                'city', 'state',
-               'zip','cell' )
+               'zip','cell', 'id')
 
 class OtherServiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,7 +51,7 @@ class SitterSerializer(serializers.ModelSerializer):
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
     class Meta:
         model = models.Sitter
-        fields = user_fields + ('id', 'biography', 'live_zip',
+        fields = user_fields + ('biography', 'live_zip',
                                 'work_zip', 'smoker',
                                 'will_transport', 'total_exp',
                                 'infant_exp',  'toddler_exp',
@@ -118,7 +118,7 @@ class ParentSerializer(serializers.ModelSerializer):
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
     class Meta:
         model = models.Parent
-        fields = user_fields + ('id','emergency_contact_one_name',
+        fields = user_fields + ('emergency_contact_one_name',
                                 'emergency_contact_one_phone',
                                 'emergency_contact_two_name',
                                 'emergency_contact_two_phone',

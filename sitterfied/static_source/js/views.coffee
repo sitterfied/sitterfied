@@ -99,7 +99,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
     Sitterfied.PhoneField = Ember.TextField.extend(
         focusOut: ->
             phone = @$().val()
-            @$().val(formatE164("US", phone))
+            @$().val(formatLocal("US", phone))
     )
 
 

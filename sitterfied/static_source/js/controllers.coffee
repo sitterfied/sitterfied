@@ -78,15 +78,8 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
 
         addFriend: (friend_id) ->
-            friends = @get('friends')
-            if friends.findProperty('id', friend_id)
-                return
-            friend = Sitterfied.User.create(id:friend_id)
-            friends.pushObject(friend)
-
-            Sitterfied.currentUser.set('isDirty', true)
-            Sitterfied.currentUser.save()
-
+            friend = Sitterfied.User.find(friend_id)
+            @get('model').addFriend(friend)
 
 
         addGroup: (group_id) ->
@@ -685,6 +678,11 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
 
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(
+    )
+
+    Sitterfied.ParentController  = Em.ObjectController.extend(
+        addFriend: () ->
+            Sitterfied.currentUser.addFriend(this.get('model'))
     )
 
 
