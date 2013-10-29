@@ -1,4 +1,8 @@
+{{# if currentUser.id == user.id }} 
+  {{# linkTo parentEdit.profile Sitterfied.currentUser }}Back to edit profile{{/linkTo}}
+{{ else }}
 {{# linkTo search class="back"}}Back to search results{{/linkTo}}
+{{/if}}
 <!-- top info -->
 <div class="top_info clear">
   <div class="member_since guest"></div>
