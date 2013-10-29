@@ -504,11 +504,11 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         ).property('localTeam.@each.passesFilters', 'localTeam.length')
 
         zoomToLocalTeam: () ->
-            $.scrollTo("#localteam", 500)
+            $.scrollTo("#localteam", 500, {offset:-200})
         zoomToFriendTeam: () ->
-            $.scrollTo("#friendteam", 500)
+            $.scrollTo("#friendteam", 500, {offset:-200})
         zoomToSitterTeam: () ->
-            $.scrollTo("#sitterteam", 500)
+            $.scrollTo("#sitterteam", 500, {offset:-200})
 
         multipleSittersText: (() ->
             selectedSitters = @get('selectedSitters')
