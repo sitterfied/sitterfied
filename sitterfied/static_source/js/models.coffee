@@ -94,6 +94,13 @@ define ['jquery'
             @set('isDirty', true)
             @save()
 
+        removeFriend: (friend) ->
+            friends = @get("friends")
+            toBlock = friends.findProperty('id', friend.get('id'))
+            friends.removeObject(toBlock)
+            @set('isDirty', true)
+            @save()
+
 
 
 

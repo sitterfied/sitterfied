@@ -81,6 +81,11 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             friend = Sitterfied.User.find(friend_id)
             @get('model').addFriend(friend)
 
+        removeFriend: (friend_id) ->
+            friend = Sitterfied.User.find(friend_id)
+            @get('model').removeFriend(friend)
+
+
 
         addGroup: (group_id) ->
             groups = @get('sitter_groups')
