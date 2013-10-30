@@ -12,18 +12,7 @@
 {% endblock %}
 {% block body %}
 
-<!-- header -->
-<header class="header">
-	<div class="wraper">
-		<a href="#" class="logo"><img src="{% static "images/logo.png" %}" alt="" /></a>
-		<ul class="social">
-			<li><a href="#" class="facebook">facebook</a></li>
-			<li><a href="#" class="twitter">twitter</a></li>
-			<li><a href="#" class="tumblr">tumblr</a></li>
-		</ul>
-	</div>
-</header>
-<!-- /header -->
+{% include "header.html" %}
 
 <!-- container -->
 <div class="container clear">
@@ -252,29 +241,7 @@
 </div>
 <!-- /container -->
 
-<!-- footer -->
-<footer class="footer">
-	<div class="wraper">
-		<a href="#" class="logo_bottom"><img src="{% static "images/logo_bottom.png" %}" alt="" /></a>
-		<ul class="social">
-			<li><a href="#" class="twitter">twitter</a></li>
-			<li><a href="#" class="facebook">facebook</a></li>
-			<li><a href="#" class="email">email</a></li>
-		</ul>
-		<!-- bottom menu -->
-		<nav>
-			<ul>
-				<li><a href="#">About Us</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">Blog</a></li>
-				<li><a href="#">Privacy Policy</a></li>
-				<li><a href="#">Terms of Service</a></li>
-			</ul>
-		</nav>
-		<!-- /bottom menu -->
-	</div>
-</footer>
-<!-- /footer -->
+{% include "footer.html" %}
 
 <div id="fixed_tabs"></div>
 
