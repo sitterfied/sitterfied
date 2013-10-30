@@ -1,0 +1,54 @@
+<!-- login_popup -->
+<div id="login" class="signup_login_block">
+  <form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+    <p>
+      <img src="/static/images/logo2.png" alt="" />
+    </p>
+	<p>
+      <a href="#">
+        <img src="/static/images/icons/facebook_login.png" alt="" />
+      </a>
+    </p>
+	<div class="or">
+      <span>Or
+      </span>
+    </div>
+	<ul>
+	  <li>
+        <span class="icon_email4">&nbsp;
+        </span>
+        {{ form.username }}
+      </li>
+	  <li>
+        <span class="icon_pass">&nbsp;
+        </span>
+        {{ form.password }}
+      </li>
+	</ul>
+	
+    <p>                
+      <input type="hidden" name="next" value="/" />
+      <input type="submit" class="button button_edit" value="LOG IN" />
+    </p>
+	<p>Don’t have an account?
+      <a href="{% url 'signup' %}">Sign up</a>
+    </p>
+  </form>
+</div>
+<!-- login_popup -->
+
+<script>
+  $(document).ready(function() {
+    $('.login-trigger').fancybox({
+        scrolling   : "no",
+        wrapCSS     : "onb_final",              
+        maxWidth    : 960,
+        maxHeight   : 800,
+        fitToView   : false,
+        width       : '90%',
+        height      : '90%',
+        target      : '#login',
+        });  
+    });
+</script>
