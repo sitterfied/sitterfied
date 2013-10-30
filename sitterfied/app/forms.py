@@ -44,6 +44,7 @@ class RegistrationForm(ModelForm):
         user.username = username
         user.set_password(password)
         user.save()
+        self.save_m2m()
         new_user = authenticate(username=email, password=password)
         return new_user
 
@@ -120,9 +121,47 @@ class SitterRegisterForm(RegistrationForm):
     def __init__(self, *args, **kwargs):
         super(SitterRegisterForm, self).__init__(*args, **kwargs)
         for key in self.fields:
-            if key in ['certifications', "special_needs_exp"]:
+            if key in ['certifications', "special_needs_exp", "infant_exp","toddler_exp","preschool_exp","school_age_exp","pre_teen_exp","teen_exp", "address2"]:
                 continue
             self.fields[key].required = True
+
+
+    def clean_dob(self):
+        dob = self.cleaned_data['dob']
+        if dob.year > 1995:
+            raise forms.ValidationError("You are too young to register!")
+        return dob
+
+    def clean_infant_exp(self):
+        dob = self.cleaned_data.get('infant_exp')
+        if not dob:
+            return 0
+        return dob
+    def clean_toddler_exp(self):
+        dob = self.cleaned_data.get('toddler_exp')
+        if not dob:
+            return 0
+        return dob
+    def clean_preschool_exp(self):
+        dob = self.cleaned_data.get('preschool_exp')
+        if not dob:
+            return 0
+        return dob
+    def clean_school_age_exp(self):
+        dob = self.cleaned_data.get('school_age_exp')
+        if not dob:
+            return 0
+        return dob
+    def clean_pre_teen_exp(self):
+        dob = self.cleaned_data.get('pre_teen_exp')
+        if not dob:
+            return 0
+        return dob
+    def clean_teen_exp(self):
+        dob = self.cleaned_data.get('teen_exp')
+        if not dob:
+            return 0
+        return dob
 
 
     class Meta:

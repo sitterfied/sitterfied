@@ -1,4 +1,4 @@
-from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled
+from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedlue
 
 
 from django.db.models.signals import post_save, m2m_changed
@@ -133,10 +133,10 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **
             twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
 @receiver(post_save, sender=SitterReview)
-def new_review(sender, **kwargs):
+def new_review(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
-        sitter = sender.sitter
+        sitter = instance.sitter
         settings = sitter.settings
         if settings.mobile_new_review:
             text = html = render_to_string("email/review/new_review.html",
@@ -149,3 +149,24 @@ def new_review(sender, **kwargs):
         if settings.email_new_review:
             sms = render_to_string("email/review/new_review.sms",{})
             twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
+
+
+
+@receiver(post_save, sender=Parent)
+def new_settings_parent(sender, instance=None, **kwargs):
+    created = kwargs.get('created', False)
+    if created:
+        Settings.objects.create(user=instance)
+
+@receiver(post_save, sender=Sitter)
+def new_settings_sitter(sender, instance=None, **kwargs):
+    created = kwargs.get('created', False)
+    if created:
+        Settings.objects.create(user=instance)
+
+
+@receiver(post_save, sender=Sitter)
+def new_schedlue_parent(sender, instance=None, **kwargs):
+    created = kwargs.get('created', False)
+    if created:
+        Schedlue.objects.create(sitter=instance)

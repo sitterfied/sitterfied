@@ -134,12 +134,12 @@ class Sitter(User):
     will_transport = models.BooleanField(default=True)
 
     total_exp = models.SmallIntegerField(default=0)
-    infant_exp = models.SmallIntegerField(default=0)
-    toddler_exp = models.SmallIntegerField(default=0)
-    preschool_exp = models.SmallIntegerField(default=0)
-    school_age_exp = models.SmallIntegerField(default=0)
-    pre_teen_exp = models.SmallIntegerField(default=0)
-    teen_exp = models.SmallIntegerField(default=0)
+    infant_exp = models.SmallIntegerField(default=0, blank=True)
+    toddler_exp = models.SmallIntegerField(default=0, blank=True)
+    preschool_exp = models.SmallIntegerField(default=0, blank=True)
+    school_age_exp = models.SmallIntegerField(default=0, blank=True)
+    pre_teen_exp = models.SmallIntegerField(default=0, blank=True)
+    teen_exp = models.SmallIntegerField(default=0, blank=True)
 
     special_needs_exp = models.BooleanField(default=True)
     extra_exp = models.TextField(blank=True, default="", null=True)
