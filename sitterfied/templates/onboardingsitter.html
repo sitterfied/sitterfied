@@ -387,6 +387,10 @@
 				  </li>
 				  <li>
 					{{form.avatar}}
+					  {% for error in form.first_name.errors %}
+					  <strong>{{ error|escape }}</strong>
+					  {% endfor %}
+
 					<div class="add_photo">
 					  <a class="add">
 						<p>Add your photo</p>

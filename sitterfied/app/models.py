@@ -63,7 +63,7 @@ class User(AbstractUser, TimeStampedModel):
     google_imported = models.BooleanField(default=False)
 
     address1 = models.CharField(max_length=255, blank=True)
-    address2 = models.CharField(max_length=255, blank=True)
+    address2 = models.CharField(max_length=255, blank=True, default="")
     city = models.CharField(max_length=50, blank=True)
     state = USStateField(blank=True, default="AZ")
     zip = models.CharField(max_length=9, blank=True)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
