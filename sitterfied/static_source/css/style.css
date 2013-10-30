@@ -1133,16 +1133,17 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 
 			/* Tabs active */
 .sitter_tabs_wrap.my_tabs_style .tab_select li.active a, .sitter_tabs_wrap.my_tabs_style .tab_select li a.active:visited, .sitter_tabs_wrap.my_tabs_style .tab_select li a.active:hover {color:#fff;background:#9ab529 url(../images/icons/stabs_bg.png) 0 0 repeat-x;box-shadow:rgba(0,0,0,.26) 0 6px 10px 3px;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;border-top:none;font-size:26px;line-height:26px;padding-bottom:15px;left:-15px;top:-5px;width:33%;z-index:1;}
+.sitter_tabs_wrap.my_tabs_style .tab_select li.active a:before {background: url(../images/icons/my_team.png) no-repeat;}
 .sitter_tabs_wrap.my_tabs_style .tab_select li.active a span, .sitter_tabs_wrap.my_tabs_style .tab_select li a.active:hover span {color:#fff;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;top:48px;right:30px;font-size:47px;}
 .sitter_tabs_wrap.my_tabs_style .tab_select li.active a:before., .sitter_tabs_wrap.my_tabs_style .tab_select li a.active:hover:before {background-image:url(../images/icons/my_team_h.png);width:106px;height:38px;left:20px;}
 
 
 			/* Tab active 2 */
 .sitter_tabs_wrap.my_tabs_style .tab_select li.active:nth-child(2) a, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(2) a.active:visited, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(2) a.active:hover {background-color:#e38144;background-image:url(../images/icons/stabs_bg2.png);width:35%;z-index:1;}
-.sitter_tabs_wrap.my_tabs_style .tab_select li.active:nth-child(2) a:before, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(2) a.active:hover:before {background-image:url(../images/icons/my_friends_h.png);left:15px;}
+.sitter_tabs_wrap.my_tabs_style .tab_select li.active:nth-child(2) a:before, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(2) a.active:hover:before {background-image:url(../images/icons/my_friends_h.png);background-size: auto 100%;left:15px;}
 			/* Tab active 3 */
 .sitter_tabs_wrap.my_tabs_style .tab_select li.active:nth-child(3) a, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(3) a.active:visited, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(3) a.active:hover {background-color:#40a7b8;background-image:url(../images/icons/stabs_bg3.png);padding-left:110px;left:auto;right:0;width:35%;z-index:1;}
-.sitter_tabs_wrap.my_tabs_style .tab_select li.active:nth-child(3) a:before, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(3) a.active:hover:before {background-image:url(../images/icons/my_local_h.png);left:15px;}
+.sitter_tabs_wrap.my_tabs_style .tab_select li.active:nth-child(3) a:before, .sitter_tabs_wrap.my_tabs_style .tab_select li:nth-child(3) a.active:hover:before {background-image:url(../images/icons/my_local_h.png);background-size: auto 100%;left:15px;}
 
 
 	/* Filter */
