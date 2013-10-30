@@ -11,14 +11,16 @@
   </div>
   <div class="ranking_info">
 	<p>{{full_name}}</p>
+    {{!--
 	<p>Ranking: <span>14th</span> of 137</p>
+    --}}
 	{{#linkTo sitter this class="db_button"}}<span class="icon_eye">&nbsp;</span>VIEW PROFILE{{/linkTo}}
 	<fieldset>
-	  <legend>Here are some simple ways to improve your ranking:</legend>
+	  <legend>Here are some simple ways to improve your experience:</legend>
 	  <ul class="clear">
-		<li><a href="#">Add more connections</a></li>
+		<li><li>{{#linkTo sitterEdit.network content }}Add more connections{{/linkTo}}</li>
 		<li>{{#linkTo mybookings}}Accept more booking requests{{/linkTo}}</li>
-		<li><a href="#">Get more recommendations</a></li>
+		{{!--<li><a href="#">Get more recommendations</a></li>--}}
 	  </ul>
 	</fieldset>
   </div>
