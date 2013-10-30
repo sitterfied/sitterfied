@@ -443,6 +443,10 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .ranking_info {float:left;width:580px;padding:10px 0 0 0;position:relative;}
 .header .top_info .ranking_info .db_button {position:absolute;top:5px;right:0;color:#fff;font:16px/38px 'ProximaNovaCond';display:block;background:#1c8292 url(../images/reco_bg.gif) repeat-x;width:95px;height:38px;padding:0 0 0 55px;border-radius:4px;box-shadow:rgba(0,0,0,.35) 3px 3px 3px;}
 .header .top_info .ranking_info .db_button span {top:11px;left:12px;}
+.edit_button {color:#fff !important;margin-bottom:5px;font:16px/38px 'ProximaNovaCond';display:block;background:#1c8292 url(../images/reco_bg.gif) repeat-x;width:95px;height:38px;padding:0 0 0 55px;border-radius:4px;box-shadow:rgba(0,0,0,.35) 3px 3px 3px;}
+.edit_button span {top:11px;left:12px;}
+
+
 .header .top_info .ranking_info > p {color:#3fa7ba;font:22px 'ProximaNova';padding:0 0 10px 10px;}
 .header .top_info .ranking_info > p span {color:#e68245;}
 .header .top_info .ranking_info > p:first-child {color:#1c8292;font:bold 29px 'ProximaNova';}
@@ -1205,7 +1209,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 
 
 .wraper {width:300px;padding:0 10px;}
-.header nav ul li:last-child img, .header nav ul li:last-child a:before, .header .top_info .flag, .header .top_info .bookmark, .header .top_info .member_since, .stat_bar p, .tabs_wrap .tab_select, .about_block .subtab_select, .tab_content .snapshot_block, .about_block .about_details_block > ul > li > ul > li p span:after, .header .top_info .ico ul li ul:before, .header .top_info .ico ul li ul li:first-child, .friends_block > ul > li .img.heart:before, .friends_block > ul > li.flag:before, .header .top_info .find_form_block > p, .my_tabs_style:before, .no_results ul li:before, .top_personal_info .img_name, .top_personal_info ul:before, .top_personal_info .my, .header .top_info .photo .photo_edit_wrap:hover p, .header .top_info .ranking_info .db_button, .header .top_info .ranking_info fieldset, .profile_completion, .friends_block > ul > li .bookmark, .header .top_info .photo:hover .heart_wrap .heart, .header .top_info .photo:hover .heart_wrap span, .friends_block > ul > li .img:hover .heart, .friends_block > ul > li .img .heart.active, .schedule_block > p .button, .sitter_tabs_wrap .stabs_block, .sitter_tabs_wrap .mob_tab_trigger {display:none;}
+.header nav ul li:last-child img, .header nav ul li:last-child a:before, .header .top_info .flag, .header .top_info .bookmark, .header .top_info .member_since, .stat_bar p, .tabs_wrap .tab_select, .about_block .subtab_select, .tab_content .snapshot_block, .about_block .about_details_block > ul > li > ul > li p span:after, .header .top_info .ico ul li ul:before, .header .top_info .ico ul li ul li:first-child, .friends_block > ul > li .img.heart:before, .friends_block > ul > li.flag:before, .header .top_info .find_form_block > p, .my_tabs_style:before, .no_results ul li:before, .top_personal_info .img_name, .top_personal_info ul:before, .top_personal_info .my, .header .top_info .photo .photo_edit_wrap:hover p, .header .top_info .ranking_info .db_button, .header .top_info .ranking_info fieldset, .profile_completion, .friends_block > ul > li .bookmark, .header .top_info .photo:hover .heart_wrap .heart, .header .top_info .photo:hover .heart_wrap span, .friends_block > ul > li .img:hover .heart, .friends_block > ul > li .img .heart.active, .schedule_block > p .button, .sitter_tabs_wrap .stabs_block, .sitter_tabs_wrap .mob_tab_trigger, db_button {display:none;}
 .form_style p > input[type="text"] {width:175px;margin-bottom:8px;}
 .form_style input.small[type="text"] {width:80px;}
 .form_style input.long[type="text"] {width:175px;}

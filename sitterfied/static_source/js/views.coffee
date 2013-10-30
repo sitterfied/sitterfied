@@ -323,7 +323,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
             top = this.$().offset().top
             auto =  parseFloat(this.$().css('margin-top').replace(/auto/, 0))
             this.set('top',top - auto)
-            $(window).bind "scroll", @_event
+            $(window).on "scroll", @_event
             @notifyPropertyChange('fixed')
 
         willDestroyElement: () ->

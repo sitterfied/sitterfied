@@ -1,15 +1,24 @@
+{{# if Sitterfied.isSitter}}
+  {{# linkTo profile class="back"}}Back to editing profile{{/linkTo}}
+{{/ if}}
 <div class="top_info clear">
-  <div {{action bookmark this}}{{bindAttr class=":bookmark isBookmarked:active"}}></div>
+  {{# if Sitterfied.isParent}}
+    <div {{action bookmark this}}{{bindAttr class=":bookmark isBookmarked:active"}}></div>
+  {{/ if}}
   <div class="member_since">Feb 2013</div>
   <div class="photo">
+    {{# if Sitterfied.isParent}}
 	<div {{action addSitterTeam this}} class="heart_wrap">
 	  <div {{bindAttr class="inSitterTeam:active :heart"}}></div>
 	  <span>Add to my sitter team</span>
 	</div>
+    {{/ if}}
 	<img {{bindAttr src="avatarUrl"}} alt="" />
   </div>
   <div class="desc">
-	<p><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action interview}}>INTERVIEW</a></p>
+    {{# if Sitterfied.isParent}}
+	  <p><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action interview}}>INTERVIEW</a></p>
+    {{/ if}}
 	<p><span>Hi, I'm <strong>{{full_name}}</strong></span></p>
     {{shortBio}}<a class="read_more" {{action "readMore" target="view"}}>Read More</a></p>
 	<div class="full_desc">

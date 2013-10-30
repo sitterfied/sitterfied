@@ -136,7 +136,10 @@ def onboarding3(request):
         form = GroupsForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect("/search?first_time=1")
+            if hasattr(request.user, 'parent'):
+                return redirect("/search?first_time=1")
+            else:
+                return redirect("/profile")
     form = GroupsForm(instance=request.user)
     return {"form":form}
 

@@ -320,6 +320,13 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
 
     Sitterfied.IndexRoute = Em.Route.extend(
+        redirect: (user) ->
+            if Sitterfied.currentUser.get('isParent')
+                this.transitionTo('search')
+            else
+                this.transitionTo('profile')
+
+
         renderTemplate: () ->
             this.render('footer', {outlet: 'footer'})
     )
@@ -405,4 +412,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
         setupController: (controller, model) ->
             #load the model once more to get fks set
             user = Sitterfied.currentUser
+            #preload the settings
+            user.get("settings")
     )

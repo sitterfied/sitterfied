@@ -28,6 +28,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 Sitterfied.currentUser.get('children').set('data', children)
                 @newChild()
             )
+            Em.run.end()
 
         deleteAccount: () ->
             imsure = confirm("are you sure you want to delete your account? This cannot be undone")

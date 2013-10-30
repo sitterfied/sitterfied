@@ -156,10 +156,11 @@
 				  <p><span>Experience with Pre Teens:</span>{{view Ember.TextField placeholder="0." valueBinding="pre_teen_exp"}}</p>
 				  <p><span>Experience with teenagers:</span>{{view Ember.TextField placeholder="0" valueBinding="teen_exp"}}</p>
 				  <p><span>Experience with special needs?</span>{{view Ember.Checkbox id="special_needs" checkedBinding="special_needs_exp"}}<label for="special_needs"></label></p>
+                  {{# comment }}
 				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="extra_exp"}}
-                  {{# comment }}<a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
-				    <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
-                    {{/comment}}
+                  <a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
+				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+                  {{/ comment}}
 				</li>
 			  </ul>
 			</li>
