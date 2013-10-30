@@ -152,7 +152,7 @@
 		  friends'<br />sitters<span>{{filteredFriendTeam.length}}</span>
         {{/ view}}
         {{# view Sitterfied.WaypointActiveView class="friends_block my_friends_sitters" targetClass="friends"}}
-		  <div class="sitter_title">
+        <div class="sitter_title" id="myfriends_sitter_title">
 			<p><span><span class="icon_heart2">&nbsp;</span>friends’<br />sitters</span><strong>{{filteredFriendTeam.length}}</strong></p>
 		  </div>
 		  <ul class="clear">
@@ -174,7 +174,7 @@
 		  local<br />sitters<span>{{filteredLocalTeam.length}}</span>
         {{/ view}}
         {{# view Sitterfied.WaypointActiveView class="friends_block my_local_sitters" targetClass="local"}}
-		  <div class="sitter_title">
+		  <div class="sitter_title" id="local_sitter_title">
 			<p><span><span class="icon_pin2">&nbsp;</span>local<br />sitters</span><strong>{{filteredLocalTeam.length}}</strong></p>
 		  </div>
 		  <ul class="clear">
