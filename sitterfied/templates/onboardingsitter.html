@@ -35,18 +35,26 @@
 			<ul>
 			  <li>
 				<ul>
-				  <li><span class="icon_name">&nbsp;</span>Name</li>
-				  <li>
+                  <li>
+                    <span class="icon_name">&nbsp;</span>Name
+
+                    {% for error in form.first_name.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+                    
+                    {% for error in form.last_name.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+ 
+                  </li>
+                    
+                  <li>
 					<p>
-					  {% for error in form.first_name.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.first_name}}
-					  {% for error in form.last_name.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.last_name}}
 					</p>
 				  </li>
@@ -55,21 +63,27 @@
 			  </li>
 			  <li>
 				<ul>
-				  <li><span class="icon_age">&nbsp;</span>Age</li>
-				  <li>
-					<p>
-					  <span class="short">DATE OF BIRTH*
-					  </span>
-					  {% for error in form.dob.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
+                  <li>
+                    <span class="icon_age">&nbsp;</span>Age
 
+                    {% for error in form.dob.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+                    
+                  </li>
+                    
+                  <li>
+					<p>
+					  <span class="short">date of birth*
+					  </span>
 					  {{form.dob}}
 					</p>
 					<p>
-					  <i>* We hate to turn away good people but our lawyers require us to inform you that you
+					  <i>* we hate to turn away good people but our lawyers require us to inform you that you
 						<strong>must
-						</strong> be at least 18 years old to join Sitterfied
+						</strong> be at least 18 years old to join sitterfied
 					  </i>
 					</p>
 				  </li>
@@ -80,66 +94,81 @@
 				  <li>
 					<span class="icon_gender">&nbsp;
 					</span>Gender
-				  </li>
-				  <li>
+				    {% for error in form.gender.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+                  </li>
+                  
+                  <li>
 					<p>
-					  {% for error in form.gender.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {% for choice in form.gender %}
 					  {{ choice.tag }}
 					  <label for="gender_{{ forloop.counter0 }}">{{ choice.choice_label }}</label>
 					  {% endfor %}
-
 					</p>
 				  </li>
 				</ul>
 			  </li>
 			  <li>
 				<ul>
-				  <li><span class="icon_pin3">&nbsp;</span>Home Address</li>
+                  <li>
+                    <span class="icon_pin3">&nbsp;</span>Home Address
+                    {% for error in form.address1.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+
+                    {% for error in form.address2.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.city.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.state.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.zip.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+                  </li>
 				  <li>
 					<p>
-					{% for error in form.address1.errors %}
-					<strong>{{ error|escape }}</strong>
-					{% endfor %}
-
 					{{form.address1}}
-
-					{% for error in form.address2.errors %}
-					<strong>{{ error|escape }}</strong>
-					{% endfor %}
-
 					{{form.address2}}
-					{% for error in form.zip.errors %}
-					<strong>{{ error|escape }}</strong>
-					{% endfor %}
-					<br>
-					{{form.zip}}
-					  {% for error in form.city.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
-					  {{form.city}}
-					  {% for error in form.state.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
-					  {{form.state}}
+				    {{form.zip}}
+				    {{form.city}}
+     				{{form.state}}
 					</p>
 				  </li>
 				</ul>
 			  </li>
 			  <li>
 				<ul>
-				  <li><span class="icon_iphone">&nbsp;</span>Cell Phone Number</li>
+                  <li>
+                    <span class="icon_iphone">&nbsp;</span>Cell Phone Number
+                    {% for error in form.cell.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+ 
+                  </li>
 				  <li>
 					<p>
-					  {% for error in form.cell.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.cell}}
 					</p>
 				  </li>
@@ -147,13 +176,16 @@
 			  </li>
 			  <li>
 				<ul>
-				  <li><span class="icon_email">&nbsp;</span>Email Address</li>
+                  <li>
+                    <span class="icon_email">&nbsp;</span>Email Address
+                      {% for error in form.email.errors %}
+                      <div class="icon_error"> 
+                        <p>{{ error|escape }}</p>
+                      </div> 
+					  {% endfor %}
+                  </li>
 				  <li>
 					<p>
-					  {% for error in form.email.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.email}}
 					</p>
 				  </li>
@@ -161,19 +193,26 @@
 			  </li>
 			  <li>
 				<ul>
-				  <li><span class="icon_pass2">&nbsp;</span>Password</li>
-				  <li class="pass">
-					<p>
-					  {% for error in form.password1.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
+                  <li>
+                    <span class="icon_pass2">&nbsp;</span>Password
 
+                    {% for error in form.password1.errors %}
+                    <div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.password2.errors %}
+                    <div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+                  </li>
+                  
+                  <li class="pass">
+					<p>
 					  {{form.password1}}
 					  <strong>Confirm Password</strong>
-					  {% for error in form.password2.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.password2}}
 					</p>
 				  </li>
@@ -188,95 +227,115 @@
 				<ul>
 				  <li>
 					<span class="icon_bio">&nbsp;</span>Biography
-					<p>Keep it brief and relevant but show some personality. Remember, you have one shot to stand out!</p>
+ 
+                    <p>Keep it brief and relevant but show some personality. Remember, you have one shot to stand out!</p>
 					<p>Cover the <strong>Why</strong> (you enjoy babysitting), <strong>Who</strong> (you’ve cared for in the past) and <strong>When</strong> (you did all this).</p>
 				  </li>
 				  <li>
-
-					{% for error in form.biography.errors %}
-					<strong>{{ error|escape }}</strong>
-					{% endfor %}
-
 					<p>
 					  {{form.biography}}
 					</p>
-					<p class="b_styling"><a href="http://blog.sitterfied.com/post/64699230620/sell-yourself-like-the-donald#more">Click here</a> for more bio tips</p>
+					<p class="b_styling"><a href="http://blog.sitterfied.com/post/64699230620/sell-yourself-like-the-donald#more" target="_blank">Click here</a> for more bio tips</p>
+
+                    {% for error in form.biography.errors %}
+                    <div class="icon_error biography_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
 				  </li>
 				</ul>
 			  </li>
 			  <li>
 				<ul>
-				  <li><span class="icon_experience">&nbsp;</span>General<br />Experience</li>
+                  <li>
+                    <span class="icon_experience">&nbsp;</span>General<br />Experience
+                    {% for error in form.total_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.infant_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.toddler_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.preschool_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.school_age_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.pre_teen_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.teen_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                    {% for error in form.special_needs_exp.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                  </li>
 				  <li>
 					<p>
 					  <span>TOTAL years of experience:
 					  </span>
-					  {% for error in form.total_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.total_exp}}
 					</p>
 					<p>
 					  <span>Experience with infants:
 					  </span>
-					  {% for error in form.infant_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.infant_exp}}
 					</p>
 					<p>
 					  <span>Experience with toddlers:
 					  </span>
-					  {% for error in form.toddler_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.toddler_exp}}
 					</p>
 					<p>
 					  <span>Experience with preschoolers:
 					  </span>
-					  {% for error in form.preschool_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.preschool_exp}}
 					</p>
 					<p>
 					  <span>Experience with School age:
 					  </span>
-					  {% for error in form.school_age_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.school_age_exp}}
 					</p>
 					<p>
 					  <span>Experience with Pre Teens:
 					  </span>
-					  {% for error in form.pre_teen_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.pre_teen_exp}}
 					</p>
 					<p>
 					  <span>Experience with teenagers:
 					  </span>
-					  {% for error in form.teen_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.teen_exp}}
 					</p>
 					<p>
 					  <span>Experience with special needs?</span>
-					  {% for error in form.special_needs_exp.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.special_needs_exp}}
 					  <label for="id_special_needs_exp"></label>
 					</p>
@@ -289,15 +348,17 @@
 					<span class="icon_certification">&nbsp;
 					</span>Certification
 					<br />or Training
-				  </li>
+				    {% for error in form.certifications.errors %}
+                    <div class="icon_error experience_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                  </li>
 				  <li>
 					<p>
 					  <span>&nbsp;
 					  </span>
-					  {% for error in form.certifications.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.certifications}}
 					</p>
 					<p>
@@ -319,60 +380,79 @@
 					</span>Standard Rates
 					<p>Using a rate range gives you the flexibility to charge more for jobs with additional service requests (like running errands)
 					</p>
+                    
+                    {% for error in form.one_child_min_rate.errors %}
+                    <div class="icon_error rate_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+     
+                    {% for error in form.one_child_max_rate.errors %}
+                    <div class="icon_error rate_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+
+                    {% for error in form.two_child_min_rate.errors %}
+                    <div class="icon_error rate_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+
+                    {% for error in form.two_child_max_rate.errors %}
+                    <div class="icon_error rate_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+
+                    {% for error in form.three_child_min_rate.errors %}
+                    <div class="icon_error rate_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+
+                    {% for error in form.three_child_max_rate.errors %}
+                    <div class="icon_error rate_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+
+
 				  </li>
 				  <li>
 					<p>
-					  <span>MInimum for 1 child:
+					  <span>Minimum for 1 child:
 					  </span>
-					  {% for error in form.one_child_min_rate.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.one_child_min_rate}}
 					</p>
 					<p>
 					  <span>Maximum for 1 child:
 					  </span>
-					  {% for error in form.one_child_max_rate.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.one_child_max_rate}}
 					</p>
 					<p>
-					  <span>MInimum for 2 children:
+					  <span>Minimum for 2 children:
 					  </span>
-					  {% for error in form.two_child_min_rate.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.two_child_min_rate}}
 					</p>
 					<p>
 					  <span>Maximum for 2 children:
 					  </span>
-					  {% for error in form.two_child_max_rate.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.two_child_max_rate}}
 					</p>
 					<p>
 					  <span>Minimum for 3 or more children
 					  </span>
-					  {% for error in form.three_child_min_rate.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.three_child_min_rate}}
 					</p>
 					<p>
 					  <span>Maximum for 3 or more children
 					  </span>
-					  {% for error in form.three_child_max_rate.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.three_child_max_rate}}
 					</p>
 				  </li>
@@ -384,18 +464,21 @@
 					<span class="icon_pic">&nbsp;</span>Profile Picture
 					<p>Like it or not we’re visual beings and adding a photo of yourself breaks down big trust barriers. </p>
 					<p>You’ll have the option to use your Facebook pic or upload your own. </p>
-				  </li>
+				
+                    {% for error in form.avatar.errors %}
+                    <div class="icon_error avatar_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div> 
+                    {% endfor %}
+
+                  </li>
 				  <li>
 					{{form.avatar}}
-					  {% for error in form.first_name.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					<div class="add_photo">
 					  <a class="add">
 						<p>Add your photo</p>
 					  </a>
-					  <p class="b_styling"><a href="http://blog.sitterfied.com/post/62361055222/a-pictures-worth-a-thousand-words-so-give-your-profile">Click here</a> for more photo tips</p>
+					  <p class="b_styling"><a href="http://blog.sitterfied.com/post/62361055222/a-pictures-worth-a-thousand-words-so-give-your-profile" target="_blank">Click here</a> for more photo tips</p>
 					</div>
 					<div class="add_photo_desc">
 					  <p>Use these simple guidelines to get the most out of your photo.</p>
@@ -484,5 +567,11 @@
      scrollTop: 0
    }, 'slow');
  });
+
+$(document).ready(function() {
+    $('.icon_error').parents('li').each(function() {
+        $(this).next('li').children('p').addClass('error_field');
+    });
+});
 </script>
 {% endblock %}

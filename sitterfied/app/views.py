@@ -36,6 +36,7 @@ from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
 
 from .models import User, Sitter, Parent, Group, Child
 from .utils import send_html_email
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
@@ -69,8 +70,10 @@ def get_user_json(user):
 
 @render_to()
 def index(request, referred_by=None):
+    form = AuthenticationForm() 
     if request.user.is_anonymous():
-        return {'TEMPLATE': "landing.html"}
+        return {'TEMPLATE': "landing.html",
+                "form": form,}
 
     user_json = get_user_json(request.user)
     if hasattr(request.user, 'sitter'):
@@ -177,8 +180,8 @@ def search(request):
 @api_view(['GET'])
 def network_search(request):
     search_term = request.GET.get('search', '')
-    users = [{'label':u.get_full_name(), 'value':u.get_full_name(), "type":"user", "id":u.id} for u in User.objects.filter(Q(first_name__startswith=search_term) | Q(last_name__startswith=search_term))]
-    groups = [{'label':g.name, 'value':g.name, "type":"group", "id":g.id} for g in Group.objects.filter(Q(name__startswith=search_term))]
+    users = [{'label':u.get_full_name(), 'value':u.get_full_name(), "type":"user", "id":u.id} for u in User.objects.filter(Q(first_name__startswith=search_term) | Q(last_name__istartswith=search_term))]
+    groups = [{'label':g.name, 'value':g.name, "type":"group", "id":g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
     users.extend(groups)
     return Response(users)
 
