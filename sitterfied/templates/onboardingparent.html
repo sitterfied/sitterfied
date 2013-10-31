@@ -41,25 +41,43 @@
 								<ul>
 
 
-									<li><span class="icon_name">&nbsp;</span>Name</li>
+                                    <li>
+                                      <span class="icon_name">&nbsp;</span>Name
+                                      
+                    {% for error in form.first_name.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+                    
+                    {% for error in form.last_name.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+   
+                                    </li>
 									<li>
 										<p>
-										  {% for error in form.first_name.errors %}
-										  <strong>{{ error|escape }}</strong>
-										  {% endfor %}
-
 										  {{form.first_name}}
-										  {% for error in form.last_name.errors %}
-										  <strong>{{ error|escape }}</strong>
-										  {% endfor %}
-										  {{form.last_name}}
+    									  {{form.last_name}}
 										</p>
 									</li>
 								</ul>
 							</li>
 							<li>
 								<ul>
-									<li><span class="icon_mom_group">&nbsp;</span>Mom Group<br /><span class="small">(optional)</span></li>
+                                  <li>
+                                    <span class="icon_mom_group">&nbsp;</span>Mom Group<br />
+                                    <span class="small">(optional)</span>
+                                  {% for error in form.sitter_group.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+
+  
+                                  </li>
 									<li class="mom_group_items">
 									  <p>
 										{{form.sitter_groups}}
@@ -76,7 +94,35 @@
 							</li>
 							<li>
 								<ul>
-									<li><span class="icon_friends7">&nbsp;</span>Children</li>
+                                    <li>
+                                      <span class="icon_friends7">&nbsp;</span>Children
+                                    {% for form in formset %}
+                    {% for error in form.name.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+
+                    {% for error in form.dob.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.school.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.special_needs.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                                    {% endfor %} 
+                                    </li>
 									{% for form in formset %}
 
 									<li class="form-container">
@@ -120,36 +166,47 @@
 							</li>
 							<li>
 								<ul>
-									<li><span class="icon_pin3">&nbsp;</span>Home Address</li>
+                                    <li>
+                                      <span class="icon_pin3">&nbsp;</span>Home Address
+                                      {% for error in form.address1.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+
+                    {% for error in form.address2.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.city.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.state.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}                    
+                    
+                    {% for error in form.zip.errors %}
+					<div class="icon_error"> 
+                      <p>{{ error|escape }}</p>
+                    </div>  
+                    {% endfor %}
+  
+                                    </li>
 									<li>
 
 					<p>
-					{% for error in form.address1.errors %}
-					<strong>{{ error|escape }}</strong>
-					{% endfor %}
-
 					{{form.address1}}
-
-					{% for error in form.address2.errors %}
-					<strong>{{ error|escape }}</strong>
-					{% endfor %}
-
-					{{form.address2}}
-					{% for error in form.zip.errors %}
-					<strong>{{ error|escape }}</strong>
-					{% endfor %}
-					<br>
-					{{form.zip}}
-					  {% for error in form.city.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
-					  {{form.city}}
-					  {% for error in form.state.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
-					  {{form.state}}
+    				{{form.address2}}
+	    			{{form.zip}}
+	  			    {{form.city}}
+					{{form.state}}
 					</p>
 
 									</li>
@@ -157,7 +214,16 @@
 							</li>
 							<li>
 								<ul>
-									<li><span class="icon_iphone">&nbsp;</span>Cell Phone Number</li>
+                                    <li>
+                                      <span class="icon_iphone">&nbsp;</span>Cell Phone Number
+                                      {% for error in form.cell.errors %}
+					                  <div class="icon_error"> 
+                                      <p>{{ error|escape }}</p>
+                                      </div>  
+                                      {% endfor %}
+ 
+  
+                                    </li>
 									<li>
 									  <p>
 									  					  {% for error in form.cell.errors %}
@@ -171,13 +237,17 @@
 							</li>
 							<li>
 								<ul>
-									<li><span class="icon_email">&nbsp;</span>Email Address</li>
+                                    <li>
+                                      <span class="icon_email">&nbsp;</span>Email Address
+                                      {% for error in form.email.errors %}
+                      <div class="icon_error"> 
+                        <p>{{ error|escape }}</p>
+                      </div> 
+					  {% endfor %}
+  
+                                    </li>
 									<li>
 										<p>
-										  {% for error in form.email.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.email}}
 										</p>
 									</li>
@@ -185,19 +255,26 @@
 							</li>
 							<li>
 								<ul>
-									<li><span class="icon_pass2">&nbsp;</span>Password</li>
+                                    <li>
+                                      <span class="icon_pass2">&nbsp;</span>Password
+                                      
+                                        {% for error in form.password1.errors %}
+                                        <div class="icon_error"> 
+                                            <p>{{ error|escape }}</p>
+                                        </div> 
+                                        {% endfor %}
+
+                                        {% for error in form.password2.errors %}
+                                        <div class="icon_error"> 
+                                            <p>{{ error|escape }}</p>
+                                        </div> 
+                                        {% endfor %}
+   
+                                    </li>
 									<li class="pass">
 										<p>
-										  					  {% for error in form.password1.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.password1}}
 					  <strong>Confirm Password</strong>
-					  {% for error in form.password2.errors %}
-					  <strong>{{ error|escape }}</strong>
-					  {% endfor %}
-
 					  {{form.password2}}
 
 										</p>
@@ -210,12 +287,17 @@
 										<span class="icon_pic">&nbsp;</span>Profile Picture
 										<p>Like it or not we’re visual beings and adding a photo of yourself breaks down big trust barriers. </p>
 										<p>You’ll have the option to use your Facebook pic or upload your own. </p>
+                                        {% for error in form.avatar.errors %}
+                                        <div class="icon_error avatar_error"> 
+                                            <p>{{ error|escape }}</p>
+                                        </div> 
+                                        {% endfor %}
 									</li>
 									<li>
 									  {{form.avatar}}
 										<div class="add_photo">
 											<a class="add"><p>Add your photo</p></a>
-											<p class="b_styling"><a href="http://blog.sitterfied.com/post/62361055222/a-pictures-worth-a-thousand-words-so-give-your-profile">Click here</a> for more photo tips</p>
+											<p class="b_styling"><a href="http://blog.sitterfied.com/post/62361055222/a-pictures-worth-a-thousand-words-so-give-your-profile" target="_blank">Click here</a> for more photo tips</p>
 										</div>
 										<div class="add_photo_desc">
 											<p>Use these simple guidelines to get the most out of your photo.</p>
@@ -395,6 +477,12 @@ jQuery('.back-to-top').click(function () {
     jQuery('html, body').animate({
         scrollTop: 0
     }, 'slow');
+});
+
+$(document).ready(function() {
+    $('.icon_error').parents('li').each(function() {
+        $(this).next('li').children('p').addClass('error_field');
+    });
 });
 </script>
 {% endblock %}
