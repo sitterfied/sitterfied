@@ -340,6 +340,11 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                 $('.header .top_info').removeClass('show_full_desc')
                 $('.header .top_info .desc .full_desc').fadeOut()
 
+            # hide read more link if text < 30 characters
+            bioLength = this.$('.full_desc').text().replace(/\s/g,'').length
+            if bioLength < 30
+                $('.read_more').hide()
+
 
 
 
@@ -358,7 +363,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                     height      : '90%'
                     href        : "#onboarding_final"
                 Sitterfied.currentUser.first_time = false
-
 
     Sitterfied.MobTriggerView = Em.View.extend
         classNameBindings: ['active', ":mob_tab_trigger", "my_mob_tab"]
