@@ -368,7 +368,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .bookmark {display:block;width:30px;height:42px;position:absolute;top:-3px;left:450px;z-index:2;background:url(../images/icons/flag5.png) no-repeat;cursor:pointer;}
 .header .top_info .bookmark:hover, .header .top_info .bookmark.active {background:url(../images/icons/flag.png) no-repeat;}
 .header .top_info .photo {float:left;width:171px;padding:0 17px 0 0;position:relative;}
-.header .top_info .photo img {border:1px solid  #fff;box-shadow:rgba(0,0,0,.45) 0 0 8px 0;border-radius:4px;width:171px;height:auto;}
+.header .top_info .photo img {border:1px solid  #fff;box-shadow:rgba(0,0,0,.45) 0 0 8px 0;border-radius:4px;max-width:171px;max-height:171px;}
 .header .top_info .photo .photo_edit_wrap {position:relative;width:171px;}
 .header .top_info .photo .photo_edit_wrap p {display:none;position:absolute;bottom:5px;left:1px;width:116px;background:#000;background:rgba(0,0,0,.4);color:#fff;font-size:18px;padding:12px 5px 12px 50px;}
 .header .top_info .photo .photo_edit_wrap p a {color:#fff;}
@@ -382,15 +382,15 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .photo:hover .heart_wrap .heart {display:block;}
 .header .top_info .photo .heart_wrap .heart:hover + span {display:block;}
 .header .top_info .photo .heart_wrap .heart.active:hover + span {display:none;}
-.header .top_info .desc {float:right;width:465px;position:relative;}
+.header .top_info .desc {float:right;width:375px;position:relative;margin-right: 90px;}
 .header .top_info .desc p {font-size:14px;line-height:21px;clear:both;padding-right:55px;}
 .header .top_info .desc p a:not(.button) {padding-right:15px;padding-left:5px;color:#32c2bb;font-size:14px;background:url(../images/icons/arrow_bottom3_t.png) right center no-repeat;}
 .read_more {padding-right:15px;padding-left:5px;color:#32c2bb;font-size:14px;background:url(../images/icons/arrow_bottom3_t.png) right center no-repeat;}
 
-.header .top_info .desc > p:first-child {float:left;padding:0 0 15px 35px;}
-.header .top_info .desc > p:first-child a {font:16px/38px 'ProximaNova-Semibold';width:125px;height:38px;border-radius:4px;margin:0 26px 0 0;}
-.header .top_info .desc > p:first-child [class^="icon_"] {top:7px;left:0;}
-.header .top_info .desc > p:first-child a:nth-child(2) {width:125px;}
+.header .top_info .desc > p:nth-child(-n+2) {float:left;padding:0 0 15px 35px;}
+.header .top_info .desc > p:nth-child(-n+2) a {font:16px/38px 'ProximaNova-Semibold';width:125px;height:38px;border-radius:4px;margin:0 26px 0 0;}
+.header .top_info .desc > p:nth-child(-n+2) [class^="icon_"] {top:7px;left:0;}
+.header .top_info .desc > p:nth-child(-n+2) a:nth-child(2) {width:125px;}
 .header .top_info .desc > p:nth-child(2) {color:#3ea7b8;font:22px 'ProximaNova';padding-bottom:15px;}
 .header .top_info .desc > p:nth-child(2) strong {font-family:'ProximaNova';}
 .header .top_info .desc > p:nth-child(2) span {border-bottom:1px solid #dde1e1;padding:0 20px 10px 0;}
@@ -837,7 +837,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .profile_block .form_style > ul > li > ul > li {float:left;padding:40px 0;position:relative;}
 .profile_block .form_style > ul > li > ul > li:nth-child(2n) {width:710px;}
 .profile_block .form_style > ul > li > ul > li:nth-child(2n+1) {color:#bababa;width:132px;padding-left:38px;margin-right:38px;font:bold 16px 'ProximaNova';}
-.profile_block .form_style > ul > li > ul > li p {clear:both;padding-bottom:10px;}
+.profile_block .form_style > ul > li > ul > li p {clear:both;padding-bottom:10px; min-height: 50px;}
+.profile_block .form_style > ul > li > ul > li p.address_fields input {margin-bottom: 10px;}
 .profile_block .form_style > ul > li > ul > li p > span {width:210px;float:left;padding:0 20px 0 0;display:block;color:#81abb0;font:14px/35px 'ProximaNovaCond';position:relative;text-transform:uppercase;}
 .profile_block .form_style > ul > li > ul > li p > span.short {width:100px;}
 .profile_block .form_style > ul > li > ul > li.long_headers p > span {width:350px;}
