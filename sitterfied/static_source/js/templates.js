@@ -5176,6 +5176,17 @@ function program6(depth0,data) {
   return buffer;
   }
 
+function program8(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n			<li>");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</li>\n			");
+  return buffer;
+  }
+
   data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper\">\n\n	<!-- network_block -->\n	<div class=\"network_block\">\n	  <ul class=\"soc_psg_list soc_psg_list_single clear\">\n		<li>\n		  <ul>\n			<li>Mutual Parent Friends (");
   hashTypes = {};
   hashContexts = {};
@@ -5194,7 +5205,16 @@ function program6(depth0,data) {
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "sitter_friends_in_common", {hash:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  </ul>\n		</li>\n		<li>\n		  <ul>\n			<li>Mutual Groups (3)</li>\n			<li><a href=\"#\">Hoboken Catholic Church</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n			<li><a href=\"#\">St Francis Prep School</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n			<li><a href=\"#\">Hoboken Mommies</a> <a href=\"#\" class=\"delete\">&nbsp;</a></li>\n		  </ul>\n		</li>\n	  </ul>\n	</div>\n	<!-- /network_block -->\n\n  </div>\n</div>");
+  data.buffer.push("\n		  </ul>\n		</li>\n		<li>\n		  <ul>\n			<li>Mutual Groups (");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "groups_in_common.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(")</li>\n            ");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers.each.call(depth0, "groups_in_common", {hash:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		  </ul>\n		</li>\n	  </ul>\n	</div>\n	<!-- /network_block -->\n\n  </div>\n</div>\n");
   return buffer;
   
 });
