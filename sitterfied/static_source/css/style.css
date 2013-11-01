@@ -555,7 +555,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .container .notify_wraper p:last-child {clear:both;padding:25px 0 0 0;border-top:1px dotted #e3e5e8;}
 .container .notify_wraper p:last-child .button {float:none;margin:0 auto;font:15px/45px 'ProximaNova-Semibold';}
 	/* Stat bar */
-.stat_bar {background:#038ca2 url(../images/stat_bar.gif) repeat-x;min-height:40px;position:relative;z-index:10;color:#fff;margin-bottom:0;box-shadow:rgba(0,0,0,.26) 0 5px 5px 0;}
+.stat_bar {background:#038ca2 url(../images/stat_bar.gif) repeat-x;min-height:40px;position:relative;color:#fff;margin-bottom:0;box-shadow:rgba(0,0,0,.26) 0 5px 5px 0;}
 .stat_bar p {float:left;width:163px;padding:0 105px 0 40px;background:url(../images/icons/flag2_t.png) 0 center no-repeat;position:relative;left:-1px;font:15px/40px 'ProximaNova-Semibold';}
 .stat_bar p [class^="icon_"] {top:12px;left:7px;}
 .stat_bar ul {float:left;width:600px;}

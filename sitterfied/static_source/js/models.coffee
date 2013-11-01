@@ -101,7 +101,12 @@ define ['jquery'
             @set('isDirty', true)
             @save()
 
-
+        removeGroup: (group) ->
+            groups = @get("sitter_groups")
+            toBlock = groups.findProperty('id', group.get('id'))
+            groups.removeObject(toBlock)
+            @set('isDirty', true)
+            @save()
 
 
         mailTo:  (() ->

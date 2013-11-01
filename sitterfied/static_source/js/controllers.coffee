@@ -63,7 +63,10 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             alert("invite friends")
 
         deleteGroup: (group) ->
-            alert("delete group, " + group)
+            groups = @get("sitter_groups")
+            toBlock = groups.findProperty('id', group.get('id'))
+            groups.removeObject(toBlock)
+            @set('isDirty', true)
 
 
         newChild: () ->

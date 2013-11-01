@@ -186,6 +186,9 @@ $(function () {
 	 }
 	 return false
    })
+   $(".delete").click(function(){
+       $(this).closest('li').remove();
+   });
    $(".skip").click(function(){
 	 $("form").submit()
 	 return false
