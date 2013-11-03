@@ -7,12 +7,15 @@ from itertools import chain
 
 import requests
 
+redirect_uri ="http://beta.sitterfied.com"
+
+
 def google_oauth_begin(request):
 
     flow = OAuth2WebServerFlow(client_id='705373512773.apps.googleusercontent.com',
                                client_secret='zSdqqjHjyfhs4u28qIL8buy4',
                                scope='http://www.google.com/m8/feeds',
-                               redirect_uri='http://localhost:8000/oauth2callback',
+                               redirect_uri=redirect_uri +'/oauth2callback',
                                access_type='online')
     auth_uri = flow.step1_get_authorize_url()
     return HttpResponseRedirect(auth_uri)
@@ -25,7 +28,7 @@ def oauth2callback(request):
         flow = OAuth2WebServerFlow(client_id='705373512773.apps.googleusercontent.com',
                                    client_secret='zSdqqjHjyfhs4u28qIL8buy4',
                                    scope='http://www.google.com/m8/feeds',
-                                   redirect_uri='http://localhost:8000/oauth2callback',
+                                   redirect_uri=redirect_uri +'/oauth2callback',
                                    access_type='online')
         credentials = flow.step2_exchange(code)
 

@@ -125,8 +125,8 @@ class Sitter(User):
     gender = models.CharField(max_length=10, choices=GENDERS, default='female')
     id_verified = models.BooleanField(default=False)
 
-    live_zip = models.CharField(max_length=9, blank=True)
-    work_zip = models.CharField(max_length=9, blank=True)
+    # live_zip = models.CharField(max_length=9, blank=True)
+    # work_zip = models.CharField(max_length=9, blank=True)
 
     dob = models.DateTimeField(blank=False, default=datetime.now)
     smoker = models.BooleanField(default=False)

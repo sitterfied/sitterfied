@@ -51,8 +51,8 @@ class SitterSerializer(serializers.ModelSerializer):
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
     class Meta:
         model = models.Sitter
-        fields = user_fields + ('biography', 'live_zip',
-                                'work_zip', 'smoker',
+        fields = user_fields + ('biography',
+                                'smoker',
                                 'will_transport', 'total_exp',
                                 'infant_exp',  'toddler_exp',
                                 'preschool_exp', 'school_age_exp',

@@ -88,6 +88,7 @@ class ParentAdmin(UserAdmin):
                                 'sitter_teams',
                                 'users_in_network',
                                 'friends',
+                                'zip',
                                 'sitter_groups',
                             )}
     ),
@@ -109,9 +110,8 @@ class SitterAdmin(UserAdmin):
     sitter_fieldsets = ('Sitter Details', {
             'fields': (    'biography',
                            'id_verified',
-                           'live_zip',
-                           'work_zip',
                            'dob',
+                           'zip',
                            'smoker',
                            'will_transport',
                            'total_exp',

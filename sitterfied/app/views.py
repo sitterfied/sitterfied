@@ -129,7 +129,7 @@ def onboarding2(request):
 
 
 
-
+@login_required
 @render_to("onboarding3.html")
 def onboarding3(request):
     if request.method =="POST":
