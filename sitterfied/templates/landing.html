@@ -19,12 +19,14 @@
 	<ul>
 		<li><a href="#learn_more">How it Works</a></li>
 		<li><a href="{%url "onboarding1" %}" >Sign Up</a></li>
-		<li><a href="{%url "login" %}">Log in</a></li>
+		<li><a class="login-trigger" href="#login">Log in</a></li>
 		<li><a href="#" class="facebook">facebook</a></li>
 		<li><a href="#" class="twitter">twitter</a></li>
 		<li><a href="#" class="tumblr">tumblr</a></li>
 	</ul>
 </div>
+
+{% include 'registration/login_modal.html' %}
 
 <!-- landing_block -->
 <div class="landing_block">
