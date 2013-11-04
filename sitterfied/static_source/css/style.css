@@ -369,7 +369,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .bookmark:hover, .header .top_info .bookmark.active {background:url(../images/icons/flag.png) no-repeat;}
 .header .top_info .photo {float:left;width:171px;padding:0 17px 0 0;position:relative;}
 .header .top_info .photo img {border:1px solid  #fff;box-shadow:rgba(0,0,0,.45) 0 0 8px 0;border-radius:4px;width:171px;height:auto;}
-.header .top_info .photo .photo_edit_wrap {position:relative;width:171px;}
+.header .top_info .photo .photo_edit_wrap {position:relative;width:171px;height:171px;background-size: cover;background-repeat: no-repeat;background-position: 50% 35%;}
 .header .top_info .photo .photo_edit_wrap p {display:none;position:absolute;bottom:5px;left:1px;width:116px;background:#000;background:rgba(0,0,0,.4);color:#fff;font-size:18px;padding:12px 5px 12px 50px;}
 .header .top_info .photo .photo_edit_wrap p a {color:#fff;}
 .header .top_info .photo .photo_edit_wrap p span {top:11px;left:13px;}
