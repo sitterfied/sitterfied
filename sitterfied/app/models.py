@@ -172,6 +172,10 @@ class Sitter(User):
 
     certifications = models.ManyToManyField("Certification", blank=True)
 
+    def save(self, *args, **kwargs):
+        self.live_zip = self.zip
+        super(Sitter, self).save(*args, **kwargs)
+
     class Meta:
          verbose_name = "Sitter"
 

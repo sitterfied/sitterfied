@@ -22,10 +22,10 @@
 		</li>
 		<li>
 		  <ul>
-			<li>Mutual Groups (3)</li>
-			<li><a href="#">Hoboken Catholic Church</a> <a href="#" class="delete">&nbsp;</a></li>
-			<li><a href="#">St Francis Prep School</a> <a href="#" class="delete">&nbsp;</a></li>
-			<li><a href="#">Hoboken Mommies</a> <a href="#" class="delete">&nbsp;</a></li>
+			<li>Mutual Groups ({{groups_in_common.length}})</li>
+            {{# each groups_in_common }}
+			<li>{{name}}</li>
+			{{/each }}
 		  </ul>
 		</li>
 	  </ul>

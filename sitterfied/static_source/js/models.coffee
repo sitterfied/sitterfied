@@ -101,7 +101,12 @@ define ['jquery'
             @set('isDirty', true)
             @save()
 
-
+        removeGroup: (group) ->
+            groups = @get("sitter_groups")
+            toBlock = groups.findProperty('id', group.get('id'))
+            groups.removeObject(toBlock)
+            @set('isDirty', true)
+            @save()
 
 
         mailTo:  (() ->
@@ -162,7 +167,11 @@ define ['jquery'
         parent_friends_in_common: (() ->
             @get('friends_in_common').filterProperty('isParent')
         ).property('friends_in_common')
-
+        groups_in_common: (() ->
+            usersGroups = Sitterfied.get('currentUser.sitter_groups')
+            myGroups = @get('sitter_groups')
+            return _.intersection(usersGroups, myGroups)
+        ).property('sitter_groups', 'Sitterfied.currentUser.sitter_groups')
     )
     Sitterfied.User.adapter = Adapter.create()
 
