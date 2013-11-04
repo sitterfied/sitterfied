@@ -89,6 +89,7 @@ class ParentAdmin(UserAdmin):
                                 'users_in_network',
                                 'friends',
                                 'zip',
+                                'cell',
                                 'sitter_groups',
                             )}
     ),
@@ -111,6 +112,7 @@ class SitterAdmin(UserAdmin):
             'fields': (    'biography',
                            'id_verified',
                            'dob',
+                           'cell',
                            'zip',
                            'smoker',
                            'will_transport',
