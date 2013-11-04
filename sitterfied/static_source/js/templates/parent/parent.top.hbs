@@ -1,4 +1,8 @@
-{{# linkTo search class="back"}}Back to search results{{/linkTo}}
+{{# if Sitterfied.currentUser.isParent}}
+  {{# linkTo search class="back"}}Back to search results{{/linkTo}}
+{{ else }}
+   {{# linkTo sitterEdit.network currentUser class="back"}}Back to your network{{/linkTo}}
+{{/ if}}
 <!-- top info -->
 <div class="top_info clear">
   <div class="photo">
