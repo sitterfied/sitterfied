@@ -83,7 +83,7 @@ def booking_request_canceled(sender, **kwargs):
                                        {'first_name':parent.first_name,
                                        })
 
-        send_html_email("Your booking request has been cancled", "hello@sitterfied.com", parent.email, text, html)
+        send_html_email("Your booking request has been canceled", "hello@sitterfied.com", parent.email, text, html)
 
     if settings.mobile_booking_accepted_denied:
         sms = render_to_string("email/booking/booking_request_canceled.sms",{})
@@ -96,14 +96,14 @@ def booking_request_canceled(sender, **kwargs):
 
     settings = sitter.settings
     if settings.email_booking_accepted_denied:
-        text = html = render_to_string("email/booking/booking_request_cancled.html",
+        text = html = render_to_string("email/booking/booking_request_canceled.html",
                                        {'first_name':sitter.first_name,
                                        })
 
-        send_html_email("Your booking request has been cancled", "hello@sitterfied.com", sitter.email, text, html)
+        send_html_email("Your booking request has been canceled", "hello@sitterfied.com", sitter.email, text, html)
 
     if settings.mobile_booking_accepted_denied:
-        sms = render_to_string("email/booking/booking_request_cancled.sms",{})
+        sms = render_to_string("email/booking/booking_request_canceled.sms",{})
         twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
 
