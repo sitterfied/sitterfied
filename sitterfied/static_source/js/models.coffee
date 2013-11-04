@@ -288,6 +288,9 @@ define ['jquery'
         gender:  attr()
         id_verified: attr(Boolean)
         id_scanPath: attr()
+        live_zip: attr()
+        work_zip: attr()
+
         dob: attr(Date)
         smoker: attr(Boolean)
         sick: attr(Boolean)

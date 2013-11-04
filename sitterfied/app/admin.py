@@ -111,6 +111,8 @@ class SitterAdmin(UserAdmin):
     sitter_fieldsets = ('Sitter Details', {
             'fields': (    'biography',
                            'id_verified',
+                           'live_zip',
+                           'work_zip',
                            'dob',
                            'cell',
                            'zip',
