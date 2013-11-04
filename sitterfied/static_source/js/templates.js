@@ -2059,8 +2059,8 @@ function program1(depth0,data) {
   hashTypes = {'class': "STRING"};
   options = {hash:{
     'class': ("back")
-  },inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "profile", options) : helperMissing.call(depth0, "linkTo", "profile", options));
+  },inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.profile", "Sitterfied.currentUser", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.profile", "Sitterfied.currentUser", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n");
   return buffer;
@@ -2068,7 +2068,7 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   
-  data.buffer.push("Back to editing profile");
+  data.buffer.push("Back to edit profile");
   }
 
 function program4(depth0,data) {
