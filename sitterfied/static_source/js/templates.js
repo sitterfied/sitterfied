@@ -841,7 +841,7 @@ function program13(depth0,data) {
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
     'placeholder': ("Zip Code"),
-    'valueBinding': ("live_zip"),
+    'valueBinding': ("zip"),
     'class': ("small")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    ");

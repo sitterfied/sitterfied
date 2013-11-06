@@ -125,9 +125,6 @@ class Sitter(User):
     gender = models.CharField(max_length=10, choices=GENDERS, default='female')
     id_verified = models.BooleanField(default=False)
 
-    live_zip = models.CharField(max_length=9, blank=True)
-    work_zip = models.CharField(max_length=9, blank=True)
-
     dob = models.DateTimeField(blank=False, default=datetime.now)
     smoker = models.BooleanField(default=False)
     sick =  models.BooleanField(default=True)
@@ -172,9 +169,6 @@ class Sitter(User):
 
     certifications = models.ManyToManyField("Certification", blank=True)
 
-    def save(self, *args, **kwargs):
-        self.live_zip = self.zip
-        super(Sitter, self).save(*args, **kwargs)
 
     class Meta:
          verbose_name = "Sitter"
@@ -212,26 +206,26 @@ class Settings(TimeStampedModel):
     #parent specific
     user =  models.OneToOneField('User', null=True)
 
-    mobile_booking_accepted_denied = models.BooleanField()
+    mobile_booking_accepted_denied = models.BooleanField(default=True)
 
     #sitter specific
-    mobile_new_review  = models.BooleanField()
-    mobile_booking_request = models.BooleanField()
+    mobile_new_review  = models.BooleanField(default=True)
+    mobile_booking_request = models.BooleanField(default=True)
 
-    mobile_friend_joined = models.BooleanField()
-    mobile_groups_added_network = models.BooleanField()
-    mobile_upcoming_booking_remind = models.BooleanField()
+    mobile_friend_joined = models.BooleanField(default=True)
+    mobile_groups_added_network = models.BooleanField(default=True)
+    mobile_upcoming_booking_remind = models.BooleanField(default=True)
 
     #parent specific
-    email_booking_accepted_denied = models.BooleanField()
+    email_booking_accepted_denied = models.BooleanField(default=True)
 
     #sitter specific
-    email_new_review  = models.BooleanField()
-    email_booking_request = models.BooleanField()
+    email_new_review  = models.BooleanField(default=True)
+    email_booking_request = models.BooleanField(default=True)
 
-    email_friend_joined = models.BooleanField()
-    email_groups_added_network = models.BooleanField()
-    email_upcoming_booking_remind = models.BooleanField()
+    email_friend_joined = models.BooleanField(default=True)
+    email_groups_added_network = models.BooleanField(default=True)
+    email_upcoming_booking_remind = models.BooleanField(default=True)
 
     email_news = models.BooleanField()
     email_blog = models.BooleanField()
