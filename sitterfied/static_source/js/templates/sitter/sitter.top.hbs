@@ -20,7 +20,9 @@
 	  <p class="sitter_profile_buttons"><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action interview}}>INTERVIEW</a></p>
     {{/ if}}
 	<p><span>Hi, I'm <strong>{{full_name}}</strong></span></p>
-    <span class="short_bio">{{shortBio}}<a class="read_more" {{#if hideBioLink }}style="display: none;"{{/if}}{{action "readMore" target="view"}}>Read More</a></span>
+    {{#if showBioLink }}
+    <span class="short_bio">{{shortBio}}<a class="read_more"{{action "readMore" target="view"}}>Read More</a></span>
+    {{/ if}}
 	<div class="full_desc">
       {{# each p in biographyPList }}
 	    <p>{{p}}</p>
