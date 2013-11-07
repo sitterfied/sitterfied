@@ -147,8 +147,8 @@ input[type="radio"] + label + input[type="radio"] + label:before {margin-left:15
 input[type="radio"]:checked + label:before {background:url(../images/icons/check.png) 0 -30px no-repeat;}
 .hidden {display:none !important;}
 
-.form_style p > input[type="text"], .form_style p > input[type="password"] {padding:0 20px;width:188px;height:43px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:17px 'ProximaNova';color:#616161;background:#fff;margin-right:8px;}
-.form_style p > input[type="text"]:hover, .form_style p > input[type="text"]:focus, .form_style p > input[type="password"]:hover, .form_style p > input[type="password"]:focus {border-color:#3ae4f8;box-shadow:#e9e9e9 5px 3px 5px 0 inset, #3ae4f8 0 0 5px 1px;color:#616161;}
+.form_style p > input[type="text"], .form_style p > input[type="password"], .form_style p > input[type="email"] {padding:0 20px;width:188px;height:43px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:17px 'ProximaNova';color:#616161;background:#fff;margin-right:8px;}
+.form_style p > input[type="text"]:hover, .form_style p > input[type="text"]:focus, .form_style p > input[type="password"]:hover, .form_style p > input[type="password"]:focus, .form_style p > input[type="email"]:hover, .form_style p > input[type="email"]:focus {border-color:#3ae4f8;box-shadow:#e9e9e9 5px 3px 5px 0 inset, #3ae4f8 0 0 5px 1px;color:#616161;}
 .form_style input.small[type="text"] {width:85px;}
 .form_style input.long[type="text"] {width:541px;}
 .form_style select {width:145px;}
@@ -369,7 +369,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .bookmark:hover, .header .top_info .bookmark.active {background:url(../images/icons/flag.png) no-repeat;}
 .header .top_info .photo {float:left;width:171px;padding:0 17px 0 0;position:relative;}
 
-.header .top_info .photo img {border:1px solid  #fff;box-shadow:rgba(0,0,0,.45) 0 0 8px 0;border-radius:4px;max-width:171px;max-height:171px;}
+.header .top_info .photo img {border:1px solid  #fff;box-shadow:rgba(0,0,0,.45) 0 0 8px 0;border-radius:4px;max-width:171px;max-height:171px;min-height:171px}
 .header .top_info .photo .photo_edit_wrap {position:relative;width:171px;}
 
 
