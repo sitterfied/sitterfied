@@ -17,10 +17,10 @@
   </div>
   <div class="desc">
     {{# if Sitterfied.isParent}}
-	  <p><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action interview}}>INTERVIEW</a></p>
+	  <p class="sitter_profile_buttons"><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action interview}}>INTERVIEW</a></p>
     {{/ if}}
 	<p><span>Hi, I'm <strong>{{full_name}}</strong></span></p>
-    {{shortBio}}<a class="read_more" {{action "readMore" target="view"}}>Read More</a></p>
+    <span class="short_bio">{{shortBio}}<a class="read_more" {{#if hideBioLink }}style="display: none;"{{/if}}{{action "readMore" target="view"}}>Read More</a></span>
 	<div class="full_desc">
       {{# each p in biographyPList }}
 	    <p>{{p}}</p>
@@ -34,7 +34,6 @@
 		<li>Friends you have in common with {{first_name}}</li>
 	  </ul>
 	  </li>
-      {{!--
 	  <li><span class="icon_recommend">&nbsp;</span><span class="number">{{recommends.length}}</span>recommends
 	  <ul>
         <li>Friends who recommend {{first_name}}</li>
@@ -48,7 +47,6 @@
 		{{/ each}}
 	  </ul>
 	  </li>
-      --}}
 	  <li><span class="icon_team">&nbsp;</span><span class="number">{{sitter_teams.length}}</span>sitter teams
 	  <ul>
 		<li>Friends who added {{first_name}} to their sitter team</li>

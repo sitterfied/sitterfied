@@ -360,7 +360,14 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
 
-
+        hideBioLink: (() ->
+            # hide read more link if text < 100 characters
+            bioLength = this.$('.full_desc').text().replace(/\s/g,'').length
+            if bioLength < 100
+                return 'hideReadMore'
+            else
+                return 'showReadMore'
+        ).property('hideBioLink')
     )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
