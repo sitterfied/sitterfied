@@ -73,7 +73,8 @@
 					</li>
 				</ul>
 				<hr />
-				<div class="video_wrap"><a class="video fancybox.iframe" href="http://www.youtube.com/embed/uLzpzjanHAY?autoplay=1"><img src="{% static "images/demo/video.png" %}" alt="" /></a></div>
+				<div class="video_wrap"><a class="video" href="#wistia_modal"><img src="{% static "images/demo/video.png" %}" alt="" /></a></div>
+                {% include 'landing_video.html' %}
 				<hr />
 				<div class="clear"><a class="button button_edit arrow" href="{% url "onboarding1" %}">i’m ready. Sign me up!</a></div>
 				<hr />
