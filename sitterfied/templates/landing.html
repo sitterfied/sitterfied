@@ -20,9 +20,9 @@
 		<li><a href="#learn_more">How it Works</a></li>
 		<li><a href="{%url "onboarding1" %}" >Sign Up</a></li>
 		<li><a class="login-trigger" href="#login">Log in</a></li>
-		<li><a href="#" class="facebook">facebook</a></li>
-		<li><a href="#" class="twitter">twitter</a></li>
-		<li><a href="#" class="tumblr">tumblr</a></li>
+		<li><a class="facebook" href="http://www.facebook.com/sitterfied" target="_blank">facebook</a></li>
+		<li><a class="twitter" href="http://www.twitter.com/sitterfied" target="_blank">twitter</a></li>
+		<li><a class="tumblr" href="http://sitterfied.tumblr.com/" target="_blank">tumblr</a></li>
 	</ul>
 </div>
 
@@ -73,7 +73,8 @@
 					</li>
 				</ul>
 				<hr />
-				<div class="video_wrap"><a class="video fancybox.iframe" href="http://www.youtube.com/embed/uLzpzjanHAY?autoplay=1"><img src="{% static "images/demo/video.png" %}" alt="" /></a></div>
+				<div class="video_wrap"><a class="video" href="#wistia_modal"><img src="{% static "images/demo/video.png" %}" alt="" /></a></div>
+                {% include 'landing_video.html' %}
 				<hr />
 				<div class="clear"><a class="button button_edit arrow" href="{% url "onboarding1" %}">i’m ready. Sign me up!</a></div>
 				<hr />

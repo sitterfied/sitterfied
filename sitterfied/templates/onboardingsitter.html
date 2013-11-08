@@ -57,6 +57,9 @@
 					  {{form.first_name}}
 					  {{form.last_name}}
 					</p>
+                    <div style="display: none;">
+                      <img src="{{STATIC_URL}}images/checkbox.png" />
+                    </div>
 				  </li>
 
 				</ul>
@@ -521,7 +524,8 @@
 	 add.css('background', path );
 	 add.css("background-size","cover")
 	 add.css("background-repeat", "no-repeat");
-
+     add.css("max-width", "237px");
+     add.css("max-height", "237px");
 
    });
    $("#back-top").hide();
@@ -572,6 +576,10 @@ $(document).ready(function() {
     $('.icon_error').parents('li').each(function() {
         $(this).next('li').children('p').addClass('error_field');
     });
+
+    if ($('.icon_error').length > 0) {
+        $('.pass').children('p').addClass('error_field');
+    }
 });
 </script>
 {% endblock %}
