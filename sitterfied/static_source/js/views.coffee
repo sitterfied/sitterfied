@@ -340,12 +340,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                 $('.header .top_info').removeClass('show_full_desc')
                 $('.header .top_info .desc .full_desc').fadeOut()
 
-            # hide read more link if text < 100 characters
-            bioLength = this.$('.full_desc').text().replace(/\s/g,'').length
-            if bioLength < 100
-                $('.read_more').hide()
-
-
 
 
 
