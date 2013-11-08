@@ -39,6 +39,8 @@ from .utils import send_html_email
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
 
+from intercom import generate_intercom_user_hash
+
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
 class HttpResponseUnauthorized(HttpResponse):
@@ -66,11 +68,9 @@ def get_user_json(user):
     user_json = JSONRenderer().render(serialized.data)
     return user_json
 
-
-
 @render_to()
 def index(request, referred_by=None):
-    form = AuthenticationForm() 
+    form = AuthenticationForm()
     if request.user.is_anonymous():
         return {'TEMPLATE': "landing.html",
                 "form": form,}
@@ -83,9 +83,11 @@ def index(request, referred_by=None):
 
 
     return {'user_json':user_json,
+            'user_hash': generate_intercom_user_hash(request.user.email),
             "parent_or_sitter": parent_or_sitter,
             "TEMPLATE":"index.html",
             "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
+            "INTERCOM_APP_ID": settings.INTERCOM_APP_ID,
             "first_time": request.GET.get("first_time", "")
     }
 
@@ -149,6 +151,18 @@ def onboarding3(request):
 @render_to("onboarding4.html")
 def onboarding4(request):
     return {}
+
+""" Injects values into static pages.
+
+"""
+@render_to()
+def static_page(request, template):
+    return {'TEMPLATE': template,
+            'user_json': get_user_json(request.user),
+            'user_hash': generate_intercom_user_hash(request.user.email),
+            "INTERCOM_APP_ID": settings.INTERCOM_APP_ID
+    }
+
 
 
 from rest_framework.response import Response
