@@ -362,7 +362,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
         showBioLink: (() ->
             # hide read more link if text < 100 characters
-            bioLength = this.get('biography').length
+            bioLength = this.get('biography')?.length
             if bioLength < 100
                 return false
             else
