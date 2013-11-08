@@ -580,31 +580,6 @@ $(document).ready(function() {
     if ($('.icon_error').length > 0) {
         $('.pass').children('p').addClass('error_field');
     }
-
-    $("input").bind('invalid',function(e){
-        e.target.setCustomValidity("");
-        if (!e.target.validity.valid) {
-            title = $(this).data('error')
-            e.target.setCustomValidity(title)
-        }
-        return true
-    }).on('oninput', function(e){
-        e.target.setCustomValidity("");
-    })
-
-    $("input").keyup(function(){
-        this.checkValidity() //seems to choke the first time
-        valid = this.checkValidity()
-        that = $(this)
-        val = that.val()
-        if (valid && val !== "") {
-            $(this).prev().show()
-        }
-        else {
-            $(this).prev().hide()
-        }
-
-    });
 });
 </script>
 {% endblock %}

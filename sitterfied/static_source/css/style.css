@@ -1999,5 +1999,112 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .form_style textarea {width:180px;padding:0 20px;}
 	/* Ondoarding final popup */
 .onb_final .fancybox-skin .stabs_block {display:block;}
+/* Landing page */
+.landing_top_bar .landing_logo {position:relative;left:0;}
+.landing_top_bar ul {float:left;margin:18px 0 10px 30px;}
+.landing_top_bar ul li:nth-last-child(4) {border:none;padding-right:0;margin-right:0;}
+.landing_top_bar ul li:nth-last-child(3) {margin-left:75px;}
+.landing_block .landing_top .right_info {float:none;clear:both;width:100%;max-width:100%;position:relative;}
+.landing_block .landing_top .right_info h1 {background:#fff;padding:30px 30px 50px 30px;font-size:32px;}
+.landing_block .landing_top .right_info .facebook_signup + p {padding-bottom:30px;}
+.landing_friends_img {float:none;max-width:100%;width:100%;margin:0 0 25px 0;}
+.landing_friends_img img {max-width:100%;height:auto;}
+.landing_friends_block {width:100%;padding-top:15px;box-shadow:rgba(0,0,0,.2) 1px 1px 2px 0;margin:0 0 30px 0;}
+.landing_friends_block .tit {float:none;width:auto;margin:0 10px 20px 10px;padding:12px;border-bottom:1px solid #dce0e0;font-size:18px;}
+.landing_friends_block .tit:after {content:'';display:block;height:0;clear:both;}
+.landing_friends_block .tit span {font-size:12px;line-height:36px;width:55px;padding-left:52px;height:36px;background:url(../images/icons/tag2.png) no-repeat;margin-right:-10px;}
+.landing_friends_block .tit span strong {font-size:16px;font-weight:normal;}
+.landing_friends_block .img {width:170px;height:170px;float:none;margin:0 auto 15px auto;}
+.landing_friends_block .img span {font-size:14px;padding:5px 0 5px 27px;width:143px;}
+.landing_friends_block .img span:before {width:24px;height:22px;background:url(../images/icons/stamp2.png) no-repeat;top:2px;left:1px;}
+.landing_friends_block .img img {width:170px;height:170px;}
+.landing_friends_block > ul {float:none;width:auto;margin:20px 40px 35px 40px;}
+.landing_friends_block > ul > li {font-size:14px;padding:5px 0 5px 25px;}
+.landing_friends_block > ul > li span {left:-5px;top:8px;}
+.landing_friends_block > ul > li:hover > ul {display:none;}
+.landing_friends_block .btns {padding:25px 0 15px 0;}
+.landing_friends_block .btns > a {font-size:18px;line-height:34px;width:143px;height:34px;float:none;margin:-40px auto 0 auto;}
+.landing_friends_block .btns > a:nth-child(2) {display:none;}
+.landing_friends_block .btns p {display:block;padding-bottom:4px;}
+.landing_block .landing_top .right_info .try {bottom:5px;left:10px;}
+.landing_block .landing_bottom .find_form_block {padding-top:80px;}
+.landing_block .landing_bottom .find_form_block ul li input[type="submit"] {margin:0;}
+.landing_block .landing_bottom .find_form_block ul li:last-child:before {left:15px;}
+.landing_block .landing_bottom .landing_wrapper {width:300px;padding:0 10px;}
+.landing_block .landing_bottom .landing_wrapper h2 {text-align:center;color:#104952;font:bold 33px 'ProximaNova';padding:15px 0 30px 0;}
+.landing_block .landing_bottom .landing_wrapper h2:first-child {padding:50px 0;}
+.landing_block .landing_bottom .landing_wrapper h2 span:before, .landing_block .landing_bottom .landing_wrapper h2 i:before {display:none;}
+.landing_block .landing_bottom .landing_wrapper .sfb_list {margin:0;}
+.landing_block .landing_bottom .landing_wrapper .sfb_list li {float:none;width:100%;margin-bottom:50px;}
+.landing_block .landing_bottom .landing_wrapper .sfb_list li:nth-child(2) {width:100%;padding:0;}
+.landing_block .landing_bottom .landing_wrapper .video_wrap img {max-width:100%;height:auto;}
+.landing_block .landing_bottom .landing_wrapper .sfg_list li {text-align:center;}
+.landing_block .landing_bottom .landing_wrapper .sfg_list li:nth-child(odd) img, .landing_block .landing_bottom .landing_wrapper .sfg_list li:nth-child(even) img {float:none;margin:0;max-width:100%;height:auto;}
+.landing_block .landing_bottom .landing_wrapper .sfg_list li h5 {padding:30px 0 15px 0;}
+.landing_block .landing_bottom .landing_wrapper .sfg_list li p {padding:0 0 15px 0;}
+.landing_block .landing_bottom .landing_wrapper .find_form_block {padding-left:0;}
+.landing_block .landing_bottom .landing_wrapper .free {background-position:right bottom;padding-left:0;padding-bottom:100px;}
+/* Onboarding block */
+.onboarding_block {padding:10px;}
+.onboarding_block > p:first-child img {max-width:100%;height:auto;}
+.onboarding_block .you_friends:before {width:1px;height:30px;border-top:none;border-left:1px solid #e3e3e3;bottom:auto;top:162px;left:138px;}
+.onboarding_block .you_friends p {float:none;margin:0 auto 45px auto;}
+.onboarding_block .you_friends p span {margin:0 auto 20px auto;}
+.onboarding_block .profile_block {padding:0 5px;}
+.onboarding_block .profile_block > p {padding-top:15px;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li:nth-child(2n) {width:auto;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li:nth-child(2n+1) {width:auto;margin-right:0;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li:nth-child(2n+1) p {margin-left:0;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li.pass input {float:none;width:76%;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li.pass strong {float:none;width:auto;padding:10px 0;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li .add_photo {float:none;width:auto;margin:0 0 0 -10px;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li .add_photo_desc {float:none;width:auto;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li.mom_group_items p > div {float:none;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li.mom_group_items p select {width:215px;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li.mom_group_items .button {float:left;margin-left:0;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li.mom_group_items span {width:210px;}
+.onboarding_block .onb_step3_left {float:none;width:auto;}
+.onboarding_block .onb_step3_left p:first-child select {width:260px;}
+.onboarding_block .onb_step3_left p:first-child .button {margin-left:0;}
+.onboarding_block .onb_step3_left p:first-child > span {width:150px;}
+.onboarding_block .onb_step3_left > div a {width:255px;font-size:18px;}
+.onboarding_block .onb_step3_left > div.connected p {float:none;width:auto;padding-top:10px;clear:both;}
+.onboarding_block .onb_step3_right {float:none;width:auto;}
+	/* Invites block */
+.invites_block {padding:45px 20px;}
+.invites_block h1 {font-size:38px;}
+.invites_block h1 span {display:block;margin:0 auto;}
+.invites_block h1 + p span:before {display:none;}
+.invites_block .invite_friends_count {width:252px;}
+.invites_block .invite_friends_count:before {width:252px;}
+.invites_block .invite_friends_count .filled {width:21px;}
+.invites_block .invite_friends_count p {left:-35px;width:110px;}
+.invites_block .invite_friends_count.step2 .filled {width:42px;}
+.invites_block .invite_friends_count.step2 p {left:-14px;}
+.invites_block .invite_friends_count.step3 .filled {width:63px;}
+.invites_block .invite_friends_count.step3 p {left:7px;}
+.invites_block .invite_friends_count.step4 .filled {width:84px;}
+.invites_block .invite_friends_count.step4 p {left:28px;}
+.invites_block .invite_friends_count.step5 .filled {width:105px;}
+.invites_block .invite_friends_count.step5 p {left:49px;}
+.invites_block .invite_friends_count.step6 .filled {width:126px;}
+.invites_block .invite_friends_count.step6 p {left:70px;}
+.invites_block .invite_friends_count.step7 .filled {width:147px;}
+.invites_block .invite_friends_count.step7 p {left:91px;}
+.invites_block .invite_friends_count.step8 .filled {width:168px;}
+.invites_block .invite_friends_count.step8 p {left:112px;}
+.invites_block .invite_friends_count.step9 .filled {width:189px;}
+.invites_block .invite_friends_count.step9 p {left:133px;}
+.invites_block .invite_friends_count.step10 .filled {width:210px;}
+.invites_block .invite_friends_count.step10 p {left:154px;}
+.invites_block .invite_friends_count.step11 .filled {width:231px;}
+.invites_block .invite_friends_count.step11 p {left:175px;}
+.invites_block .invite_friends_count.step12 .filled {width:252px;}
+.invites_block .invite_friends_count.step12 p {left:auto;right:0;width:auto;}
+.invites_block .invite_by_email, .invites_block .invite_social {padding:0;width:auto;float:none;border-right:none;}
+.invites_block .invite_share_link input[type="text"] {margin:7px;}
+
+
+
 }
 .avatarimage {height: 35px; width: 34px;}
