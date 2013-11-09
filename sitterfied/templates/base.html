@@ -35,7 +35,7 @@
 
   </head>
   <body {% block bodyclass %} {%endblock%}>
-	{% block body %}
+    {% block body %}
 	{% endblock %}
 
     <script id="IntercomSettingsScriptTag">
@@ -44,7 +44,7 @@
           created_at: '{{ request.user.date_joined|date:"U" }}',
           user_hash: '{{ user_hash }}',
           widget: {
-            activator: "#IntercomDefaultWidget"
+            activator: '{{ intercom_activator }}'
           },
           app_id: '{{ INTERCOM_APP_ID }}'
         };

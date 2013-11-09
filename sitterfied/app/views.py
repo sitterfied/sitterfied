@@ -85,6 +85,7 @@ def index(request, referred_by=None):
     return {'user_json':user_json,
             'user_hash': generate_intercom_user_hash(request.user.email),
             "parent_or_sitter": parent_or_sitter,
+            'intercom_activator': '#Intercom',
             "TEMPLATE":"index.html",
             "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
             "INTERCOM_APP_ID": settings.INTERCOM_APP_ID,
@@ -160,7 +161,8 @@ def static_page(request, template):
     return {'TEMPLATE': template,
             'user_json': get_user_json(request.user),
             'user_hash': generate_intercom_user_hash(request.user.email),
-            "INTERCOM_APP_ID": settings.INTERCOM_APP_ID
+            'intercom_activator': '#IntercomDefaultWidget',
+            'INTERCOM_APP_ID': settings.INTERCOM_APP_ID
     }
 
 
