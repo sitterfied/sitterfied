@@ -27,8 +27,9 @@ class RegistrationForm(ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password"}),
                                 label=_("Password"), )
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password (again)"}),
-                                label=_("Password (again)"))
+                                label=_("Password (again)"),)
 
+    email = forms.CharField(widget=forms.TextInput(attrs={"type":"email"}), label=_("Email"),)
     # tos = forms.BooleanField(widget=forms.CheckboxInput,
     #                          label=_(u'I have read and agree to the Terms of Service'),
     #                          error_messages={'required': _("You must agree to the terms to register")})
