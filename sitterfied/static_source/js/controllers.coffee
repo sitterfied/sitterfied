@@ -360,7 +360,15 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
 
-
+        showBioLink: (() ->
+            # hide read more link if text < 100 characters
+            debugger
+            bioLength = this.get('biography')?.length
+            if bioLength < 100
+                return false
+            else
+                return true
+        ).property('biography')
     )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
