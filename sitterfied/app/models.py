@@ -70,7 +70,7 @@ class User(AbstractUser, TimeStampedModel):
     cell = models.CharField(max_length=12, blank=True)
 
 
-    avatar = UploadcareImageField(blank=True, manual_crop="")
+    avatar = UploadcareImageField(blank=True, manual_crop="174x174 upscale")
     #avatar_url = models.URLField(blank=True)
     #objects = InheritanceManager()
 
