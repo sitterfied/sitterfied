@@ -390,17 +390,19 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .desc p a:not(.button) {padding-right:15px;padding-left:5px;color:#32c2bb;font-size:14px;background:url(../images/icons/arrow_bottom3_t.png) right center no-repeat;}
 .read_more {padding-right:15px;padding-left:5px;color:#32c2bb;font-size:14px;background:url(../images/icons/arrow_bottom3_t.png) right center no-repeat;}
 
-.header .top_info .desc > p:nth-child(-n+2) {float:left;padding:0 0 15px 35px;}
-.header .top_info .desc > p:nth-child(-n+2) a {font:16px/38px 'ProximaNova-Semibold';width:125px;height:38px;border-radius:4px;margin:0 26px 0 0;}
-.header .top_info .desc > p:nth-child(-n+2) [class^="icon_"] {top:7px;left:0;}
-.header .top_info .desc > p:nth-child(-n+2) a:nth-child(2) {width:125px;}
-.header .top_info .desc > p:nth-child(2) {color:#3ea7b8;font:22px 'ProximaNova';padding-bottom:15px;}
-.header .top_info .desc > p:nth-child(2) strong {font-family:'ProximaNova';}
-.header .top_info .desc > p:nth-child(2) span {border-bottom:1px solid #dde1e1;padding:0 20px 10px 0;}
+.header .top_info .desc p:nth-child(-n+4) {float:left;padding:0 0 15px 0px;}
+.header .top_info .desc p.sitter_profile_buttons {padding:0 0 15px 35px;}
+.header .top_info .desc p:nth-child(-n+4) a {font:16px/38px 'ProximaNova-Semibold';width:125px;height:38px;border-radius:4px;margin:0 26px 0 0;}
+.header .top_info .desc p:nth-child(-n+4) [class^="icon_"] {top:7px;left:0;}
+.header .top_info .desc p:nth-child(-n+4) a:nth-child(2) {width:125px;}
+.header .top_info .desc p:nth-child(-n+4) {color:#3ea7b8;font:22px 'ProximaNova';padding-bottom:15px;}
+.header .top_info .desc p:nth-child(-n+4) strong {font-family:'ProximaNova';}
+.header .top_info .desc p:nth-child(-n+4) span {border-bottom:1px solid #dde1e1;padding:0 20px 10px 0;}
+.header .top_info .desc span.short_bio {float: left;} 
 .header .top_info .desc .full_desc {display:none;cursor:pointer;position:absolute;top:100px;left:0;border:1px solid #3ea7b8;background:#fff;margin-right:10px;border-radius:13px;padding:35px 18px 20px 18px;box-shadow:rgba(49,48,48,.25) 4px 4px 12px 4px;}
 .header .top_info .desc .full_desc:before {content:'';position:absolute;top:-23px;left:87px;background:url(../images/icons/arrow_top7.png) no-repeat;display:block;width:27px;height:23px;}
 .header .top_info .desc .full_desc p {color:#616161;font-size:13px;padding:0 0 15px 0;}
-.header .top_info.show_full_desc {z-index:1;}
+.header .top_info.show_full_desc {z-index:3;}
 .header .top_info.show_full_desc .desc .full_desc {z-index:20;}
 .header .top_info .ico {float:left;width:253px;position:relative;padding:10px 0 0 0;}
 .header .top_info .ico ul li {color:#3ea7b8;font:14px 'ProximaNova-Semibold';position:relative;padding:15px 0 25px 75px;}
