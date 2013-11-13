@@ -80,7 +80,7 @@
 				<p>Friends or groups will be added here</p>-->
 				<ul>
 				  {% for friend in request.user.friends.all %}
-				  <li>
+				  <li data-friend-id="{{friend.id}}">
 					<a href="">
 					  <img src="{{friend.avatar_url}}" alt="" />
 					</a>
@@ -187,7 +187,12 @@ $(function () {
 	 return false
    })
    $(".delete").click(function(){
-       $(this).closest('li').remove();
+       li = $(this).closest('li')
+	   friend_id = li.data('friend-id')
+	   $.post("{% url "remove_friend" %}", {"friend_id":friend_id})
+	 li.remove()
+	 return false
+
    });
    $(".skip").click(function(){
 	 $("form").submit()

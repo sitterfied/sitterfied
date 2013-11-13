@@ -70,7 +70,7 @@ def get_user_json(user):
 
 @render_to()
 def index(request, referred_by=None):
-    form = AuthenticationForm() 
+    form = AuthenticationForm()
     if request.user.is_anonymous():
         return {'TEMPLATE': "landing.html",
                 "form": form,}
@@ -287,6 +287,17 @@ def invite_email_submit(request):
     for email in emails:
         send_html_email("You've been invited to Sitterfied", "hello@sitterfied.com", email, text, html)
 
+    return {}
+
+
+
+@ajax_request
+@login_required
+@require_POST
+def remove_friend(request):
+    friend_id = request.POST['friend_id']
+    friend = User.objects.get(id=friend_id)
+    request.user.friends.remove(friend)
     return {}
 
 
