@@ -141,6 +141,7 @@ function setGet(){
 
 
 $(function () {
+
     $("#back-top").hide();
     $(window).scroll(function () {
         if ($(this).scrollTop() > 150) {
@@ -181,7 +182,7 @@ $(function () {
      google_window = window.open("/googleoauthbegin/")
 	 google_window.onbeforeunload = function(){
          alert("google connected");
-
+	     $("form").ajaxSubmit()
 		 location.reload();
 	 }
 	 return false
@@ -208,7 +209,6 @@ use_fb_data = function() {
   var access_token, facebook_id, promise;
   access_token = FB.getAccessToken();
   facebook_id = FB.getUserID();
-   debugger
   return $.ajax({
       url: "/facebook_import/",
 	 type: "POST",
@@ -217,11 +217,11 @@ use_fb_data = function() {
 			 },
       success: function() {
          alert("facebook connected");
+	     $("form").ajaxSubmit()
 		 location.reload();
       }
     });
  };
-
 
 
 jQuery('.back-to-top').click(function () {

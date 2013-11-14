@@ -4,7 +4,7 @@ require({
         "cs": "require/cs",
         "ember": "lib/ember",
         "handlebars" : "lib/handlebars",
-		"model": "lib/ember-model-latest",
+		"model": "lib/ember-model",
         //"data": "lib/ember-data-latest",
         //"djangoRestAdapter": "lib/adapter",
 		'waypoints': 'lib/waypoints',

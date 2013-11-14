@@ -35,6 +35,7 @@ PIPELINE_JS = {
             'js/lib/jquery-ui-1.10.0.custom.min.js',
             'js/lib/select2.js',
             'js/lib/uploadcare-0.15.0.min.js',
+            'js/lib/jquery.form.min.js',
             'js/lib/PhoneFormat.js',
             'js/lib/jquery.formset.min.js',
             'js/facebook.js',
