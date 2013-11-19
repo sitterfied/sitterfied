@@ -86,15 +86,15 @@
 					</a>
 					<a href="">{{friend.get_full_name|title}}
 					</a>
-					<a href="" class="delete">&nbsp;
+					<a href="" class="delete delete-friend">&nbsp;
 					</a>
 				  </li>
 				  {% endfor %}
 				  {% for group in request.user.sitter_groups.all %}
-				  <li class="group">
+				  <li data-group-id="{{group.id}}" class="group">
 					<a href="#">{{group.name}}
 					</a>
-					<a href="#" class="delete">&nbsp;
+					<a href="#" class="delete delete-group">&nbsp;
 					</a>
 				  </li>
 				  {% endfor %}
@@ -187,13 +187,19 @@ $(function () {
 	 }
 	 return false
    })
-   $(".delete").click(function(){
+   $(".delete-friend").click(function(){
        li = $(this).closest('li')
 	   friend_id = li.data('friend-id')
 	   $.post("{% url "remove_friend" %}", {"friend_id":friend_id})
 	 li.remove()
 	 return false
-
+   });
+   $(".delete-group").click(function(){
+       li = $(this).closest('li')
+	   group_id = li.data('group-id')
+	   $.post("{% url "remove_group" %}", {"group_id":group_id})
+	 li.remove()
+	 return false
    });
    $(".skip").click(function(){
 	 $("form").submit()

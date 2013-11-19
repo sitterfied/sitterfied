@@ -300,6 +300,16 @@ def remove_friend(request):
     request.user.friends.remove(friend)
     return {}
 
+@ajax_request
+@login_required
+@require_POST
+def remove_group(request):
+    group_id = request.POST['group_id']
+    group = Group.objects.get(id=group_id)
+    request.user.sitter_groups.remove(group)
+    return {}
+
+
 
 
 

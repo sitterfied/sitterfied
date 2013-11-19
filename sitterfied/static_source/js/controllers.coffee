@@ -67,6 +67,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             toBlock = groups.findProperty('id', group.get('id'))
             groups.removeObject(toBlock)
             @set('isDirty', true)
+            @get('content').save()
 
 
         newChild: () ->
