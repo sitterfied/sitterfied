@@ -223,7 +223,7 @@ def login_ajax(request,
     return {"user":user_json}
 
 
-
+from django.contrib.auth import authenticate
 
 @sensitive_post_parameters()
 @csrf_protect
@@ -234,8 +234,13 @@ def login_facebook(request):
     """
     Displays the login form and handles the login action.
     """
-    import pdb
-    pdb.set_trace()
+    facebook_id = request.POST['id']
+
+    user = authenticate(id=facebook_id)
+    auth_login(request, user)
+    if request.session.test_cookie_worked():
+        request.session.delete_test_cookie()
+
     return {}
 
 

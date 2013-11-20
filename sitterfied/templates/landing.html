@@ -11,15 +11,10 @@ use_fb_data = function(){
   var access_token, facebook_id, promise;
   access_token = FB.getAccessToken();
   facebook_id = FB.getUserID();
-  return $.ajax({
-     url: "{% url "login-facebook" %}",
-	 type: "POST",
-	 data: {"token":access_token,
-			"id": facebook_id
-		},
-     success: function() {
-     }
-    });
+   return $.post("{% url "login-facebook" %}",{"token":access_token,"id": facebook_id}
+				 ).done(function(result){
+	 location.reload();
+   });
 }
 
 $(function(){
