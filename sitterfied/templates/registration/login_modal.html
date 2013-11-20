@@ -26,13 +26,13 @@
         {{ form.password }}
       </li>
 	</ul>
-	
-    <p>                
+
+    <p>
       <input type="hidden" name="next" value="/" />
       <input type="submit" class="button button_edit" value="LOG IN" />
     </p>
 	<p>Don’t have an account?
-      <a href="{% url 'signup' %}">Sign up</a>
+      <a href="{% url 'onboarding1' %}">Sign up</a>
     </p>
   </form>
 </div>
@@ -42,12 +42,12 @@
   $(document).ready(function() {
     $('.login-trigger').fancybox({
         scrolling   : "no",
-        wrapCSS     : "onb_final",              
+        wrapCSS     : "onb_final",
         maxWidth    : 960,
         maxHeight   : 800,
         fitToView   : false,
         width       : '90%',
         height      : '90%',
-        });  
+        });
     });
 </script>
