@@ -26,7 +26,7 @@ $(function(){
    $(".facebook_signup").click(function(){
 	 FB.getLoginStatus(function(response) {
 	   if (response.status === "connected") {
-		 debugger
+		 return use_fb_data();
 	   } else if (response.status === "not_authorized") {
 		 return FB.login(function() {
 		   return use_fb_data();

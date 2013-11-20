@@ -8,6 +8,8 @@
 {% load compressed %}
 {% compressed_js 'onboarding' %}
 {% include "csrf.html" %}
+<script src="{% static "js/lib/PhoneFormat.js" %}">
+
 <script>
   UPLOADCARE_CROP = "174x174 upscale";
 </script>

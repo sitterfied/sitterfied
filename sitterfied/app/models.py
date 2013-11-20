@@ -59,7 +59,7 @@ class User(AbstractUser, TimeStampedModel):
     membership_exp_date  = models.DateTimeField(null=True)
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
-    facebook_id = models.IntegerField(null=True, blank=True)
+    facebook_id = models.IntegerField(null=True, blank=True, unique=True)
     google_imported = models.BooleanField(default=False)
 
     address1 = models.CharField(max_length=255, blank=True)

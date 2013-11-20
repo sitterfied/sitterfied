@@ -60,8 +60,8 @@
 	 $.post("{% url "login-ajax" %}", {"username":username, "password":password}).done(function(result){
 	   location.reload();
 	 }).error(function(result){
-	   $("#id_username").addClass("error_field")
-	   $("#id_password").addClass("error_field")
+	   $("#id_username").addClass("error_field_login")
+	   $("#id_password").addClass("error_field_login")
 	   $("#errormessage").fadeIn()
 	 })
 	 return false;

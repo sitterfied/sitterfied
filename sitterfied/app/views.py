@@ -234,6 +234,8 @@ def login_facebook(request):
     """
     Displays the login form and handles the login action.
     """
+    import pdb
+    pdb.set_trace()
     return {}
 
 
