@@ -15,7 +15,10 @@
       </span>
     </div>
 	<ul>
-	  <li>
+	  <li fclass="error_text" id="errormessage">
+		<p>incorrect email or password</p>
+	  </li>
+	  <li >
         <span class="icon_email4">&nbsp;
         </span>
         {{ form.username }}
@@ -29,17 +32,18 @@
 
     <p>
       <input type="hidden" name="next" value="/" />
-      <input type="submit" class="button button_edit" value="LOG IN" />
+      <input id="loginbtn" type="submit" class="button button_edit" value="LOG IN" />
     </p>
+  </form>
 	<p>Don’t have an account?
       <a href="{% url 'onboarding1' %}">Sign up</a>
     </p>
-  </form>
 </div>
 <!-- login_popup -->
 
 <script>
   $(document).ready(function() {
+   $("#errormessage").hide()
     $('.login-trigger').fancybox({
         scrolling   : "no",
         wrapCSS     : "onb_final",
@@ -49,5 +53,21 @@
         width       : '90%',
         height      : '90%',
         });
-    });
+
+   $("form").submit(function(){
+	 username = $("#id_username").val()
+	 password = $("#id_password").val()
+	 $.post("{% url "login-ajax" %}", {"username":username, "password":password}).done(function(result){
+	   location.reload();
+	 }).error(function(result){
+	   $("#id_username").addClass("error_field")
+	   $("#id_password").addClass("error_field")
+	   $("#errormessage").fadeIn()
+	 })
+	 return false;
+   })
+ });
+
+
+
 </script>
