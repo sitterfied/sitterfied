@@ -28,10 +28,7 @@
 			</p>
 			<div class="onb_step3_left form_style">
 			  <p>
-				<form method="post">
-				  {% csrf_token %}
-				{{form.sitter_groups}}
-				</form>
+				<div id="groups" class="select2-container select2-container-multi"></div>
 			  </p>
 			  <p>Find a person, group, school, club or organization
 			  </p>
@@ -78,7 +75,7 @@
 			<div class="onb_step3_right">
 				<!--<p>This is your network on Sitterfied</p>
 				<p>Friends or groups will be added here</p>-->
-				<ul>
+				<ul id="friendlist">
 				  {% for friend in request.user.friends.all %}
 				  <li data-friend-id="{{friend.id}}">
 					<a href="">
@@ -139,8 +136,51 @@ function setGet(){
 
 }
 
+function addGroupToSideBar(group){
+     if ($("[data-group-id='" + group.id  + "']").length){
+	 return
+	 }
+     group_html = $('<li class="group"><a href="#"></a><a href="#" class="delete delete-group">&nbsp;</a></li>')
+	 group_id = group.id
+	 group_name = group.name
+	 group_html.attr("data-group-id", group_id)
+     $("a", group_html).first().html(group_name)
+     $("#friendlist").append($(group_html))
+}
 
 $(function () {
+
+
+   $("#groups").select2({
+    placeholder: "Search for a group",
+    minimumInputLength: 1,
+	formatResult: function(result, container, query, escapeMarkup) {
+	   return result.name
+     },
+
+    ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+        url: "/api/groups",
+        dataType: 'json',
+        data: function (term, page) {
+            return {
+                name: term, // search term
+                page_limit: 10,
+            };
+        },
+        results: function (data, page) { // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to alter remote JSON data
+            return {results: data};
+        }
+    },
+   });
+   $("#groups").on('change', function (event) {
+	 group = event.added
+	 $.post("{% url "add_group" %}", {"group_name":group.name})
+	 $("#groups").select2("val","")
+	 addGroupToSideBar(group)
+   })
+
+
 
     $("#back-top").hide();
     $(window).scroll(function () {
@@ -153,17 +193,12 @@ $(function () {
    $("select").select2({ width: 'resolve' })
 
 
+
    $("#newgroup-button").click(function(event){
 	 newGroupName = $("#newgroup-input").val()
-	 $.post("/api/groups/", {name: newGroupName}).done(function(data){
-	   newGroup = $("<option>");
-	   newGroup.attr("value", data.id);
-	   newGroup.text(data.name);
-	   $("#id_sitter_groups").append(newGroup);
-	   $("#newgroup-input").val("")
-	   oldval = $("#id_sitter_groups").select2("val")
-	   oldval.push(data.id)
-	   $("#id_sitter_groups").select2("val", oldval)
+	 $("#newgroup-input").val("")
+	 $.post("{% url "add_group" %}", {"group_name":newGroupName}).done(function(data){
+	   addGroupToSideBar(data)
 	 })
    });
    $("#facebook").click(function(){
@@ -194,7 +229,8 @@ $(function () {
 	 li.remove()
 	 return false
    });
-   $(".delete-group").click(function(){
+
+   $(document).on("click", ".delete-group", function(){
        li = $(this).closest('li')
 	   group_id = li.data('group-id')
 	   $.post("{% url "remove_group" %}", {"group_id":group_id})

@@ -136,13 +136,10 @@ def onboarding2(request):
 @render_to("onboarding3.html")
 def onboarding3(request):
     if request.method =="POST":
-        form = GroupsForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            if hasattr(request.user, 'parent'):
-                return redirect("/search?first_time=1")
-            else:
-                return redirect("/profile")
+        if hasattr(request.user, 'parent'):
+            return redirect("/search?first_time=1")
+        else:
+            return redirect("/profile")
     form = GroupsForm(instance=request.user)
     return {"form":form}
 
@@ -186,6 +183,14 @@ def network_search(request):
     return Response(users)
 
 
+@api_view(['GET'])
+def group_search(request):
+    search_term = request.GET.get('search', '')
+    groups = [{'label':g.name,
+               'value':g.name,
+               "type":"group",
+               "id":g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
+    return Response(groups)
 
 
 def error(request):
@@ -299,7 +304,6 @@ def remove_friend(request):
     friend = User.objects.get(id=friend_id)
     request.user.friends.remove(friend)
     return {}
-
 @ajax_request
 @login_required
 @require_POST
@@ -309,9 +313,14 @@ def remove_group(request):
     request.user.sitter_groups.remove(group)
     return {}
 
-
-
-
+@ajax_request
+@login_required
+@require_POST
+def add_group(request):
+    group_name = request.POST['group_name']
+    group, created = Group.objects.get_or_create(name=group_name)
+    request.user.sitter_groups.add(group)
+    return {"id":group.id,"name":group.name}
 
 
 @render_to('unsubscribe.html')

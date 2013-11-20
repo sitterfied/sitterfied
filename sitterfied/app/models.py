@@ -88,11 +88,8 @@ class User(AbstractUser, TimeStampedModel):
             return 'Parent'
 
 
-
-
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
-
 
 
 class Phone(TimeStampedModel):
