@@ -89,6 +89,7 @@ def index(request, referred_by=None):
             "first_time": request.GET.get("first_time", "")
     }
 
+import facebook
 @render_to()
 def onboarding2(request):
     ChildFormSet = inlineformset_factory(Parent, Child, form=ChildForm, extra=1)
@@ -97,6 +98,12 @@ def onboarding2(request):
             form = SitterRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
+                fb_id = request.session.get("FACEBOOK_ID", None)
+                fb_token = request.session.get("FACEBOOK_TOKEN", None)
+                if fb_id:
+                    user.facebook_token = fb_token
+                    user.facebook_id = fb_id
+                    user.save()
                 auth_login(request, user)
                 return redirect("onboarding3")
             else:
@@ -106,6 +113,12 @@ def onboarding2(request):
             form = ParentRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
+                fb_token = request.session.get("FACEBOOK_TOKEN", None)
+                if fb_id:
+                    user.facebook_token = fb_token
+                    user.facebook_id = fb_id
+                    user.save()
+
                 formset = ChildFormSet(request.POST, instance=user.parent)
                 if formset.is_valid():
                     formset.save()
@@ -117,13 +130,26 @@ def onboarding2(request):
                         "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form, "formset":formset}
 
     if request.method == "GET":
+        fb_id = request.session.get("FACEBOOK_ID", None)
+        fb_token = request.session.get("FACEBOOK_TOKEN", None)
+        if fb_id:
+            graph = facebook.GraphAPI(fb_token)
+            me = graph.get_object("me")
+            initial = {"first_name":me.get('first_name', ""),
+                      "last_name":me.get('last_name', ""),
+                      "gender":me.get('gender', ""),
+                      "email":me.get("email", "")
+                  }
+
+        else:
+            initial = {}
         parent_or_sitter = request.GET.get('parent_or_sitter', "parent")
         if parent_or_sitter.lower() == "sitter":
-            form = SitterRegisterForm()
+            form = SitterRegisterForm(initial=initial)
             template = "onboardingsitter.html"
             formset = None
         else:
-            form = ParentRegisterForm()
+            form = ParentRegisterForm(initial=initial)
             dummy_user = User()
             formset = ChildFormSet(instance=dummy_user)
             template = "onboardingparent.html"
@@ -237,6 +263,12 @@ def login_facebook(request):
     facebook_id = request.POST['id']
 
     user = authenticate(id=facebook_id)
+    if not user:
+        request.session["FACEBOOK_ID"] = facebook_id
+        request.session["FACEBOOK_TOKEN"] = request.POST['token']
+
+        return HttpResponseUnauthorized()
+
     auth_login(request, user)
     if request.session.test_cookie_worked():
         request.session.delete_test_cookie()

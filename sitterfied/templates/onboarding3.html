@@ -208,7 +208,7 @@ $(function () {
 	   } else if (response.status === "not_authorized") {
 		 return FB.login(function() {
 		   return use_fb_data();
-		 });
+		 }, {scope: 'email'});
 	   }
 	 }, true);
 	 return false
