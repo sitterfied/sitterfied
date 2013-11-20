@@ -6,11 +6,46 @@
 {% load compressed %}
 {% compressed_js 'onboarding' %}
 {% include "csrf.html" %}
+<script type="text/javascript">
+use_fb_data = function(){
+  var access_token, facebook_id, promise;
+  access_token = FB.getAccessToken();
+  facebook_id = FB.getUserID();
+  return $.ajax({
+     url: "{% url "login-facebook" %}",
+	 type: "POST",
+	 data: {"token":access_token,
+			"id": facebook_id
+		},
+     success: function() {
+     }
+    });
+}
+
+$(function(){
+   $(".facebook_signup").click(function(){
+	 FB.getLoginStatus(function(response) {
+	   if (response.status === "connected") {
+		 debugger
+	   } else if (response.status === "not_authorized") {
+		 return FB.login(function() {
+		   return use_fb_data();
+		 });
+	   }
+	 }, true);
+	 return false
+   })
+})
+</script>
+
 {% endblock %}
 {% block title %}
 <title>Welcome to Sitterfied!</title>
 {% endblock %}
 {%block bodyclass %}class="landing_bg"{% endblock %}
+
+
+
 
 {% block body %}
 

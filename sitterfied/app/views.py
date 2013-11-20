@@ -222,6 +222,21 @@ def login_ajax(request,
     user_json = get_user_json(request.user)
     return {"user":user_json}
 
+
+
+
+@sensitive_post_parameters()
+@csrf_protect
+@never_cache
+@require_POST
+@ajax_request
+def login_facebook(request):
+    """
+    Displays the login form and handles the login action.
+    """
+    return {}
+
+
 from django.contrib.auth import login
 
 class AjaxRegistrationView(RegistrationView):
