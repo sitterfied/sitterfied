@@ -1,4 +1,5 @@
 # Create your views here.
+from datetime import datetime
 from django.contrib.auth import login as auth_login
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.csrf import csrf_protect
@@ -135,10 +136,17 @@ def onboarding2(request):
         if fb_id:
             graph = facebook.GraphAPI(fb_token)
             me = graph.get_object("me")
+            birthday = me.get("birthday", "")
+            if birthday:
+                dob = datetime.strptime(birthday, "%m/%d/%Y")
+            else:
+                dob = ""
             initial = {"first_name":me.get('first_name', ""),
                       "last_name":me.get('last_name', ""),
                       "gender":me.get('gender', ""),
-                      "email":me.get("email", "")
+                      "email":me.get("email", ""),
+                       'dob':dob,
+
                   }
 
         else:
