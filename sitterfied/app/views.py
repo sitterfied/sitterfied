@@ -102,9 +102,7 @@ def onboarding2(request):
                 fb_id = request.session.get("FACEBOOK_ID", None)
                 fb_token = request.session.get("FACEBOOK_TOKEN", None)
                 if fb_id:
-                    user.facebook_token = fb_token
-                    user.facebook_id = fb_id
-                    user.save()
+                    facebook_import_logic(user, fb_token, fb_id)
                 auth_login(request, user)
                 return redirect("onboarding3")
             else:
@@ -116,9 +114,7 @@ def onboarding2(request):
                 user = form.save()
                 fb_token = request.session.get("FACEBOOK_TOKEN", None)
                 if fb_id:
-                    user.facebook_token = fb_token
-                    user.facebook_id = fb_id
-                    user.save()
+                    facebook_import_logic(user, fb_token, fb_id)
 
                 formset = ChildFormSet(request.POST, instance=user.parent)
                 if formset.is_valid():
@@ -309,27 +305,21 @@ class AjaxRegistrationView(RegistrationView):
         return HttpResponseUnauthorized()
 
 
-@ajax_request
-@login_required
-def facebook_import(request):
-    user = request.user
-    if request.method == "POST":
-        token = request.POST['token']
-        fb_id = request.POST['id']
-        user.facebook_token = token
-        user.facebook_id = fb_id
-        user.save()
+def facebook_import_logic(user, token, fb_id):
+    user.facebook_token = token
+    user.facebook_id = fb_id
+    user.save()
     fb = Facebook(user.facebook_token)
     response = fb.me.friends()
     facebook_ids = [friend['id'] for friend in response['data']]
     friends = User.objects.filter(facebook_id__in=facebook_ids)
-    ThroughModel = user.users_in_network.through
-    models_to = (ThroughModel(from_user_id=user.id,
-                              to_user_id=friend.id) for friend in friends)
-    models_frm = (ThroughModel(to_user_id=user.id,
-                               from_user_id=friend.id) for friend in friends)
-    models = chain(models_to, models_frm)
-    ThroughModel.objects.bulk_create(models)
+    user.friends.add(*friends)
+
+
+@ajax_request
+@login_required
+def facebook_import(request):
+    facebook_import_logic(request.user, request.POST['token'], request.POST['id'])
     return {}
 
 
