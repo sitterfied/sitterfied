@@ -43,16 +43,10 @@ def oauth2callback(request):
         pass
 
     user = request.user
-    friends = User.objects.filter(email__in=emails).exclude(id__in=user.users_in_network.values('id')).exclude(id=request.user.id)
+    friends = User.objects.filter(email__in=emails).exclude(id=request.user.id)
     user.google_imported = True
     user.save()
-    ThroughModel = user.users_in_network.through
-    models_to = (ThroughModel(from_user_id=user.id,
-                              to_user_id=friend.id) for friend in friends)
-    models_frm = (ThroughModel(to_user_id=user.id,
-                               from_user_id=friend.id) for friend in friends)
-    models = chain(models_to, models_frm)
-    ThroughModel.objects.bulk_create(models)
+    user.friends.add(*friends)
     return HttpResponse("gmail successfully imported")
 
 #in google.py
