@@ -319,7 +319,7 @@ def facebook_import_logic(user, token, fb_id):
 @ajax_request
 @login_required
 def facebook_import(request):
-    facebook_import_logic(request.user, request.POST['token'], request.POST['id'])
+    facebook_import_logic(request.user, request.user.facebook_token, request.user.facebook_id)
     return {}
 
 
