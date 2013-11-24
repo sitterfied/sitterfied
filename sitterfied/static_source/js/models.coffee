@@ -364,7 +364,7 @@ define ['jquery'
 
         biographyPList: (() ->
             bio = @get('biography')
-            return bio?.split("\n\n")
+            return bio?.split(/\r?\n\r?\n/)
         ).property('biography')
 
         in_friends_team: attr(Boolean)
@@ -415,7 +415,7 @@ define ['jquery'
             date = @get('dob')
             if not date
                 return
-            if arguments.length == 1
+            if arguments.length == 1 or not value
                 return date.getMonth()
             else
                 date.setMonth(value)
@@ -427,7 +427,7 @@ define ['jquery'
             date = @get('dob')
             if not date
                 return
-            if arguments.length == 1
+            if arguments.length == 1 or not value
                 return date.getDate()
             else
                 date.setDate(value)
@@ -438,9 +438,10 @@ define ['jquery'
             date = @get('dob')
             if not date
                 return
-            if arguments.length == 1
+            if arguments.length == 1 or not value
                 return date.getFullYear()
             else
+
                 date.setFullYear(value)
                 @set('dob', date)
         ).property('dob')
