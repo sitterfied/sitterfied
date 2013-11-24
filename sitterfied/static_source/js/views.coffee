@@ -382,6 +382,25 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
 
 
 
+    Sitterfied.ButtonAjaxStatusView = Em.View.extend
+        templateName: "ajaxButton"
+        action: null
+        save: () ->
+            action = @get('controller').get(@get('action'))
+            promise = action()
+            @setupAjax(promise)
+        setupAjax: (promise) ->
+            promise.done () ->
+                @$(".saved").fadeIn()
+                Em.later () ->
+                    @$(".saved").fadeOut(), 5000
+            .error () ->
+                @$(".error").fadeIn()
+                Em.later () ->
+                    @$(".error").fadeOut(), 5000
+            .alwaysdone () ->
+                @$(".loading").hide()
+
     #Sitterfied.BookingView = Em.View.extend
 
 
