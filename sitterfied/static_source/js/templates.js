@@ -184,6 +184,53 @@ function program5(depth0,data) {
   return buffer;
   
 });
+Ember.TEMPLATES["resetAjaxButton"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("\n  <img class=\"loading\" src=\"/static/images/loading.gif\">\n");
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("\n  <span class=\"saved\">Saved!</span>\n");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("\n  <span class=\"error\">There was an error saving your data</span>\n");
+  }
+
+  data.buffer.push("<a class=\"button button_small button_cancel\" ");
+  hashContexts = {'target': depth0};
+  hashTypes = {'target': "ID"};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "doAction", {hash:{
+    'target': ("view")
+  },contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Reset</a>\n");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "view.isLoading", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "view.isSaved", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "view.isError", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  return buffer;
+  
+});
 Ember.TEMPLATES["login"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -281,11 +328,13 @@ function program1(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n		<p>Please indicate your typical availability here.\n          <span>\n            <img src=\"/static/images/available.jpg\" alt=\"\" />Available\n            <img src=\"/static/images/unavailable.jpg\" alt=\"\" />Unavailable\n          </span>\n          <a class=\"button button_small\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSchedlue", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a></p>\n		<ul>\n		  <li>\n			<ul>\n			  <li><a ");
+  data.buffer.push("\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n		<p>Please indicate your typical availability here.\n          <span>\n            <img src=\"/static/images/available.jpg\" alt=\"\" />Available\n            <img src=\"/static/images/unavailable.jpg\" alt=\"\" />Unavailable\n          </span>\n          ");
+  hashContexts = {'action': depth0};
+  hashTypes = {'action': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.AjaxStatusButtonView", {hash:{
+    'action': ("saveSchedlue")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n		<ul>\n		  <li>\n			<ul>\n			  <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "checkAll", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -1280,11 +1329,13 @@ function program13(depth0,data) {
     'value': ("false"),
     'name': ("pref4")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                    <label for=\"no9\">NO</label>\n                  </p>\n				  <a class=\"button button_small\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n");
+  data.buffer.push("\n                    <label for=\"no9\">NO</label>\n                  </p>\n                  ");
+  hashContexts = {'action': depth0};
+  hashTypes = {'action': "ID"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.AjaxStatusButtonView", {hash:{
+    'action': ("saveSettings")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n				</li>\n			  </ul>\n			</li>\n		  </ul>\n		</form>\n	  </div>\n	  <!-- /profile_block -->\n");
   return buffer;
   
 });
@@ -5283,11 +5334,13 @@ function program6(depth0,data) {
     'id': ("mn_check4"),
     'checkedBinding': ("mobile_upcoming_booking_remind")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"mn_check4\">I have an upcoming booking</label></p>\n		  </li>\n		  <li><a class=\"button button_small\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a></li>\n		</ul>\n		<h4><span class=\"icon_eset\">&nbsp;</span>Email Settings</h4>\n        <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>\n		<ul class=\"clear\">\n		  <li>Notify me when</li>\n		  <li>\n            ");
+  data.buffer.push("<label for=\"mn_check4\">I have an upcoming booking</label></p>\n		  </li>\n		  <li>\n            ");
+  hashContexts = {'action': depth0};
+  hashTypes = {'action': "ID"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.AjaxStatusButtonView", {hash:{
+    'action': ("saveSettings")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n          </li>\n		</ul>\n		<h4><span class=\"icon_eset\">&nbsp;</span>Email Settings</h4>\n        <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>\n		<ul class=\"clear\">\n		  <li>Notify me when</li>\n		  <li>\n            ");
   hashTypes = {};
   hashContexts = {};
   stack2 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -5313,11 +5366,13 @@ function program6(depth0,data) {
     'id': ("es_check6"),
     'checkedBinding': ("email_blog")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"es_check6\">There’s a new blog post</label></p>\n		  </li>\n		  <li><a class=\"button button_small\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a></li>\n\n		</ul>\n        ");
+  data.buffer.push("<label for=\"es_check6\">There’s a new blog post</label></p>\n		  </li>\n		  <li>\n            ");
+  hashContexts = {'action': depth0};
+  hashTypes = {'action': "ID"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.AjaxStatusButtonView", {hash:{
+    'action': ("saveSettings")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n          </li>\n\n		</ul>\n        ");
   return buffer;
   }
 function program7(depth0,data) {
@@ -5484,11 +5539,13 @@ function program15(depth0,data) {
     'type': ("password"),
     'valueBinding': ("new_password2")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p></li>\n			<li><a class=\"button button_small button_cancel\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "resetPassword", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">Reset</a></li>\n		  </ul>\n		</div>\n		<p><a ");
+  data.buffer.push("</p></li>\n			<li>\n              ");
+  hashContexts = {'action': depth0};
+  hashTypes = {'action': "ID"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ResetAjaxStatusButtonView", {hash:{
+    'action': ("resetPassword")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n            </li>\n		  </ul>\n		</div>\n		<p><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteAccount", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));

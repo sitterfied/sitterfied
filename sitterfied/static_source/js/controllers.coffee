@@ -59,7 +59,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 new_password2: @get('new_password2')
                 old_password: @get('old_password')
             }
-            $.post('password_change/', data).success(alert('password changed'))
+            $.post('password_change/', data)
 
         invite: () ->
             alert("invite friends")

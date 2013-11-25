@@ -410,6 +410,10 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                     Em.run.later (=> @set("ajaxState", "done")), 5000
             )
 
+
+    Sitterfied.ResetAjaxStatusButtonView = Sitterfied.AjaxStatusButtonView.extend
+        templateName: "resetAjaxButton"
+
     #Sitterfied.BookingView = Em.View.extend
 
 
