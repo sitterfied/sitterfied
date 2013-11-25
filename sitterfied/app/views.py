@@ -32,6 +32,7 @@ from ecl_facebook import Facebook
 from signup import RegistrationView
 
 from rest_framework.renderers import JSONRenderer
+from drf_ujson.renderers import UJSONRenderer
 from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
 from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
 
@@ -41,6 +42,22 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
+
+
+
+try:
+    if 'devserver' not in settings.INSTALLED_APPS:
+        raise ImportError
+    from devserver.modules.profile import devserver_profile
+except ImportError:
+    from functools import wraps
+    class devserver_profile(object):
+        def __init__(self, *args, **kwargs):
+            pass
+        def __call__(self, func):
+            def nothing(*args, **kwargs):
+                return func(*args, **kwargs)
+            return wraps(func)(nothing)
 
 class HttpResponseUnauthorized(HttpResponse):
     status_code = 401
@@ -64,11 +81,11 @@ def get_user_json(user):
                                                                           'reviews',
                                                                       ).get(id=user.id)
     serialized = seralizer(classed_user)
-    user_json = JSONRenderer().render(serialized.data)
+    user_json = UJSONRenderer().render(serialized.data)
     return user_json
 
 
-
+@devserver_profile(follow=[get_user_json])
 @render_to()
 def index(request, referred_by=None):
     form = AuthenticationForm()

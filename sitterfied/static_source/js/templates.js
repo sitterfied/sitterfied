@@ -137,6 +137,53 @@ function program7(depth0,data) {
   return buffer;
   
 });
+Ember.TEMPLATES["ajaxButton"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("\n  <img class=\"loading\" src=\"/static/images/loading.gif\">\n");
+  }
+
+function program3(depth0,data) {
+  
+  
+  data.buffer.push("\n  <span class=\"saved\">Saved!</span>\n");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("\n  <span class=\"error\">There was an error saving your data</span>\n");
+  }
+
+  data.buffer.push("<a class=\"button button_small\" ");
+  hashContexts = {'target': depth0};
+  hashTypes = {'target': "ID"};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "doAction", {hash:{
+    'target': ("view")
+  },contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "view.isLoading", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "view.isSaved", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "view.isError", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  return buffer;
+  
+});
 Ember.TEMPLATES["login"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -795,11 +842,13 @@ function program13(depth0,data) {
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextArea", {hash:{
     'valueBinding': ("biography")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p>\n				  <a class=\"button button_small\" ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_gender2\">&nbsp;</span>Gender</li>\n				<li>\n				  <p>\n                    ");
+  data.buffer.push("</p>\n\n                  ");
+  hashContexts = {'action': depth0};
+  hashTypes = {'action': "ID"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.AjaxStatusButtonView", {hash:{
+    'action': ("saveSettings")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_gender2\">&nbsp;</span>Gender</li>\n				<li>\n				  <p>\n                    ");
   hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
   hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{

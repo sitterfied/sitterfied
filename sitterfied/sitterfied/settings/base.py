@@ -123,9 +123,8 @@ INSTALLED_APPS = (
     'south',
     'pipeline',
     'pyuploadcare.dj',
+    'favicon',
     'app',
-
-
 
 
 )

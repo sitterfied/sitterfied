@@ -1,4 +1,4 @@
-define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
+define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitterfied) ->
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
         needs: ['certifications'
@@ -19,16 +19,18 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         ).property('parent_or_sitter', 'Sitterfied.accountType')
 
         saveSettings: () ->
-            Em.run.begin()
             model = this.get('model')
             model.set('isDirty', true)
-            model.save()
-            model.get('settings').save()
-            model.get('children')?.save().then((children) ->
+            modelP = model.save()
+            settings = model.get('settings')
+            if settings.get("isLoaded")
+                settings.save()
+            childrenP = model.get('children')?.save()
+            childrenP?.then((children) ->
                 Sitterfied.currentUser.get('children').set('data', children)
                 @newChild()
             )
-            Em.run.end()
+            return Em.RSVP.all([modelP, settingsP?, childrenP])
 
         deleteAccount: () ->
             imsure = confirm("are you sure you want to delete your account? This cannot be undone")

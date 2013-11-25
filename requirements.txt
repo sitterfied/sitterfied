@@ -24,7 +24,7 @@ django-registration
 unipath
 pytz
 feedparser
-
+django-favicon
 djangorestframework
 
 #REDIS CACHING
@@ -62,3 +62,4 @@ oauth2client
 gdata
 lxml
 facebook-sdk
+drf_ujson
