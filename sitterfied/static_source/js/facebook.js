@@ -24,15 +24,12 @@ window.fbAsyncInit = function() {
 window.FBConnect = function() {
     // First time someone gets to the page we are going to check if they are connected - if they are we then load up their picture list
     FB.getLoginStatus(function(response) {
-        debugger
         if (response.status === 'connected') {
             var access_token = FB.getAccessToken();
-            debugger
-
         }
         else if (response.status === 'not_authorized')
             FB.login(function(){
-                FBConnect()
-            })
+                FBConnect();
+            }, {scope: 'email'});
     });
 }

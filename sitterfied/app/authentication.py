@@ -24,3 +24,23 @@ class EmailAuthBackend(object):
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None
+
+class FacebookAuthBackend(object):
+    """
+    Facebook Authentication Backend
+
+    Allows a user to sign in using a facebook token rather than
+    a username/password pair.
+    """
+    def authenticate(self, id=None):
+        try:
+             return User.objects.get(facebook_id=id)
+        except User.DoesNotExist:
+            return None
+
+    def get_user(self, user_id):
+        """ Get a User object from the user_id. """
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None

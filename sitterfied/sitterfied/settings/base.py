@@ -174,7 +174,7 @@ ALLOWED_HOSTS =[
 ]
 
 
-AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend','app.authentication.FacebookAuthBackend',)
 
 
 from .pipeline import *
