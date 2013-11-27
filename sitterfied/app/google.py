@@ -8,6 +8,7 @@ from itertools import chain
 import requests
 
 redirect_uri ="http://beta.sitterfied.com"
+#redirect_uri ="http://localhost:8000"
 
 
 def google_oauth_begin(request):
