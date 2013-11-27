@@ -1,11 +1,12 @@
-django==1.5
+django==1.5.5
 django-pipeline
 django-pipeline-compass
 
 cssmin
 slimit
-django-grappelli
-django-filebrowser
+django-grappelli==2.4.5
+django-filebrowser==3.5.2
+
 PIL
 
 #DB
