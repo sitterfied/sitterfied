@@ -417,3 +417,6 @@ class StaticView(TemplateView):
         context = super(StaticView, self).get_context_data(**kwargs)
         context['full_static_url'] = self.request.build_absolute_uri(settings.STATIC_URL)
         return context
+
+def cloudhealthcheck(request):
+    return HttpResponse()
