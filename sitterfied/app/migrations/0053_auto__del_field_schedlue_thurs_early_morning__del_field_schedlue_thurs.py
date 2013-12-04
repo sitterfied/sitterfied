@@ -16,7 +16,7 @@ class Migration(SchemaMigration):
         db.rename_column(u'app_schedlue', 'thurs_late_afternoon', 'thu_late_afternoon')
         db.rename_column(u'app_schedlue', 'thurs_late_morning', 'thu_late_morning')
 
-        db.rename_column(u'app_schedlue', 'thurs_overnight', 'thurs_overnight')
+        db.rename_column(u'app_schedlue', 'thurs_overnight', 'thu_overnight')
 
         db.rename_column(u'app_schedlue', 'tues_overnight', 'tue_overnight')
         db.rename_column(u'app_schedlue', 'tues_early_evening', 'tue_early_evening')
