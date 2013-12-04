@@ -360,10 +360,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("tues_early_morning"),
-    'id': ("tues_1")
+    'checkedBinding': ("tue_early_morning"),
+    'id': ("tue_1")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"tues_1\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"tue_1\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -374,10 +374,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("thurs_early_morning"),
-    'id': ("thurs_1")
+    'checkedBinding': ("thu_early_morning"),
+    'id': ("thu_1")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"thurs_1\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"thu_1\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -409,10 +409,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("tues_late_morning"),
-    'id': ("tues_2")
+    'checkedBinding': ("tue_late_morning"),
+    'id': ("tue_2")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"tues_2\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"tue_2\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -423,10 +423,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("thurs_late_morning"),
-    'id': ("thurs_2")
+    'checkedBinding': ("thu_late_morning"),
+    'id': ("thu_2")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"thurs_2\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"thu_2\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -458,10 +458,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("tues_early_afternoon"),
-    'id': ("tues_3")
+    'checkedBinding': ("tue_early_afternoon"),
+    'id': ("tue_3")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"tues_3\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"tue_3\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -472,10 +472,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("thurs_early_afternoon"),
-    'id': ("thurs_3")
+    'checkedBinding': ("thu_early_afternoon"),
+    'id': ("thu_3")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"thurs_3\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"thu_3\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -507,10 +507,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("tues_late_afternoon"),
-    'id': ("tues_4")
+    'checkedBinding': ("tue_late_afternoon"),
+    'id': ("tue_4")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"tues_4\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"tue_4\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -521,10 +521,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("thurs_late_afternoon"),
-    'id': ("thurs_4")
+    'checkedBinding': ("thu_late_afternoon"),
+    'id': ("thu_4")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"thurs_4\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"thu_4\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -556,10 +556,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("tues_early_evening"),
-    'id': ("tues_5")
+    'checkedBinding': ("tue_early_evening"),
+    'id': ("tue_5")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"tues_5\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"tue_5\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -570,10 +570,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("thurs_early_evening"),
-    'id': ("thurs_5")
+    'checkedBinding': ("thu_early_evening"),
+    'id': ("thu_5")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"thurs_5\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"thu_5\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -605,10 +605,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("tues_late_evening"),
-    'id': ("tues_6")
+    'checkedBinding': ("tue_late_evening"),
+    'id': ("tue_6")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"tues_6\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"tue_6\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -619,10 +619,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("thurs_late_evening"),
-    'id': ("thurs_6")
+    'checkedBinding': ("thu_late_evening"),
+    'id': ("thu_6")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"thurs_6\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"thu_6\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -654,10 +654,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("tues_overnight"),
-    'id': ("tues_7")
+    'checkedBinding': ("tue_overnight"),
+    'id': ("tue_7")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"tues_7\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"tue_7\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -668,10 +668,10 @@ function program1(depth0,data) {
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("thurs_overnight"),
-    'id': ("thurs_7")
+    'checkedBinding': ("thu_overnight"),
+    'id': ("thu_7")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("<label for=\"thurs_7\">&nbsp;</label></li>\n			  <li>");
+  data.buffer.push("<label for=\"thu_7\">&nbsp;</label></li>\n			  <li>");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
@@ -3430,7 +3430,7 @@ function program9(depth0,data) {
   hashContexts = {};
   stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<li class=\"fatselect\">\n\n		  <label>&nbsp;</label>\n          ");
+  data.buffer.push("\n		<li class=\"fatselect\">\n		  <label>&nbsp;</label>\n          ");
   hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0};
   hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{

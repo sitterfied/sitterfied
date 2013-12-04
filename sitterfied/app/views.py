@@ -203,17 +203,35 @@ from django.db.models import Count, Max
 @api_view(['GET'])
 def search(request):
     zipcode = request.GET.get('zip', '')
-    sitters = Sitter.objects.filter(zip=zipcode).select_related().prefetch_related('reviews',
-                                                                                   'languages',
-                                                                                   'sitter_groups',
-                                                                                   'friends',
-                                                                                   'certifications',
-                                                                                   'schedlue',
-                                                                                   'sitter_teams',
-                                                                                   'other_services',
-                                                                                   'bookings',
-                                                                                   'bookmarks',
-                                                                                   'settings').annotate(rehires=Count("booking__parent"))
+    start_date = request.GET.get('start_date', '')
+    stop_date = request.GET.get('stop_date', '')
+    stop_time = request.GET.get('stop_time', '')
+    start_time = request.GET.get('start_time', '')
+    overnight = request.GET.get('overnight', False)
+
+    import pdb
+    pdb.set_trace()
+
+    sitters = Sitter.objects.select_related().prefetch_related('reviews',
+                                                               'languages',
+                                                               'sitter_groups',
+                                                               'friends',
+                                                               'certifications',
+                                                               'schedlue',
+                                                               'sitter_teams',
+                                                               'other_services',
+                                                               'bookings',
+                                                               'bookmarks',
+                                                               'settings').annotate(rehires=Count("booking__parent"))
+    #filter by zip
+    sitters = sitters.filter(zip=zipcode)
+    #figure out which day we care about
+    start_date = datetime.strptime(start_date, "%a, %d %b %Y")
+    import pdb
+    pdb.set_trace()
+
+    #filter by availiablity
+    sitters = sitters.filter()
 
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
