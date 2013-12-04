@@ -27,6 +27,7 @@ booking_accepted = Signal(providing_args=['booking'])
 booking_declined = Signal(providing_args=['booking'])
 booking_canceled = Signal(providing_args=['booking'])
 
+from intercom import generate_intercom_user_hash
 
 from pyuploadcare.dj import ImageField as UploadcareImageField
 
@@ -69,6 +70,7 @@ class User(AbstractUser, TimeStampedModel):
     zip = models.CharField(max_length=9, blank=True)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
     cell = models.CharField(max_length=12, blank=True)
 
+    profile_completed = models.BooleanField(default=False)
 
     avatar = UploadcareImageField(blank=True, manual_crop="")
     #avatar_url = models.URLField(blank=True)
@@ -77,6 +79,12 @@ class User(AbstractUser, TimeStampedModel):
     @property
     def avatar_url(self):
         return getattr(self.avatar, 'cdn_url', None)
+
+    @property
+    def hash(self):
+        if getattr(self, '_hash', None) is None:
+            self._hash = generate_intercom_user_hash(self.email)
+        return self._hash
 
     def __unicode__(self):
         return self.get_full_name()
@@ -87,7 +95,8 @@ class User(AbstractUser, TimeStampedModel):
         else:
             return 'Parent'
 
-
+    def is_facebook_connected(self):
+        return self.facebook_id is not None
 
 
 class Address(TimeStampedModel):
@@ -149,7 +158,6 @@ class Sitter(User):
 
     current_student = models.BooleanField(default=False)
 
-
     other_services = models.ManyToManyField('OtherService', blank=True)
 
     one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
@@ -169,6 +177,11 @@ class Sitter(User):
 
     certifications = models.ManyToManyField("Certification", blank=True)
 
+    @property
+    def schedule_last_updated(self):
+        if getattr(self, '_schedule_last_updated', None) is None:
+            self._schedule_last_updated = getattr(self.schedlue, 'modified', None)
+        return self._schedule_last_updated
 
     class Meta:
          verbose_name = "Sitter"
@@ -249,6 +262,7 @@ class Contact(TimeStampedModel):
 
 class Schedlue(TimeStampedModel):
     sitter = models.OneToOneField(Sitter)
+
     mon_early_morning = models.BooleanField(default=True)
     tues_early_morning = models.BooleanField(default=True)
     wed_early_morning = models.BooleanField(default=True)

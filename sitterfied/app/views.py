@@ -39,8 +39,6 @@ from .utils import send_html_email
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
 
-from intercom import generate_intercom_user_hash
-
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
 class HttpResponseUnauthorized(HttpResponse):
@@ -83,7 +81,6 @@ def index(request, referred_by=None):
 
 
     return {'user_json':user_json,
-            'user_hash': generate_intercom_user_hash(request.user.email),
             "parent_or_sitter": parent_or_sitter,
             'intercom_activator': '#Intercom',
             "TEMPLATE":"index.html",
@@ -158,12 +155,14 @@ def onboarding4(request):
 """
 @render_to()
 def static_page(request, template):
-    return {'TEMPLATE': template,
-            'user_json': get_user_json(request.user),
-            'user_hash': generate_intercom_user_hash(request.user.email),
-            'intercom_activator': '#IntercomDefaultWidget',
-            'INTERCOM_APP_ID': settings.INTERCOM_APP_ID
-    }
+    obj = {'TEMPLATE': template}
+
+    if not request.user.is_anonymous():
+        obj['user_json'] = get_user_json(request.user)
+        obj['intercom_activator'] = '#IntercomDefaultWidget'
+        obj['INTERCOM_APP_ID'] = settings.INTERCOM_APP_ID
+
+    return obj;
 
 
 
