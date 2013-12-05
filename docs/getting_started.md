@@ -28,32 +28,32 @@ Getting the api installed
    The api uses postgres to store data.
 
 	on Debian:
-	$ sudo apt-get install postgresql-dev-X.Y postgresql-contrib
+		$ sudo apt-get install postgresql-dev-X.Y postgresql-contrib
 
 
 4. If you installed Virtual Env and the wrapper, create the virtual environment
-   $ mkvirtualenv sitterfied
+        $ mkvirtualenv sitterfied
 
 5. Install the python dependencies
    The python packages in requirements.txt will be automatically installed on the production server on a push. For development install the packages in  requirements-dev.txt, which come with a lot of debugging/profiling tools.
 
-   $ pip install -r requirements-dev.txt
+	    $ pip install -r requirements-dev.txt
 
 
 6. Create the local database and user
    Postgres comes with a couple handy shell tools - I prefer to use those. You can also do this in raw SQL if you prefer.
-   $ createuser sitterfied  -P -- use sitterfied as password
-   $ createdb sitterfied -O sitterfied --encoding=UTF8
+       $ createuser sitterfied  -P -- use sitterfied as password
+       $ createdb sitterfied -O sitterfied --encoding=UTF8
 
 7. Create the initial database tables
    Use django's sync db and south's migrate to create the initial tables. Syncdb is a one shot deal, and south is a tool for managing database versions
 
-   $ python manage.py syncdb
-   $ python manage.py migrate
+       $ python manage.py syncdb
+       $ python manage.py migrate
 
 
 8. Start the server
-   $ python manage.py runserver
+       $ python manage.py runserver
 
 If all went well, the server should now be running. browse to localhost:8000 and you should see the welcome page.
 
@@ -92,10 +92,10 @@ and recompile them after every change.
 to get this script running you must install node and two dependencies - watchdog, a python library to watch your file system, and node-ember-precompile, to actually precompile the templates.
 
 install watchdog via
- $ pip install watchdog
+     $ pip install watchdog
 
 install ember-precompile via
-$ sudo npm -g install https://github.com/gabrielgrant/node-ember-precompile/archive/compat-rc2.zip
+     $ sudo npm -g install https://github.com/gabrielgrant/node-ember-precompile/archive/compat-rc2.zip
 
 
 Updating the database schema
@@ -103,13 +103,13 @@ Updating the database schema
 As you develop you will probably need to update the database schema.
 We do this using south. Make you changes to the models.py file and then
 
-$ python manage.py schemamigration app --auto
+    $ python manage.py schemamigration app --auto
 
 This will automatically generate a migration file which will move your schema.
 
 To apply:
 
-$ python manage.py migrate
+    $ python manage.py migrate
 
 This will automatically be done on production when you deploy
 
@@ -119,9 +119,9 @@ Deploying
 
 We use dotcloud for hosting - so to start with, install the dotcloud CLI
 
-$ pip install dotcloud
+    $ pip install dotcloud
 
 I've been keeping the complied sitterfied.js application out of git because there's very little value in version controlling it.
 When you push, make sure to use rsync as a deployment method and it will move the updated build along with the django code.
 
-$ dotcloud push --rync
+    $ dotcloud push --rync
