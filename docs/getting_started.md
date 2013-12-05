@@ -11,6 +11,7 @@ Getting the api installed
 1. Install the pip package manager
   Most distributions come with easy_install - an obsolete python package manager. Either using your systems package manager (apt/yum/brew) or easy_install, install pip.
   on Debian this would be:
+
 	  # aptitude install python-pip
 
 
@@ -33,6 +34,7 @@ Getting the api installed
 
 
 4. If you installed Virtual Env and the wrapper, create the virtual environment
+
         $ mkvirtualenv sitterfied
 
 5. Install the python dependencies
@@ -44,19 +46,21 @@ Getting the api installed
 6. Create the local database and user
    Postgres comes with a couple handy shell tools - I prefer to use those. You can also do this in raw SQL if you prefer.
 
-       $ createuser sitterfied  -P -- use sitterfied as password
-       $ createdb sitterfied -O sitterfied --encoding=UTF8
+         $ createuser sitterfied  -P -- use sitterfied as password
+
+         $ createdb sitterfied -O sitterfied --encoding=UTF8
 
 7. Create the initial database tables
    Use django's sync db and south's migrate to create the initial tables. Syncdb is a one shot deal, and south is a tool for managing database versions
 
-       $ python manage.py syncdb
-       $ python manage.py migrate
+         $ python manage.py syncdb
+
+         $ python manage.py migrate
 
 
 8. Start the server
 
-       $ python manage.py runserver
+        $ python manage.py runserver
 
 If all went well, the server should now be running.
 browse to localhost:8000 and you should see the welcome page.
