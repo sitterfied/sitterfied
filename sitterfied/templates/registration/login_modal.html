@@ -3,11 +3,11 @@
   <form method="post" action="{% url 'login' %}">
   {% csrf_token %}
     <p>
-      <img src="/static/images/logo2.png" alt="" />
+      <img src="{{STATIC_URL}}/images/logo2.png" alt="" />
     </p>
 	<p>
       <a href="#" class="facebook_signup_btn">
-        <img src="/static/images/icons/facebook_login.png" alt="" />
+        <img src="{{STATIC_URL}}/images/icons/facebook_login.png" alt="" />
       </a>
     </p>
 	<div class="or">

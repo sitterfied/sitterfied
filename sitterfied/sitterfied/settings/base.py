@@ -174,10 +174,10 @@ ACCOUNT_ACTIVATION_DAYS = 30
 
 DEFAULT_FROM_EMAIL = 'hello@sitterfied.com'
 
-ALLOWED_HOSTS =[
+ALLOWED_HOSTS = [
+    "localhost",
     ".sitterfied.com",
     "beta.sitterfied.com",
-    ".sitterfied.com.",
     'ping',
 ]
 

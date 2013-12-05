@@ -1,5 +1,6 @@
 from oauth2client.client import OAuth2WebServerFlow
 from django.http import HttpResponseRedirect, HttpResponse
+from django.conf import settings
 from annoying.decorators import render_to, ajax_request
 
 from models import User
@@ -7,14 +8,14 @@ from itertools import chain
 
 import requests
 
-redirect_uri ="http://beta.sitterfied.com"
-#redirect_uri ="http://localhost:8000"
-
+client_id = settings.GOOGLE_OAUTH_CLIENT_ID
+client_secret = settings.GOOGLE_OAUTH_CLIENT_SECRET
+redirect_uri = settings.GOOGLE_OAUTH_REDIRECT_URI
 
 def google_oauth_begin(request):
 
-    flow = OAuth2WebServerFlow(client_id='705373512773.apps.googleusercontent.com',
-                               client_secret='zSdqqjHjyfhs4u28qIL8buy4',
+    flow = OAuth2WebServerFlow(client_id=client_id,
+                               client_secret=client_secret,
                                scope='http://www.google.com/m8/feeds',
                                redirect_uri=redirect_uri +'/oauth2callback',
                                access_type='online')
@@ -26,8 +27,8 @@ def oauth2callback(request):
 
     try:
         code = request.GET['code']
-        flow = OAuth2WebServerFlow(client_id='705373512773.apps.googleusercontent.com',
-                                   client_secret='zSdqqjHjyfhs4u28qIL8buy4',
+        flow = OAuth2WebServerFlow(client_id=client_id,
+                                   client_secret=client_secret,
                                    scope='http://www.google.com/m8/feeds',
                                    redirect_uri=redirect_uri +'/oauth2callback',
                                    access_type='online')
