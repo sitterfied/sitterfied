@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 	<!-- Favicon -->
-	<link href="{% static "images/favicon.ico" %} rel="icon" type="image/x-icon">
+	<link href="{% static "images/favicon.ico" %}" rel="icon" type="image/x-icon">
 
 	<!-- Stylesheets -->
     {% load compressed %}
@@ -22,13 +22,12 @@
     {% endblock extra_head %}
 
 	<!-- JavaScript -->
-    <script>
+  <script>
 	  UPLOADCARE_PUBLIC_KEY = "{{UPLOADCARE_PUBLIC_KEY}}";
 	  UPLOADCARE_TABS = "file facebook";
 	  UPLOADCARE_CROP = "171x171 upscale";
 	  UPLOADCARE_AUTOSTORE = true;
-
-    </script>
+  </script>
 
 	{%block extra_header%}
 	{% endblock extra_header %}
@@ -36,7 +35,8 @@
 
   </head>
   <body {% block bodyclass %} {%endblock%}>
-	{% block body %}
+    {% block body %}
 	{% endblock %}
+    {% include "intercom.html" %}
   </body>
 </html>

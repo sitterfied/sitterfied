@@ -361,6 +361,9 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     width: "90%"
                     height: "90%"
 
+            openIntercom: ()->
+                Intercom('show')
+
             removeFromTeam: ()->
                 debugger
 
