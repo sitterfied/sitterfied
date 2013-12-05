@@ -28,6 +28,7 @@ Getting the api installed
    The api uses postgres to store data.
 
 	on Debian:
+
 		$ sudo apt-get install postgresql-dev-X.Y postgresql-contrib
 
 
@@ -42,6 +43,7 @@ Getting the api installed
 
 6. Create the local database and user
    Postgres comes with a couple handy shell tools - I prefer to use those. You can also do this in raw SQL if you prefer.
+
        $ createuser sitterfied  -P -- use sitterfied as password
        $ createdb sitterfied -O sitterfied --encoding=UTF8
 
@@ -53,9 +55,11 @@ Getting the api installed
 
 
 8. Start the server
+
        $ python manage.py runserver
 
-If all went well, the server should now be running. browse to localhost:8000 and you should see the welcome page.
+If all went well, the server should now be running.
+browse to localhost:8000 and you should see the welcome page.
 
 
 Building the client
@@ -71,11 +75,12 @@ Ensure you have both node and Java installed on your system
 
 Once you run the build.sh file -
 
-1. Using R.js to combine the files
+1. R.js Will combine the files
+
   This process is run by node - it's possible to use rhino via Java, but it is several orders of magnitude slower to do so.
   The r.js file contains the logic to to the build process, and build level settings are controlled in the app.build.js file.
 
-2. Minifying the file with the closure compiler
+2. The closure compiler will minifiy the output
    This process is Java - the google closure complier will minify and optimize JavaScript. This is optional, but greatly recommended.
 
 the final output (sitterfied-min.js) is placed into sitterfied/static_source/js
@@ -92,9 +97,11 @@ and recompile them after every change.
 to get this script running you must install node and two dependencies - watchdog, a python library to watch your file system, and node-ember-precompile, to actually precompile the templates.
 
 install watchdog via
+
      $ pip install watchdog
 
 install ember-precompile via
+
      $ sudo npm -g install https://github.com/gabrielgrant/node-ember-precompile/archive/compat-rc2.zip
 
 
