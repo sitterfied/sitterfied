@@ -149,6 +149,18 @@ function addGroupToSideBar(group){
      $("a", group_html).first().html(group_name)
      $("#friendlist").append($(group_html))
 }
+var google_window;
+
+function googlePoll(){
+   try {
+	 // check if we have access to the window
+	 google_window == "it's about the journey, not the destination"
+	 location.reload()
+   } catch(err) {
+	 window.setInterval(googlePoll, 1000)
+   }
+
+}
 
 $(function () {
 
@@ -217,11 +229,7 @@ $(function () {
    })
    $("#google").click(function(){
      google_window = window.open("/googleoauthbegin/")
-	 google_window.onbeforeunload = function(){
-         alert("google connected");
-	     $("form").ajaxSubmit()
-		 location.reload();
-	 }
+	 window.setInterval(googlePoll, 1000)
 	 return false
    })
    $(".delete-friend").click(function(){
@@ -260,8 +268,6 @@ use_fb_data = function() {
 			 "id": facebook_id
 			 },
       success: function() {
-         alert("facebook connected");
-	     $("form").ajaxSubmit()
 		 location.reload();
       }
     });

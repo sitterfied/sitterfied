@@ -33,12 +33,12 @@ STATIC_ROOT = PROJECT_ROOT.child("static")
 
 
 INSTALLED_APPS += (
-    'debug_toolbar',
-    'devserver'
+#    'debug_toolbar',
+    'devserver',
 )
 
 MIDDLEWARE_CLASSES += (
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+#    "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
 DEBUG_TOOLBAR_CONFIG = {

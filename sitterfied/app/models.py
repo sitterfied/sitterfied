@@ -70,11 +70,7 @@ class User(AbstractUser, TimeStampedModel):
     zip = models.CharField(max_length=9, blank=True)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
     cell = models.CharField(max_length=12, blank=True)
 
-    profile_completed = models.BooleanField(default=False)
-
     avatar = UploadcareImageField(blank=True, manual_crop="174x174 upscale")
-    #avatar_url = models.URLField(blank=True)
-    #objects = InheritanceManager()
 
     @property
     def avatar_url(self):
@@ -85,6 +81,10 @@ class User(AbstractUser, TimeStampedModel):
         if getattr(self, '_hash', None) is None:
             self._hash = generate_intercom_user_hash(self.email)
         return self._hash
+
+    @property
+    def profile_completed(self):
+        return False
 
     def __unicode__(self):
         return self.get_full_name()
@@ -176,12 +176,6 @@ class Sitter(User):
 
     certifications = models.ManyToManyField("Certification", blank=True)
 
-    @property
-    def schedule_last_updated(self):
-        if getattr(self, '_schedule_last_updated', None) is None:
-            self._schedule_last_updated = getattr(self.schedlue, 'modified', None)
-        return self._schedule_last_updated
-
     class Meta:
          verbose_name = "Sitter"
 
@@ -263,57 +257,57 @@ class Schedlue(TimeStampedModel):
     sitter = models.OneToOneField(Sitter)
 
     mon_early_morning = models.BooleanField(default=True)
-    tues_early_morning = models.BooleanField(default=True)
+    tue_early_morning = models.BooleanField(default=True)
     wed_early_morning = models.BooleanField(default=True)
-    thurs_early_morning = models.BooleanField(default=True)
+    thu_early_morning = models.BooleanField(default=True)
     fri_early_morning = models.BooleanField(default=True)
     sat_early_morning = models.BooleanField(default=True)
     sun_early_morning = models.BooleanField(default=True)
 
     mon_late_morning = models.BooleanField(default=True)
-    tues_late_morning = models.BooleanField(default=True)
+    tue_late_morning = models.BooleanField(default=True)
     wed_late_morning = models.BooleanField(default=True)
-    thurs_late_morning = models.BooleanField(default=True)
+    thu_late_morning = models.BooleanField(default=True)
     fri_late_morning = models.BooleanField(default=True)
     sat_late_morning = models.BooleanField(default=True)
     sun_late_morning = models.BooleanField(default=True)
 
     mon_early_afternoon = models.BooleanField(default=True)
-    tues_early_afternoon = models.BooleanField(default=True)
+    tue_early_afternoon = models.BooleanField(default=True)
     wed_early_afternoon = models.BooleanField(default=True)
-    thurs_early_afternoon = models.BooleanField(default=True)
+    thu_early_afternoon = models.BooleanField(default=True)
     fri_early_afternoon = models.BooleanField(default=True)
     sat_early_afternoon = models.BooleanField(default=True)
     sun_early_afternoon = models.BooleanField(default=True)
 
     mon_late_afternoon = models.BooleanField(default=True)
-    tues_late_afternoon = models.BooleanField(default=True)
+    tue_late_afternoon = models.BooleanField(default=True)
     wed_late_afternoon = models.BooleanField(default=True)
-    thurs_late_afternoon = models.BooleanField(default=True)
+    thu_late_afternoon = models.BooleanField(default=True)
     fri_late_afternoon = models.BooleanField(default=True)
     sat_late_afternoon = models.BooleanField(default=True)
     sun_late_afternoon = models.BooleanField(default=True)
 
     mon_early_evening = models.BooleanField(default=True)
-    tues_early_evening = models.BooleanField(default=True)
+    tue_early_evening = models.BooleanField(default=True)
     wed_early_evening = models.BooleanField(default=True)
-    thurs_early_evening = models.BooleanField(default=True)
+    thu_early_evening = models.BooleanField(default=True)
     fri_early_evening = models.BooleanField(default=True)
     sat_early_evening = models.BooleanField(default=True)
     sun_early_evening = models.BooleanField(default=True)
 
     mon_late_evening = models.BooleanField(default=True)
-    tues_late_evening = models.BooleanField(default=True)
+    tue_late_evening = models.BooleanField(default=True)
     wed_late_evening = models.BooleanField(default=True)
-    thurs_late_evening = models.BooleanField(default=True)
+    thu_late_evening = models.BooleanField(default=True)
     fri_late_evening = models.BooleanField(default=True)
     sat_late_evening = models.BooleanField(default=True)
     sun_late_evening = models.BooleanField(default=True)
 
     mon_overnight = models.BooleanField(default=True)
-    tues_overnight = models.BooleanField(default=True)
+    tue_overnight = models.BooleanField(default=True)
     wed_overnight = models.BooleanField(default=True)
-    thurs_overnight = models.BooleanField(default=True)
+    thu_overnight = models.BooleanField(default=True)
     fri_overnight = models.BooleanField(default=True)
     sat_overnight = models.BooleanField(default=True)
     sun_overnight = models.BooleanField(default=True)

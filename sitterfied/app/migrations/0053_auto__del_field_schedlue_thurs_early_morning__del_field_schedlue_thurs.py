@@ -8,15 +8,138 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'User.profile_completed'
-        db.add_column(u'app_user', 'profile_completed',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
-                      keep_default=False)
+        db.rename_column(u'app_schedlue', 'thurs_early_morning', 'thu_early_morning')
+        db.rename_column(u'app_schedlue', 'thurs_early_evening', 'thu_early_evening')
+        db.rename_column(u'app_schedlue', 'thurs_early_afternoon', 'thu_early_afternoon')
+
+        db.rename_column(u'app_schedlue', 'thurs_late_evening', 'thu_late_evening')
+        db.rename_column(u'app_schedlue', 'thurs_late_afternoon', 'thu_late_afternoon')
+        db.rename_column(u'app_schedlue', 'thurs_late_morning', 'thu_late_morning')
+
+        db.rename_column(u'app_schedlue', 'thurs_overnight', 'thu_overnight')
+
+        db.rename_column(u'app_schedlue', 'tues_overnight', 'tue_overnight')
+        db.rename_column(u'app_schedlue', 'tues_early_evening', 'tue_early_evening')
+        db.rename_column(u'app_schedlue', 'tues_early_morning', 'tue_early_morning')
+        db.rename_column(u'app_schedlue', 'tues_early_afternoon', 'tue_early_afternoon')
+
+        db.rename_column(u'app_schedlue', 'tues_late_afternoon', 'tue_late_afternoon')
+        db.rename_column(u'app_schedlue', 'tues_late_evening', 'tue_late_evening')
+        db.rename_column(u'app_schedlue', 'tues_late_morning', 'tue_late_morning')
 
 
     def backwards(self, orm):
-        # Deleting field 'User.profile_completed'
-        db.delete_column(u'app_user', 'profile_completed')
+        # Adding field 'Schedlue.thurs_early_morning'
+        db.add_column(u'app_schedlue', 'thurs_early_morning',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.thurs_early_evening'
+        db.add_column(u'app_schedlue', 'thurs_early_evening',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.thurs_late_evening'
+        db.add_column(u'app_schedlue', 'thurs_late_evening',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.thurs_late_afternoon'
+        db.add_column(u'app_schedlue', 'thurs_late_afternoon',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.tues_late_afternoon'
+        db.add_column(u'app_schedlue', 'tues_late_afternoon',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.tues_overnight'
+        db.add_column(u'app_schedlue', 'tues_overnight',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.thurs_late_morning'
+        db.add_column(u'app_schedlue', 'thurs_late_morning',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.tues_early_evening'
+        db.add_column(u'app_schedlue', 'tues_early_evening',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.tues_early_morning'
+        db.add_column(u'app_schedlue', 'tues_early_morning',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.thurs_early_afternoon'
+        db.add_column(u'app_schedlue', 'thurs_early_afternoon',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.thurs_overnight'
+        db.add_column(u'app_schedlue', 'thurs_overnight',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.tues_early_afternoon'
+        db.add_column(u'app_schedlue', 'tues_early_afternoon',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.tues_late_evening'
+        db.add_column(u'app_schedlue', 'tues_late_evening',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Adding field 'Schedlue.tues_late_morning'
+        db.add_column(u'app_schedlue', 'tues_late_morning',
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      keep_default=False)
+
+        # Deleting field 'Schedlue.tue_early_morning'
+        db.delete_column(u'app_schedlue', 'tue_early_morning')
+
+        # Deleting field 'Schedlue.thu_early_morning'
+        db.delete_column(u'app_schedlue', 'thu_early_morning')
+
+        # Deleting field 'Schedlue.tue_late_morning'
+        db.delete_column(u'app_schedlue', 'tue_late_morning')
+
+        # Deleting field 'Schedlue.thu_late_morning'
+        db.delete_column(u'app_schedlue', 'thu_late_morning')
+
+        # Deleting field 'Schedlue.tue_early_afternoon'
+        db.delete_column(u'app_schedlue', 'tue_early_afternoon')
+
+        # Deleting field 'Schedlue.thu_early_afternoon'
+        db.delete_column(u'app_schedlue', 'thu_early_afternoon')
+
+        # Deleting field 'Schedlue.tue_late_afternoon'
+        db.delete_column(u'app_schedlue', 'tue_late_afternoon')
+
+        # Deleting field 'Schedlue.thu_late_afternoon'
+        db.delete_column(u'app_schedlue', 'thu_late_afternoon')
+
+        # Deleting field 'Schedlue.tue_early_evening'
+        db.delete_column(u'app_schedlue', 'tue_early_evening')
+
+        # Deleting field 'Schedlue.thu_early_evening'
+        db.delete_column(u'app_schedlue', 'thu_early_evening')
+
+        # Deleting field 'Schedlue.tue_late_evening'
+        db.delete_column(u'app_schedlue', 'tue_late_evening')
+
+        # Deleting field 'Schedlue.thu_late_evening'
+        db.delete_column(u'app_schedlue', 'thu_late_evening')
+
+        # Deleting field 'Schedlue.tue_overnight'
+        db.delete_column(u'app_schedlue', 'tue_overnight')
+
+        # Deleting field 'Schedlue.thu_overnight'
+        db.delete_column(u'app_schedlue', 'thu_overnight')
 
 
     models = {
@@ -167,20 +290,20 @@ class Migration(SchemaMigration):
             'sun_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'sun_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'sun_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thurs_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thurs_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thurs_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thurs_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thurs_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thurs_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thurs_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tues_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tues_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tues_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tues_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tues_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tues_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tues_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'thu_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'thu_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'thu_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'thu_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'thu_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'thu_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'thu_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'tue_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'tue_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'tue_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'tue_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'tue_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'tue_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'tue_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'wed_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'wed_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'wed_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
@@ -223,29 +346,29 @@ class Migration(SchemaMigration):
             'has_drivers_licence': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'highest_education': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'id_verified': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'infant_exp': ('django.db.models.fields.SmallIntegerField', [], {'default': '0', 'blank': 'True'}),
+            'infant_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
             'last_school': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'major': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'occupation': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'one_child_max_rate': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '5', 'decimal_places': '2'}),
-            'one_child_min_rate': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '5', 'decimal_places': '2'}),
+            'one_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
+            'one_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
             'other_animals_ok': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'other_services': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.OtherService']", 'symmetrical': 'False', 'blank': 'True'}),
-            'pre_teen_exp': ('django.db.models.fields.SmallIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'preschool_exp': ('django.db.models.fields.SmallIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'school_age_exp': ('django.db.models.fields.SmallIntegerField', [], {'default': '0', 'blank': 'True'}),
+            'pre_teen_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
+            'preschool_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
+            'school_age_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
             'sick': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'smoker': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'smokers_ok': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'special_needs_exp': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'teen_exp': ('django.db.models.fields.SmallIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'three_child_max_rate': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '5', 'decimal_places': '2'}),
-            'three_child_min_rate': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '5', 'decimal_places': '2'}),
-            'toddler_exp': ('django.db.models.fields.SmallIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'total_exp': ('django.db.models.fields.SmallIntegerField', [], {'default': '0'}),
+            'teen_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
+            'three_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'three_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'toddler_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
+            'total_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
             'travel_distance': ('django.db.models.fields.IntegerField', [], {'default': '10'}),
-            'two_child_max_rate': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '5', 'decimal_places': '2'}),
-            'two_child_min_rate': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '5', 'decimal_places': '2'}),
+            'two_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'two_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
             u'user_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.User']", 'unique': 'True', 'primary_key': 'True'}),
             'will_transport': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
         },
@@ -276,7 +399,7 @@ class Migration(SchemaMigration):
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'facebook_id': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'facebook_id': ('django.db.models.fields.IntegerField', [], {'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'facebook_token': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'friends': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'friends_rel_+'", 'blank': 'True', 'to': u"orm['app.User']"}),
@@ -293,7 +416,6 @@ class Migration(SchemaMigration):
             'membership_exp_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'profile_completed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'sitter_groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Group']", 'symmetrical': 'False', 'blank': 'True'}),
             'state': ('django_localflavor_us.models.USStateField', [], {'default': "'AZ'", 'max_length': '2', 'blank': 'True'}),
             'status': ('django.db.models.fields.CharField', [], {'default': "'Trial'", 'max_length': '10'}),

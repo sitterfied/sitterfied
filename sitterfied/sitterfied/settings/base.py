@@ -178,6 +178,7 @@ ALLOWED_HOSTS =[
     ".sitterfied.com",
     "beta.sitterfied.com",
     ".sitterfied.com.",
+    'ping',
 ]
 
 

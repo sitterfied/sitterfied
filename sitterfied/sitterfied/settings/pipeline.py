@@ -22,12 +22,6 @@ PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 
 
 PIPELINE_JS = {
-    'app': {
-        'source_filenames': (
-            'js/*.js',
-            ),
-        'output_filename': 'js/app.js',
-    },
       'onboarding': {
         'source_filenames': (
             'js/lib/jquery-1.9.1.js',
@@ -43,7 +37,7 @@ PIPELINE_JS = {
         'output_filename': 'js/libs.js',
     }
 }
-PIPELINE_JS_COMPRESSOR = ''#pipeline.compressors.slimit.SlimItCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.slimit.SlimItCompressor'
 
 PIPELINE_COMPILERS = (
   'pipeline.compilers.coffee.CoffeeScriptCompiler',

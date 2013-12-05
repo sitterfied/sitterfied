@@ -486,7 +486,34 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         overnight : false
         date_to : undefined
         findSitters : () ->
-            $.get("/api/search/", {'zip':@get('zip')}).then (response) =>
+            zip = @get("zip")
+            start_time = @get("start_time")
+            stop_time = @get("stop_time")
+            start_date = @get("start_date")
+            kids = @get("kids")
+            if not _.every([zip, start_date, start_time, stop_time, kids], _.identity)
+                alert("please ensure you've filled out every field")
+                return
+            payload = {
+                kids: kids
+                zip: zip
+                start_time: start_time
+                stop_time: stop_time
+                start_date: start_date
+            }
+            if @get("overnight")
+                if not @get("stop_date")
+                    alert("please ensure you've filled out every field")
+                    return
+                payload['overnight'] = true
+                payload['stop_date'] = @get("stop_date")
+
+
+
+
+            $.get("/api/search/",
+                  payload,
+                  ).then (response) =>
                 sitters = Em.A()
                 for sitter in response
                     s = Sitterfied.Sitter.create()

@@ -1,5 +1,6 @@
 # Create your views here.
 from datetime import datetime
+from datetime import time
 from django.contrib.auth import login as auth_login
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.csrf import csrf_protect
@@ -217,20 +218,65 @@ from rest_framework.decorators import api_view
 from api import SitterSearchSerializer
 from django.db.models import Count, Max
 
+
 @api_view(['GET'])
 def search(request):
     zipcode = request.GET.get('zip', '')
-    sitters = Sitter.objects.filter(zip=zipcode).select_related().prefetch_related('reviews',
-                                                                                   'languages',
-                                                                                   'sitter_groups',
-                                                                                   'friends',
-                                                                                   'certifications',
-                                                                                   'schedlue',
-                                                                                   'sitter_teams',
-                                                                                   'other_services',
-                                                                                   'bookings',
-                                                                                   'bookmarks',
-                                                                                   'settings').annotate(rehires=Count("booking__parent"))
+    start_date = request.GET.get('start_date', '')
+    stop_date = request.GET.get('stop_date', '')
+    stop_time = request.GET.get('stop_time', '')
+    start_time = request.GET.get('start_time', '')
+    overnight = request.GET.get('overnight', False)
+
+    sitters = Sitter.objects.select_related().prefetch_related('reviews',
+                                                               'languages',
+                                                               'sitter_groups',
+                                                               'friends',
+                                                               'certifications',
+                                                               'schedlue',
+                                                               'sitter_teams',
+                                                               'other_services',
+                                                               'bookings',
+                                                               'bookmarks',
+                                                               'settings').annotate(rehires=Count("booking__parent"))
+    #filter by zip
+    sitters = sitters.filter(zip=zipcode)
+    #figure out which day we care about
+    start_date = datetime.strptime(start_date, "%a, %d %b %Y")
+    day  = datetime.strftime(start_date, "%a").lower()
+
+
+    start_time =datetime.strptime(start_time, "%H%M")
+    start_time = time(start_time.hour, start_time.minute)
+
+    stop_time = datetime.strptime(stop_time, "%H%M")
+    stop_time = time(stop_time.hour, stop_time.minute)
+
+    times = dict(early_morning= time(hour=6), late_morning =time(hour=9),
+                 early_afternoon = time(hour=12), late_afternoon=time(hour=15),
+                 early_evening = time(hour=18), late_evening = time(hour=21),
+             )
+
+    search_terms = {}
+    if overnight:
+        stop_date = datetime.strptime(stop_date, "%a, %d %b %Y")
+        stop_day  = datetime.strftime(stop_date, "%a").lower()
+        search_terms["schedlue__%s_overnight" % day] = True
+
+        for term, search_time in times.items():
+            if  start_time <= search_time:
+                search_terms[("schedlue__%s_" % day) + term] = True
+            if   search_time <= stop_time:
+                search_terms[("schedlue__%s_" % stop_day) + term] = True
+
+    else:
+        for term, search_time in times.items():
+            if  start_time <= search_time <= stop_time:
+                search_terms[("schedlue__%s_" % day) + term] = True
+
+    #filter by availiablity
+    sitters = sitters.filter(**search_terms)
+
 
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
@@ -434,3 +480,6 @@ class StaticView(TemplateView):
         context = super(StaticView, self).get_context_data(**kwargs)
         context['full_static_url'] = self.request.build_absolute_uri(settings.STATIC_URL)
         return context
+
+def cloudhealthcheck(request):
+    return HttpResponse()

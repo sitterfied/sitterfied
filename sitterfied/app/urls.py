@@ -51,6 +51,7 @@ urlpatterns = patterns('app.views',
     url(r'^oauth2callback/$',google.oauth2callback, name='googlecallback'),
     url(r'^tos/', 'static_page', kwargs=dict(template='tos.html'), name='tos'),
     url(r'^privacy/', "static_page", kwargs=dict(template='privacy.html'), name="privacy"),
+    url(r'^CloudHealthCheck/', "cloudhealthcheck", name="cloudhealthcheck"),
 )
 
 urlpatterns += patterns('',

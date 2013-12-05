@@ -11,6 +11,9 @@ use_fb_data = function(){
   var access_token, facebook_id, promise;
   access_token = FB.getAccessToken();
   facebook_id = FB.getUserID();
+   if (facebook_id == "") {
+	 return
+   }
    return $.post("{% url "login-facebook" %}",{"token":access_token,"id": facebook_id}
 				 ).done(function(result){
 	 location.reload();
@@ -24,7 +27,7 @@ $(function(){
 	 FB.getLoginStatus(function(response) {
 	   if (response.status === "connected") {
 		 return use_fb_data();
-	   } else if (response.status === "not_authorized") {
+	   } else  {
 		 return FB.login(function() {
 		   return use_fb_data();
 		 }, {scope: 'email,user_birthday'});
@@ -71,7 +74,7 @@ $(function(){
 					<div class="right_info">
 						<h1>Simply the quickest and easiest way to find and book a <span>babysitter</span>.</h1>
 						<div class="facebook_signup">
-							<p><a class="facebook_signup_btn">Sign up with Facebook</a></p>
+							<p><a href='javascript:;' class="facebook_signup_btn">Sign up with Facebook</a></p>
 							<p>We won’t post to your wall without your permission.</p>
 							<p><i>Or</i> <a href="{% url "onboarding1" %}">sign up with email</a></p>
 						</div>
