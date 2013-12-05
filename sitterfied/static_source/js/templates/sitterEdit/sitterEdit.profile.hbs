@@ -8,7 +8,9 @@
 				<li><span class="icon_bio2">&nbsp;</span>Biography</li>
 				<li>
 				  <p><i class="char">1100 CHAR</i>{{view Ember.TextArea valueBinding="biography" }}</p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+
+                  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
+
 				</li>
 			  </ul>
 			</li>
@@ -311,7 +313,7 @@
                     {{view Ember.RadioButton id="no9" selectionBinding="other_animals_ok" value="false" name="pref4" }}
                     <label for="no9">NO</label>
                   </p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+                  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>

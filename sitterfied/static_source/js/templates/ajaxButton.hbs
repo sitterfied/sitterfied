@@ -1,0 +1,10 @@
+<a class="button button_small" {{action "doAction" target=view}}><span class="icon_ok2">&nbsp;</span>Save</a>
+{{# if view.isLoading }}
+  <img class="loading" src="/static/images/loading.gif">
+{{/ if}}
+{{# if view.isSaved }}
+  <span class="saved">Saved!</span>
+{{/ if}}
+{{# if view.isError }}
+  <span class="error">There was an error saving your data</span>
+{{/ if}}

@@ -6,11 +6,43 @@
 {% load compressed %}
 {% compressed_js 'onboarding' %}
 {% include "csrf.html" %}
+<script type="text/javascript">
+use_fb_data = function(){
+  var access_token, facebook_id, promise;
+  access_token = FB.getAccessToken();
+  facebook_id = FB.getUserID();
+   return $.post("{% url "login-facebook" %}",{"token":access_token,"id": facebook_id}
+				 ).done(function(result){
+	 location.reload();
+   }).error(function(result){
+	 location = "{%url "onboarding1" %}"
+   });
+}
+
+$(function(){
+   $(".facebook_signup_btn").click(function(){
+	 FB.getLoginStatus(function(response) {
+	   if (response.status === "connected") {
+		 return use_fb_data();
+	   } else if (response.status === "not_authorized") {
+		 return FB.login(function() {
+		   return use_fb_data();
+		 }, {scope: 'email,user_birthday'});
+	   }
+	 }, true);
+	 return false
+   })
+})
+</script>
+
 {% endblock %}
 {% block title %}
 <title>Welcome to Sitterfied!</title>
 {% endblock %}
 {%block bodyclass %}class="landing_bg"{% endblock %}
+
+
+
 
 {% block body %}
 
@@ -20,9 +52,9 @@
 		<li><a href="#learn_more">How it Works</a></li>
 		<li><a href="{%url "onboarding1" %}" >Sign Up</a></li>
 		<li><a class="login-trigger" href="#login">Log in</a></li>
-		<li><a href="#" class="facebook">facebook</a></li>
-		<li><a href="#" class="twitter">twitter</a></li>
-		<li><a href="#" class="tumblr">tumblr</a></li>
+		<li><a class="facebook" href="http://www.facebook.com/sitterfied" target="_blank">facebook</a></li>
+		<li><a class="twitter" href="http://www.twitter.com/sitterfied" target="_blank">twitter</a></li>
+		<li><a class="tumblr" href="http://sitterfied.tumblr.com/" target="_blank">tumblr</a></li>
 	</ul>
 </div>
 
@@ -39,7 +71,7 @@
 					<div class="right_info">
 						<h1>Simply the quickest and easiest way to find and book a <span>babysitter</span>.</h1>
 						<div class="facebook_signup">
-							<p><a href="{% url "onboarding1" %}">Sign up with Facebook</a></p>
+							<p><a class="facebook_signup_btn">Sign up with Facebook</a></p>
 							<p>We won’t post to your wall without your permission.</p>
 							<p><i>Or</i> <a href="{% url "onboarding1" %}">sign up with email</a></p>
 						</div>
@@ -73,7 +105,8 @@
 					</li>
 				</ul>
 				<hr />
-				<div class="video_wrap"><a class="video fancybox.iframe" href="http://www.youtube.com/embed/uLzpzjanHAY?autoplay=1"><img src="{% static "images/demo/video.png" %}" alt="" /></a></div>
+				<div class="video_wrap"><a class="video" href="#wistia_modal"><img src="{% static "images/demo/video.png" %}" alt="" /></a></div>
+                {% include 'landing_video.html' %}
 				<hr />
 				<div class="clear"><a class="button button_edit arrow" href="{% url "onboarding1" %}">i’m ready. Sign me up!</a></div>
 				<hr />
@@ -125,5 +158,7 @@
 
 </div>
 <!-- /landing_block-->
+
+<script type="text/javascript" src="//s3.amazonaws.com/scripts.hellobar.com/e12e8fdf8d04502e0b6c4b41379e97f917b64d65.js"></script>
 
 {% endblock %}

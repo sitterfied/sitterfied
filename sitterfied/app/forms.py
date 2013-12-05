@@ -27,8 +27,9 @@ class RegistrationForm(ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password"}),
                                 label=_("Password"), )
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password (again)"}),
-                                label=_("Password (again)"))
+                                label=_("Password (again)"),)
 
+    email = forms.CharField(widget=forms.TextInput(attrs={"type":"email"}), label=_("Email"),)
     # tos = forms.BooleanField(widget=forms.CheckboxInput,
     #                          label=_(u'I have read and agree to the Terms of Service'),
     #                          error_messages={'required': _("You must agree to the terms to register")})
@@ -38,7 +39,7 @@ class RegistrationForm(ModelForm):
         email, password = self.cleaned_data['email'], self.cleaned_data['password1']
         username = (self.cleaned_data['first_name'][0] + self.cleaned_data['last_name']).lower()
         username = re.sub('\W', "", username)
-        otherusers = User.objects.filter(username__startswith=username).count()
+        otherusers = User.objects.filter(username__startswith=username).count() + 1
         username = username + str(otherusers)
         user = super(RegistrationForm, self).save(*args,commit=False, **kwargs)
         user.username = username
@@ -126,6 +127,7 @@ class SitterRegisterForm(RegistrationForm):
             self.fields[key].required = True
 
 
+
     def clean_dob(self):
         dob = self.cleaned_data['dob']
         if dob.year > 1995:
@@ -162,6 +164,9 @@ class SitterRegisterForm(RegistrationForm):
         if not dob:
             return 0
         return dob
+    def clean_biography(self):
+        bio = self.cleaned_data.get('biography')
+        return bio
 
 
     class Meta:

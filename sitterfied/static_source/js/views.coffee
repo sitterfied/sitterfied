@@ -340,12 +340,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                 $('.header .top_info').removeClass('show_full_desc')
                 $('.header .top_info .desc .full_desc').fadeOut()
 
-            # hide read more link if text < 100 characters
-            bioLength = this.$('.full_desc').text().replace(/\s/g,'').length
-            if bioLength < 100
-                $('.read_more').hide()
-
-
 
 
 
@@ -387,6 +381,38 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                 $("." +targetClass).addClass('active')
 
 
+
+    Sitterfied.AjaxStatusButtonView = Em.View.extend
+        templateName: "ajaxButton"
+        action: null
+        ajaxState: "done"
+        isLoading: (() ->
+            return @get("ajaxState") == "loading"
+        ).property("ajaxState")
+        isSaved: (() ->
+            return @get("ajaxState") == "saved"
+        ).property("ajaxState")
+        isError: (() ->
+            return @get("ajaxState") == "error"
+        ).property("ajaxState")
+        doAction: () ->
+            @set("ajaxState", "loading")
+            action = @get('controller').get(@get('action'))
+            promise = action.apply(@get('controller'))
+            @setupAjax(promise)
+        setupAjax: (promise) ->
+            promise.then(
+                () =>
+                    @set("ajaxState", "saved")
+                    Em.run.later (=> @set("ajaxState", "done")), 5000
+                () =>
+                    @set("ajaxState", "error")
+                    Em.run.later (=> @set("ajaxState", "done")), 5000
+            )
+
+
+    Sitterfied.ResetAjaxStatusButtonView = Sitterfied.AjaxStatusButtonView.extend
+        templateName: "resetAjaxButton"
 
     #Sitterfied.BookingView = Em.View.extend
 

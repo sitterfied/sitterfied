@@ -25,8 +25,6 @@ from django.http import HttpResponse
 def sms_messages(request):
     from_number = request.POST.get('From', None)
     resp = Response()
-    if from_number.startswith("+1"):
-        from_number = from_number[2:]
     try:
         sitter = Sitter.objects.get(cell=from_number)
     except Sitter.DoesNotExist:

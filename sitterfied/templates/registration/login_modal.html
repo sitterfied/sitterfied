@@ -6,7 +6,7 @@
       <img src="/static/images/logo2.png" alt="" />
     </p>
 	<p>
-      <a href="#">
+      <a href="#" class="facebook_signup_btn">
         <img src="/static/images/icons/facebook_login.png" alt="" />
       </a>
     </p>
@@ -15,7 +15,10 @@
       </span>
     </div>
 	<ul>
-	  <li>
+	  <li fclass="error_text" id="errormessage">
+		<p>incorrect email or password</p>
+	  </li>
+	  <li >
         <span class="icon_email4">&nbsp;
         </span>
         {{ form.username }}
@@ -26,28 +29,45 @@
         {{ form.password }}
       </li>
 	</ul>
-	
-    <p>                
+
+    <p>
       <input type="hidden" name="next" value="/" />
-      <input type="submit" class="button button_edit" value="LOG IN" />
-    </p>
-	<p>Don’t have an account?
-      <a href="{% url 'signup' %}">Sign up</a>
+      <input id="loginbtn" type="submit" class="button button_edit" value="LOG IN" />
     </p>
   </form>
+	<p>Don’t have an account?
+      <a href="{% url 'onboarding1' %}">Sign up</a>
+    </p>
 </div>
 <!-- login_popup -->
 
 <script>
   $(document).ready(function() {
+   $("#errormessage").hide()
     $('.login-trigger').fancybox({
         scrolling   : "no",
-        wrapCSS     : "onb_final",              
+        wrapCSS     : "onb_final",
         maxWidth    : 960,
         maxHeight   : 800,
         fitToView   : false,
         width       : '90%',
         height      : '90%',
-        });  
-    });
+        });
+
+   $("form").submit(function(){
+	 username = $("#id_username").val()
+	 password = $("#id_password").val()
+	 $.post("{% url "login-ajax" %}", {"username":username, "password":password}).done(function(result){
+	   location.reload();
+	 }).error(function(result){
+	   $("#id_username").addClass("error_field_login")
+	   $("#id_password").addClass("error_field_login")
+	   $("#errormessage").fadeIn()
+	 })
+	 return false;
+   })
+ });
+
+
+
 </script>

@@ -123,9 +123,8 @@ INSTALLED_APPS = (
     'south',
     'pipeline',
     'pyuploadcare.dj',
+    'favicon',
     'app',
-
-
 
 
 )
@@ -182,7 +181,7 @@ ALLOWED_HOSTS =[
 ]
 
 
-AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend','app.authentication.FacebookAuthBackend',)
 
 
 from .pipeline import *

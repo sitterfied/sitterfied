@@ -5,12 +5,14 @@ from django.contrib import admin
 admin.autodiscover()
 
 from filebrowser.sites import site
+from django.views.generic import RedirectView
 
 urlpatterns = patterns('',
     url(r'^admin/filebrowser/?', include(site.urls)),
     url(r'^grappelli/?', include('grappelli.urls')),
     url(r'^admin/?', include(admin.site.urls)),
-
+    url(r'^', include('favicon.urls')),
+    url(r'^favicon.ico/$', RedirectView.as_view(url="/static/favicon.ico")),
 
 )
 

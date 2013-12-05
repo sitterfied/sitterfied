@@ -5,7 +5,7 @@ import os
 with open('/home/dotcloud/environment.json') as f:
   env = json.load(f)
 
-DEBUG = True
+DEBUG = False
 
 
 CACHES = {

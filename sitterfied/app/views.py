@@ -1,4 +1,5 @@
 # Create your views here.
+from datetime import datetime
 from django.contrib.auth import login as auth_login
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.csrf import csrf_protect
@@ -31,6 +32,7 @@ from ecl_facebook import Facebook
 from signup import RegistrationView
 
 from rest_framework.renderers import JSONRenderer
+from drf_ujson.renderers import UJSONRenderer
 from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
 from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
 
@@ -40,6 +42,22 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
+
+
+
+try:
+    if 'devserver' not in settings.INSTALLED_APPS:
+        raise ImportError
+    from devserver.modules.profile import devserver_profile
+except ImportError:
+    from functools import wraps
+    class devserver_profile(object):
+        def __init__(self, *args, **kwargs):
+            pass
+        def __call__(self, func):
+            def nothing(*args, **kwargs):
+                return func(*args, **kwargs)
+            return wraps(func)(nothing)
 
 class HttpResponseUnauthorized(HttpResponse):
     status_code = 401
@@ -63,9 +81,11 @@ def get_user_json(user):
                                                                           'reviews',
                                                                       ).get(id=user.id)
     serialized = seralizer(classed_user)
-    user_json = JSONRenderer().render(serialized.data)
+    user_json = UJSONRenderer().render(serialized.data)
     return user_json
 
+
+@devserver_profile(follow=[get_user_json])
 @render_to()
 def index(request, referred_by=None):
     form = AuthenticationForm()
@@ -89,6 +109,7 @@ def index(request, referred_by=None):
             "first_time": request.GET.get("first_time", "")
     }
 
+import facebook
 @render_to()
 def onboarding2(request):
     ChildFormSet = inlineformset_factory(Parent, Child, form=ChildForm, extra=1)
@@ -97,6 +118,10 @@ def onboarding2(request):
             form = SitterRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
+                fb_id = request.session.get("FACEBOOK_ID", None)
+                fb_token = request.session.get("FACEBOOK_TOKEN", None)
+                if fb_id:
+                    facebook_import_logic(user, fb_token, fb_id)
                 auth_login(request, user)
                 return redirect("onboarding3")
             else:
@@ -106,6 +131,10 @@ def onboarding2(request):
             form = ParentRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
+                fb_token = request.session.get("FACEBOOK_TOKEN", None)
+                if fb_id:
+                    facebook_import_logic(user, fb_token, fb_id)
+
                 formset = ChildFormSet(request.POST, instance=user.parent)
                 if formset.is_valid():
                     formset.save()
@@ -117,13 +146,33 @@ def onboarding2(request):
                         "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form, "formset":formset}
 
     if request.method == "GET":
+        fb_id = request.session.get("FACEBOOK_ID", None)
+        fb_token = request.session.get("FACEBOOK_TOKEN", None)
+        if fb_id:
+            graph = facebook.GraphAPI(fb_token)
+            me = graph.get_object("me")
+            birthday = me.get("birthday", "")
+            if birthday:
+                dob = datetime.strptime(birthday, "%m/%d/%Y")
+            else:
+                dob = ""
+            initial = {"first_name":me.get('first_name', ""),
+                      "last_name":me.get('last_name', ""),
+                      "gender":me.get('gender', ""),
+                      "email":me.get("email", ""),
+                       'dob':dob,
+
+                  }
+
+        else:
+            initial = {}
         parent_or_sitter = request.GET.get('parent_or_sitter', "parent")
         if parent_or_sitter.lower() == "sitter":
-            form = SitterRegisterForm()
+            form = SitterRegisterForm(initial=initial)
             template = "onboardingsitter.html"
             formset = None
         else:
-            form = ParentRegisterForm()
+            form = ParentRegisterForm(initial=initial)
             dummy_user = User()
             formset = ChildFormSet(instance=dummy_user)
             template = "onboardingparent.html"
@@ -136,13 +185,10 @@ def onboarding2(request):
 @render_to("onboarding3.html")
 def onboarding3(request):
     if request.method =="POST":
-        form = GroupsForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            if hasattr(request.user, 'parent'):
-                return redirect("/search?first_time=1")
-            else:
-                return redirect("/profile")
+        if hasattr(request.user, 'parent'):
+            return redirect("/search?first_time=1")
+        else:
+            return redirect("/profile")
     form = GroupsForm(instance=request.user)
     return {"form":form}
 
@@ -201,6 +247,14 @@ def network_search(request):
     return Response(users)
 
 
+@api_view(['GET'])
+def group_search(request):
+    search_term = request.GET.get('search', '')
+    groups = [{'label':g.name,
+               'value':g.name,
+               "type":"group",
+               "id":g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
+    return Response(groups)
 
 
 def error(request):
@@ -232,6 +286,34 @@ def login_ajax(request,
     user_json = get_user_json(request.user)
     return {"user":user_json}
 
+
+from django.contrib.auth import authenticate
+
+@sensitive_post_parameters()
+@csrf_protect
+@never_cache
+@require_POST
+@ajax_request
+def login_facebook(request):
+    """
+    Displays the login form and handles the login action.
+    """
+    facebook_id = request.POST['id']
+
+    user = authenticate(id=facebook_id)
+    if not user:
+        request.session["FACEBOOK_ID"] = facebook_id
+        request.session["FACEBOOK_TOKEN"] = request.POST['token']
+
+        return HttpResponseUnauthorized()
+
+    auth_login(request, user)
+    if request.session.test_cookie_worked():
+        request.session.delete_test_cookie()
+
+    return {}
+
+
 from django.contrib.auth import login
 
 class AjaxRegistrationView(RegistrationView):
@@ -257,27 +339,21 @@ class AjaxRegistrationView(RegistrationView):
         return HttpResponseUnauthorized()
 
 
-@ajax_request
-@login_required
-def facebook_import(request):
-    user = request.user
-    if request.method == "POST":
-        token = request.POST['token']
-        fb_id = request.POST['id']
-        user.facebook_token = token
-        user.facebook_id = fb_id
-        user.save()
+def facebook_import_logic(user, token, fb_id):
+    user.facebook_token = token
+    user.facebook_id = fb_id
+    user.save()
     fb = Facebook(user.facebook_token)
     response = fb.me.friends()
     facebook_ids = [friend['id'] for friend in response['data']]
     friends = User.objects.filter(facebook_id__in=facebook_ids)
-    ThroughModel = user.users_in_network.through
-    models_to = (ThroughModel(from_user_id=user.id,
-                              to_user_id=friend.id) for friend in friends)
-    models_frm = (ThroughModel(to_user_id=user.id,
-                               from_user_id=friend.id) for friend in friends)
-    models = chain(models_to, models_frm)
-    ThroughModel.objects.bulk_create(models)
+    user.friends.add(*friends)
+
+
+@ajax_request
+@login_required
+def facebook_import(request):
+    facebook_import_logic(request.user, request.user.facebook_token, request.user.facebook_id)
     return {}
 
 
@@ -306,6 +382,31 @@ def invite_email_submit(request):
 
 
 
+@ajax_request
+@login_required
+@require_POST
+def remove_friend(request):
+    friend_id = request.POST['friend_id']
+    friend = User.objects.get(id=friend_id)
+    request.user.friends.remove(friend)
+    return {}
+@ajax_request
+@login_required
+@require_POST
+def remove_group(request):
+    group_id = request.POST['group_id']
+    group = Group.objects.get(id=group_id)
+    request.user.sitter_groups.remove(group)
+    return {}
+
+@ajax_request
+@login_required
+@require_POST
+def add_group(request):
+    group_name = request.POST['group_name']
+    group, created = Group.objects.get_or_create(name=group_name)
+    request.user.sitter_groups.add(group)
+    return {"id":group.id,"name":group.name}
 
 
 @render_to('unsubscribe.html')

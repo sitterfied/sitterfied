@@ -159,14 +159,30 @@ define ['jquery'
         friends_in_common: (() ->
             usersFriends = Sitterfied.get('currentUser.friends')
             myFriends = @get('friends')
-            return _.intersection(usersFriends, myFriends)
-        ).property('friends', 'Sitterfied.currentUser.friends')
+            #return usersFriends.content, myFriends.content
+        ).property('friends.@each', "friends.isLoaded", 'Sitterfied.currentUser.friends.length')
+
         sitter_friends_in_common: (() ->
-            @get('friends_in_common').filterProperty('isSitter')
-        ).property('friends_in_common')
+            results = Em.A()
+            friends = @get('friends_in_common')
+            for friend in friends
+                f = Sitterfied.User.find(friend.id)
+                if f.get('isSitter')
+                    results.pushObject(f)
+            return results
+        ).property('friends_in_common', "friends.@each")
+
         parent_friends_in_common: (() ->
-            @get('friends_in_common').filterProperty('isParent')
-        ).property('friends_in_common')
+            results = Em.A()
+            friends = @get('friends_in_common')
+            for friend in friends
+                debugger
+                f = Sitterfied.User.find(friend.id)
+                if f.get('isParent')
+                    results.pushObject(f)
+            return results
+        ).property('friends_in_common', "friends.@each")
+
         groups_in_common: (() ->
             usersGroups = Sitterfied.get('currentUser.sitter_groups')
             myGroups = @get('sitter_groups')
@@ -348,7 +364,7 @@ define ['jquery'
 
         biographyPList: (() ->
             bio = @get('biography')
-            return bio?.split("\n\n")
+            return bio?.split(/\r?\n\r?\n/)
         ).property('biography')
 
         in_friends_team: attr(Boolean)
@@ -399,7 +415,7 @@ define ['jquery'
             date = @get('dob')
             if not date
                 return
-            if arguments.length == 1
+            if arguments.length == 1 or not value
                 return date.getMonth()
             else
                 date.setMonth(value)
@@ -411,7 +427,7 @@ define ['jquery'
             date = @get('dob')
             if not date
                 return
-            if arguments.length == 1
+            if arguments.length == 1 or not value
                 return date.getDate()
             else
                 date.setDate(value)
@@ -422,9 +438,10 @@ define ['jquery'
             date = @get('dob')
             if not date
                 return
-            if arguments.length == 1
+            if arguments.length == 1 or not value
                 return date.getFullYear()
             else
+
                 date.setFullYear(value)
                 @set('dob', date)
         ).property('dob')

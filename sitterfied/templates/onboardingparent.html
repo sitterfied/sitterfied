@@ -3,6 +3,11 @@
 
 
 {% block extra_head %}
+<script>
+  UPLOADCARE_CROP = "174x174 upscale";
+</script>
+<script src="{% static "js/lib/PhoneFormat.js" %}">
+
 {% load compressed %}
 {% compressed_js 'onboarding' %}
 {% include "csrf.html" %}
@@ -43,19 +48,19 @@
 
                                     <li>
                                       <span class="icon_name">&nbsp;</span>Name
-                                      
+
                     {% for error in form.first_name.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
+                    </div>
                     {% endfor %}
-                    
+
                     {% for error in form.last_name.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
+                    </div>
                     {% endfor %}
-   
+
                                     </li>
 									<li>
 										<p>
@@ -71,12 +76,12 @@
                                     <span class="icon_mom_group">&nbsp;</span>Mom Group<br />
                                     <span class="small">(optional)</span>
                                   {% for error in form.sitter_group.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
+                    </div>
                     {% endfor %}
 
-  
+
                                   </li>
 									<li class="mom_group_items">
 									  <p>
@@ -98,30 +103,30 @@
                                       <span class="icon_friends7">&nbsp;</span>Children
                                     {% for form in formset %}
                     {% for error in form.name.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
+                    </div>
                     {% endfor %}
 
                     {% for error in form.dob.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
-                    {% endfor %}                    
-                    
+                    </div>
+                    {% endfor %}
+
                     {% for error in form.school.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
-                    {% endfor %}                    
-                    
+                    </div>
+                    {% endfor %}
+
                     {% for error in form.special_needs.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
-                    {% endfor %}                    
-                    
-                                    {% endfor %} 
+                    </div>
+                    {% endfor %}
+
+                                    {% endfor %}
                                     </li>
 									{% for form in formset %}
 
@@ -169,35 +174,35 @@
                                     <li>
                                       <span class="icon_pin3">&nbsp;</span>Home Address
                                       {% for error in form.address1.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
+                    </div>
                     {% endfor %}
 
                     {% for error in form.address2.errors %}
-					<div class="icon_error"> 
+					<div class="icon_error">
                       <p>{{ error|escape }}</p>
-                    </div>  
-                    {% endfor %}                    
-                    
-                    {% for error in form.city.errors %}
-					<div class="icon_error"> 
-                      <p>{{ error|escape }}</p>
-                    </div>  
-                    {% endfor %}                    
-                    
-                    {% for error in form.state.errors %}
-					<div class="icon_error"> 
-                      <p>{{ error|escape }}</p>
-                    </div>  
-                    {% endfor %}                    
-                    
-                    {% for error in form.zip.errors %}
-					<div class="icon_error"> 
-                      <p>{{ error|escape }}</p>
-                    </div>  
+                    </div>
                     {% endfor %}
-  
+
+                    {% for error in form.city.errors %}
+					<div class="icon_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
+
+                    {% for error in form.state.errors %}
+					<div class="icon_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
+
+                    {% for error in form.zip.errors %}
+					<div class="icon_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
+
                                     </li>
 									<li>
 
@@ -217,12 +222,12 @@
                                     <li>
                                       <span class="icon_iphone">&nbsp;</span>Cell Phone Number
                                       {% for error in form.cell.errors %}
-					                  <div class="icon_error"> 
+					                  <div class="icon_error">
                                       <p>{{ error|escape }}</p>
-                                      </div>  
+                                      </div>
                                       {% endfor %}
- 
-  
+
+
                                     </li>
 									<li>
 									  <p>
@@ -240,11 +245,11 @@
                                     <li>
                                       <span class="icon_email">&nbsp;</span>Email Address
                                       {% for error in form.email.errors %}
-                      <div class="icon_error"> 
+                      <div class="icon_error">
                         <p>{{ error|escape }}</p>
-                      </div> 
+                      </div>
 					  {% endfor %}
-  
+
                                     </li>
 									<li>
 										<p>
@@ -257,19 +262,19 @@
 								<ul>
                                     <li>
                                       <span class="icon_pass2">&nbsp;</span>Password
-                                      
+
                                         {% for error in form.password1.errors %}
-                                        <div class="icon_error"> 
+                                        <div class="icon_error">
                                             <p>{{ error|escape }}</p>
-                                        </div> 
+                                        </div>
                                         {% endfor %}
 
                                         {% for error in form.password2.errors %}
-                                        <div class="icon_error"> 
+                                        <div class="icon_error">
                                             <p>{{ error|escape }}</p>
-                                        </div> 
+                                        </div>
                                         {% endfor %}
-   
+
                                     </li>
 									<li class="pass">
 										<p>
@@ -288,9 +293,9 @@
 										<p>Like it or not we’re visual beings and adding a photo of yourself breaks down big trust barriers. </p>
 										<p>You’ll have the option to use your Facebook pic or upload your own. </p>
                                         {% for error in form.avatar.errors %}
-                                        <div class="icon_error avatar_error"> 
+                                        <div class="icon_error avatar_error">
                                             <p>{{ error|escape }}</p>
-                                        </div> 
+                                        </div>
                                         {% endfor %}
 									</li>
 									<li>
@@ -340,7 +345,8 @@ $(function () {
 	 add.css('background', path );
 	 add.css("background-size","cover")
 	 add.css("background-repeat", "no-repeat");
-
+     add.css("max-width", "237px");
+     add.css("max-height", "237px");
 
    });
 

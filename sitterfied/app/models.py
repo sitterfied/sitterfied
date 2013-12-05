@@ -60,7 +60,7 @@ class User(AbstractUser, TimeStampedModel):
     membership_exp_date  = models.DateTimeField(null=True)
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
-    facebook_id = models.IntegerField(null=True, blank=True)
+    facebook_id = models.IntegerField(null=True, blank=True, unique=True)
     google_imported = models.BooleanField(default=False)
 
     address1 = models.CharField(max_length=255, blank=True)
@@ -72,7 +72,7 @@ class User(AbstractUser, TimeStampedModel):
 
     profile_completed = models.BooleanField(default=False)
 
-    avatar = UploadcareImageField(blank=True, manual_crop="")
+    avatar = UploadcareImageField(blank=True, manual_crop="174x174 upscale")
     #avatar_url = models.URLField(blank=True)
     #objects = InheritanceManager()
 
@@ -101,7 +101,6 @@ class User(AbstractUser, TimeStampedModel):
 
 class Address(TimeStampedModel):
     user = models.ForeignKey(User)
-
 
 
 class Phone(TimeStampedModel):
@@ -139,13 +138,13 @@ class Sitter(User):
     sick =  models.BooleanField(default=True)
     will_transport = models.BooleanField(default=True)
 
-    total_exp = models.SmallIntegerField(default=0)
-    infant_exp = models.SmallIntegerField(default=0, blank=True)
-    toddler_exp = models.SmallIntegerField(default=0, blank=True)
-    preschool_exp = models.SmallIntegerField(default=0, blank=True)
-    school_age_exp = models.SmallIntegerField(default=0, blank=True)
-    pre_teen_exp = models.SmallIntegerField(default=0, blank=True)
-    teen_exp = models.SmallIntegerField(default=0, blank=True)
+    total_exp = models.SmallIntegerField()
+    infant_exp = models.SmallIntegerField(blank=True)
+    toddler_exp = models.SmallIntegerField(blank=True)
+    preschool_exp = models.SmallIntegerField(blank=True)
+    school_age_exp = models.SmallIntegerField(blank=True)
+    pre_teen_exp = models.SmallIntegerField(blank=True)
+    teen_exp = models.SmallIntegerField(blank=True)
 
     special_needs_exp = models.BooleanField(default=True)
     extra_exp = models.TextField(blank=True, default="", null=True)
@@ -160,12 +159,12 @@ class Sitter(User):
 
     other_services = models.ManyToManyField('OtherService', blank=True)
 
-    one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    one_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    two_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    two_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    three_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    three_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    one_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    two_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    two_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    three_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    three_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
 
     smokers_ok = models.BooleanField(default=True)
     dogs_ok = models.BooleanField(default=True)

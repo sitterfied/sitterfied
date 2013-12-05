@@ -1,4 +1,4 @@
-django
+django==1.5
 django-pipeline
 django-pipeline-compass
 
@@ -24,7 +24,7 @@ django-registration
 unipath
 pytz
 feedparser
-
+django-favicon
 djangorestframework
 
 #REDIS CACHING
@@ -61,3 +61,5 @@ pyatom
 oauth2client
 gdata
 lxml
+facebook-sdk
+drf_ujson

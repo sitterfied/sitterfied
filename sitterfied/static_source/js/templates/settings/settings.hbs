@@ -29,7 +29,9 @@
 			<li><p>{{view Ember.TextField type="password" valueBinding="new_password1"}}</p></li>
 			<li><label for="">NEW PASSWORD (CONFIRM)</label></li>
 			<li><p>{{view Ember.TextField type="password" valueBinding="new_password2"}}</p></li>
-			<li><a class="button button_small button_cancel" {{action 'resetPassword'}}>Reset</a></li>
+			<li>
+              {{view Sitterfied.ResetAjaxStatusButtonView action=resetPassword}}
+            </li>
 		  </ul>
 		</div>
 		<p><a {{action 'deleteAccount'}}>DELETE MY ACCOUNT</a> Having problems? <strong><a href="mailto:hello@sitterfied.com">talk to us</a></strong>. Maybe we can work this out.</p>
@@ -57,7 +59,9 @@
 		  <li>
 			<p>{{view Ember.Checkbox id="mn_check4" checkedBinding="mobile_upcoming_booking_remind"}}<label for="mn_check4">I have an upcoming booking</label></p>
 		  </li>
-		  <li><a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a></li>
+		  <li>
+            {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
+          </li>
 		</ul>
 		<h4><span class="icon_eset">&nbsp;</span>Email Settings</h4>
         <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>
@@ -84,7 +88,9 @@
 			<p>{{view Ember.Checkbox id="es_check5" checkedBinding="email_news"}}<label for="es_check5">Sitterfied has fun company news, as well as periodic emails</label></p>
 			<p>{{view Ember.Checkbox id="es_check6" checkedBinding="email_blog"}}<label for="es_check6">There’s a new blog post</label></p>
 		  </li>
-		  <li><a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a></li>
+		  <li>
+            {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
+          </li>
 
 		</ul>
         {{/with}}

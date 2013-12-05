@@ -1,4 +1,4 @@
-define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
+define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitterfied) ->
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
         needs: ['certifications'
@@ -19,16 +19,18 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         ).property('parent_or_sitter', 'Sitterfied.accountType')
 
         saveSettings: () ->
-            Em.run.begin()
             model = this.get('model')
             model.set('isDirty', true)
-            model.save()
-            model.get('settings').save()
-            model.get('children')?.save().then((children) ->
+            modelP = model.save()
+            settings = model.get('settings')
+            if settings.get("isLoaded")
+                settings.save()
+            childrenP = model.get('children')?.save()
+            childrenP?.then((children) ->
                 Sitterfied.currentUser.get('children').set('data', children)
                 @newChild()
             )
-            Em.run.end()
+            return Em.RSVP.all([modelP, settingsP?, childrenP])
 
         deleteAccount: () ->
             imsure = confirm("are you sure you want to delete your account? This cannot be undone")
@@ -57,7 +59,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 new_password2: @get('new_password2')
                 old_password: @get('old_password')
             }
-            $.post('password_change/', data).success(alert('password changed'))
+            $.post('password_change/', data)
 
         invite: () ->
             alert("invite friends")
@@ -67,6 +69,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             toBlock = groups.findProperty('id', group.get('id'))
             groups.removeObject(toBlock)
             @set('isDirty', true)
+            @get('content').save()
 
 
         newChild: () ->
@@ -360,7 +363,14 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
 
-
+        showBioLink: (() ->
+            # hide read more link if text < 100 characters
+            bioLength = this.get('biography')?.length
+            if bioLength < 100
+                return false
+            else
+                return true
+        ).property('biography')
     )
     Sitterfied.SitterReviewController  = Em.ObjectController.extend(
     )
