@@ -202,8 +202,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
         renderTemplate: () ->
             this.render("sitter")
             this.render("sitter.top", {outlet: 'top'})
-
-
     )
 
     Sitterfied.SitterIndexRoute = Em.Route.extend(

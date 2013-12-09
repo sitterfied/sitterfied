@@ -45,7 +45,7 @@ define ['jquery'
     }
 
 
-    Boolean = {
+    BooleanType = {
         serialize: (bool) ->
             return bool
         deserialize: (bool) ->
@@ -56,7 +56,7 @@ define ['jquery'
         id: attr()
         #last_login: attr(Date)
         date_joined: attr(Date)
-        is_superuser: attr(Boolean)
+        is_superuser: attr(BooleanType)
         username: attr()
         first_name: attr()
         last_name: attr()
@@ -167,7 +167,9 @@ define ['jquery'
         friends_in_common: (() ->
             usersFriends = Sitterfied.get('currentUser.friends')
             myFriends = @get('friends')
-            #return usersFriends.content, myFriends.content
+            return usersFriends.filter((item, index, list) ->
+                Boolean(myFriends.findProperty("id", item.get("id")))
+            )
         ).property('friends.@each', "friends.isLoaded", 'Sitterfied.currentUser.friends.length')
 
         sitter_friends_in_common: (() ->
@@ -203,6 +205,19 @@ define ['jquery'
                 return ""
             return moment(date_joined).format("MMM YYYY")
         ).property("date_joined")
+
+        #once we have the user data, upgrade to the real thing.
+        sitter: (() ->
+            if not @get("id")
+                return null
+            return Sitterfied.Sitter.find(@get("id"))
+        ).property("id")
+        parent: (() ->
+            if not @get("id")
+                return null
+            return Sitterfied.Parent.find(@get("id"))
+        ).property("id")
+
     )
     Sitterfied.User.adapter = Adapter.create()
 
@@ -210,29 +225,29 @@ define ['jquery'
         id: attr()
         user  : belongsTo('Sitterfied.' + parent_or_sitter, {key:"user"})
         #parent specific
-        mobile_booking_accepted_denied: attr(Boolean)
+        mobile_booking_accepted_denied: attr(BooleanType)
 
         #sitter specific
-        mobile_new_review : attr(Boolean)
-        mobile_booking_request: attr(Boolean)
+        mobile_new_review : attr(BooleanType)
+        mobile_booking_request: attr(BooleanType)
 
-        mobile_friend_joined: attr(Boolean)
-        mobile_groups_added_network: attr(Boolean)
-        mobile_upcoming_booking_remind: attr(Boolean)
+        mobile_friend_joined: attr(BooleanType)
+        mobile_groups_added_network: attr(BooleanType)
+        mobile_upcoming_booking_remind: attr(BooleanType)
 
         #parent specific
-        email_booking_accepted_denied: attr(Boolean)
+        email_booking_accepted_denied: attr(BooleanType)
 
         #sitter specific
-        email_new_review : attr(Boolean)
-        email_booking_request: attr(Boolean)
+        email_new_review : attr(BooleanType)
+        email_booking_request: attr(BooleanType)
 
-        email_friend_joined: attr(Boolean)
-        email_groups_added_network: attr(Boolean)
-        email_upcoming_booking_remind: attr(Boolean)
+        email_friend_joined: attr(BooleanType)
+        email_groups_added_network: attr(BooleanType)
+        email_upcoming_booking_remind: attr(BooleanType)
 
-        email_news: attr(Boolean)
-        email_blog: attr(Boolean)
+        email_news: attr(BooleanType)
+        email_blog: attr(BooleanType)
     )
     Sitterfied.Setting.adapter = Adapter.create()
 
@@ -256,6 +271,10 @@ define ['jquery'
         sitter_teams: hasMany("Sitterfied.Sitter", {key:"sitter_teams"})
         bookmarks: hasMany("Sitterfied.Sitter",{key:"bookmarks"})
         bookings: hasMany('Sitterfied.Booking',{key:"bookings"})
+        parent: (() ->
+            return this
+        ).property()
+
 
     )
     Sitterfied.Parent.adapter = Adapter.create()
@@ -264,61 +283,61 @@ define ['jquery'
     Sitterfied.Schedlue = Ember.Model.extend(
         id: attr()
         sitter: belongsTo('Sitterfied.Sitter', {key:"sitter"})
-        mon_early_morning: attr(Boolean)
-        tue_early_morning: attr(Boolean)
-        wed_early_morning: attr(Boolean)
-        thu_early_morning: attr(Boolean)
-        fri_early_morning: attr(Boolean)
-        sat_early_morning: attr(Boolean)
-        sun_early_morning: attr(Boolean)
+        mon_early_morning: attr(BooleanType)
+        tue_early_morning: attr(BooleanType)
+        wed_early_morning: attr(BooleanType)
+        thu_early_morning: attr(BooleanType)
+        fri_early_morning: attr(BooleanType)
+        sat_early_morning: attr(BooleanType)
+        sun_early_morning: attr(BooleanType)
 
-        mon_late_morning: attr(Boolean)
-        tues_late_morning: attr(Boolean)
-        wed_late_morning: attr(Boolean)
-        thu_late_morning: attr(Boolean)
-        fri_late_morning: attr(Boolean)
-        sat_late_morning: attr(Boolean)
-        sun_late_morning: attr(Boolean)
+        mon_late_morning: attr(BooleanType)
+        tues_late_morning: attr(BooleanType)
+        wed_late_morning: attr(BooleanType)
+        thu_late_morning: attr(BooleanType)
+        fri_late_morning: attr(BooleanType)
+        sat_late_morning: attr(BooleanType)
+        sun_late_morning: attr(BooleanType)
 
-        mon_early_afternoon: attr(Boolean)
-        tue_early_afternoon: attr(Boolean)
-        wed_early_afternoon: attr(Boolean)
-        thu_early_afternoon: attr(Boolean)
-        fri_early_afternoon: attr(Boolean)
-        sat_early_afternoon: attr(Boolean)
-        sun_early_afternoon: attr(Boolean)
+        mon_early_afternoon: attr(BooleanType)
+        tue_early_afternoon: attr(BooleanType)
+        wed_early_afternoon: attr(BooleanType)
+        thu_early_afternoon: attr(BooleanType)
+        fri_early_afternoon: attr(BooleanType)
+        sat_early_afternoon: attr(BooleanType)
+        sun_early_afternoon: attr(BooleanType)
 
-        mon_late_afternoon: attr(Boolean)
-        tue_late_afternoon: attr(Boolean)
-        wed_late_afternoon: attr(Boolean)
-        thu_late_afternoon: attr(Boolean)
-        fri_late_afternoon: attr(Boolean)
-        sat_late_afternoon: attr(Boolean)
-        sun_late_afternoon: attr(Boolean)
+        mon_late_afternoon: attr(BooleanType)
+        tue_late_afternoon: attr(BooleanType)
+        wed_late_afternoon: attr(BooleanType)
+        thu_late_afternoon: attr(BooleanType)
+        fri_late_afternoon: attr(BooleanType)
+        sat_late_afternoon: attr(BooleanType)
+        sun_late_afternoon: attr(BooleanType)
 
-        mon_early_evening: attr(Boolean)
-        tue_early_evening: attr(Boolean)
-        wed_early_evening: attr(Boolean)
-        thu_early_evening: attr(Boolean)
-        fri_early_evening: attr(Boolean)
-        sat_early_evening: attr(Boolean)
-        sun_early_evening: attr(Boolean)
+        mon_early_evening: attr(BooleanType)
+        tue_early_evening: attr(BooleanType)
+        wed_early_evening: attr(BooleanType)
+        thu_early_evening: attr(BooleanType)
+        fri_early_evening: attr(BooleanType)
+        sat_early_evening: attr(BooleanType)
+        sun_early_evening: attr(BooleanType)
 
-        mon_late_evening: attr(Boolean)
-        tue_late_evening: attr(Boolean)
-        wed_late_evening: attr(Boolean)
-        thu_late_evening: attr(Boolean)
-        fri_late_evening: attr(Boolean)
-        sat_late_evening: attr(Boolean)
-        sun_late_evening: attr(Boolean)
+        mon_late_evening: attr(BooleanType)
+        tue_late_evening: attr(BooleanType)
+        wed_late_evening: attr(BooleanType)
+        thu_late_evening: attr(BooleanType)
+        fri_late_evening: attr(BooleanType)
+        sat_late_evening: attr(BooleanType)
+        sun_late_evening: attr(BooleanType)
 
-        mon_overnight: attr(Boolean)
-        tue_overnight: attr(Boolean)
-        wed_overnight: attr(Boolean)
-        thu_overnight: attr(Boolean)
-        fri_overnight: attr(Boolean)
-        sat_overnight: attr(Boolean)
-        sun_overnight: attr(Boolean)
+        mon_overnight: attr(BooleanType)
+        tue_overnight: attr(BooleanType)
+        wed_overnight: attr(BooleanType)
+        thu_overnight: attr(BooleanType)
+        fri_overnight: attr(BooleanType)
+        sat_overnight: attr(BooleanType)
+        sun_overnight: attr(BooleanType)
     )
     Sitterfied.Schedlue.adapter = Adapter.create()
 
@@ -326,13 +345,13 @@ define ['jquery'
     Sitterfied.Sitter = Sitterfied.User.extend(
         biography: attr()
         gender:  attr()
-        id_verified: attr(Boolean)
+        id_verified: attr(BooleanType)
         id_scanPath: attr()
 
         dob: attr(Date)
-        smoker: attr(Boolean)
-        sick: attr(Boolean)
-        will_transport: attr(Boolean)
+        smoker: attr(BooleanType)
+        sick: attr(BooleanType)
+        will_transport: attr(BooleanType)
 
         total_exp: attr(Number)
         infant_exp: attr(Number)
@@ -344,7 +363,7 @@ define ['jquery'
 
         highest_education: attr(),
         last_school: attr(),
-        current_student: attr(Boolean)
+        current_student: attr(BooleanType)
 
         schedlue: belongsTo('Sitterfied.Schedlue', {key:"schedlue"})
 
@@ -365,16 +384,16 @@ define ['jquery'
         special_needs_exp : attr()
         extra_exp: attr()
 
-        smokers_ok: attr(Boolean)
-        dogs_ok: attr(Boolean)
-        cats_ok: attr(Boolean)
-        other_animals_ok: attr(Boolean)
+        smokers_ok: attr(BooleanType)
+        dogs_ok: attr(BooleanType)
+        cats_ok: attr(BooleanType)
+        other_animals_ok: attr(BooleanType)
         travel_distance: attr(Number)
-        has_drivers_licence: attr(Boolean)
+        has_drivers_licence: attr(BooleanType)
 
         bookings: hasMany('Sitterfied.Booking',{key:"bookings"})
 
-        in_sitter_team: attr(Boolean)
+        in_sitter_team: attr(BooleanType)
 
 
         biographyPList: (() ->
@@ -382,7 +401,7 @@ define ['jquery'
             return bio?.split(/\r?\n\r?\n/)
         ).property('biography')
 
-        in_friends_team: attr(Boolean)
+        in_friends_team: attr(BooleanType)
         bookmarks: hasMany("Sitterfied.Parent",{key:" bookmarks"})
         isBookmarked: (() ->
             bookmarks = Sitterfied.currentUser.get('bookmarks')
@@ -461,8 +480,9 @@ define ['jquery'
                 @set('dob', date)
         ).property('dob')
 
-
-
+        sitter: (() ->
+            return this
+        ).property()
     )
 
     Sitterfied.Sitter.adapter = Adapter.create()
@@ -551,7 +571,7 @@ define ['jquery'
         id: attr()
         parent: belongsTo('Sitterfied.Parent', {key:"parent"})
         sitter: belongsTo('Sitterfied.Sitter', {key:"sitter"})
-        recommended: attr(Boolean)
+        recommended: attr(BooleanType)
         review: attr()
 
     )
@@ -571,7 +591,7 @@ define ['jquery'
         city: attr()
         state: attr()
         zip: attr()
-        overnight: attr(Boolean)
+        overnight: attr(BooleanType)
         accepted_sitter: belongsTo('Sitterfied.Sitter', {key:"accepted_sitter"})
         rate: attr(Number)
 
@@ -580,7 +600,7 @@ define ['jquery'
         booking_type: attr()
         sitters: hasMany('Sitterfied.Sitter', {key: 'sitters'})
         declined_sitters: hasMany('Sitterfied.Sitter',{key:"declined_sitters"})
-        canceled: attr(Boolean),
+        canceled: attr(BooleanType),
 
 
         isInterview: (() ->

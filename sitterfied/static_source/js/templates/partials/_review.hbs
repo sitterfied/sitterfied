@@ -1,7 +1,7 @@
 <li>
   <a ><img {{bindAttr src="avatarUrl"}} alt="" /></a>
   <div class="desc">
-	<p>{{# linkTo 'parent' parent }}{{parent.full_name}}{{/linkTo}}</p>
+	<p>{{# linkTo 'parent' parent.parent }}{{parent.full_name}}{{/linkTo}}</p>
 	{{#if recommended }}<div class="reco_btn"><span class="icon_ok">&nbsp;</span>Recommends</div>{{/if}}
 	<p>{{review}}</p>
   </div>

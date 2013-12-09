@@ -43,7 +43,7 @@
         <li>Friends who recommend {{first_name}}</li>
         {{# each friend in reccomends.parent}}
 		  <li>
-            {{# linkTo parent friend}}
+            {{# linkTo parent friend.parent}}
               <img {{bindAttr src="friend.avatarUrl"}} alt="" />
             {{/ linkTo}}
             <span>{{friend.full_name}}</span>
@@ -56,7 +56,7 @@
 		<li>Friends who added {{first_name}} to their sitter team</li>
         {{# each friend in sitter_teams}}
 		  <li>
-            {{# linkTo parent friend}}
+            {{# linkTo parent friend.parent}}
               <img {{bindAttr src="friend.avatarUrl"}} alt="" />
             {{/ linkTo}}
             <span>{{friend.full_name}}</span>
