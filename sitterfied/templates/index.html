@@ -23,41 +23,50 @@
             {% verbatim %}
 
       <div id="recommend_popup">
-	    <div class="tit">
-          <span>Recommend {{Sitterfied.currentUser.first_name}}
-          </span>
-        </div>
-	    <div class="info">
-	      <form method="post" class="form_style">
-	    	<p>
-              <span class="pad">How do you know {{Sitterfied.currentUser.first_name}}?
-              </span>
-              <select>
-                <option>Sat for my kids
-                </option>
-              </select>
-            </p>
-	    	<p>
-              <span class="icon_review3">&nbsp;
-              </span>
-              <label for="review">Review
-              </label>
-              {{# with  controllers.sitterReview }}
-              {{view Ember.TextArea id="review" valueBinding="review"}}
-            </p>
-	    	<p>
-              <a class="button button_small" {{action "postReivew" this }}>
-                <span class="icon_ok2">&nbsp;
-                </span>Post
-              </a>
-              {{/with}}
-              <a class="button button_cancel button_small" {{action "closeReccomendPopup"}}>
-                <span class="icon_cancel">&nbsp;
-                </span>Cancel
-              </a>
-            </p>
-	      </form>
-	    </div>
+	<div class="tit">
+	  <span>How did it go with  {{activeReviewPanelUser.first_name}}?
+	  </span>
+	</div>
+	<div class="info">
+	  <form method="post" class="form_style">
+	    <p>
+	      <span class="field recommend_field">
+		<span class="icon_check4 field_icon">&nbsp;
+		</span>
+		<span class="recommend_label">Recommend?</span>
+		{{view Ember.Checkbox id="recommend"}}
+		<label class="field_box" for="recommend"></label>
+	      </span>
+	      
+	      <span class="field rehire_field">
+		<span class="icon_rehire3 field_icon">&nbsp;
+		</span>
+		<span class="rehire_label">Will you rehire?</span>
+		{{view Ember.Checkbox id="rehire"}}
+		<label class="field_box" for="rehire"></label>
+	      </span>
+	    </p>
+	    <p>
+	      <span class="icon_review3">&nbsp;
+	      </span>
+	      <label for="review">Review
+	      </label>
+	      {{# with  controllers.sitterReview }}
+	      {{view Ember.TextArea id="review"}}
+	    </p>
+	    <p>
+	      <button type="submit" class="button button_small" {{action "postReview"}}>
+		<span class="icon_ok2">&nbsp;
+		</span>Post
+	      </button>
+	      {{/with}}
+	      <a class="button button_cancel button_small" {{action "closeReccomendPopup"}}>
+		<span class="icon_cancel">&nbsp;
+		</span>Cancel
+	      </a>
+	    </p>
+	  </form>
+	</div>
       </div>
 
 	  {{render login}}

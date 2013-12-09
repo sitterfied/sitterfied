@@ -345,12 +345,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.render('search')
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
-
-        postReview: () ->
-            alert("base")
-
         events:{
-            openReccomendPopup: ()->
+            openReccomendPopup: (reviewedUser)->
+                parent = Sitterfied.currentUser
+                this.controller.set('activeReviewPanelUser', reviewedUser)
+
                 $.fancybox
                     href: "#recommend_popup"
                     maxWidth: 960
@@ -360,6 +359,39 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     fitToView: false
                     width: "90%"
                     height: "90%"
+                    
+            postReview: ()->
+                parent = Sitterfied.currentUser
+                sitter = this.controller.get('activeReviewPanelUser')
+                recommend = $("#recommend").is(":checked")
+                rehire = $("#rehire").is(":checked")
+                review = $("#review").val()
+                
+                reviews = parent.sitter_reviews()
+                
+                review_exists = false
+                for rev in reviews
+                    if rev.get('sitter_id') == sitter.get('id')
+                        review_exists = true
+                        current_review = rev
+                        break
+                
+                if review_exists
+                    console.log('Review already exists')
+                    current_review.set('isDirty', true)
+                    current_review.set('recommend', recommend)
+                    current_review.set('rehire', rehire)
+                    current_review.set('review', review)
+                    current_review.save()
+                else
+                    console.log('New Review')
+                    Sitterfied.SitterReview.create({
+                        parent: parent,
+                        sitter: sitter,
+                        rehire: rehire,
+                        recommend: recommend,
+                        review: review
+                    }).save()
 
             removeFromTeam: ()->
                 debugger

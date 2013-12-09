@@ -9,6 +9,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 'bookings'
                 'children']
         accountType: parent_or_sitter
+        activeReviewPanelUser: null
 
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"

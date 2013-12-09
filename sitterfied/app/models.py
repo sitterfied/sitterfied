@@ -307,6 +307,7 @@ class SitterReview(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="reviews")
     sitter  = models.ForeignKey(Sitter, related_name="reviews")
     recommended = models.BooleanField()
+    rehire = models.BooleanField()
     review = models.TextField(blank=True)
 
     class Meta:

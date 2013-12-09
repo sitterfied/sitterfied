@@ -305,15 +305,20 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 	/* Recommend popup */
 #recommend_popup {display:none;}
 #recommend_popup .tit {color:#fff;font-size:29px;text-align:center;background:#31a7b5 url(../images/top_title.gif) repeat-x;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;padding:30px 10px;margin:0 0 30px 0;border-radius:4px 4px 0 0;}
-#recommend_popup .tit span {padding-right:38px;background:url(../images/icons/bird.png) right center no-repeat;}
+#recommend_popup .tit span {padding-right:38px;}
 #recommend_popup .info {padding:0 10px;}
 #recommend_popup .info p {color:#616161;font:bold 16px 'ProximaNova';padding:20px 50px 25px 55px;position:relative;clear:both;}
 #recommend_popup .info p select {width:190px;}
 #recommend_popup .info p .pad {padding-right:30px;}
 #recommend_popup .info p label {float:left;display:block;}
+#recommend_popup .info p span.field {float:left;width:250px;}
+#recommend_popup .info p span.recommend_field {}
+#recommend_popup .info p span.rehire_field {}
+#recommend_popup .info p span label.field_box {float:none;display:inline-block;margin-left:15px;}
 #recommend_popup .info p > [class^="icon_"] {top:20px;}
+#recommend_popup .info p .field_icon {top:-5px;left:0px;display:inline-block;position:relative;}
 #recommend_popup .info p textarea {float:right;width:380px;height:115px;padding:15px;font:14px 'ProximaNova';color:#616161;}
-#recommend_popup .info p:first-child {text-align:center;padding-top:0;border-bottom:1px dotted #e7e9eb;}
+#recommend_popup .info p:first-child {padding-top:5px;padding-left:10px;padding-bottom:60px;border-bottom:1px dotted #e7e9eb;}
 #recommend_popup .info p:first-child div {text-align:left;}
 #recommend_popup .info p .button_small {float:right;margin-left:10px;}
 #recommend_popup .info p .fb_button {float:right;color:#8a8989;font-size:24px;font-weight:normal;padding:0 0 0 18px;}
@@ -665,6 +670,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .about_block .about_details_block > ul > li:hover > ul > li .icon_emergency2, .about_block .about_details_block > ul > li.focus > ul > li .icon_emergency2 {background-position:0 -3536px;}
 	/* Reviews block */
 .reviews_block {padding:25px 25px 50px 30px;}
+.reviews_block .edit_reviews .sitter_review {float:left;}
 .reviews_block .reco {border-bottom:1px dotted #e1e3e6;padding-bottom:30px;margin-bottom:10px;}
 .reviews_block .reco a {position:relative;color:#fff;font:16px/38px 'ProximaNovaCond';float:right;display:block;background:#1c8292 url(../images/reco_bg.gif) repeat-x;min-width:120px;height:38px;padding:0 10px 0 35px;border-radius:4px;box-shadow:rgba(0,0,0,.35) 3px 3px 3px;}
 .reviews_block .reco a span {top:11px;left:4px;}

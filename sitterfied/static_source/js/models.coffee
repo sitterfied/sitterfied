@@ -242,6 +242,26 @@ define ['jquery'
         bookmarks: hasMany("Sitterfied.Sitter",{key:"bookmarks"})
         bookings: hasMany('Sitterfied.Booking',{key:"bookings"})
 
+        sitters_to_review: (() ->
+            results = Em.A()
+            bookings = this.get('bookings').toArray()
+            for booking in bookings
+                accepted_sitter = booking.get('accepted_sitter')
+                if accepted_sitter
+                    results.pushObject(accepted_sitter)
+            return results.uniq()
+        ).property('bookings.@each', "bookings.@each.accepted_sitter")
+            
+        sitter_reviews: (() ->
+            results = Em.A()
+            reviews = Sitterfied.SitterReview.find({
+                        parent: this,
+                    })
+            for review in reviews
+                results.pushObject(review)
+            return results
+        )
+
     )
     Sitterfied.Parent.adapter = Adapter.create()
 
@@ -536,6 +556,7 @@ define ['jquery'
         parent: belongsTo('Sitterfied.Parent', {key:"parent"})
         sitter: belongsTo('Sitterfied.Sitter', {key:"sitter"})
         recommended: attr(Boolean)
+        rehire: attr(Boolean)
         review: attr()
 
     )
