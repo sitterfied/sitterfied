@@ -1342,7 +1342,7 @@ function program13(depth0,data) {
 Ember.TEMPLATES["sitterEdit/top"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, stack2, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, stack2, hashTypes, hashContexts, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -1374,7 +1374,11 @@ function program9(depth0,data) {
   data.buffer.push("\n  <p>Your profile is <span>ACTIVE</span> but incomplete</p>\n  <div><span>&nbsp;</span></div>\n  <p>Fill in the gaps below so parents can see how great you are!</p>\n");
   }
 
-  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img ");
+  data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"member_since\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "memberSince", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img ");
   hashContexts = {'src': depth0};
   hashTypes = {'src': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
@@ -2281,7 +2285,11 @@ function program15(depth0,data) {
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n  <div class=\"member_since\">Feb 2013</div>\n  <div class=\"photo\">\n    ");
+  data.buffer.push("\n  <div class=\"member_since\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "memberSince", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</div>\n  <div class=\"photo\">\n    ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "Sitterfied.isParent", {hash:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -5513,7 +5521,11 @@ function program15(depth0,data) {
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
     'valueBinding': ("full_name")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p></li>\n			<li><label for=\"\">STATUS</label></li>\n			<li>\n			  <div class=\"member_since\">Feb 2013</div>\n              ");
+  data.buffer.push("</p></li>\n			<li><label for=\"\">STATUS</label></li>\n			<li>\n			  <div class=\"member_since\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "memberSince", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</div>\n              ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "isParent", {hash:{},inverse:self.program(4, program4, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -5813,7 +5825,11 @@ function program5(depth0,data) {
   },inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "search", options) : helperMissing.call(depth0, "linkTo", "search", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n<!-- top info -->\n<div class=\"top_info clear\">\n  <div class=\"member_since guest\"></div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img ");
+  data.buffer.push("\n<!-- top info -->\n<div class=\"top_info clear\">\n  <div class=\"member_since\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "memberSince", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("</div>\n  <div class=\"photo\">\n	<div class=\"photo_edit_wrap\">\n	  <img ");
   hashContexts = {'src': depth0};
   hashTypes = {'src': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
@@ -5879,7 +5895,11 @@ function program3(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content my_sitter_team my_sitter_team_tab_bg\" id=\"tab-3\">\n		<div class=\"send_request\"><a href=\"#\">Send a job request to the team</a></div>\n		<ul class=\"clear\">\n          ");
+  data.buffer.push("\n	  <div class=\"tab_content my_sitter_team my_sitter_team_tab_bg\" id=\"tab-3\">\n		<div class=\"send_request\"><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "bookTeam", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Send a job request to the team</a></div>\n		<ul class=\"clear\">\n          ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "sitter", "in", "", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});

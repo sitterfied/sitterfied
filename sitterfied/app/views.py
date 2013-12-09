@@ -82,7 +82,7 @@ def get_user_json(user):
                                                                           'reviews',
                                                                       ).get(id=user.id)
     serialized = seralizer(classed_user)
-    user_json = UJSONRenderer().render(serialized.data)
+    user_json = JSONRenderer().render(serialized.data)
     return user_json
 
 
