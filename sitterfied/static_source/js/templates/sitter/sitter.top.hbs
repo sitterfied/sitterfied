@@ -5,7 +5,7 @@
   {{# if Sitterfied.isParent}}
     <div {{action bookmark this}}{{bindAttr class=":bookmark isBookmarked:active"}}></div>
   {{/ if}}
-  <div class="member_since">Feb 2013</div>
+  <div class="member_since">{{memberSince}}</div>
   <div class="photo">
     {{# if Sitterfied.isParent}}
 	<div {{action addSitterTeam this}} class="heart_wrap">

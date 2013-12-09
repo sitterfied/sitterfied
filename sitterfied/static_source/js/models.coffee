@@ -27,7 +27,14 @@ define ['jquery'
         serialize: (date) ->
             if date then moment(date).utc().toISOString() else null
         deserialize: (date) ->
-            if date then moment(date).local().toDate() else null
+            #deal with ujson wierdniss
+            if date
+                if $.type(date) ==  "number"
+                    date = moment.unix(date)
+                else
+                    date = moment(date)
+                return date.local().toDate()
+            else null
     }
 
     Phone = {
@@ -48,6 +55,7 @@ define ['jquery'
     Sitterfied.User = Ember.Model.extend(
         id: attr()
         #last_login: attr(Date)
+        date_joined: attr(Date)
         is_superuser: attr(Boolean)
         username: attr()
         first_name: attr()
@@ -188,6 +196,13 @@ define ['jquery'
             myGroups = @get('sitter_groups')
             return _.intersection(usersGroups, myGroups)
         ).property('sitter_groups', 'Sitterfied.currentUser.sitter_groups')
+
+        memberSince : (() ->
+            date_joined = @get("date_joined")
+            if not date_joined
+                return ""
+            return moment(date_joined).format("MMM YYYY")
+        ).property("date_joined")
     )
     Sitterfied.User.adapter = Adapter.create()
 
