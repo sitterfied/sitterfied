@@ -152,7 +152,7 @@ I've been keeping the complied sitterfied.js application out of git because ther
 
 When you push, make sure to use rsync as a deployment method and it will move the updated build along with the django code.
 
-		$ dotcloud setup
+		$ dotcloud setup --api-key <will prompt for key>
 
 		$ dotcloud connect beta
 
