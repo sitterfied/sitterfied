@@ -414,6 +414,16 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
     Sitterfied.ResetAjaxStatusButtonView = Sitterfied.AjaxStatusButtonView.extend
         templateName: "resetAjaxButton"
 
+    Sitterfied.PopUpView = Em.View.extend
+        classNameBindings: ['content']
+        layoutName: 'popupView'
+        content: null
+        isEmpty: (() ->
+            @get("content.length") == 0
+        ).property("content.@each", "content")
+
+
+
     #Sitterfied.BookingView = Em.View.extend
 
 

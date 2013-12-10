@@ -168,6 +168,7 @@ define ['jquery'
             usersFriends = Sitterfied.get('currentUser.friends')
             myFriends = @get('friends')
             return myFriends.filter((item, index, list) ->
+                if item.get("id") == Sitterfied.get('currentUser.id') then return false
                 Boolean(usersFriends.findProperty("id", item.get("id")))
             )
         ).property('friends.@each',
