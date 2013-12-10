@@ -5793,7 +5793,7 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("<img ");
+  data.buffer.push("<img  class=\"avatarimage\" ");
   hashContexts = {'src': depth0,'alt': depth0};
   hashTypes = {'src': "ID",'alt': "ID"};
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
@@ -5818,7 +5818,7 @@ function program6(depth0,data) {
   data.buffer.push("\n			<li>");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "sitter", options) : helperMissing.call(depth0, "linkTo", "sitter", "sitter", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   hashTypes = {};
@@ -5829,8 +5829,21 @@ function program6(depth0,data) {
   data.buffer.push("</li>\n            ");
   return buffer;
   }
+function program7(depth0,data) {
+  
+  var buffer = '', hashContexts, hashTypes;
+  data.buffer.push("<img class=\"avatarimage\"  ");
+  hashContexts = {'src': depth0,'alt': depth0};
+  hashTypes = {'src': "ID",'alt': "ID"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'src': ("avatarUrl"),
+    'alt': ("full_name")
+  },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" />");
+  return buffer;
+  }
 
-function program8(depth0,data) {
+function program9(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
   data.buffer.push("\n			<li>");
@@ -5866,7 +5879,7 @@ function program8(depth0,data) {
   data.buffer.push(")</li>\n            ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "groups_in_common", {hash:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "groups_in_common", {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		  </ul>\n		</li>\n	  </ul>\n	</div>\n	<!-- /network_block -->\n  </div>\n</div>\n");
   return buffer;

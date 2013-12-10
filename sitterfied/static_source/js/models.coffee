@@ -167,37 +167,34 @@ define ['jquery'
         friends_in_common: (() ->
             usersFriends = Sitterfied.get('currentUser.friends')
             myFriends = @get('friends')
-            return usersFriends.filter((item, index, list) ->
-                Boolean(myFriends.findProperty("id", item.get("id")))
+            return myFriends.filter((item, index, list) ->
+                Boolean(usersFriends.findProperty("id", item.get("id")))
             )
-        ).property('friends.@each', "friends.isLoaded", 'Sitterfied.currentUser.friends.length')
+        ).property('friends.@each',
+            "friends.@each.isLoaded",
+            'Sitterfied.currentUser.friends.length',
+            'Sitterfied.currentUser.friends.@each',
+            'Sitterfied.currentUser.friends.@each.isLoaded')
 
         sitter_friends_in_common: (() ->
-            results = Em.A()
-            friends = @get('friends_in_common')
-            for friend in friends
-                f = Sitterfied.User.find(friend.id)
-                if f.get('isSitter')
-                    results.pushObject(f)
-            return results
-        ).property('friends_in_common', "friends.@each")
+            @get('friends_in_common').filter((item, index, list) ->
+                item.get("isSitter")
+            )
+        ).property('friends_in_common')
 
         parent_friends_in_common: (() ->
-            results = Em.A()
-            friends = @get('friends_in_common')
-            for friend in friends
-                debugger
-                f = Sitterfied.User.find(friend.id)
-                if f.get('isParent')
-                    results.pushObject(f)
-            return results
-        ).property('friends_in_common', "friends.@each")
+            @get('friends_in_common').filter((item, index, list) ->
+                item.get("isParent")
+            )
+        ).property('friends_in_common')
 
         groups_in_common: (() ->
             usersGroups = Sitterfied.get('currentUser.sitter_groups')
             myGroups = @get('sitter_groups')
-            return _.intersection(usersGroups, myGroups)
-        ).property('sitter_groups', 'Sitterfied.currentUser.sitter_groups')
+            return usersGroups.filter((item, index, list) ->
+                Boolean(myGroups.findProperty("id", item.get("id")))
+            )
+        ).property('sitter_groups.@each', 'Sitterfied.currentUser.sitter_groups')
 
         memberSince : (() ->
             date_joined = @get("date_joined")

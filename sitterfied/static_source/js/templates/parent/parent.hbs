@@ -8,7 +8,7 @@
 		  <ul>
 			<li>Mutual Parent Friends ({{parent_friends_in_common.length}})</li>
             {{# each parent_friends_in_common }}
-			<li>{{# linkTo parent this.parent}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}{{# linkTo parent this.parent}}{{full_name}}{{/linkTo}}</li>
+			<li>{{# linkTo parent this.parent}}<img  class="avatarimage" {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}{{# linkTo parent this.parent}}{{full_name}}{{/linkTo}}</li>
             {{/each }}
 		  </ul>
 		</li>
@@ -16,7 +16,7 @@
 		  <ul>
 			<li>Mutual Sitter Friends ({{sitter_friends_in_common.length}})</li>
             {{# each sitter_friends_in_common }}
-			<li>{{# linkTo sitter this.sitter}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}{{# linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}</li>
+			<li>{{# linkTo sitter this.sitter}}<img class="avatarimage"  {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}{{# linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}</li>
             {{/each }}
 		  </ul>
 		</li>
