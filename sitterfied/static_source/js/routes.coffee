@@ -8,7 +8,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
         )
         this.resource('sitterEdit', {path: '/sitter/:sitter_id/edit'}, () ->
             this.route('profile')
-            this.route('schedlue')
+            this.route('schedule')
             this.route('network')
             this.route('reviews')
         )
@@ -257,15 +257,15 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
         renderTemplate: () ->
             this.render("sitterEdit/profile", {controller: 'currentUser'})
     )
-    Sitterfied.SitterEditSchedlueRoute = Em.Route.extend(
+    Sitterfied.SitterEditScheduleRoute = Em.Route.extend(
         model: () ->
-            return Sitterfied.currentUser.get('schedlue')
+            return Sitterfied.currentUser.get('schedule')
 
         setupController: (controller, model) ->
             controller.set('model', model);
 
         renderTemplate: () ->
-            this.render("sitterEdit/schedlue")
+            this.render("sitterEdit/schedule")
     )
     Sitterfied.SitterEditBookingsRoute = Em.Route.extend(
         renderTemplate: () ->

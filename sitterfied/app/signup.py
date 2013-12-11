@@ -11,7 +11,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth import login, authenticate
 
 from forms import RegistrationForm
-from models import Parent, Sitter, Settings, Schedlue
+from models import Parent, Sitter, Settings, Schedule
 
 class RegistrationView(DjangoRegistrationView):
     form_class = RegistrationForm
@@ -53,10 +53,10 @@ def create_user_settings(sender, user, request, **kwargs):
         Settings.objects.create(user=user)
 
 @receiver(user_registered)
-def create_schedlue(sender, user, request, **kwargs):
+def create_schedule(sender, user, request, **kwargs):
     if hasattr(user, 'sitter'):
-        if not Schedlue.objects.filter(sitter=user).exists():
-            Schedlue.objects.create(sitter=user)
+        if not Schedule.objects.filter(sitter=user).exists():
+            Schedule.objects.create(sitter=user)
 
 
 

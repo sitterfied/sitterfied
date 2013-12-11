@@ -216,7 +216,7 @@ def search(request):
                                                                'sitter_groups',
                                                                'friends',
                                                                'certifications',
-                                                               'schedlue',
+                                                               'schedule',
                                                                'sitter_teams',
                                                                'other_services',
                                                                'bookings',
@@ -244,18 +244,18 @@ def search(request):
     if overnight:
         stop_date = datetime.strptime(stop_date, "%a, %d %b %Y")
         stop_day  = datetime.strftime(stop_date, "%a").lower()
-        search_terms["schedlue__%s_overnight" % day] = True
+        search_terms["schedule__%s_overnight" % day] = True
 
         for term, search_time in times.items():
             if  start_time <= search_time:
-                search_terms[("schedlue__%s_" % day) + term] = True
+                search_terms[("schedule__%s_" % day) + term] = True
             if   search_time <= stop_time:
-                search_terms[("schedlue__%s_" % stop_day) + term] = True
+                search_terms[("schedule__%s_" % stop_day) + term] = True
 
     else:
         for term, search_time in times.items():
             if  start_time <= search_time <= stop_time:
-                search_terms[("schedlue__%s_" % day) + term] = True
+                search_terms[("schedule__%s_" % day) + term] = True
 
     #filter by availiablity
     sitters = sitters.filter(**search_terms)
