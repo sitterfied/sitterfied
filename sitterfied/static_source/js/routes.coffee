@@ -349,49 +349,89 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             openReccomendPopup: (reviewedUser)->
                 parent = Sitterfied.currentUser
                 this.controller.set('activeReviewPanelUser', reviewedUser)
-
-                $.fancybox
-                    href: "#recommend_popup"
-                    maxWidth: 960
-                    maxHeight: 800
-                    minWidth: 700
-                    minHeight: 480
-                    fitToView: false
-                    width: "90%"
-                    height: "90%"
+                
+                promise = parent.sitter_reviews()
+                promise.then (revs) =>
+                    results = Em.A()
+                    review_length = revs.get('length')
+                    index = 0
+                    while index < review_length
+                        results.pushObject(revs.content.get(index))
+                        index++
+                
+                    review_exists = false
+                    for rev in results
+                        if rev.get('sitter').get('id') is reviewedUser.get('id') and rev.get('parent').get('id') is parent.get('id')
+                            review_exists = true
+                            current_review = rev
+                            break
+                        
+                    if review_exists
+                        $("#recommended").prop('checked', current_review.get('recommended'))
+                        $("#rehire").prop('checked', current_review.get('rehire'))
+                        $("#review").val(current_review.get('review'))
+                    else
+                        $("#recommended").prop('checked', false)
+                        $("#rehire").prop('checked', false)
+                        $("#review").val('')
+    
+                    $.fancybox
+                        href: "#recommend_popup"
+                        maxWidth: 960
+                        maxHeight: 800
+                        minWidth: 700
+                        minHeight: 480
+                        fitToView: false
+                        width: "90%"
+                        height: "90%"
                     
             postReview: ()->
                 parent = Sitterfied.currentUser
                 sitter = this.controller.get('activeReviewPanelUser')
-                recommend = $("#recommend").is(":checked")
+                recommend = $("#recommended").is(":checked")
                 rehire = $("#rehire").is(":checked")
                 review = $("#review").val()
                 
-                reviews = parent.sitter_reviews()
+                console.log('Recommend:', recommend)
+                console.log('Rehire:', rehire)
+                console.log('Review:', review)
                 
-                review_exists = false
-                for rev in reviews
-                    if rev.get('sitter_id') == sitter.get('id')
-                        review_exists = true
-                        current_review = rev
-                        break
-                
-                if review_exists
-                    console.log('Review already exists')
-                    current_review.set('isDirty', true)
-                    current_review.set('recommend', recommend)
-                    current_review.set('rehire', rehire)
-                    current_review.set('review', review)
-                    current_review.save()
-                else
-                    console.log('New Review')
-                    Sitterfied.SitterReview.create({
-                        parent: parent,
-                        sitter: sitter,
-                        rehire: rehire,
-                        recommend: recommend,
-                        review: review
-                    }).save()
+                promise = parent.sitter_reviews()
+                promise.then (revs) =>
+                    results = Em.A()
+                    review_length = revs.get('length')
+                    index = 0
+                    while index < review_length
+                        results.pushObject(revs.content.get(index))
+                        index++
+                    
+                    console.log("Revs:", revs)
+                    console.log("Review length:", review_length)
+                    
+                    review_exists = false
+                    for rev in results
+                        if rev.get('sitter').get('id') is sitter.get('id') and rev.get('parent').get('id') is parent.get('id')
+                            review_exists = true
+                            current_review = rev
+                            break
+                    
+                    if review_exists
+                        console.log('Review already exists')
+                        current_review.set('isDirty', true)
+                        current_review.set('recommended', recommend)
+                        current_review.set('rehire', rehire)
+                        current_review.set('review', review)
+                        current_review.save()
+                    else
+                        console.log('New Review')
+                        Sitterfied.SitterReview.create({
+                            parent: parent,
+                            sitter: sitter,
+                            rehire: rehire,
+                            recommended: recommend,
+                            review: review
+                        }).save()
+                    $.fancybox.close()
 
             removeFromTeam: ()->
                 debugger

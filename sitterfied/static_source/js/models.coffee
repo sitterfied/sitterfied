@@ -253,13 +253,7 @@ define ['jquery'
         ).property('bookings.@each', "bookings.@each.accepted_sitter")
             
         sitter_reviews: (() ->
-            results = Em.A()
-            reviews = Sitterfied.SitterReview.find({
-                        parent: this,
-                    })
-            for review in reviews
-                results.pushObject(review)
-            return results
+            return Sitterfied.SitterReview.fetch()
         )
 
     )

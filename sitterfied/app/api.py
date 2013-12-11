@@ -147,7 +147,7 @@ class SpecialNeedSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SitterReview
-        fields = ("parent", "sitter", 'recommended', 'review', 'id')
+        fields = ("parent", "sitter", 'recommended', 'rehire', 'review', 'id')
 
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
