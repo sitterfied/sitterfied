@@ -382,6 +382,48 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
 
 
 
+    Sitterfied.AjaxStatusButtonView = Em.View.extend
+        templateName: "ajaxButton"
+        action: null
+        ajaxState: "done"
+        isLoading: (() ->
+            return @get("ajaxState") == "loading"
+        ).property("ajaxState")
+        isSaved: (() ->
+            return @get("ajaxState") == "saved"
+        ).property("ajaxState")
+        isError: (() ->
+            return @get("ajaxState") == "error"
+        ).property("ajaxState")
+        doAction: () ->
+            @set("ajaxState", "loading")
+            action = @get('controller').get(@get('action'))
+            promise = action.apply(@get('controller'))
+            @setupAjax(promise)
+        setupAjax: (promise) ->
+            promise.then(
+                () =>
+                    @set("ajaxState", "saved")
+                    Em.run.later (=> @set("ajaxState", "done")), 5000
+                () =>
+                    @set("ajaxState", "error")
+                    Em.run.later (=> @set("ajaxState", "done")), 5000
+            )
+
+
+    Sitterfied.ResetAjaxStatusButtonView = Sitterfied.AjaxStatusButtonView.extend
+        templateName: "resetAjaxButton"
+
+    Sitterfied.PopUpView = Em.View.extend
+        classNameBindings: ['content']
+        layoutName: 'popupView'
+        content: null
+        isEmpty: (() ->
+            @get("content.length") == 0
+        ).property("content.@each", "content")
+
+
+
     #Sitterfied.BookingView = Em.View.extend
 
 

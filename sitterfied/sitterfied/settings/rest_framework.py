@@ -7,3 +7,8 @@ REST_FRAMEWORK = {
 
 
 DEFAULT_FILTER_BACKENDS = ('rest_framework.filters.DjangoFilterBackend',)
+DEFAULT_RENDERER_CLASSES = ('drf_ujson.renderers.UJSONRenderer',)
+
+
+REST_FRAMEWORK = {
+}

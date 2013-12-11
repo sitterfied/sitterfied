@@ -2,11 +2,11 @@
   <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}></div>
   <div class="tit">
 	<span><strong>${{one_child_min_rate}}</strong> /hr</span>
-	{{#linkTo sitter this}}{{full_name}}{{/linkTo}}
+	{{#linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}
   </div>
   <div class="img">
 	<div {{action addSitterTeam this}} {{bindAttr class="inSitterTeam:active :heart" }}></div>
-	{{#linkTo sitter this}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}
+	{{#linkTo sitter this.sitter}}<img {{bindAttr src=avatarUrl alt=full_name}} />{{/linkTo}}
     {{# if id_verified }}
 	  <span>Background Cleared</span>
     {{/if}}
@@ -24,7 +24,7 @@
 	<ul>
 	  <li>Added to sitter teams and repeatedly hired</li>
       {{# each sitter_teams }}
-	    <li>{{#linkTo parent this}}<img {{bindAttr src=avatarUrl}}  />{{/linkTo}}<span>{{full_name}}</span></li>
+	    <li>{{#linkTo parent this.parent}}<img {{bindAttr src=avatarUrl}}  />{{/linkTo}}<span>{{full_name}}</span></li>
       {{/each}}
 	</ul>
 	</li>
@@ -33,10 +33,10 @@
       {{# if reviews }}
       {{# with reviews.firstObject}}
 	  <li class="rev clear">
-		{{#linkTo parent parent}}<img {{bindAttr src=parent.avatarUrl}}  />{{/linkTo}}
+		{{#linkTo parent parent.parent}}<img {{bindAttr src=parent.avatarUrl}}  />{{/linkTo}}
 		<div>
 		  <p>{{review}}</p>
-		  <p>{{#linkTo sitter sitter}}Read more reviews {{/linkTo}}</p>
+		  <p>{{#linkTo sitter sitter.sitter}}Read more reviews {{/linkTo}}</p>
 		</div>
 	  </li>
       {{/with}}

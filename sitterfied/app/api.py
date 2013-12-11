@@ -49,6 +49,8 @@ class UserSerializer(serializers.ModelSerializer):
 class SitterSerializer(serializers.ModelSerializer):
     avatar = serializers.Field(source="avatar_url")
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
+    languages = serializers.PrimaryKeyRelatedField(many=True)
+
     class Meta:
         model = models.Sitter
         fields = user_fields + ('biography',
@@ -162,7 +164,12 @@ class GroupSerializer(serializers.ModelSerializer):
         model = models.Group
 
 
+from drf_ujson.renderers import UJSONRenderer
+from rest_framework.renderers import BrowsableAPIRenderer
+
 class IdFilterViewset(viewsets.ModelViewSet):
+    renderer_classes = (BrowsableAPIRenderer, UJSONRenderer)
+
     def get_queryset(self):
         queryset = super(IdFilterViewset, self).get_queryset()
         if 'id' in self.request.GET:
@@ -270,9 +277,10 @@ class SitterViewSet(IdFilterViewset):
                                                                        'bookings',
                                                                        'sitter_teams',
                                                                        'bookmarks',
-                                                                       'settings').all()
+                                                                       'settings')
     serializer_class = SitterSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
 
 
     @link()

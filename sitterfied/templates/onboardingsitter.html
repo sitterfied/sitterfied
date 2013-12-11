@@ -556,6 +556,8 @@
    });
 
    $("#register").click(function(){
+	 if (submitted){return}
+	 submitted = true
 	 cell = $("#id_cell")
 	 num = cell.val()
 	 formatted_num = formatE164("US", num);
@@ -576,6 +578,8 @@
      scrollTop: 0
    }, 'slow');
  });
+
+var submitted = false;
 
 $(document).ready(function() {
     $('.icon_error').parents('li').each(function() {

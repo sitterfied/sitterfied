@@ -29,12 +29,12 @@ STATIC_ROOT = PROJECT_ROOT.child("static")
 
 
 INSTALLED_APPS += (
-    'debug_toolbar',
-    'devserver'
+#    'debug_toolbar',
+    'devserver',
 )
 
 MIDDLEWARE_CLASSES += (
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+#    "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -60,3 +60,4 @@ DEVSERVER_MODULES = (
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEVSERVER_AUTO_PROFILE = True

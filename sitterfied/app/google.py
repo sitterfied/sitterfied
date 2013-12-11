@@ -8,6 +8,7 @@ from itertools import chain
 import requests
 
 redirect_uri ="http://beta.sitterfied.com"
+#redirect_uri ="http://localhost:8000"
 
 
 def google_oauth_begin(request):
@@ -20,7 +21,7 @@ def google_oauth_begin(request):
     auth_uri = flow.step1_get_authorize_url()
     return HttpResponseRedirect(auth_uri)
 
-
+@render_to("oauthcallback.html")
 def oauth2callback(request):
 
     try:
@@ -47,7 +48,7 @@ def oauth2callback(request):
     user.google_imported = True
     user.save()
     user.friends.add(*friends)
-    return HttpResponse("gmail successfully imported")
+    return {}
 
 #in google.py
 from atom.http import ProxiedHttpClient #Google contacts use this client

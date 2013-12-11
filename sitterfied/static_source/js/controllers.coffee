@@ -1,4 +1,4 @@
-define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
+define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitterfied) ->
 
     Sitterfied.CurrentUserController = Em.ObjectController.extend({
         needs: ['certifications'
@@ -20,16 +20,18 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         ).property('parent_or_sitter', 'Sitterfied.accountType')
 
         saveSettings: () ->
-            Em.run.begin()
             model = this.get('model')
             model.set('isDirty', true)
-            model.save()
-            model.get('settings').save()
-            model.get('children')?.save().then((children) ->
+            modelP = model.save()
+            settings = model.get('settings')
+            if settings.get("isLoaded")
+                settings.save()
+            childrenP = model.get('children')?.save()
+            childrenP?.then((children) ->
                 Sitterfied.currentUser.get('children').set('data', children)
                 @newChild()
             )
-            Em.run.end()
+            return Em.RSVP.all([modelP, settingsP?, childrenP])
 
         deleteAccount: () ->
             imsure = confirm("are you sure you want to delete your account? This cannot be undone")
@@ -58,7 +60,7 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
                 new_password2: @get('new_password2')
                 old_password: @get('old_password')
             }
-            $.post('password_change/', data).success(alert('password changed'))
+            $.post('password_change/', data)
 
         invite: () ->
             alert("invite friends")
@@ -319,20 +321,25 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
     Sitterfied.SitterController  = Em.ObjectController.extend(
         book: () ->
+            start_date_time = Sitterfied.onDeckBookingAttrs['start_date_time'] || moment().toDate()
+            stop_date_time = Sitterfied.onDeckBookingAttrs['stop_date_time'] || moment().toDate()
+            kids = Sitterfied.onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
+            overnight = Sitterfied.onDeckBookingAttrs['overnight'] || false
+
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
-                overnight: false
+                overnight: overnight
                 booking_status: "Pending"
                 booking_type: "Job"
-                start_date_time: moment().toDate()
-                stop_date_time: moment().toDate()
+                start_date_time: start_date_time
+                stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
                 address2: Sitterfied.get('currentUser.address2')
                 city: Sitterfied.get('currentUser.city')
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
-                num_children: Sitterfied.get('currentUser.children.length')
+                num_children: kids
                 emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
                 rate: 0
             sitters = [@get('content')]
@@ -341,20 +348,25 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
             this.transitionTo('book')
 
         interview: () ->
+            start_date_time = Sitterfied.onDeckBookingAttrs['start_date_time'] || moment().toDate()
+            stop_date_time = Sitterfied.onDeckBookingAttrs['stop_date_time'] || moment().toDate()
+            kids = Sitterfied.onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
+            overnight = Sitterfied.onDeckBookingAttrs['overnight'] || false
+
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
-                overnight: false
+                overnight: overnight
                 booking_status: "Pending"
                 booking_type: "Interview"
-                start_date_time: moment().toDate()
-                stop_date_time: moment().toDate()
+                start_date_time: start_date_time
+                stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
                 address2: Sitterfied.get('currentUser.address2')
                 city: Sitterfied.get('currentUser.city')
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
-                num_children: Sitterfied.get('currentUser.children.length')
+                num_children: kids
                 emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
                 rate: 0
             sitters = [@get('content')]
@@ -364,7 +376,6 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
 
         showBioLink: (() ->
             # hide read more link if text < 100 characters
-            debugger
             bioLength = this.get('biography')?.length
             if bioLength < 100
                 return false
@@ -486,7 +497,57 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
         overnight : false
         date_to : undefined
         findSitters : () ->
-            $.get("/api/search/", {'zip':@get('zip')}).then (response) =>
+            zip = @get("zip")
+            start_time = @get("start_time")
+            stop_time = @get("stop_time")
+            start_date = @get("start_date")
+            kids = @get("kids")
+
+            #store properties for future bookings
+            if not _.every([zip, start_date, start_time, stop_time, kids], _.identity)
+                alert("please ensure you've filled out every field")
+                return
+
+
+
+            Sitterfied.onDeckBookingAttrs = {}
+            #probably should do this as a property of the controller rather than adhoc
+            start_date_time = moment(start_date)
+            start_date_time.hours(start_time.substr(0,2))
+            start_date_time.minutes(start_time.substr(2))
+            Sitterfied.onDeckBookingAttrs['start_date_time'] = start_date_time
+
+            Sitterfied.onDeckBookingAttrs['kids'] = kids
+
+            stop_date_time = moment(start_date)
+            stop_date_time.hours(stop_time.substr(0,2))
+            stop_date_time.minutes(stop_time.substr(2))
+            Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
+
+
+            payload = {
+                kids: kids
+                zip: zip
+                start_time: start_time
+                stop_time: stop_time
+                start_date: start_date
+            }
+            if @get("overnight")
+                if not @get("stop_date")
+                    alert("please ensure you've filled out every field")
+                    return
+                payload['overnight'] = true
+                payload['stop_date'] = @get("stop_date")
+
+                Sitterfied.onDeckBookingAttrs['overnight'] = true
+                stop_date_time.date(@get("stop_date"))
+                Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
+
+
+
+            $.get("/api/search/",
+                  payload,
+                  ).then (response) =>
                 sitters = Em.A()
                 for sitter in response
                     s = Sitterfied.Sitter.create()
@@ -715,6 +776,27 @@ define ["ember", "cs!sitterfied", 'moment', "cs!models"], (Em, Sitterfied) ->
     )
 
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(
+        bookTeam: () ->
+            booking = Sitterfied.Booking.create
+                parent: Sitterfied.currentUser
+                notes: ""
+                overnight: false
+                booking_status: "Pending"
+                booking_type: "Job"
+                start_date_time: null
+                stop_date_time: null
+                address1: Sitterfied.get('currentUser.address1')
+                address2: Sitterfied.get('currentUser.address2')
+                city: Sitterfied.get('currentUser.city')
+                state: Sitterfied.get('currentUser.state')
+                zip: Sitterfied.get('currentUser.zip')
+                num_children: 1
+                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                rate: 0
+            sitters = @get("content")
+            booking.get('sitters').addObjects(sitters)
+            Sitterfied.set('onDeckBooking', booking)
+            this.transitionTo('book')
     )
 
     Sitterfied.ParentController  = Em.ObjectController.extend(

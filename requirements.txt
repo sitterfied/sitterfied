@@ -1,11 +1,12 @@
-django
+django==1.5.5
 django-pipeline
 django-pipeline-compass
 
 cssmin
 slimit
-django-grappelli
-django-filebrowser
+django-grappelli==2.4.5
+django-filebrowser==3.5.2
+
 PIL
 
 #DB
@@ -24,7 +25,7 @@ django-registration
 unipath
 pytz
 feedparser
-
+django-favicon
 djangorestframework
 
 #REDIS CACHING
@@ -62,3 +63,4 @@ oauth2client
 gdata
 lxml
 facebook-sdk
+drf_ujson

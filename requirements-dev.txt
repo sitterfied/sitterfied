@@ -9,7 +9,7 @@ werkzeug
 sqlparse
 #cheeseshop version doesn't work with 2.7
 guppy
-line_profiler
+line_profiler==1.0b3
 dozer
 
 ipython

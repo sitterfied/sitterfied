@@ -416,6 +416,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .ico ul li [class^="icon_"] {left:0;top:15px;}
 .header .top_info .ico ul li ul {display:none;position:absolute;top:-78px;left:23px;border:1px solid #71becb;padding:5px;border-radius:4px;z-index:4;width:330px;background:#fff;box-shadow:rgba(0,0,0,.10) 0 3px 1px 0;}
 .header .top_info .ico ul li:hover ul {display:block;}
+.header .top_info .ico ul li.empty:hover ul {display:none;}
 .header .top_info .ico ul li ul:before {content:'';display:block;width:16px;height:12px;background:url(../images/icons/arrow_bottom4_t.png) no-repeat;position:absolute;top:100%;left:16px;}
 .header .top_info .ico ul li ul:after{content:'';display:block;width:100px;height:12px;background:url(../images/blank.gif) no-repeat;position:absolute;top:100%;left:0;}
 .header .top_info .ico ul li ul li {float:left;padding:0 3px 0 0;font-size:0;line-height:0;position:relative;}

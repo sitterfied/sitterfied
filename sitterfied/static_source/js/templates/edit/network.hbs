@@ -37,7 +37,7 @@
 			  <li>Parents</li>
               {{# each }}
                 {{# if isParent }}
-		          <li>{{#linkTo parent this}}<img class="avatarimage" {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}} <a {{action removeFriend this.id }} class="delete">&nbsp;</a></li>
+		          <li>{{#linkTo parent this.parent}}<img class="avatarimage" {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}} <a {{action removeFriend this.id }} class="delete">&nbsp;</a></li>
                 {{/ if }}
               {{/each}}
 			</ul>
@@ -47,7 +47,7 @@
 			  <li>Sitters</li>
               {{# each }}
                 {{# if isSitter }}
-		          <li>{{#linkTo sitter this}}<img class="avatarimage"  {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}<a {{action removeFriend this.id }} class="delete">&nbsp;</a></li>
+		          <li>{{#linkTo sitter.snapshot this.sitter}}<img class="avatarimage"  {{bindAttr src=avatarUrl alt=full_name}} />{{full_name}}{{/linkTo}}<a {{action removeFriend this.id }} class="delete">&nbsp;</a></li>
                 {{/ if}}
               {{/each}}
 			</ul>

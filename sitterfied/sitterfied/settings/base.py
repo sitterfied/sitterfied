@@ -123,9 +123,8 @@ INSTALLED_APPS = (
     'south',
     'pipeline',
     'pyuploadcare.dj',
+    'favicon',
     'app',
-
-
 
 
 )
@@ -171,6 +170,7 @@ ALLOWED_HOSTS =[
     ".sitterfied.com",
     "beta.sitterfied.com",
     ".sitterfied.com.",
+    'ping',
 ]
 
 

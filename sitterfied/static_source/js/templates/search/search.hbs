@@ -18,7 +18,7 @@
 			<ul>
               {{# each controller}}
                 {{# if isSelected}}
-			    <li {{bindAttr class="selectTeamClass"}}>{{# linkTo sitter this}}{{full_name}}{{/ linkTo}}<span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span></li>
+			    <li {{bindAttr class="selectTeamClass"}}>{{# linkTo sitter this.sitter}}{{full_name}}{{/ linkTo}}<span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span></li>
                 {{/ if}}
               {{/ each}}
               <li>
