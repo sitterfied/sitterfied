@@ -61,3 +61,5 @@ DEVSERVER_MODULES = (
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEVSERVER_AUTO_PROFILE = True
+
+from .mandrill import *
