@@ -244,7 +244,7 @@ class Contact(TimeStampedModel):
     phone = models.ForeignKey('Phone')
 
 
-class Schedlue(TimeStampedModel):
+class Schedule(TimeStampedModel):
     sitter = models.OneToOneField(Sitter)
     mon_early_morning = models.BooleanField(default=True)
     tue_early_morning = models.BooleanField(default=True)

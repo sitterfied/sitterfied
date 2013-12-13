@@ -268,8 +268,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
 
 
-    Sitterfied.SitterEditSchedlueController =  Em.ObjectController.extend({
-        saveSchedlue: () ->
+    Sitterfied.SitterEditScheduleController =  Em.ObjectController.extend({
+        saveSchedule: () ->
             @get('model').save()
         checkAll: () ->
             model = @get('model')

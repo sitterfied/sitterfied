@@ -65,7 +65,7 @@ class SitterSerializer(serializers.ModelSerializer):
                                 'one_child_max_rate', 'two_child_min_rate',
                                 'two_child_max_rate',  'three_child_min_rate',
                                 'three_child_max_rate',  'smokers_ok',
-                                'dob', 'schedlue', 'other_services',
+                                'dob', 'schedule', 'other_services',
                                 'dogs_ok', 'cats_ok',
                                 'other_animals_ok',
                                 'gender', 'sick',
@@ -133,9 +133,9 @@ class SettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Settings
 
-class SchedlueSerializer(serializers.ModelSerializer):
+class ScheduleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Schedlue
+        model = models.Schedule
 
 class CertificationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -272,7 +272,7 @@ class SitterViewSet(IdFilterViewset):
                                                                        'sitter_groups',
                                                                        'friends',
                                                                        'certifications',
-                                                                       'schedlue',
+                                                                       'schedule',
                                                                        'other_services',
                                                                        'bookings',
                                                                        'sitter_teams',
@@ -322,7 +322,7 @@ class ParentViewSet(IdFilterViewset):
                                                           'bookmarks',
                                                            'friends',
                                                            'certifications',
-                                                           'schedlue',
+                                                           'schedule',
                                                            'other_services',
                                                             'bookings',
                                                            'settings').filter(sitter_teams=pk)
@@ -337,7 +337,7 @@ class ParentViewSet(IdFilterViewset):
                                                           'sitter_groups',
                                                           'friends',
                                                           'certifications',
-                                                          'schedlue',
+                                                          'schedule',
                                                           'other_services',
                                                           'bookings',
                                                           'bookmarks',
@@ -383,9 +383,9 @@ class SettingsViewSet(IdFilterViewset):
     serializer_class = SettingsSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-class SchedlueViewSet(IdFilterViewset):
-    queryset = models.Schedlue.objects.all()
-    serializer_class = SchedlueSerializer
+class ScheduleViewSet(IdFilterViewset):
+    queryset = models.Schedule.objects.all()
+    serializer_class = ScheduleSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class ReviewViewSet(IdFilterViewset):

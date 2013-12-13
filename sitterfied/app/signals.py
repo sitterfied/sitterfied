@@ -1,4 +1,4 @@
-from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedlue
+from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule
 
 
 from django.db.models.signals import post_save, m2m_changed
@@ -166,7 +166,7 @@ def new_settings_sitter(sender, instance=None, **kwargs):
 
 
 @receiver(post_save, sender=Sitter)
-def new_schedlue_parent(sender, instance=None, **kwargs):
+def new_schedule_parent(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
-        Schedlue.objects.create(sitter=instance)
+        Schedule.objects.create(sitter=instance)
