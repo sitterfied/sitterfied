@@ -278,7 +278,7 @@ define ['jquery'
     Sitterfied.Parent.adapter = Adapter.create()
 
 
-    Sitterfied.Schedlue = Ember.Model.extend(
+    Sitterfied.Schedule = Ember.Model.extend(
         id: attr()
         sitter: belongsTo('Sitterfied.Sitter', {key:"sitter"})
         mon_early_morning: attr(BooleanType)
@@ -290,7 +290,7 @@ define ['jquery'
         sun_early_morning: attr(BooleanType)
 
         mon_late_morning: attr(BooleanType)
-        tues_late_morning: attr(BooleanType)
+        tue_late_morning: attr(BooleanType)
         wed_late_morning: attr(BooleanType)
         thu_late_morning: attr(BooleanType)
         fri_late_morning: attr(BooleanType)
@@ -337,7 +337,7 @@ define ['jquery'
         sat_overnight: attr(BooleanType)
         sun_overnight: attr(BooleanType)
     )
-    Sitterfied.Schedlue.adapter = Adapter.create()
+    Sitterfied.Schedule.adapter = Adapter.create()
 
 
     Sitterfied.Sitter = Sitterfied.User.extend(
@@ -363,7 +363,7 @@ define ['jquery'
         last_school: attr(),
         current_student: attr(BooleanType)
 
-        schedlue: belongsTo('Sitterfied.Schedlue', {key:"schedlue"})
+        schedule: belongsTo('Sitterfied.Schedule', {key:"schedule"})
 
         major: attr()
         occupation:  attr()

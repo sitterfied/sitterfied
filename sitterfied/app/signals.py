@@ -1,4 +1,4 @@
-from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedlue
+from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule
 
 
 from django.db.models.signals import post_save, m2m_changed
@@ -166,10 +166,10 @@ def new_settings_sitter(sender, instance=None, **kwargs):
 
 
 @receiver(post_save, sender=Sitter)
-def new_schedlue_parent(sender, instance=None, **kwargs):
+def new_schedule_parent(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
-        Schedlue.objects.create(sitter=instance)
+	Schedlue.objects.create(sitter=instance)
 
 from django_mandrill.mail.mandrillmail import MandrillTemplateMail
 
@@ -177,14 +177,14 @@ from django_mandrill.mail.mandrillmail import MandrillTemplateMail
 def new_sitter(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
-        message = {
-            'from_email': 'hello@sitterfied.com',
-            'from_name': 'Sitterfied',
-            'subject': 'Welcome to Sitterfied!',
-            'to': [{'email': instance.email, 'name': instance.full_name},],
-            'global_merge_vars': [
-                {'name':'FNAME', 'content': instance.first_name}
-            ],
-        }   
-        email = MandrillTemplateMail('welcome-sitter', [], message)
-        email.send()	
+	message = {
+	    'from_email': 'hello@sitterfied.com',
+	    'from_name': 'Sitterfied',
+	    'subject': 'Welcome to Sitterfied!',
+	    'to': [{'email': instance.email, 'name': instance.full_name},],
+	    'global_merge_vars': [
+		{'name':'FNAME', 'content': instance.first_name}
+	    ],
+	}
+	email = MandrillTemplateMail('welcome-sitter', [], message)
+	email.send()

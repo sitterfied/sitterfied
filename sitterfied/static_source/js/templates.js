@@ -1100,7 +1100,7 @@ function program23(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedlue", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedlue", "content", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedule", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedule", "content", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li>");
   hashTypes = {};
@@ -5032,7 +5032,7 @@ function program9(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedlue", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedlue", "content", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitterEdit.schedule", "content", options) : helperMissing.call(depth0, "linkTo", "sitterEdit.schedule", "content", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</li>\n		<li>");
   hashTypes = {};
@@ -5637,7 +5637,7 @@ function program13(depth0,data) {
   return buffer;
   
 });
-Ember.TEMPLATES["sitterEdit/schedlue"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["sitterEdit/schedule"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', stack1, hashTypes, hashContexts, self=this, escapeExpression=this.escapeExpression;
@@ -5653,13 +5653,13 @@ function program1(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n		<p>Please indicate your typical availability here.\n          <span>\n            <img src=\"/static/images/available.jpg\" alt=\"\" />Available\n            <img src=\"/static/images/unavailable.jpg\" alt=\"\" />Unavailable\n          </span>\n          ");
+  data.buffer.push("\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n		<div>\n			<p>Please indicate your typical availability here.\n          <span>\n            <img src=\"/static/images/available.jpg\" alt=\"\" />Available\n            <img src=\"/static/images/unavailable.jpg\" alt=\"\" />Unavailable\n          </span>\n          	</p>\n          ");
   hashContexts = {'action': depth0};
   hashTypes = {'action': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.AjaxStatusButtonView", {hash:{
-    'action': ("saveSchedlue")
+    'action': ("saveSchedule")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n		<ul>\n		  <li>\n			<ul>\n			  <li><a ");
+  data.buffer.push("\n        </div>\n		<ul>\n		  <li>\n			<ul>\n			  <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "checkAll", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
