@@ -17,16 +17,11 @@ from django_localflavor_us.models import USStateField
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
 
-
-from model_utils.managers import InheritanceManager
-
-
 from django.dispatch import Signal
 
 booking_accepted = Signal(providing_args=['booking'])
 booking_declined = Signal(providing_args=['booking'])
 booking_canceled = Signal(providing_args=['booking'])
-
 
 from pyuploadcare.dj import ImageField as UploadcareImageField
 
