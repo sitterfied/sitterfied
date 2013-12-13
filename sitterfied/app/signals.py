@@ -8,7 +8,7 @@ from django.template.loader import render_to_string
 from sms import client as twilio_client
 from sms import sitterfied_number
 
-from .utils import send_html_email
+from .utils import send_html_email, send_template_email
 
 
 
@@ -169,22 +169,19 @@ def new_settings_sitter(sender, instance=None, **kwargs):
 def new_schedule_parent(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
-	Schedlue.objects.create(sitter=instance)
-
-from django_mandrill.mail.mandrillmail import MandrillTemplateMail
+        Schedule.objects.create(sitter=instance)
 
 @receiver(post_save, sender=Sitter)
 def new_sitter(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
-	message = {
-	    'from_email': 'hello@sitterfied.com',
-	    'from_name': 'Sitterfied',
-	    'subject': 'Welcome to Sitterfied!',
-	    'to': [{'email': instance.email, 'name': instance.full_name},],
-	    'global_merge_vars': [
-		{'name':'FNAME', 'content': instance.first_name}
-	    ],
-	}
-	email = MandrillTemplateMail('welcome-sitter', [], message)
-	email.send()
+        message = {
+            'from_email': 'hello@sitterfied.com',
+            'from_name': 'Sitterfied',
+            'subject': 'Welcome to Sitterfied!',
+            'to': [{'email': instance.email, 'name': instance.full_name},],
+            'global_merge_vars': [
+                {'name':'FNAME', 'content': instance.first_name}
+            ],
+        }   
+        send_template_mail('welcome-sitter', message)
