@@ -13,6 +13,7 @@
     <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
 	{% else %}
 	<script src="{{STATIC_URL}}js/sitterfied-min.js"></script>
+	
 	{% endif %}
 	{% endblock extra_header %}
 
@@ -29,6 +30,7 @@
 	</div>
 	<div class="info">
 	  <form method="post" class="form_style">
+	    {{input type="hidden" id="sitter_id"}}
 	    <p>
 	      <span class="field recommend_field">
 		<span class="icon_check4 field_icon">&nbsp;

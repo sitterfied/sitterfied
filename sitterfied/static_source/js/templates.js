@@ -2371,7 +2371,7 @@ function program3(depth0,data) {
   data.buffer.push(" alt=\"\" />\n          <div class=\"reco clear\">\n            <a ");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openReccomendPopup", "", {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "openReviewPopup", "", {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push(">\n              Review ");
   hashTypes = {};
   hashContexts = {};

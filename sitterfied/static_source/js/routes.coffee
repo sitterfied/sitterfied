@@ -344,51 +344,15 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
         events:{
-            openReccomendPopup: (reviewedUser)->
-                parent = Sitterfied.currentUser
-                this.controller.set('activeReviewPanelUser', reviewedUser)
-                
-                promise = parent.sitter_reviews()
-                promise.then (revs) =>
-                    results = Em.A()
-                    review_length = revs.get('length')
-                    index = 0
-                    while index < review_length
-                        results.pushObject(revs.content.get(index))
-                        index++
-                
-                    review_exists = false
-                    for rev in results
-                        if rev.get('sitter').get('id') is reviewedUser.get('id') and rev.get('parent').get('id') is parent.get('id')
-                            review_exists = true
-                            current_review = rev
-                            break
-                        
-                    if review_exists
-                        $("#recommended").prop('checked', current_review.get('recommended'))
-                        $("#rehire").prop('checked', current_review.get('rehire'))
-                        $("#review").val(current_review.get('review'))
-                    else
-                        $("#recommended").prop('checked', false)
-                        $("#rehire").prop('checked', false)
-                        $("#review").val('')
-    
-                    $.fancybox
-                        href: "#recommend_popup"
-                        maxWidth: 960
-                        maxHeight: 800
-                        minWidth: 700
-                        minHeight: 480
-                        fitToView: false
-                        width: "90%"
-                        height: "90%"
-                    
             postReview: ()->
                 parent = Sitterfied.currentUser
-                sitter = this.controller.get('activeReviewPanelUser')
+                sitter_id = $("#sitter_id").val()
                 recommend = $("#recommended").is(":checked")
                 rehire = $("#rehire").is(":checked")
                 review = $("#review").val()
+                
+                if sitter_id
+                    sitter = Sitterfied.Sitter.find(sitter_id)
                 
                 console.log('Recommend:', recommend)
                 console.log('Rehire:', rehire)

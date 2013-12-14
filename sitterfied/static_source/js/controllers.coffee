@@ -9,7 +9,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 'bookings'
                 'children']
         accountType: parent_or_sitter
-        activeReviewPanelUser: null
 
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -145,6 +144,52 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 return
             Sitterfied.SpecialNeed.create({need:newNeed}).save()
             this.set('controllers.specialneeds.newNeed', '')
+            
+        openReviewPopup: (reviewedUser) ->
+            parent = Sitterfied.currentUser
+            $("#sitter_id").val(reviewedUser.get('id'))
+            this.set('activeReviewPanelUser', reviewedUser)
+            
+            promise = parent.sitter_reviews()
+            promise.then (revs) =>
+                results = Em.A()
+                review_length = revs.get('length')
+                index = 0
+                while index < review_length
+                    results.pushObject(revs.content.get(index))
+                    index++
+                    
+                console.log("Results:", results)
+            
+                review_exists = false
+                for rev in results
+                    console.log("Rev:", rev)
+                    if rev.get('sitter').get('id') is reviewedUser.get('id') and rev.get('parent').get('id') is parent.get('id')
+                        review_exists = true
+                        current_review = rev
+                        break
+                
+                console.log("Review exists:", review_exists)
+                
+                if review_exists
+                    $("#recommended").prop('checked', current_review.get('recommended'))
+                    $("#rehire").prop('checked', current_review.get('rehire'))
+                    $("#review").val(current_review.get('review'))
+                else
+                    $("#recommended").prop('checked', false)
+                    $("#rehire").prop('checked', false)
+                    $("#review").val('')
+
+                console.log("Opening popup")
+                $.fancybox
+                    href: "#recommend_popup"
+                    maxWidth: 960
+                    maxHeight: 800
+                    minWidth: 700
+                    minHeight: 480
+                    fitToView: false
+                    width: "90%"
+                    height: "90%"
 
         gmailConnect: ()->
             window.open("/googleoauthbegin/")
@@ -806,6 +851,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
 
     Sitterfied.ParentEditBookingsController  = Sitterfied.BookingsController.extend()
+    
+    Sitterfied.ParentEditReviewsController = Em.ObjectController.extend(
+        activeReviewPanelUser: null
+    )
 
     Sitterfied.SignupController  = Em.Controller.extend(
         parentSitter: "Parent"
