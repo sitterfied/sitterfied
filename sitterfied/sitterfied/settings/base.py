@@ -151,7 +151,6 @@ LOGGING = {
         'log_file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'verbose',
             'filename': '/var/log/supervisor/beta.log',
             'maxBytes': 1024*1024*25, # 25 MB
             'backupCount': 5,  
