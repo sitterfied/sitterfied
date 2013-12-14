@@ -35,6 +35,10 @@ $(function(){
 	 }, true);
 	 return false
    })
+
+   $("#back2Top").click(function() {
+     $("html, body").animate({ scrollTop: 0 }, 600);
+   })
 })
 </script>
 
@@ -154,7 +158,7 @@ $(function(){
 				<h2>Help sitters. Help yourself. Help your friends.</h2>
 				<div class="free clear"><a class="button" href="{% url "onboarding1" %}">SIGN ME UP</a></div>
 				<hr />
-				<div class="more"><span><a href="#back_2top">BACK TO TOP</a></span></div>
+				<div class="more"><span><a id="back2Top">BACK TO TOP</a></span></div>
 			</div>
 
 		</div>
