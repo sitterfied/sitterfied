@@ -147,6 +147,14 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'filename': '/var/log/supervisor/beta.log',
+            'maxBytes': 1024*1024*25, # 25 MB
+            'backupCount': 5,  
         }
     },
     'loggers': {
