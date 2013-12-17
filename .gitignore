@@ -4,6 +4,7 @@
 */static/*
 *_flymake*
 *.\#*
+\#*#
 .sass-cache/
 .dotcloud/
 compass.rb

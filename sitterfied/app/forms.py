@@ -1,21 +1,13 @@
-import re
 import datetime
+import re
+
 from django import forms
-from django.forms import ModelForm
-from models import User, Sitter, Parent, Booking, Child
-
-from django.utils.translation import ugettext_lazy as _
-
-from django.forms import widgets
-from django.forms.extras.widgets import SelectDateWidget
-
 from django.contrib.auth import authenticate
-from .models import User
-
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, HTML#Fieldset, ButtonHolder, Submit
-
-
+from django.forms import ModelForm, widgets
+from django.forms.extras.widgets import SelectDateWidget
+from django.utils.translation import ugettext_lazy as _
+from models import User, Sitter, Parent, Booking, Child
+from pyuploadcare.dj.forms import ImageField as UploadcareImageField
 
 
 USER_FIELDS =  ["address1", "address2", "city", "state", "zip", "cell", "first_name", "last_name", "email", "avatar"]
@@ -76,12 +68,7 @@ class RegistrationForm(ModelForm):
         return self.cleaned_data['email']
 
 
-import mimetypes
-from base64 import b64decode
-from django.core.files.base import ContentFile
-import uuid
 
-from pyuploadcare.dj.forms import ImageField as UploadcareImageField
 
 class AvatarForm(forms.Form):
     avatar = UploadcareImageField()
@@ -117,20 +104,25 @@ class DeclineBookingForm(BookingForm):
         return booking
 
 
-
 class SitterRegisterForm(RegistrationForm):
     def __init__(self, *args, **kwargs):
         super(SitterRegisterForm, self).__init__(*args, **kwargs)
         for key in self.fields:
-            if key in ['certifications', "special_needs_exp", "infant_exp","toddler_exp","preschool_exp","school_age_exp","pre_teen_exp","teen_exp", "address2"]:
+            if key in ["certifications",
+                       "special_needs_exp",
+                       "infant_exp",
+                       "toddler_exp",
+                       "preschool_exp",
+                       "school_age_exp",
+                       "pre_teen_exp",
+                       "teen_exp",
+                       "address2"]:
                 continue
             self.fields[key].required = True
 
-
-
     def clean_dob(self):
         dob = self.cleaned_data['dob']
-        if dob.year > 1995:
+        if dob.year > datetime.date.today().year - 18:
             raise forms.ValidationError("You are too young to register!")
         return dob
 
@@ -139,6 +131,7 @@ class SitterRegisterForm(RegistrationForm):
         if not dob:
             return 0
         return dob
+
     def clean_toddler_exp(self):
         dob = self.cleaned_data.get('toddler_exp')
         if not dob:
@@ -168,7 +161,6 @@ class SitterRegisterForm(RegistrationForm):
         bio = self.cleaned_data.get('biography')
         return bio
 
-
     class Meta:
         model = Sitter
         fields = USER_FIELDS + ['gender', 'dob', "biography", "total_exp",
@@ -178,10 +170,13 @@ class SitterRegisterForm(RegistrationForm):
                                 "two_child_min_rate",    "two_child_max_rate",
                                 "three_child_min_rate",    "three_child_max_rate",
         ]
+        rate_prompt = "Amount in Dollars"
+        exp_prompt = "Number of Years"
         widgets = {
-            "address1":widgets.TextInput(attrs={"placeholder":"Street Address"}),
+            "address1":widgets.TextInput(attrs={"placeholder":"Street Address", "class": "large"}),
             "address2":widgets.TextInput(attrs={"placeholder":"Apt/Suite", "class":"small"}),
             "city":widgets.TextInput(attrs={"placeholder":"City"}),
+            "state": widgets.Select(attrs={"class": "extra-small"}),
             "zip":widgets.TextInput(attrs={"placeholder":"Zip Code", "class":"small"}),
             "cell":widgets.TextInput(attrs={"placeholder":"(123) 456-7890"}),
             "first_name":widgets.TextInput(attrs={"placeholder":"First"}),
@@ -190,15 +185,26 @@ class SitterRegisterForm(RegistrationForm):
             'gender':widgets.RadioSelect(attrs={'id': 'gender'}),
             'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-100, datetime.date.today().year)))),
             "biography":widgets.Textarea(),
+            "one_child_min_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
+            "one_child_max_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
+            "two_child_min_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
+            "two_child_max_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
+            "three_child_min_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
+            "three_child_max_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
+            "total_exp": widgets.TextInput(attrs={"placeholder": exp_prompt}),
+            "infant_exp": widgets.TextInput(attrs={"placeholder": exp_prompt}),
+            "toddler_exp": widgets.TextInput(attrs={"placeholder": exp_prompt}),
+            "preschool_exp": widgets.TextInput(attrs={"placeholder": exp_prompt}),
+            "school_age_exp": widgets.TextInput(attrs={"placeholder": exp_prompt}),
+            "pre_teen_exp": widgets.TextInput(attrs={"placeholder": exp_prompt}),
+            "teen_exp": widgets.TextInput(attrs={"placeholder": exp_prompt})
         }
-
 
 
 class GroupsForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["sitter_groups"]
-
 
 
 class ParentRegisterForm(RegistrationForm):
@@ -210,13 +216,13 @@ class ParentRegisterForm(RegistrationForm):
             "address1":widgets.TextInput(attrs={"placeholder":"Street Address"}),
             "address2":widgets.TextInput(attrs={"placeholder":"Apt/Suite", "class":"small"}),
             "city":widgets.TextInput(attrs={"placeholder":"City"}),
+            "state": widgets.Select(attrs={"class": "extra-small"}),
             "zip":widgets.TextInput(attrs={"placeholder":"Zip Code", "class":"small"}),
             "cell":widgets.TextInput(attrs={"placeholder":"(123) 456-7890"}),
             "first_name":widgets.TextInput(attrs={"placeholder":"First"}),
             "last_name":widgets.TextInput(attrs={"placeholder":"Last"}),
-            "email":widgets.TextInput(attrs={"placeholder":"Email"}),
+            "email":widgets.TextInput(attrs={"placeholder":"Email"})
         }
-
 
 
 class ChildForm(forms.ModelForm):

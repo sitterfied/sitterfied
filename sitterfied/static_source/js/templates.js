@@ -5218,11 +5218,12 @@ function program13(depth0,data) {
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("><span class=\"icon_ok2\">&nbsp;</span>Save</a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_pin4\">&nbsp;</span>Home Address</li>\n				<li>\n				  <p>\n                    ");
-  hashContexts = {'placeholder': depth0,'valueBinding': depth0};
-  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'placeholder': ("Street address"),
-    'valueBinding': ("address1")
+    'placeholder': ("Street\n			  address"),
+    'valueBinding': ("address1"),
+    'class': ("large")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
@@ -5233,14 +5234,6 @@ function program13(depth0,data) {
     'class': ("small")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                  </p>\n				  <p>\n                    ");
-  hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
-  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
-    'placeholder': ("Zip Code"),
-    'valueBinding': ("zip"),
-    'class': ("small")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                    ");
   hashContexts = {'placeholder': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -5248,8 +5241,8 @@ function program13(depth0,data) {
     'valueBinding': ("city")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n                    ");
-  hashContexts = {'viewName': depth0,'prompt': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'required': depth0};
-  hashTypes = {'viewName': "STRING",'prompt': "STRING",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'required': "STRING"};
+  hashContexts = {'viewName': depth0,'prompt': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0,'required': depth0,'class': depth0};
+  hashTypes = {'viewName': "STRING",'prompt': "STRING",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING",'required': "STRING",'class': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'viewName': ("fieldValueSelect2"),
     'prompt': ("Select State"),
@@ -5257,9 +5250,18 @@ function program13(depth0,data) {
     'optionLabelPath': ("content"),
     'optionValuePath': ("content"),
     'selectionBinding': ("state"),
-    'required': ("")
+    'required': (""),
+    'class': ("extra-small")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n\n                  </p>\n				  <a class=\"button button_small\" ");
+  data.buffer.push("\n                    ");
+  hashContexts = {'placeholder': depth0,'valueBinding': depth0,'class': depth0};
+  hashTypes = {'placeholder': "STRING",'valueBinding': "STRING",'class': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+    'placeholder': ("Zip Code"),
+    'valueBinding': ("zip"),
+    'class': ("small")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n                  </p>\n				  <a class=\"button button_small\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "saveSettings", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -5290,7 +5292,7 @@ function program13(depth0,data) {
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "isLoaded", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n				  <a class=\"button button_small\" href=\"#\">\n					<span class=\"icon_ok2\">&nbsp;\n					</span>Save\n				  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_smoker2\">&nbsp;</span>Smoker</li>\n				<li>\n				  <p>\n                    ");
+  data.buffer.push("\n				  <a class=\"button button_small\" href=\"#\">\n					<span class=\"icon_ok2\">&nbsp;\n					</span>Save\n				  </a>\n				</li>\n			  </ul>\n			</li>\n			<li>\n			  <ul>\n				<li><span class=\"icon_smoker2\">&nbsp;</span>Smoker</li>\n				<li>\n				  <p>\n		    ");
   hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
   hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
@@ -5299,7 +5301,7 @@ function program13(depth0,data) {
     'value': ("true"),
     'name': ("smoker")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                    <label for=\"yes\">YES</label>\n                    ");
+  data.buffer.push("\n                    <label for=\"yes\">YES</label>\n		    ");
   hashContexts = {'id': depth0,'selectionBinding': depth0,'value': depth0,'name': depth0};
   hashTypes = {'id': "STRING",'selectionBinding': "STRING",'value': "STRING",'name': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.RadioButton", {hash:{
@@ -5653,13 +5655,13 @@ function program1(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n		<div>\n			<p>Please indicate your typical availability here.\n          <span>\n            <img src=\"/static/images/available.jpg\" alt=\"\" />Available\n            <img src=\"/static/images/unavailable.jpg\" alt=\"\" />Unavailable\n          </span>\n          	</p>\n          ");
+  data.buffer.push("\n	  <div class=\"tab_content schedule_block\" id=\"tab-2\">\n			<p>Please indicate your typical availability here.\n          <span>\n            <img src=\"/static/images/available.jpg\" alt=\"\" />Available\n            <img src=\"/static/images/unavailable.jpg\" alt=\"\" />Unavailable\n          </span>\n          ");
   hashContexts = {'action': depth0};
   hashTypes = {'action': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.AjaxStatusButtonView", {hash:{
     'action': ("saveSchedule")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n        </div>\n		<ul>\n		  <li>\n			<ul>\n			  <li><a ");
+  data.buffer.push("\n      </p>\n		<ul>\n		  <li>\n			<ul>\n			  <li><a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "checkAll", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));

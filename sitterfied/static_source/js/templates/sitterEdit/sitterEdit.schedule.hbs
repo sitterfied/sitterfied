@@ -1,15 +1,13 @@
 <!-- schedule_block -->
 {{# view Sitterfied.MobTriggerView }} Schedule {{/ view}}
 	  <div class="tab_content schedule_block" id="tab-2">
-		<div>
 			<p>Please indicate your typical availability here.
           <span>
             <img src="/static/images/available.jpg" alt="" />Available
             <img src="/static/images/unavailable.jpg" alt="" />Unavailable
           </span>
-          	</p>
           {{view Sitterfied.AjaxStatusButtonView action="saveSchedule"}}
-        </div>
+      </p>
 		<ul>
 		  <li>
 			<ul>

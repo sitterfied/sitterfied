@@ -33,11 +33,11 @@
 				<li><span class="icon_pin4">&nbsp;</span>Home Address</li>
 				<li>
 				  <p>
-                    {{view Ember.TextField placeholder="Street address" valueBinding="address1"}}
+                    {{view Ember.TextField placeholder="Street
+			  address" valueBinding="address1" class="large"}}
                     {{view Ember.TextField placeholder="Apt/Suite" valueBinding="address2" class="small"}}
                   </p>
 				  <p>
-                    {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
                     {{view Ember.TextField placeholder="City" valueBinding="city"}}
                     {{ view Sitterfied.Select2
                          viewName="fieldValueSelect2"
@@ -46,8 +46,8 @@
                          optionLabelPath="content"
                          optionValuePath="content"
                          selectionBinding="state"
-                         required="" }}
-
+                         required="" class="extra-small"}}
+                    {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
                   </p>
 				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
@@ -112,9 +112,9 @@
 				<li><span class="icon_smoker2">&nbsp;</span>Smoker</li>
 				<li>
 				  <p>
-                    {{view Ember.RadioButton id="yes" selectionBinding="smoker" value="true" name="smoker" }}
+		    {{view Ember.RadioButton id="yes" selectionBinding="smoker" value="true" name="smoker" }}
                     <label for="yes">YES</label>
-                    {{view Ember.RadioButton id="no" selectionBinding="smoker" value="false" name="smoker" }}
+		    {{view Ember.RadioButton id="no" selectionBinding="smoker" value="false" name="smoker" }}
                     <label for="no">NO</label>
                   </p>
 				  <a class="button button_small" {{action "saveSettings"}}><span class="icon_ok2">&nbsp;</span>Save</a>
