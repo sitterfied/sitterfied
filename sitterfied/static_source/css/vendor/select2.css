@@ -188,16 +188,13 @@ Version: 3.4.2 Timestamp: Mon Aug 12 15:04:12 PDT 2013
 
 .select2-container .select2-choice .select2-arrow {
     display: inline-block;
-    width: 35px;
-    height: 100%;
+    width: 33px;
+    height: 60px;
     position: absolute;
     right: 0;
     top: 0;
-
     border-radius:4px;
-
     background-clip: padding-box;
-
 }
 
 .select2-container .select2-choice .select2-arrow b {
