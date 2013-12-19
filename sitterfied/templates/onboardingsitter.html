@@ -44,13 +44,13 @@
                     <span class="icon_name">&nbsp;</span>Name
 
                     {% for error in form.first_name.errors %}
-					<div class="icon_error">
+					<div class="icon_error first_name">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.last_name.errors %}
-					<div class="icon_error">
+					<div class="icon_error last_name">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -103,7 +103,7 @@
 					<span class="icon_gender">&nbsp;
 					</span>Gender
 				    {% for error in form.gender.errors %}
-					<div class="icon_error">
+					<div class="icon_error gender">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -124,31 +124,31 @@
                   <li>
                     <span class="icon_pin3">&nbsp;</span>Home Address
                     {% for error in form.address1.errors %}
-					<div class="icon_error">
+					<div class="icon_error address1">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.address2.errors %}
-					<div class="icon_error">
+					<div class="icon_error address2">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.city.errors %}
-					<div class="icon_error">
+					<div class="icon_error city">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.state.errors %}
-					<div class="icon_error">
+					<div class="icon_error state">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.zip.errors %}
-					<div class="icon_error">
+					<div class="icon_error zip">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -157,9 +157,9 @@
 					<p class="address_fields">
 					  {{form.address1}}
 					  {{form.address2}}
-				    {{form.city}}
-     				{{form.state}}
-            {{form.zip}}
+				      {{form.city}}
+     				  {{form.state}}
+                      {{form.zip}}
 					</p>
 				  </li>
 				</ul>
@@ -169,7 +169,7 @@
                   <li>
                     <span class="icon_iphone">&nbsp;</span>Cell Phone Number
                     {% for error in form.cell.errors %}
-					<div class="icon_error">
+					<div class="icon_error cell">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -187,7 +187,7 @@
                   <li>
                     <span class="icon_email">&nbsp;</span>Email Address
                       {% for error in form.email.errors %}
-                      <div class="icon_error">
+                      <div class="icon_error email">
                         <p>{{ error|escape }}</p>
                       </div>
 					  {% endfor %}
@@ -205,13 +205,13 @@
                     <span class="icon_pass2">&nbsp;</span>Password
 
                     {% for error in form.password1.errors %}
-                    <div class="icon_error">
+                    <div class="icon_error password1">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.password2.errors %}
-                    <div class="icon_error">
+                    <div class="icon_error password2">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -246,7 +246,7 @@
 					<p class="b_styling"><a href="http://blog.sitterfied.com/post/64699230620/sell-yourself-like-the-donald#more" target="_blank">Click here</a> for more bio tips</p>
 
                     {% for error in form.biography.errors %}
-                    <div class="icon_error biography_error">
+                    <div class="icon_error biography_error biography">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -258,43 +258,43 @@
                   <li>
                     <span class="icon_experience">&nbsp;</span>General<br />Experience
                     {% for error in form.total_exp.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error total_exp">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.infant_exp.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error infant_exp">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.toddler_exp.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error toddler_exp">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.preschool_exp.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error preschool_exp">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.school_age_exp.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error school_age_exp">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.pre_teen_exp.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error pre_teen_exp">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.teen_exp.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error teen_exp">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -357,7 +357,7 @@
 					</span>Certification
 					<br />or Training
 				    {% for error in form.certifications.errors %}
-                    <div class="icon_error experience_error">
+                    <div class="icon_error experience_error certifications">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
@@ -390,46 +390,44 @@
 					</p>
 
                     {% for error in form.one_child_min_rate.errors %}
-                    <div class="icon_error rate_error">
+                    <div class="icon_error rate_error one_child_min_rate">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
                     {% for error in form.one_child_max_rate.errors %}
-                    <div class="icon_error rate_error">
+                    <div class="icon_error rate_error one_child_max_rate">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
 
                     {% for error in form.two_child_min_rate.errors %}
-                    <div class="icon_error rate_error">
+                    <div class="icon_error rate_error two_child_min_rate">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
 
                     {% for error in form.two_child_max_rate.errors %}
-                    <div class="icon_error rate_error">
+                    <div class="icon_error rate_error two_child_max_rate">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
 
                     {% for error in form.three_child_min_rate.errors %}
-                    <div class="icon_error rate_error">
+                    <div class="icon_error rate_error three_child_min_rate">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
 
                     {% for error in form.three_child_max_rate.errors %}
-                    <div class="icon_error rate_error">
+                    <div class="icon_error rate_error three_child_max_rate">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
-
-
 
 				  </li>
 				  <li>
@@ -619,7 +617,7 @@
 
 function clearErrorIndicator(icon_element, form_element) {
     icon_element.parent().children(".icon_error").remove();
-    form_element.parent().removeClass("error_field");
+    form_element.removeClass("error_field");
 }
 
 function checkPassword() {
@@ -635,8 +633,10 @@ function checkPassword() {
 var submitted = false;
 
 $(document).ready(function() {
-    $('.icon_error').parents('li').each(function() {
-        $(this).next('li').children('p').addClass('error_field');
+    $(".icon_error").each(function() { 
+      var classes = $(this).attr("class").split(" ");
+      var id = classes[classes.length - 1]
+      $("#id_" + id).addClass("error_field");
     });
 
     if ($('.icon_error').length > 0) {
