@@ -630,6 +630,8 @@ define ['jquery'
         ).property('parent.id', 'sitter.id', 'Sitterfied.accountType')
 
         sitter: (() ->
+            if @get("accepted_sitter")
+                return @get("accepted_sitter")
             return this.get('sitters.firstObject')
         ).property('sitters.firstObject')
 
@@ -711,6 +713,10 @@ define ['jquery'
             now = moment().toDate()
             return @get('start_date_time') < now
         ).property('start_date_time')
+
+        hasMultipleSitters: (() ->
+            return @get("sitters.length") > 1 and not @get("accepted_sitter")
+        ).property("sitters")
 
     )
     Sitterfied.Booking.adapter = Adapter.create()

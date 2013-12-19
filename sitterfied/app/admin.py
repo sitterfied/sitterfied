@@ -41,6 +41,8 @@ class ParentChangeForm(UserChangeForm):
 
 class SettingsInline(admin.TabularInline):
     model = Settings
+class ScheduleInline(admin.TabularInline):
+    model = Schedule
 
 class PhoneInline(admin.TabularInline):
     model = Phone
@@ -154,7 +156,7 @@ class SitterAdmin(UserAdmin):
 
     add_fieldsets = UserAdmin.add_fieldsets + sitter_fieldsets
     fieldsets = UserAdmin.fieldsets + sitter_fieldsets
-    inlines = copy.copy(UserAdmin.inlines) + [ReviewsInline]
+    inlines = copy.copy(UserAdmin.inlines) + [ReviewsInline, ScheduleInline,]
     form = SitterChangeForm
     add_form = SitterCreationForm
 

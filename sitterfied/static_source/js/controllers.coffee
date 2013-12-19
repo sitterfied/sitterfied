@@ -190,9 +190,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     return false
 
                 accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and future
+                if accepted
+                    if Sitterfied.get("isSitter") and accepted != Sitterfied.currentUser
+                        return false
+                    now = new Date()
+                    future = item.get('start_date_time') > now
+                    return  accepted and future
+                 else
+                    return false
         ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
 
         completedJobs: (() ->

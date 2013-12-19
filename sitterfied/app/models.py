@@ -306,7 +306,7 @@ class Booking(TimeStampedModel):
     BOOKING_TYPES = Choices('Job', 'Interview')
     parent = models.ForeignKey(Parent, related_name="bookings")
     sitters = models.ManyToManyField(Sitter, related_name="bookings")
-    declined_sitters = models.ManyToManyField(Sitter, related_name="declined_bookings")
+    declined_sitters = models.ManyToManyField(Sitter, blank=True, related_name="declined_bookings")
 
     notes = models.TextField(blank=True)
     respond_by = models.DateTimeField(blank=True, null=True)
