@@ -307,13 +307,14 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 #recommend_popup .tit {color:#fff;font-size:29px;text-align:center;background:#31a7b5 url(../images/top_title.gif) repeat-x;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;padding:30px 10px;margin:0 0 30px 0;border-radius:4px 4px 0 0;}
 #recommend_popup .tit span {padding-right:38px;}
 #recommend_popup .info {padding:0 10px;}
-#recommend_popup .info p {color:#616161;font:bold 16px 'ProximaNova';padding:20px 50px 25px 55px;position:relative;clear:both;}
+#recommend_popup .info p {color:#616161;font:bold 16px 'ProximaNova';padding:20px 50px 25px 0px;position:relative;clear:both;}
 #recommend_popup .info p select {width:190px;}
 #recommend_popup .info p .pad {padding-right:30px;}
-#recommend_popup .info p label {float:left;display:block;}
+#recommend_popup .info p label {float:left;display:block;margin-left:40px;}
+#recommend_popup .info p span.icon_review3 {left:0px;}
 #recommend_popup .info p span.field {float:left;width:250px;}
-#recommend_popup .info p span.recommend_field {}
-#recommend_popup .info p span.rehire_field {}
+#recommend_popup .info p span.recommend_label {margin-left:6px;}
+#recommend_popup .info p span.rehire_label {margin-left:6px;}
 #recommend_popup .info p span label.field_box {float:none;display:inline-block;margin-left:15px;}
 #recommend_popup .info p > [class^="icon_"] {top:20px;}
 #recommend_popup .info p .field_icon {top:-5px;left:0px;display:inline-block;position:relative;}
@@ -671,19 +672,29 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .about_block .about_details_block > ul > li:hover > ul > li .icon_emergency2, .about_block .about_details_block > ul > li.focus > ul > li .icon_emergency2 {background-position:0 -3536px;}
 	/* Reviews block */
 .reviews_block {padding:25px 25px 50px 30px;}
-.reviews_block .edit_reviews .sitter_review {float:left;}
-.reviews_block .reco {border-bottom:1px dotted #e1e3e6;padding-bottom:30px;margin-bottom:10px;}
-.reviews_block .reco a {position:relative;color:#fff;font:16px/38px 'ProximaNovaCond';float:right;display:block;background:#1c8292 url(../images/reco_bg.gif) repeat-x;min-width:120px;height:38px;padding:0 10px 0 35px;border-radius:4px;box-shadow:rgba(0,0,0,.35) 3px 3px 3px;}
+.reviews_block .review_message_intro {color:#038ca2;}
+.reviews_block .edit_reviews {border-bottom:1px dotted #e1e3e6;}
+.reviews_block .edit_reviews:after {clear:both;content:"";display:block;}
+.reviews_block .edit_reviews .sitter_review {float:left;padding-right:50px;padding-top:35px;}
+.reviews_block .edit_reviews .sitter_review.empty_to_review {color:#038ca2;font-size:16px;padding-top:80px;padding-bottom:80px;}
+.reviews_block .reco {padding-bottom:30px;margin-bottom:10px;margin-top:15px;}
+.reviews_block .reco a {position:relative;color:#fff;font:16px/38px 'ProximaNovaCond';float:right;display:block;background:#1c8292 url(../images/reco_bg.gif) repeat-x;width:111px;height:38px;text-align:center;border-radius:4px;box-shadow:rgba(0,0,0,.35) 3px 3px 3px;padding-left:30px;padding-right:30px;padding-top:5px;line-height:16px;text-transform:uppercase;}
+.reviews_block .reco .review_first_name {display:block;}
 .reviews_block .reco a span {top:11px;left:4px;}
-.reviews_block ul li {padding:40px 0 0 0;float:left;width:100%;border-bottom:1px dotted #e1e3e6;}
+.reviews_block ul li {padding:40px 0 30px 0;float:left;width:100%;border-bottom:1px dotted #e1e3e6;}
 .reviews_block ul li:last-of-type {border-bottom:none;}
 .reviews_block ul li > a img {float:left;border-radius:4px;margin:0 40px 0 20px;}
 .reviews_block ul li .desc {float:left;width:665px;}
 .reviews_block ul li .desc p {line-height:25px;padding:0 0 20px 0;}
 .reviews_block ul li .desc p:first-child {padding-bottom:10px;color:#1c8292;font:bold 18px 'ProximaNova';}
 .reviews_block ul li .desc p:first-child a {color:#1c8292;}
+.reviews_block ul li .desc .badge {display:inline-block;margin-right:15px;}
 .reviews_block ul li .desc .reco_btn {position:relative;color:#b0d225;font:bold 14px/44px 'ProximaNova';text-align:center;border:1px solid #e3e5e8;padding:0 10px 0 40px;width:100px;min-height:37px;border-radius:4px;margin-bottom:25px;background:#fff;}
 .reviews_block ul li .desc .reco_btn span {top:13px;}
+.reviews_block ul li .desc .rehire_btn {position:relative;color:#e88c58;font:bold 14px/44px 'ProximaNova';text-align:center;border:1px solid #e3e5e8;padding:0 10px 0 40px;width:100px;min-height:37px;border-radius:4px;margin-bottom:25px;background:#fff;}
+.reviews_block ul li .desc .rehire_btn span {top:13px;}
+.reviews_block ul li .desc .sitter_team_btn {position:relative;color:#2499ab;font:bold 14px/44px 'ProximaNova';text-align:center;border:1px solid #e3e5e8;padding:0 10px 0 40px;width:100px;min-height:37px;border-radius:4px;margin-bottom:25px;background:#fff;}
+.reviews_block ul li .desc .sitter_team span {top:13px;}
 	/* Friends block */
 .friends_block {padding:40px 20px 80px 20px;}
 .friends_block .filter_block {font:16px 'ProximaNova-Semibold';padding:0 50px 0 0;display:none;}

@@ -13,9 +13,14 @@
           <img {{bindAttr src="avatarUrl"}} alt="" />
           <div class="reco clear">
             <a {{action 'openReviewPopup' this}}>
-              Review {{first_name}}
+              REVIEW
+              <span class="review_first_name">{{first_name}}</span>
             </a>
           </div>
+        </div>
+      {{else}}
+        <div class="sitter_review empty_to_review">
+          No one to review at this time.  Time to book another sitter!
         </div>
       {{/each}}
     </div>

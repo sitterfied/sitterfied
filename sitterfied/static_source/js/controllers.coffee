@@ -9,6 +9,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 'bookings'
                 'children']
         accountType: parent_or_sitter
+        activeReviewPanelUser: null
 
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -149,6 +150,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             parent = Sitterfied.currentUser
             $("#sitter_id").val(reviewedUser.get('id'))
             this.set('activeReviewPanelUser', reviewedUser)
+            
+            $(".popup_title").html("How did it go with " + reviewedUser.get('first_name') + "?")
             
             promise = parent.sitter_reviews()
             promise.then (revs) =>

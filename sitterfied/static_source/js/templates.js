@@ -2372,15 +2372,21 @@ function program3(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "openReviewPopup", "", {hash:{},contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n              Review ");
+  data.buffer.push(">\n              REVIEW\n              <span class=\"review_first_name\">");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n            </a>\n          </div>\n        </div>\n      ");
+  data.buffer.push("</span>\n            </a>\n          </div>\n        </div>\n      ");
   return buffer;
   }
 
 function program5(depth0,data) {
+  
+  
+  data.buffer.push("\n        <div class=\"sitter_review empty_to_review\">\n          No one to review at this time.  Time to book another sitter!\n        </div>\n      ");
+  }
+
+function program7(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts, options;
   data.buffer.push("\n        ");
@@ -2400,12 +2406,12 @@ function program5(depth0,data) {
   data.buffer.push("\n  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n    \n    <div class=\"review_message_intro\">\n      Reviews are written after completion of a job.  Please take a minute to let the\n      Sitterfied community know about the sitters you've hired.\n    </div>\n    \n    <div class=\"edit_reviews\">\n      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "sitters_to_review", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "sitters_to_review", {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    </div>\n    \n    <ul class=\"clear\">\n      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "reviews", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "reviews", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    </ul>\n  </div>\n  <!-- /reviews_block -->\n");
   return buffer;
@@ -3130,13 +3136,25 @@ function program1(depth0,data) {
   var hashTypes, hashContexts;
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "parent.full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "sitter.full_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   }
 
 function program3(depth0,data) {
   
   
-  data.buffer.push("<div class=\"reco_btn\"><span class=\"icon_ok\">&nbsp;</span>Recommends</div>");
+  data.buffer.push("<div class=\"reco_btn badge\"><span class=\"icon_ok3\">&nbsp;</span>Recommends</div>");
+  }
+
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("<div class=\"rehire_btn badge\"><span class=\"icon_rehire2\">&nbsp;</span>Will Rehire</div>");
+  }
+
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("<div class=\"sitter_team_btn badge\"><span class=\"icon_heart3\">&nbsp;</span>On Sitter Team</div>");
   }
 
   data.buffer.push("<li>\n  <a ><img ");
@@ -3149,12 +3167,22 @@ function program3(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parent", "parent.parent", options) : helperMissing.call(depth0, "linkTo", "parent", "parent.parent", options));
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "sitter", "sitter", options) : helperMissing.call(depth0, "linkTo", "sitter", "sitter", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("</p>\n	");
   hashTypes = {};
   hashContexts = {};
   stack2 = helpers['if'].call(depth0, "recommended", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers['if'].call(depth0, "rehire", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers['if'].call(depth0, "inSitterTeam", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n	<p>");
   hashTypes = {};
