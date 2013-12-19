@@ -4095,20 +4095,26 @@ function program15(depth0,data) {
     'valueBinding': ("old_password")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("</p></li>\n			<li><label for=\"\">NEW PASSWORD</label></li>\n			<li><p>");
-  hashContexts = {'type': depth0,'valueBinding': depth0};
-  hashTypes = {'type': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+  hashContexts = {'type': depth0,'valueBinding': depth0,'onFocusOut': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING",'onFocusOut': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.TextField", {hash:{
     'type': ("password"),
-    'valueBinding': ("new_password1")
+    'valueBinding': ("new_password1"),
+    'onFocusOut': ("validatePassword")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("</p></li>\n			<li><label for=\"\">NEW PASSWORD (CONFIRM)</label></li>\n			<li><p>");
-  hashContexts = {'type': depth0,'valueBinding': depth0};
-  hashTypes = {'type': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
+  hashContexts = {'type': depth0,'valueBinding': depth0,'onKeyUp': depth0};
+  hashTypes = {'type': "STRING",'valueBinding': "STRING",'onKeyUp': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.TextField", {hash:{
     'type': ("password"),
-    'valueBinding': ("new_password2")
+    'valueBinding': ("new_password2"),
+    'onKeyUp': ("validatePassword")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p></li>\n			<li>\n              ");
+  data.buffer.push("</p></li>\n            <li>\n              <!--\n              <p style=\"\n    line-height: 25px;\n    margin: -25px 0px 0px 40px;\n    font-weight: bold;\n    width: 160px;\n    \">Passwords must match!</p>\n    -->\n              ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ErrorIndicator", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n              ");
   hashContexts = {'action': depth0};
   hashTypes = {'action': "ID"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.ResetAjaxStatusButtonView", {hash:{
