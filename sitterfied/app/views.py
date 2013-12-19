@@ -90,6 +90,8 @@ def get_user_json(user):
 @render_to()
 def index(request, referred_by=None):
     form = AuthenticationForm()
+    form.fields['username'].widget.attrs['placeholder'] = "Email"
+    form.fields['password'].widget.attrs['placeholder'] = "Password"
     if request.user.is_anonymous():
         return {'TEMPLATE': "landing.html",
                 "form": form,}
@@ -306,6 +308,9 @@ def login_ajax(request,
     """
     form = authentication_form(data=request.POST)
     if form.is_valid():
+        if not request.POST.get('remember_me', None):
+            request.session.set_expiry(0)
+
         auth_login(request, form.get_user())
 
         if request.session.test_cookie_worked():

@@ -1,37 +1,22 @@
+import re
+import time
 from datetime import datetime
 
-from django.db import models
-
-from django.utils.functional import cached_property
-
-
-from model_utils.models import TimeStampedModel
-# Create your models here.
-
-from model_utils.choices import Choices
-
-
 from django.contrib.auth.models import AbstractUser, UserManager
-
-from django_localflavor_us.models import USStateField
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^django_localflavor_us\.models\.USStateField"])
-
-
-from model_utils.managers import InheritanceManager
-
-
+from django.db import models
 from django.dispatch import Signal
+from django.utils.functional import cached_property
+from model_utils.choices import Choices
+from model_utils.models import TimeStampedModel
+from pyuploadcare.dj import ImageField as UploadcareImageField
+
+from .us_states import US_STATES
+
 
 booking_accepted = Signal(providing_args=['booking'])
 booking_declined = Signal(providing_args=['booking'])
 booking_canceled = Signal(providing_args=['booking'])
 
-
-from pyuploadcare.dj import ImageField as UploadcareImageField
-
-import re
-import time
 
 UPLOADS_DIR = 'uploads/{0}/{1.year:04}/{1.month:02}/{1.day:02}/{2}/{3}'
 def file_url(name):
@@ -42,7 +27,6 @@ def file_url(name):
         timestamp = int(time.time())
         return  UPLOADS_DIR.format(name, now, timestamp, filename)
     return inner
-
 
 
 class User(AbstractUser, TimeStampedModel):
@@ -65,7 +49,7 @@ class User(AbstractUser, TimeStampedModel):
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True, default="")
     city = models.CharField(max_length=50, blank=True)
-    state = USStateField(blank=True, default="AZ")
+    state = models.CharField(choices=US_STATES, max_length=2, blank=True, default="AL")
     zip = models.CharField(max_length=9, blank=True)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
     cell = models.CharField(max_length=12, blank=True)
 
@@ -334,7 +318,7 @@ class Booking(TimeStampedModel):
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=50, blank=True)
-    state = USStateField(blank=True, default="AZ")
+    state = models.CharField(choices=US_STATES, max_length=2, blank=True, default="AL")
     zip = models.CharField(max_length=9, blank=True)
     rate = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=True)
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')

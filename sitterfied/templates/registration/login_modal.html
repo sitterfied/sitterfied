@@ -3,7 +3,7 @@
   <form method="post" action="{% url 'login' %}">
   {% csrf_token %}
     <p>
-      <img src="/static/images/logo2.png" alt="" />
+      <img src="/static/images/logo2.png" alt="Sitterfied" class="logo" />
     </p>
 	<p>
       <a href="#" class="facebook_signup_btn">
@@ -28,8 +28,13 @@
         </span>
         {{ form.password }}
       </li>
+      <li>
+      </li>
 	</ul>
-
+    <p>
+      <input type="checkbox" id="remember_me">
+      <label for="remember_me">Remember me</label> 
+      <!--<a href="#">Forgot your password?</a></p>-->
     <p>
       <input type="hidden" name="next" value="/" />
       <input id="loginbtn" type="submit" class="button button_edit" value="LOG IN" />
@@ -43,7 +48,7 @@
 
 <script>
   $(document).ready(function() {
-   $("#errormessage").hide()
+    $("#errormessage").hide()
     $('.login-trigger').fancybox({
         scrolling   : "no",
         wrapCSS     : "onb_final",
@@ -52,22 +57,25 @@
         fitToView   : false,
         width       : '90%',
         height      : '90%',
+        afterClose  : function() {
+            $("#errormessage").hide();
+            $("#id_username, #id_password").removeClass("error_field_login")
+            $("#id_username, #id_password").val("")
+          },
         });
 
    $("form").submit(function(){
 	 username = $("#id_username").val()
 	 password = $("#id_password").val()
-	 $.post("{% url "login-ajax" %}", {"username":username, "password":password}).done(function(result){
+     remember_me = $("#remember_me").val()
+	 $.post("{% url "login-ajax" %}", {"username":username,
+	 "password":password, "remember_me": remember_me}).done(function(result){
 	   location.reload();
 	 }).error(function(result){
-	   $("#id_username").addClass("error_field_login")
-	   $("#id_password").addClass("error_field_login")
+	   $("#id_username, #id_password").addClass("error_field_login")
 	   $("#errormessage").fadeIn()
 	 })
 	 return false;
    })
  });
-
-
-
 </script>

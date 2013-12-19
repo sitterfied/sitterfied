@@ -155,11 +155,11 @@
                   </li>
 				  <li>
 					<p class="address_fields">
-					{{form.address1}}
-					{{form.address2}}
-				    {{form.zip}}
+					  {{form.address1}}
+					  {{form.address2}}
 				    {{form.city}}
      				{{form.state}}
+            {{form.zip}}
 					</p>
 				  </li>
 				</ul>
@@ -201,7 +201,7 @@
 			  </li>
 			  <li>
 				<ul>
-                  <li>
+                  <li id="password_state">
                     <span class="icon_pass2">&nbsp;</span>Password
 
                     {% for error in form.password1.errors %}
@@ -571,13 +571,66 @@
 	 that.val(formatted_num)
    })
    $("select").select2({ width: 'resolve' })
+    
+/*
+    $("#id_first_name, #id_last_name").keyup(function() {
+        clearErrorIndicator($(".icon_name"), $("#id_first_name"));
+    });
 
+    $("#id_address1, #id_address2, #id_city, #id_state, #id_zip").keyup(function() {
+        clearErrorIndicator($(".icon_pin3"), $("#id_address1"));
+    });
+
+    $("#id_cell").keyup(function() {
+        clearErrorIndicator($(".icon_iphone"), $("#id_cell"));
+    });
+
+    $("#id_email").keyup(function() {
+        clearErrorIndicator($(".icon_email"), $("#id_email"));
+    });
+
+    $("#id_password1, #id_password2").keyup(function() {
+        clearErrorIndicator($(".icon_pass2"), $("#id_password1"));
+    });
+*/
+    $("#id_password1, #id_password2").keyup(function() {
+        $(".icon_pass2").parent().children(".icon_error").remove(); 
+    });
+
+    $("#id_password1").blur(function() {
+        checkPassword();
+    });
+
+    $("#id_password2").keyup(function() {
+        checkPassword();
+    });
+/*
+    $("#id_biography").keyup(function() {
+        $(".biography_error").remove();
+    });
+*/
  });
+
  jQuery('.back-to-top').click(function () {
    jQuery('html, body').animate({
      scrollTop: 0
    }, 'slow');
  });
+
+function clearErrorIndicator(icon_element, form_element) {
+    icon_element.parent().children(".icon_error").remove();
+    form_element.parent().removeClass("error_field");
+}
+
+function checkPassword() {
+    var pass1 = $("#id_password1").val();
+    var pass2 = $("#id_password2").val();
+    if (pass1 != pass2) {
+        $("#password_state").append('<div class="icon_error"><p>Passwords must match!</p></div>');
+    } else {
+        $("#password_state .icon_error").remove();
+    }
+}
 
 var submitted = false;
 

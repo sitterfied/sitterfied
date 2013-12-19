@@ -150,10 +150,14 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .form_style p > input[type="text"], .form_style p > input[type="password"], .form_style p > input[type="email"] {padding:0 20px;width:188px;height:43px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:17px 'ProximaNova';color:#616161;background:#fff;margin-right:8px;}
 .form_style p > input[type="text"]:hover, .form_style p > input[type="text"]:focus, .form_style p > input[type="password"]:hover, .form_style p > input[type="password"]:focus, .form_style p > input[type="email"]:hover, .form_style p > input[type="email"]:focus {border-color:#3ae4f8;box-shadow:#e9e9e9 5px 3px 5px 0 inset, #3ae4f8 0 0 5px 1px;color:#616161;}
 .form_style input.small[type="text"] {width:85px;}
+.form_style input.large[type="text"] {width: 270px;}
 .form_style input.long[type="text"] {width:541px;}
-.form_style select {width:145px;}
+.form_style select {width:120px;}
 .form_style select[multiple] {width:230px;}
-.form_style .select2-container {margin-right:8px;}
+.form_style .select2-container {margin-right:8px; vertical-align: top;}
+.form_style p  > .select2-container {min-width: 60px;
+                                                   margin-right: 8px;}
+.form_style select.extra-small {width: 70px;}
 .form_style select.small {width:105px;}
 .form_style textarea {width:500px;height:115px;padding:10px 20px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:17px 'ProximaNova';color:#616161;background:#fff;}
 .form_style textarea:hover, .form_style textarea:focus {border-color:#3ae4f8;box-shadow:#e9e9e9 5px 3px 5px 0 inset, #3ae4f8 0 0 5px 1px;color:#616161;}
@@ -1727,25 +1731,26 @@ a {cursor:pointer}
 	/* Signup/login popup */
 .signup_login_block {display:none;padding:15px 30px;background:#ebe9ed;border-radius:5px;}
 .signup_login_block p {padding-bottom:10px;font-size:12px;color:#797979;}
-#login p:nth-child(2) {padding:15px 0 20px 0;}
+#login p:nth-child(2) {padding:10px 0 20px 0;}
 .signup_login_block p:first-child {text-align:center;}
 .signup_login_block p.age {padding:0 0 25px 0;font-size:13px;}
 .signup_login_block p.check {padding:10px 0 25px 0;}
 .signup_login_block p.check label {color:#2ea4ae;font-size:20px;}
-.signup_login_block p img {max-width:100%;height:auto;}
+.signup_login_block p img {width:100%;height:auto;}
+.signup_login_block p img.logo {width:auto; display: block; margin-left: auto; margin-right: auto;}
 .signup_login_block p:last-child {font-size:14px;}
 .signup_login_block p .button {border:none;cursor:pointer;float:none;width:100%;font-size:17px;font-weight:bold;margin:10px 0;}
 .signup_login_block .or {text-align:center;margin:5px 50px 15px 50px;position:relative;}
 .signup_login_block .or:before {content:'';position:absolute;top:7px;left:0;width:100%;height:1px;border-bottom:1px solid #c3c3c3;}
 .signup_login_block .or span {background:#f5f8f5;padding:7px;color:#797979;font-size:17px;font-style:italic;border-radius:50%;position:relative;z-index:2;}
-.signup_login_block ul {padding-bottom:10px;}
+.signup_login_block ul {padding-bottom:0px;}
 .signup_login_block ul li {position:relative;padding-bottom:10px;}
 .signup_login_block ul li i {padding-left:40px;color:#2ca4b6;font-size:16px;}
-.signup_login_block ul li input {border:1px solid #c9cac7;min-height:42px;padding:0 40px;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:6px;box-shadow:rgba(0,0,0,.25) 0 0 6px 0 inset;color:#bbbaba;font:19px 'ProximaNova';}
+.signup_login_block ul li input {border:1px solid #c9cac7;min-height:42px;padding:0 40px;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:6px;box-shadow:rgba(0,0,0,.25) 0 0 6px 0 inset;color:#bbbaba;font:16px 'ProximaNova';}
 .signup_login_block ul li input:focus {color:#323131;}
 .signup_login_block ul li input.success {background:#fff url(../images/icons/ok2.png) right center no-repeat;}
 .signup_login_block ul + p label {color:#3ea7b8;padding-right:5px;}
-.signup_login_block input[type="checkbox"] + label:before {width:16px;height:16px;margin:-1px 7px 0 0;background:url(../images/icons/check_t.png) left top no-repeat;}
+.signup_login_block input[type="checkbox"] + label:before {width:16px;height:16px;margin:-1px 7px 0px 0px;background:url(../images/icons/check_t.png) left top no-repeat;}
 .signup_login_block input[type="checkbox"]:checked + label:before {background:url(../images/icons/check_t.png) 0 -16px no-repeat;}
 	/* Ondoarding final popup */
 .onboarding_final_trigger {display:none;}

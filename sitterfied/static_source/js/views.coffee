@@ -7,7 +7,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         click : () ->
             this.set("selection", this.$().val())
         checked : (() ->
-            return this.get("value") == this.get("selection");
+          return this.get("value") == this.get("selection").toString()
         ).property('value', 'selection')
     })
 
@@ -463,7 +463,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
       attributeBindings: ["required", "multiple"]
       required: false
       width: "resolve"
-      allowClear: true
+      allowClear: false
       closeOnSelect: true
       prompt: "Please make a selection"
       # initialize Select2 once view is inserted in DOM
