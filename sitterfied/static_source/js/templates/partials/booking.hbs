@@ -5,10 +5,12 @@
   </header>
   <div class="img">
     {{# if otherPerson}}
-      {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
-        {{# if hasMultipleSitters }}
+
+      {{# if hasMultipleSitters }}
+        <img width=73 hight=73 src="/static/images/WhiteHeart_Avatar.jpg">
          <p><span>Multiple Sitters</span></p>
-        {{ else }}
+         {{ else }}
+         {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
          <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
        {{/ if}}
       {{/ if}}
