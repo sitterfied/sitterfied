@@ -6,10 +6,10 @@
 <script>
   UPLOADCARE_CROP = "174x174 upscale";
 </script>
-<script src="{% static "js/lib/PhoneFormat.js" %}">
-
 {% load compressed %}
 {% compressed_js 'onboarding' %}
+<script src="{% static "js/lib/PhoneFormat.js" %}">
+
 {% include "csrf.html" %}
 {% endblock %}
 {% block title %}
@@ -133,7 +133,11 @@
 									<li class="form-container">
 										<div class="child_wrap">
 										  <p class="child_number">CHILD 1</p>
+										  {% if form.name.errors %}
+										  <p class="small_selects error_field">
+											{% else %}
 										  <p class="small_selects">
+											{% endif %}
 											{{form.name}}
 											{{form.dob}}
 										  </p>
@@ -489,6 +493,7 @@ $(document).ready(function() {
     $('.icon_error').parents('li').each(function() {
         $(this).next('li').children('p').addClass('error_field');
     });
+	$(".errorchild").children("p").addClass('error_field');
 });
 </script>
 {% endblock %}

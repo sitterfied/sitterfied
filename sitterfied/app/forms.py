@@ -221,6 +221,13 @@ class GroupsForm(forms.ModelForm):
 
 
 class ParentRegisterForm(RegistrationForm):
+    def __init__(self, *args, **kwargs):
+        super(ParentRegisterForm, self).__init__(*args, **kwargs)
+        for key in self.fields:
+            if key in ["address2","sitter_groups"]:
+                self.fields[key].required = False
+                continue
+            self.fields[key].required = True
 
     class Meta:
         model = Parent
@@ -239,6 +246,10 @@ class ParentRegisterForm(RegistrationForm):
 
 
 class ChildForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ChildForm, self).__init__(*args, **kwargs)
+        self.fields["name"].required = True
+        self.fields["dob"].required = True
 
     class Meta:
         model = Child
