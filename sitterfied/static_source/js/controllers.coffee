@@ -253,9 +253,15 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
 
     Sitterfied.BookController = Em.ObjectController.extend(
+        pending: false
         cancel: () ->
             this.transitionTo('search');
+
         book: () ->
+            #debounce clicks
+            if @get("pending")
+                return
+            @set("pending", true)
             booking = Sitterfied.get('onDeckBooking')
             promise = booking.save()
             promise.then (booking) =>
@@ -264,7 +270,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 p = booking.reload()
                 p.then =>
                     Sitterfied.currentUser.get('bookings').pushObject(booking)
+                    @set("pending", false)
                     this.transitionTo('done', booking);
+
 
         multiple: (() ->
             return @get('sitters.length') > 1
