@@ -145,8 +145,22 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             Sitterfied.SpecialNeed.create({need:newNeed}).save()
             this.set('controllers.specialneeds.newNeed', '')
 
+
+        googlePoll: () ->
+            that = this
+            try
+                #check if we have access to the window
+                that.google_window.history
+                location.reload()
+            catch error
+                window.setInterval((->
+                    that.googlePoll()), 1000)
+
         gmailConnect: ()->
-            window.open("/googleoauthbegin/")
+            that = this
+            this.google_window = window.open("/googleoauthbegin/")
+            window.setInterval((->
+                    that.googlePoll()), 3000)
 
 
         facebookConnect: ()->
@@ -161,6 +175,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                         url: "/facebook_import/"
                         success: () ->
                             alert("facebook connected")
+                            location.reload()
 
             FB.getLoginStatus((response) ->
                 if response.status is "connected"
