@@ -7,7 +7,7 @@
     {{# if otherPerson}}
 
       {{# if hasMultipleSitters }}
-        <img width=73 hight=73 src="/static/images/WhiteHeart_Avatar.jpg">
+        <img width=73 hight=73 src="/static/images/MultiSitterPic.jpg">
          <p><span>Multiple Sitters</span></p>
          {{ else }}
          {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
@@ -34,8 +34,10 @@
       <li><span class="icon_friends5">&nbsp;</span>{{num_children}} {{kidsString}}</li>
       <li><a {{bindAttr href=googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span> {{city}}, {{state}}</a></li>
       <li>
+        {{# unless hasMultipleSitters }}
         <p><a {{bindAttr href=otherPerson.mailTo}} >Need more info?<br>Email {{otherPerson.first_name}}</a></p>
         <span class="icon_email2">&nbsp;</span><a {{bindAttr href=otherPerson.mailTo}} >{{otherPerson.email}}</a>
+        {{/unless}}
       </li>
     </ul>
     <div class="price">
