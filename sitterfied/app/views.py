@@ -132,6 +132,7 @@ def onboarding2(request):
             form = ParentRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
+                fb_id = request.session.get("FACEBOOK_ID", None)
                 fb_token = request.session.get("FACEBOOK_TOKEN", None)
                 if fb_id:
                     facebook_import_logic(user, fb_token, fb_id)
