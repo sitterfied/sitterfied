@@ -6076,7 +6076,7 @@ function program7(depth0,data) {
 function program9(depth0,data) {
   
   
-  data.buffer.push("\n  <p>Your profile is <span>ACTIVE</span> but incomplete</p>\n  <div><span>&nbsp;</span></div>\n  <p>Fill in the gaps below so parents can see how great you are!</p>\n");
+  data.buffer.push("\n  <p>Your profile is now active. Don't forget to keep your schedule updated!</p>\n");
   }
 
   data.buffer.push("<div class=\"top_info clear\">\n  <div class=\"member_since\">");
