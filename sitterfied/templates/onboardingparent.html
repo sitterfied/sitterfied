@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-
 {% block extra_head %}
+{% load compressed %}
+{% compressed_js 'onboarding' %}
+{% include "csrf.html" %}
 <script>
   UPLOADCARE_CROP = "174x174 upscale";
 </script>
