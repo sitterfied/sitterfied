@@ -206,7 +206,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
                 accepted = Boolean(item.get('accepted_sitter'))
                 if accepted
-                    if Sitterfied.get("isSitter") and accepted != Sitterfied.currentUser
+                    if Sitterfied.get("isSitter") and item.get('accepted_sitter.id') != Sitterfied.currentUser.get("id")
                         return false
                     now = new Date()
                     future = item.get('start_date_time') > now

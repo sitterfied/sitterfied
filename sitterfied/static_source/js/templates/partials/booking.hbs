@@ -5,10 +5,12 @@
   </header>
   <div class="img">
     {{# if otherPerson}}
-      {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
-        {{# if hasMultipleSitters }}
+
+      {{# if hasMultipleSitters }}
+        <img width=73 hight=73 src="/static/images/MultiSitterPic.jpg">
          <p><span>Multiple Sitters</span></p>
-        {{ else }}
+         {{ else }}
+         {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
          <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
        {{/ if}}
       {{/ if}}
@@ -32,8 +34,10 @@
       <li><span class="icon_friends5">&nbsp;</span>{{num_children}} {{kidsString}}</li>
       <li><a {{bindAttr href=googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span> {{city}}, {{state}}</a></li>
       <li>
+        {{# unless hasMultipleSitters }}
         <p><a {{bindAttr href=otherPerson.mailTo}} >Need more info?<br>Email {{otherPerson.first_name}}</a></p>
         <span class="icon_email2">&nbsp;</span><a {{bindAttr href=otherPerson.mailTo}} >{{otherPerson.email}}</a>
+        {{/unless}}
       </li>
     </ul>
     <div class="price">

@@ -653,12 +653,12 @@ define ['jquery'
 
         startHour: ((key, value) ->
             date = @get('start_date_time')
-            if not date
+            if not date and not value
                 return
             if not value?
                 return moment(date).format("HHmm")
             else
-                date = moment(date)
+                date = moment(date) or moment()
                 value_date = moment(value, "HHmm")
                 date.hour(value_date.hour())
                 date.minute(value_date.minute())
@@ -668,12 +668,12 @@ define ['jquery'
 
         endHour: ((key, value) ->
             date = @get('stop_date_time')
-            if not date
+            if not date and not value
                 return
             if not value?
                 return moment(date).format("HHmm")
             else
-                date = moment(date)
+                date = moment(date) or moment()
                 value_date = moment(value, "HHmm")
                 date.hour(value_date.hour())
                 date.minute(value_date.minute())
@@ -685,7 +685,7 @@ define ['jquery'
             fmt_str = "ddd, Do MMM YYYY"
             date = @get('start_date_time')
             date = moment(date)
-            if not date
+            if not date and not value
                 return
             if arguments.length == 1
                 return date.format(fmt_str)
@@ -717,6 +717,8 @@ define ['jquery'
         hasMultipleSitters: (() ->
             return @get("sitters.length") > 1 and not @get("accepted_sitter")
         ).property("sitters")
+
+
 
     )
     Sitterfied.Booking.adapter = Adapter.create()

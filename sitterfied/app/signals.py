@@ -37,7 +37,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
 
         send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
 
-    if settings.mobile_booking_accepted_denied:
+    if settings.mobile_booking_accepted_denied and parent.cell:
         sms = render_to_string("email/booking/booking_request_accepted.sms",
                                        {'sitter_first_name':sitter.first_name,
                                         'sitter_full_name':sitter.get_full_name(),
@@ -62,7 +62,7 @@ def booking_request_declined(sender, sitter=None,  **kwargs):
 
         send_html_email("Your booking request has been declined", "hello@sitterfied.com", parent.email, text, html)
 
-    if settings.mobile_booking_accepted_denied:
+    if settings.mobile_booking_accepted_denied and parent.cell:
         sms = render_to_string("email/booking/booking_request_declined.sms",
                                        {'sitter_first_name':sitter.first_name,
                                         'sitter_full_name':sitter.get_full_name(),
@@ -85,7 +85,7 @@ def booking_request_canceled(sender, **kwargs):
 
         send_html_email("Your booking request has been canceled", "hello@sitterfied.com", parent.email, text, html)
 
-    if settings.mobile_booking_accepted_denied:
+    if settings.mobile_booking_accepted_denied and parent.cell:
         sms = render_to_string("email/booking/booking_request_canceled.sms",{})
         twilio_client.sms.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
@@ -102,7 +102,7 @@ def booking_request_canceled(sender, **kwargs):
 
         send_html_email("Your booking request has been canceled", "hello@sitterfied.com", sitter.email, text, html)
 
-    if settings.mobile_booking_accepted_denied:
+    if settings.mobile_booking_accepted_denied and sitter.cell:
         sms = render_to_string("email/booking/booking_request_canceled.sms",{})
         twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
@@ -127,6 +127,8 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **
 
 
         for sitter in text_sitters:
+            if not sitter.cell:
+                continue
             sms = render_to_string("email/booking/booking_request_received.sms",{
                 'instance': instance
             })
@@ -146,7 +148,7 @@ def new_review(sender, instance=None, **kwargs):
 
             send_html_email("You have recieved a new review", "hello@sitterfied.com", sitter.email, text, html)
 
-        if settings.email_new_review:
+        if settings.email_new_review and sitter.cell:
             sms = render_to_string("email/review/new_review.sms",{})
             twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
