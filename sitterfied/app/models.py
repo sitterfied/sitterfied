@@ -328,7 +328,7 @@ class Booking(TimeStampedModel):
 
     @cached_property
     def accepted(self):
-        return bool(self.accept_sitter)
+        return bool(self.accepted_sitter)
 
     def accept(self, sitter):
         self.accepted_sitter = sitter

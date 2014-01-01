@@ -190,65 +190,33 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     Sitterfied.BookingsController  = Em.ArrayController.extend(
         pendingRequests: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return not accepted and future
-
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isPending')
+        ).property('content.@each.isPending', )
 
         upcomingJobs: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                if accepted
-                    if Sitterfied.get("isSitter") and item.get('accepted_sitter.id') != Sitterfied.currentUser.get("id")
-                        return false
-                    now = new Date()
-                    future = item.get('start_date_time') > now
-                    return  accepted and future
-                 else
-                    return false
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isUpcoming')
+        ).property('content.@each.isUpcoming')
 
         completedJobs: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and not future
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isCompleted')
+        ).property('content.@each.isCompleted')
 
         missedRequests: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  not accepted and not future
-        ).property('content.@each', 'content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isMissed')
+        ).property('content.@each.isMissed')
 
         canceledRequests: (() ->
             return @get('content').filter (item, index, content) ->
                 return item.get('canceled')
-        ).property('content.@each.canceled')
+        ).property('content.@each.canceled', 'content.@each.isLoaded')
 
         declinedRequests: (() ->
             return @get('content').filter (item, index, content) ->
-                declined_sitters = item.get('declined_sitters')
-                return declined_sitters.indexOf(item.get('content')) != -1
-        ).property('content.@each.declined_sitters')
-
-
+                return item.get('isDeclined')
+        ).property('content.@each.isDeclined')
 
     )
 

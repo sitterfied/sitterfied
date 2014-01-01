@@ -46,6 +46,7 @@
       </span>
     </div>
     {{# unless canceled}}
+    {{# unless isDeclined}}
     {{# if Sitterfied.isParent }}
       <div class="btn_wrap">
         <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
@@ -78,7 +79,8 @@
       </div>
       {{/ if }}
     {{/ if}}
-   {{/ unless}}
+    {{/ unless}}
+    {{/ unless}}
     <div class="note_wrap">
       <a {{action 'toggleNote'}} {{bindAttr class=isNoteShown:hide_text}}>
         <span class="show">Show</span>
