@@ -129,6 +129,7 @@ class SitterAdmin(UserAdmin):
                            'highest_education',
                            'last_school',
                            'current_student',
+                           'travel_distance',
 
                            'other_services',
 
