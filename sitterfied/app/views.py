@@ -205,6 +205,20 @@ from api import SitterSearchSerializer
 from django.db.models import Count, Max
 
 
+
+test_zips = [
+    {
+      "zip_code": "11207",
+      "distance": 0
+    },
+    {
+      "zip_code": "12345",
+      "distance": 9.932
+    },
+]
+
+
+import operator
 @api_view(['GET'])
 def search(request):
     zipcode = request.GET.get('zip', '')
@@ -226,7 +240,20 @@ def search(request):
                                                                'bookmarks',
                                                                'settings').annotate(rehires=Count("booking__parent"))
     #filter by zip
-    sitters = sitters.filter(zip=zipcode)
+    #flip this out
+
+    # response = requests.get("https://redline-redline-zipcode.p.mashape.com/rest/radius.json/%s/50/mile",
+    #                         headers={
+    #                             "X-Mashape-Authorization": "JbvKMl37oS4Vh0GZTbuNHkDcNdTjBU8F"
+    #                         })
+    # zipcodes = response.data['zipcodes']
+
+    zipcodes = test_zips
+
+    q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
+    reduced_q = reduce(operator.or_, q_list)
+    sitters = sitters.filter(reduced_q)
+
     #figure out which day we care about
     start_date = datetime.strptime(start_date, "%a, %d %b %Y")
     day  = datetime.strftime(start_date, "%a").lower()
@@ -259,6 +286,9 @@ def search(request):
         for term, search_time in times.items():
             if  start_time <= search_time <= stop_time:
                 search_terms[("schedule__%s_" % day) + term] = True
+
+
+
 
     #filter by availiablity
     sitters = sitters.filter(**search_terms)
