@@ -248,11 +248,13 @@ def search(request):
     #                         })
     # zipcodes = response.data['zipcodes']
 
-    zipcodes = test_zips
+    # zipcodes = test_zips
 
-    q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
-    reduced_q = reduce(operator.or_, q_list)
-    sitters = sitters.filter(reduced_q)
+    # q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
+    # reduced_q = reduce(operator.or_, q_list)
+    # sitters = sitters.filter(reduced_q)
+
+    sitters = sitters.filter(zip=zipcode)
 
     #figure out which day we care about
     start_date = datetime.strptime(start_date, "%a, %d %b %Y")
