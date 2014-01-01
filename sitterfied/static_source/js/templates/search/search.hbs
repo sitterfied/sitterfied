@@ -22,8 +22,17 @@
                 {{/ if}}
               {{/ each}}
               <li>
-				<p>+ <a {{action "addFriendsSitters"}}class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
-				<p>- &nbsp;<a {{action "clearSelected"}} class="remove_team">REMOVE SITTER TEAM</a></p>
+                {{# if isFriendsSelected}}
+				<p>- <a {{action "selectFriends"}}class="add_sitters">REMOVE ALL FRIENDS’ SITTERS</a></p>
+                {{ else }}
+                <p>+ <a {{action "clearFriends"}}class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
+                {{/ if}}
+
+                {{# if isTeamSelected}}
+				<p>- &nbsp;<a {{action "clearTeam"}} class="remove_team">REMOVE SITTER TEAM</a></p>
+                {{ else }}
+                <p>+ &nbsp;<a {{action "selectTeam"}} class="remove_team">ADD SITTER TEAM</a></p>
+                {{/ if}}
 			  </li>
 			</ul>
 			<p>Select from the available sitters below. <a {{action book selectedSitters.content }} class="button button_small"><span class="icon_ok2">&nbsp;</span>submit</a></p>

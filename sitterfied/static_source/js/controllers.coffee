@@ -432,8 +432,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         isSelected: (() ->
             selected = @get('parentController.selectedSitters')
-            return selected.indexOf(@get('content')) != -1
-        ).property('parentController.selectedSitters.@each')
+            return selected.filterProperty("id", @get('id')).length > 0
+        ).property('parentController.selectedSitters.@each', "parentController.selectedSitters.content")
 
         passesFilters: (() ->
             languages = @get("parentController.languages")
@@ -502,9 +502,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             #force a resort
             Em.run.end()
             @notifyPropertyChange('content')
-
-
-
 
         resetFilters: () ->
             Em.run.begin()
@@ -581,6 +578,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     s.load(sitter['id'], sitter)
                     sitters.pushObject(s)
                 this.set('model', sitters)
+                @set("selectedSitters", Ember.ArrayProxy.create
+                    content: Em.copy(@get("sitterTeam"))
+                )
+
 
         content: []
         selectedSitters:  Ember.ArrayProxy.create
@@ -589,6 +590,48 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         sitterTeam: (() ->
             return @filterProperty('inSitterTeam', true)
         ).property('content.@each.inSitterTeam')
+
+        selectTeam: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("sitterTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    selected.pushObject(sitter)
+
+        clearTeam: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("sitterTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length > 0
+                    selected.removeObject(sitter)
+
+        selectFriends: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("friendTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    selected.pushObject(sitter)
+
+        clearFriends: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("friendTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length > 0
+                    selected.removeObject(sitter)
+
+
+        isTeamSelected: (() ->
+            selected = @get("selectedSitters")
+            for sitter in @get("sitterTeam")
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    return false
+            return true
+        ).property("selectedSitters", "selectedSitters.@each", "sitterTeam")
+
+
+        isFriendsSelected: (() ->
+            selected = @get("selectedSitters")
+            for sitter in @get("friendTeam")
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    return false
+            return true
+        ).property("selectedSitters", "selectedSitters.@each", "friendTeam")
 
         friendTeam: (() ->
             return @filterProperty("inFriendsTeam", true)
