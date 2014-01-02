@@ -1,3 +1,8 @@
+{{# if Sitterfied.isParent }}
+  {{#linkTo parentEdit.profile tag="div" class="mob_tab_trigger"}}Profile{{/linkTo}}
+  {{#linkTo mybookings tag="div" class="mob_tab_trigger"}}Bookings{{/linkTo}}
+  {{#linkTo parentEdit.sitterTeam tag="div" class="mob_tab_trigger"}}Sitter Team{{/linkTo}}
+{{/if}}
 <!-- network_block -->
 {{# view Sitterfied.MobTriggerView }} Network {{/ view}}
 	  <div class="tab_content network_block" id="tab-4">
@@ -64,3 +69,8 @@
 		</ul>
 	  </div>
 	  <!-- /network_block -->
+{{# if Sitterfied.isParent }}
+  {{#linkTo parentEdit.reviews tag="div" class="mob_tab_trigger"}}Reviews{{/linkTo}}
+{{ else }}
+  {{#linkTo sitterEdit.reviews tag="div" class="mob_tab_trigger"}}Reviews{{/linkTo}}
+{{/ if }}

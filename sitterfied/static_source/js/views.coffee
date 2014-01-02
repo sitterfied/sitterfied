@@ -370,7 +370,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
 
     Sitterfied.MobTriggerView = Em.View.extend
         classNameBindings: ['active', ":mob_tab_trigger", "my_mob_tab"]
-        active: false
+        active: true
         my_mob_tab:  false
         linkto: null
         click: () ->
