@@ -2,6 +2,10 @@
   {{#linkTo parentEdit.profile tag="div" class="mob_tab_trigger"}}Profile{{/linkTo}}
   {{#linkTo mybookings tag="div" class="mob_tab_trigger"}}Bookings{{/linkTo}}
   {{#linkTo parentEdit.sitterTeam tag="div" class="mob_tab_trigger"}}Sitter Team{{/linkTo}}
+  {{ else }}
+  {{#linkTo sitterEdit.profile tag="div" class="mob_tab_trigger"}}Profile{{/linkTo}}
+  {{#linkTo sitterEdit.schedule tag="div" class="mob_tab_trigger"}}Schedule{{/linkTo}}
+  {{#linkTo mybookings tag="div" class="mob_tab_trigger"}}Bookings{{/linkTo}}
 {{/if}}
 <!-- network_block -->
 {{# view Sitterfied.MobTriggerView }} Network {{/ view}}

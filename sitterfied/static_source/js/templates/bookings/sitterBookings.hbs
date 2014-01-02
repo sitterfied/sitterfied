@@ -1,7 +1,6 @@
 <!-- container -->
 <div class="container clear">
   <div class="wraper">
-
 	<!-- tabs_wrap -->
 	<div class="tabs_wrap">
 	  <ul class="tab_select">
@@ -11,6 +10,8 @@
 		<li>{{#linkTo sitterEdit.network content }}Network{{/linkTo}}</li>
 		<li>{{#linkTo sitterEdit.reviews content }}Reviews{{/linkTo}}</li>
 	  </ul>
+      {{#linkTo sitterEdit.profile content  tag="div" class="mob_tab_trigger"}}Profile{{/linkTo}}
+      {{#linkTo sitterEdit.schedule content tag="div" class="mob_tab_trigger"}}Schedule{{/linkTo}}
       {{# view Sitterfied.MobTriggerView }} Bookings {{/ view}}
         <div class="tab_content bookings_block" id="tab-3">
 	      <ul class="subtab_select">
@@ -49,6 +50,8 @@
 	      </ul>
           {{outlet}}
         </div>
+      {{#linkTo sitterEdit.network content tag="div" class="mob_tab_trigger"}}Network{{/linkTo}}
+      {{#linkTo sitterEdit.reviews content tag="div" class="mob_tab_trigger"}}Reviews{{/linkTo}}
 	</div>
   </div>
 </div>
