@@ -2403,7 +2403,11 @@ function program7(depth0,data) {
   hashContexts = {};
   stack1 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n  <div class=\"tab_content reviews_block\" id=\"tab-5\">\n    \n    <div class=\"review_message_intro\">\n      Reviews are written after completion of a job.  Please take a minute to let the\n      Sitterfied community know about the sitters you've hired.\n    </div>\n    \n    <div class=\"edit_reviews\">\n      ");
+  data.buffer.push("\n  <div class=\"tab_content reviews_block\" id=\"tab-5\" onload=>\n    \n    <div class=\"review_message_intro\">\n      Reviews are written after completion of a job.  Please take a minute to let the\n      Sitterfied community know about the sitters you've hired.\n    </div>\n    \n    ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "update_reviews", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n    \n    <div class=\"edit_reviews\">\n      ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.each.call(depth0, "sitters_to_review", {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});

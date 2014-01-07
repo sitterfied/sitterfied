@@ -4,6 +4,7 @@ from .models import Settings, SitterReview, User, Booking, booking_accepted, boo
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+from twilio import TwilioException
 
 from sms import client as twilio_client
 from sms import sitterfied_number
@@ -148,7 +149,10 @@ def new_review(sender, instance=None, **kwargs):
 
         if settings.email_new_review:
             sms = render_to_string("email/review/new_review.sms",{})
-            twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
+            try:
+                twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
+            except TwilioException:
+                pass
 
 
 

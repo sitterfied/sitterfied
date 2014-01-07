@@ -10,6 +10,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 'children']
         accountType: parent_or_sitter
         activeReviewPanelUser: null
+        sitters_to_review: []
+        reviews: []
 
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -145,6 +147,40 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 return
             Sitterfied.SpecialNeed.create({need:newNeed}).save()
             this.set('controllers.specialneeds.newNeed', '')
+            
+        update_reviews: (() ->
+            #Populate reviews
+            this.set("reviews", Sitterfied.currentUser.get('reviews').toArray())
+            
+            #Populate users to review
+            console.log("Start users to review")
+            results = Em.A()
+            parent = Sitterfied.currentUser
+            console.log("Parent", parent)
+            revs = parent.get('reviews').toArray()
+            sitter_id_set = new Em.Set()
+            
+            console.log("Reviews:", revs)
+            #Get existing reviews
+            for rev in revs
+                console.log("Rev:", rev)
+                if rev.get('sitter')
+                    sitter_id_set.add(rev.get('sitter').get('id'))
+            
+            #Include sitters that has no reviews
+            bookings = parent.get('bookings').toArray()
+            for booking in bookings
+                accepted_sitter = booking.get('accepted_sitter')
+                if accepted_sitter and not sitter_id_set.contains(accepted_sitter.get('id'))
+                    results.pushObject(accepted_sitter)
+            this.set('sitters_to_review', results.uniq())
+            return null
+        ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
+            
+        #.property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")   
+        #sitters_to_review_changes : (() ->
+        #    console.log("Sitters to Review Changed")
+        #).observes('sitters_to_review')
             
         openReviewPopup: (reviewedUser) ->
             parent = Sitterfied.currentUser
@@ -925,7 +961,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
 
     Sitterfied.ApplicationController = Ember.Controller.extend
-        needs: ['sitterReview', 'friends']
+        needs: ['sitterReview', 'friends', 'currentUser']
 
         postReivew: () ->
             $.fancybox.close()
