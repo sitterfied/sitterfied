@@ -354,73 +354,33 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 if sitter_id
                     sitter = Sitterfied.Sitter.find(sitter_id)
                 
-                console.log('Recommend:', recommend)
-                console.log('Rehire:', rehire)
-                console.log('Review:', review)
+                new_review_promise = Sitterfied.SitterReview.create({
+                        parent: parent,
+                        sitter: sitter,
+                        rehire: rehire,
+                        recommended: recommend,
+                        review: review
+                    }).save()
+                    
+                new_review_promise.then (new_review) =>
+                    #Reload new review
+                    review_reload_promise = new_review.reload()
+                    review_reload_promise.then =>
+                        #Repopulate sitters to review by not including sitter from previous list
+                        current_sitters_to_review = this.get('controller').get("controllers.currentUser").get("sitters_to_review")
+                        sitters_to_review = Em.A()
+                        for sitter_to_review in current_sitters_to_review
+                            if sitter_id and sitter_to_review.get('id') is not sitter_id
+                                sitters_to_review.pushObject(sitter_to_review)
+                        this.get('controller').get("controllers.currentUser").set("sitters_to_review", sitters_to_review)
                 
-                promise = parent.sitter_reviews()
-                promise.then (revs) =>
-                    results = Em.A()
-                    review_length = revs.get('length')
-                    index = 0
-                    while index < review_length
-                        results.pushObject(revs.content.get(index))
-                        index++
+                        #Add new_review to review_list
+                        current_reviews = this.get('controller').get("controllers.currentUser").get("reviews")
+                        current_reviews.pushObject(new_review)
+                        this.get('controller').get("controllers.currentUser").set("reviews", current_reviews)
+                $.fancybox.close()
+                this.get('controller').transitionToRoute('parentEdit.reviews', parent)
                     
-                    console.log("Revs:", revs)
-                    console.log("Review length:", review_length)
-                    
-                    review_exists = false
-                    for rev in results
-                        if rev.get('sitter').get('id') is sitter.get('id') and rev.get('parent').get('id') is parent.get('id')
-                            review_exists = true
-                            current_review = rev
-                            break
-                    
-                    if review_exists
-                        console.log('Review already exists')
-                        current_review.set('isDirty', true)
-                        current_review.set('recommended', recommend)
-                        current_review.set('rehire', rehire)
-                        current_review.set('review', review)
-                        current_review.save()
-                    else
-                        console.log('New Review')
-                        console.log("This controller:", this.get('controller'))
-                        
-                        new_review_promise = Sitterfied.SitterReview.create({
-                            parent: parent,
-                            sitter: sitter,
-                            rehire: rehire,
-                            recommended: recommend,
-                            review: review
-                        }).save()
-                        
-                        new_review_promise.then (new_review) =>
-                            #Reload new review
-                            review_reload_promise = new_review.reload()
-                            review_reload_promise.then =>
-                                console.log("New review:", new_review)
-                                console.log("New review sitter:", new_review.get("sitter"))
-                                #Repopulate sitters to review by not including sitter from previous list
-                                console.log("Start sitter to review repopulate")
-                                current_sitters_to_review = this.get('controller').get("controllers.currentUser").get("sitters_to_review")
-                                sitters_to_review = Em.A()
-                                for sitter_to_review in current_sitters_to_review
-                                    if sitter_id and sitter_to_review.get('id') is not sitter_id
-                                        console.log("Sitter to review id:", sitter_to_review.get('id'))
-                                        sitters_to_review.pushObject(sitter_to_review)
-                                this.get('controller').get("controllers.currentUser").set("sitters_to_review", sitters_to_review)
-                        
-                                #Add new_review to review_list
-                                console.log("Start reviews repopulate")
-                                current_reviews = this.get('controller').get("controllers.currentUser").get("reviews")
-                                current_reviews.pushObject(new_review)
-                                this.get('controller').get("controllers.currentUser").set("reviews", current_reviews)
-                        
-                    console.log("Closing")
-                    $.fancybox.close()
-                    this.get('controller').transitionToRoute('parentEdit.reviews', parent)
 
             removeFromTeam: ()->
                 debugger

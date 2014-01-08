@@ -153,17 +153,13 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.set("reviews", Sitterfied.currentUser.get('reviews').toArray())
             
             #Populate users to review
-            console.log("Start users to review")
             results = Em.A()
             parent = Sitterfied.currentUser
-            console.log("Parent", parent)
             revs = parent.get('reviews').toArray()
             sitter_id_set = new Em.Set()
             
-            console.log("Reviews:", revs)
             #Get existing reviews
             for rev in revs
-                console.log("Rev:", rev)
                 if rev.get('sitter')
                     sitter_id_set.add(rev.get('sitter').get('id'))
             
@@ -176,11 +172,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.set('sitters_to_review', results.uniq())
             return null
         ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
-            
-        #.property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")   
-        #sitters_to_review_changes : (() ->
-        #    console.log("Sitters to Review Changed")
-        #).observes('sitters_to_review')
             
         openReviewPopup: (reviewedUser) ->
             parent = Sitterfied.currentUser
@@ -197,18 +188,13 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 while index < review_length
                     results.pushObject(revs.content.get(index))
                     index++
-                    
-                console.log("Results:", results)
             
                 review_exists = false
                 for rev in results
-                    console.log("Rev:", rev)
                     if rev.get('sitter').get('id') is reviewedUser.get('id') and rev.get('parent').get('id') is parent.get('id')
                         review_exists = true
                         current_review = rev
                         break
-                
-                console.log("Review exists:", review_exists)
                 
                 if review_exists
                     $("#recommended").prop('checked', current_review.get('recommended'))
@@ -219,7 +205,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     $("#rehire").prop('checked', false)
                     $("#review").val('')
 
-                console.log("Opening popup")
                 $.fancybox
                     href: "#recommend_popup"
                     maxWidth: 960
