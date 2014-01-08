@@ -132,6 +132,7 @@ def onboarding2(request):
             form = ParentRegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
+                fb_id = request.session.get("FACEBOOK_ID", None)
                 fb_token = request.session.get("FACEBOOK_TOKEN", None)
                 if fb_id:
                     facebook_import_logic(user, fb_token, fb_id)
@@ -204,6 +205,20 @@ from api import SitterSearchSerializer
 from django.db.models import Count, Max
 
 
+
+test_zips = [
+    {
+      "zip_code": "11207",
+      "distance": 0
+    },
+    {
+      "zip_code": "12345",
+      "distance": 9.932
+    },
+]
+
+
+import operator
 @api_view(['GET'])
 def search(request):
     zipcode = request.GET.get('zip', '')
@@ -225,7 +240,22 @@ def search(request):
                                                                'bookmarks',
                                                                'settings').annotate(rehires=Count("booking__parent"))
     #filter by zip
+    #flip this out
+
+    # response = requests.get("https://redline-redline-zipcode.p.mashape.com/rest/radius.json/%s/50/mile",
+    #                         headers={
+    #                             "X-Mashape-Authorization": "JbvKMl37oS4Vh0GZTbuNHkDcNdTjBU8F"
+    #                         })
+    # zipcodes = response.data['zipcodes']
+
+    # zipcodes = test_zips
+
+    # q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
+    # reduced_q = reduce(operator.or_, q_list)
+    # sitters = sitters.filter(reduced_q)
+
     sitters = sitters.filter(zip=zipcode)
+
     #figure out which day we care about
     start_date = datetime.strptime(start_date, "%a, %d %b %Y")
     day  = datetime.strftime(start_date, "%a").lower()
@@ -259,6 +289,9 @@ def search(request):
             if  start_time <= search_time <= stop_time:
                 search_terms[("schedule__%s_" % day) + term] = True
 
+
+
+
     #filter by availiablity
     sitters = sitters.filter(**search_terms)
 
@@ -272,7 +305,7 @@ def search(request):
 @api_view(['GET'])
 def network_search(request):
     search_term = request.GET.get('search', '')
-    users = [{'label':u.get_full_name(), 'value':u.get_full_name(), "type":"user", "id":u.id} for u in User.objects.filter(Q(first_name__startswith=search_term) | Q(last_name__istartswith=search_term))]
+    users = [{'label':u.get_full_name(), 'value':u.get_full_name(), "type":"user", "id":u.id} for u in User.objects.filter(Q(first_name__istartswith=search_term) | Q(last_name__istartswith=search_term))]
     groups = [{'label':g.name, 'value':g.name, "type":"group", "id":g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
     users.extend(groups)
     return Response(users)

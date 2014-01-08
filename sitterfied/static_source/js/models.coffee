@@ -668,6 +668,8 @@ define ['jquery'
         ).property('parent.id', 'sitter.id', 'Sitterfied.accountType')
 
         sitter: (() ->
+            if @get("accepted_sitter")
+                return @get("accepted_sitter")
             return this.get('sitters.firstObject')
         ).property('sitters.firstObject')
 
@@ -689,12 +691,12 @@ define ['jquery'
 
         startHour: ((key, value) ->
             date = @get('start_date_time')
-            if not date
+            if not date and not value
                 return
             if not value?
                 return moment(date).format("HHmm")
             else
-                date = moment(date)
+                date = moment(date) or moment()
                 value_date = moment(value, "HHmm")
                 date.hour(value_date.hour())
                 date.minute(value_date.minute())
@@ -704,12 +706,12 @@ define ['jquery'
 
         endHour: ((key, value) ->
             date = @get('stop_date_time')
-            if not date
+            if not date and not value
                 return
             if not value?
                 return moment(date).format("HHmm")
             else
-                date = moment(date)
+                date = moment(date) or moment()
                 value_date = moment(value, "HHmm")
                 date.hour(value_date.hour())
                 date.minute(value_date.minute())
@@ -721,7 +723,7 @@ define ['jquery'
             fmt_str = "ddd, Do MMM YYYY"
             date = @get('start_date_time')
             date = moment(date)
-            if not date
+            if not date and not value
                 return
             if arguments.length == 1
                 return date.format(fmt_str)
@@ -749,6 +751,66 @@ define ['jquery'
             now = moment().toDate()
             return @get('start_date_time') < now
         ).property('start_date_time')
+
+        hasMultipleSitters: (() ->
+            return @get("sitters.length") > 1 and not @get("accepted_sitter")
+        ).property("sitters")
+
+        isPending: (() ->
+            if this.get('canceled')
+                return false
+            accepted = Boolean(this.get('accepted_sitter'))
+            declined_sitters = this.get('declined_sitters')
+            if declined_sitters.filterProperty("id", Sitterfied.currentUser.get("id")).length > 0
+                return false
+            now = moment().toDate()
+            future = this.get('start_date_time') > now
+            return not accepted and future
+        ).property('accepted_sitter', 'declined_sitters.@each', 'start_date_time', 'canceled', 'isLoaded')
+
+        isUpcoming: (() ->
+            if this.get('canceled')
+                return false
+            accepted = Boolean(this.get('accepted_sitter'))
+            if accepted
+                if Sitterfied.get("isSitter") and this.get('accepted_sitter.id') != Sitterfied.currentUser.get("id")
+                    return false
+                now = moment().toDate()
+                future = this.get('start_date_time') > now
+                return  accepted and future
+            else
+                return false
+        ).property('accepted_sitter', 'start_date_time', 'canceled', 'isLoaded')
+
+
+        isCompleted: (() ->
+            if this.get('canceled')
+                return false
+            accepted = Boolean(this.get('accepted_sitter'))
+            now = moment().toDate()
+            future = this.get('start_date_time') > now
+            return  accepted and not future
+        ).property('accepted_sitter', 'start_date_time', 'canceled', 'isLoaded')
+
+
+        isMissed: (() ->
+            if this.get('canceled')
+                return false
+            accepted = Boolean(this.get('accepted_sitter'))
+            now = moment().toDate()
+            future = this.get('start_date_time') > now
+            return  not accepted and not future
+        ).property('accepted_sitter', 'start_date_time', 'canceled', 'isLoaded')
+
+        isDeclined: (() ->
+            declined_sitters = this.get('declined_sitters')
+            if declined_sitters.get("length") == 0
+                return false
+            if declined_sitters.filterProperty("id", Sitterfied.currentUser.get("id"))
+                return true
+            return false
+        ).property('declined_sitters', 'declined_sitters.@each')
+
 
     )
     Sitterfied.Booking.adapter = Adapter.create()

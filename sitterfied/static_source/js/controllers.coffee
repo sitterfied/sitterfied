@@ -230,8 +230,22 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     width: "90%"
                     height: "90%"
 
+
+        googlePoll: () ->
+            that = this
+            try
+                #check if we have access to the window
+                that.google_window.history
+                location.reload()
+            catch error
+                window.setInterval((->
+                    that.googlePoll()), 1000)
+
         gmailConnect: ()->
-            window.open("/googleoauthbegin/")
+            that = this
+            this.google_window = window.open("/googleoauthbegin/")
+            window.setInterval((->
+                    that.googlePoll()), 3000)
 
 
         facebookConnect: ()->
@@ -246,6 +260,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                         url: "/facebook_import/"
                         success: () ->
                             alert("facebook connected")
+                            location.reload()
 
             FB.getLoginStatus((response) ->
                 if response.status is "connected"
@@ -260,67 +275,46 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     Sitterfied.BookingsController  = Em.ArrayController.extend(
         pendingRequests: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return not accepted and future
-
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isPending')
+        ).property('content.@each.isPending', )
 
         upcomingJobs: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and future
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isUpcoming')
+        ).property('content.@each.isUpcoming')
 
         completedJobs: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  accepted and not future
-        ).property('content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isCompleted')
+        ).property('content.@each.isCompleted')
 
         missedRequests: (() ->
             return @get('content').filter (item, index, content) ->
-                if item.get('canceled')
-                    return false
-
-                accepted = Boolean(item.get('accepted_sitter'))
-                now = new Date()
-                future = item.get('start_date_time') > now
-                return  not accepted and not future
-        ).property('content.@each', 'content.@each.accepted_sitter', 'content.@each.start_date_time', 'content.@each.canceled')
+                return item.get('isMissed')
+        ).property('content.@each.isMissed')
 
         canceledRequests: (() ->
             return @get('content').filter (item, index, content) ->
                 return item.get('canceled')
-        ).property('content.@each.canceled')
+        ).property('content.@each.canceled', 'content.@each.isLoaded')
 
         declinedRequests: (() ->
             return @get('content').filter (item, index, content) ->
-                declined_sitters = item.get('declined_sitters')
-                return declined_sitters.indexOf(item.get('content')) != -1
-        ).property('content.@each.declined_sitters')
-
-
+                return item.get('isDeclined')
+        ).property('content.@each.isDeclined')
 
     )
 
     Sitterfied.BookController = Em.ObjectController.extend(
+        pending: false
         cancel: () ->
             this.transitionTo('search');
+
         book: () ->
+            #debounce clicks
+            if @get("pending")
+                return
+            @set("pending", true)
             booking = Sitterfied.get('onDeckBooking')
             promise = booking.save()
             promise.then (booking) =>
@@ -329,7 +323,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 p = booking.reload()
                 p.then =>
                     Sitterfied.currentUser.get('bookings').pushObject(booking)
+                    @set("pending", false)
                     this.transitionTo('done', booking);
+
 
         multiple: (() ->
             return @get('sitters.length') > 1
@@ -489,8 +485,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         isSelected: (() ->
             selected = @get('parentController.selectedSitters')
-            return selected.indexOf(@get('content')) != -1
-        ).property('parentController.selectedSitters.@each')
+            return selected.filterProperty("id", @get('id')).length > 0
+        ).property('parentController.selectedSitters.@each', "parentController.selectedSitters.content")
 
         passesFilters: (() ->
             languages = @get("parentController.languages")
@@ -559,9 +555,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             #force a resort
             Em.run.end()
             @notifyPropertyChange('content')
-
-
-
 
         resetFilters: () ->
             Em.run.begin()
@@ -638,6 +631,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     s.load(sitter['id'], sitter)
                     sitters.pushObject(s)
                 this.set('model', sitters)
+                @set("selectedSitters", Ember.ArrayProxy.create
+                    content: Em.copy(@get("sitterTeam"))
+                )
+
 
         content: []
         selectedSitters:  Ember.ArrayProxy.create
@@ -646,6 +643,48 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         sitterTeam: (() ->
             return @filterProperty('inSitterTeam', true)
         ).property('content.@each.inSitterTeam')
+
+        selectTeam: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("sitterTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    selected.pushObject(sitter)
+
+        clearTeam: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("sitterTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length > 0
+                    selected.removeObject(sitter)
+
+        selectFriends: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("friendTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    selected.pushObject(sitter)
+
+        clearFriends: () ->
+            selected = @get("selectedSitters")
+            for sitter in Em.copy(@get("friendTeam"))
+                if selected.filterProperty("id", sitter.get('id')).length > 0
+                    selected.removeObject(sitter)
+
+
+        isTeamSelected: (() ->
+            selected = @get("selectedSitters")
+            for sitter in @get("sitterTeam")
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    return false
+            return true
+        ).property("selectedSitters", "selectedSitters.@each", "sitterTeam")
+
+
+        isFriendsSelected: (() ->
+            selected = @get("selectedSitters")
+            for sitter in @get("friendTeam")
+                if selected.filterProperty("id", sitter.get('id')).length == 0
+                    return false
+            return true
+        ).property("selectedSitters", "selectedSitters.@each", "friendTeam")
 
         friendTeam: (() ->
             return @filterProperty("inFriendsTeam", true)

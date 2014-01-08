@@ -8,6 +8,9 @@
 		<li>{{#linkTo parentEdit.network content }}Network{{/linkTo}}</li>
 		<li>{{#linkTo parentEdit.reviews content }}Reviews{{/linkTo}}</li>
 	  </ul>
+      {{# if Sitterfied.isParent }}
+        {{#linkTo parentEdit.profile content  tag="div" class="mob_tab_trigger"}}Profile{{/linkTo}}
+      {{/ if }}
       {{# view Sitterfied.MobTriggerView }} Bookings {{/ view}}
         <div class="tab_content bookings_block" id="tab-3">
 	      <ul class="subtab_select">
@@ -46,6 +49,12 @@
 	      </ul>
           {{outlet}}
         </div>
+{{# if Sitterfied.isParent }}
+  {{#linkTo parentEdit.sitterTeam content tag="div" class="mob_tab_trigger"}}Sitter Team{{/linkTo}}
+  {{#linkTo parentEdit.network content tag="div" class="mob_tab_trigger"}}Network{{/linkTo}}
+  {{#linkTo parentEdit.reviews content tag="div" class="mob_tab_trigger"}}Reviews{{/linkTo}}
+{{/ if }}
+
 	</div>
   </div>
 </div>

@@ -312,7 +312,17 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         classNameBindings: ['fixed']
 
         fixed: (() ->
+            if this.state != "inDOM"
+                return false
             y = $(window).scrollTop();
+            height = 0;
+            for div in this.$('div')
+                height += $(div).height()
+
+            #prevent the window from going wonky when on small documents
+            if  $(window).height()  > $(document).height()- height
+                return false
+
             if y >= this.get('top')
                 return true
             else
@@ -360,8 +370,9 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
 
     Sitterfied.MobTriggerView = Em.View.extend
         classNameBindings: ['active', ":mob_tab_trigger", "my_mob_tab"]
-        active: false
+        active: true
         my_mob_tab:  false
+        linkto: null
         click: () ->
             @toggleProperty('active')
             @$("+ .subtab_content").slideToggle()

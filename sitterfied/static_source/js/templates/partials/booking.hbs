@@ -5,17 +5,27 @@
   </header>
   <div class="img">
     {{# if otherPerson}}
-    {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
-      <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
+
+      {{# if hasMultipleSitters }}
+        <img width=73 hight=73 src="/static/images/MultiSitterPic.jpg">
+         <p><span>Multiple Sitters</span></p>
+         {{ else }}
+         {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
+         <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
+       {{/ if}}
       {{/ if}}
-    <div>
+      <div>
+        {{# unless hasMultipleSitters }}
       <a>{{friends_in_common.length}} mutual friends</a>
       <ul>
+
         <li>Friends you have in common</li>
         {{# each otherPerson.friends_in_common}}
         <li>{{# linkTo user this }}<img {{bindAttr src=avatarUrl alt=full_name}}></a><span> {{full_name}}</span>{{/linkTo}}</li>
         {{/each}}
+
       </ul>
+      {{/unless}}
     </div>
   </div>
   <div class="desc clear">
@@ -24,8 +34,10 @@
       <li><span class="icon_friends5">&nbsp;</span>{{num_children}} {{kidsString}}</li>
       <li><a {{bindAttr href=googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span> {{city}}, {{state}}</a></li>
       <li>
+        {{# unless hasMultipleSitters }}
         <p><a {{bindAttr href=otherPerson.mailTo}} >Need more info?<br>Email {{otherPerson.first_name}}</a></p>
         <span class="icon_email2">&nbsp;</span><a {{bindAttr href=otherPerson.mailTo}} >{{otherPerson.email}}</a>
+        {{/unless}}
       </li>
     </ul>
     <div class="price">
@@ -34,6 +46,7 @@
       </span>
     </div>
     {{# unless canceled}}
+    {{# unless isDeclined}}
     {{# if Sitterfied.isParent }}
       <div class="btn_wrap">
         <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
@@ -66,7 +79,8 @@
       </div>
       {{/ if }}
     {{/ if}}
-   {{/ unless}}
+    {{/ unless}}
+    {{/ unless}}
     <div class="note_wrap">
       <a {{action 'toggleNote'}} {{bindAttr class=isNoteShown:hide_text}}>
         <span class="show">Show</span>
