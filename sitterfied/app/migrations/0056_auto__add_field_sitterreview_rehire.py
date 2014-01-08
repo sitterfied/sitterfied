@@ -49,7 +49,7 @@ class Migration(SchemaMigration):
             'respond_by': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'sitters': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'bookings'", 'symmetrical': 'False', 'to': u"orm['app.Sitter']"}),
             'start_date_time': ('django.db.models.fields.DateTimeField', [], {}),
-            'state': ('django_localflavor_us.models.USStateField', [], {'default': "'AZ'", 'max_length': '2', 'blank': 'True'}),
+            'state': ('django.db.models.fields.CharField', [], {'default': "'AL'", 'max_length': '2', 'blank': 'True'}),
             'stop_date_time': ('django.db.models.fields.DateTimeField', [], {}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '9', 'blank': 'True'})
         },
@@ -295,7 +295,7 @@ class Migration(SchemaMigration):
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'sitter_groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Group']", 'symmetrical': 'False', 'blank': 'True'}),
-            'state': ('django_localflavor_us.models.USStateField', [], {'default': "'AZ'", 'max_length': '2', 'blank': 'True'}),
+            'state': ('django.db.models.fields.CharField', [], {'default': "'AL'", 'max_length': '2', 'blank': 'True'}),
             'status': ('django.db.models.fields.CharField', [], {'default': "'Trial'", 'max_length': '10'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
