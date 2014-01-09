@@ -1035,7 +1035,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 			/* Declined block */
 			/* Canceled block */
 		/* Network block */
-.network_block {padding:25px 15px 100px 15px;}
+.network_block {padding:25px 15px 0px 30px;}
 .network_block .soc_list {background:#f8f9f9;border:1px solid #dce0e0;border-radius:12px;box-shadow:rgba(0,0,0,.2) 1px 1px 2px 0;margin-bottom:30px;}
 .network_block .soc_list > p {font-size:30px;color:#0e96ac;text-align:center;padding:15px 0 25px 0;}
 .network_block .soc_list ul {margin-left:17px;}
@@ -1051,12 +1051,13 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .network_block .soc_list ul li p input[type="text"] {vertical-align:middle;border:1px solid #bfced5;min-height:34px;padding:0 45px 0 20px;width:210px;font:17px 'ProximaNova';color:#616161;margin-right:12px;box-shadow:rgba(0,0,0,.15) 0 0 5px 0 inset;background:#fff url(../images/icons/search2.png) right center no-repeat;}
 .ui-autocomplete {width: 275px;}
 .network_block .soc_list ul li p input[type="submit"] {cursor:pointer;vertical-align:middle;color:#fff;font:14px/28px 'ProximaNovaCond';border:1px solid #135964;background:#1c8292 url(../images/reco_bg.gif) repeat-x;width:46px;height:31px;border-radius:2px;box-shadow:rgba(0,0,0,.25) 1px 1px 1px;text-align:center;}
+.parent_block .reviews_block {padding-top: 0px;}
 
 .add-friend {vertical-align:middle;border:1px solid #bfced5;min-height:34px;padding:0 45px 0 20px;width:210px;font:17px 'ProximaNova';color:#616161;margin-right:12px;box-shadow:rgba(0,0,0,.15) 0 0 5px 0 inset;background:#fff url(../images/icons/search2.png) right center no-repeat;}
 
 
 
-.network_block .soc_psg_list {margin-left:70px;}
+.network_block .soc_psg_list {padding-left:70px;border-bottom:1px dotted #e1e3e6;}
 .network_block .soc_psg_list > li {float:left;width:220px;margin-right:60px;}
 .network_block .soc_psg_list > li > ul > li {font-size:17px;color:#146470;padding:0 25px 10px 0;line-height:34px;position:relative;}
 .network_block .soc_psg_list > li > ul > li a {color:#146470;}
