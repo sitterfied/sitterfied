@@ -45,6 +45,9 @@
 	Media Queries
 */
 
+#IntercomDefaultWidget {
+	top: 20px !important;
+}
 
 .network_link a {
 	color: #fff !important;

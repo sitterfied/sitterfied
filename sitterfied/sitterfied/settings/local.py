@@ -19,14 +19,19 @@ DATABASES = {
 MEDIA_ROOT = PROJECT_ROOT.child("media")
 MEDIA_URL = "/media/"
 
+# URL prefix for static files.
+# Example: "http://example.com/static/", "http://static.example.com/"
+STATIC_URL = '/static/'
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = PROJECT_ROOT.child("static")
 
-
-
+GOOGLE_OAUTH_CLIENT_ID = '778609432409-h3p3eumt29copfqrcsv7dksapkpbssbq.apps.googleusercontent.com'
+GOOGLE_OAUTH_CLIENT_SECRET = 'Xo2d7W1OK7ezu4rfGBoEhSuM'
+GOOGLE_OAUTH_REDIRECT_URI = "http://localhost:8000"
 
 INSTALLED_APPS += (
 #    'debug_toolbar',

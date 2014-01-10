@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 	{%block extra_header%}
-    <script>
-      var user_json = '{{user_json|escapejs}}'
+  <script>
+    var user_json = '{{user_json|escapejs}}'
+    var parent_or_sitter = '{{parent_or_sitter}}'
+    var authenticated = {{ user.is_authenticated|yesno:"true,false" }};
+    var FIRST_TIME = {{ first_time|yesno:"true,false" }};
+  </script>
 
-      var parent_or_sitter = '{{parent_or_sitter}}'
-      var authenticated = {{ user.is_authenticated|yesno:"true,false" }};
-	  var FIRST_TIME = {{ first_time|yesno:"true,false" }};
-    </script>
 	<script src="{{STATIC_URL}}js/lib/handlebars.js"></script>
  	{% if debug %}
     <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
@@ -18,7 +18,7 @@
 	{% endblock extra_header %}
 
 
-{% block body %}
+  {% block body %}
     <script type="text/x-handlebars">
 
             {% verbatim %}
@@ -118,7 +118,7 @@
                         <li class="network_link"><span class="menu_icon_friends">&nbsp;</span>{{#linkTo sitterEdit.network Sitterfied.currentUser }}Find Friends{{/linkTo}}</li>
                         {{/if}}
 						<li><span class="menu_icon_members">&nbsp;</span><a href="#">Are you Sitterfied?</a></li>
-						<li><span class="menu_icon_support">&nbsp;</span><a href="#">Support</a></li>
+						<li><span class="menu_icon_support">&nbsp;</span><a id="Intercom" {{action 'openIntercom'}}>Support</a></li>
 						<li><span class="menu_icon_signout">&nbsp;</span><a href="/logout/">Sign Out</a></li>
 					</ul>
 				</li>
@@ -144,7 +144,7 @@
 
         <footer class="footer">
 	      <div class="wraper">
-		    <a href="#" class="logo_bottom"><img src="{{STATIC_URL}}images/logo_bottom.png" alt="" /></a>
+		    <a href="/" class="logo_bottom"><img src="{{STATIC_URL}}images/logo_bottom.png" alt="" /></a>
 		    <!-- bottom menu -->
 		    <nav>
 			  <ul>
@@ -164,5 +164,5 @@
 		  <a class="back-to-top">Top</a>
 		{{/ view}}
 		{% endverbatim %}
-      </script>
-{% endblock %}
+    </script>
+  {% endblock %}

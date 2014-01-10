@@ -382,6 +382,9 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 this.get('controller').transitionToRoute('parentEdit.reviews', parent)
                     
 
+            openIntercom: ()->
+                Intercom('show')
+
             removeFromTeam: ()->
                 debugger
 

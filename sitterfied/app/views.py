@@ -105,8 +105,10 @@ def index(request, referred_by=None):
 
     return {'user_json':user_json,
             "parent_or_sitter": parent_or_sitter,
+            'intercom_activator': '#Intercom',
             "TEMPLATE":"index.html",
             "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
+            "INTERCOM_APP_ID": settings.INTERCOM_APP_ID,
             "first_time": request.GET.get("first_time", "")
     }
 
@@ -197,6 +199,21 @@ def onboarding3(request):
 @render_to("onboarding4.html")
 def onboarding4(request):
     return {}
+
+""" Injects values into static pages.
+
+"""
+@render_to()
+def static_page(request, template):
+    obj = {'TEMPLATE': template}
+
+    if not request.user.is_anonymous():
+        obj['user_json'] = get_user_json(request.user)
+        obj['intercom_activator'] = '#IntercomDefaultWidget'
+        obj['INTERCOM_APP_ID'] = settings.INTERCOM_APP_ID
+
+    return obj;
+
 
 
 from rest_framework.response import Response
