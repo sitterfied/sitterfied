@@ -699,6 +699,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .reviews_block ul li .desc .rehire_btn span {top:13px;}
 .reviews_block ul li .desc .sitter_team_btn {position:relative;color:#2499ab;font:bold 14px/44px 'ProximaNova';text-align:center;border:1px solid #e3e5e8;padding:0 10px 0 40px;width:100px;min-height:37px;border-radius:4px;margin-bottom:25px;background:#fff;}
 .reviews_block ul li .desc .sitter_team span {top:13px;}
+.reviews_block ul li .desc p .has_hired_text {font-size:14px;color:#3fa7ba;font-weight:normal;}
 	/* Friends block */
 .friends_block {padding:40px 20px 80px 20px;}
 .friends_block .filter_block {font:16px 'ProximaNova-Semibold';padding:0 50px 0 0;display:none;}

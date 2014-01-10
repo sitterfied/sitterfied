@@ -1,18 +1,12 @@
 <!-- reviews_block -->
 {{# view Sitterfied.MobTriggerView }} Reviews {{/ view}}
-  <div class="tab_content reviews_block" id="tab-2">
-{{!--
-        {{# if Sitterfied.isParent}}
-		  <div class="reco clear"><a {{action 'openReccomendPopup'}}><span class="icon_team2">&nbsp;</span>RECOMMEND {{first_name}}</a></div>
-        {{/ if}}
-        --}}
-		<ul class="clear">
-
-{{!--
-          {{# each reviews}}
-            {{partial "_review"}}
-            {{/each}}
-            --}}
-		</ul>
-	  </div>
-	  <!-- /reviews_block -->
+  <div class="tab_content reviews_block" id="tab-5" onload=>
+    {{update_reviews}}
+    
+    <ul class="clear">
+      {{# each reviews}}
+        {{partial "sitter_profile_review"}}
+      {{/each}}
+    </ul>
+  </div>
+<!-- /reviews_block -->

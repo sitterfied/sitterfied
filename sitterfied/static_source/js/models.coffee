@@ -596,13 +596,21 @@ define ['jquery'
         rehire: attr(BooleanType)
         review: attr()
 
-        avatarUrl: (() ->
+        sitterAvatarUrl: (() ->
             if this.get('sitter')
                 if this.get('sitter').get('avatar')
                     return this.get('sitter').get('avatar')
             else
                 return "/static/images/WhiteHeart_Avatar.jpg"
         ).property('sitter', 'sitter.avatar')
+            
+        parentAvatarUrl: (() ->
+            if this.get('parent')
+                if this.get('parent').get('avatar')
+                    return this.get('parent').get('avatar')
+            else
+                return "/static/images/WhiteHeart_Avatar.jpg"
+        ).property('parent', 'parent.avatar')
             
         inSitterTeam: (() ->
             if this.get('sitter')
