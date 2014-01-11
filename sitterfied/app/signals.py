@@ -1,16 +1,11 @@
-from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule
-
-
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from twilio import TwilioException
+from sms import client as twilio_client, sitterfied_number
 
-from sms import client as twilio_client
-from sms import sitterfied_number
-
-from .utils import send_html_email
-
+from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule
+from .utils import send_html_email, send_template_email
 
 
 #mutual events
@@ -18,8 +13,10 @@ from .utils import send_html_email
 def friend_joined(sender, **kwargs):
     created = kwargs.get('created', False)
 
+
 def groups_added():
     pass
+
 
 #parent events
 @receiver(booking_accepted)
@@ -176,3 +173,18 @@ def new_schedule_parent(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
         Schedule.objects.create(sitter=instance)
+
+@receiver(post_save, sender=Sitter)
+def new_sitter(sender, instance=None, **kwargs):
+    created = kwargs.get('created', False)
+    if created:
+        message = {
+            'from_email': 'hello@sitterfied.com',
+            'from_name': 'Sitterfied',
+            'subject': 'Welcome to Sitterfied!',
+            'to': [{'email': instance.email, 'name': instance.get_full_name()},],
+            'global_merge_vars': [
+                {'name':'FNAME', 'content': instance.first_name}
+            ],
+        }   
+        send_template_email('welcome-sitter', message)
