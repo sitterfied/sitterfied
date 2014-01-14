@@ -98,7 +98,7 @@
 				</ul>
 			</div>
 			<div class="button_wrap">
-			  <a href="" class="button button_small">
+			  <a href="" class="button button_small next">
 				<span class="icon_next">&nbsp;
 				</span>next
 			  </a>
@@ -247,7 +247,8 @@ $(function () {
 	 li.remove()
 	 return false
    });
-   $(".skip").click(function(){
+
+   $(".skip, .next").click(function(){
 	 $("form").submit()
 	 return false
    })
