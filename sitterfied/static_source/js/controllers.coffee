@@ -147,22 +147,22 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 return
             Sitterfied.SpecialNeed.create({need:newNeed}).save()
             this.set('controllers.specialneeds.newNeed', '')
-            
+
         update_reviews: (() ->
             #Populate reviews
             this.set("reviews", Sitterfied.currentUser.get('reviews').toArray())
-            
+
             #Populate users to review
             results = Em.A()
             parent = Sitterfied.currentUser
             revs = parent.get('reviews').toArray()
             sitter_id_set = new Em.Set()
-            
+
             #Get existing reviews
             for rev in revs
                 if rev.get('sitter')
                     sitter_id_set.add(rev.get('sitter').get('id'))
-            
+
             #Include sitters that has no reviews
             bookings = parent.get('bookings').toArray()
             for booking in bookings
@@ -172,14 +172,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.set('sitters_to_review', results.uniq())
             return null
         ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
-            
+
         openReviewPopup: (reviewedUser) ->
             parent = Sitterfied.currentUser
             $("#sitter_id").val(reviewedUser.get('id'))
             this.set('activeReviewPanelUser', reviewedUser)
-            
+
             $(".popup_title").html("How did it go with " + reviewedUser.get('first_name') + "?")
-            
+
             promise = parent.sitter_reviews()
             promise.then (revs) =>
                 results = Em.A()
@@ -188,14 +188,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 while index < review_length
                     results.pushObject(revs.content.get(index))
                     index++
-            
+
                 review_exists = false
                 for rev in results
                     if rev.get('sitter').get('id') is reviewedUser.get('id') and rev.get('parent').get('id') is parent.get('id')
                         review_exists = true
                         current_review = rev
                         break
-                
+
                 if review_exists
                     $("#recommended").prop('checked', current_review.get('recommended'))
                     $("#rehire").prop('checked', current_review.get('rehire'))
@@ -629,6 +629,16 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             return @filterProperty('inSitterTeam', true)
         ).property('content.@each.inSitterTeam')
 
+        hasSitterTeam: (() ->
+            sitterTeam = @get("sitterTeam")
+            return sitterTeam.length > 0
+        ).property("sitterTeam")
+
+        hasFriendTeam: (() ->
+            friendTeam = @get("friendTeam")
+            return friendTeam.length > 0
+        ).property("friendTeam")
+
         selectTeam: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("sitterTeam"))
@@ -914,7 +924,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
 
     Sitterfied.ParentEditBookingsController  = Sitterfied.BookingsController.extend()
-    
+
     Sitterfied.ParentEditReviewsController = Em.ObjectController.extend(
         activeReviewPanelUser: null
     )
