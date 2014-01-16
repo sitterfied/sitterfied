@@ -1,6 +1,8 @@
 # Create your views here.
 from datetime import datetime
 from datetime import time
+import requests
+
 from django.contrib.auth import login as auth_login
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.csrf import csrf_protect
@@ -257,21 +259,21 @@ def search(request):
                                                                'bookmarks',
                                                                'settings').annotate(rehires=Count("booking__parent"))
     #filter by zip
-    #flip this out
+    #sitters = sitters.filter(zip=zipcode)
+    #filter by radius
+    response = requests.get("https://redline-redline-zipcode.p.mashape.com/rest/radius.json/%s/50/mile",
+                            headers={
+                                "X-Mashape-Authorization": "vYhe9kmT59y8pplZsoVXgqzONVcE9tir"
+                            })
+    zipcodes = response.data['zipcodes']
 
-    # response = requests.get("https://redline-redline-zipcode.p.mashape.com/rest/radius.json/%s/50/mile",
-    #                         headers={
-    #                             "X-Mashape-Authorization": "JbvKMl37oS4Vh0GZTbuNHkDcNdTjBU8F"
-    #                         })
-    # zipcodes = response.data['zipcodes']
+    zipcodes = test_zips
 
-    # zipcodes = test_zips
+    q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
+    reduced_q = reduce(operator.or_, q_list)
+    sitters = sitters.filter(reduced_q)
 
-    # q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
-    # reduced_q = reduce(operator.or_, q_list)
-    # sitters = sitters.filter(reduced_q)
 
-    sitters = sitters.filter(zip=zipcode)
 
     #figure out which day we care about
     start_date = datetime.strptime(start_date, "%a, %d %b %Y")
