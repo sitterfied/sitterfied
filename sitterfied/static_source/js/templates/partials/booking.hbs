@@ -5,15 +5,19 @@
   </header>
   <div class="img">
     {{# if otherPerson}}
-
-      {{# if hasMultipleSitters }}
-        <img width=73 hight=73 src="/static/images/MultiSitterPic.jpg">
-         <p><span>Multiple Sitters</span></p>
-         {{ else }}
+      {{#if hasMultipleSitters }}
+        {{# if Sitterfied.isParent }}
+          <img width=73 hight=73 src="/static/images/MultiSitterPic.jpg">
+          <p><span>Multiple Sitters</span></p>
+        {{ else }}
          {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
-         <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
-       {{/ if}}
+           <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
+        {{/ if}}
+        {{else}}
+        {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
+          <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
       {{/ if}}
+    {{/ if}}
       <div>
         {{# unless hasMultipleSitters }}
       <a>{{friends_in_common.length}} mutual friends</a>
