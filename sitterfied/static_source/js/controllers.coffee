@@ -9,6 +9,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 'bookings'
                 'children']
         accountType: parent_or_sitter
+        activeReviewPanelUser: null
+        sitters_to_review: []
+        reviews: []
 
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -144,6 +147,73 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 return
             Sitterfied.SpecialNeed.create({need:newNeed}).save()
             this.set('controllers.specialneeds.newNeed', '')
+            
+        update_reviews: (() ->
+            #Populate reviews
+            this.set("reviews", Sitterfied.currentUser.get('reviews').toArray())
+            
+            #Populate users to review
+            results = Em.A()
+            parent = Sitterfied.currentUser
+            revs = parent.get('reviews').toArray()
+            sitter_id_set = new Em.Set()
+            
+            #Get existing reviews
+            for rev in revs
+                if rev.get('sitter')
+                    sitter_id_set.add(rev.get('sitter').get('id'))
+            
+            #Include sitters that has no reviews
+            bookings = parent.get('bookings').toArray()
+            for booking in bookings
+                accepted_sitter = booking.get('accepted_sitter')
+                if accepted_sitter and not sitter_id_set.contains(accepted_sitter.get('id'))
+                    results.pushObject(accepted_sitter)
+            this.set('sitters_to_review', results.uniq())
+            return null
+        ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
+            
+        openReviewPopup: (reviewedUser) ->
+            parent = Sitterfied.currentUser
+            $("#sitter_id").val(reviewedUser.get('id'))
+            this.set('activeReviewPanelUser', reviewedUser)
+            
+            $(".popup_title").html("How did it go with " + reviewedUser.get('first_name') + "?")
+            
+            promise = parent.sitter_reviews()
+            promise.then (revs) =>
+                results = Em.A()
+                review_length = revs.get('length')
+                index = 0
+                while index < review_length
+                    results.pushObject(revs.content.get(index))
+                    index++
+            
+                review_exists = false
+                for rev in results
+                    if rev.get('sitter').get('id') is reviewedUser.get('id') and rev.get('parent').get('id') is parent.get('id')
+                        review_exists = true
+                        current_review = rev
+                        break
+                
+                if review_exists
+                    $("#recommended").prop('checked', current_review.get('recommended'))
+                    $("#rehire").prop('checked', current_review.get('rehire'))
+                    $("#review").val(current_review.get('review'))
+                else
+                    $("#recommended").prop('checked', false)
+                    $("#rehire").prop('checked', false)
+                    $("#review").val('')
+
+                $.fancybox
+                    href: "#recommend_popup"
+                    maxWidth: 960
+                    maxHeight: 800
+                    minWidth: 700
+                    minHeight: 480
+                    fitToView: false
+                    width: "90%"
+                    height: "90%"
 
 
         googlePoll: () ->
@@ -844,6 +914,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
 
     Sitterfied.ParentEditBookingsController  = Sitterfied.BookingsController.extend()
+    
+    Sitterfied.ParentEditReviewsController = Em.ObjectController.extend(
+        activeReviewPanelUser: null
+    )
 
     Sitterfied.SignupController  = Em.Controller.extend(
         parentSitter: "Parent"
@@ -911,7 +985,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
 
     Sitterfied.ApplicationController = Ember.Controller.extend
-        needs: ['sitterReview', 'friends']
+        needs: ['sitterReview', 'friends', 'currentUser']
 
         postReivew: () ->
             $.fancybox.close()

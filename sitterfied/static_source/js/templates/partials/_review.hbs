@@ -1,8 +1,28 @@
+{{! Review is used to display reviews called from the current user page. }}
+{{! Partial template will display differently depending on the type of user (sitter or parent). }}
+
 <li>
-  <a ><img {{bindAttr src="avatarUrl"}} alt="" /></a>
+  <a >
+    {{# if Sitterfied.currentUser.isParent }}
+      <img {{bindAttr src="sitterAvatarUrl"}} alt="" />
+    {{else}}
+      <img {{bindAttr src="parentAvatarUrl"}} alt="" />
+    {{/if}}
+  </a>
   <div class="desc">
-	<p>{{# linkTo 'parent' parent.parent }}{{parent.full_name}}{{/linkTo}}</p>
-	{{#if recommended }}<div class="reco_btn"><span class="icon_ok">&nbsp;</span>Recommends</div>{{/if}}
-	<p>{{review}}</p>
+    <p>
+      {{# if Sitterfied.currentUser.isParent }}
+	{{# linkTo 'sitter' sitter }}{{sitter.full_name}}{{/linkTo}}
+      {{else}}
+	{{# linkTo 'parent' parent }}{{parent.full_name}}{{/linkTo}}
+	<span class="has_hired_text">
+	  - has hired {{sitter.first_name}}
+	</span>
+      {{/if}}
+    </p>
+    {{#if recommended }}<div class="reco_btn badge"><span class="icon_ok3">&nbsp;</span>Recommends</div>{{/if}}
+    {{#if rehire}}<div class="rehire_btn badge"><span class="icon_rehire2">&nbsp;</span>Will Rehire</div>{{/if}}
+    {{#if inSitterTeam}}<div class="sitter_team_btn badge"><span class="icon_heart3">&nbsp;</span>On Sitter Team</div>{{/if}}
+    <p>{{review}}</p>
   </div>
 </li>

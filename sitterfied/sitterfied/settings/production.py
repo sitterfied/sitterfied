@@ -52,3 +52,7 @@ MIDDLEWARE_CLASSES += (
 
 SECRET_KEY =  os.environ.get('DJANGO_SECRET_KEY','boo')
 from .mandrill import *
+
+GOOGLE_OAUTH_CLIENT_ID = '705373512773.apps.googleusercontent.com'
+GOOGLE_OAUTH_CLIENT_SECRET = 'zSdqqjHjyfhs4u28qIL8buy4'
+GOOGLE_OAUTH_REDIRECT_URI = 'http://beta.sitterfied.com'

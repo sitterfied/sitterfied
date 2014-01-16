@@ -143,6 +143,14 @@ LOGGING = {
         }
     },
     'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler'
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -166,10 +174,10 @@ ACCOUNT_ACTIVATION_DAYS = 30
 
 DEFAULT_FROM_EMAIL = 'hello@sitterfied.com'
 
-ALLOWED_HOSTS =[
+ALLOWED_HOSTS = [
+    "localhost",
     ".sitterfied.com",
     "beta.sitterfied.com",
-    ".sitterfied.com.",
     'ping',
 ]
 
@@ -182,3 +190,4 @@ from .grappelli import *
 from .rest_framework import *
 from .uploadcare import *
 from .twilio import *
+from .intercom import *

@@ -274,6 +274,29 @@ define ['jquery'
         ).property()
 
 
+        sitters_to_review: (() ->
+            results = Em.A()
+            revs = this.get('reviews').toArray()
+            sitter_id_set = new Em.Set()
+            
+            #Get existing reviews
+            for rev in revs
+                if rev.get('sitter')
+                    sitter_id_set.add(rev.get('sitter').get('id'))
+            
+            #Include sitters that has no reviews
+            bookings = this.get('bookings').toArray()
+            for booking in bookings
+                accepted_sitter = booking.get('accepted_sitter')
+                if accepted_sitter and not sitter_id_set.contains(accepted_sitter.get('id'))
+                    results.pushObject(accepted_sitter)
+            return results.uniq()
+        ).property('reviews.@each', "reviews.@each.sitter", 'bookings.@each', "bookings.@each.accepted_sitter")
+            
+        sitter_reviews: (() ->
+            return Sitterfied.SitterReview.fetch()
+        )
+
     )
     Sitterfied.Parent.adapter = Adapter.create()
 
@@ -570,8 +593,31 @@ define ['jquery'
         parent: belongsTo('Sitterfied.Parent', {key:"parent"})
         sitter: belongsTo('Sitterfied.Sitter', {key:"sitter"})
         recommended: attr(BooleanType)
+        rehire: attr(BooleanType)
         review: attr()
 
+        sitterAvatarUrl: (() ->
+            if this.get('sitter')
+                if this.get('sitter').get('avatar')
+                    return this.get('sitter').get('avatar')
+            else
+                return "/static/images/WhiteHeart_Avatar.jpg"
+        ).property('sitter', 'sitter.avatar')
+            
+        parentAvatarUrl: (() ->
+            if this.get('parent')
+                if this.get('parent').get('avatar')
+                    return this.get('parent').get('avatar')
+            else
+                return "/static/images/WhiteHeart_Avatar.jpg"
+        ).property('parent', 'parent.avatar')
+            
+        inSitterTeam: (() ->
+            if this.get('sitter')
+                console.log("In sitter team:", this.get('sitter').get('inSitterTeam'))
+                return this.get('sitter').get('inSitterTeam')
+            return null
+        ).property('sitter')
     )
     Sitterfied.SitterReview.adapter = Adapter.create()
 

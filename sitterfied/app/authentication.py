@@ -1,5 +1,4 @@
-from .models import User
-#from django.contrib.auth.models import check_password
+from .models import User, Parent, Sitter
 
 class EmailAuthBackend(object):
     """
@@ -21,7 +20,11 @@ class EmailAuthBackend(object):
     def get_user(self, user_id):
         """ Get a User object from the user_id. """
         try:
-            return User.objects.get(pk=user_id)
+            user = User.objects.get(pk=user_id)
+            if user.is_parent_or_sitter() is 'Parent':
+                return Parent.objects.get(pk=user_id)
+            else:
+                return Sitter.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None
 
@@ -41,6 +44,10 @@ class FacebookAuthBackend(object):
     def get_user(self, user_id):
         """ Get a User object from the user_id. """
         try:
-            return User.objects.get(pk=user_id)
+            user = User.objects.get(pk=user_id)
+            if user.is_parent_or_sitter() is 'Parent':
+                return Parent.objects.get(pk=user_id)
+            else:
+                return Sitter.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None

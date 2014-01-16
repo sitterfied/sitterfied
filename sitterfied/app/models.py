@@ -17,6 +17,7 @@ booking_accepted = Signal(providing_args=['booking'])
 booking_declined = Signal(providing_args=['booking'])
 booking_canceled = Signal(providing_args=['booking'])
 
+from intercom import generate_intercom_user_hash
 
 UPLOADS_DIR = 'uploads/{0}/{1.year:04}/{1.month:02}/{1.day:02}/{2}/{3}'
 def file_url(name):
@@ -53,14 +54,21 @@ class User(AbstractUser, TimeStampedModel):
     zip = models.CharField(max_length=9, blank=True)  # there is forms.USZipCodeField but no model.USZip..., ComingSoonInterest does not use
     cell = models.CharField(max_length=12, blank=True)
 
-
     avatar = UploadcareImageField(blank=True, manual_crop="174x174 upscale")
-    #avatar_url = models.URLField(blank=True)
-    #objects = InheritanceManager()
 
     @property
     def avatar_url(self):
         return getattr(self.avatar, 'cdn_url', None)
+
+    @property
+    def hash(self):
+        if getattr(self, '_hash', None) is None:
+            self._hash = generate_intercom_user_hash(self.email)
+        return self._hash
+
+    @property
+    def profile_completed(self):
+        return False
 
     def __unicode__(self):
         return self.get_full_name()
@@ -70,6 +78,9 @@ class User(AbstractUser, TimeStampedModel):
             return 'Sitter'
         else:
             return 'Parent'
+
+    def is_facebook_connected(self):
+        return self.facebook_id is not None
 
 
 class Address(TimeStampedModel):
@@ -130,7 +141,6 @@ class Sitter(User):
 
     current_student = models.BooleanField(default=False)
 
-
     other_services = models.ManyToManyField('OtherService', blank=True)
 
     one_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2)
@@ -149,7 +159,6 @@ class Sitter(User):
     travel_distance = models.IntegerField(default=10)
 
     certifications = models.ManyToManyField("Certification", blank=True)
-
 
     class Meta:
          verbose_name = "Sitter"
@@ -230,6 +239,7 @@ class Contact(TimeStampedModel):
 
 class Schedule(TimeStampedModel):
     sitter = models.OneToOneField(Sitter)
+
     mon_early_morning = models.BooleanField(default=True)
     tue_early_morning = models.BooleanField(default=True)
     wed_early_morning = models.BooleanField(default=True)
@@ -291,6 +301,7 @@ class SitterReview(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="reviews")
     sitter  = models.ForeignKey(Sitter, related_name="reviews")
     recommended = models.BooleanField()
+    rehire = models.BooleanField()
     review = models.TextField(blank=True)
 
     class Meta:

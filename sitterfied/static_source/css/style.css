@@ -45,6 +45,9 @@
 	Media Queries
 */
 
+#IntercomDefaultWidget {
+	top: 20px !important;
+}
 
 .network_link a {
 	color: #fff !important;
@@ -309,15 +312,21 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 	/* Recommend popup */
 #recommend_popup {display:none;}
 #recommend_popup .tit {color:#fff;font-size:29px;text-align:center;background:#31a7b5 url(../images/top_title.gif) repeat-x;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;padding:30px 10px;margin:0 0 30px 0;border-radius:4px 4px 0 0;}
-#recommend_popup .tit span {padding-right:38px;background:url(../images/icons/bird.png) right center no-repeat;}
+#recommend_popup .tit span {padding-right:38px;}
 #recommend_popup .info {padding:0 10px;}
-#recommend_popup .info p {color:#616161;font:bold 16px 'ProximaNova';padding:20px 50px 25px 55px;position:relative;clear:both;}
+#recommend_popup .info p {color:#616161;font:bold 16px 'ProximaNova';padding:20px 50px 25px 0px;position:relative;clear:both;}
 #recommend_popup .info p select {width:190px;}
 #recommend_popup .info p .pad {padding-right:30px;}
-#recommend_popup .info p label {float:left;display:block;}
+#recommend_popup .info p label {float:left;display:block;margin-left:40px;}
+#recommend_popup .info p span.icon_review3 {left:0px;}
+#recommend_popup .info p span.field {float:left;width:250px;}
+#recommend_popup .info p span.recommend_label {margin-left:6px;}
+#recommend_popup .info p span.rehire_label {margin-left:6px;}
+#recommend_popup .info p span label.field_box {float:none;display:inline-block;margin-left:15px;}
 #recommend_popup .info p > [class^="icon_"] {top:20px;}
+#recommend_popup .info p .field_icon {top:-5px;left:0px;display:inline-block;position:relative;}
 #recommend_popup .info p textarea {float:right;width:380px;height:115px;padding:15px;font:14px 'ProximaNova';color:#616161;}
-#recommend_popup .info p:first-child {text-align:center;padding-top:0;border-bottom:1px dotted #e7e9eb;}
+#recommend_popup .info p:first-child {padding-top:5px;padding-left:10px;padding-bottom:60px;border-bottom:1px dotted #e7e9eb;}
 #recommend_popup .info p:first-child div {text-align:left;}
 #recommend_popup .info p .button_small {float:right;margin-left:10px;}
 #recommend_popup .info p .fb_button {float:right;color:#8a8989;font-size:24px;font-weight:normal;padding:0 0 0 18px;}
@@ -670,18 +679,30 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .about_block .about_details_block > ul > li:hover > ul > li .icon_emergency2, .about_block .about_details_block > ul > li.focus > ul > li .icon_emergency2 {background-position:0 -3536px;}
 	/* Reviews block */
 .reviews_block {padding:25px 25px 50px 30px;}
-.reviews_block .reco {border-bottom:1px dotted #e1e3e6;padding-bottom:30px;margin-bottom:10px;}
-.reviews_block .reco a {position:relative;color:#fff;font:16px/38px 'ProximaNovaCond';float:right;display:block;background:#1c8292 url(../images/reco_bg.gif) repeat-x;min-width:120px;height:38px;padding:0 10px 0 35px;border-radius:4px;box-shadow:rgba(0,0,0,.35) 3px 3px 3px;}
+.reviews_block .review_message_intro {color:#038ca2;}
+.reviews_block .edit_reviews {border-bottom:1px dotted #e1e3e6;}
+.reviews_block .edit_reviews:after {clear:both;content:"";display:block;}
+.reviews_block .edit_reviews .sitter_review {float:left;padding-right:50px;padding-top:35px;}
+.reviews_block .edit_reviews .sitter_review.empty_to_review {color:#038ca2;font-size:16px;padding-top:80px;padding-bottom:80px;}
+.reviews_block .reco {padding-bottom:30px;margin-bottom:10px;margin-top:15px;}
+.reviews_block .reco a {position:relative;color:#fff;font:16px/38px 'ProximaNovaCond';float:right;display:block;background:#1c8292 url(../images/reco_bg.gif) repeat-x;width:111px;height:38px;text-align:center;border-radius:4px;box-shadow:rgba(0,0,0,.35) 3px 3px 3px;padding-left:30px;padding-right:30px;padding-top:5px;line-height:16px;text-transform:uppercase;}
+.reviews_block .reco .review_first_name {display:block;}
 .reviews_block .reco a span {top:11px;left:4px;}
-.reviews_block ul li {padding:40px 0 0 0;float:left;width:100%;border-bottom:1px dotted #e1e3e6;}
+.reviews_block ul li {padding:40px 0 30px 0;float:left;width:100%;border-bottom:1px dotted #e1e3e6;}
 .reviews_block ul li:last-of-type {border-bottom:none;}
-.reviews_block ul li > a img {float:left;border-radius:4px;margin:0 40px 0 20px;}
+.reviews_block ul li > a img {float:left;border-radius:4px;margin:0 40px 0 20px;width:171px;height:171px;}
 .reviews_block ul li .desc {float:left;width:665px;}
 .reviews_block ul li .desc p {line-height:25px;padding:0 0 20px 0;}
 .reviews_block ul li .desc p:first-child {padding-bottom:10px;color:#1c8292;font:bold 18px 'ProximaNova';}
 .reviews_block ul li .desc p:first-child a {color:#1c8292;}
+.reviews_block ul li .desc .badge {display:inline-block;margin-right:15px;}
 .reviews_block ul li .desc .reco_btn {position:relative;color:#b0d225;font:bold 14px/44px 'ProximaNova';text-align:center;border:1px solid #e3e5e8;padding:0 10px 0 40px;width:100px;min-height:37px;border-radius:4px;margin-bottom:25px;background:#fff;}
 .reviews_block ul li .desc .reco_btn span {top:13px;}
+.reviews_block ul li .desc .rehire_btn {position:relative;color:#e88c58;font:bold 14px/44px 'ProximaNova';text-align:center;border:1px solid #e3e5e8;padding:0 10px 0 40px;width:100px;min-height:37px;border-radius:4px;margin-bottom:25px;background:#fff;}
+.reviews_block ul li .desc .rehire_btn span {top:13px;}
+.reviews_block ul li .desc .sitter_team_btn {position:relative;color:#2499ab;font:bold 14px/44px 'ProximaNova';text-align:center;border:1px solid #e3e5e8;padding:0 10px 0 40px;width:100px;min-height:37px;border-radius:4px;margin-bottom:25px;background:#fff;}
+.reviews_block ul li .desc .sitter_team span {top:13px;}
+.reviews_block ul li .desc p .has_hired_text {font-size:14px;color:#3fa7ba;font-weight:normal;}
 	/* Friends block */
 .friends_block {padding:40px 20px 80px 20px;}
 .friends_block .filter_block {font:16px 'ProximaNova-Semibold';padding:0 50px 0 0;display:none;}
@@ -1018,7 +1039,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 			/* Declined block */
 			/* Canceled block */
 		/* Network block */
-.network_block {padding:25px 15px 100px 15px;}
+.network_block {padding:25px 15px 0px 30px;}
 .network_block .soc_list {background:#f8f9f9;border:1px solid #dce0e0;border-radius:12px;box-shadow:rgba(0,0,0,.2) 1px 1px 2px 0;margin-bottom:30px;}
 .network_block .soc_list > p {font-size:30px;color:#0e96ac;text-align:center;padding:15px 0 25px 0;}
 .network_block .soc_list ul {margin-left:17px;}
@@ -1034,12 +1055,13 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .network_block .soc_list ul li p input[type="text"] {vertical-align:middle;border:1px solid #bfced5;min-height:34px;padding:0 45px 0 20px;width:210px;font:17px 'ProximaNova';color:#616161;margin-right:12px;box-shadow:rgba(0,0,0,.15) 0 0 5px 0 inset;background:#fff url(../images/icons/search2.png) right center no-repeat;}
 .ui-autocomplete {width: 275px;}
 .network_block .soc_list ul li p input[type="submit"] {cursor:pointer;vertical-align:middle;color:#fff;font:14px/28px 'ProximaNovaCond';border:1px solid #135964;background:#1c8292 url(../images/reco_bg.gif) repeat-x;width:46px;height:31px;border-radius:2px;box-shadow:rgba(0,0,0,.25) 1px 1px 1px;text-align:center;}
+.parent_block .reviews_block {padding-top: 0px;}
 
 .add-friend {vertical-align:middle;border:1px solid #bfced5;min-height:34px;padding:0 45px 0 20px;width:210px;font:17px 'ProximaNova';color:#616161;margin-right:12px;box-shadow:rgba(0,0,0,.15) 0 0 5px 0 inset;background:#fff url(../images/icons/search2.png) right center no-repeat;}
 
 
 
-.network_block .soc_psg_list {margin-left:70px;}
+.network_block .soc_psg_list {padding-left:70px;border-bottom:1px dotted #e1e3e6;}
 .network_block .soc_psg_list > li {float:left;width:220px;margin-right:60px;}
 .network_block .soc_psg_list > li > ul > li {font-size:17px;color:#146470;padding:0 25px 10px 0;line-height:34px;position:relative;}
 .network_block .soc_psg_list > li > ul > li a {color:#146470;}

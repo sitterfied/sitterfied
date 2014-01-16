@@ -1,6 +1,5 @@
 <div class="container clear">
-  <div class="wraper">
-
+  <div class="wraper parent_block">
 	<!-- network_block -->
 	<div class="network_block">
 	  <ul class="soc_psg_list soc_psg_list_single clear">
@@ -31,5 +30,12 @@
 	  </ul>
 	</div>
 	<!-- /network_block -->
+	<div class="reviews_block">
+	  <ul class="clear">
+	    {{# each reviews}}
+	      {{partial "parent_profile_review"}}
+	    {{/each}}
+	  </ul>
+	</div>
   </div>
 </div>

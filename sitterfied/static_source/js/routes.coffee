@@ -343,21 +343,47 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.render('search')
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
-
-        postReview: () ->
-            alert("base")
-
         events:{
-            openReccomendPopup: ()->
-                $.fancybox
-                    href: "#recommend_popup"
-                    maxWidth: 960
-                    maxHeight: 800
-                    minWidth: 700
-                    minHeight: 480
-                    fitToView: false
-                    width: "90%"
-                    height: "90%"
+            postReview: ()->
+                parent = Sitterfied.currentUser
+                sitter_id = $("#sitter_id").val()
+                recommend = $("#recommended").is(":checked")
+                rehire = $("#rehire").is(":checked")
+                review = $("#review").val()
+                
+                if sitter_id
+                    sitter = Sitterfied.Sitter.find(sitter_id)
+                
+                new_review_promise = Sitterfied.SitterReview.create({
+                        parent: parent,
+                        sitter: sitter,
+                        rehire: rehire,
+                        recommended: recommend,
+                        review: review
+                    }).save()
+                    
+                new_review_promise.then (new_review) =>
+                    #Reload new review
+                    review_reload_promise = new_review.reload()
+                    review_reload_promise.then =>
+                        #Repopulate sitters to review by not including sitter from previous list
+                        current_sitters_to_review = this.get('controller').get("controllers.currentUser").get("sitters_to_review")
+                        sitters_to_review = Em.A()
+                        for sitter_to_review in current_sitters_to_review
+                            if sitter_id and sitter_to_review.get('id') is not sitter_id
+                                sitters_to_review.pushObject(sitter_to_review)
+                        this.get('controller').get("controllers.currentUser").set("sitters_to_review", sitters_to_review)
+                
+                        #Add new_review to review_list
+                        current_reviews = this.get('controller').get("controllers.currentUser").get("reviews")
+                        current_reviews.pushObject(new_review)
+                        this.get('controller').get("controllers.currentUser").set("reviews", current_reviews)
+                $.fancybox.close()
+                this.get('controller').transitionToRoute('parentEdit.reviews', parent)
+                    
+
+            openIntercom: ()->
+                Intercom('show')
 
             removeFromTeam: ()->
                 debugger

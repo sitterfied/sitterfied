@@ -1,0 +1,17 @@
+{{! Parent profile review is used to display reviews called from a read only profile page. }}
+{{! Any kind of user (parent or sitter) can see this review. }}
+
+<li>
+  <a >
+    <img {{bindAttr src="sitterAvatarUrl"}} alt="" />
+  </a>
+  <div class="desc">
+    <p>
+      {{# linkTo 'sitter' sitter }}{{sitter.full_name}}{{/linkTo}}
+    </p>
+    {{#if recommended }}<div class="reco_btn badge"><span class="icon_ok3">&nbsp;</span>Recommends</div>{{/if}}
+    {{#if rehire}}<div class="rehire_btn badge"><span class="icon_rehire2">&nbsp;</span>Will Rehire</div>{{/if}}
+    {{#if inSitterTeam}}<div class="sitter_team_btn badge"><span class="icon_heart3">&nbsp;</span>On Sitter Team</div>{{/if}}
+    <p>{{review}}</p>
+  </div>
+</li>
