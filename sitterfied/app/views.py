@@ -261,16 +261,16 @@ def search(request):
     #filter by zip
     #sitters = sitters.filter(zip=zipcode)
     #filter by radius
-    response = requests.get("https://redline-redline-zipcode.p.mashape.com/rest/radius.json/%s/50/mile",
+    response = requests.get("https://redline-redline-zipcode.p.mashape.com/rest/radius.json/%s/50/mile" % zipcode,
                             headers={
-                                "X-Mashape-Authorization": "vYhe9kmT59y8pplZsoVXgqzONVcE9tir"
+                                "X-Mashape-Authorization": "kCS3vjTPWYHa7JKYwD3LY6bIcxpmgp5r"
                             })
-    zipcodes = response.data['zipcodes']
+    zipcodes = response.json()['zip_codes']
 
-    zipcodes = test_zips
-
+    #zipcodes = test_zips
     q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
     reduced_q = reduce(operator.or_, q_list)
+
     sitters = sitters.filter(reduced_q)
 
 
