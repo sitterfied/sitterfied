@@ -42,7 +42,7 @@ from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
 from .models import User, Sitter, Parent, Group, Child
 from .utils import send_html_email
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
+from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
@@ -117,7 +117,7 @@ def index(request, referred_by=None):
 import facebook
 @render_to()
 def onboarding2(request):
-    ChildFormSet = inlineformset_factory(Parent, Child, form=ChildForm, extra=1)
+    ChildFormSet = inlineformset_factory(Parent, Child, form=ChildForm, extra=1, formset=RequiredFormSet)
     if request.method == "POST":
         if request.POST["parent_or_sitter"] == "sitter":
             form = SitterRegisterForm(request.POST)

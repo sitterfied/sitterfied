@@ -4,6 +4,8 @@ import re
 from django import forms
 from django.contrib.auth import authenticate
 from django.forms import ModelForm, widgets
+from django.forms.models import BaseInlineFormSet
+
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils.translation import ugettext_lazy as _
 from models import User, Sitter, Parent, Booking, Child
@@ -244,6 +246,12 @@ class ParentRegisterForm(RegistrationForm):
             "email":widgets.TextInput(attrs={"placeholder":"Email"})
         }
 
+
+class RequiredFormSet(BaseInlineFormSet):
+    def __init__(self, *args, **kwargs):
+        super(RequiredFormSet, self).__init__(*args, **kwargs)
+        for form in self.forms:
+            form.empty_permitted = False
 
 class ChildForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
