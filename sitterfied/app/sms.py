@@ -1,57 +1,65 @@
+import hashlib
 import re
+
 from django.conf import settings
-
+from django.core.exceptions import ObjectDoesNotExist
 from django_twilio.decorators import twilio_view
-
-
 from twilio.rest import TwilioRestClient
 from twilio.twiml import Response
 
-from .models import Sitter, Booking
-
+from .models import Sitter, Booking, IncomingSMSMessage
 
 # Your Account Sid and Auth Token from twilio.com/user/account
 account_sid = settings.TWILIO_ACCOUNT_SID
-auth_token  = settings.TWILIO_AUTH_TOKEN
+auth_token = settings.TWILIO_AUTH_TOKEN
 sitterfied_number = settings.TWILIO_DEFAULT_CALLERID
-
-
 client = TwilioRestClient(account_sid, auth_token)
-from django.http import HttpResponse
-
-
 
 @twilio_view
 def sms_messages(request):
     from_number = request.POST.get('From', None)
     resp = Response()
+
     try:
         sitter = Sitter.objects.get(cell=from_number)
-    except Sitter.DoesNotExist:
-        resp.sms("Sorry, but this cell phone isn't registered")
-        return str(resp)
+    except (Sitter.DoesNotExist, ObjectDoesNotExist):
+        resp.sms('We\'re sorry, but this cell phone isn\'t registered.')
+        return resp
+
     body = request.POST.get('Body')
-    yes = re.search("(\d*):yes", body)
-    request_id = yes.groups()[0]
+    result = re.search('(accept|yes|decline|no)[^\d]*(\d*)', body, re.I | re.S)
+
+    if result is None or len(result.groups()) < 2:
+        resp.sms('We\'re sorry, but we couldn\'t understand your response. \
+Please respond with either the word \'Accept\' or \'Decline\' followed by the \
+code you received.')
+        return resp
+
+    response = result.group(1).lower()
+    request_id = result.group(2)
+
     try:
         booking = Booking.objects.get(id=request_id)
-        if booking.accepted_sitter:
-            resp.sms("Sorry, but this booking has already been accepted")
-            return str(resp)
-        booking.accepted_sitter = sitter
-        booking.save()
-    except Booking.DoesNotExist:
-        resp.sms("Sorry, but you've tried to accept a booking that doesnt' exist")
-        return str(resp)
+    except (Booking.DoesNotExist, ObjectDoesNotExist):
+        resp.sms('We\'re sorry, but we couldn\'t find a booking request that matches the code you sent.')
+        return resp
 
+    if booking.accepted_sitter:
+        resp.sms('We\'re sorry, but this booking has already been accepted.')
+        return resp
 
+    if response == 'accept' or response == 'yes':
+        booking.accept(sitter)
+    elif response == 'decline' or response == 'no':
+        booking.decline(sitter)
 
+    return resp
 
 #for polling via cronjob
 def get_new_messages():
     try:
         most_recent_message = IncomingSMSMessage.objects.all().order_by('-date_created')[0]
-        most_recent  = most_recent_message.date_created
+        most_recent = most_recent_message.date_created
         messages = client.sms.messages.list(to=sitterfied_number, after=most_recent)
     except IndexError:
         print "no messages yet"
