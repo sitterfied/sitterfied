@@ -7,7 +7,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Ben Beecher', 'BenBeecher@gmail.com'),
+     ('Andrew Lewisohn', 'alewisohn@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -179,6 +179,7 @@ ALLOWED_HOSTS = [
     "localhost",
     ".sitterfied.com",
     "beta.sitterfied.com",
+    'test.sitterfied.com',
     'ping',
 ]
 

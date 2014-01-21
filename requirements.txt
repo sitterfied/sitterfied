@@ -63,3 +63,6 @@ lxml
 facebook-sdk
 drf_ujson
 requests
+
+geopy
+https://github.com/pegler/pytzwhere/tarball/master

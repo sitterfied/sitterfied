@@ -29,9 +29,9 @@ STATIC_URL = '/static/'
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = PROJECT_ROOT.child("static")
 
-GOOGLE_OAUTH_CLIENT_ID = '778609432409-h3p3eumt29copfqrcsv7dksapkpbssbq.apps.googleusercontent.com'
-GOOGLE_OAUTH_CLIENT_SECRET = 'Xo2d7W1OK7ezu4rfGBoEhSuM'
-GOOGLE_OAUTH_REDIRECT_URI = "http://localhost:8000"
+GOOGLE_OAUTH_CLIENT_ID = '213296649304-10d5ppglkmjmq7l60uub4r5nvnklfjoa.apps.googleusercontent.com'
+GOOGLE_OAUTH_CLIENT_SECRET = 'u9BePfC9OC9Z3XkO0SMJbwkq'
+GOOGLE_OAUTH_REDIRECT_URI = "http://sitterfied.ngrok.com"
 
 INSTALLED_APPS += (
 #    'debug_toolbar',
