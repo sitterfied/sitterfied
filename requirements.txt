@@ -18,7 +18,7 @@ django-crispy-forms
 django-floppyforms
 
 #GENERAL TOOLS
-django-annoying
+django-annoying==0.7.7
 django-extensions
 django-model-utils
 django-registration

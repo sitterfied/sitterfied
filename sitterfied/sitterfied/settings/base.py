@@ -83,7 +83,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'app.middleware.TimezoneMiddleware',
+#    'app.middleware.TimezoneMiddleware',
 )
 
 ROOT_URLCONF = 'sitterfied.urls'
