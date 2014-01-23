@@ -77,8 +77,10 @@ class User(AbstractUser, TimeStampedModel):
     def is_parent_or_sitter(self):
         if hasattr(self, 'sitter'):
             return 'Sitter'
-        else:
+        elif hasattr(self, 'parent'):
             return 'Parent'
+        else:
+            return 'Admin'
 
     def is_facebook_connected(self):
         return self.facebook_id is not None

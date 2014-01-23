@@ -395,6 +395,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 alert("add friend")
 
             addSitterTeam: (sitter) ->
+                console.log("Sitter:", sitter)
                 Em.run.begin()
                 sitterTeam = Sitterfied.currentUser.get('sitter_teams')
                 dupSitter = sitterTeam.findProperty('id', sitter.get('id'))

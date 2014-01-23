@@ -23,8 +23,10 @@ class EmailAuthBackend(object):
             user = User.objects.get(pk=user_id)
             if user.is_parent_or_sitter() is 'Parent':
                 return Parent.objects.get(pk=user_id)
-            else:
+            elif user.is_parent_or_sitter() is 'Sitter':
                 return Sitter.objects.get(pk=user_id)
+            else:
+                return user
         except User.DoesNotExist:
             return None
 
