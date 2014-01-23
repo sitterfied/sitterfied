@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import logging
 
+import app.tasks as tasks
+
 from django.utils import timezone
-from geopy import geocoders
-from tzwhere.tzwhere import tzwhere
 
 __all__ = [
     'TimezoneMiddleware'
@@ -18,31 +18,17 @@ class TimezoneMiddleware(object):
             user_timezone = request.user.timezone
             if not user_timezone:
                 zip_code = request.user.zip
+                if not zip_code:
+                    logger.warn('The user does not have a zip code associated so time zone cannot be retrieved.')
+                    return
 
                 try:
-                    place, (lat, lng) = geocoders.GoogleV3().geocode(zip_code)
+                    (tasks.geocode_user.s(request.user.id) | tasks.lookup_time_zone.s(request.user.id)).delay()
                 except Exception as e:
                     logger.error('Could not determine the user\'s location: %s' % (str(e)))
                     return
-
-                try:
-                    user_timezone = tzwhere().tzNameAt(lat, lng)
-                except Exception as e:
-                    logger.error('Could not determine the user\'s location: %s' % (str(e)))
-                    return
-
-                if not user_timezone:
-                    logger.warn('Cannot set timezone for this user.')
-                    return
-
-                try:
-                    request.user.timezone = user_timezone
-                    request.user.save()
-                except Exception as e:
-                    logger.error('Could not save user\'s timezone: %s' % (str(e)))
 
             try:
                 timezone.activate(user_timezone)
             except Exception as e:
-                request.user.timezone = None
-                logger.error('Invalid timezone selected: %s' % (str(e)))
+                logger.error('Invalid timezone selected: {0}'.format(e))
