@@ -15,3 +15,8 @@ data:
 
 cache:
   type: redis
+
+worker:
+  type: python-worker
+  config:
+    python_version: v2.7
