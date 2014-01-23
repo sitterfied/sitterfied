@@ -7,6 +7,11 @@ with open('/home/dotcloud/environment.json') as f:
 
 DEBUG = False
 
+BROKER_URL = env.get('DOTCLOUD_CACHE_REDIS_URL') + '/0'
+CELERY_IGNORE_RESULTS = True
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 CACHES = {
     'default': {
