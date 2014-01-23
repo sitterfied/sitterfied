@@ -24,9 +24,9 @@
               <li>
                 {{# if hasFriendTeam }}
                   {{# if isFriendsSelected}}
-				    <p>- <a {{action "selectFriends"}}class="add_sitters">REMOVE ALL FRIENDS’ SITTERS</a></p>
+				    <p>- <a {{action "clearFriends"}}class="add_sitters">REMOVE ALL FRIENDS’ SITTERS</a></p>
                    {{ else }}
-                    <p>+ <a {{action "clearFriends"}}class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
+                    <p>+ <a {{action "selectFriends"}}class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
                   {{/ if}}
                 {{/ if}}
 
