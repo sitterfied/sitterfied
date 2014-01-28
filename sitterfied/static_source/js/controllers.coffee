@@ -832,6 +832,28 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
+            
+        bookTeam: () ->
+            booking = Sitterfied.Booking.create
+                parent: Sitterfied.currentUser
+                notes: ""
+                overnight: false
+                booking_status: "Pending"
+                booking_type: "Job"
+                start_date_time: null
+                stop_date_time: null
+                address1: Sitterfied.get('currentUser.address1')
+                address2: Sitterfied.get('currentUser.address2')
+                city: Sitterfied.get('currentUser.city')
+                state: Sitterfied.get('currentUser.state')
+                zip: Sitterfied.get('currentUser.zip')
+                num_children: 1
+                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                rate: 0
+            sitters = Sitterfied.currentUser.get('sitter_teams')
+            booking.get('sitters').addObjects(sitters)
+            Sitterfied.set('onDeckBooking', booking)
+            this.transitionTo('book')
     )
 
     Sitterfied.BookingController = Em.ObjectController.extend(

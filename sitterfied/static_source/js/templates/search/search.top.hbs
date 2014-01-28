@@ -138,7 +138,8 @@
 		<li><input class="findSitter" type="button" value="FIND MY SITTER" {{action "findSitters"}} /></li>
 	  </ul>
 	</form>
-	<p class="hide"><a href="#">Hide Search Bar</a></p>
-	<p class="show"><a href="#">Show Search Bar</a></p>
+	{{# if Sitterfied.currentUser.sitter_teams }}
+          <div class="send_request"><a {{action bookTeam }}>Send a job request to the team</a></div>
+        {{/if}}
   </div>
 </div>

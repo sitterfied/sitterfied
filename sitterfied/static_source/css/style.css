@@ -503,6 +503,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .guest_top_info ul li .letter {display:block;width:36px;height:39px;background:url(../images/icons/letter.png) no-repeat;margin:0 auto;}
 .header .top_info .guest_top_info ul li .letter:hover, .header .top_info .guest_top_info ul li:hover .letter {background-position:0 -40px;}
 .header .top_info .guest_top_info .hide, .header .top_info .guest_top_info .show {display:none;}
+.header .top_info .find_form_block .send_request {display: none;}
+
 	/* Top notify */
 .top_notify {width:560px;margin:35px auto 0 auto;min-height:210px;padding:0 0 0 0;background:#42a8b4 url(../images/top_notify.gif) 0 top repeat-x;box-shadow:0 -3px 0 0 #0f99a9, 3px 0 0 0 #0f99a9, -3px 0 0 0 #0f99a9;position:relative;z-index:2;border-radius:2px 2px 0 0;}
 .top_notify .sent {padding:75px 0 20px 0;color:#fff;text-align:center;font:36px 'ProximaNova-Semibold';text-shadow:rgba(0,0,0,.35) 1px 1px 1px;}
@@ -755,7 +757,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .friends_block > ul > li > ul > li > ul li.rev div p:last-child {text-align:center;margin:8px 25px 0 25px;padding-top:8px;border-top:1px solid #dde1e1;}
 .friends_block > ul > li > ul > li > ul li.rev div p a {color:#396df0;}
 .friends_block > ul > li .btns {clear:both;background:#1c8292 url(../images/btns_bg.gif) repeat-x;padding:20px 25px;}
-.friends_block > ul > li .btns > a:nth-child(2) {float:right;}
+.friends_block > ul > li .btns > a:nth-child(3) {float:right;}
 .friends_block > ul > li .btns p {display:none;padding:15px 0 0 55px;background:url(../images/icons/plus.png) 24px 15px no-repeat;}
 .friends_block > ul > li .btns p a {color:#fefefe;font:14px 'ProximaNova';}
 	/* My sitter team */
@@ -1302,7 +1304,6 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .find_form_block {padding:10px 10px 170px 10px;}
 .header .top_info .find_form_block form > ul > li {font-size:12px;padding:0 0 15px 0;}
 .header .top_info .find_form_block form > ul > li:nth-child(4) {float:right;}
-.header .top_info .find_form_block form > ul > li:nth-child(5) {display:none;}
 .header .top_info .find_form_block ul li:first-child > input[type="text"] {padding:0 5px 0 45px;width:205px;height:45px;font-size:18px;}
 .header .top_info .find_form_block ul li input.datepicker {height:45px;width:200px;font-size:14px;margin-bottom:15px;}
 .header .top_info .find_form_block ul li select {width:120px;}
@@ -1314,6 +1315,9 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .find_form_block .hide a {padding-left:20px;background:url(../images/icons/arrow_top2.png) left center no-repeat;}
 .header .top_info .find_form_block .show {padding:10px 0 0 0;font-size:17px;text-align:center;}
 .header .top_info .find_form_block .show a {padding-left:20px;background:url(../images/icons/arrow_bottom5.png) left center no-repeat;}
+.header .top_info .find_form_block .send_request {display:block;font:17px 'ProximaNova-Semibold';padding:0 0 0 125px;margin-bottom:50px;background:url(../images/icons/icon_multiple_sitters2.png) 60px center no-repeat;}
+.header .top_info .find_form_block .send_request a {color:#e88649;}
+.header .top_info .find_form_block .send_request a:hover {text-decoration:underline;}
 .header .top_info .ranking_info {float:none;width:auto;padding:10px 0 0 0;}
 .header .top_info .ranking_info > p {font-size:17px;padding-left:0;text-align:center;}
 .header .top_info .guest_top_info {float:none;width:auto;}
@@ -1435,7 +1439,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .friends_block > ul > li > ul > li:hover > ul {display:none;}
 .friends_block > ul > li .btns {padding:25px 0 15px 0;}
 .friends_block > ul > li .btns > a {font-size:18px;line-height:34px;width:143px;height:34px;float:none;margin:-40px auto 0 auto;}
-.friends_block > ul > li .btns > a:nth-child(2) {display:none;}
+.friends_block > ul > li .btns > a:nth-child(3) {display:none;}
 .friends_block > ul > li .btns p {display:block;padding-bottom:4px;}
 	/* My sitter team */
 .my_sitter_team_tab_bg {background:#f7fafc;border-top:3px solid #d8e8f0;border-bottom:3px solid #d8e8f0;}

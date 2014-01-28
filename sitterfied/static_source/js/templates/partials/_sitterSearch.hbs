@@ -60,6 +60,13 @@
 	<a class="button" {{action book this}}>BOOK</a><a class="button button2" {{action interview this}}>INTERVIEW</a>
 	<p><a {{action addSitterTeam this}}>ADD TO SITTER TEAM</a></p>
     {{/ if}}
-	<p><a {{action bookmark this}}>BOOKMARK</a></p>
+	<p>
+	  <a {{action bookmark this}}>
+	    {{# if isBookmarked}}
+	      REMOVE 
+	    {{/ if}}
+	    BOOKMARK
+	  </a>
+	</p>
   </div>
 </li>

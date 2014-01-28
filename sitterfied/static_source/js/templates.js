@@ -2145,7 +2145,7 @@ function program4(depth0,data) {
 Ember.TEMPLATES["parentEdit/sitterTeam"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, stack2, hashContexts, hashTypes, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, stack2, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
   
@@ -2167,6 +2167,17 @@ function program5(depth0,data) {
 
 function program7(depth0,data) {
   
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n	  <div class=\"send_request\">\n	    <a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "bookTeam", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">\n	      Send a job request to the team\n	    </a>\n	  </div>\n	");
+  return buffer;
+  }
+
+function program9(depth0,data) {
+  
   var buffer = '', stack1, hashTypes, hashContexts, options;
   data.buffer.push("\n        ");
   hashTypes = {};
@@ -2177,13 +2188,13 @@ function program7(depth0,data) {
   return buffer;
   }
 
-function program9(depth0,data) {
+function program11(depth0,data) {
   
   
   data.buffer.push("Network");
   }
 
-function program11(depth0,data) {
+function program13(depth0,data) {
   
   
   data.buffer.push("Reviews");
@@ -2211,14 +2222,15 @@ function program11(depth0,data) {
   hashContexts = {};
   stack2 = helpers.view.call(depth0, "Sitterfied.MobTriggerView", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n  <div class=\"tab_content my_sitter_team my_sitter_team_tab_bg\" id=\"tab-3\">\n	<div class=\"send_request\"><a ");
+  data.buffer.push("\n  <div class=\"tab_content my_sitter_team my_sitter_team_tab_bg\" id=\"tab-3\">\n	");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "bookTeam", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">Send a job request to the team</a></div>\n	<ul class=\"clear\">\n      ");
+  stack2 = helpers['if'].call(depth0, "", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	<ul class=\"clear\">\n      ");
   hashTypes = {};
   hashContexts = {};
-  stack2 = helpers.each.call(depth0, "sitter", "in", "", {hash:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack2 = helpers.each.call(depth0, "sitter", "in", "", {hash:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n	</ul>\n  </div>\n  <!-- /sitter_team -->\n");
   hashContexts = {'tag': depth0,'class': depth0};
@@ -2226,7 +2238,7 @@ function program11(depth0,data) {
   options = {hash:{
     'tag': ("div"),
     'class': ("mob_tab_trigger")
-  },inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  },inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.network", options) : helperMissing.call(depth0, "linkTo", "parentEdit.network", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n");
@@ -2235,7 +2247,7 @@ function program11(depth0,data) {
   options = {hash:{
     'tag': ("div"),
     'class': ("mob_tab_trigger")
-  },inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  },inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "parentEdit.reviews", options) : helperMissing.call(depth0, "linkTo", "parentEdit.reviews", options));
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n");
@@ -4179,6 +4191,12 @@ function program24(depth0,data) {
   return buffer;
   }
 
+function program26(depth0,data) {
+  
+  
+  data.buffer.push("\n	      REMOVE \n	    ");
+  }
+
   data.buffer.push("<li>\n  <div ");
   hashTypes = {};
   hashContexts = {};
@@ -4252,11 +4270,16 @@ function program24(depth0,data) {
   hashContexts = {};
   stack2 = helpers['if'].call(depth0, "parentController.multipleSitters", {hash:{},inverse:self.program(24, program24, data),fn:self.program(19, program19, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n	<p><a ");
+  data.buffer.push("\n	<p>\n	  <a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "bookmark", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">BOOKMARK</a></p>\n  </div>\n</li>\n");
+  data.buffer.push(">\n	    ");
+  hashTypes = {};
+  hashContexts = {};
+  stack2 = helpers['if'].call(depth0, "isBookmarked", {hash:{},inverse:self.noop,fn:self.program(26, program26, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n	    BOOKMARK\n	  </a>\n	</p>\n  </div>\n</li>\n");
   return buffer;
   
 });
@@ -6503,6 +6526,17 @@ function program9(depth0,data) {
   return buffer;
   }
 
+function program11(depth0,data) {
+  
+  var buffer = '', hashTypes, hashContexts;
+  data.buffer.push("\n          <div class=\"send_request\"><a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "bookTeam", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Send a job request to the team</a></div>\n        ");
+  return buffer;
+  }
+
   data.buffer.push("<div style=\"display:none\">\n<div id=\"onboarding_final\">\n		<div class=\"done_desc clear\">\n			<p><img src=\"/static/images/done.png\" alt=\"\" /></p>\n			<ul>\n				<li>Add your favorite sitters here for quick access</li>\n				<li>Sitters your friends have hired</li>\n				<li>Sitters we found in your area</li>\n			</ul>\n		</div>\n		<div class=\"sitter_tabs_wrap my_tabs_style\">\n			<div class=\"stabs_block\">\n				<nav>\n					<ul class=\"tab_select\">\n						<li><a href=\"#\">sitter<br />team<span>7</span></a></li>\n						<li><a href=\"#\">friends'<br />sitters<span>42</span></a></li>\n						<li><a href=\"#\">local<br />sitters<span>519</span></a></li>\n					</ul>\n				</nav>\n				<div class=\"friends_block my_friends_sitters\">\n					<div class=\"multiple_sitters_block clear\">\n						<a href=\"#\" class=\"close\">&nbsp;</a>\n						<ul>\n							<li class=\"team select1\"><a href=\"#\">Ellen Vukelich</a><span class=\"remove\"><a href=\"#\" class=\"select1\">&nbsp;</a></span></li>\n							<li>\n								<p>+ <a href=\"#\" class=\"add_sitters\">ADD ALL FRIENDS’ SITTERS</a></p>\n								<p>- &nbsp;<a href=\"#\" class=\"remove_team\">REMOVE SITTER TEAM</a></p>\n							</li>\n						</ul>\n						<p>Select from the available sitters below. <a href=\"#\" class=\"button button_small\"><span class=\"icon_ok2\">&nbsp;</span>submit</a></p>\n					</div>\n					<div class=\"filter_block\">\n						<p><a href=\"#\">Reset Filters</a></p>\n						<form method=\"post\" action=\"#\">\n							<ul class=\"clear\">\n								<li><select data-placeholder=\"Choose languages\" multiple tabindex=\"1\"><option>test</option><option>test2</option></select></li>\n								<li><select data-placeholder=\"Education level\" multiple tabindex=\"2\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Training/Certifications\" multiple tabindex=\"3\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Level of Experience\" multiple tabindex=\"4\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Type of Experience\" multiple tabindex=\"5\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Other\" multiple tabindex=\"6\"><option>test</option></select></li>\n							</ul>\n						</form>\n						<p><a href=\"#\">Hide Filters</a></p>\n					</div>\n					<div class=\"sort_filter clear\">\n						<div class=\"sort\">\n							<a class=\"sort_trigger\" href=\"#\">Sort by</a>\n							<a class=\"reset_trigger\" href=\"#\">Reset Sort</a>\n							<ul>\n								<li><a href=\"#\">Bookmarked</a></li>\n								<li><a href=\"#\">Rehires</a></li>\n								<li><a href=\"#\">Experience</a></li>\n								<li><a href=\"#\">Sitter Teams</a></li>\n								<li><a href=\"#\">Rate</a></li>\n								<li><a href=\"#\">Reviews</a></li>\n							</ul>\n						</div>\n						<div class=\"multiple_select\"><a href=\"#\">Select multiple sitters</a></div>\n						<div class=\"filter\"><a href=\"#\">Filter</a> my sitters</div>\n					</div>\n				</div>\n			</div>\n		</div>\n		<p>When you need a sitter <i>FAST</i>,  click here and let sitters compete for your job</p>\n</div>\n<!-- onboarding_final_popup -->\n</div>\n\n\n\n<!-- /top note -->\n<div class=\"top_info clear\">\n  <div class=\"find_form_block\">\n	<p>Where and when do you need your sitter?</p>\n	<form>\n	  <ul class=\"clear\">\n		<li>\n		  <label for=\"where\">Where</label>\n          ");
   hashContexts = {'valueBinding': depth0,'placeholder': depth0};
   hashTypes = {'valueBinding': "STRING",'placeholder': "STRING"};
@@ -6580,7 +6614,12 @@ function program9(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "findSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" /></li>\n	  </ul>\n	</form>\n	<p class=\"hide\"><a href=\"#\">Hide Search Bar</a></p>\n	<p class=\"show\"><a href=\"#\">Show Search Bar</a></p>\n  </div>\n</div>\n");
+  data.buffer.push(" /></li>\n	  </ul>\n	</form>\n	");
+  hashTypes = {};
+  hashContexts = {};
+  stack1 = helpers['if'].call(depth0, "Sitterfied.currentUser.sitter_teams", {hash:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n  </div>\n</div>\n");
   return buffer;
   
 });
