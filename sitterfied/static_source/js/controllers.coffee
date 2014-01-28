@@ -622,8 +622,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
 
         content: []
-        selectedSitters:  Ember.ArrayProxy.create
-            content: Ember.A()
+        selectedSitters:  Ember.A()
 
         sitterTeam: (() ->
             return @filterProperty('inSitterTeam', true)
@@ -750,6 +749,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         book: (sitters) ->
             if not Sitterfied.typeIsArray sitters
                 sitters = [sitters]
+            else
+                # we're passed an array of controllers - strip out the models
+                sitters = (sitter.get("content") for sitter in sitters)
 
             if @get('overnight')
                 stop_date = @get('stop_date')
