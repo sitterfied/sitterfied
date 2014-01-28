@@ -1,48 +1,35 @@
 # Create your views here.
-from datetime import datetime
-from datetime import time
+import operator
+from datetime import datetime, time
+
+import facebook
 import requests
-
-from django.contrib.auth import login as auth_login
-from django.views.decorators.debug import sensitive_post_parameters
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.cache import never_cache
-from django.contrib.auth.forms import AuthenticationForm
-from django.forms.models import inlineformset_factory
-from django.shortcuts import redirect
-
-
-from itertools import chain
-import json
-from django.conf import settings
-from django.http import HttpResponse
-from django.core.mail import send_mail
-from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
-
-from django.contrib.auth.decorators import login_required
-
 from annoying.decorators import render_to, ajax_request, JsonResponse
-
-from django.views.decorators.http import require_POST
-
+from api import ParentSerializer, SitterSerializer, SitterSearchSerializer
+from django.conf import settings
+from django.contrib.auth import login as auth_login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.db.models import Q, Count
+from django.forms.models import inlineformset_factory
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
-
-from django.http import HttpResponseRedirect
-
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.http import require_POST
+from django.views.generic import TemplateView
 from ecl_facebook import Facebook
-
+from rest_framework.decorators import api_view
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 from signup import RegistrationView
 
-from rest_framework.renderers import JSONRenderer
-from drf_ujson.renderers import UJSONRenderer
-from api import ParentSerializer, SitterSerializer, UserSerializer, ChildSerializer, BookingSerializer
-from api import UserViewSet, SitterViewSet, ParentViewSet, GroupSerializer
-
+from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
 from .models import User, Sitter, Parent, Group, Child
 from .utils import send_html_email
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
+
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
@@ -114,7 +101,6 @@ def index(request, referred_by=None):
             "first_time": request.GET.get("first_time", "")
     }
 
-import facebook
 @render_to()
 def onboarding2(request):
     ChildFormSet = inlineformset_factory(Parent, Child, form=ChildForm, extra=1, formset=RequiredFormSet)
@@ -218,10 +204,6 @@ def static_page(request, template):
 
 
 
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from api import SitterSearchSerializer
-from django.db.models import Count, Max
 
 
 
@@ -237,7 +219,6 @@ test_zips = [
 ]
 
 
-import operator
 @api_view(['GET'])
 def search(request):
     zipcode = request.GET.get('zip', '')
@@ -373,7 +354,6 @@ def login_ajax(request,
     return {"user":user_json}
 
 
-from django.contrib.auth import authenticate
 
 @sensitive_post_parameters()
 @csrf_protect
@@ -400,7 +380,6 @@ def login_facebook(request):
     return {}
 
 
-from django.contrib.auth import login
 
 class AjaxRegistrationView(RegistrationView):
     def register(self, request, **cleaned_data):
@@ -512,8 +491,6 @@ def cancel_unsubscribe(request):
     return {'email':email}
 
 
-from django.views.generic import TemplateView
-from django.template import TemplateDoesNotExist
 
 class StaticView(TemplateView):
     def get_context_data(self, **kwargs):

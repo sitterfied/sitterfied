@@ -67,4 +67,11 @@ DEVSERVER_MODULES = (
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEVSERVER_AUTO_PROFILE = True
 
+# Celery configuration
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_IGNORE_RESULTS = True
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
 from .mandrill import *
