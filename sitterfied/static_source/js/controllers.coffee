@@ -616,9 +616,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     s.load(sitter['id'], sitter)
                     sitters.pushObject(s)
                 this.set('model', sitters)
-                @set("selectedSitters", Ember.ArrayProxy.create
-                    content: Em.copy(@get("sitterTeam"))
-                )
+                @selectTeam()
 
 
         content: []
@@ -643,25 +641,25 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("sitterTeam"))
                 if selected.filterProperty("id", sitter.get('id')).length == 0
-                    selected.pushObject(sitter)
+                    selected.pushObject(sitter.get("content"))
 
         clearTeam: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("sitterTeam"))
                 if selected.filterProperty("id", sitter.get('id')).length > 0
-                    selected.removeObject(sitter)
+                    selected.removeObject(sitter.get("content"))
 
         selectFriends: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("friendTeam"))
                 if selected.filterProperty("id", sitter.get('id')).length == 0
-                    selected.pushObject(sitter)
+                    selected.pushObject(sitter.get("content"))
 
         clearFriends: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("friendTeam"))
                 if selected.filterProperty("id", sitter.get('id')).length > 0
-                    selected.removeObject(sitter)
+                    selected.removeObject(sitter.get("content"))
 
 
         isTeamSelected: (() ->
@@ -750,9 +748,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         book: (sitters) ->
             if not Sitterfied.typeIsArray sitters
                 sitters = [sitters]
-            else
-                # we're passed an array of controllers - strip out the models
-                sitters = (sitter.get("content") for sitter in sitters)
 
             if @get('overnight')
                 stop_date = @get('stop_date')
