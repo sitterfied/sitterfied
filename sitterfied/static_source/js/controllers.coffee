@@ -622,7 +622,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
 
         content: []
-        selectedSitters:  Ember.A()
+        selectedSitters:  Ember.ArrayProxy.create
+            content: Ember.A()
 
         sitterTeam: (() ->
             return @filterProperty('inSitterTeam', true)
