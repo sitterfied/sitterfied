@@ -395,16 +395,18 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 alert("add friend")
 
             addSitterTeam: (sitter) ->
-                console.log("Sitter:", sitter)
                 Em.run.begin()
                 sitterTeam = Sitterfied.currentUser.get('sitter_teams')
                 dupSitter = sitterTeam.findProperty('id', sitter.get('id'))
                 if dupSitter
                     sitterTeam.removeObject(dupSitter)
                     dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                    # Remove to network
+                    Sitterfied.currentUser.removeFriend(dupSitter)
                 else
                     sitterTeam.pushObject(sitter)
                     sitter.get('sitter_teams').pushObject(Sitterfied.currentUser)
+                    Sitterfied.currentUser.addFriend(sitter)
 
                 Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()

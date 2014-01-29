@@ -92,9 +92,20 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @get('model').addFriend(friend)
 
         removeFriend: (friend_id) ->
-            friend = Sitterfied.User.find(friend_id)
-            @get('model').removeFriend(friend)
-
+            friendPromise = Sitterfied.User.fetch(friend_id)
+            friendPromise.then (friend) =>
+                @get('model').removeFriend(friend)
+                # Remove to sitter team if user is parent and friend is sitter
+                if Sitterfied.currentUser.get('isParent')
+                    if friend.get('isSitter')
+                        Em.run.begin()
+                        sitterTeam = Sitterfied.currentUser.get('sitter_teams')
+                        sitter = sitterTeam.findProperty('id', friend.get('id'))
+                        sitterTeam.removeObject(sitter)
+                        sitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                        Sitterfied.currentUser.set('isDirty', true)
+                        Sitterfied.currentUser.save()
+                        Em.run.end()
 
 
         addGroup: (group_id) ->

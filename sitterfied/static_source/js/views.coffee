@@ -34,6 +34,24 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                 Sitterfied.currentUserController.createGroup(groupName)
             else if selected.type == "user"
                 Sitterfied.currentUserController.addFriend(selected.id)
+                # Add to sitter team if user is parent
+                if Sitterfied.currentUser.get('isParent')
+                    userPromise = Sitterfied.User.fetch(selected.id)
+                    userPromise.then (user) =>
+                        if user.get('isSitter')
+                            sitterPromise = Sitterfied.Sitter.fetch(selected.id)
+                            sitterPromise.then (sitter) =>                        
+                                sitter = Sitterfied.Sitter.find(selected.id)
+                                sitterTeam = Sitterfied.currentUser.get('sitter_teams')
+                                dupSitter = sitterTeam.findProperty('id', sitter.get('id'))
+                                if dupSitter
+                                    sitterTeam.removeObject(dupSitter)
+                                    dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                                else
+                                    sitterTeam.pushObject(sitter)
+                                    sitter.get('sitter_teams').pushObject(Sitterfied.currentUser)
+                                Sitterfied.currentUser.save()
+                    
             else if selected.type == "group"
                 Sitterfied.currentUserController.addGroup(selected.id)
 
