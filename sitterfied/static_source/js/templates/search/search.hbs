@@ -147,6 +147,9 @@
 			<div class="sitter_title">
 			  <p><span><span class="icon_heart2">&nbsp;</span>sitter<br />team</span><strong>{{filteredSitterTeam.length}}</strong></p>
 			</div>
+	    {{# if Sitterfied.currentUser.sitter_teams }}
+	      <div class="send_request search_request"><a {{action bookTeam }}>Send a job request to sitter team</a></div>
+	    {{/if}}
             <ul class="clear">
               {{# each sitter in controller}}
                 {{# if sitter.inSitterTeam }}

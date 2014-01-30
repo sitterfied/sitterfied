@@ -845,14 +845,34 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.transitionTo('book')
             
         bookTeam: () ->
+            console.log("Start book team")
+            if @get('overnight')
+                stop_date = @get('stop_date')
+            else
+                stop_date = @get('start_date')
+
+            start_moment = moment(@get('start_date'))
+            start_time = moment(@get('start_time'), "HHmm")
+
+            start_moment.hour(start_time.hour())
+            start_moment.minute(start_time.minutes())
+            start_date_time = start_moment.toDate()
+
+
+            stop_moment = moment(stop_date)
+            stop_time = moment(@get('stop_time'), "HHmm")
+            stop_moment.hour(stop_time.hour())
+            stop_moment.minute(stop_time.minutes())
+            stop_date_time = stop_moment.toDate()
+            
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
-                overnight: false
+                overnight: @get("overnight")
                 booking_status: "Pending"
                 booking_type: "Job"
-                start_date_time: null
-                stop_date_time: null
+                start_date_time: start_date_time
+                stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
                 address2: Sitterfied.get('currentUser.address2')
                 city: Sitterfied.get('currentUser.city')

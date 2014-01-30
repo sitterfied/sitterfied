@@ -1444,6 +1444,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 	/* My sitter team */
 .my_sitter_team_tab_bg {background:#f7fafc;border-top:3px solid #d8e8f0;border-bottom:3px solid #d8e8f0;}
 .my_sitter_team .send_request {padding:0 0 0 65px;margin-bottom:25px;background-position:0 center;}
+.my_sitter_team .send_request.search_request {display:none;}
 .my_sitter_team .send_to_all {padding-bottom:25px;}
 .my_sitter_team .send_to_all a {font-size:15px;line-height:38px;height:38px;width:auto;}
 .my_sitter_team .send_to_all.njr_btn a {width:225px;margin:0 auto;}
