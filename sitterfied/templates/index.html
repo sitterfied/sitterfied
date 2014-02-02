@@ -142,23 +142,23 @@
         {{outlet}}
         {% endverbatim %}
 
-        <footer class="footer">
+	<footer class="footer">
 	      <div class="wraper">
 		    <a href="/" class="logo_bottom"><img src="{{STATIC_URL}}images/logo_bottom.png" alt="" /></a>
 		    <!-- bottom menu -->
 		    <nav>
 			  <ul>
-                {% verbatim %}
+		{% verbatim %}
 				<li><a href="mailto:hello@sitterfied.com">Contact</a></li>
 				<li><a href="http://blog.sitterfied.com/">Blog</a></li>
 				<li>{{#linkTo privacy }}Privacy Policy{{/linkTo}}</li>
 				<li>{{#linkTo tos }}Terms of Service{{/linkTo}}</li>
-                {% endverbatim %}
+		{% endverbatim %}
 			  </ul>
 		    </nav>
 		    <!-- /bottom menu -->
 	      </div>
-        </footer>
+	</footer>
 		{% verbatim %}
 		{{# view Sitterfied.BackToTop class="back-to-top" id="back-top" }}
 		  <a class="back-to-top">Top</a>

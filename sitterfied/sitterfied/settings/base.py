@@ -169,7 +169,7 @@ LOGGING = {
 
 
 AUTH_USER_MODEL = 'app.User'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/'
 
 ACCOUNT_ACTIVATION_DAYS = 30
 

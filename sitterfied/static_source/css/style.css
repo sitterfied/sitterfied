@@ -606,8 +606,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .my_tabs_style:before {content:'';display:block;width:3px;height:108px;position:absolute;z-index:2;top:0;right:-2px;background:#028ea3 url(../images/my_tab.gif) repeat-x;}
 .my_tabs_style .tab_select {position:relative;min-height:110px;margin:0;overflow:hidden;}
 .my_tabs_style .tab_select:before {display:none;}
-.my_tabs_style .tab_select li {float:left;padding:0 0 25px 0;width:33%;}
-.my_tabs_style .tab_select li:nth-child(2){width:34%;}
+.my_tabs_style .tab_select li {float:left;padding:0 0 25px 0;width:33.33%;}
+.my_tabs_style .tab_select li:nth-child(2){width:33.34%;}
 .my_tabs_style .tab_select li a, .my_tabs_style .tab_select li a:visited {float:none;box-shadow:rgba(0,0,0,.36) 0 7px 17px 0;background:#028ea3 url(../images/my_tab.gif) repeat-x;border:none;padding:33px 110px 0 130px;min-height:67px;border-radius:0;color:#fff;font:21px/21px 'ProximaNova';}
 .my_tabs_style .tab_select li a span {position:absolute;top:45px;right:45px;font-size:37px;color:#b0d225;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;font-weight:bold;}
 .my_tabs_style .tab_select li a:before {content:'';display:block;width:87px;height:31px;background:url(../images/icons/my_team.png) no-repeat;position:absolute;top:42px;left:40px;}
@@ -1193,7 +1193,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .stabs_block .friends_block .filter_block, .stabs_block .friends_block .sort_filter {font-size:14px;}
 .stabs_block .friends_block .sort_filter .sort a {background:url(../images/icons/arrow_bottom13.png) right center no-repeat;padding-right:20px;}
 .stabs_block .friends_block .sort_filter .filter {padding:3px 20px 3px 0;background:url(../images/icons/arrow_bottom13.png) right center no-repeat;}
-.stabs_block .friends_block .multiple_select {float:left;padding:3px 0 3px 50px;background:url(../images/icons/multiple_select.png) left center no-repeat;margin-left:285px;}
+.stabs_block .friends_block .multiple_select {float:left;padding:3px 0 3px 50px;background:url(../images/icons/multiple_select.png) left center no-repeat;margin-left:265px;}
 .stabs_block .friends_block .filter_block {padding-bottom:10px;}
 .multiple_sitters_block {position:relative;border:1px solid #cbcbcb;margin:0 15px 25px 15px;padding:18px 16px 18px 28px;border-radius:14px;box-shadow:rgba(187,187,186,.55) 2px 1px 2px 0 inset;}
 .multiple_sitters_block .close {position:absolute;top:8px;right:12px;display:block;width:12px;height:12px;background:url(../images/icons/close2.png) no-repeat;}

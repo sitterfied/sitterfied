@@ -81,9 +81,13 @@ def index(request, referred_by=None):
     form = AuthenticationForm()
     form.fields['username'].widget.attrs['placeholder'] = "Email"
     form.fields['password'].widget.attrs['placeholder'] = "Password"
-    if request.user.is_anonymous():
-        return {'TEMPLATE': "landing.html",
-                "form": form,}
+
+    if not request.user.is_authenticated():
+        return {'TEMPLATE': 'landing.html',
+                'form': form, }
+
+    if 'next' in request.GET and request.GET['next'] != '':
+        return redirect(request.GET['next'])
 
     user_json = get_user_json(request.user)
     if hasattr(request.user, 'sitter'):
@@ -91,15 +95,21 @@ def index(request, referred_by=None):
     else:
         parent_or_sitter = "Parent"
 
-
-    return {'user_json':user_json,
-            "parent_or_sitter": parent_or_sitter,
-            'intercom_activator': '#Intercom',
-            "TEMPLATE":"index.html",
-            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
-            "INTERCOM_APP_ID": settings.INTERCOM_APP_ID,
-            "first_time": request.GET.get("first_time", "")
+    return {
+        'user_json': user_json,
+        "parent_or_sitter": parent_or_sitter,
+        'intercom_activator': '#Intercom',
+        "TEMPLATE": "index.html",
+        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
+        "INTERCOM_APP_ID": settings.INTERCOM_APP_ID,
+        "first_time": request.GET.get("first_time", "")
     }
+
+def redirect_next(request):
+    if request.user.is_anonymous():
+        return redirect('/?login=true&next=' + request.path)
+    else:
+        return index(request)
 
 @render_to()
 def onboarding2(request):

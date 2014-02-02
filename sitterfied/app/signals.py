@@ -43,7 +43,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
                                         'parent': parent
                                        })
 
-        twilio_client.sms.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
+        twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
 @receiver(booking_declined)
 def booking_request_declined(sender, sitter=None,  **kwargs):
@@ -68,7 +68,7 @@ def booking_request_declined(sender, sitter=None,  **kwargs):
                                         'parent': parent
                                        })
 
-        twilio_client.sms.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
+        twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
 
 @receiver(booking_canceled)
@@ -85,7 +85,7 @@ def booking_request_canceled(sender, **kwargs):
 
     if settings.mobile_booking_accepted_denied and parent.cell:
         sms = render_to_string("email/booking/booking_request_canceled.sms",{})
-        twilio_client.sms.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
+        twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
 
 
@@ -102,7 +102,7 @@ def booking_request_canceled(sender, **kwargs):
 
     if settings.mobile_booking_accepted_denied and sitter.cell:
         sms = render_to_string("email/booking/booking_request_canceled.sms",{})
-        twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
+        twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
 
 @receiver(m2m_changed, sender=Booking.sitters.through)
@@ -130,7 +130,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **
             sms = render_to_string("email/booking/booking_request_received.sms",{
                 'instance': instance
             })
-            twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
+            twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
 @receiver(post_save, sender=SitterReview)
 def new_review(sender, instance=None, **kwargs):
@@ -149,7 +149,7 @@ def new_review(sender, instance=None, **kwargs):
         if settings.email_new_review and sitter.cell:
             sms = render_to_string("email/review/new_review.sms",{})
             try:
-                twilio_client.sms.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
+                twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
             except TwilioException:
                 pass
 
