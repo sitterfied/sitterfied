@@ -76,7 +76,7 @@ require({
         },
 		ucare: {
             deps: ['jquery']
-        }
+        },
         purl: {
             deps: ['jquery']
         }
