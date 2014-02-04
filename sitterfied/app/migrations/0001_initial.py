@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
+import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
 
 class Migration(SchemaMigration):
+
 
     def forwards(self, orm):
         # Adding model 'User'
@@ -24,83 +25,65 @@ class Migration(SchemaMigration):
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
             ('status', self.gf('django.db.models.fields.CharField')(default='Trial', max_length=10)),
-            ('membership_exp_date', self.gf('django.db.models.fields.DateTimeField')(null=True)),
-            ('facebook_token', self.gf('django.db.models.fields.CharField')(max_length=256, null=True, blank=True)),
-            ('facebook_id', self.gf('django.db.models.fields.IntegerField')(unique=True, null=True, blank=True)),
-            ('google_imported', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('address1', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('address2', self.gf('django.db.models.fields.CharField')(default='', max_length=255, blank=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('state', self.gf('django.db.models.fields.CharField')(default='AL', max_length=2, blank=True)),
-            ('zip', self.gf('django.db.models.fields.CharField')(max_length=9, blank=True)),
-            ('timezone', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('cell', self.gf('django.db.models.fields.CharField')(max_length=12, blank=True)),
-            ('avatar', self.gf('pyuploadcare.dj.models.ImageField')(blank=True)),
+            ('membership_exp_date', self.gf('django.db.models.fields.DateField')(null=True)),
         ))
         db.send_create_signal(u'app', ['User'])
 
         # Adding M2M table for field groups on 'User'
-        m2m_table_name = db.shorten_name(u'app_user_groups')
-        db.create_table(m2m_table_name, (
+        db.create_table(u'app_user_groups', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('user', models.ForeignKey(orm[u'app.user'], null=False)),
             ('group', models.ForeignKey(orm[u'auth.group'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['user_id', 'group_id'])
+        db.create_unique(u'app_user_groups', ['user_id', 'group_id'])
 
         # Adding M2M table for field user_permissions on 'User'
-        m2m_table_name = db.shorten_name(u'app_user_user_permissions')
-        db.create_table(m2m_table_name, (
+        db.create_table(u'app_user_user_permissions', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('user', models.ForeignKey(orm[u'app.user'], null=False)),
             ('permission', models.ForeignKey(orm[u'auth.permission'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['user_id', 'permission_id'])
+        db.create_unique(u'app_user_user_permissions', ['user_id', 'permission_id'])
 
-        # Adding M2M table for field users_in_network on 'User'
-        m2m_table_name = db.shorten_name(u'app_user_users_in_network')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('from_user', models.ForeignKey(orm[u'app.user'], null=False)),
-            ('to_user', models.ForeignKey(orm[u'app.user'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['from_user_id', 'to_user_id'])
-
-        # Adding M2M table for field friends on 'User'
-        m2m_table_name = db.shorten_name(u'app_user_friends')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('from_user', models.ForeignKey(orm[u'app.user'], null=False)),
-            ('to_user', models.ForeignKey(orm[u'app.user'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['from_user_id', 'to_user_id'])
-
-        # Adding M2M table for field sitter_groups on 'User'
-        m2m_table_name = db.shorten_name(u'app_user_sitter_groups')
-        db.create_table(m2m_table_name, (
+        # Adding M2M table for field parents_in_network on 'User'
+        db.create_table(u'app_user_parents_in_network', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('user', models.ForeignKey(orm[u'app.user'], null=False)),
-            ('group', models.ForeignKey(orm[u'app.group'], null=False))
+            ('parent', models.ForeignKey(orm[u'app.parent'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['user_id', 'group_id'])
+        db.create_unique(u'app_user_parents_in_network', ['user_id', 'parent_id'])
+
+        # Adding M2M table for field sitters_in_network on 'User'
+        db.create_table(u'app_user_sitters_in_network', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('user', models.ForeignKey(orm[u'app.user'], null=False)),
+            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False))
+        ))
+        db.create_unique(u'app_user_sitters_in_network', ['user_id', 'sitter_id'])
+
+        # Adding M2M table for field fave_sitters on 'User'
+        db.create_table(u'app_user_fave_sitters', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('user', models.ForeignKey(orm[u'app.user'], null=False)),
+            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False))
+        ))
+        db.create_unique(u'app_user_fave_sitters', ['user_id', 'sitter_id'])
 
         # Adding M2M table for field invited_by on 'User'
-        m2m_table_name = db.shorten_name(u'app_user_invited_by')
-        db.create_table(m2m_table_name, (
+        db.create_table(u'app_user_invited_by', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('from_user', models.ForeignKey(orm[u'app.user'], null=False)),
             ('to_user', models.ForeignKey(orm[u'app.user'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['from_user_id', 'to_user_id'])
+        db.create_unique(u'app_user_invited_by', ['from_user_id', 'to_user_id'])
 
         # Adding M2M table for field languages on 'User'
-        m2m_table_name = db.shorten_name(u'app_user_languages')
-        db.create_table(m2m_table_name, (
+        db.create_table(u'app_user_languages', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('user', models.ForeignKey(orm[u'app.user'], null=False)),
             ('language', models.ForeignKey(orm[u'app.language'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['user_id', 'language_id'])
+        db.create_unique(u'app_user_languages', ['user_id', 'language_id'])
 
         # Adding model 'Address'
         db.create_table(u'app_address', (
@@ -108,6 +91,11 @@ class Migration(SchemaMigration):
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.User'])),
+            ('address1', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('address2', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('city', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('state', self.gf('django_localflavor_us.models.USStateField')(max_length=2)),
+            ('zip', self.gf('django.db.models.fields.CharField')(max_length=9)),
         ))
         db.send_create_signal(u'app', ['Address'])
 
@@ -126,105 +114,48 @@ class Migration(SchemaMigration):
         # Adding model 'Parent'
         db.create_table(u'app_parent', (
             (u'user_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['app.User'], unique=True, primary_key=True)),
-            ('emergency_contact_one_name', self.gf('django.db.models.fields.CharField')(max_length=128, blank=True)),
-            ('emergency_contact_one_phone', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
-            ('emergency_contact_two_name', self.gf('django.db.models.fields.CharField')(max_length=128, blank=True)),
-            ('emergency_contact_two_phone', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
+            ('emergency_contact', self.gf('django.db.models.fields.related.OneToOneField')(related_name='emergencies', unique=True, null=True, to=orm['app.Contact'])),
+            ('physician_contact', self.gf('django.db.models.fields.related.OneToOneField')(related_name='physicians', unique=True, null=True, to=orm['app.Contact'])),
+            ('parking_area', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('parking_for_sitter', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal(u'app', ['Parent'])
-
-        # Adding M2M table for field sitter_teams on 'Parent'
-        m2m_table_name = db.shorten_name(u'app_parent_sitter_teams')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('parent', models.ForeignKey(orm[u'app.parent'], null=False)),
-            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['parent_id', 'sitter_id'])
-
-        # Adding M2M table for field bookmarks on 'Parent'
-        m2m_table_name = db.shorten_name(u'app_parent_bookmarks')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('parent', models.ForeignKey(orm[u'app.parent'], null=False)),
-            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['parent_id', 'sitter_id'])
 
         # Adding model 'Sitter'
         db.create_table(u'app_sitter', (
             (u'user_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['app.User'], unique=True, primary_key=True)),
-            ('biography', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('gender', self.gf('django.db.models.fields.CharField')(default='female', max_length=10)),
+            ('biography', self.gf('django.db.models.fields.TextField')()),
             ('id_verified', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('dob', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+            ('id_scan_path', self.gf('django.db.models.fields.FilePathField')(max_length=100)),
+            ('live_zip', self.gf('django.db.models.fields.CharField')(max_length=9)),
+            ('work_zip', self.gf('django.db.models.fields.CharField')(max_length=9)),
+            ('dob', self.gf('django.db.models.fields.DateField')()),
             ('smoker', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('sick', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('will_transport', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('will_transport', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('total_exp', self.gf('django.db.models.fields.SmallIntegerField')()),
-            ('infant_exp', self.gf('django.db.models.fields.SmallIntegerField')(blank=True)),
-            ('toddler_exp', self.gf('django.db.models.fields.SmallIntegerField')(blank=True)),
-            ('preschool_exp', self.gf('django.db.models.fields.SmallIntegerField')(blank=True)),
-            ('school_age_exp', self.gf('django.db.models.fields.SmallIntegerField')(blank=True)),
-            ('pre_teen_exp', self.gf('django.db.models.fields.SmallIntegerField')(blank=True)),
-            ('teen_exp', self.gf('django.db.models.fields.SmallIntegerField')(blank=True)),
-            ('special_needs_exp', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('extra_exp', self.gf('django.db.models.fields.TextField')(default='', null=True, blank=True)),
-            ('highest_education', self.gf('django.db.models.fields.CharField')(default='', max_length=50, null=True, blank=True)),
-            ('last_school', self.gf('django.db.models.fields.CharField')(default='', max_length=50, null=True, blank=True)),
-            ('major', self.gf('django.db.models.fields.CharField')(default='', max_length=50, null=True, blank=True)),
-            ('occupation', self.gf('django.db.models.fields.CharField')(default='', max_length=50, null=True, blank=True)),
+            ('infant_exp', self.gf('django.db.models.fields.SmallIntegerField')()),
+            ('toddler_exp', self.gf('django.db.models.fields.SmallIntegerField')()),
+            ('preschool_exp', self.gf('django.db.models.fields.SmallIntegerField')()),
+            ('school_age_exp', self.gf('django.db.models.fields.SmallIntegerField')()),
+            ('pre_teen_exp', self.gf('django.db.models.fields.SmallIntegerField')()),
+            ('teen_exp', self.gf('django.db.models.fields.SmallIntegerField')()),
+            ('highest_education', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('last_school', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('current_student', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('certification', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('other_services', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('one_child_min_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2)),
             ('one_child_max_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2)),
-            ('two_child_min_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2, blank=True)),
-            ('two_child_max_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2, blank=True)),
-            ('three_child_min_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2, blank=True)),
-            ('three_child_max_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2, blank=True)),
-            ('smokers_ok', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('dogs_ok', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('cats_ok', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('other_animals_ok', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('has_drivers_licence', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('travel_distance', self.gf('django.db.models.fields.IntegerField')(default=10)),
+            ('two_child_min_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2)),
+            ('two_child_max_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2)),
+            ('three_child_min_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2)),
+            ('three_child_max_rate', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2)),
+            ('smokers_ok', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('dogs_ok', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('cats_ok', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('other_animals_ok', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal(u'app', ['Sitter'])
-
-        # Adding M2M table for field other_services on 'Sitter'
-        m2m_table_name = db.shorten_name(u'app_sitter_other_services')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False)),
-            ('otherservice', models.ForeignKey(orm[u'app.otherservice'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['sitter_id', 'otherservice_id'])
-
-        # Adding M2M table for field certifications on 'Sitter'
-        m2m_table_name = db.shorten_name(u'app_sitter_certifications')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False)),
-            ('certification', models.ForeignKey(orm[u'app.certification'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['sitter_id', 'certification_id'])
-
-        # Adding model 'Certification'
-        db.create_table(u'app_certification', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
-            ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('certification', self.gf('django.db.models.fields.CharField')(unique=True, max_length=128)),
-        ))
-        db.send_create_signal(u'app', ['Certification'])
-
-        # Adding model 'OtherService'
-        db.create_table(u'app_otherservice', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
-            ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('service', self.gf('django.db.models.fields.CharField')(unique=True, max_length=128)),
-        ))
-        db.send_create_signal(u'app', ['OtherService'])
 
         # Adding model 'Language'
         db.create_table(u'app_language', (
@@ -235,58 +166,44 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'app', ['Language'])
 
-        # Adding model 'SpecialNeed'
-        db.create_table(u'app_specialneed', (
+        # Adding model 'EmailSettings'
+        db.create_table(u'app_emailsettings', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('need', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['app.User'], unique=True)),
+            ('upcoming_booking', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('new_review', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('new_reference', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('new_reference_request', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
-        db.send_create_signal(u'app', ['SpecialNeed'])
+        db.send_create_signal(u'app', ['EmailSettings'])
 
-        # Adding model 'Settings'
-        db.create_table(u'app_settings', (
+        # Adding model 'MobileSettings'
+        db.create_table(u'app_mobilesettings', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['app.User'], unique=True, null=True)),
-            ('mobile_booking_accepted_denied', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mobile_new_review', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mobile_booking_request', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mobile_friend_joined', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mobile_groups_added_network', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mobile_upcoming_booking_remind', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('email_booking_accepted_denied', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('email_new_review', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('email_booking_request', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('email_friend_joined', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('email_groups_added_network', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('email_upcoming_booking_remind', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('email_news', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('email_blog', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['app.User'], unique=True)),
+            ('message_received', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('booking_accepted_denied', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
-        db.send_create_signal(u'app', ['Settings'])
+        db.send_create_signal(u'app', ['MobileSettings'])
 
         # Adding model 'Child'
         db.create_table(u'app_child', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(related_name='children', to=orm['app.Parent'])),
-            ('name', self.gf('django.db.models.fields.CharField')(default='', max_length=50, blank=True)),
-            ('dob', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('school', self.gf('django.db.models.fields.CharField')(default='', max_length=50, blank=True)),
+            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Parent'])),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('dob', self.gf('django.db.models.fields.DateField')()),
+            ('school', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('sitter_instructions', self.gf('django.db.models.fields.TextField')()),
+            ('special_needs', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('allergies', self.gf('django.db.models.fields.CharField')(max_length=100)),
         ))
         db.send_create_signal(u'app', ['Child'])
-
-        # Adding M2M table for field special_needs on 'Child'
-        m2m_table_name = db.shorten_name(u'app_child_special_needs')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('child', models.ForeignKey(orm[u'app.child'], null=False)),
-            ('specialneed', models.ForeignKey(orm[u'app.specialneed'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['child_id', 'specialneed_id'])
 
         # Adding model 'Contact'
         db.create_table(u'app_contact', (
@@ -298,74 +215,40 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'app', ['Contact'])
 
-        # Adding model 'Schedule'
-        db.create_table(u'app_schedule', (
+        # Adding model 'GeneralAvail'
+        db.create_table(u'app_generalavail', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
             ('sitter', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['app.Sitter'], unique=True)),
-            ('mon_early_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tue_early_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('wed_early_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('thu_early_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('fri_early_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sat_early_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sun_early_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mon_late_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tue_late_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('wed_late_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('thu_late_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('fri_late_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sat_late_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sun_late_morning', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mon_early_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tue_early_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('wed_early_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('thu_early_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('fri_early_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sat_early_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sun_early_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mon_late_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tue_late_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('wed_late_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('thu_late_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('fri_late_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sat_late_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sun_late_afternoon', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mon_early_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tue_early_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('wed_early_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('thu_early_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('fri_early_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sat_early_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sun_early_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mon_late_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tue_late_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('wed_late_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('thu_late_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('fri_late_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sat_late_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sun_late_evening', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('mon_overnight', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('tue_overnight', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('wed_overnight', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('thu_overnight', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('fri_overnight', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sat_overnight', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sun_overnight', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('last_updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('mon_avail_start', self.gf('django.db.models.fields.TimeField')()),
+            ('mon_avail_stop', self.gf('django.db.models.fields.TimeField')()),
+            ('tue_avail_start', self.gf('django.db.models.fields.TimeField')()),
+            ('tue_avail_stop', self.gf('django.db.models.fields.TimeField')()),
+            ('wed_avail_start', self.gf('django.db.models.fields.TimeField')()),
+            ('wed_avail_stop', self.gf('django.db.models.fields.TimeField')()),
+            ('thr_avail_start', self.gf('django.db.models.fields.TimeField')()),
+            ('thr_avail_stop', self.gf('django.db.models.fields.TimeField')()),
+            ('fri_avail_start', self.gf('django.db.models.fields.TimeField')()),
+            ('fri_avail_stop', self.gf('django.db.models.fields.TimeField')()),
+            ('sat_avail_start', self.gf('django.db.models.fields.TimeField')()),
+            ('sat_avail_stop', self.gf('django.db.models.fields.TimeField')()),
+            ('sun_avail_start', self.gf('django.db.models.fields.TimeField')()),
+            ('sun_avail_stop', self.gf('django.db.models.fields.TimeField')()),
         ))
-        db.send_create_signal(u'app', ['Schedule'])
+        db.send_create_signal(u'app', ['GeneralAvail'])
 
         # Adding model 'SitterReview'
         db.create_table(u'app_sitterreview', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(related_name='reviews', to=orm['app.Parent'])),
-            ('sitter', self.gf('django.db.models.fields.related.ForeignKey')(related_name='reviews', to=orm['app.Sitter'])),
+            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Parent'])),
+            ('sitter', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Sitter'])),
             ('recommended', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('rehire', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('review', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('review', self.gf('django.db.models.fields.TextField')()),
+            ('rating', self.gf('django.db.models.fields.SmallIntegerField')()),
         ))
         db.send_create_signal(u'app', ['SitterReview'])
 
@@ -378,67 +261,24 @@ class Migration(SchemaMigration):
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
             ('parent', self.gf('django.db.models.fields.related.ForeignKey')(related_name='bookings', to=orm['app.Parent'])),
-            ('notes', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('respond_by', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('sitter', self.gf('django.db.models.fields.related.ForeignKey')(related_name='bookings', to=orm['app.Sitter'])),
+            ('notes', self.gf('django.db.models.fields.TextField')()),
+            ('respond_by', self.gf('django.db.models.fields.DateTimeField')()),
             ('start_date_time', self.gf('django.db.models.fields.DateTimeField')()),
             ('stop_date_time', self.gf('django.db.models.fields.DateTimeField')()),
-            ('num_children', self.gf('django.db.models.fields.IntegerField')(default=1)),
-            ('emergency_phone', self.gf('django.db.models.fields.CharField')(max_length=10, blank=True)),
-            ('address1', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('address2', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
-            ('state', self.gf('django.db.models.fields.CharField')(default='AL', max_length=2, blank=True)),
-            ('zip', self.gf('django.db.models.fields.CharField')(max_length=9, blank=True)),
-            ('rate', self.gf('django.db.models.fields.DecimalField')(default=0, max_digits=5, decimal_places=2, blank=True)),
+            ('emergency_phone', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Phone'])),
             ('booking_status', self.gf('django.db.models.fields.CharField')(default='Active', max_length=10)),
-            ('booking_type', self.gf('django.db.models.fields.CharField')(default='Job', max_length=10)),
-            ('accepted_sitter', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Sitter'], null=True, blank=True)),
-            ('overnight', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('canceled', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('location', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.Address'])),
         ))
         db.send_create_signal(u'app', ['Booking'])
 
-        # Adding M2M table for field sitters on 'Booking'
-        m2m_table_name = db.shorten_name(u'app_booking_sitters')
-        db.create_table(m2m_table_name, (
+        # Adding M2M table for field child on 'Booking'
+        db.create_table(u'app_booking_child', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('booking', models.ForeignKey(orm[u'app.booking'], null=False)),
-            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False))
+            ('child', models.ForeignKey(orm[u'app.child'], null=False))
         ))
-        db.create_unique(m2m_table_name, ['booking_id', 'sitter_id'])
-
-        # Adding M2M table for field declined_sitters on 'Booking'
-        m2m_table_name = db.shorten_name(u'app_booking_declined_sitters')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('booking', models.ForeignKey(orm[u'app.booking'], null=False)),
-            ('sitter', models.ForeignKey(orm[u'app.sitter'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['booking_id', 'sitter_id'])
-
-        # Adding model 'IncomingSMSMessage'
-        db.create_table(u'app_incomingsmsmessage', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
-            ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('sid', self.gf('django.db.models.fields.CharField')(max_length=34)),
-            ('date_created', self.gf('django.db.models.fields.DateTimeField')()),
-            ('date_updated', self.gf('django.db.models.fields.DateTimeField')()),
-            ('date_sent', self.gf('django.db.models.fields.DateTimeField')()),
-            ('to', self.gf('django.db.models.fields.CharField')(max_length=16)),
-            ('body', self.gf('django.db.models.fields.CharField')(max_length=161)),
-            ('status', self.gf('django.db.models.fields.CharField')(max_length=12)),
-        ))
-        db.send_create_signal(u'app', ['IncomingSMSMessage'])
-
-        # Adding model 'Group'
-        db.create_table(u'app_group', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
-            ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=128)),
-        ))
-        db.send_create_signal(u'app', ['Group'])
+        db.create_unique(u'app_booking_child', ['booking_id', 'child_id'])
 
 
     def backwards(self, orm):
@@ -449,25 +289,25 @@ class Migration(SchemaMigration):
         db.delete_table(u'app_user')
 
         # Removing M2M table for field groups on 'User'
-        db.delete_table(db.shorten_name(u'app_user_groups'))
+        db.delete_table('app_user_groups')
 
         # Removing M2M table for field user_permissions on 'User'
-        db.delete_table(db.shorten_name(u'app_user_user_permissions'))
+        db.delete_table('app_user_user_permissions')
 
-        # Removing M2M table for field users_in_network on 'User'
-        db.delete_table(db.shorten_name(u'app_user_users_in_network'))
+        # Removing M2M table for field parents_in_network on 'User'
+        db.delete_table('app_user_parents_in_network')
 
-        # Removing M2M table for field friends on 'User'
-        db.delete_table(db.shorten_name(u'app_user_friends'))
+        # Removing M2M table for field sitters_in_network on 'User'
+        db.delete_table('app_user_sitters_in_network')
 
-        # Removing M2M table for field sitter_groups on 'User'
-        db.delete_table(db.shorten_name(u'app_user_sitter_groups'))
+        # Removing M2M table for field fave_sitters on 'User'
+        db.delete_table('app_user_fave_sitters')
 
         # Removing M2M table for field invited_by on 'User'
-        db.delete_table(db.shorten_name(u'app_user_invited_by'))
+        db.delete_table('app_user_invited_by')
 
         # Removing M2M table for field languages on 'User'
-        db.delete_table(db.shorten_name(u'app_user_languages'))
+        db.delete_table('app_user_languages')
 
         # Deleting model 'Address'
         db.delete_table(u'app_address')
@@ -478,47 +318,26 @@ class Migration(SchemaMigration):
         # Deleting model 'Parent'
         db.delete_table(u'app_parent')
 
-        # Removing M2M table for field sitter_teams on 'Parent'
-        db.delete_table(db.shorten_name(u'app_parent_sitter_teams'))
-
-        # Removing M2M table for field bookmarks on 'Parent'
-        db.delete_table(db.shorten_name(u'app_parent_bookmarks'))
-
         # Deleting model 'Sitter'
         db.delete_table(u'app_sitter')
-
-        # Removing M2M table for field other_services on 'Sitter'
-        db.delete_table(db.shorten_name(u'app_sitter_other_services'))
-
-        # Removing M2M table for field certifications on 'Sitter'
-        db.delete_table(db.shorten_name(u'app_sitter_certifications'))
-
-        # Deleting model 'Certification'
-        db.delete_table(u'app_certification')
-
-        # Deleting model 'OtherService'
-        db.delete_table(u'app_otherservice')
 
         # Deleting model 'Language'
         db.delete_table(u'app_language')
 
-        # Deleting model 'SpecialNeed'
-        db.delete_table(u'app_specialneed')
+        # Deleting model 'EmailSettings'
+        db.delete_table(u'app_emailsettings')
 
-        # Deleting model 'Settings'
-        db.delete_table(u'app_settings')
+        # Deleting model 'MobileSettings'
+        db.delete_table(u'app_mobilesettings')
 
         # Deleting model 'Child'
         db.delete_table(u'app_child')
 
-        # Removing M2M table for field special_needs on 'Child'
-        db.delete_table(db.shorten_name(u'app_child_special_needs'))
-
         # Deleting model 'Contact'
         db.delete_table(u'app_contact')
 
-        # Deleting model 'Schedule'
-        db.delete_table(u'app_schedule')
+        # Deleting model 'GeneralAvail'
+        db.delete_table(u'app_generalavail')
 
         # Deleting model 'SitterReview'
         db.delete_table(u'app_sitterreview')
@@ -526,70 +345,51 @@ class Migration(SchemaMigration):
         # Deleting model 'Booking'
         db.delete_table(u'app_booking')
 
-        # Removing M2M table for field sitters on 'Booking'
-        db.delete_table(db.shorten_name(u'app_booking_sitters'))
-
-        # Removing M2M table for field declined_sitters on 'Booking'
-        db.delete_table(db.shorten_name(u'app_booking_declined_sitters'))
-
-        # Deleting model 'IncomingSMSMessage'
-        db.delete_table(u'app_incomingsmsmessage')
-
-        # Deleting model 'Group'
-        db.delete_table(u'app_group')
+        # Removing M2M table for field child on 'Booking'
+        db.delete_table('app_booking_child')
 
 
     models = {
         u'app.address': {
             'Meta': {'object_name': 'Address'},
+            'address1': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'address2': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'city': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.User']"})
+            'state': ('django_localflavor_us.models.USStateField', [], {'max_length': '2'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.User']"}),
+            'zip': ('django.db.models.fields.CharField', [], {'max_length': '9'})
         },
         u'app.booking': {
             'Meta': {'object_name': 'Booking'},
-            'accepted_sitter': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Sitter']", 'null': 'True', 'blank': 'True'}),
-            'address1': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
-            'address2': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'booking_status': ('django.db.models.fields.CharField', [], {'default': "'Active'", 'max_length': '10'}),
-            'booking_type': ('django.db.models.fields.CharField', [], {'default': "'Job'", 'max_length': '10'}),
-            'canceled': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
+            'child': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Child']", 'symmetrical': 'False'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'declined_sitters': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'declined_bookings'", 'blank': 'True', 'to': u"orm['app.Sitter']"}),
-            'emergency_phone': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'}),
+            'emergency_phone': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Phone']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'location': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Address']"}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'notes': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'num_children': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
-            'overnight': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'notes': ('django.db.models.fields.TextField', [], {}),
             'parent': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'bookings'", 'to': u"orm['app.Parent']"}),
-            'rate': ('django.db.models.fields.DecimalField', [], {'default': '0', 'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
-            'respond_by': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'sitters': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'bookings'", 'symmetrical': 'False', 'to': u"orm['app.Sitter']"}),
+            'respond_by': ('django.db.models.fields.DateTimeField', [], {}),
+            'sitter': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'bookings'", 'to': u"orm['app.Sitter']"}),
             'start_date_time': ('django.db.models.fields.DateTimeField', [], {}),
-            'state': ('django.db.models.fields.CharField', [], {'default': "'AL'", 'max_length': '2', 'blank': 'True'}),
-            'stop_date_time': ('django.db.models.fields.DateTimeField', [], {}),
-            'zip': ('django.db.models.fields.CharField', [], {'max_length': '9', 'blank': 'True'})
-        },
-        u'app.certification': {
-            'Meta': {'object_name': 'Certification'},
-            'certification': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'}),
-            'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'})
+            'stop_date_time': ('django.db.models.fields.DateTimeField', [], {})
         },
         u'app.child': {
             'Meta': {'object_name': 'Child'},
+            'allergies': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'dob': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'dob': ('django.db.models.fields.DateField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'blank': 'True'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'children'", 'to': u"orm['app.Parent']"}),
-            'school': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'blank': 'True'}),
-            'special_needs': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.SpecialNeed']", 'symmetrical': 'False', 'blank': 'True'})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Parent']"}),
+            'school': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'sitter_instructions': ('django.db.models.fields.TextField', [], {}),
+            'special_needs': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'app.contact': {
             'Meta': {'object_name': 'Contact'},
@@ -599,25 +399,38 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'phone': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Phone']"})
         },
-        u'app.group': {
-            'Meta': {'object_name': 'Group'},
+        u'app.emailsettings': {
+            'Meta': {'object_name': 'EmailSettings'},
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '128'})
+            'new_reference': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'new_reference_request': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'new_review': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'upcoming_booking': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.User']", 'unique': 'True'})
         },
-        u'app.incomingsmsmessage': {
-            'Meta': {'object_name': 'IncomingSMSMessage'},
-            'body': ('django.db.models.fields.CharField', [], {'max_length': '161'}),
+        u'app.generalavail': {
+            'Meta': {'object_name': 'GeneralAvail'},
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'date_created': ('django.db.models.fields.DateTimeField', [], {}),
-            'date_sent': ('django.db.models.fields.DateTimeField', [], {}),
-            'date_updated': ('django.db.models.fields.DateTimeField', [], {}),
+            'fri_avail_start': ('django.db.models.fields.TimeField', [], {}),
+            'fri_avail_stop': ('django.db.models.fields.TimeField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'sid': ('django.db.models.fields.CharField', [], {'max_length': '34'}),
-            'status': ('django.db.models.fields.CharField', [], {'max_length': '12'}),
-            'to': ('django.db.models.fields.CharField', [], {'max_length': '16'})
+            'mon_avail_start': ('django.db.models.fields.TimeField', [], {}),
+            'mon_avail_stop': ('django.db.models.fields.TimeField', [], {}),
+            'sat_avail_start': ('django.db.models.fields.TimeField', [], {}),
+            'sat_avail_stop': ('django.db.models.fields.TimeField', [], {}),
+            'sitter': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.Sitter']", 'unique': 'True'}),
+            'sun_avail_start': ('django.db.models.fields.TimeField', [], {}),
+            'sun_avail_stop': ('django.db.models.fields.TimeField', [], {}),
+            'thr_avail_start': ('django.db.models.fields.TimeField', [], {}),
+            'thr_avail_stop': ('django.db.models.fields.TimeField', [], {}),
+            'tue_avail_start': ('django.db.models.fields.TimeField', [], {}),
+            'tue_avail_stop': ('django.db.models.fields.TimeField', [], {}),
+            'wed_avail_start': ('django.db.models.fields.TimeField', [], {}),
+            'wed_avail_stop': ('django.db.models.fields.TimeField', [], {})
         },
         u'app.language': {
             'Meta': {'object_name': 'Language'},
@@ -626,21 +439,21 @@ class Migration(SchemaMigration):
             'language': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'})
         },
-        u'app.otherservice': {
-            'Meta': {'object_name': 'OtherService'},
+        u'app.mobilesettings': {
+            'Meta': {'object_name': 'MobileSettings'},
+            'booking_accepted_denied': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'message_received': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'service': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'})
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.User']", 'unique': 'True'})
         },
         u'app.parent': {
             'Meta': {'object_name': 'Parent', '_ormbases': [u'app.User']},
-            'bookmarks': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'bookmarks'", 'blank': 'True', 'to': u"orm['app.Sitter']"}),
-            'emergency_contact_one_name': ('django.db.models.fields.CharField', [], {'max_length': '128', 'blank': 'True'}),
-            'emergency_contact_one_phone': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'}),
-            'emergency_contact_two_name': ('django.db.models.fields.CharField', [], {'max_length': '128', 'blank': 'True'}),
-            'emergency_contact_two_phone': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'}),
-            'sitter_teams': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'sitter_teams'", 'blank': 'True', 'to': u"orm['app.Sitter']"}),
+            'emergency_contact': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'emergencies'", 'unique': 'True', 'null': 'True', 'to': u"orm['app.Contact']"}),
+            'parking_area': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'parking_for_sitter': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'physician_contact': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'physicians'", 'unique': 'True', 'null': 'True', 'to': u"orm['app.Contact']"}),
             u'user_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.User']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'app.phone': {
@@ -653,175 +466,75 @@ class Migration(SchemaMigration):
             'primary': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.User']"})
         },
-        u'app.schedule': {
-            'Meta': {'object_name': 'Schedule'},
-            'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'fri_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'fri_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'fri_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'fri_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'fri_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'fri_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'fri_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'mon_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mon_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mon_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mon_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mon_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mon_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mon_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sat_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sat_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sat_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sat_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sat_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sat_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sat_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sitter': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.Sitter']", 'unique': 'True'}),
-            'sun_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sun_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sun_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sun_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sun_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sun_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sun_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thu_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thu_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thu_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thu_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thu_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thu_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'thu_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tue_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tue_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tue_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tue_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tue_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tue_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'tue_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'wed_early_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'wed_early_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'wed_early_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'wed_late_afternoon': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'wed_late_evening': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'wed_late_morning': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'wed_overnight': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
-        },
-        u'app.settings': {
-            'Meta': {'object_name': 'Settings'},
-            'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'email_blog': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'email_booking_accepted_denied': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'email_booking_request': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'email_friend_joined': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'email_groups_added_network': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'email_new_review': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'email_news': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'email_upcoming_booking_remind': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'mobile_booking_accepted_denied': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mobile_booking_request': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mobile_friend_joined': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mobile_groups_added_network': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mobile_new_review': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'mobile_upcoming_booking_remind': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.User']", 'unique': 'True', 'null': 'True'})
-        },
         u'app.sitter': {
             'Meta': {'object_name': 'Sitter', '_ormbases': [u'app.User']},
-            'biography': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'cats_ok': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'certifications': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Certification']", 'symmetrical': 'False', 'blank': 'True'}),
+            'biography': ('django.db.models.fields.TextField', [], {}),
+            'cats_ok': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'certification': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'current_student': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'dob': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'dogs_ok': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'extra_exp': ('django.db.models.fields.TextField', [], {'default': "''", 'null': 'True', 'blank': 'True'}),
-            'gender': ('django.db.models.fields.CharField', [], {'default': "'female'", 'max_length': '10'}),
-            'has_drivers_licence': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'highest_education': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            'dob': ('django.db.models.fields.DateField', [], {}),
+            'dogs_ok': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'highest_education': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'id_scan_path': ('django.db.models.fields.FilePathField', [], {'max_length': '100'}),
             'id_verified': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'infant_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
-            'last_school': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'major': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'occupation': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            'infant_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
+            'last_school': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'live_zip': ('django.db.models.fields.CharField', [], {'max_length': '9'}),
             'one_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
             'one_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
-            'other_animals_ok': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'other_services': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.OtherService']", 'symmetrical': 'False', 'blank': 'True'}),
-            'pre_teen_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
-            'preschool_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
-            'school_age_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
-            'sick': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'other_animals_ok': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'other_services': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'pre_teen_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
+            'preschool_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
+            'school_age_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
             'smoker': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'smokers_ok': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'special_needs_exp': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'teen_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
-            'three_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
-            'three_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
-            'toddler_exp': ('django.db.models.fields.SmallIntegerField', [], {'blank': 'True'}),
+            'smokers_ok': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'teen_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
+            'three_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
+            'three_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
+            'toddler_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
             'total_exp': ('django.db.models.fields.SmallIntegerField', [], {}),
-            'travel_distance': ('django.db.models.fields.IntegerField', [], {'default': '10'}),
-            'two_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
-            'two_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2', 'blank': 'True'}),
+            'two_child_max_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
+            'two_child_min_rate': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'}),
             u'user_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['app.User']", 'unique': 'True', 'primary_key': 'True'}),
-            'will_transport': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
+            'will_transport': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'work_zip': ('django.db.models.fields.CharField', [], {'max_length': '9'})
         },
         u'app.sitterreview': {
             'Meta': {'unique_together': "(('parent', 'sitter'),)", 'object_name': 'SitterReview'},
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reviews'", 'to': u"orm['app.Parent']"}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Parent']"}),
+            'rating': ('django.db.models.fields.SmallIntegerField', [], {}),
             'recommended': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'rehire': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'review': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'sitter': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reviews'", 'to': u"orm['app.Sitter']"})
-        },
-        u'app.specialneed': {
-            'Meta': {'object_name': 'SpecialNeed'},
-            'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'need': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'review': ('django.db.models.fields.TextField', [], {}),
+            'sitter': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['app.Sitter']"})
         },
         u'app.user': {
             'Meta': {'object_name': 'User'},
-            'address1': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
-            'address2': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'blank': 'True'}),
-            'avatar': ('pyuploadcare.dj.models.ImageField', [], {'blank': 'True'}),
-            'cell': ('django.db.models.fields.CharField', [], {'max_length': '12', 'blank': 'True'}),
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'facebook_id': ('django.db.models.fields.IntegerField', [], {'unique': 'True', 'null': 'True', 'blank': 'True'}),
-            'facebook_token': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
+            'fave_sitters': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'favored_by'", 'null': 'True', 'to': u"orm['app.Sitter']"}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'friends': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'friends_rel_+'", 'blank': 'True', 'to': u"orm['app.User']"}),
-            'google_imported': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'invited_by': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.User']", 'symmetrical': 'False', 'blank': 'True'}),
+            'invited_by': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'invited_by_rel_+'", 'symmetrical': "'false'", 'to': u"orm['app.User']"}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'languages': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'users'", 'blank': 'True', 'to': u"orm['app.Language']"}),
+            'languages': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Language']", 'symmetrical': 'False'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'membership_exp_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'membership_exp_date': ('django.db.models.fields.DateField', [], {'null': 'True'}),
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
+            'parents_in_network': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Parent']", 'symmetrical': 'False'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'sitter_groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Group']", 'symmetrical': 'False', 'blank': 'True'}),
-            'state': ('django.db.models.fields.CharField', [], {'default': "'AL'", 'max_length': '2', 'blank': 'True'}),
+            'sitters_in_network': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['app.Sitter']", 'symmetrical': 'False'}),
             'status': ('django.db.models.fields.CharField', [], {'default': "'Trial'", 'max_length': '10'}),
-            'timezone': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
-            'users_in_network': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'users_in_network_rel_+'", 'blank': 'True', 'to': u"orm['app.User']"}),
-            'zip': ('django.db.models.fields.CharField', [], {'max_length': '9', 'blank': 'True'})
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
