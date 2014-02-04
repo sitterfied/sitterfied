@@ -65,6 +65,7 @@ urlpatterns += patterns('',
     url(r'^sms/$', 'app.sms.sms_messages',  name="sms_messages"),
 
     #Finally our catch all
+    url(r'^[a-zA-Z0-9]{5}$', 'app.views.short_url'),
     url(r'^.*/$', 'app.views.redirect_next'),
     url(r'^$', 'app.views.index', name='index'),
 )

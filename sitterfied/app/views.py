@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q, Count
 from django.forms.models import inlineformset_factory
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.views.decorators.cache import never_cache
@@ -21,6 +21,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
 from ecl_facebook import Facebook
+from redis import Redis
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
@@ -30,9 +31,9 @@ from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm
 from .models import User, Sitter, Parent, Group, Child
 from .utils import send_html_email
 
-
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
+redis_client = Redis.from_url(settings.REDIS_URL + '/2')
 
 
 try:
@@ -110,6 +111,17 @@ def redirect_next(request):
         return redirect('/?login=true&next=' + request.path)
     else:
         return index(request)
+
+
+def short_url(request):
+    try:
+        long_url = redis_client.get(request.path)
+        if long_url is not None:
+            return HttpResponseRedirect(long_url)
+        else:
+            raise HttpResponseNotFound()
+    except:
+        return HttpResponseNotFound()
 
 @render_to()
 def onboarding2(request):

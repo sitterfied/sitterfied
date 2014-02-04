@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
+from django.conf import settings
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from twilio import TwilioException
 from sms import client as twilio_client, sitterfied_number
+from utils import generate_short_url_code
+from views import redis_client
 
 from .models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule
-from .utils import send_html_email, send_template_email
+from .utils import send_html_email, send_template_email, generate_short_url_code
 
 
 #mutual events
@@ -106,29 +110,39 @@ def booking_request_canceled(sender, **kwargs):
 
 
 @receiver(m2m_changed, sender=Booking.sitters.through)
-def receive_booking_request(sender, pk_set=None, instance=None, action=None,  **kwargs):
+def receive_booking_request(sender, pk_set=None, instance=None, action=None, **kwargs):
     if kwargs.get('reverse', False):
         return
+
     if action == "post_add":
         parent = instance.parent
         email_sitters = instance.sitters.filter(settings__email_booking_request=True).filter(id__in=pk_set)
         text_sitters = instance.sitters.filter(settings__mobile_booking_request=True).filter(id__in=pk_set)
-        for sitter in email_sitters:
-            text = html = render_to_string("email/booking/booking_request_received.html",
-                                           {
-                                               'parent_name':parent.get_full_name(),
-                                               'first_name':sitter.first_name,
 
-                                           })
+        for sitter in email_sitters:
+            text = html = render_to_string('email/booking/booking_request_received.html', {
+                'parent_name': parent.get_full_name(),
+                'first_name': sitter.first_name,
+            })
 
             send_html_email("You have recieved a booking request", "hello@sitterfied.com", sitter.email, text, html)
-
 
         for sitter in text_sitters:
             if not sitter.cell:
                 continue
-            sms = render_to_string("email/booking/booking_request_received.sms",{
-                'instance': instance
+
+            short_url_code = generate_short_url_code()
+            redis_client.set(short_url_code, '/mybookings/pending/' + instance.id)
+            short_url = settings.SHORT_URL + short_url_code
+
+            sms = render_to_string('email/booking/booking_request_received.sms', {
+                'sitter_name': sitter.first_name,
+                'parent_name': parent.first_name,
+                'booking_date': instance.start_date,
+                'start_date_time': instance.start_date_time,
+                'stop_date_time': instance.stop_date_time,
+                'short_url': short_url,
+                'booking_code': instance.id,
             })
             twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
@@ -154,12 +168,12 @@ def new_review(sender, instance=None, **kwargs):
                 pass
 
 
-
 @receiver(post_save, sender=Parent)
 def new_settings_parent(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
         Settings.objects.create(user=instance)
+
 
 @receiver(post_save, sender=Sitter)
 def new_settings_sitter(sender, instance=None, **kwargs):
@@ -174,6 +188,7 @@ def new_schedule_parent(sender, instance=None, **kwargs):
     if created:
         Schedule.objects.create(sitter=instance)
 
+
 @receiver(post_save, sender=Sitter)
 def new_sitter(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
@@ -182,9 +197,9 @@ def new_sitter(sender, instance=None, **kwargs):
             'from_email': 'hello@sitterfied.com',
             'from_name': 'Sitterfied',
             'subject': 'Welcome to Sitterfied!',
-            'to': [{'email': instance.email, 'name': instance.get_full_name()},],
+            'to': [{'email': instance.email, 'name': instance.get_full_name()}, ],
             'global_merge_vars': [
-                {'name':'FNAME', 'content': instance.first_name}
+                {'name': 'FNAME', 'content': instance.first_name}
             ],
-        }   
+        }
         send_template_email('welcome-sitter', message)
