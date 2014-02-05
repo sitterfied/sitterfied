@@ -1,4 +1,5 @@
-.pyo
+*.pyo
+*.pyc
 .ropeproject
 _flymake*
 .dotcloud/
