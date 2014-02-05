@@ -1,11 +1,7 @@
-*.pyc
-*.pyo
-*.ropeproject
-*/static/*
-*_flymake*
-*.\#*
-\#*#
-.sass-cache/
+.pyo
+.ropeproject
+_flymake*
 .dotcloud/
-compass.rb
+data/
+*/static/*
 sitterfied*.js
