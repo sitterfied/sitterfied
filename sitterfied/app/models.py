@@ -317,7 +317,7 @@ class SitterReview(TimeStampedModel):
 
 class Booking(TimeStampedModel):
     BOOKING_STATUS = Choices('Active', 'Pending', 'Completed', 'Expired', 'Declined', 'Canceled',)
-    BOOKING_TYPES = Choices('Job', 'Interview')
+    BOOKING_TYPES = Choices('Job', 'Interview', 'Meetup Interview', 'Phone Interview')
     parent = models.ForeignKey(Parent, related_name="bookings")
     sitters = models.ManyToManyField(Sitter, related_name="bookings")
     declined_sitters = models.ManyToManyField(Sitter, blank=True, related_name="declined_bookings")
@@ -335,7 +335,7 @@ class Booking(TimeStampedModel):
     zip = models.CharField(max_length=9, blank=True)
     rate = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=True)
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
-    booking_type =  models.CharField(max_length=10, choices=BOOKING_TYPES, default='Job')
+    booking_type =  models.CharField(max_length=20, choices=BOOKING_TYPES, default='Job')
     accepted_sitter= models.ForeignKey(Sitter, blank=True, null=True)
     overnight = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)

@@ -307,17 +307,23 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.transitionTo('search');
 
         book: () ->
+            console.log("Start book")
             #debounce clicks
             if @get("pending")
                 return
             @set("pending", true)
             booking = Sitterfied.get('onDeckBooking')
+            
+            console.log("Booking:", booking)
+            
             promise = booking.save()
             promise.then (booking) =>
                 #for some reason, this first load strips out start_date and end_date.
                 #it's in the json, just doesn't make it to the object. select2 perhaps?
+                console.log("Booking Before Promise:", booking)
                 p = booking.reload()
                 p.then =>
+                    console.log("Booking Promise:", booking)
                     Sitterfied.currentUser.get('bookings').pushObject(booking)
                     @set("pending", false)
                     this.transitionTo('done', booking);
@@ -423,18 +429,35 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
 
-        interview: () ->
-            start_date_time = Sitterfied.onDeckBookingAttrs['start_date_time'] || moment().toDate()
-            stop_date_time = Sitterfied.onDeckBookingAttrs['stop_date_time'] || moment().toDate()
-            kids = Sitterfied.onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
-            overnight = Sitterfied.onDeckBookingAttrs['overnight'] || false
+        open_interview_popup: () ->
+            $.fancybox
+                href: "#interview_popup"
+                maxWidth: 390
+                maxHeight: 257
+                minWidth: 390
+                minHeight: 257
+                fitToView: false
+                closeBtn: false
+                enableEscapeButton: false
+                width: "90%"
+                height: "90%"
+        
+        interview: (interview_type) ->
+            $.fancybox.close()
+            
+            start_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['start_date_time']) || moment().toDate()
+            stop_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['stop_date_time']) || moment().toDate()
+            kids = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['kids']) || Sitterfied.get('currentUser.children.length')
+            overnight = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['overnight']) || false
+                
+            booking_type = interview_type + " Interview"
 
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: overnight
                 booking_status: "Pending"
-                booking_type: "Interview"
+                booking_type: booking_type
                 start_date_time: start_date_time
                 stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
@@ -802,7 +825,24 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             Sitterfied.set('onDeckBooking', booking)
             this.transitionTo('book')
 
-        interview: (sitters) ->
+        open_interview_popup: (sitters) ->
+            Sitterfied.set("sitters_to_interview", sitters)
+            $.fancybox
+                href: "#interview_popup"
+                maxWidth: 390
+                maxHeight: 257
+                minWidth: 390
+                minHeight: 257
+                fitToView: false
+                closeBtn: false
+                enableEscapeButton: false
+                width: "90%"
+                height: "90%"
+
+        interview: (interview_type) ->
+            $.fancybox.close()
+            
+            sitters = Sitterfied.get("sitters_to_interview")
             if not Sitterfied.typeIsArray sitters
                 sitters = [sitters]
 
@@ -822,14 +862,15 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             stop_moment.hour(stop_time.hour())
             stop_moment.minute(stop_time.minute())
             stop_date_time = stop_moment.toDate()
-
+            
+            booking_type = interview_type + " Interview"
 
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
                 booking_status: "Pending"
-                booking_type: "Interview"
+                booking_type: booking_type
                 start_date_time: start_date_time
                 stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
@@ -845,7 +886,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.transitionTo('book')
             
         bookTeam: () ->
-            console.log("Start book team")
             if @get('overnight')
                 stop_date = @get('stop_date')
             else

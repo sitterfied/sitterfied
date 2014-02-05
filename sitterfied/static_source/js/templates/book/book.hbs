@@ -3,162 +3,173 @@
 	<!-- parent_book_block -->
 	<form class="form_style">
 	  <div class="parent_book_block clear">
-		<ul>
-          {{# if multiple }}
-		  <li><div><span class="icon_heart">&nbsp;</span>Recipients</div>
+	    <ul>
+	      {{# if multiple }}
+		<li>
+		  <div>
+		    <span class="icon_heart">&nbsp;</span>
+		    Recipients
+		  </div>
 		  <ul>
-			<li><span class="icon_heart">&nbsp;</span>Recipients</li>
-			<li>
-              <select data-placeholder="Names" multiple tabindex="1">
-                {{# each sitters }}
-                <option {{bindAttr value=id }}>{{full_name}}</option>
-                {{/ each }}
-              </select>
-            </li>
-			<li>&nbsp;</li>
+		    <li><span class="icon_heart">&nbsp;</span>Recipients</li>
+		    <li>
+		      <select data-placeholder="Names" multiple tabindex="1">
+			{{# each sitters }}
+	                  <option {{bindAttr value=id }}>{{full_name}}</option>
+	                {{/ each }}
+	              </select>
+	            </li>
+		    <li>&nbsp;</li>
 		  </ul>
-		  </li>
-          {{/if}}
+		</li>
+	      {{/if}}
+	      <li>
+	        <div>
+	          <span class="icon_date2">&nbsp;
+	          </span>Schedule
+	        </div>
+	        <ul>
 		  <li>
-            <div>
-              <span class="icon_date2">&nbsp;
-              </span>Schedule
-            </div>
-		  <ul>
-			<li>
-              <span class="icon_date2">&nbsp;
-              </span>Schedule
-            </li>
-			<li>
-              <p>
-                {{view Ember.DatePicker placeholder="Choose date" id="datepicker" class="datepicker" valueBinding=calendarDate}}
-              </p>
-            </li>
-			<li>
-			  <p>
-                <label for="from">FROM
-                </label>
-                {{view Sitterfied.Select2
-                contentBinding="Sitterfied.HourBlocks"
-                id="from"
-                optionLabelPath="content.name"
-                optionValuePath="content.value"
-                valueBinding="startHour"
-                }}
-              </p>
-			  <p>
-                <label for="to">TO
-                </label>
-                {{view Sitterfied.Select2
-                contentBinding="Sitterfied.HourBlocks"
-                id="to"
-                optionLabelPath="content.name"
-                optionValuePath="content.value"
-                valueBinding="endHour"
-                }}
-              </p>
-              {{# unless isInterview}}
-			  <p>
-                {{view Ember.Checkbox id="check" checkedBinding="overnight"}}
-                <label for="check">Overnight/Multiday booking
-                </label>
-              </p>
-              {{/unless}}
-			</li>
-			<li>&nbsp;
-            </li>
-		  </ul>
-		  </li>
-		  <li class="lng">
-            <div>
-              <span class="icon_pin4">&nbsp;
-              </span>Location
-            </div>
-		  <ul>
-			<li>
-              <span class="icon_pin4">&nbsp;
-              </span>Location
-            </li>
-			<li>
-			  <p>
-                {{view Ember.TextField valueBinding="address1" placeholder="123 anywhere st"}}
-                {{view Ember.TextField valueBinding="address2" class="small" placeholder="Suite#2"}}
-              </p>
-			  <p>
-                {{view Ember.TextField valueBinding="zip" class="small" placeholder="zipcode"}}
-                {{view Ember.TextField valueBinding="city" placeholder="city"}}
-                {{ view Sitterfied.Select2
-                   viewName="fieldValueSelect2"
-        	       prompt="Select State"
-                   contentBinding="Sitterfied.States"
-                   optionLabelPath="content"
-                   optionValuePath="content"
-                   selectionBinding="state"
-                   required="" }}
-              </p>
-			</li>
-			<li>&nbsp;
-            </li>
-		  </ul>
-		  </li>
-          {{# unless isInterview}}
+		    <span class="icon_date2">&nbsp;</span>
+		    Schedule
+                  </li>
 		  <li>
-            <div>
-              <span class="icon_friends6">&nbsp;
-              </span># of kids
-            </div>
-		  <ul>
-			<li>
-              <span class="icon_friends6">&nbsp;
-              </span>Number of kids
-            </li>
-			<li>
-              <p>
-          {{view Sitterfied.Select2
-          contentBinding="Sitterfied.Kids"
-          optionLabelPath="content.name"
-          optionValuePath="content.value"
-          valueBinding="num_children"
-          }}
-              </p>
-            </li>
-			<li>&nbsp;
-            </li>
-			<li>&nbsp;
-            </li>
-		  </ul>
+		    <p>
+		      {{view Ember.DatePicker placeholder="Choose date" id="datepicker" class="datepicker" valueBinding=calendarDate}}
+		    </p>
 		  </li>
-		  <li class="lng">
-            <div>
-              <span class="icon_phone2">&nbsp;
-              </span>Emergency Contact
-            </div>
-		  <ul>
-			<li>
-              <span class="icon_phone2">&nbsp;
-              </span>Emergency Contact
-            </li>
-			<li>
-              <p>
-                {{view Sitterfied.PhoneField valueBinding="emergency_phone" placeholder="(123) 456-7890"}}
-              </p>
-            </li>
-			<li>&nbsp;
-            </li>
-		  </ul>
+		  <li>
+		    <p>
+		      <label for="from">FROM</label>
+		      {{view Sitterfied.Select2
+	                contentBinding="Sitterfied.HourBlocks"
+	                id="from"
+	                optionLabelPath="content.name"
+	                optionValuePath="content.value"
+	                valueBinding="startHour"
+	              }}
+                    </p>
+		    <p>
+		      <label for="to">TO</label>
+		      {{view Sitterfied.Select2
+			contentBinding="Sitterfied.HourBlocks"
+			id="to"
+			optionLabelPath="content.name"
+			optionValuePath="content.value"
+			valueBinding="endHour"
+		      }}
+		    </p>
+		    {{# unless isInterview}}
+		      <p>
+			{{view Ember.Checkbox id="check" checkedBinding="overnight"}}
+			<label for="check">
+			  Overnight/Multiday booking
+			</label>
+		      </p>
+		    {{/unless}}
 		  </li>
-          {{/unless}}
+		  <li>&nbsp;
+		  </li>
 		</ul>
-		<p>
-          <a class="button button_small button_cancel" {{action 'cancel'}}>
-            <span class="icon_cancel">&nbsp;</span>
-            CANCEL
-          </a>
-          <a class="button button_small" {{action 'book'}}>
-            <span class="icon_ok2">&nbsp;</span>
-            SEND
-          </a>
-        </p>
+	      </li>
+	      {{# unless isPhoneInterview}}
+		<li class="lng">
+		  <div>
+		    <span class="icon_pin4">&nbsp;</span>
+		    Location
+		  </div>
+		  <ul>
+		    <li>
+		      <span class="icon_pin4">&nbsp;</span>
+		      Location
+		    </li>
+		    <li>
+		      <p>
+			{{view Ember.TextField valueBinding="address1" placeholder="123 anywhere st"}}
+			{{view Ember.TextField valueBinding="address2" class="small" placeholder="Suite#2"}}
+		      </p>
+		      <p>
+			{{view Ember.TextField valueBinding="zip" class="small" placeholder="zipcode"}}
+			{{view Ember.TextField valueBinding="city" placeholder="city"}}
+			{{ view Sitterfied.Select2
+			   viewName="fieldValueSelect2"
+			   prompt="Select State"
+			   contentBinding="Sitterfied.States"
+			   optionLabelPath="content"
+			   optionValuePath="content"
+			   selectionBinding="state"
+			   required="" }}
+		      </p>
+		    </li>
+		    <li>
+		      &nbsp;
+		    </li>
+		  </ul>
+		</li>
+	      {{/unless}}
+	      {{# unless isInterview}}
+		<li>
+		  <div>
+		    <span class="icon_friends6">&nbsp;</span>
+		    # of kids
+		  </div>
+		  <ul>
+		    <li>
+		      <span class="icon_friends6">&nbsp;</span>
+		      Number of kids
+		    </li>
+		    <li>
+		      <p>
+			{{view Sitterfied.Select2
+			  contentBinding="Sitterfied.Kids"
+			  optionLabelPath="content.name"
+			  optionValuePath="content.value"
+			  valueBinding="num_children"
+			}}
+		      </p>
+		    </li>
+		    <li>
+		      &nbsp;
+		    </li>
+		    <li>
+		      &nbsp;
+		    </li>
+		  </ul>
+		</li>
+	      {{/unless}}
+	      {{# unless isMeetupInterview}}
+		<li class="lng">
+		    <div>
+		      <span class="icon_phone2">&nbsp;</span>
+		      Emergency Contact
+		    </div>
+		    <ul>
+		      <li>
+		        <span class="icon_phone2">&nbsp;</span>
+		        Emergency Contact
+		      </li>
+		      <li>
+		        <p>
+			  {{view Sitterfied.PhoneField valueBinding="emergency_phone" placeholder="(123) 456-7890"}}
+			</p>
+		      </li>
+		      <li>
+			&nbsp;
+		      </li>
+		    </ul>
+		  </li>
+		{{/unless}}
+	    </ul>
+	    <p>
+	      <a class="button button_small button_cancel" {{action 'cancel'}}>
+		<span class="icon_cancel">&nbsp;</span>
+		CANCEL
+	      </a>
+	      <a class="button button_small" {{action 'book'}}>
+	        <span class="icon_ok2">&nbsp;</span>
+	        SEND
+	      </a>
+	    </p>
 	  </div>
 	</form>
 	<!-- /parent_book_block -->

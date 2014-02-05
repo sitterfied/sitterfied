@@ -1,10 +1,37 @@
 <ul>
-  <li><span class="icon_date">&nbsp;</span>{{formattedDate}}&nbsp;<span>{{formattedHours}}</span></li>
-  <li>{{#unless isInterview}}<span class="icon_friends5">&nbsp;</span>{{num_children}}{{/ unless}}</li>
-	<li><span class="icon_pin3">&nbsp;</span>{{address1}} {{address2}} {{city}}, {{state}}</li>
-    <li>
-	  {{#unless isInterview}}
-        <span class="icon_phone">&nbsp;</span>{{emergency_phone}}
-      {{/unless}}
+  <li>
+    <span class="icon_date">&nbsp;</span>
+    {{formattedDate}}
+    &nbsp;
+    <span>
+      {{formattedHours}}
+    </span>
+  </li>
+  {{#unless isInterview}}
+    <li class="num_children_detail">
+      <span class="icon_friends5">&nbsp;</span>
+      {{num_children}}
     </li>
+    <li class="address_detail_book">
+      <span class="icon_pin3">&nbsp;</span>
+      {{address1}} {{address2}} {{city}}, {{state}}
+    </li>
+    <li class="phone_detail_book">
+      <span class="icon_phone">&nbsp;</span>{{emergency_phone}}
+    </li>
+  {{/unless}}
+  
+  {{#if isPhoneInterview}}
+    <li class="interview_detail phone_interview_detail">
+      <span class="icon_phone">&nbsp;</span>
+      {{emergency_phone}}
+    </li>
+  {{/if}}
+  
+  {{#if isMeetupInterview}}
+    <li class="interview_detail meetup_interview_detail">
+      <span class="icon_pin3">&nbsp;</span>
+      {{address1}} {{address2}} {{city}}, {{state}}
+    </li>
+  {{/if}}
 </ul>

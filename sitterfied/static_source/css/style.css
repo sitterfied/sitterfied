@@ -336,6 +336,28 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 #recommend_popup .info p.email_p label {padding-right:180px;}
 #recommend_popup .info p.email_p a {color:#81abb0;font:14px 'ProximaNovaCond';}
 
+#interview_popup {display:none;}
+#interview_popup .tit {color:#fff;font-size:20px;text-align:center;background:#31a7b5 url(../images/top_title.gif) repeat-x;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;padding:15px 10px;margin:0 0 30px 0;border-radius:4px 4px 0 0;}
+#interview_popup .info {padding:0 10px;}
+#interview_popup .info {color:#616161;font:bold 16px 'ProximaNova';padding:50px 50px 25px 90px;position:relative;clear:both;}
+#interview_popup .info select {width:190px;}
+#interview_popup .info .pad {padding-right:30px;}
+#interview_popup .info label {float:left;display:block;margin-left:40px;}
+#interview_popup .info span.icon_review3 {left:0px;}
+#interview_popup .info span.field {width:250px;padding-right:45px}
+#interview_popup .info span.phone_interview_label {margin-left:6px;font-size:15px;font-weight:bold;}
+#interview_popup .info span.meetup_interview_label {margin-left:6px;font-size:15px;font-weight:bold;}
+#interview_popup .info span label.field_box {float:none;display:inline-block;margin-left:15px;}
+#interview_popup .info span label:before {margin:-1px 0px 0px 0px;}
+#interview_popup .info > [class^="icon_"] {top:20px;}
+#interview_popup .info .field_icon {top:-5px;left:0px;display:inline-block;position:relative;}
+#interview_popup .info textarea {float:right;width:380px;height:115px;padding:15px;font:14px 'ProximaNova';color:#616161;}
+#interview_popup .info:first-child {padding-top:5px;padding-left:10px;padding-bottom:60px;border-bottom:1px dotted #e7e9eb;}
+#interview_popup .info:first-child div {text-align:left;}
+#interview_popup .info .button_small {float:right;margin-left:10px;}
+#interview_popup .info .fb_button {float:right;color:#8a8989;font-size:24px;font-weight:normal;padding:0 0 0 18px;}
+#interview_popup .info .fb_button img {margin-left:18px;position:relative;top:7px;}
+
 /* Header */
 .header {background:#007587 url(../images/header.jpg) repeat-x;min-height:320px;position:relative;}
 .header .logo {position:absolute;top:35px;left:0;z-index:5;}
@@ -530,13 +552,18 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .top_personal_info ul li {position:relative;float:left;color:#104952;font:14px 'ProximaNova-Semibold';padding:8px 0;text-align:center;margin:0 0 2px 0;}
 .top_personal_info ul li span {color:#e68245;}
 .top_personal_info ul li:first-child {border-bottom:2px solid #e6e6e6;float:none;}
-.top_personal_info ul li:nth-child(2) {border-right:2px solid #e6e6e6;width:100px;}
-.top_personal_info ul li:nth-child(3) {width:300px;}
+.top_personal_info ul li.num_children_detail {border-right:2px solid #e6e6e6;width:100px;}
+.top_personal_info ul li.address_detail_book {width:300px;}
 .top_personal_info ul li span {top:8px;left:10px;}
-.top_personal_info ul li:nth-child(2) span {left:-5px;}
-.top_personal_info ul li:nth-child(3) span {top:6px;left:-1px;}
-.top_personal_info ul li:nth-child(4) {position:absolute;top:5px;right:8px;padding:22px 0 22px 40px;border-left:2px solid #e6e6e6;width:105px;}
-.top_personal_info ul li:nth-child(4) span {top:21px;left:11px;}
+.top_personal_info ul li.num_children_detail span {left:-5px;}
+.top_personal_info ul li.address_detail_book span {top:6px;left:-1px;}
+.top_personal_info ul li.phone_detail_book {position:absolute;top:5px;right:8px;padding:22px 0 22px 40px;border-left:2px solid #e6e6e6;width:105px;}
+.top_personal_info ul li.phone_detail_book span {top:21px;left:11px;}
+.top_personal_info ul li.interview_detail {width:300px;}
+.top_personal_info ul li.phone_interview_detail {width:220px}
+.top_personal_info ul li.meetup_interview_detail {width:410px}
+
+
 	/* Profile completion */
 .profile_completion {background:#038ca2 url(../images/stat_bar.gif) repeat-x;min-height:40px;position:relative;z-index:10;color:#fff;margin-bottom:0;box-shadow:#0f99a9 0 0 0 3px, rgba(0,0,0,.26) 0 8px 5px 0;}
 .profile_completion p {float:left;font-size:17px;padding-left:15px;line-height:40px;}
@@ -1352,13 +1379,15 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .top_personal_info ul {float:left;width:260px;padding:0 10px;}
 .top_personal_info ul li {float:none;padding:8px 0 8px 25px;text-align:left;}
 .top_personal_info ul li:first-child {border-bottom-width:1px;}
-.top_personal_info ul li:nth-child(2) {border-right:none;width:auto;border-bottom:1px solid #e6e6e6;}
-.top_personal_info ul li:nth-child(3) {width:auto;border-bottom:1px solid #e6e6e6;}
+.top_personal_info ul li.num_children_detail {border-right:none;width:auto;border-bottom:1px solid #e6e6e6;}
+.top_personal_info ul li.address_detail_book {width:auto;border-bottom:1px solid #e6e6e6;}
 .top_personal_info ul li span {top:8px;left:-3px;display:block;}
-.top_personal_info ul li:nth-child(2) span {left:-5px;}
-.top_personal_info ul li:nth-child(3) span {top:13px;left:-3px;}
-.top_personal_info ul li:nth-child(4) {position:relative;top:0;right:0;padding:8px 0 8px 25px;border-left:none;width:auto;}
-.top_personal_info ul li:nth-child(4) span {top:9px;left:-4px;}
+.top_personal_info ul li.num_children_detail span {left:-5px;}
+.top_personal_info ul li.address_detail_book span {top:13px;left:-3px;}
+.top_personal_info ul li.phone_detail_book {position:relative;top:0;right:0;padding:8px 0 8px 25px;border-left:none;width:auto;}
+.top_personal_info ul li.phone_detail_book span {top:9px;left:-4px;}
+.top_personal_info ul li.interview_detail {border-right:none;width:auto;border-bottom:1px solid #e6e6e6;}
+.top_personal_info ul li.interview_detail span {left:-5px;}
 	/* Quick info list */
 .quick_info_list {background:#24a1b0;}
 .quick_info_list ul {margin-left:0;}
@@ -1444,7 +1473,6 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 	/* My sitter team */
 .my_sitter_team_tab_bg {background:#f7fafc;border-top:3px solid #d8e8f0;border-bottom:3px solid #d8e8f0;}
 .my_sitter_team .send_request {padding:0 0 0 65px;margin-bottom:25px;background-position:0 center;}
-.my_sitter_team .send_request.search_request {display:none;}
 .my_sitter_team .send_to_all {padding-bottom:25px;}
 .my_sitter_team .send_to_all a {font-size:15px;line-height:38px;height:38px;width:auto;}
 .my_sitter_team .send_to_all.njr_btn a {width:225px;margin:0 auto;}
