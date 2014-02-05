@@ -1,3 +1,7 @@
-The OpenShift `python` cartridge documentation can be found at:
+a generic django project
 
-https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-python/README.md
+
+todo:
+  404/403 ect
+  500 page
+  update templates for prod to use cached templates

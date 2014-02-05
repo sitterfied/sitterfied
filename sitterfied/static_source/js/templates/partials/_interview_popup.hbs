@@ -1,0 +1,22 @@
+<!-- Interview popup -->
+<div id="interview_popup">
+  <div class="tit">
+    <span class="popup_title">
+      Is this a phone interview?
+    </span>
+  </div>
+
+  <div class="info">
+    <span class="field phone_interview_field">
+      <input id="phone_interview" type="checkbox" />
+      <label class="field_box" for="phone_interview" {{action interview "Phone"}}></label>
+      <span class="phone_interview_label">Yes</span>
+    </span>
+    
+    <span class="field meetup_interview_field">
+      <input id="meetup_interview" type="checkbox" />
+      <label class="field_box" for="meetup_interview" {{action interview "Meetup"}}></label>
+      <span class="meetup_interview_label">No</span>
+    </span>
+  </div>
+</div>

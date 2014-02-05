@@ -646,13 +646,26 @@ define ['jquery'
         declined_sitters: hasMany('Sitterfied.Sitter',{key:"declined_sitters"})
         canceled: attr(BooleanType),
 
+        display_booking_type: (() ->
+            if @get('isInterview')
+                return "Interview"
+            return @get('booking_type')
+        ).property('booking_type')
 
         isInterview: (() ->
-            return @get('booking_type') == "Interview"
+            return @get('booking_type') && @get('booking_type').indexOf("Interview") != -1
+        ).property('booking_type')
+            
+        isMeetupInterview: (() ->
+            return @get('booking_type') == "Meetup Interview"
+        ).property('booking_type')
+            
+        isPhoneInterview: (() ->
+            return @get('booking_type') == "Phone Interview"
         ).property('booking_type')
 
         kidsString: (() ->
-            if @get('num_children') ==1
+            if @get('num_children') == 1
                 return "Kid"
             return "Kids"
         ).property('num_children')

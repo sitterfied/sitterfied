@@ -17,7 +17,7 @@
   </div>
   <div class="desc">
     {{# if Sitterfied.isParent}}
-	  <p class="sitter_profile_buttons"><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action interview}}>INTERVIEW</a></p>
+	  <p class="sitter_profile_buttons"><a class="button" {{action book}}>BOOK</a><a class="button button2" {{action open_interview_popup}}>INTERVIEW</a></p>
     {{/ if}}
 	<p><span>Hi, I'm <strong>{{full_name}}</strong></span></p>
     <span class="short_bio">{{shortBio}}
@@ -80,3 +80,6 @@
 	</ul>
   </div>
 </div>
+
+<!-- Interview popup -->
+{{ partial interview_popup }}

@@ -1,2 +1,2 @@
 web: python manage.py runserver
-worker: celery --workdir=sitterfied --app=sitterfied worker -l INFO
+worker: celery woker --app=sitterfied --workdir=sitterfied --loglevel=INFO

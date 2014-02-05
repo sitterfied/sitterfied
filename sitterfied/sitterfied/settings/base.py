@@ -7,7 +7,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Andrew Lewisohn', 'alewisohn@gmail.com'),
+    ('Andrew Lewisohn', 'alewisohn@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -45,7 +45,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    PROJECT_ROOT.child("static_source"),# An absolute path: /foo/bar/baz.py
+    PROJECT_ROOT.child("static_source"),  # An absolute path: /foo/bar/baz.py
 )
 
 # List of finder classes that know how to find static files in
@@ -53,7 +53,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -63,7 +62,6 @@ SECRET_KEY = "&)y$vgj8lzxlexal31dcd(^ua(0yf95)f^b@$=*to5s)*eznxq"
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
@@ -81,7 +79,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'app.middleware.TimezoneMiddleware',
 )
@@ -126,8 +123,6 @@ INSTALLED_APPS = (
     'pyuploadcare.dj',
     'favicon',
     'app',
-
-
 )
 
 # A sample logging configuration. The only tangible logging
@@ -169,23 +164,20 @@ LOGGING = {
 
 
 AUTH_USER_MODEL = 'app.User'
-LOGIN_URL = '/login/'
+LOGIN_URL = '/'
 
 ACCOUNT_ACTIVATION_DAYS = 30
 
 DEFAULT_FROM_EMAIL = 'hello@sitterfied.com'
 
 ALLOWED_HOSTS = [
-    "localhost",
-    ".sitterfied.com",
-    "beta.sitterfied.com",
-    'test.sitterfied.com',
+    'localhost',
+    '*.sitterfied.com',
+    '*.sttrfd.us',
     'ping',
 ]
 
-
-AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend','app.authentication.FacebookAuthBackend',)
-
+AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend', 'app.authentication.FacebookAuthBackend',)
 
 from .pipeline import *
 from .grappelli import *

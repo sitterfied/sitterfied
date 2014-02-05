@@ -57,9 +57,17 @@
         </label>
       </div>
       {{else}}
-	<a class="button" {{action book this}}>BOOK</a><a class="button button2" {{action interview this}}>INTERVIEW</a>
-	<p><a href="#">ADD TO SITTER TEAM</a></p>
+	<a class="button" {{action book this}}>BOOK</a><a class="button button2" {{action open_interview_popup this}}>INTERVIEW</a>
+	<p><a {{action addSitterTeam this}}>ADD TO SITTER TEAM</a></p>
     {{/ if}}
-	<p><a href="#">BOOKMARK</a></p>
+	<p>
+	  <a {{action bookmark this}}>
+	    {{# if isBookmarked}}
+	      REMOVE 
+	    {{/ if}}
+	    BOOKMARK
+	  </a>
+	</p>
   </div>
 </li>
+

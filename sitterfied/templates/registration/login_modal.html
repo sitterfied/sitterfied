@@ -49,6 +49,7 @@
 <script>
   $(document).ready(function() {
     $("#errormessage").hide()
+
     $('.login-trigger').fancybox({
         scrolling   : "no",
         wrapCSS     : "onb_final",
@@ -77,5 +78,9 @@
 	 })
 	 return false;
    })
- });
+   
+  if($.url().param('login') != null) {
+    $('.login-trigger').trigger('click')
+  }
+  });
 </script>
