@@ -31,8 +31,7 @@ def sms_messages(request):
 
     if result is None or len(result.groups()) < 2:
         resp.sms('We\'re sorry, but we couldn\'t understand your response. \
-Please respond with either the word \'Accept\' or \'Decline\' followed by the \
-code you received.')
+Please respond with either ACCEPT or DECLINE followed by the code you received.')
         return resp
 
     response = result.group(1).lower()
@@ -41,11 +40,15 @@ code you received.')
     try:
         booking = Booking.objects.get(id=request_id)
     except (Booking.DoesNotExist, ObjectDoesNotExist):
-        resp.sms('We\'re sorry, but we couldn\'t find a booking request that matches the code you sent.')
+        resp.sms('We\'re sorry, but we couldn\'t find a job request for ' + request_id + '. Please check the code and try again.')
+        return resp
+
+    if not sitter in booking.sitters:
+        resp.sms('We\'re sorry, but we couldn\'t find a job request for ' + request_id + '. Please check the code and try again.')
         return resp
 
     if booking.accepted_sitter:
-        resp.sms('We\'re sorry, but this booking has already been accepted.')
+        resp.sms('We\'re sorry, but this job has already been accepted.')
         return resp
 
     if response == 'accept' or response == 'yes':

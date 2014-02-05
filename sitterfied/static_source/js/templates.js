@@ -4334,7 +4334,7 @@ function program26(depth0,data) {
   hashContexts = {};
   stack2 = helpers['if'].call(depth0, "isBookmarked", {hash:{},inverse:self.noop,fn:self.program(26, program26, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
-  data.buffer.push("\n	    BOOKMARK\n	  </a>\n	</p>\n  </div>\n</li>\n");
+  data.buffer.push("\n	    BOOKMARK\n	  </a>\n	</p>\n  </div>\n</li>\n\n");
   return buffer;
   
 });
@@ -6358,7 +6358,7 @@ function program28(depth0,data) {
     'targetClass': ("local")
   },inverse:self.noop,fn:self.program(47, program47, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	</section>\n	<!-- /my_local_sitters -->\n\n      </div>\n      \n      <!-- Interview popup -->\n      ");
+  data.buffer.push("\n	</section>\n	<!-- /my_local_sitters -->\n      </div>\n      \n      <!-- Interview popup -->\n      ");
   hashTypes = {};
   hashContexts = {};
   options = {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
@@ -6559,7 +6559,7 @@ function program50(depth0,data) {
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.program(50, program50, data),fn:self.program(28, program28, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n  </div>\n</div>\n");
+  data.buffer.push("\n</div>\n");
   return buffer;
   
 });

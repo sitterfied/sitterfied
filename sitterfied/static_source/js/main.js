@@ -19,7 +19,8 @@ require({
         'scrollto': 'lib/jquery.scrollTo-1.4.3.1-min',
 		'imgareaselect': 'lib/jquery.imgareaselect.pack',
 		'phoneformat': 'lib/PhoneFormat',
-		'ucare': 'lib/uploadcare-0.15.0.min'
+		'ucare': 'lib/uploadcare-0.15.0.min',
+        'purl': 'lib/purl.js'
     },
     waitSeconds: 0,
 
@@ -75,9 +76,10 @@ require({
         },
 		ucare: {
             deps: ['jquery']
+        },
+        purl: {
+            deps: ['jquery']
         }
-
-
     },
     urlArgs: "bust=" +  (new Date()).getTime(),
 },
