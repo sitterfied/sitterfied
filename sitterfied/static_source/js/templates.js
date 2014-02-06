@@ -4430,12 +4430,6 @@ function program48(depth0,data) {
   return buffer;
   }
 
-function program50(depth0,data) {
-  
-  
-  data.buffer.push("\n      <!-- no_results -->\n      <div class=\"no_results clear\">\n	<p>We’re not in your neighborhood just yet.</p>\n	<p>Here are a few things you can do right now.</p>\n	<ul>\n	  <li>\n	    <p>\n	      <a href=\"#\" class=\"button\">Invite</a>\n	    </p>\n	    <p>\n	      Invite your friends and discover great sitters together. We’ll even reward you and your friends with free months as they join Sitterfied\n	    </p>\n	  </li>\n	  <li>\n	    <p>\n	      <a href=\"#\" class=\"button\">Connect</a>\n	    </p>\n	    <p>\n	      Connect with your existing social networks to find great sitters through your friends\n	    </p>\n	  </li>\n	  <li>\n	    <p>\n	      <a href=\"#\" class=\"button\">Sign Up</a>\n	    </p>\n	    <p>\n	      Sign up to follow our progress and we’ll let you know when great sitters are added to your area\n	    </p>\n	  </li>\n	</ul>\n      </div>\n      <!-- /no_results -->\n    ");
-  }
-
   data.buffer.push("<div class=\"container clear\">\n  <div class=\"wraper\">\n    <!-- sitter_tabs_wrap -->\n\n    <div class=\"sitter_tabs_wrap my_tabs_style\">\n      ");
   hashContexts = {'tagName': depth0,'id': depth0};
   hashTypes = {'tagName': "STRING",'id': "STRING"};
@@ -4447,7 +4441,7 @@ function program50(depth0,data) {
   data.buffer.push("\n      \n      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.program(50, program50, data),fn:self.program(28, program28, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.noop,fn:self.program(28, program28, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</div>\n");
   return buffer;

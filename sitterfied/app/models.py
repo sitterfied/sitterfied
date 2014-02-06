@@ -226,7 +226,7 @@ class Settings(TimeStampedModel):
 class Child(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="children")
     name = models.CharField(max_length=50, blank=True, default="")
-    dob = models.DateTimeField(blank=True, null=True)
+    dob = models.DateTimeField(blank=True, null=True, default=datetime.now)
     school = models.CharField(max_length=50, blank=True, default="")
     special_needs = models.ManyToManyField(SpecialNeed, blank=True)
 

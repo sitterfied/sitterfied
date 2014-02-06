@@ -235,7 +235,7 @@ class ParentRegisterForm(RegistrationForm):
         model = Parent
         fields = USER_FIELDS + ['sitter_groups']
         widgets = {
-            "address1":widgets.TextInput(attrs={"placeholder":"Street Address"}),
+            "address1":widgets.TextInput(attrs={"placeholder":"Street Address", "class": "large"}),
             "address2":widgets.TextInput(attrs={"placeholder":"Apt/Suite", "class":"small"}),
             "city":widgets.TextInput(attrs={"placeholder":"City"}),
             "state": widgets.Select(attrs={"class": "extra-small"}),
