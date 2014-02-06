@@ -172,8 +172,8 @@ DEFAULT_FROM_EMAIL = 'hello@sitterfied.com'
 
 ALLOWED_HOSTS = [
     'localhost',
-    '*.sitterfied.com',
-    '*.sttrfd.us',
+    '.sitterfied.com',
+    '.sttrfd.us',
     'ping',
 ]
 
