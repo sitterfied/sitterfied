@@ -9,13 +9,12 @@ REDIS_URL = 'redis://localhost:6379'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sitterfied',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sitterfied',
         'USER': 'sitterfied',
         'PASSWORD': 'sitterfied',
-        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '127.0.0.1',
+        'PORT': '',
     }
 }
 
@@ -73,7 +72,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEVSERVER_AUTO_PROFILE = True
 
 # Celery configuration
-BROKER_URL = 'redis://localhost:6379/0'
+BROKER_URL = REDIS_URL + '/0'
 CELERY_IGNORE_RESULTS = True
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
