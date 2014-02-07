@@ -174,6 +174,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '*.sitterfied.com',
     '*.sttrfd.us',
+    'test.sttrfd.us',
     'ping',
 ]
 
