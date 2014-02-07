@@ -1014,17 +1014,22 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .desc ul li a {color:#104952;}
 .bookings_block .booking_list > li .desc ul li span {color:#e68245;top:8px;}
 .bookings_block .booking_list > li .desc ul li .rlink {position:absolute;top:1px;right:20px;text-align:center;display:block;color:#3ea7b8;font:13px 'ProximaNova';width:85px;}
-.bookings_block .booking_list > li .desc ul li:first-child .rlink {right:27px;}
+.bookings_block .booking_list > li .desc ul li.date_detail .rlink {right:27px;}
 .bookings_block .booking_list > li .desc ul li .rlink:hover {text-decoration:underline;}
 .bookings_block .booking_list > li .desc ul li:last-child .rlink {top:10px;right:24px;}
-.bookings_block .booking_list > li .desc ul li:first-child {border-bottom:1px solid #e6e6e6;width:305px;}
-.bookings_block .booking_list > li .desc ul li:nth-child(2) {border-left:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;width:70px;}
-.bookings_block .booking_list > li .desc ul li:nth-child(3) {width:135px;border-right:1px solid #e6e6e6;}
-.bookings_block .booking_list > li .desc ul li:nth-child(4) {width:115px;padding-left:160px;}
-.bookings_block .booking_list > li .desc ul li:nth-child(4) span {left:124px;}
-.bookings_block .booking_list > li .desc ul li:nth-child(4) p {position:absolute;top:2px;left:12px;font:12px 'ProximaNova';}
-.bookings_block .booking_list > li .desc ul li:nth-child(4) p a {color:#3ea7b8;}
-.bookings_block .booking_list > li .desc ul li:nth-child(4) > a {word-wrap:break-word;}
+.bookings_block .booking_list > li .desc ul li.date_detail {border-bottom:1px solid #e6e6e6;width:305px;}
+.bookings_block .booking_list > li .desc ul li.date_detail.date_detail_interview  {width:415px;color:#e68245;}
+.bookings_block .booking_list > li .desc ul li.kids_detail {border-left:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;width:70px;}
+.bookings_block .booking_list > li .desc ul li.address_detail_job {width:135px;border-right:1px solid #e6e6e6;}
+.bookings_block .booking_list > li .desc ul li.address_detail_interview {width:135px;border-right:1px solid #e6e6e6;height:40px;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job {width:115px;padding-left:160px;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job span {left:124px;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job p {position:absolute;top:2px;left:12px;font:12px 'ProximaNova';}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job p a {color:#3ea7b8;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job > a {word-wrap:break-word;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job .contact_detail_interview {padding-top:5px;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job .contact_detail_interview .icon_email2 {top:30px;}
+
 .bookings_block .booking_list > li .desc .price {position:absolute;top:1px;left:11px;width:143px;border-bottom:1px solid #e6e6e6;min-height:33px;}
 .bookings_block .booking_list > li .desc .price span:before {content:'';display:block;width:24px;height:34px;position:absolute;top:0;left:32px;}
 .bookings_block .booking_list > li .desc .price.active span:before {display:none;}
@@ -1037,6 +1042,11 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .desc .price_lng {position:absolute;top:4px;left:11px;width:143px;border-bottom:1px solid #e6e6e6;min-height:31px;}
 .bookings_block .booking_list > li .desc .price_lng span {display:block;width:74px;padding-left:24px;height:27px;background:url(../images/icons/tag7.png) no-repeat;color:#2a9db1;font-size:12px;line-height:27px;margin-left:12px;}
 .bookings_block .booking_list > li .desc .price_lng strong {font-size:14px;}
+
+.bookings_block .booking_list > li .desc .price span.interview_detail{background:none;color:#e68245;font-size:18px;font-weight:bold;padding-left:0px;text-align:center;width:135px;height:20px;line-height:25px;}
+.bookings_block .booking_list > li .desc .price span.interview_detail.phone_sub_detail{color:#000000;font-size:13px;font-weight:normal;height:20px;line-height:20px;}
+
+
 .bookings_block .booking_list > li .desc .children {position:absolute;top:1px;left:11px;width:103px;color:#104952;font:14px 'ProximaNova-Semibold';padding:8px 0 0 40px;border-bottom:1px solid #e6e6e6;min-height:26px;}
 .bookings_block .booking_list > li .desc .children span {top:8px;}
 .bookings_block .booking_list > li .desc .btn_wrap {position:absolute;top:0;right:15px;}
@@ -1053,11 +1063,12 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .parent_bookings_block .booking_list > li .desc .btn_wrap {position:absolute;top:17px;right:15px;}
 			/* Pending requests block */
 			/* Upcoming jobs block */
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:first-child {width:auto;float:none;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(2) {border-left:none;border-bottom:none;border-right:1px solid #e6e6e6;width:115px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(3) {width:260px;border:none;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) {width:auto;clear:both;float:none;border-top:1px solid #e6e6e6;padding-left:40px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) span {left:8px;}
+.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.date_detail {width:auto;float:none;}
+.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.kids_detail {border-left:none;border-bottom:none;border-right:1px solid #e6e6e6;width:115px;}
+.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.address_detail_job {width:260px;border:none;}
+.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.address_detail_interview {width:260px;border:none;height:40px;}
+.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.contact_detail_job {width:auto;clear:both;float:none;border-top:1px solid #e6e6e6;padding-left:40px;}
+.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.contact_detail_job span {left:8px;}
 .bookings_block .upcoming_jobs_block .booking_list > li .desc .price {top:39px;}
 .bookings_block .upcoming_jobs_block .booking_list > li .desc .btn_wrap {top:33px;}
 .bookings_block .upcoming_jobs_block .booking_list > li .desc .note_wrap {top:86px;}

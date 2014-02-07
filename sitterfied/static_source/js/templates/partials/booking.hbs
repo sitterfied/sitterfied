@@ -10,80 +10,191 @@
           <img width=73 hight=73 src="/static/images/MultiSitterPic.jpg">
           <p><span>Multiple Sitters</span></p>
         {{ else }}
-         {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
-           <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
+          {{#linkTo user otherPerson}}
+            <img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>
+          {{/linkTo}}
+          <p>
+            <span>
+              {{#linkTo user otherPerson}}
+                {{otherPerson.full_name}}
+              {{/linkTo}}
+            </span>
+          </p>
         {{/ if}}
-        {{else}}
-        {{#linkTo user otherPerson}}<img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>{{/linkTo}}
-          <p><span>{{#linkTo user otherPerson}}{{otherPerson.full_name}}{{/linkTo}}</span></p>
+      {{else}}
+        {{#linkTo user otherPerson}}
+          <img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>
+        {{/linkTo}}
+        <p>
+          <span>
+            {{#linkTo user otherPerson}}
+              {{otherPerson.full_name}}
+            {{/linkTo}}
+          </span>
+        </p>
       {{/ if}}
     {{/ if}}
-      <div>
-        {{# unless hasMultipleSitters }}
-      <a>{{friends_in_common.length}} mutual friends</a>
-      <ul>
-
-        <li>Friends you have in common</li>
-        {{# each otherPerson.friends_in_common}}
-        <li>{{# linkTo user this }}<img {{bindAttr src=avatarUrl alt=full_name}}></a><span> {{full_name}}</span>{{/linkTo}}</li>
-        {{/each}}
-
-      </ul>
+    <div>
+      {{# unless hasMultipleSitters }}
+        <a>{{friends_in_common.length}} mutual friends</a>
+        <ul>
+          <li>Friends you have in common</li>
+          {{# each otherPerson.friends_in_common}}
+            <li>
+              {{# linkTo user this }}
+                <img {{bindAttr src=avatarUrl alt=full_name}}>
+                <span>
+                  {{full_name}}
+                </span>
+              {{/linkTo}}
+            </li>
+          {{/each}}
+        </ul>
       {{/unless}}
     </div>
   </div>
   <div class="desc clear">
     <ul>
-      <li><span class="icon_date">&nbsp;</span>{{formattedDate}}&nbsp; <span>{{formattedHours}}</span></li>
-      <li><span class="icon_friends5">&nbsp;</span>{{num_children}} {{kidsString}}</li>
-      <li><a {{bindAttr href=googleMapsLink}} target="_blank"><span class="icon_pin3">&nbsp;</span> {{city}}, {{state}}</a></li>
-      <li>
+      {{#if isInterview}}
+        <li class="date_detail date_detail_interview">
+          <span class="icon_date">&nbsp;</span>
+          {{formattedDate}}&nbsp;
+          <span>{{formattedHours}}</span>
+        </li>
+      {{else}}
+        <li class="date_detail">
+          <span class="icon_date">&nbsp;</span>
+          {{formattedDate}}&nbsp;
+          <span>{{formattedHours}}</span>
+        </li>
+      {{/if}}      
+      {{#unless isInterview}}
+        <li class="kids_detail">
+          <span class="icon_friends5">&nbsp;</span>
+          {{num_children}} {{kidsString}}
+        </li>
+      {{/unless}}
+      
+      {{#if isInterview}}
+        <li class="address_detail_interview">
+          {{#unless isPhoneInterview}}
+            <a {{bindAttr href=googleMapsLink}} target="_blank">
+              <span class="icon_pin3">&nbsp;</span>
+              {{city}}, {{state}}
+            </a>
+          {{/unless}}
+        </li>
+      {{else}}
+        <li class="address_detail_job">
+          <a {{bindAttr href=googleMapsLink}} target="_blank">
+            <span class="icon_pin3">&nbsp;</span>
+            {{city}}, {{state}}
+          </a>
+        </li>
+      {{/if}}
+      
+      <li class="contact_detail_job">
         {{# unless hasMultipleSitters }}
-        <p><a {{bindAttr href=otherPerson.mailTo}} >Need more info?<br>Email {{otherPerson.first_name}}</a></p>
-        <span class="icon_email2">&nbsp;</span><a {{bindAttr href=otherPerson.mailTo}} >{{otherPerson.email}}</a>
+          <p>
+            <a {{bindAttr href=otherPerson.mailTo}} >
+              {{#if isInterview}}
+                Contact<br> {{otherPerson.first_name}}
+              {{else}}
+                Need more info?<br>Email {{otherPerson.first_name}}
+              {{/if}}
+            </a>
+          </p>
+          {{#if isInterview}}
+            <div class="contact_detail">
+              <span class="icon_phone3">&nbsp;</span>
+              {{otherPerson.cell}}
+            </div>
+            <div class="contact_detail contact_detail_interview">
+              <span class="icon_email2">&nbsp;</span>
+              <a {{bindAttr href=otherPerson.mailTo}} >{{otherPerson.email}}</a>
+            </div>
+          {{else}}
+            <div class="contact_detail">
+              <span class="icon_email2">&nbsp;</span>
+              <a {{bindAttr href=otherPerson.mailTo}} >{{otherPerson.email}}</a>
+            </div>
+          {{/if}}
+          
         {{/unless}}
       </li>
     </ul>
     <div class="price">
-      <span>
-        {{rate}}
-      </span>
+      {{#unless isInterview}}
+        <span class="rate_detail">
+          {{rate}}
+        </span>
+      {{/unless}}
+      
+      {{#if isMeetupInterview}}
+        <span class="meetup_detail interview_detail">
+          Meetup
+        </span>
+      {{/if}}
+      
+      {{#if isPhoneInterview}}
+        <span class="phone_detail interview_detail">
+          Phone
+        </span>
+        
+        <span class="phone_sub_detail interview_detail">
+          {{# if otherPerson}}
+            {{#if Sitterfied.isParent}}
+              {{otherPerson.first_name}} will call you
+            {{else}}
+              You will call {{otherPerson.first_name}}
+            {{/if}}
+          {{/if}}
+        </span>
+        
+      {{/if}}
     </div>
     {{# unless canceled}}
-    {{# unless isDeclined}}
-    {{# if Sitterfied.isParent }}
-      <div class="btn_wrap">
-        <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
-          <span class="icon_cancel">&nbsp;
-          </span>CANCEL
-        </a>
-      </div>
-    {{ else }}
-      {{# if accepted_sitter }}
-        {{# if thisSitterAccepted }}
-          {{# unless isInPast }}
+      {{# unless isDeclined}}
+        {{# if Sitterfied.isParent }}
+          <div class="btn_wrap">
+            <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+              <span class="icon_cancel">
+                &nbsp;
+              </span>
+              CANCEL
+            </a>
+          </div>
+        {{ else }}
+          {{# if accepted_sitter }}
+            {{# if thisSitterAccepted }}
+              {{# unless isInPast }}
+                <div class="btn_wrap">
+                  <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+                    <span class="icon_cancel">
+                      &nbsp;
+                    </span>
+                    CANCEL
+                  </a>
+                </div>
+              {{/ unless}}
+            {{/ if}}
+          {{ else }}
             <div class="btn_wrap">
-              <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
-                <span class="icon_cancel">&nbsp;
-                </span>CANCEL
+              <a class="button button_smaller" {{action 'acceptBooking' booking}}>
+                <span class="icon_ok2">
+                &nbsp;
+                </span>
+                ACCEPT
+              </a>
+              <a class="button button_smaller button_cancel" {{action 'declineBooking' booking}}>
+                <span class="icon_cancel">
+                  &nbsp;
+                </span>DECLINE
               </a>
             </div>
-          {{/ unless}}
+          {{/ if }}
         {{/ if}}
-      {{ else }}
-      <div class="btn_wrap">
-        <a class="button button_smaller" {{action 'acceptBooking' booking}}>
-          <span class="icon_ok2">&nbsp;
-          </span>ACCEPT
-        </a>
-        <a class="button button_smaller button_cancel" {{action 'declineBooking' booking}}>
-          <span class="icon_cancel">&nbsp;
-          </span>DECLINE
-        </a>
-      </div>
-      {{/ if }}
-    {{/ if}}
-    {{/ unless}}
+      {{/ unless}}
     {{/ unless}}
     <div class="note_wrap">
       <a {{action 'toggleNote'}} {{bindAttr class=isNoteShown:hide_text}}>
@@ -94,7 +205,7 @@
     </div>
   </div>
   {{#view Sitterfied.SlideDownView class="note_desc clear" toggleBinding=isNoteShown}}
-      <p>{{notes}}</p>
+    <p>{{notes}}</p>
   {{/view}}
   <footer>
     Request Sent: {{created}}

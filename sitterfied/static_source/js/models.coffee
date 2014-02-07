@@ -657,7 +657,7 @@ define ['jquery'
         ).property('booking_type')
             
         isMeetupInterview: (() ->
-            return @get('booking_type') == "Meetup Interview"
+            return @get('booking_type') == "Meetup Interview" || @get('booking_type') == "Interview"
         ).property('booking_type')
             
         isPhoneInterview: (() ->
