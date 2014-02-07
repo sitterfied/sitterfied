@@ -175,6 +175,8 @@ ALLOWED_HOSTS = [
     '*.sitterfied.com',
     '*.sttrfd.us',
     'test.sttrfd.us',
+    '.sitterfied.com',
+    '.sttrfd.us',
     'ping',
 ]
 

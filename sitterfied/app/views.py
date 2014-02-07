@@ -107,6 +107,13 @@ def index(request, referred_by=None):
     }
 
 def redirect_next(request):
+    """Handles redirection based on current authentication status.
+
+    If the user is authenticated, then the index page view handles the request,
+    if the user is not authenticated, he is redirected to the landing page and
+    the 'next' query string param is added to the url.
+
+    """
     if request.user.is_anonymous():
         return redirect('/?login=true&next=' + request.path)
     else:
@@ -114,6 +121,13 @@ def redirect_next(request):
 
 
 def short_url(request):
+    """Handles requests for short URLs.
+
+    Checks the Redis cache for a corresponding long URL keyed to the short code.
+    If a long URL is not found, returns a 404. If any error occurs, returns a
+    404.
+
+    """
     try:
         long_url = redis_client.get(request.path)
         if long_url is not None:
