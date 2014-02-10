@@ -1009,7 +1009,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .img div > ul li img {width:38px;height:38px;}
 .bookings_block .booking_list > li .desc {border:1px solid #d8e8f0;border-radius:4px;box-shadow:rgba(0,0,0,.11) 0 2px 2px 0;float:left;width:724px;padding:2px 8px;position:relative;min-height:71px;}
 .bookings_block .booking_list > li .desc:before {content:'';display:block;width:11px;height:10px;background:url(../images/icons/arrow_left2.png) no-repeat;position:absolute;top:31px;left:-10px;}
-.bookings_block .booking_list > li .desc ul {margin:0 110px 0 150px;padding:0 7px;border-right:1px solid #e6e6e6;border-left:1px solid #e6e6e6;float:left;width:460px;}
+.bookings_block .booking_list > li .desc ul {margin:0 110px 0 150px;padding:0 7px;border-left:1px solid #e6e6e6;float:left;width:460px;}
 .bookings_block .booking_list > li .desc ul li {position:relative;float:left;color:#104952;font:14px 'ProximaNova-Semibold';padding:8px 0 8px 40px;margin:0 0 2px 0;}
 .bookings_block .booking_list > li .desc ul li a {color:#104952;}
 .bookings_block .booking_list > li .desc ul li span {color:#e68245;top:8px;}
@@ -1029,6 +1029,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .desc ul li.contact_detail_job > a {word-wrap:break-word;}
 .bookings_block .booking_list > li .desc ul li.contact_detail_job .contact_detail_interview {padding-top:5px;}
 .bookings_block .booking_list > li .desc ul li.contact_detail_job .contact_detail_interview .icon_email2 {top:30px;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job.contact_detail_interview {padding-left:105px;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job.contact_detail_interview span {left:69px;}
 
 .bookings_block .booking_list > li .desc .price {position:absolute;top:1px;left:11px;width:143px;border-bottom:1px solid #e6e6e6;min-height:33px;}
 .bookings_block .booking_list > li .desc .price span:before {content:'';display:block;width:24px;height:34px;position:absolute;top:0;left:32px;}
