@@ -928,7 +928,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
 
     Sitterfied.BookingController = Em.ObjectController.extend(
-        isNoteShown: false
+        isNoteShown: (() ->
+            notes = @get('notes')
+            return notes && notes.trim().length > 0
+        ).property('notes')
+
         toggleNote: () ->
             isNoteShown = @get('isNoteShown')
             @set('isNoteShown', !isNoteShown)

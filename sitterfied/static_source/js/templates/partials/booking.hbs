@@ -80,7 +80,11 @@
           {{#unless isPhoneInterview}}
             <a {{bindAttr href=googleMapsLink}} target="_blank">
               <span class="icon_pin3">&nbsp;</span>
-              {{city}}, {{state}}
+              {{#if isPending}}
+                {{city}}, {{state}}
+              {{else}}
+                {{address1}} {{address2}} {{city}}, {{state}}
+              {{/if}}
             </a>
           {{/unless}}
         </li>
@@ -93,7 +97,11 @@
         </li>
       {{/if}}
       
-      <li class="contact_detail_job">
+      {{#if isInterview}}
+        <li class="contact_detail_job contact_detail_interview">
+      {{else}}
+        <li class="contact_detail_job">
+      {{/if}}
         {{# unless hasMultipleSitters }}
           <p>
             <a {{bindAttr href=otherPerson.mailTo}} >

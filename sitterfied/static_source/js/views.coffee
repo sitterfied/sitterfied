@@ -236,7 +236,11 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         _show: false
 
         didInsertElement: () ->
-            @$().hide()
+            isNoteShown = @get("context").get("isNoteShown")
+            if isNoteShown
+                @$().show()
+            else
+                @$().hide()
 
     Sitterfied.SitterAboutView =  Em.View.extend
         scrollSnapshot: () ->
