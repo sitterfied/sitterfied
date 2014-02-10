@@ -7,10 +7,9 @@ with open('/home/dotcloud/environment.json') as f:
 
 DEBUG = False
 
-# ShortUrl Redis Configuration
-REDIS_URL = 'redis://localhost:6379'
+REDIS_URL = env.get('DOTCLOUD_CACHE_REDIS_URL')
 
-BROKER_URL = env.get('DOTCLOUD_CACHE_REDIS_URL') + '/0'
+BROKER_URL = REDIS_URL + '/0'
 CELERY_IGNORE_RESULTS = True
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'

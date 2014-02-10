@@ -6,7 +6,7 @@
 {% load compressed %}
 {% compressed_js 'onboarding' %}
 {% include "csrf.html" %}
-<script type="text/javascript" src="{{STATIC_URL}}/js/lib/purl.js"/>
+<script type="text/javascript" src="{{ STATIC_URL }}/js/lib/purl.js"></script>
 <script type="text/javascript">
 use_fb_data = function(){
   var access_token, facebook_id, promise;
