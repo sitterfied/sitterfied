@@ -1,0 +1,108 @@
+<li>
+  <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}></div>
+  <div class="tit">
+    <span>
+      <strong>
+	${{one_child_min_rate}}
+      </strong>
+    </span>
+    {{#linkTo sitter this.sitter}}
+      {{full_name}}
+    {{/linkTo}}
+  </div>
+  <div class="img">
+    <div {{action addSitterTeam this}} {{bindAttr class="inSitterTeam:active :heart" }}>
+    </div>
+    {{#linkTo sitter this.sitter}}
+      <img {{bindAttr src=avatarUrl alt=full_name}} />
+    {{/linkTo}}
+    {{# if id_verified }}
+      <span>Background Cleared</span>
+    {{/if}}
+  </div>
+  
+  <ul>
+    <li>
+      <span class="icon_friends3">&nbsp;</span>{{friends_in_common.length}} mutual friends
+      <ul>
+	<li>Friends you have in common with {{first_name}}</li>
+	{{# each friends_in_common }}
+	  <li>
+	    {{#linkTo user this}}
+	      <img {{bindAttr src=this.avatarUrl}}  />
+	    {{/linkTo}}
+	    <span>{{this.full_name}}</span>
+	  </li>
+        {{/each}}
+      </ul>
+    </li>
+    
+    <li>
+      <span class="icon_rehire">&nbsp;</span>{{rehires.length}} rehires
+      <ul>
+	<li>Rehires</li>
+	{{# each rehires }}
+	  <li>
+	    {{#linkTo parent this.parent}}
+	      <img {{bindAttr src=this.parent.avatarUrl}}  />
+	    {{/linkTo}}
+	    <span>{{this.parent.full_name}}</span>
+	  </li>
+        {{/each}}
+      </ul>
+    </li>
+    
+    <li>
+      <span class="icon_recommend2">&nbsp;</span>{{recommends.length}} recommends
+      <ul>
+	<li>Recommendations</li>
+	{{# each recommends }}
+	  <li>
+	    {{#linkTo parent this.parent}}
+	      <img {{bindAttr src=this.parent.avatarUrl}}  />
+	    {{/linkTo}}
+	    <span>{{this.parent.full_name}}</span>
+	  </li>
+        {{/each}}
+      </ul>
+    </li>
+    
+    <li>
+      <span class="icon_pin3">&nbsp;</span>
+      {{city}}, {{state}}
+    </li>
+  </ul>
+  <div class="btns clear">
+    {{# if parentController.multipleSitters }}
+      <div class="select_wrap" {{action "selectSitter" this}}>
+        <input type="checkbox" {{bindAttr checked=isSelected}} class="select5" />
+        <label>
+          {{# if isSelected }}
+            Unselect
+          {{ else }}
+            Select
+          {{/ if}}
+        </label>
+      </div>
+    {{else}}
+      <a class="button" {{action book this}}>
+	BOOK
+      </a>
+      <a class="button button2" {{action open_interview_popup this}}>
+	INTERVIEW
+      </a>
+      <p>
+	<a {{action addSitterTeam this}}>ADD TO SITTER TEAM</a>
+      </p>
+    {{/ if}}
+    <p>
+      <a {{action bookmark this}}>
+	{{# if isBookmarked}}
+	  REMOVE 
+	{{/ if}}
+	BOOKMARK
+      </a>
+    </p>
+  </div>
+</li>
+
