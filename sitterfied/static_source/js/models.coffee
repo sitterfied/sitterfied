@@ -455,6 +455,10 @@ define ['jquery'
         recommends: (() ->
             return this.get('reviews').filterProperty('recommended', true)
         ).property('reviews.@each.recommended', 'reviews')
+            
+        rehires: (() ->
+            return this.get('reviews').filterProperty('rehire', true)
+        ).property('reviews.@each.rehire', 'reviews')
 
         inSitterTeam: (() ->
             sitterTeam = Sitterfied.currentUser.get('sitter_teams')

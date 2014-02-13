@@ -767,6 +767,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .friends_block > ul > li > ul > li {color:#104952;font:14px 'ProximaNova-Semibold';border-bottom:1px solid #dde0e1;padding:5px 0 5px 25px;position:relative;}
 .friends_block > ul > li > ul > li:hover {color:#4693a1;}
 .friends_block > ul > li > ul > li:first-child {border-top:1px solid #dde0e1;}
+.friends_block > ul > li > ul > li:last-child {border-bottom:none;}
 .friends_block > ul > li > ul > li span {left:-5px;top:8px;}
 .friends_block > ul > li > ul > li > ul {display:none;position:absolute;bottom:40px;left:2px;border:1px solid #71becb;padding:5px;border-radius:4px;z-index:4;width:330px;background:#fff;box-shadow:rgba(0,0,0,.10) 0 3px 1px 0;}
 .friends_block > ul > li > ul > li:hover > ul {display:block;}
