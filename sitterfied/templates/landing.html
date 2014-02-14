@@ -40,6 +40,21 @@ $(function(){
    $("#back2Top").click(function() {
      $("html, body").animate({ scrollTop: 0 }, 600);
    })
+
+   $(".learn_more a").click(function(event) {
+     event.preventDefault();
+     //calculate destination place
+     var dest = 0;
+     if ($(this.hash).offset().top > $(document).height() - $(window).height()) {
+        dest = $(document).height() - $(window).height();
+     } else {
+        dest = $(this.hash).offset().top;
+     }
+     //go to destination
+     $('html,body').animate({
+        scrollTop: dest
+     }, 600, 'swing');
+   })
 })
 </script>
 
@@ -57,7 +72,7 @@ $(function(){
 <div class="landing_top_bar clear">
 	<a href="#" class="landing_logo"><img src="{% static "images/logo4.png" %}" alt="" /><br />Friend Verified. Search Simplified.</a>
 	<ul>
-		<li><a href="#learn_more">How it Works</a></li>
+		<li class="learn_more"><a href="#learn_more">How it Works</a></li>
 		<li><a href="{%url "onboarding1" %}" >Sign Up</a></li>
 		<li><a class="login-trigger" href="#login">Log in</a></li>
 		<li><a class="facebook" href="http://www.facebook.com/sitterfied" target="_blank">facebook</a></li>
