@@ -224,23 +224,23 @@
 	    <span>{{filteredFriendTeam.length}}</span>
 	  {{/ view}}
 	  {{# view Sitterfied.WaypointActiveView class="friends_block my_friends_sitters" targetClass="friends"}}
-          <div class="sitter_title" id="myfriends_sitter_title">
-	    <p>
-	      <span>
-		<span class="icon_heart2">&nbsp;</span>
-		friends’<br />
-		sitters
-	      </span>
-	      <strong>{{filteredFriendTeam.length}}</strong>
-	    </p>
-	  </div>
+	    <div class="sitter_title" id="myfriends_sitter_title">
+	      <p>
+	        <span>
+	  	<span class="icon_heart2">&nbsp;</span>
+		  friends’<br />
+		  sitters
+		</span>
+		<strong>{{filteredFriendTeam.length}}</strong>
+	      </p>
+	    </div>
 	    <ul class="clear">
 	      {{# each controller }}
-	        {{# if inFriendsTeam }}
-	          {{# if passesFilters }}
-	            {{ partial sitter_search_with_mutual_friends }}
-	          {{/ if}}
-	        {{/ if}}
+		{{# if inFriendsTeam }}
+		  {{# if passesFilters }}
+		    {{ partial sitter_search_with_mutual_friends }}
+		  {{/ if}}
+		{{/ if}}
 	      {{/ each}}
 	    </ul>
 	  {{/ view}}

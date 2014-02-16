@@ -495,7 +495,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         ).property('inSitterTeam', 'inFriendsTeam', 'inLocalTeam')
 
         inFriendsTeam: (() ->
-            return @get('in_friends_team') and not @get('inSitterTeam')
+            return @get('friends_in_common').length > 0 and not @get('inSitterTeam')
         ).property('inSitterTeam')
 
         inLocalTeam: (() ->
