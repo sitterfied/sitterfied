@@ -13,6 +13,7 @@ TWILIO_TEST_CALLERID = '+15005550006'
 account_sid = settings.TWILIO_ACCOUNT_SID
 auth_token = settings.TWILIO_AUTH_TOKEN
 default_callerid = '+19088384816'
+from_number = '+12035175070'
 
 client = TwilioRestClient(account_sid, auth_token)
 
@@ -25,7 +26,7 @@ def test_send_sms_message():
     assert_that(message_id, not_none())
 
 def test_sms_messages_no_cell():
-    request = request_factory.post('sms/', {'From': '+15555555555',
+    request = request_factory.post('sms/', {'From': from_number,
                                             'To': default_callerid,
                                             'Body': 'Accept 0'})
 
@@ -43,7 +44,7 @@ def test_sms_messages_no_cell():
         assert_that(message.text, is_('We\'re sorry, but this cell phone isn\'t registered.'))
 
 def test_sms_messages_response_not_understood():
-    request = request_factory.post('sms/', {'From': '+17322397588',
+    request = request_factory.post('sms/', {'From': from_number,
                                             'To': default_callerid,
                                             'Body': 'jfdkfsdfsd'})
 
@@ -54,11 +55,11 @@ def test_sms_messages_response_not_understood():
     xml = ET.fromstring(response.content)
     message = xml.find('Sms')
     assert_that(message.text, is_('We\'re sorry, but we couldn\'t understand \
-your response. Please respond with either the word \'Accept\' or \'Decline\' \
+your response. Please respond with either ACCEPT or DECLINE \
 followed by the code you received.'))
 
 def test_sms_messages_booking_does_not_exist():
-    request = request_factory.post('sms/', {'From': '+17322397588',
+    request = request_factory.post('sms/', {'From': from_number,
                                             'To': default_callerid,
                                             'Body': 'Accept 0'})
 
@@ -73,37 +74,46 @@ def test_sms_messages_booking_does_not_exist():
 
         xml = ET.fromstring(response.content)
         message = xml.find('Sms')
-        assert_that(message.text, is_('We\'re sorry, but we couldn\'t find a booking request that matches the code you sent.'))
+        assert_that(message.text, is_('We\'re sorry, but we couldn\'t find job request 0. Please check the code and try again.'))
 
 def test_sms_messages_booking_already_accepted():
-    request = request_factory.post('sms/', {'From': '+17322397588',
+    request = request_factory.post('sms/', {'From': from_number,
                                             'To': default_callerid,
                                             'Body': 'Accept 0'})
 
     with mock.patch('app.sms.Booking') as mock_booking:
-        mock_booking.objects.get = mock.Mock()
+        with mock.patch('app.sms.Sitter') as mock_sitter:
+            mock_booking.objects.get.return_value = return_value = mock.Mock()
+            mock_sitter.objects.get.return_value = sitter = mock.Mock()
 
-        response = sms.sms_messages(request)
-        assert_that(response, not_none())
-        assert_that(response.content, not_none())
+            sitter.first_name = 'Devon'
+            return_value.sitters = [sitter]
 
-        xml = ET.fromstring(response.content)
-        message = xml.find('Sms')
-        assert_that(message.text, is_('We\'re sorry, but this booking has already been accepted.'))
+            response = sms.sms_messages(request)
+            assert_that(response, not_none())
+            assert_that(response.content, not_none())
+
+            xml = ET.fromstring(response.content)
+            message = xml.find('Sms')
+            assert_that(message.text, is_('Hi Devon. Thanks for responding, but this job has already been accepted.'))
 
 def test_sms_messages_success():
-    request = request_factory.post('sms/', {'From': '+17322397588',
+    request = request_factory.post('sms/', {'From': from_number,
                                             'To': default_callerid,
                                             'Body': 'Accept 0'})
 
     with mock.patch('app.sms.Booking') as mock_booking:
-        mock_booking.objects.get.return_value = return_value = mock.Mock()
-        return_value.accepted_sitter = None
+        with mock.patch('app.sms.Sitter') as mock_sitter:
+            mock_sitter.objects.get.return_value = sitter = mock.Mock()
 
-        response = sms.sms_messages(request)
-        assert_that(response, not_none())
-        assert_that(response.content, not_none())
+            mock_booking.objects.get.return_value = return_value = mock.Mock()
+            return_value.accepted_sitter = None
+            return_value.sitters = [sitter]
 
-        xml = ET.fromstring(response.content)
-        message = xml.find('Sms')
-        assert_that(message, none())
+            response = sms.sms_messages(request)
+            assert_that(response, not_none())
+            assert_that(response.content, not_none())
+
+            xml = ET.fromstring(response.content)
+            message = xml.find('Sms')
+            assert_that(message, none())

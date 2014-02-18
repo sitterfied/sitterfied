@@ -1,4 +1,4 @@
-import hashlib
+# -*- coding: utf-8 -*-
 import re
 
 from django.conf import settings
@@ -40,15 +40,15 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
     try:
         booking = Booking.objects.get(id=request_id)
     except (Booking.DoesNotExist, ObjectDoesNotExist):
-        resp.sms('We\'re sorry, but we couldn\'t find a job request for ' + request_id + '. Please check the code and try again.')
+        resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
     if not sitter in booking.sitters:
-        resp.sms('We\'re sorry, but we couldn\'t find a job request for ' + request_id + '. Please check the code and try again.')
+        resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
     if booking.accepted_sitter:
-        resp.sms('We\'re sorry, but this job has already been accepted.')
+        resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
         return resp
 
     if response == 'accept' or response == 'yes':
