@@ -192,7 +192,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
         multi_request_suffix = '_multiple' if len(instance.sitters.all()) > -1 else ''
 
         for sitter in email_sitters:
-            email_template = 'email/booking/booking_request_received{0}.html'.format(multi_request_suffix)
+            email_template = 'email/booking/booking_request_received.html'.format(multi_request_suffix)
             text = html = render_to_string(email_template, {
                 'parent_name': parent.get_full_name(),
                 'first_name': sitter.first_name,
@@ -209,13 +209,13 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
             if not sitter.cell:
                 continue
 
-            sms_template = 'booking_request_received{0}.sms'.format(multi_request_suffix)
+            sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
 
             booking_date = instance.start_date_time.date()
 
             sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
-                'parent_name': parent.full_name,
+                'parent_name': parent.get_full_name(),
                 'booking_date': booking_date,
                 'start_date_time': instance.start_date_time,
                 'stop_date_time': instance.stop_date_time,
