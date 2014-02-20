@@ -79,6 +79,9 @@ require({
         },
         purl: {
             deps: ['jquery']
+        },
+        csrf: {
+            deps: ['jquery']
         }
     },
     urlArgs: "bust=" +  (new Date()).getTime(),

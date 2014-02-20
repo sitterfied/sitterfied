@@ -43,7 +43,7 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
         resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
-    if not sitter in booking.sitters:
+    if not sitter in booking.sitters.all():
         resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 

@@ -79,4 +79,7 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
 # Override Short URL
-SHORT_URL = 'test.sttrfd.us/'
+SHORT_URL = 'localhost:8000/'
+
+# Override Twilio Settings
+TWILIO_DEFAULT_CALLERID = '+19088384816'

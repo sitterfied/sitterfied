@@ -42,7 +42,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     if parent_settings.mobile_booking_accepted_denied and parent.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/mybookings/pending/' + str(sender.id))
+        redis_client.set(short_url_code, '/mybookings/pending')
 
         sms = render_to_string('sms/booking/booking_request_accepted.sms', {
             'sitter_name': sitter.first_name,
@@ -60,7 +60,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     if sitter_settings.mobile_booking_accepted_denied and sitter.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/mybookings/pending/' + str(sender.id))
+        redis_client.set(short_url_code, '/mybookings/pending')
 
         sms = render_to_string('sms/booking/booking_request_accepted_sitter.sms', {
             'sitter_name': sitter.first_name,
@@ -189,7 +189,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
         parent = instance.parent
         email_sitters = instance.sitters.filter(settings__email_booking_request=True).filter(id__in=pk_set)
         text_sitters = instance.sitters.filter(settings__mobile_booking_request=True).filter(id__in=pk_set)
-        multi_request_suffix = '_multiple' if len(instance.sitters.all()) > -1 else ''
+        multi_request_suffix = '_multiple' if len(instance.sitters.all()) > 1 else ''
 
         for sitter in email_sitters:
             email_template = 'email/booking/booking_request_received.html'.format(multi_request_suffix)
@@ -203,7 +203,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
 
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/mybookings/pending/' + str(instance.id))
+        redis_client.set(short_url_code, '/mybookings/pending')
 
         for sitter in text_sitters:
             if not sitter.cell:
@@ -230,7 +230,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
             pass  # TODO: implement email for parent request sent
 
         if parent.settings.mobile_booking_accepted_denied:
-            sms = render_to_string('booking_request_sent.sms', {'short_url': short_url})
+            sms = render_to_string('sms/booking/booking_request_sent.sms', {'short_url': short_url})
             twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
 @receiver(post_save, sender=SitterReview)

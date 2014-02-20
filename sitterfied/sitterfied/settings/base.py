@@ -1,5 +1,13 @@
-# Django settings for project project.
+# -*- coding: utf-8 -*-
 from unipath import Path
+
+from .intercom import *
+from .pipeline import *
+from .grappelli import *
+from .rest_framework import *
+from .twilio import *
+from .uploadcare import *
+
 
 PROJECT_ROOT = Path(__file__).ancestor(3)
 
@@ -179,9 +187,6 @@ ALLOWED_HOSTS = [
 
 AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend', 'app.authentication.FacebookAuthBackend',)
 
-from .pipeline import *
-from .grappelli import *
-from .rest_framework import *
-from .uploadcare import *
-from .twilio import *
-from .intercom import *
+
+# Base URL for shortened URLs 
+SHORT_URL = 'sttrfd.us/'
