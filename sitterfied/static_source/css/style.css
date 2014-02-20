@@ -1067,16 +1067,6 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .parent_bookings_block .booking_list > li .desc .btn_wrap {position:absolute;top:17px;right:15px;}
 			/* Pending requests block */
 			/* Upcoming jobs block */
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.date_detail {width:auto;float:none;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.kids_detail {border-left:none;border-bottom:none;border-right:1px solid #e6e6e6;width:115px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.address_detail_job {width:260px;border:none;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.address_detail_interview {width:260px;border:none;height:40px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.contact_detail_job {width:auto;clear:both;float:none;border-top:1px solid #e6e6e6;padding-left:40px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.contact_detail_job span {left:8px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc .price {top:39px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc .btn_wrap {top:33px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc .note_wrap {top:86px;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc .additional_info {top:40px;}
 			/* Completed block */
 			/* Missed requests block */
 			/* Expired requests block */
@@ -1554,7 +1544,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list {margin:0 15px;}
 .bookings_block .booking_list > li {padding:18px 0 25px 0;}
 .bookings_block .booking_list > li header {font-size:0;line-height:0;padding:0;}
-.bookings_block .booking_list > li header span {top:120px;right:15px;z-index:2;}
+.bookings_block .booking_list > li header span {top:135px;right:15px;z-index:2;}
 .bookings_block .booking_list > li footer {display:block;}
 .bookings_block .booking_list > li .img {float:none;width:auto;text-align:left;}
 .bookings_block .booking_list > li .img img {float:left;margin:0 10px 20px 0;}
@@ -1562,7 +1552,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .img p span {font-size:24px;padding-top:10px;}
 .bookings_block .booking_list > li .img div {float:left;width:120px;text-align:center;margin-bottom:20px;}
 .bookings_block .booking_list > li .img div:hover > ul {display:none;}
-.bookings_block .booking_list > li .desc {clear:both;background:#fff;width:auto;padding-top:35px;padding-bottom:8px;}
+.bookings_block .booking_list > li .desc {clear:both;background:#fff;width:auto;padding-top:35px;padding-bottom:8px;float:none}
 .bookings_block .booking_list > li .desc:before {height:15px;background:url(../images/icons/arrow_top6.png) no-repeat;top:-14px;left:33px;}
 .bookings_block .booking_list > li .desc ul {margin:0;padding:0;border-right:none;border-left:none;float:none;width:auto;}
 .bookings_block .booking_list > li .desc ul li {float:none;border-bottom:1px solid #e6e6e6;}
@@ -1573,19 +1563,21 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .desc ul li:nth-child(4) {width:90px;}
 .bookings_block .booking_list > li .desc .price, .bookings_block .booking_list > li .desc .price_lng {position:relative;top:0;left:0;width:auto;}
 .bookings_block .booking_list > li .desc .children {position:relative;top:0;left:0;width:auto;}
-.bookings_block .booking_list > li .desc .btn_wrap {position:static;padding-left:35px;}
+.bookings_block .booking_list > li .desc .btn_wrap {position:static;padding-left:70px;}
 .bookings_block .booking_list > li .desc .btn_wrap .button {float:left;margin:25px 0 20px 18px;}
 .bookings_block .booking_list > li .desc .note_wrap {position:static;clear:both;text-align:center;}
 .bookings_block .booking_list > li .desc .additional_info {position:static;width:auto;text-align:left;}
+
+.bookings_block .booking_list > li .desc ul li.date_detail.date_detail_interview {width:auto;}
+.bookings_block .booking_list > li .desc ul li.kids_detail {width:auto;border-left:none;}
+.bookings_block .booking_list > li .desc ul li.address_detail_job {width:auto;border-right:none;}
+.bookings_block .booking_list > li .desc ul li.address_detail_interview {width:auto;border-right:none;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job {width:auto;}
+.bookings_block .booking_list > li .desc ul li.contact_detail_job a {word-wrap:break-word;}
+.bookings_block .booking_list > li .desc .price span.interview_detail {width:auto;text-align:left;padding-left:10px;}
+
 .bookings_block .booking_list > li .note_desc {background:#fff;border-top:none;margin:0;width:auto;float:none;clear:both;position:relative;top:-4px;}
 .parent_bookings_block .booking_list > li .desc .btn_wrap {padding-left:70px;}
-		/* Upcoming jobs block */
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(2) {width:auto;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(3) {width:auto;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) {width:auto;border-top:none;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc .price {top:0;}
-.bookings_block .upcoming_jobs_block .booking_list > li .desc .btn_wrap .button {float:none;margin:25px 0 20px 55px;}
-.parent_bookings_block .upcoming_jobs_block .booking_list > li .desc .btn_wrap .button {margin-left:15px;}
 	/* Network block */
 .network_block {background:#f7fafc;border-top:3px solid #d8e8f0;border-bottom:3px solid #d8e8f0;padding:15px 0 50px 0;}
 .network_block .soc_list {background:none;border:none;box-shadow:none;}

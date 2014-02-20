@@ -422,7 +422,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
                 num_children: kids
-                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             sitters = [@get('content')]
             booking.get('sitters').addObjects(sitters)
@@ -466,7 +466,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
                 num_children: kids
-                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             sitters = [@get('content')]
             booking.get('sitters').addObjects(sitters)
@@ -499,7 +499,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         ).property('inSitterTeam')
 
         inLocalTeam: (() ->
-            return not @get('in_friends_team') and not @get('inSitterTeam')
+            return @get('friends_in_common').length == 0 and not @get('inSitterTeam')
         ).property('inSitterTeam')
 
         isSelected: (() ->
@@ -818,7 +818,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
                 num_children: @get('kids')
-                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             booking.get('sitters').addObjects(sitters)
 
@@ -879,7 +879,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
                 num_children: Sitterfied.get('currentUser.children.length')
-                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
@@ -919,7 +919,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
                 num_children: 1
-                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             sitters = Sitterfied.currentUser.get('sitter_teams')
             booking.get('sitters').addObjects(sitters)
@@ -1006,7 +1006,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
                 num_children: 1
-                emergency_phone: Sitterfied.get('currentUser.emergency_contact_one_phone')
+                emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             sitters = @get("content")
             booking.get('sitters').addObjects(sitters)
