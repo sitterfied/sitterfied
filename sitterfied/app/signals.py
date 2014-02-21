@@ -26,9 +26,8 @@ def groups_added():
 @receiver(booking_accepted)
 def booking_request_accepted(sender, sitter=None, **kwargs):
     parent = sender.parent
-    parent_settings = parent.settings
 
-    if parent_settings.email_booking_accepted_denied:
+    if parent.settings.email_booking_accepted_denied:
 
         text = html = render_to_string("email/booking/booking_request_accepted.html",
                                        {'sitter_first_name':sitter.first_name,
@@ -39,7 +38,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
 
         send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
 
-    if parent_settings.mobile_booking_accepted_denied and parent.cell:
+    if parent.settings.mobile_booking_accepted_denied and parent.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
         redis_client.set(short_url_code, '/mybookings/pending')
@@ -51,13 +50,11 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
             'short_url': short_url,
         })
         twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
-
-    sitter_settings = sitter.settings
-
-    if sitter_settings.email_booking_accepted_denied:
+  
+    if sitter.settings.email_booking_accepted_denied:
         pass
 
-    if sitter_settings.mobile_booking_accepted_denied and sitter.cell:
+    if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
         redis_client.set(short_url_code, '/mybookings/pending')
@@ -192,14 +189,31 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
         multi_request_suffix = '_multiple' if len(instance.sitters.all()) > 1 else ''
 
         for sitter in email_sitters:
-            email_template = 'email/booking/booking_request_received.html'.format(multi_request_suffix)
-            text = html = render_to_string(email_template, {
-                'parent_name': parent.get_full_name(),
-                'first_name': sitter.first_name,
-                'num_sitters': len(instance.sitters.all())
-            })
+            """
+            *|FULL_NAME|* [URL link to parent's profile page] would like you to
+            sit for *|CHILD_1|*, *|CHILD_2|* and *|CHILD_3|* on *|JOB_DATE|* from 
+            *|FROM_TIME|* to *|TO_TIME|*.
 
-            send_html_email("You have recieved a booking request", "hello@sitterfied.com", sitter.email, text, html)
+            The job is located at *|JOB_ADDRESS|*
+            
+            Go to your bookings page [URL link to sitter's bookings page] to 
+            Accept or Decline this job.
+
+            *|FNAME|* added a note- "*|SHOW_NOTE|*"
+
+            You can reach *|FNAME|* by email: *|EMAIL|* or phone: *|MOBILE|*
+            """
+            message = create_message_base()
+            message['subject'] = 'You have a new job request!'
+            message['to'] = [create_email_to(sitter.email, sitter.get_full_name())]
+            message['global_merge_vars'] = [{
+                'FNAME': sitter.first_name,
+                'PARENT_NAME': parent.get_full_name(),
+                'PARENT_URL': '/profile/' + str(parent.id),
+                
+            }]
+            
+            # TODO: send_template_email('', message)
 
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
@@ -276,13 +290,21 @@ def new_schedule_parent(sender, instance=None, **kwargs):
 def new_sitter(sender, instance=None, **kwargs):
     created = kwargs.get('created', False)
     if created:
-        message = {
-            'from_email': 'hello@sitterfied.com',
-            'from_name': 'Sitterfied',
-            'subject': 'Welcome to Sitterfied!',
-            'to': [{'email': instance.email, 'name': instance.get_full_name()}, ],
-            'global_merge_vars': [
-                {'name': 'FNAME', 'content': instance.first_name}
-            ],
-        }
+        message = create_message_base()
+        message['subject'] = 'Welcome to Sitterfied!'
+        message['to'] = [create_email_to(instance.email, instance.get_full_name())]
+        message['global_merge_vars'] = [{'name': 'FNAME', 'content': instance.first_name}]
         send_template_email('welcome-sitter', message)
+
+
+def create_email_to(email, name):
+    return {'email': email, 'name': name}
+
+def create_message_base():
+    return {
+        'from_email': settings.DEFAULT_FROM_EMAIL,
+        'from_name': 'Sitterfied',
+        'subject': None,
+        'to': None,
+        'global_merge_vars': None,
+    }

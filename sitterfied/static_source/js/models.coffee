@@ -643,7 +643,7 @@ define ['jquery'
         accepted_sitter: belongsTo('Sitterfied.Sitter', {key:"accepted_sitter"})
         rate: attr(Number)
 
-        emergency_phone: attr()
+        emergency_phone: attr(Phone)
         booking_status:attr()
         booking_type: attr()
         sitters: hasMany('Sitterfied.Sitter', {key: 'sitters'})

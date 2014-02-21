@@ -71,4 +71,13 @@ def test_booking_request_message():
     ))
     #sms.client.messages.create(body=message, to=sitter.cell,
     #from_=sms.sitterfied_number
- 
+
+
+def test_new_sitter_signal():
+    sitter = mock.Mock(spec=Sitter)
+    sitter.email = 'alewisohn@gmail.com'
+    sitter.first_name = 'Test'
+    sitter.last_name = 'Signals'
+    
+    signals.new_sitter(sitter, sitter, created=True)
+    

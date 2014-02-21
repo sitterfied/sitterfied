@@ -1,19 +1,25 @@
-from .base import *
+# -*- coding: utf-8 -*-
 import json
 import os
+
+from .base import *
+from .mandrill import *
 
 with open('/home/dotcloud/environment.json') as f:
   env = json.load(f)
 
 DEBUG = False
 
+
 REDIS_URL = env.get('DOTCLOUD_CACHE_REDIS_URL')
+
 
 BROKER_URL = REDIS_URL + '/0'
 CELERY_IGNORE_RESULTS = True
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
 
 CACHES = {
     'default': {
@@ -28,6 +34,7 @@ CACHES = {
     },
 }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -40,10 +47,10 @@ DATABASES = {
 }
 
 
-
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = "/home/dotcloud/data/media/"
+
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -57,9 +64,69 @@ MIDDLEWARE_CLASSES += (
    'pipeline.middleware.MinifyHTMLMiddleware',
 )
 
+
 SECRET_KEY =  os.environ.get('DJANGO_SECRET_KEY','boo')
-from .mandrill import *
+
 
 GOOGLE_OAUTH_CLIENT_ID = '305141264963-9av2onc3pdada6mtkat6uorhv99k5nhu.apps.googleusercontent.com'
 GOOGLE_OAUTH_CLIENT_SECRET = 'rwUoSO0hjvtL5ZtOqznzL5WB'
 GOOGLE_OAUTH_REDIRECT_URI = 'http://www.sitterfied.com'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'filename': '/var/log/supervisor/application.log',
+            'maxBytes': 1024 * 1024 * 25,  # 25 MB
+            'backupCount': 5,
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'log_file', 'mail_admins'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['console', 'log_file', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['console', 'log_file', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        '': {
+            'handlers': ['console', 'log_file', 'mail_admins'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    }
+}

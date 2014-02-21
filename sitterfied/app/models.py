@@ -327,7 +327,7 @@ class Booking(TimeStampedModel):
     start_date_time = models.DateTimeField()
     stop_date_time = models.DateTimeField()
     num_children = models.IntegerField(default=1)
-    emergency_phone = models.CharField(max_length=10, blank=True)
+    emergency_phone = models.CharField(max_length=12, blank=True)
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=50, blank=True)
