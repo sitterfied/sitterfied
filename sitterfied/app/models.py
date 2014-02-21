@@ -327,7 +327,7 @@ class Booking(TimeStampedModel):
     start_date_time = models.DateTimeField()
     stop_date_time = models.DateTimeField()
     num_children = models.IntegerField(default=1)
-    emergency_phone = models.CharField(max_length=10, blank=True)
+    emergency_phone = models.CharField(max_length=12, blank=True)
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=50, blank=True)
@@ -335,8 +335,8 @@ class Booking(TimeStampedModel):
     zip = models.CharField(max_length=9, blank=True)
     rate = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=True)
     booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
-    booking_type =  models.CharField(max_length=20, choices=BOOKING_TYPES, default='Job')
-    accepted_sitter= models.ForeignKey(Sitter, blank=True, null=True)
+    booking_type = models.CharField(max_length=20, choices=BOOKING_TYPES, default='Job')
+    accepted_sitter = models.ForeignKey(Sitter, blank=True, null=True)
     overnight = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
 
@@ -354,10 +354,10 @@ class Booking(TimeStampedModel):
         self.save()
         booking_declined.send(sender=self, sitter=sitter)
 
-    def cancel(self):
+    def cancel(self, parent_or_sitter):
         self.canceled = True
         self.save()
-        booking_canceled.send(sender=self)
+        booking_canceled.send(sender=self, cancelled_by=parent_or_sitter)
 
 
 class IncomingSMSMessage(TimeStampedModel):

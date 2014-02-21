@@ -1,0 +1,1 @@
+Hi {{ sitter_name }}, this is confirmation that you passed on {{ parent_name }}'s job request. Check your schedule to ensure it accurately reflects your availability: {{ short_url }}.

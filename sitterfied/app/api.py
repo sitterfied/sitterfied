@@ -423,7 +423,7 @@ class BookingViewSet(IdFilterViewset):
     @action()
     def cancel_booking(self, request, pk=None):
         booking = get_object_or_404(models.Booking, pk=pk)
-        booking.cancel()
+        booking.cancel(request.user)
         serializer = BookingSerializer(booking)
         response = Response(serializer.data)
         return response
