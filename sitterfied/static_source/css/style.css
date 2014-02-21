@@ -464,7 +464,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .find_form_block form > ul > li:last-child {float:none;clear:both;}
 .header .top_info .find_form_block form > ul > li label {display:block;min-height:24px;}
 .header .top_info .find_form_block form > ul > li p label {display:inline;}
-.header .top_info .find_form_block ul li:first-child > input[type="text"] {padding:0 10px 0 45px;width:174px;height:43px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:17px 'ProximaNova';color:#616161;background:#fff url(../images/icons/sprite_tablet.png) 8px -1240px no-repeat;}
+.header .top_info .find_form_block ul li:first-child > input[type="text"] {padding:0 10px 0 45px;width:174px;height:43px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:13px 'ProximaNova-Semibold';color:#616161;background:#fff url(../images/icons/sprite_tablet.png) 8px -1240px no-repeat;}
 .header .top_info .find_form_block ul li:first-child > input[type="text"]:hover, .header .top_info .find_form_block ul li > input[type="text"]:focus {border-color:#3ae4f8;box-shadow:#e9e9e9 5px 3px 5px 0 inset, #3ae4f8 0 0 5px 1px;}
 .header .top_info .find_form_block ul li > input[type="text"]:focus {color:#616161;}
 .header .top_info .find_form_block ul li input.datepicker {text-transform:uppercase;padding:0 10px 0 45px;width:175px;height:43px;border:1px solid #d7d7d7;box-shadow:#e9e9e9 4px 2px 4px 0 inset;border-radius:4px;font:13px 'ProximaNova-Semibold';color:#616161;background:#fff url(../images/icons/sprite_tablet.png) 8px -3988px no-repeat;margin-bottom:20px;}
@@ -1879,6 +1879,9 @@ a {cursor:pointer}
 .onboarding_block .profile_block .form_style > ul > li > ul > li p.child_number {border-bottom:1px solid #dfe6ea;color:#1c8292;font:bold 11px 'ProximaNovaCond';padding:0 0 8px 10px;margin-bottom:20px; min-height: 20px;}
 .onboarding_block .profile_block .form_style > ul > li > ul > li p.child_number .button_smaller {float:none;width:110px;padding-right:5px;font-size:12px;display:inline-block;margin-left:10px;}
 .onboarding_block .profile_block .form_style > ul > li > ul > li .icon_rates {left:-4px;}
+
+.onboarding_block .profile_block .form_style > ul > li > ul > li .button.remove_child_trigger {display:none;}
+
 .onboarding_block .onb_step3_left {float:left;width:535px;padding:40px 0;}
 .onboarding_block .onb_step3_left p:first-child > div {float:left;}
 .onboarding_block .onb_step3_left p:first-child select {width:350px;}

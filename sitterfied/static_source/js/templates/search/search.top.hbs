@@ -77,11 +77,11 @@
 	  <ul class="clear">
 		<li>
 		  <label for="where">Where</label>
-          {{view Ember.TextField valueBinding="zip" placeholder="Enter town or zipcode"}}
+          {{view Ember.TextField valueBinding="zip" placeholder="ZIPCODE"}}
 		</li>
 		<li>
 		  <label for="when">{{# unless overnight }}When{{else}}From{{/unless}}</label>
-          {{view Ember.DatePicker placeholder="Choose date" id="datepicker" class="datepicker" valueBinding="start_date"}}
+          {{view Ember.DatePicker placeholder="DATE" id="datepicker" class="datepicker" valueBinding="start_date"}}
 		  <p>
             {{view Ember.Checkbox checkedBinding="overnight" id="check"}}
             <label for="check">Overnight / Multiday booking?</label>
@@ -121,7 +121,7 @@
 
 		  {{#view Sitterfied.SlideDownView toggleBinding="overnight" tagName="li"}}
 		    <label>To</label>
-            {{view Ember.DatePicker placeholder="Choose date" id="datepicker3" class="datepicker" valueBinding="stop_date"}}
+            {{view Ember.DatePicker placeholder="DATE" id="datepicker3" class="datepicker" valueBinding="stop_date"}}
           {{/view}}
 		  {{#view Sitterfied.SlideDownView toggleBinding="overnight" tagName="li"}}
 		  <label></label>

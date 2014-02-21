@@ -1,0 +1,1 @@
+{{ sitter_name }} has accepted your job request for {{ start_date_time|date:'M j' }}, {{ start_date_time|date:'fA'|lower }}-{{ stop_date_time|date:'fA'|lower }}. Yay! For job and contact details, go to {{ short_url }}.

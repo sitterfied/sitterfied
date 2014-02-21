@@ -113,7 +113,7 @@ install watchdog via
 
 install ember-precompile via
 
-		 $ sudo npm -g install ember-precompile
+		 $ npm -g install ember-precompile@0.2.2
 
 
 Building the client for deployment

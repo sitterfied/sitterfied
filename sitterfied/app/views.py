@@ -129,7 +129,7 @@ def short_url(request):
 
     """
     try:
-        long_url = redis_client.get(request.path)
+        long_url = redis_client.get(request.path[1:])
         if long_url is not None:
             return HttpResponseRedirect(long_url)
         else:
