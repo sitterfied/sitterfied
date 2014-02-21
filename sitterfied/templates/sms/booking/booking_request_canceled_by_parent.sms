@@ -1,1 +1,1 @@
-Your job on {{ start_date_time|date:'M j' }} has been cancelled and {{ sitter_name }} has been notified. Please get in touch with {{ sitter_name }} as a courtesy: {{ sitter_contact_info }}.
+Your job on {{ start_date_time|date:'M j' }} has been cancelled{% if sitter_contact_info %} and {{ sitter_name }} has been notified. Please get in touch with {{ sitter_name }} as a courtesy: {{ sitter_contact_info }}{% endif %}.

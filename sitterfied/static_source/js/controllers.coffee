@@ -319,15 +319,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             
             console.log("Booking:", booking)
                 
-            promise = booking.save()
-            promise
+            booking.save()
                 .then (booking) =>
-                    console.log('Booking promise fulfilled!')
-                    Sitterfied.currentUser.get('bookings').unshiftObject(booking)
+                    Sitterfied.currentUser.get('bookings').pushObject(booking)
                     @set('pending', false)
                     @transitionToRoute('done', booking)
                 .then null, (reason) =>
-                    console.log('Booking promise rejected because ' + reason)
                     @set('pending', false)
             
         multiple: (() ->

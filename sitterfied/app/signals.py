@@ -140,9 +140,15 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
         else:
             # Is this necessary? Cancellation happens through the site
             # so confirmation isn't really needed.
-            sitter_contact_info = sitter.cell if sitter.cell else sitter.email
+            if sitter:
+                sitter_first_name = sitter.first_name
+                sitter_contact_info = sitter.cell if sitter.cell else sitter.email
+            else:
+                sitter_first_name = None
+                sitter_contact_info = None
+
             sms = render_to_string('sms/booking/booking_request_canceled_by_parent.sms', {
-                'sitter_name': sitter.first_name,
+                'sitter_name': sitter_first_name,
                 'start_date_time': sender.start_date_time,
                 'sitter_contact_info': sitter_contact_info,
             })
