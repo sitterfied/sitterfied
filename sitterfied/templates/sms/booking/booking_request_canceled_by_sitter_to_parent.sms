@@ -1,1 +1,1 @@
-{{ sitter_name }} had to cancel her upcoming job with you on {{ start_date_time|date:'M j' }} from {{ start_date_time|date:'fA'|lower }} to {{ stop_date_time|date:'fA'|lower }}. Go to {{ short_url }} to find another sitter now.
+{{ sitter_name }} had to cancel the upcoming job with you on {{ start_date_time|date:'M j' }} from {{ start_date_time|date:'fA'|lower }} to {{ stop_date_time|date:'fA'|lower }}. Go to {{ short_url }} to find another sitter now.
