@@ -1880,7 +1880,7 @@ a {cursor:pointer}
 .onboarding_block .profile_block .form_style > ul > li > ul > li p.child_number .button_smaller {float:none;width:110px;padding-right:5px;font-size:12px;display:inline-block;margin-left:10px;}
 .onboarding_block .profile_block .form_style > ul > li > ul > li .icon_rates {left:-4px;}
 
-.onboarding_block .profile_block .form_style > ul > li > ul > li .button.remove_child_trigger {display:none;}
+.onboarding_block .profile_block .form_style > ul > li > ul > li .button.remove_child_trigger {display:none;margin-left:10px;}
 
 .onboarding_block .onb_step3_left {float:left;width:535px;padding:40px 0;}
 .onboarding_block .onb_step3_left p:first-child > div {float:left;}

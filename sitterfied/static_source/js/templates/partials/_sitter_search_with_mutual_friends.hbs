@@ -24,47 +24,53 @@
   <ul>
     <li>
       <span class="icon_friends3">&nbsp;</span>{{friends_in_common.length}} mutual friends
-      <ul>
-	<li>Friends you have in common with {{first_name}}</li>
-	{{# each friends_in_common }}
-	  <li>
-	    {{#linkTo user this}}
-	      <img {{bindAttr src=this.avatarUrl}}  />
-	    {{/linkTo}}
-	    <span>{{this.full_name}}</span>
-	  </li>
-        {{/each}}
-      </ul>
+      {{#if friends_in_common}}
+        <ul>
+	  <li>Friends you have in common with {{first_name}}</li>
+	  {{# each friends_in_common }}
+	    <li>
+	      {{#linkTo user this}}
+	        <img {{bindAttr src=this.avatarUrl}}  />
+  	      {{/linkTo}}
+	      <span>{{this.full_name}}</span>
+	    </li>
+          {{/each}}
+        </ul>
+      {{/if}}
     </li>
     
     <li>
       <span class="icon_rehire">&nbsp;</span>{{rehires.length}} rehires
-      <ul>
-	<li>Rehires</li>
-	{{# each rehires }}
-	  <li>
-	    {{#linkTo parent this.parent}}
-	      <img {{bindAttr src=this.parent.avatarUrl}}  />
-	    {{/linkTo}}
-	    <span>{{this.parent.full_name}}</span>
-	  </li>
-        {{/each}}
-      </ul>
+      {{#if rehires}}
+        <ul>
+	  <li>Rehires</li>
+	  {{# each rehires }}
+	    <li>
+	      {{#linkTo parent this.parent}}
+	        <img {{bindAttr src=this.parent.avatarUrl}}  />
+	      {{/linkTo}}
+	      <span>{{this.parent.full_name}}</span>
+	    </li>
+          {{/each}}
+        </ul>
+      {{/if}}
     </li>
     
     <li>
       <span class="icon_recommend2">&nbsp;</span>{{recommends.length}} recommends
-      <ul>
-	<li>Recommendations</li>
-	{{# each recommends }}
-	  <li>
-	    {{#linkTo parent this.parent}}
-	      <img {{bindAttr src=this.parent.avatarUrl}}  />
-	    {{/linkTo}}
-	    <span>{{this.parent.full_name}}</span>
-	  </li>
-        {{/each}}
-      </ul>
+      {{#if recommends}}
+        <ul>
+	  <li>Recommendations</li>
+	  {{# each recommends }}
+	    <li>
+	      {{#linkTo parent this.parent}}
+	        <img {{bindAttr src=this.parent.avatarUrl}}  />
+	      {{/linkTo}}
+	      <span>{{this.parent.full_name}}</span>
+	    </li>
+          {{/each}}
+        </ul>
+      {{/if}}
     </li>
     
     <li>

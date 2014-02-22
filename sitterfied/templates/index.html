@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-	{%block extra_header%}
+	{% block extra_header%}
   <script>
     var user_json = '{{user_json|escapejs}}'
     var parent_or_sitter = '{{parent_or_sitter}}'
@@ -13,62 +13,59 @@
     <script data-main="{{STATIC_URL}}js/main" src="{{STATIC_URL}}js/require/require.js"></script>
 	{% else %}
 	<script src="{{STATIC_URL}}js/sitterfied-min.js"></script>
-	
 	{% endif %}
-	{% endblock extra_header %}
 
 
-  {% block body %}
-    <script type="text/x-handlebars">
+    <script type="text/x-handlebars" data-template-name="application">
 
-            {% verbatim %}
+      {% verbatim %}
 
       <div id="recommend_popup">
-	<div class="tit">
-	  <span class="popup_title">How did it go with {{activeReviewPanelUser.first_name}}?
-	  </span>
-	</div>
-	<div class="info">
-	  <form method="post" class="form_style">
-	    {{input type="hidden" id="sitter_id"}}
-	    <p>
-	      <span class="field recommend_field">
-		<span class="icon_check4 field_icon">&nbsp;
-		</span>
-		<span class="recommend_label">Recommend?</span>
-		{{view Ember.Checkbox id="recommended"}}
-		<label class="field_box" for="recommended"></label>
+	    <div class="tit">
+	      <span class="popup_title">How did it go with {{activeReviewPanelUser.first_name}}?
 	      </span>
-	      
-	      <span class="field rehire_field">
-		<span class="icon_rehire3 field_icon">&nbsp;
-		</span>
-		<span class="rehire_label">Will you rehire?</span>
-		{{view Ember.Checkbox id="rehire"}}
-		<label class="field_box" for="rehire"></label>
-	      </span>
-	    </p>
-	    <p>
-	      <span class="icon_review3">&nbsp;
-	      </span>
-	      <label for="review">Review
-	      </label>
-	      {{# with  controllers.sitterReview }}
-	      {{view Ember.TextArea id="review"}}
-	    </p>
-	    <p>
-	      <button type="submit" class="button button_small" {{action "postReview"}}>
-		<span class="icon_ok2">&nbsp;
-		</span>Post
-	      </button>
-	      {{/with}}
-	      <a class="button button_cancel button_small" {{action "closeReccomendPopup"}}>
-		<span class="icon_cancel">&nbsp;
-		</span>Cancel
-	      </a>
-	    </p>
-	  </form>
-	</div>
+	    </div>
+	    <div class="info">
+	      <form method="post" class="form_style">
+	        {{input type="hidden" id="sitter_id"}}
+	        <p>
+	          <span class="field recommend_field">
+		        <span class="icon_check4 field_icon">&nbsp;
+		        </span>
+		        <span class="recommend_label">Recommend?</span>
+		        {{view Ember.Checkbox id="recommended"}}
+		        <label class="field_box" for="recommended"></label>
+	          </span>
+	          
+	          <span class="field rehire_field">
+		        <span class="icon_rehire3 field_icon">&nbsp;
+		        </span>
+		        <span class="rehire_label">Will you rehire?</span>
+		        {{view Ember.Checkbox id="rehire"}}
+		        <label class="field_box" for="rehire"></label>
+	          </span>
+	        </p>
+	        <p>
+	          <span class="icon_review3">&nbsp;
+	          </span>
+	          <label for="review">Review
+	          </label>
+	          {{# with  controllers.sitterReview }}
+	          {{view Ember.TextArea id="review"}}
+	        </p>
+	        <p>
+	          <button type="submit" class="button button_small" {{action "postReview"}}>
+		        <span class="icon_ok2">&nbsp;
+		        </span>Post
+	          </button>
+	          {{/with}}
+	          <a class="button button_cancel button_small" {{action "closeReccomendPopup"}}>
+		        <span class="icon_cancel">&nbsp;
+		        </span>Cancel
+	          </a>
+	        </p>
+	      </form>
+	    </div>
       </div>
 
 	  {{render login}}
@@ -77,92 +74,80 @@
       {% endverbatim %}
 
       <!-- header -->
-        <header class="header">
-	      <div class="wraper">
-            {% verbatim %}
-		    {{# linkTo index class="logo"}}
-            {% endverbatim %}
-            <img src="{{STATIC_URL}}images/logo.png" alt="" />
-            {% verbatim %}
-            {{/linkTo}}
-		    <!-- top menu -->
-			{{view Sitterfied.TriggerView class="menu_trigger"}}
-            {% endverbatim %}
-            <nav>
-              <ul>
-                {% verbatim %}
-				{{# unless Sitterfied.isAuthenticated }}
-				<li>
-				  {{# view Sitterfied.FancyboxButton target="#login" id="login_trigger" }}
-				  Login
-				  {{/view}}
-				</li>
-				<li>
-				  {{# view Sitterfied.FancyboxButton target="#signup" id="signup_trigger" }}
-				  Signup
-				  {{/view}}
+      <header class="header">
+	    <div class="wraper">
+          {% verbatim %}
+		  {{# linkTo index class="logo"}}
+          {% endverbatim %}
+          <img src="{{STATIC_URL}}images/logo.png" alt="" />
+          {% verbatim %}
+          {{/linkTo}}
+		  <!-- top menu -->
+		  {{view Sitterfied.TriggerView class="menu_trigger"}}
+          {% endverbatim %}
+          <nav>
+            <ul>
+              {% verbatim %}
+			  {{# unless Sitterfied.isAuthenticated }}
+			  <li>
+				{{# view Sitterfied.FancyboxButton target="#login" id="login_trigger" }}
+				Login
+				{{/view}}
+			  </li>
+			  <li>
+				{{# view Sitterfied.FancyboxButton target="#signup" id="signup_trigger" }}
+				Signup
+				{{/view}}
 				{{/ unless}}
 				{{# if Sitterfied.isParent }}
-                <li>{{#linkTo search }} Search {{/linkTo}}</li>
-				{{/if}}
-				{{# if Sitterfied.isAuthenticated }}
-	            <li>{{#linkTo mybookings }}Bookings{{/linkTo}}</li>
-		        <li>
-					{{#linkTo profile }}<img {{bindAttr src=Sitterfied.currentUser.avatarUrl}} alt="" /> {{Sitterfied.currentUser.first_name}}{{/linkTo}}
-					<ul>
-						<li><span class="menu_icon_setting">&nbsp;</span>{{#linkTo settings }}Account Settings{{/linkTo}}</li>
-						<li><span class="menu_icon_profile">&nbsp;</span>{{#linkTo profile }}Profile{{/linkTo}}</li>
-                        {{# if Sitterfied.isParent }}
-                        <li class="network_link"><span class="menu_icon_friends">&nbsp;</span>{{#linkTo parentEdit.network Sitterfied.currentUser }}Find Friends{{/linkTo}}</li>
-                        {{ else }}
-                        <li class="network_link"><span class="menu_icon_friends">&nbsp;</span>{{#linkTo sitterEdit.network Sitterfied.currentUser }}Find Friends{{/linkTo}}</li>
-                        {{/if}}
-						<li><span class="menu_icon_members">&nbsp;</span><a href="#">Are you Sitterfied?</a></li>
-						<li><span class="menu_icon_support">&nbsp;</span><a id="Intercom" {{action 'openIntercom'}}>Support</a></li>
-						<li><span class="menu_icon_signout">&nbsp;</span><a href="/logout/">Sign Out</a></li>
-					</ul>
-				</li>
-				{{/ if}}
-                {% endverbatim %}
-              </ul>
-            </nav>
-		    <!-- /top menu -->
-		    <!-- top note -->
-              {% verbatim %}
-              {{outlet top}}
+              <li>{{#linkTo search }} Search {{/linkTo}}</li>
+			  {{/if}}
+			  {{# if Sitterfied.isAuthenticated }}
+	          <li>{{#linkTo mybookings }}Bookings{{/linkTo}}</li>
+		      <li>
+				{{#linkTo profile }}<img {{bindAttr src=Sitterfied.currentUser.avatarUrl}} alt="" /> {{Sitterfied.currentUser.first_name}}{{/linkTo}}
+				<ul>
+				  <li><span class="menu_icon_setting">&nbsp;</span>{{#linkTo settings }}Account Settings{{/linkTo}}</li>
+				  <li><span class="menu_icon_profile">&nbsp;</span>{{#linkTo profile }}Profile{{/linkTo}}</li>
+                  {{# if Sitterfied.isParent }}
+                  <li class="network_link"><span class="menu_icon_friends">&nbsp;</span>{{#linkTo parentEdit.network Sitterfied.currentUser }}Find Friends{{/linkTo}}</li>
+                  {{ else }}
+                  <li class="network_link"><span class="menu_icon_friends">&nbsp;</span>{{#linkTo sitterEdit.network Sitterfied.currentUser }}Find Friends{{/linkTo}}</li>
+                  {{/if}}
+				  <li><span class="menu_icon_members">&nbsp;</span><a href="#">Are you Sitterfied?</a></li>
+				  <li><span class="menu_icon_support">&nbsp;</span><a id="Intercom" {{action 'openIntercom'}}>Support</a></li>
+				  <li><span class="menu_icon_signout">&nbsp;</span><a href="/logout/">Sign Out</a></li>
+				</ul>
+			  </li>
+			  {{/ if}}
               {% endverbatim %}
+            </ul>
+          </nav>
+		  <!-- /top menu -->
+		  <!-- top note -->
+          {% verbatim %}
+          {{outlet top}}
+          {% endverbatim %}
 
 
-	      </div>
-        </header>
-        <!-- /header -->
+	    </div>
+      </header>
+      <!-- /header -->
 
+      {% verbatim %}
+      {{outlet}} 
+      {% endverbatim %}
 
-        {% verbatim %}
-        {{outlet}}
-        {% endverbatim %}
-
-	<footer class="footer">
-	      <div class="wraper">
-		    <a href="/" class="logo_bottom"><img src="{{STATIC_URL}}images/logo_bottom.png" alt="" /></a>
-		    <!-- bottom menu -->
-		    <nav>
-			  <ul>
-		{% verbatim %}
-				<li><a href="mailto:hello@sitterfied.com">Contact</a></li>
-				<li><a href="http://blog.sitterfied.com/">Blog</a></li>
-				<li>{{#linkTo privacy }}Privacy Policy{{/linkTo}}</li>
-				<li>{{#linkTo tos }}Terms of Service{{/linkTo}}</li>
-		{% endverbatim %}
-			  </ul>
-		    </nav>
-		    <!-- /bottom menu -->
-	      </div>
-	</footer>
-		{% verbatim %}
-		{{# view Sitterfied.BackToTop class="back-to-top" id="back-top" }}
-		  <a class="back-to-top">Top</a>
-		{{/ view}}
-		{% endverbatim %}
+	  {% verbatim %}
+	  {{# view Sitterfied.BackToTop class="back-to-top" id="back-top" }}
+	  <a class="back-to-top">Top</a>
+	  {{/ view}}
+	  {% endverbatim %}
     </script>
-  {% endblock %}
+
+	{% endblock extra_header %}
+
+    {% block body %}
+    <div id="application"></div>
+    {% include "footer.html" %}
+    {% endblock body %}

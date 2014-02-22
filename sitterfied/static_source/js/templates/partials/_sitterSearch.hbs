@@ -19,38 +19,42 @@
     <li>
       <span class="icon_recommend2">&nbsp;</span>
       {{recommends.length}} recommends
-      <ul>
-	<li>Recommendations</li>
-        {{# each recommends }}
-	  <li>
-	    {{#linkTo parent this.parent}}
-	      <img {{bindAttr src=this.parent.avatarUrl}}  />
-	    {{/linkTo}}
-	    <span>{{this.parent.full_name}}</span>
-	  </li>
-        {{/each}}
-      </ul>
+      {{#if recommends}}
+        <ul>
+	  <li>Recommendations</li>
+          {{# each recommends }}
+	    <li>
+	      {{#linkTo parent this.parent}}
+	        <img {{bindAttr src=this.parent.avatarUrl}}  />
+	      {{/linkTo}}
+	      <span>{{this.parent.full_name}}</span>
+	    </li>
+          {{/each}}
+        </ul>
+      {{/if}}
     </li>
     <li>
       <span class="icon_team3">&nbsp;</span>
       {{sitter_teams.length}} sitter teams
-      <ul>
-	<li>Added to sitter teams and repeatedly hired</li>
-	{{# each sitter_teams }}
-	  <li>
-	    {{#linkTo parent this.parent}}
-	      <img {{bindAttr src=avatarUrl}}  />
-	    {{/linkTo}}
-	    <span>{{full_name}}</span>
-	  </li>
-	{{/each}}
-      </ul>
+      {{# if sitter_teams}}
+        <ul>
+	  <li>Added to sitter teams and repeatedly hired</li>
+	  {{# each sitter_teams }}
+	    <li>
+	      {{#linkTo parent this.parent}}
+	        <img {{bindAttr src=avatarUrl}}  />
+	      {{/linkTo}}
+	      <span>{{full_name}}</span>
+	    </li>
+	  {{/each}}
+        </ul>
+      {{/if}}
     </li>
     <li>
       <span class="icon_reviews">&nbsp;</span>
-	{{reviews.length}} reviews
-      <ul>
-        {{# if reviews }}
+      {{reviews.length}} reviews
+      {{#if reviews}}
+        <ul>
           {{# with reviews.firstObject}}
 	    <li class="rev clear">
 	      {{#linkTo parent parent.parent}}
@@ -58,12 +62,12 @@
 	      {{/linkTo}}
 	      <div>
 		<p>{{review}}</p>
-		<p>{{#linkTo sitter sitter.sitter}}Read more reviews {{/linkTo}}</p>
+	        <p>{{#linkTo sitter sitter.sitter}}Read more reviews {{/linkTo}}</p>
 	      </div>
 	    </li>
 	  {{/with}}
-        {{/if}}
-      </ul>
+        </ul>
+      {{/if}}
     </li>
 	
     <li>
