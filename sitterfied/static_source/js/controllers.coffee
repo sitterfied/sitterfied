@@ -303,32 +303,30 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.BookController = Em.ObjectController.extend(
         pending: false
+        
         cancel: () ->
-            this.transitionTo('search');
+            @transitionToRoute('search');
 
         book: () ->
             console.log("Start book")
+
             #debounce clicks
             if @get("pending")
                 return
+                
             @set("pending", true)
             booking = Sitterfied.get('onDeckBooking')
             
             console.log("Booking:", booking)
-            
-            promise = booking.save()
-            promise.then (booking) =>
-                #for some reason, this first load strips out start_date and end_date.
-                #it's in the json, just doesn't make it to the object. select2 perhaps?
-                console.log("Booking Before Promise:", booking)
-                p = booking.reload()
-                p.then =>
-                    console.log("Booking Promise:", booking)
+                
+            booking.save()
+                .then (booking) =>
                     Sitterfied.currentUser.get('bookings').pushObject(booking)
-                    @set("pending", false)
-                    this.transitionTo('done', booking);
-
-
+                    @set('pending', false)
+                    @transitionToRoute('done', booking)
+                .then null, (reason) =>
+                    @set('pending', false)
+            
         multiple: (() ->
             return @get('sitters.length') > 1
         ).property("sitters.@each")
@@ -337,11 +335,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.EditBookController = Em.ObjectController.extend(
         cancel: () ->
-            this.transitionTo('mybookings');
+            @transitionToRoute('mybookings');
         book: () ->
             booking = @get('model')
             booking.save()
-            this.transitionTo('done', booking);
+            @transitionToRoute('done', booking);
         multiple: (() ->
             return @get('sitters.length') > 1
         ).property("sitters.@each")
@@ -374,13 +372,13 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.DoneController = Em.ObjectController.extend(
         edit: (booking)  ->
-            this.transitionTo('editBook', booking)
+            @transitionToRoute('editBook', booking)
 
         cancel: (booking) ->
             cancel = confirm("are you sure you want to cancel this booking request?")
             if cancel
                 this.get('content').deleteRecord()
-                this.transitionTo('search')
+                @transitionToRoute('search')
     )
 
     Sitterfied.stateController  = Em.ArrayController.create(
@@ -427,7 +425,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             sitters = [@get('content')]
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
-            this.transitionTo('book')
+            @transitionToRoute('book')
 
         open_interview_popup: () ->
             $.fancybox
@@ -471,7 +469,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             sitters = [@get('content')]
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
-            this.transitionTo('book')
+            @transitionToRoute('book')
 
         showBioLink: (() ->
             # hide read more link if text < 100 characters
@@ -823,7 +821,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             booking.get('sitters').addObjects(sitters)
 
             Sitterfied.set('onDeckBooking', booking)
-            this.transitionTo('book')
+            @transitionToRoute('book')
 
         open_interview_popup: (sitters) ->
             Sitterfied.set("sitters_to_interview", sitters)
@@ -883,7 +881,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 rate: 0
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
-            this.transitionTo('book')
+            @transitionToRoute('book')
             
         bookTeam: () ->
             if @get('overnight')
@@ -924,7 +922,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             sitters = Sitterfied.currentUser.get('sitter_teams')
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
-            this.transitionTo('book')
+            @transitionToRoute('book')
     )
 
     Sitterfied.BookingController = Em.ObjectController.extend(
@@ -1011,7 +1009,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             sitters = @get("content")
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
-            this.transitionTo('book')
+            @transitionToRoute('book')
     )
 
     Sitterfied.ParentController  = Em.ObjectController.extend(

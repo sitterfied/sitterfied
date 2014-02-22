@@ -643,7 +643,7 @@ define ['jquery'
         accepted_sitter: belongsTo('Sitterfied.Sitter', {key:"accepted_sitter"})
         rate: attr(Number)
 
-        emergency_phone: attr()
+        emergency_phone: attr(Phone)
         booking_status:attr()
         booking_type: attr()
         sitters: hasMany('Sitterfied.Sitter', {key: 'sitters'})
@@ -702,7 +702,7 @@ define ['jquery'
             date = @get('start_date_time')
             if not date
                 return ""
-            return moment(date).format('dddd, MMMM Do')
+            return moment(date).format('ddd, MMM Do')
         ).property("start_date_time")
         formattedHours: (() ->
             start = @get('start_date_time')

@@ -7221,7 +7221,7 @@ function program7(depth0,data) {
   hashContexts = {'placeholder': depth0,'id': depth0,'class': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'id': "STRING",'class': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.DatePicker", {hash:{
-    'placeholder': ("Choose date"),
+    'placeholder': ("DATE"),
     'id': ("datepicker3"),
     'class': ("datepicker"),
     'valueBinding': ("stop_date")
@@ -7251,7 +7251,7 @@ function program9(depth0,data) {
   hashTypes = {'valueBinding': "STRING",'placeholder': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
     'valueBinding': ("zip"),
-    'placeholder': ("Enter town or zipcode")
+    'placeholder': ("ZIPCODE")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n		</li>\n		<li>\n		  <label for=\"when\">");
   hashTypes = {};
@@ -7262,7 +7262,7 @@ function program9(depth0,data) {
   hashContexts = {'placeholder': depth0,'id': depth0,'class': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'id': "STRING",'class': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.DatePicker", {hash:{
-    'placeholder': ("Choose date"),
+    'placeholder': ("DATE"),
     'id': ("datepicker"),
     'class': ("datepicker"),
     'valueBinding': ("start_date")

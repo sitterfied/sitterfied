@@ -1,0 +1,1 @@
+Hi {{ sitter_name }}, {{ parent_name }} sent a job for you and {{ num_sitters }} others. {{ start_date_time|date:'M j' }}, {{ start_date_time|date:'fA'|lower }}-{{ stop_date_time|date:'fA'|lower }}. Details at {{ short_url }}. Be quick! Reply ACCEPT {{ booking_code }} or DECLINE {{ booking_code }}
