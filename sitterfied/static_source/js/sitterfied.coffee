@@ -203,12 +203,5 @@ define ['jquery'
 
     Sitterfied.OnDeckBooking = null
     Sitterfied.typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
-
-
-
-
-
-
-
-
+    
     return Sitterfied
