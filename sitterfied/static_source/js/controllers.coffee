@@ -583,15 +583,17 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         itemController: 'searchSitter'
 
-        zip : ""
+        zip : (->
+            return Sitterfied.currentUser.get('zip')
+        ).property()
+        
         when: undefined
-        from : 2
-        to : 5
+        start_time: '1800'
+        stop_time: '2200'
         kids : 1
         overnight : false
         date_to : undefined
-        start_time: '1800'
-        stop_time: '2200'
+
         findSitters : () ->
             zip = @get("zip")
             start_time = @get("start_time")
