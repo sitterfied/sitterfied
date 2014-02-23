@@ -36,7 +36,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
                                         'parent': parent
                                        })
 
-        send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
+        # TODO: send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         short_url_code = generate_short_url_code()
@@ -78,7 +78,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
                                         'parent': parent
                                        })
 
-        send_html_email("Your booking request has been declined", "hello@sitterfied.com", parent.email, text, html)
+        # TODO: send_html_email("Your booking request has been declined", "hello@sitterfied.com", parent.email, text, html)
 
     if parent_settings.mobile_booking_accepted_denied and parent.cell:
         short_url_code = generate_short_url_code()
@@ -123,7 +123,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                                        {'first_name':parent.first_name,
                                        })
 
-        send_html_email("Your booking request has been canceled", "hello@sitterfied.com", parent.email, text, html)
+        # TODO: send_html_email("Your booking request has been canceled", "hello@sitterfied.com", parent.email, text, html)
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         if cancelled_by == sitter:
@@ -161,7 +161,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             text = html = render_to_string("email/booking/booking_request_canceled.html", {
                 'first_name': sitter.first_name,
             })
-            send_html_email("Your booking request has been canceled", "hello@sitterfied.com", sitter.email, text, html)
+            # TODO: send_html_email("Your booking request has been canceled", "hello@sitterfied.com", sitter.email, text, html)
 
         if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
             if cancelled_by == sitter:
@@ -260,7 +260,7 @@ def new_review(sender, instance=None, **kwargs):
         sitter = instance.sitter
         if sitter.settings.mobile_new_review:
             text = html = render_to_string("email/review/new_review.html", {'first_name': sitter.first_name})
-            send_html_email("You have recieved a new review", "hello@sitterfied.com", sitter.email, text, html)
+            # TODO: send_html_email("You have recieved a new review", "hello@sitterfied.com", sitter.email, text, html)
 
         if settings.email_new_review and sitter.cell:
             short_url_code = generate_short_url_code()
