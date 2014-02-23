@@ -1,1 +1,3 @@
-Hi {{ parent_name }}, unfortunately {{ sitter_name }} is unavailable {{ start_date_time|date:'M j' }}. Find another sitter now: {{ short_url }}. Tip: Send your job request to multiple sitters.
+Hi {{ parent_name }}, unfortunately {{ sitter_name }} is unavailable
+{{ start_date_time|date:'M j' }}. Find another sitter now: {{
+short_url }}.
