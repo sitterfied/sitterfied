@@ -189,6 +189,7 @@
               {{/ unless}}
             {{/ if}}
           {{ else }}
+            {{# unless isInPast }}
             <div class="btn_wrap">
               <a class="button button_smaller" {{action 'acceptBooking' booking}}>
                 <span class="icon_ok2">
@@ -202,6 +203,7 @@
                 </span>DECLINE
               </a>
             </div>
+            {{/ unless}}
           {{/ if }}
         {{/ if}}
       {{/ unless}}
