@@ -94,6 +94,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
             'parent_name': parent.first_name,
             'start_date_time': sender.start_date_time,
             'short_url': short_url,
+            'single_sitter_requested': len(sender.sitters.all()) == 1,
         })
         twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
