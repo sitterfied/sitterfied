@@ -43,18 +43,33 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
         resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
+    if booking.canceled:
+        resp.sms('We\'re sorry, but this booking has been cancelled.')
+        return resp
+
+    if sitter in booking.declined_sitters.all():
+        resp.sms('We\'re sorry, but you\'ve already declined this request.')
+        return resp
+
     if not sitter in booking.sitters.all():
         resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
     if booking.accepted_sitter:
-        resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
+        if booking.accepted_sitter == sitter:
+            if response != 'decline' and response != 'no':
+                resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but you\'ve already accepted this job.')
+        else:
+            resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
         return resp
 
     if response == 'accept' or response == 'yes':
         booking.accept(sitter)
     elif response == 'decline' or response == 'no':
-        booking.decline(sitter)
+        if booking.accepted_sitter == sitter:
+            booking.cancel(sitter)
+        else:
+            booking.decline(sitter)
 
     return resp
 
