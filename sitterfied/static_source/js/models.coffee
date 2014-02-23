@@ -831,7 +831,7 @@ define ['jquery'
             declined_sitters = this.get('declined_sitters')
             if declined_sitters.get("length") == 0
                 return false
-            if declined_sitters.filterProperty("id", Sitterfied.currentUser.get("id"))
+            if declined_sitters.filterProperty("id", Sitterfied.currentUser.get("id")).length > 0
                 return true
             return false
         ).property('declined_sitters', 'declined_sitters.@each')
