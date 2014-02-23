@@ -36,14 +36,21 @@
 				  <p>
                     <span>&nbsp;
                     </span>
-                    {{view Ember.TextField placeholder="Street address" valueBinding="address1"}}
+                    {{view Ember.TextField placeholder="Street address" valueBinding="address1" class="large"}}
                     {{view Ember.TextField placeholder="Apt/Suite" valueBinding="address2" class="small"}}
                   </p>
 				  <p>
-                    <span>&nbsp;
-                    </span>
-                    {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
+                    <span>&nbsp;</span>
                     {{view Ember.TextField placeholder="City" valueBinding="city"}}
+                    {{view Sitterfied.Select2
+                    viewName="fieldValueSelect2"
+        	        prompt="Select State"
+                    contentBinding="Sitterfied.States"
+                    optionLabelPath="content"
+                    optionValuePath="content"
+                    selectionBinding="state"
+                    required="" class="extra-small"}}
+                    {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
                   </p>
                   <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
@@ -75,7 +82,7 @@
 				  <p>
                     <span>&nbsp;
                     </span>
-                    {{view Ember.TextField placeholder="Email" valueBinding="email"}}
+                    {{view Ember.TextField placeholder="Email" valueBinding="email" class="large"}}
                   </p>
                   <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
 				</li>
