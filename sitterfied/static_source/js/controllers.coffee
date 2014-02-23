@@ -590,6 +590,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         kids : 1
         overnight : false
         date_to : undefined
+        start_time: '1800'
+        stop_time: '2200'
         findSitters : () ->
             zip = @get("zip")
             start_time = @get("start_time")
