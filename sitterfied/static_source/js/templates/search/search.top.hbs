@@ -94,7 +94,7 @@
             optionLabelPath="content.name"
             optionValuePath="content.value"
             valueBinding="start_time"
-            id="from"
+            id="from" prompt=""
             }}
 		</li>
         {{# unless overnight }}
@@ -105,7 +105,7 @@
             optionLabelPath="content.name"
             optionValuePath="content.value"
             valueBinding="stop_time"
-            id="to"
+            id="to" prompt=""
             }}
 		</li>
         {{/unless}}
@@ -131,7 +131,7 @@
             contentBinding="Sitterfied.HourBlocks"
             optionLabelPath="content.name"
             optionValuePath="content.value"
-            valueBinding="stop_time"
+            valueBinding="stop_time" prompt=""
             }}
             </div>
           {{/view}}
