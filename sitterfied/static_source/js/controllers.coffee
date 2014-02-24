@@ -543,6 +543,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 #'specialneeds'
                 'otherServices'
                 ]
+	searched: false
 
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
@@ -641,7 +642,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 stop_date_time.date(@get("stop_date"))
                 Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
 
-
+	    @set('searched', false)
 
             $.get("/api/search/",
                   payload,
@@ -652,10 +653,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     s.load(sitter['id'], sitter)
                     sitters.pushObject(s)
                 this.set('model', sitters)
-                @set("selectedSitters", Ember.ArrayProxy.create
-                    content: Em.copy(@get("sitterTeam"))
-                )
-
+		@set('searched', true)
 
         content: []
         selectedSitters:  Ember.ArrayProxy.create

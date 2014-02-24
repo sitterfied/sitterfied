@@ -284,7 +284,8 @@
     
     <!-- /sitter_tabs_wrap -->
   {{else}}
-
+    {{# if searched }}
+      {{# unless content }}
       <!-- no_results -->
       <div class="no_results clear">
 	    <p>It appears no sitters are available right now.</p>
@@ -309,7 +310,8 @@
 	      </li>
 	    </ul>
       </div>
-
+      {{/unless}}
+      {{/if}}
     <!-- /no_results -->
     {{/if}}
   </div>
