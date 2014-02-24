@@ -590,10 +590,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             return Sitterfied.currentUser.get('zip')
         ).property()
 
-	kids : (->
-	    return Sitterfied.currentUser.get('children').get('length')
-	).property()
-        
+    	kids : (->
+    	    return Sitterfied.currentUser.get('children').get('length')
+        ).property()
+                
         when: undefined
         start_time: '1800'
         stop_time: '2200'
@@ -679,9 +679,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         selectTeam: () ->
             selected = @get("selectedSitters")
-            for sitter in Em.copy(@get("sitterTeam"))
+            for sitter in Em.copy(@get('sitterTeam'))
                 if selected.filterProperty("id", sitter.get('id')).length == 0
-                    selected.pushObject(sitter)
+                    selected.pushObject(@get('model').filterProperty('id', sitter.get('id'))[0])
 
         clearTeam: () ->
             selected = @get("selectedSitters")
@@ -694,7 +694,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("friendTeam"))
                 if selected.filterProperty("id", sitter.get('id')).length == 0
-                    selected.pushObject(sitter)
+                    selected.pushObject(@get('model').filterProperty('id', sitter.get('id'))[0])
 
         clearFriends: () ->
             selected = @get("selectedSitters")
