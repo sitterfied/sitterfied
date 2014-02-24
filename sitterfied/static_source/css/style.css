@@ -553,7 +553,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .top_personal_info ul li span {color:#e68245;}
 .top_personal_info ul li:first-child {border-bottom:2px solid #e6e6e6;float:none;}
 .top_personal_info ul li.num_children_detail {border-right:2px solid #e6e6e6;width:100px;}
-.top_personal_info ul li.address_detail_book {width:300px;}
+.top_personal_info ul li.address_detail_book {padding-left: 25px; width: 275px;}
 .top_personal_info ul li span {top:8px;left:10px;}
 .top_personal_info ul li.num_children_detail span {left:-5px;}
 .top_personal_info ul li.address_detail_book span {top:6px;left:-1px;}
