@@ -242,7 +242,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
                 'stop_date_time': instance.stop_date_time,
                 'short_url': short_url,
                 'booking_code': instance.id,
-                'num_sitters': len(instance.sitters.all())
+                'num_sitters': len(instance.sitters.all()) - 1,
             })
             twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
