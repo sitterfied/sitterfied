@@ -150,7 +150,7 @@ define ['jquery'
         ]
 
     Sitterfied.HourBlocks = Em.A [
-            Em.Object.create({value:"0001", name:"12:00 AM"})
+            Em.Object.create({value:"0000", name:"12:00 AM"})
             Em.Object.create({value:"0030", name:"12:30 AM"})
             Em.Object.create({value:"0100", name:"1:00 AM"})
             Em.Object.create({value:"0130", name:"1:30 AM"})
@@ -198,7 +198,7 @@ define ['jquery'
             Em.Object.create({value:"2230", name:"10:30 PM"})
             Em.Object.create({value:"2300", name:"11:00 PM"})
             Em.Object.create({value:"2330", name:"11:30 PM"})
-            Em.Object.create({value:"0001", name:"12:00 AM"})
+            Em.Object.create({value:"0000", name:"12:00 AM"})
     ]
 
     Sitterfied.OnDeckBooking = null

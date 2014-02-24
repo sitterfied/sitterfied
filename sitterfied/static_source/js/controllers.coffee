@@ -321,11 +321,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 
             booking.save()
                 .then (booking) =>
-		    p = booking.reload()
-		    p.then =>
-			Sitterfied.currentUser.get('bookings').pushObject(booking)
-			@set('pending', false)
-			@transitionToRoute('done', booking)
+                    p = booking.reload()
+                    p.then =>
+                        Sitterfied.currentUser.get('bookings').pushObject(booking)
+                        @set('pending', false)
+                        @transitionToRoute('done', booking)
                 .then null, (reason) =>
                     @set('pending', false)
             
@@ -545,7 +545,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 #'specialneeds'
                 'otherServices'
                 ]
-	searched: false
+        searched: false
 
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
@@ -598,18 +598,17 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         date_to : undefined
 
         findSitters : () ->
+            sitters = Em.A()
             zip = @get("zip")
             start_time = @get("start_time")
             stop_time = @get("stop_time")
             start_date = @get("start_date")
             kids = @get("kids")
-
+            
             #store properties for future bookings
             if not _.every([zip, start_date, start_time, stop_time, kids], _.identity)
                 alert("please ensure you've filled out every field")
                 return
-
-
 
             Sitterfied.onDeckBookingAttrs = {}
             #probably should do this as a property of the controller rather than adhoc
@@ -625,7 +624,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             stop_date_time.minutes(stop_time.substr(2))
             Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
 
-
             payload = {
                 kids: kids
                 zip: zip
@@ -633,6 +631,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 stop_time: stop_time
                 start_date: start_date
             }
+            
             if @get("overnight")
                 if not @get("stop_date")
                     alert("please ensure you've filled out every field")
@@ -644,8 +643,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 stop_date_time.date(@get("stop_date"))
                 Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
 
-	    @set('searched', false)
-
+            @set('searched', false)
+            
             $.get("/api/search/",
                   payload,
                   ).then (response) =>
@@ -655,7 +654,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     s.load(sitter['id'], sitter)
                     sitters.pushObject(s)
                 this.set('model', sitters)
-		@set('searched', true)
+                @set('searched', true)
 
         content: []
         selectedSitters:  Ember.ArrayProxy.create
@@ -684,8 +683,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         clearTeam: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("sitterTeam"))
-                if selected.filterProperty("id", sitter.get('id')).length > 0
-                    selected.removeObject(sitter)
+                matches = selected.filterProperty("id", sitter.get('id'))
+                if matches.length == 1
+                    selected.removeObject(matches[0])
 
         selectFriends: () ->
             selected = @get("selectedSitters")
@@ -696,8 +696,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         clearFriends: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("friendTeam"))
-                if selected.filterProperty("id", sitter.get('id')).length > 0
-                    selected.removeObject(sitter)
+                matches = selected.filterProperty("id", sitter.get('id'))
+                if matches.length == 1
+                    selected.removeObject(matches[0])
 
 
         isTeamSelected: (() ->
@@ -769,10 +770,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         selectSitter: (sitter) ->
             selected = @get('selectedSitters')
-            if selected.indexOf(sitter) == -1
+            matches = selected.filterProperty('id', sitter.get('id'))
+            if matches.length == 0
                 selected.pushObject(sitter)
             else
-                selected.removeObject(sitter)
+                selected.removeObject(matches[0])
 
         clearSelected: () ->
             @set('selectedSitters.content', Em.A())
@@ -836,7 +838,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 minWidth: 390
                 minHeight: 257
                 fitToView: false
-                closeBtn: false
+                closeBtn: true
                 enableEscapeButton: false
                 width: "90%"
                 height: "90%"
