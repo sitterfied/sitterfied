@@ -1,10 +1,42 @@
-
 <div class="container clear">
-	<div class="wraper notify_wraper">
-	  <p>{{note}}</p>
-      {{partial "smallBooking"}}
-	  <p><a {{action 'edit' this }} class="button button_small button_edit"><span class="icon_edit">&nbsp;</span>Edit</a><a {{action 'cancel' this }} class="button button_small button_cancel"><span class="icon_cancel">&nbsp;</span>Cancel</a></p>
-
-        <p>{{#linkTo mybookings class="button" }}Go to bookings{{/linkTo}}</p>
-	</div>
+  <div class="wraper notify_wraper notify_done">
+	<p>{{note}}</p>
+    <ul>
+      <li>
+        <span class="icon_date">&nbsp;</span>{{formattedDate}}&nbsp;<span>{{formattedHours}}</span>
+      </li>
+      {{#unless isInterview}}
+        <li class="address_detail_book">
+          <span class="icon_pin3">&nbsp;</span>
+          {{address1}} {{address2}} {{city}}, {{state}} {{zip}}
+        </li>
+        <li class="num_children_detail">
+          <span class="icon_friends5">&nbsp;</span>
+          {{num_children}}
+        </li>
+        <li class="phone_detail_book">
+          <span class="icon_phone">&nbsp;</span>{{emergency_phone}}
+        </li>
+      {{/unless}}
+      
+      {{#if isPhoneInterview}}
+        <li class="interview_detail phone_interview_detail">
+          <span class="icon_phone">&nbsp;</span>
+          {{emergency_phone}}
+        </li>
+      {{/if}}
+      
+      {{#if isMeetupInterview}}
+        <li class="interview_detail meetup_interview_detail">
+          <span class="icon_pin3">&nbsp;</span>
+          {{address1}} {{address2}} {{city}}, {{state}}
+        </li>
+      {{/if}}
+    </ul>
+	<p>
+      <a {{action 'edit' this }} class="button button_small button_edit"><span class="icon_edit">&nbsp;</span>Edit</a>
+      <a {{action 'cancel' this }} class="button button_small button_cancel"><span class="icon_cancel">&nbsp;</span>Cancel</a>
+    </p>
+    <p>{{#linkTo mybookings class="button" }}Go to bookings{{/linkTo}}</p>
+  </div>
 </div>

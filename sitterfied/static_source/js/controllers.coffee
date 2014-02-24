@@ -321,9 +321,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 
             booking.save()
                 .then (booking) =>
-                    Sitterfied.currentUser.get('bookings').pushObject(booking)
-                    @set('pending', false)
-                    @transitionToRoute('done', booking)
+		    p = booking.reload()
+		    p.then =>
+			Sitterfied.currentUser.get('bookings').pushObject(booking)
+			@set('pending', false)
+			@transitionToRoute('done', booking)
                 .then null, (reason) =>
                     @set('pending', false)
             
