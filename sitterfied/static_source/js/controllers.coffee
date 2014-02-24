@@ -589,11 +589,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         zip : (->
             return Sitterfied.currentUser.get('zip')
         ).property()
+
+	kids : (->
+	    return Sitterfied.currentUser.get('children').get('length')
+	).property()
         
         when: undefined
         start_time: '1800'
         stop_time: '2200'
-        kids : 1
         overnight : false
         date_to : undefined
 
