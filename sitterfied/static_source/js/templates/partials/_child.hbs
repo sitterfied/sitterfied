@@ -16,12 +16,12 @@
   {{view Sitterfied.Select2
   contentBinding="Sitterfied.Days"
   prompt="Day"
-  selectionBinding="child.birthDay"
+  valueBinding="child.birthDay"
   }}
   {{view Sitterfied.Select2
   contentBinding="Sitterfied.Years"
   prompt="Year"
-  selectionBinding="chlid.birthYear"
+  valueBinding="child.birthYear"
   }}
 </p>
 <p>
@@ -33,16 +33,16 @@
   <span>Special needs?
   </span>
   {{# if controllers.specialneeds.content.content }}
-  {{view Sitterfied.Select2
-  contentBinding=controllers.specialneeds
-  prompt="Select special needs"
-  optionLabelPath="content.need"
-  optionValuePath="content"
-  selectionBinding="child.special_needs"
-  multiple="multiple"
-  }}
-  {{/if}}
-  </p>
+    {{view Sitterfied.Select2
+    contentBinding=controllers.specialneeds
+    prompt="Select special needs"
+    optionLabelPath="content.need"
+    optionValuePath="content"
+    selectionBinding="child.special_needs"
+    multiple="multiple"
+    }}
+    {{/if}}
+</p>
 <p>
   <span class="two_row">Not listed?
     <br />Add another
@@ -51,6 +51,4 @@
     <span  class="icon_plus">&nbsp;
     </span>ADD
   </a>
-
-
 </p>

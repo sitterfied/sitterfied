@@ -76,8 +76,8 @@ define ['jquery'
     Sitterfied.onDeckAvatar = ''
 
 
-    Sitterfied.Years = (num for num in [2013..1995])
-    Sitterfied.SitterYears = (num for num in [2013..1900])
+    Sitterfied.Years = (num for num in [2014..1995])
+    Sitterfied.SitterYears = (num for num in [2014..1900])
 
     Sitterfied.Days = (num for num in [1..31])
     Sitterfied.Months = Em.A [
