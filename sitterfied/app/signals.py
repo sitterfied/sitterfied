@@ -41,7 +41,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/mybookings/pending')
+        redis_client.set(short_url_code, '/mybookings/upcoming')
 
         sms = render_to_string('sms/booking/booking_request_accepted.sms', {
             'sitter_name': sitter.first_name,
@@ -57,7 +57,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/mybookings/pending')
+        redis_client.set(short_url_code, '/mybookings/upcoming')
 
         sms = render_to_string('sms/booking/booking_request_accepted_sitter.sms', {
             'sitter_name': sitter.first_name,
@@ -105,7 +105,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/schedule')
+        redis_client.set(short_url_code, '/sitter/' + str(sitter.id) + '/edit/schedule')
 
         sms = render_to_string('sms/booking/booking_request_declined_sitter.sms', {
             'sitter_name': sitter.first_name,
@@ -267,7 +267,7 @@ def new_review(sender, instance=None, **kwargs):
         if settings.email_new_review and sitter.cell:
             short_url_code = generate_short_url_code()
             short_url = settings.SHORT_URL + short_url_code
-            redis_client.set(short_url_code, '/reviews/' + str(instance.id))
+            redis_client.set(short_url_code, '/sitter/' + str(sitter.id) + '/edit/reviews/' + str(instance.id))
 
             sms = render_to_string('sms/review/new_review.sms', {'short_url': short_url})
             twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
