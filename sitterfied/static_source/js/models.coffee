@@ -216,6 +216,10 @@ define ['jquery'
             return Sitterfied.Parent.find(@get("id"))
         ).property("id")
 
+        sitterFriends: (() ->
+            return @get('friends').filterProperty('parent_or_sitter', 'Sitter')
+        ).property('friends.@each.parent_or_sitter')
+
     )
     Sitterfied.User.adapter = Adapter.create()
 
