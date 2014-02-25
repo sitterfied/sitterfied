@@ -1,19 +1,23 @@
 <li>
+  {{#unless isSitter}}
   <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}>
   </div>
+  {{/unless}}
   <div class="tit">
     <span><strong>${{one_child_min_rate}}</strong> /hr</span>
     {{#linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}
   </div>
   <div class="img">
+    {{#unless isSitter}}
     <div {{action addSitterTeam this}} {{bindAttr class="inSitterTeam:active :heart" }}>
     </div>
+    {{/unless}}
     {{#linkTo sitter this.sitter}}
       <img {{bindAttr src=avatarUrl alt=full_name}} />
     {{/linkTo}}
     {{# if id_verified }}
       <span>Background Cleared</span>
-    {{/if}}
+      {{/if}}
   </div>
   <ul>
     <li>
@@ -21,15 +25,15 @@
       {{recommends.length}} recommends
       {{#if recommends}}
         <ul>
-	  <li>Recommendations</li>
+	      <li>Recommendations</li>
           {{# each recommends }}
-	    <li>
-	      {{#linkTo parent this.parent}}
-	        <img {{bindAttr src=this.parent.avatarUrl}}  />
-	      {{/linkTo}}
-	      <span>{{this.parent.full_name}}</span>
-	    </li>
-          {{/each}}
+	        <li>
+	          {{#linkTo parent this.parent}}
+	            <img {{bindAttr src=this.parent.avatarUrl}}  />
+	          {{/linkTo}}
+	          <span>{{this.parent.full_name}}</span>
+	        </li>
+            {{/each}}
         </ul>
       {{/if}}
     </li>
@@ -38,17 +42,17 @@
       {{sitter_teams.length}} sitter teams
       {{# if sitter_teams}}
         <ul>
-	  <li>Added to sitter teams and repeatedly hired</li>
-	  {{# each sitter_teams }}
-	    <li>
-	      {{#linkTo parent this.parent}}
-	        <img {{bindAttr src=avatarUrl}}  />
-	      {{/linkTo}}
-	      <span>{{full_name}}</span>
-	    </li>
-	  {{/each}}
+	      <li>Added to sitter teams and repeatedly hired</li>
+	      {{# each sitter_teams }}
+	        <li>
+	          {{#linkTo parent this.parent}}
+	            <img {{bindAttr src=avatarUrl}}  />
+	          {{/linkTo}}
+	          <span>{{full_name}}</span>
+	        </li>
+	        {{/each}}
         </ul>
-      {{/if}}
+        {{/if}}
     </li>
     <li>
       <span class="icon_reviews">&nbsp;</span>
@@ -56,16 +60,16 @@
       {{#if reviews}}
         <ul>
           {{# with reviews.firstObject}}
-	    <li class="rev clear">
-	      {{#linkTo parent parent.parent}}
-		<img {{bindAttr src=parent.avatarUrl}}  />
-	      {{/linkTo}}
-	      <div>
-		<p>{{review}}</p>
-	        <p>{{#linkTo sitter sitter.sitter}}Read more reviews {{/linkTo}}</p>
-	      </div>
-	    </li>
-	  {{/with}}
+	        <li class="rev clear">
+	          {{#linkTo parent parent.parent}}
+		        <img {{bindAttr src=parent.avatarUrl}}  />
+	          {{/linkTo}}
+	          <div>
+		        <p>{{review}}</p>
+	            <p>{{#linkTo sitter sitter.sitter}}Read more reviews {{/linkTo}}</p>
+	          </div>
+	        </li>
+	        {{/with}}
         </ul>
       {{/if}}
     </li>
@@ -88,26 +92,30 @@
         </label>
       </div>
     {{else}}
-      <a class="button" {{action book this}}>
-	BOOK
-      </a>
-      <a class="button button2" {{action open_interview_popup this}}>
-	INTERVIEW
-      </a>
-      <p>
-	<a {{action addSitterTeam this}}>
-	  ADD TO SITTER TEAM
-	</a>
-      </p>
+      {{#unless isSitter}}
+        <a class="button" {{action book this}}>
+	      BOOK
+        </a>
+        <a class="button button2" {{action open_interview_popup this}}>
+	      INTERVIEW
+        </a>
+        <p>
+	      <a {{action addSitterTeam this}}>
+	        ADD TO SITTER TEAM
+	      </a>
+        </p>
+      {{/unless}}
     {{/ if}}
+    {{#unless isSitter}}
     <p>
       <a {{action bookmark this}}>
-	{{# if isBookmarked}}
-	  REMOVE 
-	{{/ if}}
-	BOOKMARK
+	    {{# if isBookmarked}}
+	      REMOVE 
+	    {{/ if}}
+	    BOOKMARK
       </a>
     </p>
+    {{/unless}}
   </div>
 </li>
 
