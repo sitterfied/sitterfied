@@ -326,6 +326,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                         Sitterfied.currentUser.get('bookings').pushObject(booking)
                         @set('pending', false)
                         @transitionToRoute('done', booking)
+                    .then null, (reason) =>
+                        @set('pending', false)
                 .then null, (reason) =>
                     @set('pending', false)
             
@@ -1083,11 +1085,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             ).fail((data) ->
                 alert("there was an error logging you in. Please try again!")
             )
-
-
-
-
-
 
     Sitterfied.FriendsController  = Em.ArrayController.extend(
         parents: (() ->
