@@ -270,35 +270,34 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.BookingsController  = Em.ArrayController.extend(
         pendingRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isPending')
-        ).property('content.@each.isPending', )
+            return @createFilteredArray('isPending', 'start_date_time', true)
+        ).property('content.@each.isPending')
 
         upcomingJobs: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isUpcoming')
+            return @createFilteredArray('isUpcoming', 'start_date_time', true)         
         ).property('content.@each.isUpcoming')
 
         completedJobs: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isCompleted')
+            return @createFilteredArray('isCompleted', 'start_date_time', false)       
         ).property('content.@each.isCompleted')
 
         missedRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isMissed')
+            return @createFilteredArray('isMissed', 'start_date_time', false)
         ).property('content.@each.isMissed')
 
         canceledRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('canceled')
+            return @createFilteredArray('canceled', 'start_date_time', false)
         ).property('content.@each.canceled', 'content.@each.isLoaded')
 
         declinedRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isDeclined')
+            return @createFilteredArray('isDeclined', 'start_date_time', false)
         ).property('content.@each.isDeclined')
 
+        createFilteredArray: (property, sort, order) ->
+            return Em.ArrayController.create
+                content: @get('content').filterProperty(property, true)
+                sortProperties: [sort]
+                sortAscending: order
     )
 
     Sitterfied.BookController = Em.ObjectController.extend(
