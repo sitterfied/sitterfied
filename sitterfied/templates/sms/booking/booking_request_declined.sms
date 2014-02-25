@@ -1,3 +1,1 @@
-Hi {{ parent_name }}, unfortunately {{ sitter_name }} is unavailable
-{{ start_date_time|date:'M j' }}. Find another sitter now: {{
-short_url }}.
+Hi {{ parent_name }}, unfortunately {{ sitter_name }} is unavailable {{ start_date_time|date:'M j' }}. Find another sitter now: {{ short_url }}.
