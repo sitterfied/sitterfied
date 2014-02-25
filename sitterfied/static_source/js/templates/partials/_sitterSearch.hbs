@@ -1,5 +1,5 @@
 <li>
-  {{#unless isSitter}}
+  {{#unless parentController.isSitter}}
   <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}>
   </div>
   {{/unless}}
@@ -8,7 +8,7 @@
     {{#linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}
   </div>
   <div class="img">
-    {{#unless isSitter}}
+    {{#unless parentController.isSitter}}
     <div {{action addSitterTeam this}} {{bindAttr class="inSitterTeam:active :heart" }}>
     </div>
     {{/unless}}
@@ -92,7 +92,7 @@
         </label>
       </div>
     {{else}}
-      {{#unless isSitter}}
+      {{#unless parentController.isSitter}}
         <a class="button" {{action book this}}>
 	      BOOK
         </a>
@@ -106,7 +106,7 @@
         </p>
       {{/unless}}
     {{/ if}}
-    {{#unless isSitter}}
+    {{#unless parentController.isSitter}}
     <p>
       <a {{action bookmark this}}>
 	    {{# if isBookmarked}}
