@@ -48,15 +48,15 @@
 		    <li>
 		      {{# if hasFriendTeam }}
 		        {{# if isFriendsSelected}}
-		          <p>- <a {{action "selectFriends"}} class="add_sitters">REMOVE ALL FRIENDS’ SITTERS</a></p>
+		          <p>- &nbsp;<a {{action "clearFriends"}} class="add_sitters">REMOVE ALL FRIENDS’ SITTERS</a></p>
 		        {{ else }}
-		          <p>+ <a {{action "clearFriends"}} class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
+		          <p>+ <a {{action "selectFriends"}} class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
 		        {{/ if}}
 		      {{/ if}}
 
 		      {{# if hasSitterTeam }}
 		        {{# if isTeamSelected}}
-		          <p>- <a {{action "clearTeam"}} class="remove_team">REMOVE SITTER TEAM</a></p>
+		          <p>- &nbsp;<a {{action "clearTeam"}} class="remove_team">REMOVE SITTER TEAM</a></p>
 		        {{ else }}
 		          <p>+ <a {{action "selectTeam"}} class="remove_team">ADD SITTER TEAM</a></p>
 		        {{/ if}}
