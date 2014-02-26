@@ -5,108 +5,108 @@
     <div class="sitter_tabs_wrap my_tabs_style">
       {{# view Sitterfied.FixedView  tagName="span" id="fixed_tabs"}}
       <div class="stabs_block" >
-	<nav>
-	  <ul class="tab_select">
-	    <li class="team">
-	      <a {{action 'zoomToSitterTeam'}}>
-		sitter<br />
-		team
-		<span>{{filteredSitterTeam.length}}</span>
-	      </a>
-	    </li>
-	    <li class="friends">
-	      <a {{action 'zoomToFriendTeam'}}>
-		friends'
-		<br />
-		sitters
-		<span>{{filteredFriendTeam.length}}</span>
-	      </a>
-	    </li>
-	    <li class="local">
-	      <a {{action 'zoomToLocalTeam'}}>
-		local<br />
-		sitters
-		<span>{{filteredLocalTeam.length}}</span>
-	      </a>
-	    </li>
-	  </ul>
-	</nav>
-	<div class="friends_block my_friends_sitters">
+	    <nav>
+	      <ul class="tab_select">
+	        <li class="team">
+	          <a {{action 'zoomToSitterTeam'}}>
+		        sitter<br />
+		        team
+		        <span>{{filteredSitterTeam.length}}</span>
+	          </a>
+	        </li>
+	        <li class="friends">
+	          <a {{action 'zoomToFriendTeam'}}>
+		        friends'
+		        <br />
+		        sitters
+		        <span>{{filteredFriendTeam.length}}</span>
+	          </a>
+	        </li>
+	        <li class="local">
+	          <a {{action 'zoomToLocalTeam'}}>
+		        local<br />
+		        sitters
+		        <span>{{filteredLocalTeam.length}}</span>
+	          </a>
+	        </li>
+	      </ul>
+	    </nav>
+	    <div class="friends_block my_friends_sitters">
           {{#view Sitterfied.ScrollSlideDownView class="multiple_sitters_block clear" toggleBinding=multipleSitters}}
-	    <a {{action "toggleMultipleSitters"}} class="close">&nbsp;</a>
+	      <a {{action "toggleMultipleSitters"}} class="close">&nbsp;</a>
 	      <ul>
-		{{# each controller}}
-		  {{# if isSelected}}
-		    <li {{bindAttr class="selectTeamClass"}}>
-		      {{# linkTo sitter this.sitter}}
-			{{full_name}}
-		      {{/ linkTo}}
-		      <span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span>
-		    </li>
-		  {{/ if}}
-		{{/ each}}
-		<li>
-		  {{# if hasFriendTeam }}
-		    {{# if isFriendsSelected}}
-		      <p>- <a {{action "selectFriends"}}class="add_sitters">REMOVE ALL FRIENDS’ SITTERS</a></p>
-		    {{ else }}
-		      <p>+ <a {{action "clearFriends"}}class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
-		    {{/ if}}
-		  {{/ if}}
+		    {{# each controller}}
+		      {{# if isSelected}}
+		        <li {{bindAttr class="selectTeamClass"}}>
+		          {{# linkTo sitter this.sitter}}
+			        {{full_name}}
+		          {{/ linkTo}}
+		          <span class="remove"><a {{action "selectSitter" this}} class="select1">&nbsp;</a></span>
+		        </li>
+		      {{/ if}}
+		    {{/ each}}
+		    <li>
+		      {{# if hasFriendTeam }}
+		        {{# if isFriendsSelected}}
+		          <p>- &nbsp;<a {{action "clearFriends"}} class="add_sitters">REMOVE ALL FRIENDS’ SITTERS</a></p>
+		        {{ else }}
+		          <p>+ <a {{action "selectFriends"}} class="add_sitters">ADD ALL FRIENDS’ SITTERS</a></p>
+		        {{/ if}}
+		      {{/ if}}
 
-		  {{# if hasSitterTeam }}
-		    {{# if isTeamSelected}}
-		      <p>- &nbsp;<a {{action "clearTeam"}} class="remove_team">REMOVE SITTER TEAM</a></p>
-		    {{ else }}
-		      <p>+ &nbsp;<a {{action "selectTeam"}} class="remove_team">ADD SITTER TEAM</a></p>
-		    {{/ if}}
-		  {{/ if}}
-		</li>
+		      {{# if hasSitterTeam }}
+		        {{# if isTeamSelected}}
+		          <p>- &nbsp;<a {{action "clearTeam"}} class="remove_team">REMOVE SITTER TEAM</a></p>
+		        {{ else }}
+		          <p>+ <a {{action "selectTeam"}} class="remove_team">ADD SITTER TEAM</a></p>
+		        {{/ if}}
+		      {{/ if}}
+		    </li>
 	      </ul>
 	      <p>
-		Select from the available sitters below.
-		<a {{action book selectedSitters.content }} class="button button_small">
-		  <span class="icon_ok2">&nbsp;</span>
-		  submit
-		</a>
+		    Select from the available sitters below.
+		    <a {{action book selectedSitters.content }} class="button button_small">
+		      <span class="icon_ok2">&nbsp;</span>
+		      submit
+		    </a>
 	      </p>
-	    {{/ view}}
+	  {{/ view}}
 
 
-	    {{#view Sitterfied.ScrollSlideDownView class="filter_block" toggleBinding="filterSitters"}}
-	      <p>
+	  {{#view Sitterfied.ScrollSlideDownView class="filter_block" toggleBinding="filterSitters"}}
+	  <p>
 		<a {{action 'resetFilters'}}>Reset Filters</a>
-	      </p>
-	      <form method="post" action="#">
-		  <ul class="clear">
-	          <li>
-                    {{view Sitterfied.Select2
+	  </p>
+	  <form method="post" action="#">
+		<ul class="clear">
+	      <li>
+            {{view Sitterfied.Select2
 			contentBinding=controllers.languages
 			controllerBinding=controllers.languages
-        	        prompt="Select languages"
+        	prompt="Select languages"
 			optionLabelPath="content.language"
-                        optionValuePath="content"
-                        selectionBinding="languages"
-                        multiple="multiple"
-                    }}
+            optionValuePath="content"
+            selectionBinding="languages"
+            multiple="multiple"
+            }}
 		  </li>
-	          <li>
+	      <li>
 	  	    {{view Sitterfied.Select2
-		        prompt="Education level"
-		        contentBinding=Sitterfied.Educations
-                        selectionBinding="highest_education"
-                    }}
-	          </li>
-	          <li>
-                    {{view Sitterfied.Select2
+		    prompt="Education level"
+		    contentBinding=Sitterfied.Educations
+            selectionBinding="highest_education"
+            }}
+	      </li>
+	      <li>
+            {{view Sitterfied.Select2
 			contentBinding=controllers.certifications
-        	        prompt="Training/Certifications"
-                        optionLabelPath="content.certification"
-                        optionValuePath="content"
-                        selectionBinding="certifications"
-                        multiple="multiple"
-                    }}
-                  </li>
+        	prompt="Training/Certifications"
+            optionLabelPath="content.certification"
+            optionValuePath="content"
+            selectionBinding="certifications"
+            multiple="multiple"
+            }}
+          </li>
 
 		  <li>
 		    {{view Sitterfied.Select2
@@ -118,11 +118,11 @@
 		    {{view Sitterfied.Select2
 			prompt="Type of Experience"
 			multiple="multiple"
-                    }}
-                  </li>
-                  <li>
-                    {{view Sitterfied.Select2
-                        contentBinding=controllers.otherServices
+            }}
+          </li>
+          <li>
+            {{view Sitterfied.Select2
+            contentBinding=controllers.otherServices
 			prompt="Other"
 			optionLabelPath="content.service"
 			optionValuePath="content"
@@ -131,79 +131,79 @@
 		    }}
 		  </li>
 		</ul>
-	      </form>
-	      <p>
+	  </form>
+	  <p>
 		<a {{action "toggleFilterSitters"}}>Hide Filters</a>
-	      </p>
-	    {{/ view}}
+	  </p>
+	  {{/ view}}
 
-	    <div class="sort_filter clear">
-	      <div class="sort">
-	        {{# unless sortSitters }}
-		  <a {{action "toggleSortSitters"}} class="sort_trigger">Sort by</a>
-		{{ else }}
-		  <a {{action "toggleSortSitters"}} class="reset_trigger"> Reset Sort</a>
-		{{/ unless}}
-		
-		{{# view Sitterfied.ToggleView class="sort_block" toggleBinding="sortSitters" tagName="ul"}}
+	  <div class="sort_filter clear">
+	    <div class="sort">
+	      {{# unless sortSitters }}
+		    <a {{action "toggleSortSitters"}} class="sort_trigger">Sort by</a>
+		  {{ else }}
+		    <a {{action "toggleSortSitters"}} class="reset_trigger"> Reset Sort</a>
+		  {{/ unless}}
+		  
+		  {{# view Sitterfied.ToggleView class="sort_block" toggleBinding="sortSitters" tagName="ul"}}
 		  <li {{action sortSet "isBookmarked" false}}>
 		    <a>Bookmarked</a>
 		  </li>
 		  {{# view Sitterfied.SortItemView sortProp="rehires" direction=false}}
-		    <a>Rehires</a>
-	          {{/ view}}
+		  <a>Rehires</a>
+	      {{/ view}}
 		  <li {{action sortSet "total_exp" false}}>
-	            <a>Experience</a>
-	          </li>
+	        <a>Experience</a>
+	      </li>
 		  <li {{action sortSet "sitter_teams.length" false}}>
 		    <a>Sitter Teams</a>
-	          </li>
-	          {{# view Sitterfied.SortItemView sortProp="one_child_min_rate" direction=true}}
-		    <a>Rate</a>
-	          {{/ view}}
+	      </li>
+	      {{# view Sitterfied.SortItemView sortProp="one_child_min_rate" direction=true}}
+		  <a>Rate</a>
+	      {{/ view}}
 		  <li {{action sortSet "reviews.length" false}}>
 		    <a>Reviews</a>
-	          </li>
-		{{/ view}}
-	      </div>
-	      <div {{action "toggleMultipleSitters"}} class="multiple_select">
-		<a>{{multipleSittersText}}</a>
-	      </div>
-	      <div {{action "toggleFilterSitters"}} class="filter">
-		<a>Filter my sitters</a>
-	      </div>
+	      </li>
+		  {{/ view}}
+	    </div>
+	    <div {{action "toggleMultipleSitters"}} class="multiple_select">
+		  <a>{{multipleSittersText}}</a>
+	    </div>
+	    <div {{action "toggleFilterSitters"}} class="filter">
+		  <a>Filter my sitters</a>
 	    </div>
 	  </div>
-	</div>
+	    </div>
+	  </div>
       {{/ view}}
       
       {{# if content }}
         <section id="sitterteam">
           {{# view Sitterfied.MobTriggerView my_mob_tab=true}}
             sitter<br />
-	    team
-	    <span>
-	      {{filteredSitterTeam.length}}
-	    </span>
+	        team
+	        <span>
+	          {{filteredSitterTeam.length}}
+	        </span>
           {{/ view}}
           {{# view Sitterfied.WaypointActiveView class="my_sitter_team" targetClass="team"}}
-	    <div class="sitter_title">
-	      <p>
-		<span>
-		  <span class="icon_heart2">&nbsp;</span>
-		  sitter<br />
-		  team
-		</span>
-		<strong>{{filteredSitterTeam.length}}</strong>
-	      </p>
-	    </div>
-	    {{# if Sitterfied.currentUser.sitter_teams }}
-	      <div class="send_request search_request">
-		<a {{action bookTeam }}>
-		  Send job request to sitter team
-		</a>
+	      <div class="sitter_title">
+	        <p>
+		      <span>
+		        <span class="icon_heart2">&nbsp;</span>
+		        sitter<br />
+		        team
+		      </span>
+		      <strong>{{filteredSitterTeam.length}}</strong>
+	        </p>
 	      </div>
-	    {{/if}}
+	      {{# if Sitterfied.currentUser.sitter_teams }}
+	        <div class="send_request search_request">
+		      <a {{action bookTeam }}>
+		        Send job request to sitter team
+		      </a>
+	        </div>
+	        {{/if}}
             <ul class="clear">
               {{# each sitter in controller}}
                 {{# if sitter.inSitterTeam }}
@@ -211,81 +211,110 @@
                     {{ partial sitterTeam }}
                   {{/ if}}
                 {{/ if}}
-              {{/each}}
+                {{/each}}
             </ul>
           {{/ view}}
         </section>
 
-	<!-- my_friends_sitters -->
-	<section id="friendteam">
-	  {{# view Sitterfied.MobTriggerView my_mob_tab=true }}
-	    friends'<br />
-	    sitters
-	    <span>{{filteredFriendTeam.length}}</span>
-	  {{/ view}}
-	  {{# view Sitterfied.WaypointActiveView class="friends_block my_friends_sitters" targetClass="friends"}}
-	    <div class="sitter_title" id="myfriends_sitter_title">
-	      <p>
-	        <span>
-	  	<span class="icon_heart2">&nbsp;</span>
-		  friends’<br />
-		  sitters
-		</span>
-		<strong>{{filteredFriendTeam.length}}</strong>
-	      </p>
-	    </div>
-	    <ul class="clear">
-	      {{# each controller }}
-		{{# if inFriendsTeam }}
-		  {{# if passesFilters }}
-		    {{ partial sitter_search_with_mutual_friends }}
-		  {{/ if}}
-		{{/ if}}
-	      {{/ each}}
-	    </ul>
-	  {{/ view}}
-	</section>
-	<!-- /my_friends_sitters -->
+	    <!-- my_friends_sitters -->
+	    <section id="friendteam">
+	      {{# view Sitterfied.MobTriggerView my_mob_tab=true }}
+	        friends'<br />
+	        sitters
+	        <span>{{filteredFriendTeam.length}}</span>
+	      {{/ view}}
+	      {{# view Sitterfied.WaypointActiveView class="friends_block my_friends_sitters" targetClass="friends"}}
+	      <div class="sitter_title" id="myfriends_sitter_title">
+	        <p>
+	          <span>
+	  	        <span class="icon_heart2">&nbsp;</span>
+		        friends’<br />
+		        sitters
+		      </span>
+		      <strong>{{filteredFriendTeam.length}}</strong>
+	        </p>
+	      </div>
+	      <ul class="clear">
+	        {{# each controller }}
+		      {{# if inFriendsTeam }}
+		        {{# if passesFilters }}
+		          {{ partial sitter_search_with_mutual_friends }}
+		        {{/ if}}
+		      {{/ if}}
+	        {{/ each}}
+	      </ul>
+	      {{/ view}}
+	    </section>
+	    <!-- /my_friends_sitters -->
 
-	<!-- my_local_sitters -->
-	<section id="localteam">
-	  {{# view Sitterfied.MobTriggerView my_mob_tab=true }}
-	    local<br />
-	    sitters
-	    <span>{{filteredLocalTeam.length}}</span>
-	  {{/ view}}
-	  {{# view Sitterfied.WaypointActiveView class="friends_block my_local_sitters" targetClass="local"}}
-	    <div class="sitter_title" id="local_sitter_title">
-	      <p>
-		<span>
-		  <span class="icon_pin2">&nbsp;</span>
-		  local<br />
-		  sitters
-		</span>
-		<strong>{{filteredLocalTeam.length}}</strong>
-	      </p>
-	    </div>
-	    <ul class="clear">
-	      {{# each controller }}
-	        {{# if inLocalTeam }}
-	          {{# if passesFilters }}
-	            {{ partial sitterSearch }}
+	    <!-- my_local_sitters -->
+	    <section id="localteam">
+	      {{# view Sitterfied.MobTriggerView my_mob_tab=true }}
+	        local<br />
+	        sitters
+	        <span>{{filteredLocalTeam.length}}</span>
+	      {{/ view}}
+	      {{# view Sitterfied.WaypointActiveView class="friends_block my_local_sitters" targetClass="local"}}
+	      <div class="sitter_title" id="local_sitter_title">
+	        <p>
+		      <span>
+		        <span class="icon_pin2">&nbsp;</span>
+		        local<br />
+		        sitters
+		      </span>
+		      <strong>{{filteredLocalTeam.length}}</strong>
+	        </p>
+	      </div>
+	      <ul class="clear">
+	        {{# each controller }}
+	          {{# if inLocalTeam }}
+	            {{# if passesFilters }}
+	              {{ partial sitterSearch }}
+	            {{/ if}}
 	          {{/ if}}
-	        {{/ if}}
-	      {{/ each}}
-	    </ul>
-	  {{/ view}}
-	</section>
-	<!-- /my_local_sitters -->
-      </div>
-      
-      <button {{action interview "Phone"}}>Phone</button>
-      
-      <!-- /sitter_tabs_wrap -->
+	        {{/ each}}
+	      </ul>
+	      {{/ view}}
+	    </section>
+	    <!-- /my_local_sitters -->
+    </div>
+    
+    <!-- Interview popup -->
+    {{ partial interview_popup }}
+    
+    <!-- /sitter_tabs_wrap -->
+  {{else}}
+    {{# if searched }}
+      {{# unless content }}
+        <!-- no_results -->
+        <div class="no_results clear">
+	  <p>It appears no sitters are available right now.</p>
+	  <p>Here are a couple things you can do:</p>
+	  <ul>
+	    <li>
+	      <p>
+	        {{#linkTo parentEdit.network Sitterfied.currentUser class="button"}}Invite{{/linkTo}}
+	      </p>
+	      <p>
+	        Invite your friends and discover great sitters together. We’ll even reward you and your friends with free months as they join Sitterfied
+	      </p>
+	    </li>
+	    <li style="visibility: hidden;">
+	    </li>
+	    <li>
+	      <p>
+	        {{#linkTo parentEdit.network Sitterfied.currentUser class="button" }}Connect{{/linkTo}}
+	      </p>
+	      <p>
+	        Connect with your existing social networks to find great sitters through your friends
+	      </p>
+	    </li>
+	  </ul>
+	</div>
+      {{/unless}}
     {{/if}}
+    <!-- /no_results -->
+  {{/if}}
 </div>
-
-<!-- Interview popup -->
-{{ partial interview_popup }}
-
+  
 {{ partial loading_popup }}

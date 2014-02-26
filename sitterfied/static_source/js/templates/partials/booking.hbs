@@ -161,17 +161,19 @@
         
       {{/if}}
     </div>
-    {{# unless canceled}}
-      {{# unless isDeclined}}
+    {{# unless canceled }}
+      {{# unless isDeclined }}
         {{# if Sitterfied.isParent }}
-          <div class="btn_wrap">
-            <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
-              <span class="icon_cancel">
-                &nbsp;
-              </span>
-              CANCEL
-            </a>
-          </div>
+          {{# unless isInPast }}
+            <div class="btn_wrap">
+              <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+                <span class="icon_cancel">
+                  &nbsp;
+                </span>
+                CANCEL
+              </a>
+            </div>
+          {{/ unless }}
         {{ else }}
           {{# if accepted_sitter }}
             {{# if thisSitterAccepted }}
@@ -187,6 +189,7 @@
               {{/ unless}}
             {{/ if}}
           {{ else }}
+            {{# unless isInPast }}
             <div class="btn_wrap">
               <a class="button button_smaller" {{action 'acceptBooking' booking}}>
                 <span class="icon_ok2">
@@ -200,6 +203,7 @@
                 </span>DECLINE
               </a>
             </div>
+            {{/ unless}}
           {{/ if }}
         {{/ if}}
       {{/ unless}}

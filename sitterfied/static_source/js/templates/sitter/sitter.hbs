@@ -10,7 +10,7 @@
 		<li><span class="icon_pin6">&nbsp;</span>{{city}}, {{state}}</li>
 		<li><span class="icon_dollar2">&nbsp;</span>from ${{one_child_min_rate}} /hr</li>
 		<li><span class="icon_review2">&nbsp;</span>{{reviews.length}} reviews</li>
-		<li><span class="icon_friends8">&nbsp;</span>{{friends.length}} sitter friends</li>
+		<li><span class="icon_friends8">&nbsp;</span>{{sitterFriends.length}} sitter friends</li>
 	  </ul>
     {{/ view}}
 	<!-- /stat_bar -->
@@ -20,7 +20,7 @@
 	  <ul class="tab_select">
 		<li>{{# linkTo sitter.snapshot }}About{{/linkTo}}</li>
 		<li>{{# linkTo sitter.reviews }}Reviews{{/linkTo}}</li>
-		<li>{{# linkTo sitter.friends }}Friends{{/linkTo}}</li>
+		<li>{{# linkTo sitter.friends }}Sitter Friends{{/linkTo}}</li>
 	  </ul>
       {{outlet}}
 	</div>

@@ -322,7 +322,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             if Sitterfied.currentUser.get('isParent')
                 this.transitionTo('search')
             else
-                this.transitionTo('profile')
+                this.transitionTo('mybookings.pending')
 
 
         renderTemplate: () ->

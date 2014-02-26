@@ -1,1 +1,1 @@
-Hi {{ parent_name }}, unfortunately no sitters were available {{ start_date_time|date:'M j' }}. Find another sitter now: {{ short_url }}.
+Hi {{ parent_name }}, unfortunately no sitters were available {{ start_date_time|date:'M j' }}. Find another sitter now: {{ short_url }}.{% if single_sitter_requested %} Tip: Send your job request to multiple sitters.{% endif %}
