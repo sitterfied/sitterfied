@@ -279,9 +279,13 @@
 	<!-- /my_local_sitters -->
       </div>
       
-      <!-- Interview popup -->
-      {{ partial interview_popup }}
+      <button {{action interview "Phone"}}>Phone</button>
       
       <!-- /sitter_tabs_wrap -->
     {{/if}}
 </div>
+
+<!-- Interview popup -->
+{{ partial interview_popup }}
+
+{{ partial loading_popup }}

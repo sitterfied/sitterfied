@@ -428,6 +428,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @transitionToRoute('book')
 
         open_interview_popup: () ->
+            console.log("Open Interview Popup Sitetr Controller:")
             $.fancybox
                 href: "#interview_popup"
                 maxWidth: 390
@@ -441,6 +442,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 height: "90%"
         
         interview: (interview_type) ->
+            console.log("Interview Type:", interview_type)
             $.fancybox.close()
             
             start_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['start_date_time']) || moment().toDate()
@@ -602,7 +604,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 alert("please ensure you've filled out every field")
                 return
 
-
+            $(".loadingImage").show()
+            $(".findSitter").attr("disabled", true)
 
             Sitterfied.onDeckBookingAttrs = {}
             #probably should do this as a property of the controller rather than adhoc
@@ -641,7 +644,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
             $.get("/api/search/",
                   payload,
-                  ).then (response) =>
+                  ).then ((response) =>
                 sitters = Em.A()
                 for sitter in response
                     s = Sitterfied.Sitter.create()
@@ -651,6 +654,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 @set("selectedSitters", Ember.ArrayProxy.create
                     content: Em.copy(@get("sitterTeam"))
                 )
+                $(".loadingImage").hide()
+                $(".findSitter").attr("disabled", false)
+            ), (reason) =>
+                $(".loadingImage").hide()
+                $(".findSitter").attr("disabled", false)
+                
 
 
         content: []
@@ -825,6 +834,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         open_interview_popup: (sitters) ->
             Sitterfied.set("sitters_to_interview", sitters)
+            console.log("Sitters to review:", sitters)
             $.fancybox
                 href: "#interview_popup"
                 maxWidth: 390
@@ -838,6 +848,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 height: "90%"
 
         interview: (interview_type) ->
+            console.log("Interview Type:", interview_type)
+            
             $.fancybox.close()
             
             sitters = Sitterfied.get("sitters_to_interview")

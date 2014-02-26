@@ -1882,6 +1882,8 @@ a {cursor:pointer}
 
 .onboarding_block .profile_block .form_style > ul > li > ul > li .button.remove_child_trigger {display:none;margin-left:10px;}
 
+.loadingImage {display:none;position:fixed;z-index:1000;top:50%;left:50%;margin-left:-150px;margin-top:-150px;}
+
 .onboarding_block .onb_step3_left {float:left;width:535px;padding:40px 0;}
 .onboarding_block .onb_step3_left p:first-child > div {float:left;}
 .onboarding_block .onb_step3_left p:first-child select {width:350px;}

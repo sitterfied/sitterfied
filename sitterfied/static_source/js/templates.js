@@ -3178,6 +3178,15 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   data.buffer.push("	<div class=\"top_notify clear\">\n			<p class=\"sent\">Request Sent!</p>\n	</div>");
   
 });
+Ember.TEMPLATES["_loading_popup"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [3,'>= 1.0.0-rc.4'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  
+
+
+  data.buffer.push("<img class=\"loadingImage\" src=\"/static/images/Beating-Heart.gif\" />");
+  
+});
 Ember.TEMPLATES["_interview_popup"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
@@ -6555,7 +6564,7 @@ function program9(depth0,data) {
 Ember.TEMPLATES["search"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [3,'>= 1.0.0-rc.4'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashContexts, hashTypes, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, hashContexts, hashTypes, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -6913,7 +6922,7 @@ function program26(depth0,data) {
 
 function program28(depth0,data) {
   
-  var buffer = '', stack1, hashContexts, hashTypes, options;
+  var buffer = '', stack1, hashContexts, hashTypes;
   data.buffer.push("\n        <section id=\"sitterteam\">\n          ");
   hashContexts = {'my_mob_tab': depth0};
   hashTypes = {'my_mob_tab': "BOOLEAN"};
@@ -6959,12 +6968,11 @@ function program28(depth0,data) {
     'targetClass': ("local")
   },inverse:self.noop,fn:self.program(47, program47, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	</section>\n	<!-- /my_local_sitters -->\n      </div>\n      \n      <!-- Interview popup -->\n      ");
+  data.buffer.push("\n	</section>\n	<!-- /my_local_sitters -->\n      </div>\n      \n      <button ");
   hashTypes = {};
   hashContexts = {};
-  options = {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
-  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "interview_popup", options) : helperMissing.call(depth0, "partial", "interview_popup", options))));
-  data.buffer.push("\n      \n      <!-- /sitter_tabs_wrap -->\n    ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "interview", "Phone", {hash:{},contexts:[depth0,depth0],types:["ID","STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(">Phone</button>\n      \n      <!-- /sitter_tabs_wrap -->\n    ");
   return buffer;
   }
 function program29(depth0,data) {
@@ -7176,7 +7184,16 @@ function program50(depth0,data) {
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "content", {hash:{},inverse:self.noop,fn:self.program(28, program28, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n</div>\n");
+  data.buffer.push("\n</div>\n\n<!-- Interview popup -->\n");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "interview_popup", options) : helperMissing.call(depth0, "partial", "interview_popup", options))));
+  data.buffer.push("\n\n");
+  hashTypes = {};
+  hashContexts = {};
+  options = {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
+  data.buffer.push(escapeExpression(((stack1 = helpers.partial),stack1 ? stack1.call(depth0, "loading_popup", options) : helperMissing.call(depth0, "partial", "loading_popup", options))));
   return buffer;
   
 });
@@ -7323,7 +7340,7 @@ function program9(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "findSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" /></li>\n	  </ul>\n	</form>\n  </div>\n</div>\n");
+  data.buffer.push(" /></li>\n	  </ul>\n	</form>\n  </div>\n</div>");
   return buffer;
   
 });
