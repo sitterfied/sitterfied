@@ -189,4 +189,4 @@ AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend', 'app.authentic
 
 
 # Base URL for shortened URLs 
-SHORT_URL = 'sttrfd.us/'
+SHORT_URL = 'www.sttrfd.us/'
