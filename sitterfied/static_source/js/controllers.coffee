@@ -225,6 +225,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     fitToView: false
                     width: "90%"
                     height: "90%"
+                    parent: "div#application"
 
 
         googlePoll: () ->
@@ -443,6 +444,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 enableEscapeButton: false
                 width: "90%"
                 height: "90%"
+                parent: "div#application"
         
         interview: (interview_type) ->
             console.log("Interview Type:", interview_type)
@@ -849,7 +851,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         open_interview_popup: (sitters) ->
             Sitterfied.set("sitters_to_interview", sitters)
-            console.log("Sitters to review:", sitters)
+            console.log("Sitters to review Wow:", sitters)
             $.fancybox
                 href: "#interview_popup"
                 maxWidth: 390
@@ -861,6 +863,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 enableEscapeButton: false
                 width: "90%"
                 height: "90%"
+                parent: "div#application"
 
         interview: (interview_type) ->
             console.log("Interview Type:", interview_type)
