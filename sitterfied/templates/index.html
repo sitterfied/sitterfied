@@ -15,20 +15,17 @@
 	<script src="{{STATIC_URL}}js/sitterfied-min.js"></script>
 	{% endif %}
 
-
-    <script type="text/x-handlebars" data-template-name="application">
-
+    <script type="text/x-handlebars" data-template-name="reviewPopup">
       {% verbatim %}
-
       <div id="recommend_popup">
 	    <div class="tit">
 	      <span class="popup_title">How did it go with {{activeReviewPanelUser.first_name}}?
 	      </span>
 	    </div>
 	    <div class="info">
-	      <form method="post" class="form_style">
-	        {{input type="hidden" id="sitter_id"}}
-	        <p>
+	      <form class="form_style">
+            {{input type="hidden" id="sitter_id"}}
+            <p>
 	          <span class="field recommend_field">
 		        <span class="icon_check4 field_icon">&nbsp;
 		        </span>
@@ -36,7 +33,8 @@
 		        {{view Ember.Checkbox id="recommended"}}
 		        <label class="field_box" for="recommended"></label>
 	          </span>
-	          
+            </p>
+            <p>
 	          <span class="field rehire_field">
 		        <span class="icon_rehire3 field_icon">&nbsp;
 		        </span>
@@ -50,16 +48,14 @@
 	          </span>
 	          <label for="review">Review
 	          </label>
-	          {{# with  controllers.sitterReview }}
 	          {{view Ember.TextArea id="review"}}
 	        </p>
 	        <p>
-	          <button type="submit" class="button button_small" {{action "postReview"}}>
+              <a class="button button_small" {{action 'postReview'}}>
 		        <span class="icon_ok2">&nbsp;
 		        </span>Post
-	          </button>
-	          {{/with}}
-	          <a class="button button_cancel button_small" {{action "closeReccomendPopup"}}>
+	          </a>
+	          <a class="button button_cancel button_small" {{action 'close'}}>
 		        <span class="icon_cancel">&nbsp;
 		        </span>Cancel
 	          </a>
@@ -67,10 +63,15 @@
 	      </form>
 	    </div>
       </div>
+      {% endverbatim %}
+    </script>
 
+    <script type="text/x-handlebars" data-template-name="application">
+
+      {% verbatim %}
+      {{render reviewPopup}}
 	  {{render login}}
 	  {{render signup Sitterfied.currentUser}}
-
       {% endverbatim %}
 
       <!-- header -->
