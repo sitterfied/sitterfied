@@ -43,7 +43,12 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
         short_url = settings.SHORT_URL + short_url_code
         redis_client.set(short_url_code, '/mybookings/upcoming')
 
-        sms = render_to_string('sms/booking/booking_request_accepted.sms', {
+        if 'Interview' in sender.booking_type:
+            sms_template = 'sms/interview/interview_request_accepted_parent.sms'
+        else:
+            sms_template = 'sms/booking/booking_request_accepted.sms'
+
+        sms = render_to_string(sms_template, {
             'sitter_name': sitter.first_name,
             'start_date_time': sender.start_date_time,
             'stop_date_time': sender.stop_date_time,
@@ -59,7 +64,12 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
         short_url = settings.SHORT_URL + short_url_code
         redis_client.set(short_url_code, '/mybookings/upcoming')
 
-        sms = render_to_string('sms/booking/booking_request_accepted_sitter.sms', {
+        if 'Interview' in sender.booking_type:
+            sms_template = 'sms/interview/interview_request_accepted_sitter.sms'
+        else:
+            sms_template = 'sms/booking/booking_request_accepted_sitter.sms'
+
+        sms = render_to_string(sms_template, {
             'sitter_name': sitter.first_name,
             'short_url': short_url,
         })
@@ -86,11 +96,14 @@ def booking_request_declined(sender, sitter=None, **kwargs):
             short_url = settings.SHORT_URL + short_url_code
             redis_client.set(short_url_code, '/search')
 
-            template = ('sms/booking/booking_request_declined.sms'
-                        if len(sender.sitters.all()) == 1
-                        else 'sms/booking/booking_request_declined_all.sms')
+            if 'Interview' in sender.booking_type:
+                sms_template = 'sms/interview/interview_request_declined_parent.sms'
+            else:
+                sms_template = ('sms/booking/booking_request_declined.sms'
+                                if len(sender.sitters.all()) == 1
+                                else 'sms/booking/booking_request_declined_all.sms')
 
-            sms = render_to_string(template, {
+            sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
                 'parent_name': parent.first_name,
                 'start_date_time': sender.start_date_time,
@@ -107,9 +120,15 @@ def booking_request_declined(sender, sitter=None, **kwargs):
         short_url = settings.SHORT_URL + short_url_code
         redis_client.set(short_url_code, '/sitter/' + str(sitter.id) + '/edit/schedule')
 
-        sms = render_to_string('sms/booking/booking_request_declined_sitter.sms', {
+        if 'Interview' in sender.booking_type:
+            sms_template = 'sms/interview/interview_request_declined_sitter.sms'
+        else:
+            sms_template = 'sms/booking/booking_request_declined_sitter.sms'
+
+        sms = render_to_string(sms_template, {
             'sitter_name': sitter.first_name,
             'parent_name': parent.first_name,
+            'parent_cell': parent.cell,
             'short_url': short_url,
         })
         twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
@@ -133,23 +152,32 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             short_url = settings.SHORT_URL + short_url_code
             redis_client.set(short_url_code, '/search')
 
-            sms = render_to_string('sms/booking/booking_request_canceled_by_sitter_to_parent.sms', {
+            if 'Interview' in sender.booking_type:
+                sms_template = 'sms/interview/interview_cancelled_by_sitter_parent_notification.sms'
+            else:
+                sms_template = 'sms/booking/booking_request_canceled_by_sitter_to_parent.sms'
+
+            sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
+                'sitter_contact': sitter.cell if sitter.cell else sitter.email,
                 'start_date_time': sender.start_date_time,
                 'stop_date_time': sender.stop_date_time,
                 'short_url': short_url,
             })
         else:
-            # Is this necessary? Cancellation happens through the site
-            # so confirmation isn't really needed.
             if sitter:
                 sitter_first_name = sitter.first_name
                 sitter_contact_info = sitter.cell if sitter.cell else sitter.email
             else:
                 sitter_first_name = None
                 sitter_contact_info = None
+            
+            if 'Interview' in sender.booking_type:
+                sms_template = 'sms/interivew/interview_cancelled_by_parent_confirmation.sms'
+            else:
+                sms_template = 'sms/booking/booking_request_canceled_by_parent.sms'
 
-            sms = render_to_string('sms/booking/booking_request_canceled_by_parent.sms', {
+            sms = render_to_string(sms_template, {
                 'sitter_name': sitter_first_name,
                 'start_date_time': sender.start_date_time,
                 'sitter_contact_info': sitter_contact_info,
@@ -167,16 +195,25 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
 
         if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
             if cancelled_by == sitter:
-                # Probably not necessary since cancellation happens
-                # through the site.
                 parent_contact_info = parent.cell if parent.cell else parent.email
-                sms = render_to_string('sms/booking/booking_request_canceled_by_sitter.sms', {
+                
+                if 'Interview' in sender.booking_type:
+                    sms_template = 'sms/interview/interview_cancelled_by_sitter_confirmation.sms'
+                else:
+                    sms_template = 'sms/booking/booking_request_canceled_by_sitter.sms'
+
+                sms = render_to_string(sms_template, {
                     'start_date_time': sender.start_date_time,
                     'parent_name': parent.first_name,
                     'parent_contact_info': parent_contact_info,
                 })
             else:
-                sms = render_to_string('sms/booking/booking_request_canceled_by_parent_to_sitter.sms', {
+                if 'Interview' in sender.booking_type:
+                    sms_template = 'sms/interview/interview_cancelled_by_parent_sitter_notification.sms'
+                else:
+                    sms_template = 'sms/booking/booking_request_canceled_by_parent_to_sitter.sms'
+
+                sms = render_to_string(sms_template, {
                     'parent_name': parent.first_name,
                     'start_date_time': sender.start_date_time,
                     'stop_date_time': sender.stop_date_time,
@@ -231,7 +268,11 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
             if not sitter.cell:
                 continue
 
-            sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
+            if 'Interview' in instance.booking_type:
+                booking_type = instance.booking_type.replace('Interview', '_Interview').lower()
+                sms_template = 'sms/interview/{0}_request_to_sitter.sms'.format(booking_type)
+            else:
+                sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
 
             booking_date = instance.start_date_time.date()
 
@@ -241,6 +282,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
                 'booking_date': booking_date,
                 'start_date_time': instance.start_date_time,
                 'stop_date_time': instance.stop_date_time,
+                'parent_city': parent.city,
                 'short_url': short_url,
                 'booking_code': instance.id,
                 'num_sitters': len(instance.sitters.all()) - 1,
@@ -252,7 +294,11 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
             pass  # TODO: implement email for parent request sent
 
         if parent.settings.mobile_booking_accepted_denied:
-            sms = render_to_string('sms/booking/booking_request_sent.sms', {'short_url': short_url})
+            if 'Interview' in instance.booking_type:
+                sms_template = 'sms/interview/interview_request_parent_confirmation.sms'
+            else:
+                sms_template = 'sms/booking/booking_request_sent.sms'
+            sms = render_to_string(sms_template, {'short_url': short_url})
             twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
 @receiver(post_save, sender=SitterReview)
@@ -264,7 +310,7 @@ def new_review(sender, instance=None, **kwargs):
             text = html = render_to_string("email/review/new_review.html", {'first_name': sitter.first_name})
             # TODO: send_html_email("You have recieved a new review", "hello@sitterfied.com", sitter.email, text, html)
 
-        if settings.email_new_review and sitter.cell:
+        if sitter.settings.email_new_review and sitter.cell:
             short_url_code = generate_short_url_code()
             short_url = settings.SHORT_URL + short_url_code
             redis_client.set(short_url_code, '/sitter/' + str(sitter.id) + '/edit/reviews/' + str(instance.id))
@@ -305,8 +351,20 @@ def new_sitter(sender, instance=None, **kwargs):
         send_template_email('welcome-sitter', message)
 
 
+@receiver(post_save, sender=Parent)
+def new_parent(sender, instance=None, **kwargs):
+    created = kwargs.get('created', False)
+    if created:
+        message = create_message_base()
+        message['subject'] = 'Welcome to Sitterfied!'
+        message['to'] = [create_email_to(instance.email, instance.get_full_name())]
+        message['global_merge_vars'] = [{'name': 'FNAME', 'content': instance.first_name}]
+        send_template_email('welcome-parent', message)
+
+
 def create_email_to(email, name):
     return {'email': email, 'name': name}
+
 
 def create_message_base():
     return {

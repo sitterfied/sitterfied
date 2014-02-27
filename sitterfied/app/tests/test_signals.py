@@ -80,4 +80,12 @@ def test_new_sitter_signal():
     sitter.last_name = 'Signals'
     
     signals.new_sitter(sitter, sitter, created=True)
+
+
+def test_new_parent_signal():
+    parent = mock.Mock(spec=Parent)
+    parent.email = 'alewisohn@gmail.com'
+    parent.first_name = 'Test'
+    parent.last_name = 'Signals'
     
+    signals.new_parent(parent, parent, created=True)

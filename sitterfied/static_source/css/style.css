@@ -322,10 +322,10 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 #recommend_popup .info p span.field {float:left;width:250px;}
 #recommend_popup .info p span.recommend_label {margin-left:6px;}
 #recommend_popup .info p span.rehire_label {margin-left:6px;}
-#recommend_popup .info p span label.field_box {float:none;display:inline-block;margin-left:15px;}
+#recommend_popup .info p span label.field_box {float:right;display:inline-block;margin-left:15px;}
 #recommend_popup .info p > [class^="icon_"] {top:20px;}
 #recommend_popup .info p .field_icon {top:-5px;left:0px;display:inline-block;position:relative;}
-#recommend_popup .info p textarea {float:right;width:380px;height:115px;padding:15px;font:14px 'ProximaNova';color:#616161;}
+#recommend_popup .info p textarea {float:right;width:380px;height:115px;font:14px 'ProximaNova';color:#616161;}
 #recommend_popup .info p:first-child {padding-top:5px;padding-left:10px;padding-bottom:60px;border-bottom:1px dotted #e7e9eb;}
 #recommend_popup .info p:first-child div {text-align:left;}
 #recommend_popup .info p .button_small {float:right;margin-left:10px;}
