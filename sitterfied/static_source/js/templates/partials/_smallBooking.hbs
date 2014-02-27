@@ -1,11 +1,6 @@
 <ul>
   <li>
-    <span class="icon_date">&nbsp;</span>
-    {{formattedDate}}
-    &nbsp;
-    <span>
-      {{formattedHours}}
-    </span>
+    <span class="icon_date">&nbsp;</span>{{formattedDate}}&nbsp;<span>{{formattedHours}}</span>
   </li>
   {{#unless isInterview}}
     <li class="num_children_detail">
@@ -14,7 +9,7 @@
     </li>
     <li class="address_detail_book">
       <span class="icon_pin3">&nbsp;</span>
-      {{address1}} {{address2}} {{city}}, {{state}}
+      {{address1}} {{address2}} {{city}}, {{state}} {{zip}}
     </li>
     <li class="phone_detail_book">
       <span class="icon_phone">&nbsp;</span>{{emergency_phone}}

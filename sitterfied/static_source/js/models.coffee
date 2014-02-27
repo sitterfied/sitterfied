@@ -216,6 +216,10 @@ define ['jquery'
             return Sitterfied.Parent.find(@get("id"))
         ).property("id")
 
+        sitterFriends: (() ->
+            return @get('friends').filterProperty('parent_or_sitter', 'Sitter')
+        ).property('friends.@each.parent_or_sitter')
+
     )
     Sitterfied.User.adapter = Adapter.create()
 
@@ -577,18 +581,20 @@ define ['jquery'
                 date.setDate(value)
                 @set('dob', date)
         ).property('dob')
+
         birthYear: ((key, value) ->
             date = @get('dob')
             if not date
                 return
+
             if arguments.length == 1
                 return date.getFullYear()
             else
                 date.setFullYear(value)
                 @set('dob', date)
         ).property('dob')
-
     )
+
     Sitterfied.Child.adapter = Adapter.create()
     Sitterfied.Child.url = "children"
 
@@ -831,7 +837,7 @@ define ['jquery'
             declined_sitters = this.get('declined_sitters')
             if declined_sitters.get("length") == 0
                 return false
-            if declined_sitters.filterProperty("id", Sitterfied.currentUser.get("id"))
+            if declined_sitters.filterProperty("id", Sitterfied.currentUser.get("id")).length > 0
                 return true
             return false
         ).property('declined_sitters', 'declined_sitters.@each')

@@ -8,12 +8,16 @@ from twilio.rest import TwilioRestClient
 from twilio.twiml import Response
 
 from .models import Sitter, Booking, IncomingSMSMessage
+from .utils import generate_short_url_code
+from .views import redis_client
+
 
 # Your Account Sid and Auth Token from twilio.com/user/account
 account_sid = settings.TWILIO_ACCOUNT_SID
 auth_token = settings.TWILIO_AUTH_TOKEN
 sitterfied_number = settings.TWILIO_DEFAULT_CALLERID
 client = TwilioRestClient(account_sid, auth_token)
+
 
 @twilio_view
 def sms_messages(request):
@@ -43,20 +47,39 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
         resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
+    if booking.canceled:
+        resp.sms('We\'re sorry, but this job has been cancelled.')
+        return resp
+
+    if sitter in booking.declined_sitters.all():
+        resp.sms('We\'re sorry, but you\'ve already declined this job.')
+        return resp
+
     if not sitter in booking.sitters.all():
         resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
     if booking.accepted_sitter:
-        resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
+        if booking.accepted_sitter == sitter:
+            if response != 'decline' and response != 'no':
+                resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but you\'ve already accepted this job.')
+        else:
+            resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
         return resp
 
     if response == 'accept' or response == 'yes':
         booking.accept(sitter)
     elif response == 'decline' or response == 'no':
-        booking.decline(sitter)
+        if booking.accepted_sitter == sitter:
+            short_url_code = generate_short_url_code()
+            short_url = settings.SHORT_URL + short_url_code
+            redis_client.set(short_url_code, '/mybookings/upcoming')
+            resp.sms('You have already ACCEPTED this job. If you\'d like to cancel, go here: ' + short_url)
+        else:
+            booking.decline(sitter)
 
     return resp
+
 
 #for polling via cronjob
 def get_new_messages():

@@ -36,12 +36,12 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
                                         'parent': parent
                                        })
 
-        send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
+        # TODO: send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/mybookings/pending')
+        redis_client.set(short_url_code, '/mybookings/upcoming')
 
         sms = render_to_string('sms/booking/booking_request_accepted.sms', {
             'sitter_name': sitter.first_name,
@@ -57,7 +57,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/mybookings/pending')
+        redis_client.set(short_url_code, '/mybookings/upcoming')
 
         sms = render_to_string('sms/booking/booking_request_accepted_sitter.sms', {
             'sitter_name': sitter.first_name,
@@ -78,24 +78,26 @@ def booking_request_declined(sender, sitter=None, **kwargs):
                                         'parent': parent
                                        })
 
-        send_html_email("Your booking request has been declined", "hello@sitterfied.com", parent.email, text, html)
+        # TODO: send_html_email("Your booking request has been declined", "hello@sitterfied.com", parent.email, text, html)
 
     if parent_settings.mobile_booking_accepted_denied and parent.cell:
-        short_url_code = generate_short_url_code()
-        short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/search')
+        if len(sender.declined_sitters.all()) == len(sender.sitters.all()):
+            short_url_code = generate_short_url_code()
+            short_url = settings.SHORT_URL + short_url_code
+            redis_client.set(short_url_code, '/search')
 
-        template = ('sms/booking/booking_request_declined.sms'
-                    if len(sender.declined_sitters.all()) != len(sender.sitters.all())
-                    else 'sms/booking/booking_request_declined_all.sms')
+            template = ('sms/booking/booking_request_declined.sms'
+                        if len(sender.sitters.all()) == 1
+                        else 'sms/booking/booking_request_declined_all.sms')
 
-        sms = render_to_string(template, {
-            'sitter_name': sitter.first_name,
-            'parent_name': parent.first_name,
-            'start_date_time': sender.start_date_time,
-            'short_url': short_url,
-        })
-        twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
+            sms = render_to_string(template, {
+                'sitter_name': sitter.first_name,
+                'parent_name': parent.first_name,
+                'start_date_time': sender.start_date_time,
+                'short_url': short_url,
+                'single_sitter_requested': len(sender.sitters.all()) == 1,
+            })
+            twilio_client.messages.create(body=sms, to=parent.cell, from_=sitterfied_number)
 
     if sitter.settings.email_booking_accepted_denied:
         pass
@@ -103,7 +105,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url_code = generate_short_url_code()
         short_url = settings.SHORT_URL + short_url_code
-        redis_client.set(short_url_code, '/schedule')
+        redis_client.set(short_url_code, '/sitter/' + str(sitter.id) + '/edit/schedule')
 
         sms = render_to_string('sms/booking/booking_request_declined_sitter.sms', {
             'sitter_name': sitter.first_name,
@@ -123,7 +125,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                                        {'first_name':parent.first_name,
                                        })
 
-        send_html_email("Your booking request has been canceled", "hello@sitterfied.com", parent.email, text, html)
+        # TODO: send_html_email("Your booking request has been canceled", "hello@sitterfied.com", parent.email, text, html)
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         if cancelled_by == sitter:
@@ -161,7 +163,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             text = html = render_to_string("email/booking/booking_request_canceled.html", {
                 'first_name': sitter.first_name,
             })
-            send_html_email("Your booking request has been canceled", "hello@sitterfied.com", sitter.email, text, html)
+            # TODO: send_html_email("Your booking request has been canceled", "hello@sitterfied.com", sitter.email, text, html)
 
         if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
             if cancelled_by == sitter:
@@ -241,7 +243,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
                 'stop_date_time': instance.stop_date_time,
                 'short_url': short_url,
                 'booking_code': instance.id,
-                'num_sitters': len(instance.sitters.all())
+                'num_sitters': len(instance.sitters.all()) - 1,
             })
             twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)
 
@@ -260,12 +262,12 @@ def new_review(sender, instance=None, **kwargs):
         sitter = instance.sitter
         if sitter.settings.mobile_new_review:
             text = html = render_to_string("email/review/new_review.html", {'first_name': sitter.first_name})
-            send_html_email("You have recieved a new review", "hello@sitterfied.com", sitter.email, text, html)
+            # TODO: send_html_email("You have recieved a new review", "hello@sitterfied.com", sitter.email, text, html)
 
         if settings.email_new_review and sitter.cell:
             short_url_code = generate_short_url_code()
             short_url = settings.SHORT_URL + short_url_code
-            redis_client.set(short_url_code, '/reviews/' + str(instance.id))
+            redis_client.set(short_url_code, '/sitter/' + str(sitter.id) + '/edit/reviews/' + str(instance.id))
 
             sms = render_to_string('sms/review/new_review.sms', {'short_url': short_url})
             twilio_client.messages.create(body=sms, to=sitter.cell, from_=sitterfied_number)

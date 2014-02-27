@@ -270,35 +270,34 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.BookingsController  = Em.ArrayController.extend(
         pendingRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isPending')
-        ).property('content.@each.isPending', )
+            return @createFilteredArray('isPending', 'start_date_time', true)
+        ).property('content.@each.isPending')
 
         upcomingJobs: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isUpcoming')
+            return @createFilteredArray('isUpcoming', 'start_date_time', true)         
         ).property('content.@each.isUpcoming')
 
         completedJobs: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isCompleted')
+            return @createFilteredArray('isCompleted', 'start_date_time', false)       
         ).property('content.@each.isCompleted')
 
         missedRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isMissed')
+            return @createFilteredArray('isMissed', 'start_date_time', false)
         ).property('content.@each.isMissed')
 
         canceledRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('canceled')
+            return @createFilteredArray('canceled', 'start_date_time', false)
         ).property('content.@each.canceled', 'content.@each.isLoaded')
 
         declinedRequests: (() ->
-            return @get('content').filter (item, index, content) ->
-                return item.get('isDeclined')
+            return @createFilteredArray('isDeclined', 'start_date_time', false)
         ).property('content.@each.isDeclined')
 
+        createFilteredArray: (property, sort, order) ->
+            return Em.ArrayController.create
+                content: @get('content').filterProperty(property, true)
+                sortProperties: [sort]
+                sortAscending: order
     )
 
     Sitterfied.BookController = Em.ObjectController.extend(
@@ -321,9 +320,13 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 
             booking.save()
                 .then (booking) =>
-                    Sitterfied.currentUser.get('bookings').pushObject(booking)
-                    @set('pending', false)
-                    @transitionToRoute('done', booking)
+                    p = booking.reload()
+                    p.then =>
+                        Sitterfied.currentUser.get('bookings').pushObject(booking)
+                        @set('pending', false)
+                        @transitionToRoute('done', booking)
+                    .then null, (reason) =>
+                        @set('pending', false)
                 .then null, (reason) =>
                     @set('pending', false)
             
@@ -428,6 +431,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @transitionToRoute('book')
 
         open_interview_popup: () ->
+            console.log("Open Interview Popup Sitetr Controller:")
             $.fancybox
                 href: "#interview_popup"
                 maxWidth: 390
@@ -441,6 +445,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 height: "90%"
         
         interview: (interview_type) ->
+            console.log("Interview Type:", interview_type)
             $.fancybox.close()
             
             start_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['start_date_time']) || moment().toDate()
@@ -543,6 +548,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 #'specialneeds'
                 'otherServices'
                 ]
+        searched: false
 
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
@@ -583,26 +589,35 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         itemController: 'searchSitter'
 
-        zip : ""
+        zip : (->
+            return Sitterfied.currentUser.get('zip')
+        ).property()
+
+    	kids : (->
+    	    return Sitterfied.currentUser.get('children').get('length')
+        ).property()
+                
         when: undefined
-        from : 2
-        to : 5
-        kids : 1
+        start_time: '1800'
+        stop_time: '2200'
         overnight : false
         date_to : undefined
+
         findSitters : () ->
+            sitters = Em.A()
             zip = @get("zip")
             start_time = @get("start_time")
             stop_time = @get("stop_time")
             start_date = @get("start_date")
             kids = @get("kids")
-
+            
             #store properties for future bookings
             if not _.every([zip, start_date, start_time, stop_time, kids], _.identity)
                 alert("please ensure you've filled out every field")
                 return
 
-
+            $(".loadingImage").show()
+            $(".findSitter").attr("disabled", true)
 
             Sitterfied.onDeckBookingAttrs = {}
             #probably should do this as a property of the controller rather than adhoc
@@ -618,7 +633,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             stop_date_time.minutes(stop_time.substr(2))
             Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
 
-
             payload = {
                 kids: kids
                 zip: zip
@@ -626,6 +640,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 stop_time: stop_time
                 start_date: start_date
             }
+            
             if @get("overnight")
                 if not @get("stop_date")
                     alert("please ensure you've filled out every field")
@@ -637,21 +652,27 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 stop_date_time.date(@get("stop_date"))
                 Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
 
-
-
+            @set('searched', false)
+            
             $.get("/api/search/",
                   payload,
-                  ).then (response) =>
+                  ).then ((response) =>
                 sitters = Em.A()
                 for sitter in response
                     s = Sitterfied.Sitter.create()
                     s.load(sitter['id'], sitter)
                     sitters.pushObject(s)
                 this.set('model', sitters)
+                @set('searched', true)
                 @set("selectedSitters", Ember.ArrayProxy.create
                     content: Em.copy(@get("sitterTeam"))
                 )
-
+                $(".loadingImage").hide()
+                $(".findSitter").attr("disabled", false)
+            ), (reason) =>
+                $(".loadingImage").hide()
+                $(".findSitter").attr("disabled", false)
+                
 
         content: []
         selectedSitters:  Ember.ArrayProxy.create
@@ -673,27 +694,29 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         selectTeam: () ->
             selected = @get("selectedSitters")
-            for sitter in Em.copy(@get("sitterTeam"))
+            for sitter in Em.copy(@get('sitterTeam'))
                 if selected.filterProperty("id", sitter.get('id')).length == 0
-                    selected.pushObject(sitter)
+                    selected.pushObject(@get('model').filterProperty('id', sitter.get('id'))[0])
 
         clearTeam: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("sitterTeam"))
-                if selected.filterProperty("id", sitter.get('id')).length > 0
-                    selected.removeObject(sitter)
+                matches = selected.filterProperty("id", sitter.get('id'))
+                if matches.length == 1
+                    selected.removeObject(matches[0])
 
         selectFriends: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("friendTeam"))
                 if selected.filterProperty("id", sitter.get('id')).length == 0
-                    selected.pushObject(sitter)
+                    selected.pushObject(@get('model').filterProperty('id', sitter.get('id'))[0])
 
         clearFriends: () ->
             selected = @get("selectedSitters")
             for sitter in Em.copy(@get("friendTeam"))
-                if selected.filterProperty("id", sitter.get('id')).length > 0
-                    selected.removeObject(sitter)
+                matches = selected.filterProperty("id", sitter.get('id'))
+                if matches.length == 1
+                    selected.removeObject(matches[0])
 
 
         isTeamSelected: (() ->
@@ -765,10 +788,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         selectSitter: (sitter) ->
             selected = @get('selectedSitters')
-            if selected.indexOf(sitter) == -1
+            matches = selected.filterProperty('id', sitter.get('id'))
+            if matches.length == 0
                 selected.pushObject(sitter)
             else
-                selected.removeObject(sitter)
+                selected.removeObject(matches[0])
 
         clearSelected: () ->
             @set('selectedSitters.content', Em.A())
@@ -825,6 +849,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
         open_interview_popup: (sitters) ->
             Sitterfied.set("sitters_to_interview", sitters)
+            console.log("Sitters to review:", sitters)
             $.fancybox
                 href: "#interview_popup"
                 maxWidth: 390
@@ -832,12 +857,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 minWidth: 390
                 minHeight: 257
                 fitToView: false
-                closeBtn: false
+                closeBtn: true
                 enableEscapeButton: false
                 width: "90%"
                 height: "90%"
 
         interview: (interview_type) ->
+            console.log("Interview Type:", interview_type)
+            
             $.fancybox.close()
             
             sitters = Sitterfied.get("sitters_to_interview")
@@ -1074,11 +1101,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             ).fail((data) ->
                 alert("there was an error logging you in. Please try again!")
             )
-
-
-
-
-
 
     Sitterfied.FriendsController  = Em.ArrayController.extend(
         parents: (() ->
