@@ -15,7 +15,7 @@
 	<script src="{{STATIC_URL}}js/sitterfied-min.js"></script>
 	{% endif %}
 
-    <script type="text/x-handlebars" data-template-name="reviewPopup">
+    <script type="text/x-handlebars" data-template-name="application">
       {% verbatim %}
       <div id="recommend_popup">
 	    <div class="tit">
@@ -63,13 +63,6 @@
 	      </form>
 	    </div>
       </div>
-      {% endverbatim %}
-    </script>
-
-    <script type="text/x-handlebars" data-template-name="application">
-
-      {% verbatim %}
-      {{render reviewPopup}}
 	  {{render login}}
 	  {{render signup Sitterfied.currentUser}}
       {% endverbatim %}

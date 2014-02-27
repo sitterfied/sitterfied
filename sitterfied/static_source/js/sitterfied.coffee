@@ -12,6 +12,8 @@ define ['jquery'
         LOG_BINDINGS: true
         LOG_ACTIVE_GENERATION: true
         LOG_VERSION: true
+
+        rootElement: $('#application')
         
         init:  () ->
             this.deferReadiness() # important - allows requirejs to preload everything. Take out for prod perhaps
