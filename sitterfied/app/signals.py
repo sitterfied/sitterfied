@@ -310,7 +310,7 @@ def new_review(sender, instance=None, **kwargs):
             text = html = render_to_string("email/review/new_review.html", {'first_name': sitter.first_name})
             # TODO: send_html_email("You have recieved a new review", "hello@sitterfied.com", sitter.email, text, html)
 
-        if settings.email_new_review and sitter.cell:
+        if sitter.settings.email_new_review and sitter.cell:
             short_url_code = generate_short_url_code()
             short_url = settings.SHORT_URL + short_url_code
             redis_client.set(short_url_code, '/sitter/' + str(sitter.id) + '/edit/reviews/' + str(instance.id))

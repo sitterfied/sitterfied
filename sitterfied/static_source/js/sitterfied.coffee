@@ -15,8 +15,6 @@ define ['jquery'
 
         rootElement: $('#application')
         
-        rootElement: $('#application')
-        
         init:  () ->
             this.deferReadiness() # important - allows requirejs to preload everything. Take out for prod perhaps
             this._super()
