@@ -27,8 +27,8 @@
 <!-- quick_info_list -->
 {{# view Sitterfied.FixedView class="quick_info_list clear" id="fixed_tabs" }}
   <ul>
-	<li><strong>&nbsp;</strong>Facebook connected</li>
-	<li><strong>{{sitters_in_network.length}}</strong> sitters on your team</li>
+	{{#if facebook_id}}<li><strong>&nbsp;</strong>Facebook connected</li>{{/if}}
+	<li><strong>{{sitter_teams.length}}</strong> sitters on your team</li>
 	<li><strong>{{bookings.length}}</strong> bookings</li>
 	<li><strong>{{weeks_since_last_booking}}</strong> weeks &amp; <strong>{{days_since_last_booking}}</strong> days since your last booking</li>
   </ul>

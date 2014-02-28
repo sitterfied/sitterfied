@@ -135,6 +135,7 @@ define ['jquery'
                     return -1
             )
         ).property('bookings.@each')
+        
         weeks_since_last_booking: (() ->
             if this.get('sorted_bookings').length == 0
                 return 0
@@ -276,7 +277,6 @@ define ['jquery'
         parent: (() ->
             return this
         ).property()
-
 
         sitters_to_review: (() ->
             results = Em.A()

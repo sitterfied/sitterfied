@@ -40,6 +40,9 @@ define ['jquery'
         ready: () ->
             # Show the footer once the application has loaded
             $('.footer').css('visibility', 'visible')
+
+            $(document).on 'click', '.rusitterfied', (e) ->
+                e.preventDefault()
     )
 
     Sitterfied.Router.reopen(
