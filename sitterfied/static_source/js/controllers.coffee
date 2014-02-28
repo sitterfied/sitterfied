@@ -674,9 +674,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     sitters.pushObject(s)
                 this.set('model', sitters)
                 @set('searched', true)
-                @set("selectedSitters", Ember.ArrayProxy.create
-                    content: Em.copy(@get("sitterTeam"))
-                )
                 $(".loadingImage").hide()
                 $(".findSitter").attr("disabled", false)
             ), (reason) =>
