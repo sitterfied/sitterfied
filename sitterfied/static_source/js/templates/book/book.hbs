@@ -159,9 +159,13 @@
 		    <span class="icon_cancel">&nbsp;</span>
 		    CANCEL
 	      </a>
-	      <a class="button button_small" {{action 'book'}}>
+	      <a class="button button_small bookButton" {{action 'book'}}>
 	        <span class="icon_ok2">&nbsp;</span>
-	        SEND
+		{{#if isLoading}}
+		  <i class="fa fa-spinner fa-spin"></i>
+		{{else}}
+		  SEND
+		{{/if}}
 	      </a>
 	    </p>
 	  </div>

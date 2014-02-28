@@ -413,8 +413,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
                 $("li.active").removeClass('active')
                 $("." +targetClass).addClass('active')
 
-
-
     Sitterfied.AjaxStatusButtonView = Em.View.extend
         templateName: "ajaxButton"
         action: null

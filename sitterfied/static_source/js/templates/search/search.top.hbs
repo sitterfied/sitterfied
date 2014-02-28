@@ -135,7 +135,15 @@
             }}
             </div>
           {{/view}}
-		<li><input class="findSitter" type="button" value="FIND MY SITTER" {{action "findSitters"}} /></li>
+		<li>
+		  <button class="findSitter" {{action "findSitters"}}>
+		    {{#if isLoading}}
+		      <i class="fa fa-spinner fa-spin"></i>
+		    {{else}}
+		      FIND MY SITTER
+		    {{/if}}
+		  </button>
+		</li>
 	  </ul>
 	</form>
   </div>

@@ -303,6 +303,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.BookController = Em.ObjectController.extend(
         pending: false
+        isLoading: false
         
         cancel: () ->
             @transitionToRoute('search');
@@ -318,6 +319,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             booking = Sitterfied.get('onDeckBooking')
             
             console.log("Booking:", booking)
+            
+            this.set("isLoading", true)
+            $(".bookButton").bind 'click', (e) ->
+                e.preventDefault()
+                return
                 
             booking.save()
                 .then (booking) =>
@@ -325,11 +331,17 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     p.then =>
                         Sitterfied.currentUser.get('bookings').pushObject(booking)
                         @set('pending', false)
+                        this.set("isLoading", false)
+                        $("bookButton").unbind "click"
                         @transitionToRoute('done', booking)
                     .then null, (reason) =>
+                        this.set("isLoading", false)
+                        $("bookButton").unbind "click"
                         @set('pending', false)
                 .then null, (reason) =>
                     @set('pending', false)
+                    this.set("isLoading", false)
+                    $("bookButton").unbind "click"
             
         multiple: (() ->
             return @get('sitters.length') > 1
@@ -432,7 +444,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @transitionToRoute('book')
 
         open_interview_popup: () ->
-            console.log("Open Interview Popup Sitetr Controller:")
             $.fancybox
                 href: "#interview_popup"
                 maxWidth: 390
@@ -551,6 +562,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 'otherServices'
                 ]
         searched: false
+        isLoading: false
 
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
@@ -618,7 +630,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 alert("please ensure you've filled out every field")
                 return
 
-            $(".loadingImage").show()
+            this.set("isLoading", true)
             $(".findSitter").attr("disabled", true)
 
             Sitterfied.onDeckBookingAttrs = {}
@@ -671,9 +683,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 )
                 $(".loadingImage").hide()
                 $(".findSitter").attr("disabled", false)
+                this.set("isLoading", false)
             ), (reason) =>
-                $(".loadingImage").hide()
                 $(".findSitter").attr("disabled", false)
+                this.set("isLoading", false)
                 
 
         content: []
