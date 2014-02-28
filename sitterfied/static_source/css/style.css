@@ -1678,7 +1678,7 @@ a {cursor:pointer}
   line-height: 45px !important;
 }
 
-.select2-container .select2-choice .select2-arrow { display:none;}
+.select2-container .select2-choice .select2-arrow { display:none !important; }
 .select2-container-active .select2-choice, .select2-container-active .select2-choices, .select2-container-active, .fatselect .select2-choice:hover, .select2-choice:active {
   border-color: #3ae4f8 !important;
   box-shadow: #e9e9e9 5px 3px 5px 0 inset, #3ae4f8 10 -20 5px 1px !important;
@@ -1793,7 +1793,7 @@ a {cursor:pointer}
 .signup_login_block ul {padding-bottom:0px;}
 .signup_login_block ul li {position:relative;padding-bottom:10px;}
 .signup_login_block ul li i {padding-left:40px;color:#2ca4b6;font-size:16px;}
-.signup_login_block ul li input {border:1px solid #c9cac7;min-height:42px;padding:0 40px;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:6px;box-shadow:rgba(0,0,0,.25) 0 0 6px 0 inset;color:#bbbaba;font:16px 'ProximaNova';}
+.signup_login_block ul li input {border:1px solid #c9cac7;min-height:42px;padding:0 40px;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:6px;box-shadow:rgba(0,0,0,.25) 0 0 6px 0 inset; font:16px 'ProximaNova';}
 .signup_login_block ul li input:focus {color:#323131;}
 .signup_login_block ul li input.success {background:#fff url(../images/icons/ok2.png) right center no-repeat;}
 .signup_login_block ul + p label {color:#3ea7b8;padding-right:5px;}
