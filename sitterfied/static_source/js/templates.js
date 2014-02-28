@@ -810,7 +810,7 @@ function program23(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "controllers.bookings.declinedRequests.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n                </span>Declined Jobs\n              ");
+  data.buffer.push("\n                </span>Declined&nbsp; Jobs\n              ");
   return buffer;
   }
 
@@ -7503,14 +7503,14 @@ function program7(depth0,data) {
     'class': ("datepicker"),
     'valueBinding': ("stop_date")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n          ");
+  data.buffer.push("\n            ");
   return buffer;
   }
 
 function program9(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n		  <label></label>\n          <div class=\"fatselect\">\n\n            ");
+  data.buffer.push("\n		  <label></label>  \n          <div class=\"fatselect\">\n\n            ");
   hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'prompt': depth0};
   hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'prompt': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
@@ -7557,14 +7557,14 @@ function program13(depth0,data) {
     'class': ("datepicker"),
     'valueBinding': ("start_date")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n		  <p>\n            ");
+  data.buffer.push("\n		  <!-- Uncomment for overnight support\n          <p>\n            ");
   hashContexts = {'checkedBinding': depth0,'id': depth0};
   hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
     'checkedBinding': ("overnight"),
     'id': ("check")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n            <label for=\"check\">Overnight / Multiday booking?</label>\n          </p>\n		</li>\n		<li class=\"fatselect\">\n		  <label for=\"from\">");
+  data.buffer.push("\n            <label for=\"check\">Overnight / Multiday booking?</label>\n          </p>\n          -->\n		</li>\n		<li class=\"fatselect\">\n		  <label for=\"from\">");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
@@ -7595,7 +7595,7 @@ function program13(depth0,data) {
     'valueBinding': ("kids"),
     'prompt': ("")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n		</li>\n\n		  ");
+  data.buffer.push("\n		</li>\n        <!-- Uncomment for overnight support-->\n		  ");
   hashContexts = {'toggleBinding': depth0,'tagName': depth0};
   hashTypes = {'toggleBinding': "STRING",'tagName': "STRING"};
   stack1 = helpers.view.call(depth0, "Sitterfied.SlideDownView", {hash:{
@@ -7603,7 +7603,7 @@ function program13(depth0,data) {
     'tagName': ("li")
   },inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  ");
+  data.buffer.push("         \n		  ");
   hashContexts = {'toggleBinding': depth0,'tagName': depth0};
   hashTypes = {'toggleBinding': "STRING",'tagName': "STRING"};
   stack1 = helpers.view.call(depth0, "Sitterfied.SlideDownView", {hash:{
