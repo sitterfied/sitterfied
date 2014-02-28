@@ -269,7 +269,7 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
                 continue
 
             if 'Interview' in instance.booking_type:
-                booking_type = instance.booking_type.replace('Interview', '_Interview').lower()
+                booking_type = instance.booking_type.replace(' Interview', '_Interview').lower()
                 sms_template = 'sms/interview/{0}_request_to_sitter.sms'.format(booking_type)
             else:
                 sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
