@@ -420,8 +420,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         
         book: (sitter) ->
             onDeckBookingAttrs = Sitterfied.onDeckBookingAttrs || {}
-            start_date_time = onDeckBookingAttrs['start_date_time'] || moment().toDate()
-            stop_date_time = onDeckBookingAttrs['stop_date_time'] || moment().toDate()
+            start_date_time = onDeckBookingAttrs['start_date_time'] || moment().minutes(30)
+            stop_date_time = onDeckBookingAttrs['stop_date_time'] || moment().startOf('hour').add('hours', 3.5)
             kids = onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
             overnight = onDeckBookingAttrs['overnight'] || false
             
@@ -468,11 +468,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             sitter = @get('interviewee')
             
             $.fancybox.close()
-            
-            start_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['start_date_time']) || moment().toDate()
-            stop_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['stop_date_time']) || moment().toDate()
-            kids = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['kids']) || Sitterfied.get('currentUser.children.length')
-            overnight = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['overnight']) || false
+
+            onDeckBookingAttrs = Sitterfied.onDeckBookingAttrs || {}
+            start_date_time = onDeckBookingAttrs['start_date_time'] || moment().minutes(30)
+            stop_date_time = onDeckBookingAttrs['stop_date_time'] || moment().startOf('hour').add('minutes', 60)
+            kids = onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
+            overnight = onDeckBookingAttrs['overnight'] || false
                 
             booking_type = interview_type + " Interview"
 
