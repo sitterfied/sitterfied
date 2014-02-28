@@ -92,7 +92,11 @@
         <li class="address_detail_job">
           <a {{bindAttr href=googleMapsLink}} target="_blank">
             <span class="icon_pin3">&nbsp;</span>
-            {{city}}, {{state}}
+            {{#if isUpcoming}}
+              {{address1}} {{address2}} {{city}}, {{state}}
+            {{else}}
+              {{city}}, {{state}}
+            {{/if}}
           </a>
         </li>
       {{/if}}
