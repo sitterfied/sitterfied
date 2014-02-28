@@ -37,7 +37,9 @@ define ['jquery'
             Sitterfied.set('currentUser', user)
             return user
 
-
+        ready: () ->
+            # Show the footer once the application has loaded
+            $('.footer').css('visibility', 'visible')
     )
 
     Sitterfied.Router.reopen(

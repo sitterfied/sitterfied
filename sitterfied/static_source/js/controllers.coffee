@@ -303,6 +303,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.BookController = Em.ObjectController.extend(
         pending: false
+        isLoading: false
         
         cancel: () ->
             @transitionToRoute('search');
@@ -318,6 +319,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             booking = Sitterfied.get('onDeckBooking')
             
             console.log("Booking:", booking)
+            
+            this.set("isLoading", true)
+            $(".bookButton").bind 'click', (e) ->
+                e.preventDefault()
+                return
                 
             booking.save()
                 .then (booking) =>
@@ -325,11 +331,17 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     p.then =>
                         Sitterfied.currentUser.get('bookings').pushObject(booking)
                         @set('pending', false)
+                        this.set("isLoading", false)
+                        $("bookButton").unbind "click"
                         @transitionToRoute('done', booking)
                     .then null, (reason) =>
+                        this.set("isLoading", false)
+                        $("bookButton").unbind "click"
                         @set('pending', false)
                 .then null, (reason) =>
                     @set('pending', false)
+                    this.set("isLoading", false)
+                    $("bookButton").unbind "click"
             
         multiple: (() ->
             return @get('sitters.length') > 1
@@ -404,12 +416,15 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         newLanguage: ''
     )
     Sitterfied.SitterController  = Em.ObjectController.extend(
-        book: () ->
-            start_date_time = Sitterfied.onDeckBookingAttrs['start_date_time'] || moment().toDate()
-            stop_date_time = Sitterfied.onDeckBookingAttrs['stop_date_time'] || moment().toDate()
-            kids = Sitterfied.onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
-            overnight = Sitterfied.onDeckBookingAttrs['overnight'] || false
-
+        interviewee: null
+        
+        book: (sitter) ->
+            onDeckBookingAttrs = Sitterfied.onDeckBookingAttrs || {}
+            start_date_time = onDeckBookingAttrs['start_date_time'] || moment().minutes(30)
+            stop_date_time = onDeckBookingAttrs['stop_date_time'] || moment().startOf('hour').add('hours', 3.5)
+            kids = onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
+            overnight = onDeckBookingAttrs['overnight'] || false
+            
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
@@ -426,13 +441,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 num_children: kids
                 emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
-            sitters = [@get('content')]
+            sitters = [sitter || @get('content')]
+            console.log sitters
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
             @transitionToRoute('book')
 
-        open_interview_popup: () ->
-            console.log("Open Interview Popup Sitetr Controller:")
+        open_interview_popup: (sitter) ->
+            @set('interviewee', sitter)
             $.fancybox
                 href: "#interview_popup"
                 maxWidth: 390
@@ -440,20 +456,24 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 minWidth: 390
                 minHeight: 257
                 fitToView: false
-                closeBtn: false
+                closeBtn: true
                 enableEscapeButton: false
                 width: "90%"
                 height: "90%"
                 parent: "div#application"
+                onClosed: () ->
+                    @set('interviewee', null)
         
         interview: (interview_type) ->
-            console.log("Interview Type:", interview_type)
-            $.fancybox.close()
+            sitter = @get('interviewee')
             
-            start_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['start_date_time']) || moment().toDate()
-            stop_date_time = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['stop_date_time']) || moment().toDate()
-            kids = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['kids']) || Sitterfied.get('currentUser.children.length')
-            overnight = (Sitterfied.onDeckBookingAttrs && Sitterfied.onDeckBookingAttrs['overnight']) || false
+            $.fancybox.close()
+
+            onDeckBookingAttrs = Sitterfied.onDeckBookingAttrs || {}
+            start_date_time = onDeckBookingAttrs['start_date_time'] || moment().minutes(30)
+            stop_date_time = onDeckBookingAttrs['stop_date_time'] || moment().startOf('hour').add('minutes', 60)
+            kids = onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
+            overnight = onDeckBookingAttrs['overnight'] || false
                 
             booking_type = interview_type + " Interview"
 
@@ -473,7 +493,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 num_children: kids
                 emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
-            sitters = [@get('content')]
+            sitters = [sitter || @get('content')]
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
             @transitionToRoute('book')
@@ -551,6 +571,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 'otherServices'
                 ]
         searched: false
+        isLoading: false
 
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
@@ -618,7 +639,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 alert("please ensure you've filled out every field")
                 return
 
-            $(".loadingImage").show()
+            this.set("isLoading", true)
             $(".findSitter").attr("disabled", true)
 
             Sitterfied.onDeckBookingAttrs = {}
@@ -666,14 +687,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     sitters.pushObject(s)
                 this.set('model', sitters)
                 @set('searched', true)
-                @set("selectedSitters", Ember.ArrayProxy.create
-                    content: Em.copy(@get("sitterTeam"))
-                )
                 $(".loadingImage").hide()
                 $(".findSitter").attr("disabled", false)
+                this.set("isLoading", false)
             ), (reason) =>
-                $(".loadingImage").hide()
                 $(".findSitter").attr("disabled", false)
+                this.set("isLoading", false)
                 
 
         content: []
@@ -1019,27 +1038,33 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
 
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(
-        bookTeam: () ->
+        book: (sitters) ->
+            if not Sitterfied.typeIsArray sitters
+                sitters = [sitters]
+
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
                 booking_status: "Pending"
                 booking_type: "Job"
-                start_date_time: null
-                stop_date_time: null
+                start_date_time: moment().minutes(30)
+                stop_date_time: moment().startOf('hour').add('minutes', 60)
                 address1: Sitterfied.get('currentUser.address1')
                 address2: Sitterfied.get('currentUser.address2')
                 city: Sitterfied.get('currentUser.city')
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
-                num_children: 1
+                num_children: Sitterfied.get('currentUser.children.length')
                 emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
-            sitters = @get("content")
             booking.get('sitters').addObjects(sitters)
             Sitterfied.set('onDeckBooking', booking)
             @transitionToRoute('book')
+
+        bookTeam: () ->
+            sitters = @get("content")
+            @book(sitters)
     )
 
     Sitterfied.ParentController  = Em.ObjectController.extend(

@@ -1,17 +1,17 @@
 <li>
-  {{#unless parentController.isSitter}}
-  <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}>
-  </div>
-  {{/unless}}
+  {{#if Sitterfied.currentUser.isParent}}
+    <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}>
+    </div>
+  {{/if}}
   <div class="tit">
     <span><strong>${{one_child_min_rate}}</strong> /hr</span>
     {{#linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}
   </div>
   <div class="img">
-    {{#unless parentController.isSitter}}
-    <div {{action addSitterTeam this}} {{bindAttr class="inSitterTeam:active :heart" }}>
-    </div>
-    {{/unless}}
+    {{#if Sitterfied.currentUser.isParent}}
+      <div {{action addSitterTeam this}} {{bindAttr class="inSitterTeam:active :heart" }}>
+      </div>
+    {{/if}}
     {{#linkTo sitter this.sitter}}
       <img {{bindAttr src=avatarUrl alt=full_name}} />
     {{/linkTo}}
@@ -92,7 +92,7 @@
         </label>
       </div>
     {{else}}
-      {{#unless parentController.isSitter}}
+      {{#if Sitterfied.currentUser.isParent}}
         <a class="button" {{action book this}}>
 	      BOOK
         </a>
@@ -104,18 +104,18 @@
 	        ADD TO SITTER TEAM
 	      </a>
         </p>
-      {{/unless}}
+      {{/if}}
     {{/ if}}
-    {{#unless parentController.isSitter}}
-    <p>
-      <a {{action bookmark this}}>
-	    {{# if isBookmarked}}
-	      REMOVE 
-	    {{/ if}}
-	    BOOKMARK
-      </a>
-    </p>
-    {{/unless}}
+    {{#if Sitterfied.currentUser.isParent}}
+      <p>
+        <a {{action bookmark this}}>
+	      {{# if isBookmarked}}
+	        REMOVE 
+	      {{/ if}}
+	      BOOKMARK
+        </a>
+      </p>
+    {{/if}}
   </div>
 </li>
 

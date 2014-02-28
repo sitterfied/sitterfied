@@ -5,6 +5,7 @@ PIPELINE_CSS = {
         'source_filenames': (
           'css/style.css',
           'css/vendor/*.css',
+          'css/vendor/font-awesome-4.0.3/css/font-awesome.min.css',
         ),
         'output_filename': 'css/sitterfied.css',
         'variant': 'datauri',
