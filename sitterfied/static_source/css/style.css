@@ -1250,6 +1250,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .multiple_sitters_block ul + p .button {float:right;margin-top:-10px;}
 
 /* Footer */
+.footer {visibility: hidden;}
 .footer .wraper {border-top:1px solid #c7cdd0;min-height:50px;}
 .footer .logo_bottom {position:absolute;top:12px;left:25px;}
 .footer .logo_bottom img {width:116px;height:auto;}
