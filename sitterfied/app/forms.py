@@ -23,7 +23,7 @@ class RegistrationForm(ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password (again)"}),
                                 label=_("Password (again)"),)
 
-    email = forms.CharField(widget=forms.TextInput(attrs={"type":"email"}), label=_("Email"),)
+    #email = forms.CharField(widget=forms.TextInput(attrs={"type":"email"}), label=_("Email"),)
     # tos = forms.BooleanField(widget=forms.CheckboxInput,
     #                          label=_(u'I have read and agree to the Terms of Service'),
     #                          error_messages={'required': _("You must agree to the terms to register")})
@@ -193,10 +193,10 @@ class SitterRegisterForm(RegistrationForm):
             "city":widgets.TextInput(attrs={"placeholder":"City"}),
             "state": widgets.Select(attrs={"class": "extra-small"}),
             "zip":widgets.TextInput(attrs={"placeholder":"Zip Code", "class":"small"}),
-            "cell":widgets.TextInput(attrs={"placeholder":"(123) 456-7890"}),
+            "cell":widgets.TextInput(attrs={"placeholder":"555-555-5555"}),
             "first_name":widgets.TextInput(attrs={"placeholder":"First"}),
             "last_name":widgets.TextInput(attrs={"placeholder":"Last"}),
-            "email":widgets.TextInput(attrs={"placeholder":"Email"}),
+            "email":widgets.TextInput(attrs={"placeholder":"Email", "class": "large"}),
             'gender':widgets.RadioSelect(attrs={'id': 'gender'}),
             'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-100, datetime.date.today().year)))),
             "biography":widgets.Textarea(),
@@ -240,10 +240,10 @@ class ParentRegisterForm(RegistrationForm):
             "city":widgets.TextInput(attrs={"placeholder":"City"}),
             "state": widgets.Select(attrs={"class": "extra-small"}),
             "zip":widgets.TextInput(attrs={"placeholder":"Zip Code", "class":"small"}),
-            "cell":widgets.TextInput(attrs={"placeholder":"(123) 456-7890"}),
+            "cell":widgets.TextInput(attrs={"placeholder": "555-555-5555"}),
             "first_name":widgets.TextInput(attrs={"placeholder":"First"}),
             "last_name":widgets.TextInput(attrs={"placeholder":"Last"}),
-            "email":widgets.TextInput(attrs={"placeholder":"Email"})
+            "email":widgets.TextInput(attrs={"placeholder":"Email", "class": "large"})
         }
 
 

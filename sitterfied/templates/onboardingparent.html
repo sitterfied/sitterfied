@@ -267,7 +267,7 @@
 							</li>
 							<li>
 								<ul>
-                                    <li>
+                                    <li id="password_state">
                                       <span class="icon_pass2">&nbsp;</span>Password
 
                                         {% for error in form.password1.errors %}
@@ -354,7 +354,7 @@ $(function () {
 	 add.css("background-repeat", "no-repeat");
      add.css("max-width", "237px");
      add.css("max-height", "237px");
-
+     $(".add p").remove()
    });
 
     $("#back-top").hide();
@@ -369,6 +369,8 @@ $(function () {
 	 dialog = widget.openDialog();
    })
    $("#register").click(function(){
+     if (submitted) { return }
+     submitted = true
 	 cell = $("#id_cell")
 	 num = cell.val()
 	 formatted_num = formatE164("US", num);
@@ -507,12 +509,42 @@ $(function () {
     });
     $("select").select2({ width: 'resolve' })
 
+    $("#id_password1, #id_password2").keyup(function() {
+        $(".icon_pass2").parent().children(".icon_error").remove(); 
+    });
+
+    $("#id_password1").blur(function() {
+        checkPassword();
+    });
+
+    $("#id_password2").keyup(function() {
+        checkPassword();
+    });
+
 });
 jQuery('.back-to-top').click(function () {
     jQuery('html, body').animate({
         scrollTop: 0
     }, 'slow');
 });
+
+var submitted = false;
+
+function clearErrorIndicator(icon_element, form_element) {
+    icon_element.parent().children(".icon_error").remove();
+    form_element.removeClass("error_field");
+}
+
+function checkPassword() {
+    var pass1 = $("#id_password1").val();
+    var pass2 = $("#id_password2").val();
+    console.log(pass1, pass2)
+    if (pass1 != pass2) {
+        $("#password_state").append('<div class="icon_error"><p>Passwords must match!</p></div>');
+    } else {
+        $("#password_state .icon_error").remove();
+    }
+}
 
 $(document).ready(function() {
     $('.icon_error').parents('li').each(function() {
