@@ -12,7 +12,7 @@ from models import User, Sitter, Parent, Booking, Child
 from pyuploadcare.dj.forms import ImageField as UploadcareImageField
 
 
-USER_FIELDS =  ["address1", "address2", "city", "state", "zip", "cell", "first_name", "last_name", "email", "avatar"]
+USER_FIELDS =  ["address1", "address2", "city", "state", "zip", "cell", "first_name", "last_name", "email", "avatar", "tos"]
 
 class RegistrationForm(ModelForm):
     class Meta:
@@ -23,10 +23,9 @@ class RegistrationForm(ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password (again)"}),
                                 label=_("Password (again)"),)
 
-    #email = forms.CharField(widget=forms.TextInput(attrs={"type":"email"}), label=_("Email"),)
-    # tos = forms.BooleanField(widget=forms.CheckboxInput,
-    #                          label=_(u'I have read and agree to the Terms of Service'),
-    #                          error_messages={'required': _("You must agree to the terms to register")})
+    tos = forms.BooleanField(widget=forms.CheckboxInput,
+                             label=_(u'I have read and agree to the Terms of Service.'),
+                             error_messages={'required': _('You must agree to the terms to register')})
 
 
     def save(self, *args, **kwargs):
@@ -198,7 +197,7 @@ class SitterRegisterForm(RegistrationForm):
             "last_name":widgets.TextInput(attrs={"placeholder":"Last"}),
             "email":widgets.TextInput(attrs={"placeholder":"Email", "class": "large"}),
             'gender':widgets.RadioSelect(attrs={'id': 'gender'}),
-            'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-100, datetime.date.today().year)))),
+            'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-100, datetime.date.today().year + 1)))),
             "biography":widgets.Textarea(),
             "one_child_min_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
             "one_child_max_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
@@ -264,7 +263,7 @@ class ChildForm(forms.ModelForm):
         fields = ('name', 'dob', 'school', 'special_needs')
         widgets = {
             "name":widgets.TextInput(attrs={"placeholder":"Name", "class":"left"}),
-            'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-100, datetime.date.today().year)))),
+            'dob':SelectDateWidget(years=reversed(range(datetime.date.today().year-50, datetime.date.today().year + 1))),
             "school":widgets.TextInput(attrs={"placeholder":"School (if applicable)", "class":"long"}),
             "special_needs": widgets.SelectMultiple(attrs={"placeholder":"Special needs"}),
         }
