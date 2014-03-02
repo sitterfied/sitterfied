@@ -263,7 +263,7 @@ class ChildForm(forms.ModelForm):
         fields = ('name', 'dob', 'school', 'special_needs')
         widgets = {
             "name":widgets.TextInput(attrs={"placeholder":"Name", "class":"left"}),
-            'dob':SelectDateWidget(years=reversed(range(datetime.date.today().year-50, datetime.date.today().year + 1))),
+            'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-50, datetime.date.today().year + 1)))),
             "school":widgets.TextInput(attrs={"placeholder":"School (if applicable)", "class":"long"}),
             "special_needs": widgets.SelectMultiple(attrs={"placeholder":"Special needs"}),
         }
