@@ -113,13 +113,7 @@
 		</li>
 		<li>
           <label>&nbsp;</label>
-		  <button class="findSitter" {{action "findSitters"}}>
-		    {{#if isLoading}}
-		      <i class="fa fa-spinner fa-spin"></i>
-		    {{else}}
-		      FIND
-		    {{/if}}
-		  </button>
+          {{view Sitterfied.AjaxStateButton valueBinding="isLoading" action="findSitters" class="findSitter" saveText="FIND"}}
 		</li>
 	  </ul>
 	</form>

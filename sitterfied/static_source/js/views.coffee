@@ -564,3 +564,17 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
       ).observes("selection")
 
     )
+
+    Sitterfied.AjaxStateButton = Ember.View.extend(Ember.ViewTargetActionSupport,
+        tagName: 'button'
+        attributeBindings: ['class']
+        
+        template: (->
+            return Ember.Handlebars.compile("{{#if view.value}}<i class=\"fa fa-spinner fa-spin\"></i>{{else}}{{view.saveText}}{{/if}}")
+        ).property()
+        
+        click: (event) ->
+            event.preventDefault()       
+            if !@get('value')
+                @triggerAction()
+    )
