@@ -82,3 +82,6 @@ SHORT_URL = 'localhost:8000/'
 
 # Override Twilio Settings
 TWILIO_DEFAULT_CALLERID = '+19088384816'
+
+# Override Facebook App ID
+FACEBOOK_APP_ID = '746551758706532'

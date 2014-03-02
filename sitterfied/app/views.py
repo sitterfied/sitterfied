@@ -85,6 +85,7 @@ def index(request, referred_by=None):
 
     if not request.user.is_authenticated():
         return {'TEMPLATE': 'landing.html',
+                'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
                 'form': form, }
 
     if 'next' in request.GET and request.GET['next'] != '':
@@ -100,6 +101,7 @@ def index(request, referred_by=None):
         'user_json': user_json,
         "parent_or_sitter": parent_or_sitter,
         'intercom_activator': '#Intercom',
+        'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
         "TEMPLATE": "index.html",
         "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
         "INTERCOM_APP_ID": settings.INTERCOM_APP_ID,
@@ -153,6 +155,7 @@ def onboarding2(request):
                 return redirect("onboarding3")
             else:
                 return {'TEMPLATE': "onboardingsitter.html",
+                        'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
                         "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
         elif request.POST["parent_or_sitter"] == "parent":
             form = ParentRegisterForm(request.POST)
@@ -171,6 +174,7 @@ def onboarding2(request):
             else:
                 formset = ChildFormSet(request.POST)
                 return {'TEMPLATE': "onboardingparent.html",
+                        'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
                         "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form, "formset":formset}
 
     if request.method == "GET":
@@ -205,8 +209,12 @@ def onboarding2(request):
             formset = ChildFormSet(instance=dummy_user)
             template = "onboardingparent.html"
 
-        return {'TEMPLATE': template,"UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form, "formset": formset}
-
+        return {
+            'TEMPLATE': template,
+            'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
+            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, 
+            "form":form, 
+            "formset": formset}
 
 
 @login_required
@@ -218,7 +226,7 @@ def onboarding3(request):
         else:
             return redirect("/profile")
     form = GroupsForm(instance=request.user)
-    return {"form":form}
+    return {"form":form, "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID}
 
 @render_to("onboarding4.html")
 def onboarding4(request):
@@ -229,7 +237,7 @@ def onboarding4(request):
 """
 @render_to()
 def static_page(request, template):
-    obj = {'TEMPLATE': template}
+    obj = {'TEMPLATE': template, "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID}
 
     if not request.user.is_anonymous():
         obj['user_json'] = get_user_json(request.user)

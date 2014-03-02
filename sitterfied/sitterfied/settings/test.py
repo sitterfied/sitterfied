@@ -77,6 +77,9 @@ SHORT_URL = 'test.sttrfd.us/'
 TWILIO_DEFAULT_CALLERID = '+19088384816'
 
 
+# Override Facebook App ID
+FACEBOOK_APP_ID = '624946094225118'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
