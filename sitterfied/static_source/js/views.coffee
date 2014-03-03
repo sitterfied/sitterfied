@@ -15,7 +15,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         didInsertElement: ()->
             #setup datepicker and keep ember insync with it
             @$().datepicker(
-                dateFormat: 'D, dd M yy',
+                dateFormat: 'D, M dd yy',
                 showOtherMonths: true,
                 selectOtherMonths: true,
                 numberOfMonths: [ 1, 2 ],
