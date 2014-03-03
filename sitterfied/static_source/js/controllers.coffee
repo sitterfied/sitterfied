@@ -1039,7 +1039,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(
         book: (sitters) ->
-            if not Sitterfied.typeIsArray sitters
+            if not Ember.isArray sitters
                 sitters = [sitters]
 
             booking = Sitterfied.Booking.create
@@ -1063,9 +1063,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @transitionToRoute('book')
 
         bookTeam: () ->
-            sitters = @get('content.firstObject')
-            console.log sitters
-            @book(sitters)
+            @book(@get('content'))
     )
 
     Sitterfied.ParentController  = Em.ObjectController.extend(
