@@ -965,7 +965,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 city: Sitterfied.get('currentUser.city')
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
-                num_children: 1
+                num_children: @get('kids')
                 emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             sitters = Sitterfied.currentUser.get('sitter_teams')
@@ -1063,7 +1063,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @transitionToRoute('book')
 
         bookTeam: () ->
-            sitters = @get("content")
+            sitters = @get('content.firstObject')
+            console.log sitters
             @book(sitters)
     )
 
