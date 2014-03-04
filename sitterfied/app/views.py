@@ -1,9 +1,12 @@
 # Create your views here.
 import operator
-from datetime import datetime, time
+import datetime
+import time
 
 import facebook
+import pytz
 import requests
+
 from annoying.decorators import render_to, ajax_request, JsonResponse
 from api import ParentSerializer, SitterSerializer, SitterSearchSerializer
 from django.conf import settings
@@ -298,28 +301,33 @@ def search(request):
 
     sitters = sitters.filter(reduced_q)
 
+    date_format = '%a, %b %d %Y'
+    time_format = '%H%M%S'
+    date_time_format = date_format + ' ' + time_format
+    tzinfo = pytz.UTC # pytz.timezone(request.user.timezone)
 
+    start_date_time = datetime.datetime.strptime('{0} {1}'.format(start_date, start_time), date_time_format).replace(tzinfo=tzinfo)
+    stop_date_time = datetime.datetime.strptime('{0} {1}'.format(start_date, stop_time), date_time_format).replace(tzinfo=tzinfo)
 
     #figure out which day we care about
-    start_date = datetime.strptime(start_date, "%a, %b %d %Y")
-    day  = datetime.strftime(start_date, "%a").lower()
+    start_date = datetime.datetime.strptime(start_date, date_format)
+    day = datetime.datetime.strftime(start_date, "%a").lower()
 
+    start_time = datetime.datetime.strptime(start_time, time_format)
+    start_time = datetime.time(start_time.hour, start_time.minute)
+    
+    stop_time = datetime.datetime.strptime(stop_time, time_format)
+    stop_time = datetime.time(stop_time.hour, stop_time.minute)
 
-    start_time =datetime.strptime(start_time, "%H%M")
-    start_time = time(start_time.hour, start_time.minute)
-
-    stop_time = datetime.strptime(stop_time, "%H%M")
-    stop_time = time(stop_time.hour, stop_time.minute)
-
-    times = dict(early_morning= time(hour=6), late_morning =time(hour=9),
-                 early_afternoon = time(hour=12), late_afternoon=time(hour=15),
-                 early_evening = time(hour=18), late_evening = time(hour=21),
+    times = dict(early_morning= datetime.time(hour=6), late_morning = datetime.time(hour=9),
+                 early_afternoon = datetime.time(hour=12), late_afternoon= datetime.time(hour=15),
+                 early_evening = datetime.time(hour=18), late_evening = datetime.time(hour=21),
              )
 
     search_terms = {}
     if overnight:
-        stop_date = datetime.strptime(stop_date, "%a, %d %b %Y")
-        stop_day  = datetime.strftime(stop_date, "%a").lower()
+        stop_date = datetime.datetime.strptime(stop_date, date_format)
+        stop_day  = datetime.datetime.strftime(stop_date, "%a").lower()
         search_terms["schedule__%s_overnight" % day] = True
 
         for term, search_time in times.items():
@@ -333,17 +341,13 @@ def search(request):
             if  start_time <= search_time <= stop_time:
                 search_terms[("schedule__%s_" % day) + term] = True
 
+    #booked = sitters.exclude(Q(bookings__start_date_time__gte=stop_date_time) | Q(bookings__stop_date_time__lte=start_date_time)).values_list('bookings__accepted_sitter_id', flat=True)
+    #sitters = sitters.filter(user_ptr__id__in=booked)
 
-
-
-    #filter by availiablity
     sitters = sitters.filter(**search_terms)
-
 
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
-
-
 
 
 @api_view(['GET'])
