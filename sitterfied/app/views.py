@@ -301,7 +301,7 @@ def search(request):
 
 
     #figure out which day we care about
-    start_date = datetime.strptime(start_date, "%a, %d %b %Y")
+    start_date = datetime.strptime(start_date, "%a, %b %d %Y")
     day  = datetime.strftime(start_date, "%a").lower()
 
 
