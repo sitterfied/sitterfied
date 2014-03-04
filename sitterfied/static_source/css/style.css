@@ -63,6 +63,14 @@
 	background: #dd7c3f url(../images/edit_bg.gif) repeat-x !important;
 }
 
+.removefriend {
+	font-family: ProximaNova, Arial, Tahoma !important;
+	font-size: 14px !important;
+	font-style: normal !important;
+	font-variant: normal !important;
+	font-weight: normal !important;
+}
+
 .networktext {
 margin-left: 10px;
 }
@@ -457,6 +465,11 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .ico ul li ul li:hover span {display:block;}
 .header .top_info .member_since {position:absolute;top:-3px;right:17px;width:94px;height:25px;padding-top:60px;background:url(../images/icons/member_since_t.png) no-repeat;text-align:center;color:#fff;font:bold 15px 'ProximaNovaCond';text-shadow:rgba(0,0,0,.35) 1px 1px 1px;}
 .header .top_info .member_since.guest {background:url(../images/icons/guest.png) no-repeat;}
+
+.header .top_info .know {float:right;}
+.header .top_info .know .know-statement {float:left;padding-top:27px;padding-right:15px;color:#3ea7b8;}
+.header .top_info .left ul li .know .button {float:right;}
+
 .header .top_info .find_form_block {padding:13px 0 110px 20px;}
 .header .top_info .find_form_block > p {color:#81abb0;font-size:22px;padding-bottom:15px;}
 .header .top_info .find_form_block .over_form {display:none;}

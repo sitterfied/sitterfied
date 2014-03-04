@@ -417,6 +417,20 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
     Sitterfied.SitterController  = Em.ObjectController.extend(
         interviewee: null
+        isFriend: false # Create property so that template is updated upon change
+
+        # Used by template to get initial value for sitters
+        initializeSitter: (() ->
+            # Set isFriend
+            friends = Sitterfied.currentUser.get('friends').toArray()
+            for friend in friends
+                if friend.get('id') == parseInt(this.get("model").get("id"))
+                    this.set("isFriend", true)
+                    return null
+            this.set("isFriend", false)
+            
+            return null
+        ).property('model', 'model.myFriends', 'model.myFriends.length', 'model.sitter_teams', 'model.sitter_teams.length')
         
         book: (sitter) ->
             onDeckBookingAttrs = Sitterfied.onDeckBookingAttrs || {}
@@ -1067,8 +1081,34 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
 
     Sitterfied.ParentController  = Em.ObjectController.extend(
+        isFriend: false # Create property so that template is updated upon change
+        friendLength: 0 # Create property so that template is updated upon change
+        
         addFriend: () ->
             Sitterfied.currentUser.addFriend(this.get('model'))
+            this.set("isFriend", true)
+            this.set("friendLength", this.get("friendLength") + 1)
+            
+        removeFriend: () ->
+            Sitterfied.currentUser.removeFriend(this.get('model'))
+            this.set("isFriend", false)
+            this.set("friendLength", this.get("friendLength") - 1)
+
+        # Used by template to get initial value for friends
+        initializeFriend: (() ->
+            # Set FriendLength
+            this.set("friendLength", this.get("model").get("myFriends").get("length"))
+            
+            # Set isFriend
+            friends = Sitterfied.currentUser.get('friends').toArray()
+            for friend in friends
+                if friend.get('id') == parseInt(this.get("model").get("id"))
+                    this.set("isFriend", true)
+                    return null
+            this.set("isFriend", false)
+            
+            return null
+        ).property('model', 'model.myFriends', 'model.myFriends.length')
     )
 
 

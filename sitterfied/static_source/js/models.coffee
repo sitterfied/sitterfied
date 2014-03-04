@@ -108,6 +108,14 @@ define ['jquery'
             friends.removeObject(toBlock)
             @set('isDirty', true)
             @save()
+            
+        isFriend: (() ->
+            friends = @get("friends").toArray()
+            for friend in friends
+                if friend.get('id') == parseInt(Sitterfied.currentUser.get("id"))
+                    return true
+            return false
+        ).property('friends.@each')
 
         removeGroup: (group) ->
             groups = @get("sitter_groups")
@@ -115,7 +123,6 @@ define ['jquery'
             groups.removeObject(toBlock)
             @set('isDirty', true)
             @save()
-
 
         mailTo:  (() ->
             return "mailto:" +@get('email')
@@ -135,6 +142,7 @@ define ['jquery'
                     return -1
             )
         ).property('bookings.@each')
+            
         weeks_since_last_booking: (() ->
             if this.get('sorted_bookings').length == 0
                 return 0
@@ -144,6 +152,7 @@ define ['jquery'
                     return 0
                 return moment().diff(date, 'weeks')
         ).property('sorted_bookings.@each')
+            
         days_since_last_booking: (() ->
             if this.get('sorted_bookings').length == 0
                 return 0
@@ -153,6 +162,7 @@ define ['jquery'
                     return 0
                 return moment().diff(date, 'days')
         ).property('sorted_bookings')
+            
         full_name: ((key, value) ->
             if arguments.length == 1
                 return @get('first_name') + ' ' + @get('last_name')
@@ -210,6 +220,7 @@ define ['jquery'
                 return null
             return Sitterfied.Sitter.find(@get("id"))
         ).property("id")
+            
         parent: (() ->
             if not @get("id")
                 return null
