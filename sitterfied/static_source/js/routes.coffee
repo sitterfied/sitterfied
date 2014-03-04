@@ -202,6 +202,48 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
         renderTemplate: () ->
             this.render("sitter")
             this.render("sitter.top", {outlet: 'top'})
+        events:{
+            addFriend: (user) ->
+                Em.run.begin()
+                Sitterfied.currentUser.addFriend(user)
+                this.get("controller").set("isFriend", true)
+                
+                # Add to sitter team if user is sitter
+                if user.get('isSitter') and Sitterfied.currentUser.get('isParent')
+                    sitterTeam = Sitterfied.currentUser.get('sitter_teams')
+                    dupSitter = sitterTeam.findProperty('id', user.get('id'))
+                    if dupSitter
+                        sitterTeam.removeObject(dupSitter)
+                        dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                    else
+                        sitterTeam.pushObject(user)
+                        user.get('sitter_teams').pushObject(Sitterfied.currentUser)
+    
+                Sitterfied.currentUser.set('isDirty', true)
+                Sitterfied.currentUser.save()
+                Em.run.end()
+            
+            removeFriend: (user) ->
+                Em.run.begin()
+                Sitterfied.currentUser.removeFriend(user)
+                this.get("controller").set("isFriend", false)
+                
+                # Remove from team
+                if user.get('isSitter') and Sitterfied.currentUser.get('isParent')
+                    sitterTeam = Sitterfied.currentUser.get('sitter_teams')
+                    dupSitter = sitterTeam.findProperty('id', user.get('id'))
+                    sitterTeam.removeObject(user)
+                    if dupSitter
+                        sitterTeam.removeObject(dupSitter)
+                        dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                    else
+                        sitterTeam.pushObject(user)
+                        user.get('sitter_teams').pushObject(Sitterfied.currentUser)
+                
+                Sitterfied.currentUser.set('isDirty', true)
+                Sitterfied.currentUser.save()
+                Em.run.end()
+        }
     )
 
     Sitterfied.SitterIndexRoute = Em.Route.extend(
@@ -390,9 +432,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
 
             editBooking: (booking)  ->
                 this.transitionTo('editBook', booking)
-
-            addFriend: (user) ->
-                alert("add friend")
 
             addSitterTeam: (sitter) ->
                 Em.run.begin()

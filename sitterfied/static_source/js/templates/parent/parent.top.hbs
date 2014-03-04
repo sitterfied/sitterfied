@@ -1,35 +1,53 @@
 {{# if Sitterfied.currentUser.isParent}}
   {{# linkTo search class="back"}}Back to search{{/linkTo}}
 {{ else }}
-   {{# linkTo sitterEdit.network currentUser class="back"}}Back to your network{{/linkTo}}
+  {{# linkTo sitterEdit.network currentUser class="back"}}Back to your network{{/linkTo}}
 {{/ if}}
+
 <!-- top info -->
 <div class="top_info clear">
   <div class="photo">
-	<div class="photo_edit_wrap" style="background-image: url('{{unbound avatarUrl}}');">
-	</div>
+    <div class="photo_edit_wrap" style="background-image: url('{{unbound avatarUrl}}');">
+    </div>
   </div>
   <div class="guest_top_info">
-	<p>{{full_name}}</p>
-	<p>{{children.length}} Children &nbsp;|&nbsp; {{city}}, {{state}}</p>
-	<div class="know">
-	  <p>Do you know {{first_name}}?</p>
-	  <p>
-		<a {{action addFriend }} class="button addfriend">
-		  <span class="icon_plus">&nbsp;
-		  </span><span class="networktext">ADD TO NETWORK</span>
-		</a>
-
+    <p>{{full_name}}</p>
+    <p>{{children.length}} Children &nbsp;|&nbsp; {{city}}, {{state}}</p>
+    <div class="know">
+      <p>Do you know {{first_name}}?</p>
+      <p>
+        {{initializeFriend}}
+	
+	{{#if isFriend }}
+	  <a {{action removeFriend }} class="button button_cancel removefriend">
+	    <span class="icon_cancel">
+	      &nbsp;
+	    </span>
+	    <span class="networktext">
+	      REMOVE
+	    </span>
+	  </a>
+	{{else}}
+	  <a {{action addFriend }} class="button addfriend">
+	    <span class="icon_plus">
+	      &nbsp;
+	    </span>
+	    <span class="networktext">
+	      ADD TO NETWORK
+	    </span>
+	  </a>
+	{{/if}}
       </p>
-	</div>
+    </div>
   </div>
 </div>
 <!-- /top info -->
+
 <!-- quick_info_list -->
 {{# view Sitterfied.FixedView class="quick_info_list clear" id="fixed_tabs" }}
-<ul>
-	<li><strong>{{myFriends.length}}</strong> friends</li>
-	<li><strong>{{sitter_groups.length}}</strong>groups</li>
+  <ul>
+    <li><strong>{{friendLength}}</strong> friends</li>
+    <li><strong>{{sitter_groups.length}}</strong>groups</li>
   </ul>
 {{/ view}}
 <!-- /quick_info_list -->
