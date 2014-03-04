@@ -4579,7 +4579,7 @@ helpers = helpers || Ember.Handlebars.helpers; data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n  <div ");
+  data.buffer.push("\n    <div ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "bookmark", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -4589,7 +4589,7 @@ function program1(depth0,data) {
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
     'class': (":bookmark isBookmarked:active")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n  </div>\n  ");
+  data.buffer.push(">\n    </div>\n  ");
   return buffer;
   }
 
@@ -4604,7 +4604,7 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n    <div ");
+  data.buffer.push("\n      <div ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "addSitterTeam", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -4614,7 +4614,7 @@ function program5(depth0,data) {
   data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
     'class': ("inSitterTeam:active :heart")
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n    </div>\n    ");
+  data.buffer.push(">\n      </div>\n    ");
   return buffer;
   }
 
@@ -4809,7 +4809,7 @@ function program30(depth0,data) {
   data.buffer.push("\n      ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.unless.call(depth0, "parentController.isSitter", {hash:{},inverse:self.noop,fn:self.program(31, program31, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "Sitterfied.currentUser.isParent", {hash:{},inverse:self.noop,fn:self.program(31, program31, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    ");
   return buffer;
@@ -4836,28 +4836,28 @@ function program31(depth0,data) {
 function program33(depth0,data) {
   
   var buffer = '', stack1, hashTypes, hashContexts;
-  data.buffer.push("\n    <p>\n      <a ");
+  data.buffer.push("\n      <p>\n        <a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "bookmark", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(">\n	    ");
+  data.buffer.push(">\n	      ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "isBookmarked", {hash:{},inverse:self.noop,fn:self.program(34, program34, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	    BOOKMARK\n      </a>\n    </p>\n    ");
+  data.buffer.push("\n	      BOOKMARK\n        </a>\n      </p>\n    ");
   return buffer;
   }
 function program34(depth0,data) {
   
   
-  data.buffer.push("\n	      REMOVE \n	    ");
+  data.buffer.push("\n	        REMOVE \n	      ");
   }
 
   data.buffer.push("<li>\n  ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.unless.call(depth0, "parentController.isSitter", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "Sitterfied.currentUser.isParent", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  <div class=\"tit\">\n    <span><strong>$");
   hashTypes = {};
@@ -4872,7 +4872,7 @@ function program34(depth0,data) {
   data.buffer.push("\n  </div>\n  <div class=\"img\">\n    ");
   hashTypes = {};
   hashContexts = {};
-  stack2 = helpers.unless.call(depth0, "parentController.isSitter", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack2 = helpers['if'].call(depth0, "Sitterfied.currentUser.isParent", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n    ");
   hashTypes = {};
@@ -4928,7 +4928,7 @@ function program34(depth0,data) {
   data.buffer.push("\n    ");
   hashTypes = {};
   hashContexts = {};
-  stack2 = helpers.unless.call(depth0, "parentController.isSitter", {hash:{},inverse:self.noop,fn:self.program(33, program33, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack2 = helpers['if'].call(depth0, "Sitterfied.currentUser.isParent", {hash:{},inverse:self.noop,fn:self.program(33, program33, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
   data.buffer.push("\n  </div>\n</li>\n\n");
   return buffer;
@@ -5325,14 +5325,14 @@ function program2(depth0,data) {
 function program4(depth0,data) {
   
   var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n		            <p>\n			          ");
+  data.buffer.push("\n                    <!-- Uncomment for overnight functionality\n		            <p>\n			          ");
   hashContexts = {'id': depth0,'checkedBinding': depth0};
   hashTypes = {'id': "STRING",'checkedBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
     'id': ("check"),
     'checkedBinding': ("overnight")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n			          <label for=\"check\">\n			            Overnight/Multiday booking\n			          </label>\n		            </p>\n		            ");
+  data.buffer.push("\n			          <label for=\"check\">\n			            Overnight/Multiday booking\n			          </label>\n		            </p>\n                    -->\n		            ");
   return buffer;
   }
 
@@ -7571,68 +7571,17 @@ function program3(depth0,data) {
 
 function program5(depth0,data) {
   
-  var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n		  <li class=\"fatselect\">\n		  <label for=\"to\">To</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'id': depth0,'prompt': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'id': "STRING",'prompt': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
-    'contentBinding': ("Sitterfied.HourBlocks"),
-    'optionLabelPath': ("content.name"),
-    'optionValuePath': ("content.value"),
-    'valueBinding': ("stop_time"),
-    'id': ("to"),
-    'prompt': ("")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n		</li>\n        ");
-  return buffer;
-  }
-
-function program7(depth0,data) {
-  
-  var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n		    <label>To</label>\n            ");
-  hashContexts = {'placeholder': depth0,'id': depth0,'class': depth0,'valueBinding': depth0};
-  hashTypes = {'placeholder': "STRING",'id': "STRING",'class': "STRING",'valueBinding': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.DatePicker", {hash:{
-    'placeholder': ("DATE"),
-    'id': ("datepicker3"),
-    'class': ("datepicker"),
-    'valueBinding': ("stop_date")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n            ");
-  return buffer;
-  }
-
-function program9(depth0,data) {
-  
-  var buffer = '', hashContexts, hashTypes;
-  data.buffer.push("\n		  <label></label>  \n          <div class=\"fatselect\">\n\n            ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'prompt': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'prompt': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
-    'contentBinding': ("Sitterfied.HourBlocks"),
-    'optionLabelPath': ("content.name"),
-    'optionValuePath': ("content.value"),
-    'valueBinding': ("stop_time"),
-    'prompt': ("")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n            </div>\n          ");
-  return buffer;
-  }
-
-function program11(depth0,data) {
-  
   
   data.buffer.push("\n		      <i class=\"fa fa-spinner fa-spin\"></i>\n		    ");
   }
 
-function program13(depth0,data) {
+function program7(depth0,data) {
   
   
-  data.buffer.push("\n		      FIND MY SITTER\n		    ");
+  data.buffer.push("\n		      FIND\n		    ");
   }
 
-  data.buffer.push("<div style=\"display:none\">\n<div id=\"onboarding_final\">\n		<div class=\"done_desc clear\">\n			<p><img src=\"/static/images/done.png\" alt=\"\" /></p>\n			<ul>\n				<li>Add your favorite sitters here for quick access</li>\n				<li>Sitters your friends have hired</li>\n				<li>Sitters we found in your area</li>\n			</ul>\n		</div>\n		<div class=\"sitter_tabs_wrap my_tabs_style\">\n			<div class=\"stabs_block\">\n				<nav>\n					<ul class=\"tab_select\">\n						<li><a href=\"#\">sitter<br />team<span>7</span></a></li>\n						<li><a href=\"#\">friends'<br />sitters<span>42</span></a></li>\n						<li><a href=\"#\">local<br />sitters<span>519</span></a></li>\n					</ul>\n				</nav>\n				<div class=\"friends_block my_friends_sitters\">\n					<div class=\"multiple_sitters_block clear\">\n						<a href=\"#\" class=\"close\">&nbsp;</a>\n						<ul>\n							<li class=\"team select1\"><a href=\"#\">Ellen Vukelich</a><span class=\"remove\"><a href=\"#\" class=\"select1\">&nbsp;</a></span></li>\n							<li>\n								<p>+ <a href=\"#\" class=\"add_sitters\">ADD ALL FRIENDS’ SITTERS</a></p>\n								<p>- &nbsp;<a href=\"#\" class=\"remove_team\">REMOVE SITTER TEAM</a></p>\n							</li>\n						</ul>\n						<p>Select from the available sitters below. <a href=\"#\" class=\"button button_small\"><span class=\"icon_ok2\">&nbsp;</span>submit</a></p>\n					</div>\n					<div class=\"filter_block\">\n						<p><a href=\"#\">Reset Filters</a></p>\n						<form method=\"post\" action=\"#\">\n							<ul class=\"clear\">\n								<li><select data-placeholder=\"Choose languages\" multiple tabindex=\"1\"><option>test</option><option>test2</option></select></li>\n								<li><select data-placeholder=\"Education level\" multiple tabindex=\"2\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Training/Certifications\" multiple tabindex=\"3\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Level of Experience\" multiple tabindex=\"4\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Type of Experience\" multiple tabindex=\"5\"><option>test</option></select></li>\n								<li><select data-placeholder=\"Other\" multiple tabindex=\"6\"><option>test</option></select></li>\n							</ul>\n						</form>\n						<p><a href=\"#\">Hide Filters</a></p>\n					</div>\n					<div class=\"sort_filter clear\">\n						<div class=\"sort\">\n							<a class=\"sort_trigger\" href=\"#\">Sort by</a>\n							<a class=\"reset_trigger\" href=\"#\">Reset Sort</a>\n							<ul>\n								<li><a href=\"#\">Bookmarked</a></li>\n								<li><a href=\"#\">Rehires</a></li>\n								<li><a href=\"#\">Experience</a></li>\n								<li><a href=\"#\">Sitter Teams</a></li>\n								<li><a href=\"#\">Rate</a></li>\n								<li><a href=\"#\">Reviews</a></li>\n							</ul>\n						</div>\n						<div class=\"multiple_select\"><a href=\"#\">Select multiple sitters</a></div>\n						<div class=\"filter\"><a href=\"#\">Filter</a> my sitters</div>\n					</div>\n				</div>\n			</div>\n		</div>\n		<p>When you need a sitter <i>FAST</i>,  click here and let sitters compete for your job</p>\n</div>\n<!-- onboarding_final_popup -->\n</div>\n\n\n\n<!-- /top note -->\n<div class=\"top_info clear\">\n  <div class=\"find_form_block\">\n	<p>Where and when do you need your sitter?</p>\n	<form>\n	  <ul class=\"clear\">\n		<li>\n		  <label for=\"where\">Where</label>\n          ");
+  data.buffer.push("<div style=\"display:none\">\n  <div id=\"onboarding_final\">\n	<div class=\"done_desc clear\">\n	  <p><img src=\"/static/images/done.png\" alt=\"\" /></p>\n	  <ul>\n		<li>Add your favorite sitters here for quick access</li>\n		<li>Sitters your friends have hired</li>\n		<li>Sitters we found in your area</li>\n	  </ul>\n	</div>\n	<div class=\"sitter_tabs_wrap my_tabs_style\">\n	  <div class=\"stabs_block\">\n		<nav>\n		  <ul class=\"tab_select\">\n			<li><a href=\"#\">sitter<br />team<span>7</span></a></li>\n			<li><a href=\"#\">friends'<br />sitters<span>42</span></a></li>\n			<li><a href=\"#\">local<br />sitters<span>519</span></a></li>\n		  </ul>\n		</nav>\n		<div class=\"friends_block my_friends_sitters\">\n		  <div class=\"multiple_sitters_block clear\">\n			<a href=\"#\" class=\"close\">&nbsp;</a>\n			<ul>\n			  <li class=\"team select1\"><a href=\"#\">Ellen Vukelich</a><span class=\"remove\"><a href=\"#\" class=\"select1\">&nbsp;</a></span></li>\n			  <li>\n				<p>+ <a href=\"#\" class=\"add_sitters\">ADD ALL FRIENDS’ SITTERS</a></p>\n				<p>- &nbsp;<a href=\"#\" class=\"remove_team\">REMOVE SITTER TEAM</a></p>\n			  </li>\n			</ul>\n			<p>Select from the available sitters below. <a href=\"#\" class=\"button button_small\"><span class=\"icon_ok2\">&nbsp;</span>submit</a></p>\n		  </div>\n		  <div class=\"filter_block\">\n			<p><a href=\"#\">Reset Filters</a></p>\n			<form method=\"post\" action=\"#\">\n			  <ul class=\"clear\">\n				<li><select data-placeholder=\"Choose languages\" multiple tabindex=\"1\"><option>test</option><option>test2</option></select></li>\n				<li><select data-placeholder=\"Education level\" multiple tabindex=\"2\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Training/Certifications\" multiple tabindex=\"3\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Level of Experience\" multiple tabindex=\"4\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Type of Experience\" multiple tabindex=\"5\"><option>test</option></select></li>\n				<li><select data-placeholder=\"Other\" multiple tabindex=\"6\"><option>test</option></select></li>\n			  </ul>\n			</form>\n			<p><a href=\"#\">Hide Filters</a></p>\n		  </div>\n		  <div class=\"sort_filter clear\">\n			<div class=\"sort\">\n			  <a class=\"sort_trigger\" href=\"#\">Sort by</a>\n			  <a class=\"reset_trigger\" href=\"#\">Reset Sort</a>\n			  <ul>\n				<li><a href=\"#\">Bookmarked</a></li>\n				<li><a href=\"#\">Rehires</a></li>\n				<li><a href=\"#\">Experience</a></li>\n				<li><a href=\"#\">Sitter Teams</a></li>\n				<li><a href=\"#\">Rate</a></li>\n				<li><a href=\"#\">Reviews</a></li>\n			  </ul>\n			</div>\n			<div class=\"multiple_select\"><a href=\"#\">Select multiple sitters</a></div>\n			<div class=\"filter\"><a href=\"#\">Filter</a> my sitters</div>\n		  </div>\n		</div>\n	  </div>\n	</div>\n	<p>When you need a sitter <i>FAST</i>,  click here and let sitters compete for your job</p>\n  </div>\n  <!-- onboarding_final_popup -->\n</div>\n\n<!-- /top note -->\n<div class=\"top_info clear\">\n  <div class=\"find_form_block\">\n	<p>Where and when do you need your sitter?</p>\n	<form>\n	  <ul class=\"clear\">\n		<li>\n		  <label for=\"where\">Where</label>\n          ");
   hashContexts = {'valueBinding': depth0,'placeholder': depth0};
   hashTypes = {'valueBinding': "STRING",'placeholder': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.TextField", {hash:{
@@ -7644,7 +7593,7 @@ function program13(depth0,data) {
   hashContexts = {};
   stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</label>\n          ");
+  data.buffer.push("</label>\n            ");
   hashContexts = {'placeholder': depth0,'id': depth0,'class': depth0,'valueBinding': depth0};
   hashTypes = {'placeholder': "STRING",'id': "STRING",'class': "STRING",'valueBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.DatePicker", {hash:{
@@ -7653,19 +7602,7 @@ function program13(depth0,data) {
     'class': ("datepicker"),
     'valueBinding': ("start_date")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n		  <!-- Uncomment for overnight support\n          <p>\n            ");
-  hashContexts = {'checkedBinding': depth0,'id': depth0};
-  hashTypes = {'checkedBinding': "STRING",'id': "STRING"};
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
-    'checkedBinding': ("overnight"),
-    'id': ("check")
-  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n            <label for=\"check\">Overnight / Multiday booking?</label>\n          </p>\n          -->\n		</li>\n		<li class=\"fatselect\">\n		  <label for=\"from\">");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</label>\n          ");
+  data.buffer.push("\n		</li>\n		<li class=\"fatselect\">\n		  <label for=\"from\">From</label>\n          ");
   hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'id': depth0,'prompt': depth0};
   hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'id': "STRING",'prompt': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
@@ -7676,45 +7613,36 @@ function program13(depth0,data) {
     'id': ("from"),
     'prompt': ("")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n		</li>\n        ");
-  hashTypes = {};
-  hashContexts = {};
-  stack1 = helpers.unless.call(depth0, "overnight", {hash:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<li class=\"fatselect\">\n		  <label>&nbsp;</label>\n          ");
-  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'prompt': depth0};
-  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'prompt': "STRING"};
+  data.buffer.push("\n		</li>\n		<li class=\"fatselect\">\n		  <label for=\"to\">To</label>\n          ");
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'id': depth0,'prompt': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'id': "STRING",'prompt': "STRING"};
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
+    'contentBinding': ("Sitterfied.HourBlocks"),
+    'optionLabelPath': ("content.name"),
+    'optionValuePath': ("content.value"),
+    'valueBinding': ("stop_time"),
+    'id': ("to"),
+    'prompt': ("")
+  },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n		</li>\n		<li class=\"fatselect\">\n		  <label for=\"kids\">For</label>\n          ");
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'valueBinding': depth0,'prompt': depth0,'id': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'valueBinding': "STRING",'prompt': "STRING",'id': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Sitterfied.Select2", {hash:{
     'contentBinding': ("Sitterfied.Kids"),
     'optionLabelPath': ("content.name"),
     'optionValuePath': ("content.value"),
     'valueBinding': ("kids"),
-    'prompt': ("")
+    'prompt': (""),
+    'id': ("for")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n		</li>\n        <!-- Uncomment for overnight support-->\n		  ");
-  hashContexts = {'toggleBinding': depth0,'tagName': depth0};
-  hashTypes = {'toggleBinding': "STRING",'tagName': "STRING"};
-  stack1 = helpers.view.call(depth0, "Sitterfied.SlideDownView", {hash:{
-    'toggleBinding': ("overnight"),
-    'tagName': ("li")
-  },inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("         \n		  ");
-  hashContexts = {'toggleBinding': depth0,'tagName': depth0};
-  hashTypes = {'toggleBinding': "STRING",'tagName': "STRING"};
-  stack1 = helpers.view.call(depth0, "Sitterfied.SlideDownView", {hash:{
-    'toggleBinding': ("overnight"),
-    'tagName': ("li")
-  },inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		<li>\n		  <button class=\"findSitter\" ");
+  data.buffer.push("\n		</li>\n		<li>\n          <label>&nbsp;</label>\n		  <button class=\"findSitter\" ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "findSitters", {hash:{},contexts:[depth0],types:["STRING"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push(">\n		    ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers['if'].call(depth0, "isLoading", {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers['if'].call(depth0, "isLoading", {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		  </button>\n		</li>\n	  </ul>\n	</form>\n  </div>\n</div>\n");
   return buffer;
