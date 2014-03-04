@@ -209,7 +209,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 this.get("controller").set("isFriend", true)
                 
                 # Add to sitter team if user is sitter
-                if user.get('isSitter')
+                if user.get('isSitter') and Sitterfied.currentUser.get('isParent')
                     sitterTeam = Sitterfied.currentUser.get('sitter_teams')
                     dupSitter = sitterTeam.findProperty('id', user.get('id'))
                     if dupSitter
@@ -229,7 +229,7 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 this.get("controller").set("isFriend", false)
                 
                 # Remove from team
-                if user.get('isSitter')
+                if user.get('isSitter') and Sitterfied.currentUser.get('isParent')
                     sitterTeam = Sitterfied.currentUser.get('sitter_teams')
                     dupSitter = sitterTeam.findProperty('id', user.get('id'))
                     sitterTeam.removeObject(user)
