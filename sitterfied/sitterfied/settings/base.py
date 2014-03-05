@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from unipath import Path
 
+from .facebook import *
 from .intercom import *
 from .pipeline import *
 from .grappelli import *

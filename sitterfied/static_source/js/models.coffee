@@ -762,7 +762,7 @@ define ['jquery'
         ).property('stop_date_time')
 
         calendarDate: ((key, value) ->
-            fmt_str = "ddd, Do MMM YYYY"
+            fmt_str = "ddd, MMM D YYYY"
             date = @get('start_date_time')
             date = moment(date)
             if not date and not value

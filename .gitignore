@@ -6,3 +6,4 @@ _flymake*
 data/
 */static/*
 sitterfied*.js
+templates.js

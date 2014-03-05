@@ -647,7 +647,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             stop_time = @get("stop_time")
             start_date = @get("start_date")
             kids = @get("kids")
-            
+
             #store properties for future bookings
             if not _.every([zip, start_date, start_time, stop_time, kids], _.identity)
                 alert("please ensure you've filled out every field")
@@ -690,7 +690,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 Sitterfied.onDeckBookingAttrs['stop_date_time'] = stop_date_time
 
             @set('searched', false)
-            
+
             $.get("/api/search/",
                   payload,
                   ).then ((response) =>
@@ -979,7 +979,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 city: Sitterfied.get('currentUser.city')
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
-                num_children: 1
+                num_children: @get('kids')
                 emergency_phone: Sitterfied.get('currentUser.cell')
                 rate: 0
             sitters = Sitterfied.currentUser.get('sitter_teams')
@@ -1053,7 +1053,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
 
     Sitterfied.ParentEditSitterTeamController  = Em.ArrayController.extend(
         book: (sitters) ->
-            if not Sitterfied.typeIsArray sitters
+            if not Ember.isArray sitters
                 sitters = [sitters]
 
             booking = Sitterfied.Booking.create
@@ -1077,8 +1077,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @transitionToRoute('book')
 
         bookTeam: () ->
-            sitters = @get("content")
-            @book(sitters)
+            @book(@get('content'))
     )
 
     Sitterfied.ParentController  = Em.ObjectController.extend(

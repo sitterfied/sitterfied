@@ -37,7 +37,9 @@
       <!--<a href="#">Forgot your password?</a></p>-->
     <p>
       <input type="hidden" name="next" value="/" />
-      <input id="loginbtn" type="submit" class="button button_edit" value="LOG IN" />
+      <button id="loginbtn" type="submit" class="button button_edit">
+		LOG IN
+	  </button>
     </p>
   </form>
 	<p>Don’t have an account?
@@ -66,6 +68,8 @@
         });
 
    $("form").submit(function(){
+     $("#loginbtn").html("<i class=\"fa fa-spinner fa-spin\"></i>")
+
 	 username = $("#id_username").val()
 	 password = $("#id_password").val()
      remember_me = $("#remember_me").val()
@@ -75,6 +79,7 @@
 	 }).error(function(result){
 	   $("#id_username, #id_password").addClass("error_field_login")
 	   $("#errormessage").fadeIn()
+       $("#loginbtn").html("LOG IN")
 	 })
 	 return false;
    })

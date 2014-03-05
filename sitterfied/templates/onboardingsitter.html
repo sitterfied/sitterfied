@@ -495,6 +495,27 @@
 				  </li>
 				</ul>
 			  </li>
+              <li>
+				<ul>
+				  <li>
+					<span class="icon_pass2">&nbsp;</span>Terms of Service
+
+                    {% for error in form.tos.errors %}
+                    <div class="icon_error tos_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
+
+                  </li>
+				  <li>
+                    <p>
+					  {{form.tos}}
+                      <label for="id_tos">I have read and agree to the
+                        <a href="{% url 'tos' %}" target="_blank">Terms of Service.</a></label>
+                    </p>
+				  </li>
+				</ul>
+			  </li>
 			</ul>
 		  </div>
 		</div>
@@ -526,7 +547,7 @@
 	 add.css("background-repeat", "no-repeat");
      add.css("max-width", "237px");
      add.css("max-height", "237px");
-
+     $(".add p").remove()
    });
    $("#back-top").hide();
    $(window).scroll(function () {

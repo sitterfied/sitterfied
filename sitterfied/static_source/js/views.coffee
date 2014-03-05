@@ -15,7 +15,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         didInsertElement: ()->
             #setup datepicker and keep ember insync with it
             @$().datepicker(
-                dateFormat: 'D, dd M yy',
+                dateFormat: 'D, M dd yy',
                 showOtherMonths: true,
                 selectOtherMonths: true,
                 numberOfMonths: [ 1, 2 ],
@@ -563,4 +563,18 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
             @setSelectedValue newval
       ).observes("selection")
 
+    )
+
+    Sitterfied.AjaxStateButton = Ember.View.extend(Ember.ViewTargetActionSupport,
+        tagName: 'button'
+        attributeBindings: ['class']
+        
+        template: (->
+            return Ember.Handlebars.compile("{{#if view.value}}<i class=\"fa fa-spinner fa-spin\"></i>{{else}}{{view.saveText}}{{/if}}")
+        ).property()
+        
+        click: (event) ->
+            event.preventDefault()       
+            if !@get('value')
+                @triggerAction()
     )

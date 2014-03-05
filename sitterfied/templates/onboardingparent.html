@@ -7,45 +7,45 @@
 {% include "csrf.html" %}
 <script src="{% static "js/lib/PhoneFormat.js" %}">
 
-<script>
-  UPLOADCARE_CROP = "174x174 upscale";
-</script>
-{% endblock %}
-{% block title %}
-<title>Welcome to Sitterfied!</title>
-{% endblock %}
-{% block body %}
-{% include "header.html" %}
+  <script>
+    UPLOADCARE_CROP = "174x174 upscale";
+  </script>
+  {% endblock %}
+  {% block title %}
+  <title>Welcome to Sitterfied!</title>
+  {% endblock %}
+  {% block body %}
+  {% include "header.html" %}
 
-<!-- container -->
-<div class="container clear">
+  <!-- container -->
+  <div class="container clear">
 	<div class="wraper text_topmarg">
 
-		<!-- onboarding_block -->
-		<div class="onboarding_block clear">
-			<p class="center"><img src="{% static "images/welcome.png" %}" alt="" /></p>
-			<div class="you_friends clear">
-				<p><span><img src="{% static "images/icons/you.png" %}" alt="" /></span>You</p>
-				<p><span><img src="{% static "images/icons/friends.png" %}" alt="" /></span>Friends</p>
-			</div>
-			<div class="profile_block">
-					<p>Great! Let’s get acquainted...</p>
-					<form method="post" action="#" class="form_style">
-	<input type="hidden" name="parent_or_sitter" value="parent">
-	{% csrf_token %}
+	  <!-- onboarding_block -->
+	  <div class="onboarding_block clear">
+		<p class="center"><img src="{% static "images/welcome.png" %}" alt="" /></p>
+		<div class="you_friends clear">
+		  <p><span><img src="{% static "images/icons/you.png" %}" alt="" /></span>You</p>
+		  <p><span><img src="{% static "images/icons/friends.png" %}" alt="" /></span>Friends</p>
+		</div>
+		<div class="profile_block">
+		  <p>Great! Let’s get acquainted...</p>
+		  <form method="post" action="#" class="form_style">
+	        <input type="hidden" name="parent_or_sitter" value="parent">
+	        {% csrf_token %}
 
-						<ul>
-							<li>
-	{% if form.non_field_errors %}
-<ul>
-    {{ form.non_field_errors.as_ul }}
-</ul>
-{% endif %}
-								<ul>
+			<ul>
+			  <li>
+	            {% if form.non_field_errors %}
+                <ul>
+                  {{ form.non_field_errors.as_ul }}
+                </ul>
+                {% endif %}
+				<ul>
 
 
-                                    <li>
-                                      <span class="icon_name">&nbsp;</span>Name
+                  <li>
+                    <span class="icon_name">&nbsp;</span>Name
 
                     {% for error in form.first_name.errors %}
 					<div class="icon_error first_name">
@@ -59,47 +59,47 @@
                     </div>
                     {% endfor %}
 
-                                    </li>
-									<li>
-										<p>
-										  {{form.first_name}}
-    									  {{form.last_name}}
-										</p>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<ul>
-                                  <li>
-                                    <span class="icon_mom_group">&nbsp;</span>Mom Group<br />
-                                    <span class="small">(optional)</span>
-                                  {% for error in form.sitter_group.errors %}
+                  </li>
+				  <li>
+					<p>
+					  {{form.first_name}}
+    				  {{form.last_name}}
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+                  <li>
+                    <span class="icon_mom_group">&nbsp;</span>Mom Group<br />
+                    <span class="small">(optional)</span>
+                    {% for error in form.sitter_group.errors %}
 					<div class="icon_error">
                       <p>{{ error|escape }}</p>
                     </div>
                     {% endfor %}
 
 
-                                  </li>
-									<li class="mom_group_items">
-									  <p>
-										{{form.sitter_groups}}
-									  </p>
-									  <p>
-										<input id="newgroup" type="text">
-										<a class="button button_small button2" id="newgroup-button">Create
-										</a>
-										<span>If you can’t find your group, create it
-										</span>
-									  </p>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<ul>
-                                    <li>
-                                      <span class="icon_friends7">&nbsp;</span>Children
-                                    {% for form in formset %}
+                  </li>
+				  <li class="mom_group_items">
+					<p>
+					  {{form.sitter_groups}}
+					</p>
+					<p>
+					  <input id="newgroup" type="text">
+					  <a class="button button_small button2" id="newgroup-button">Create
+					  </a>
+					  <span>If you can’t find your group, create it
+					  </span>
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+                  <li>
+                    <span class="icon_friends7">&nbsp;</span>Children
+                    {% for form in formset %}
                     {% for error in form.name.errors %}
 					<div class="icon_error">
                       <p>{{ error|escape }}</p>
@@ -124,63 +124,63 @@
                     </div>
                     {% endfor %}
 
-                                    {% endfor %}
-                                    </li>
-									{% for form in formset %}
+                    {% endfor %}
+                  </li>
+				  {% for form in formset %}
 
-									<li class="form-container">
-										<div class="child_wrap">
-										  <p class="child_number">CHILD</p>
-										  {% if form.name.errors %}
-										  <p class="small_selects error_field">
-											{% else %}
-										  <p class="small_selects">
-											{% endif %}
-											{{form.name}}
-											{{form.dob}}
-										  </p>
-										  <p>
-											{{form.school}}
-										  </p>
-										  <p>
-											{{form.special_needs}}
-											<input type="checkbox" id="none" />
-										  </p>
-										  <p>
-											<input type="text" placeholder="Special Need not listed?" class="left" />
-											<a class="button button_smaller button_edit newneed-button">
-											  <span class="icon_plus">&nbsp;
-											  </span>ADD
-											</a>
-										  </p>
-										</div>
-										<p class="add_child_block">&nbsp;
-										  <br />
-										  <br />
-	{% if forloop.last %}
+				  <li class="form-container">
+					<div class="child_wrap">
+					  <p class="child_number">CHILD</p>
+					  {% if form.name.errors %}
+					  <p class="small_selects error_field">
+						{% else %}
+					  <p class="small_selects">
+						{% endif %}
+						{{form.name}}
+						{{form.dob}}
+					  </p>
+					  <p>
+						{{form.school}}
+					  </p>
+					  <p>
+						{{form.special_needs}}
+						<input type="checkbox" id="none" />
+					  </p>
+					  <p>
+						<input type="text" placeholder="Special Need not listed?" class="left" />
+						<a class="button button_smaller button_edit newneed-button">
+						  <span class="icon_plus">&nbsp;
+						  </span>ADD
+						</a>
+					  </p>
+					</div>
+					<p class="add_child_block">&nbsp;
+					  <br />
+					  <br />
+	                  {% if forloop.last %}
 
-										  <a class="button button_smaller button_edit add_child_trigger">
-											<span class="icon_plus">&nbsp;
-											</span>ADD CHILD
-										  </a>
-										  
-										  <a class="button button_smaller button_cancel remove_child_trigger">
-											<span class="icon_cancel">&nbsp;
-											</span>REMOVE
-										  </a>
-	{% endif %}
-										</p>
+					  <a class="button button_smaller button_edit add_child_trigger">
+						<span class="icon_plus">&nbsp;
+						</span>ADD CHILD
+					  </a>
+					  
+					  <a class="button button_smaller button_cancel remove_child_trigger">
+						<span class="icon_cancel">&nbsp;
+						</span>REMOVE
+					  </a>
+	                  {% endif %}
+					</p>
 
 
-										{% endfor %}
-									</li>
-								</ul>
-							</li>
-							<li>
-								<ul>
-                                    <li>
-                                      <span class="icon_pin3">&nbsp;</span>Home Address
-                                      {% for error in form.address1.errors %}
+					{% endfor %}
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+                  <li>
+                    <span class="icon_pin3">&nbsp;</span>Home Address
+                    {% for error in form.address1.errors %}
 					<div class="icon_error address1">
                       <p>{{ error|escape }}</p>
                     </div>
@@ -210,227 +210,250 @@
                     </div>
                     {% endfor %}
 
-                                    </li>
-									<li>
+                  </li>
+				  <li>
 
-					                  <p class="address_fields">
-					                    {{form.address1}}
-    				                    {{form.address2}}
-	  			                        {{form.city}}
-					                    {{form.state}}
-                                        {{form.zip}}
-					                  </p>
+					<p class="address_fields">
+					  {{form.address1}}
+    				  {{form.address2}}
+	  			      {{form.city}}
+					  {{form.state}}
+                      {{form.zip}}
+					</p>
 
-									</li>
-								</ul>
-							</li>
-							<li>
-								<ul>
-                                    <li>
-                                      <span class="icon_iphone">&nbsp;</span>Cell Phone Number
-                                      {% for error in form.cell.errors %}
-					                  <div class="icon_error">
-                                      <p>{{ error|escape }}</p>
-                                      </div>
-                                      {% endfor %}
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+                  <li>
+                    <span class="icon_iphone">&nbsp;</span>Cell Phone Number
+                    {% for error in form.cell.errors %}
+					<div class="icon_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
 
 
-                                    </li>
-									<li>
-									  <p>
-									  					  {% for error in form.cell.errors %}
-									  <strong>{{ error|escape }}</strong>
-									  {% endfor %}
-
-									  {{form.cell}}
-									  </p>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<ul>
-                                    <li>
-                                      <span class="icon_email">&nbsp;</span>Email Address
-                                      {% for error in form.email.errors %}
-                      <div class="icon_error">
-                        <p>{{ error|escape }}</p>
-                      </div>
+                  </li>
+				  <li>
+					<p>
+					  {% for error in form.cell.errors %}
+					  <strong>{{ error|escape }}</strong>
 					  {% endfor %}
 
-                                    </li>
-									<li>
-										<p>
+					  {{form.cell}}
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+                  <li>
+                    <span class="icon_email">&nbsp;</span>Email Address
+                    {% for error in form.email.errors %}
+                    <div class="icon_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+					{% endfor %}
+
+                  </li>
+				  <li>
+					<p>
 					  {{form.email}}
-										</p>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<ul>
-                                    <li>
-                                      <span class="icon_pass2">&nbsp;</span>Password
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+                  <li id="password_state">
+                    <span class="icon_pass2">&nbsp;</span>Password
 
-                                        {% for error in form.password1.errors %}
-                                        <div class="icon_error">
-                                            <p>{{ error|escape }}</p>
-                                        </div>
-                                        {% endfor %}
+                    {% for error in form.password1.errors %}
+                    <div class="icon_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
 
-                                        {% for error in form.password2.errors %}
-                                        <div class="icon_error">
-                                            <p>{{ error|escape }}</p>
-                                        </div>
-                                        {% endfor %}
+                    {% for error in form.password2.errors %}
+                    <div class="icon_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
 
-                                    </li>
-									<li class="pass">
-										<p>
+                  </li>
+				  <li class="pass">
+					<p>
 					  {{form.password1}}
 					  <strong>Confirm Password</strong>
 					  {{form.password2}}
 
-										</p>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<ul>
-									<li>
-										<span class="icon_pic">&nbsp;</span>Profile Picture
-										<p>Like it or not we’re visual beings and adding a photo of yourself breaks down big trust barriers. </p>
-										<p>You’ll have the option to use your Facebook pic or upload your own. </p>
-                                        {% for error in form.avatar.errors %}
-                                        <div class="icon_error avatar_error">
-                                            <p>{{ error|escape }}</p>
-                                        </div>
-                                        {% endfor %}
-									</li>
-									<li>
-									  {{form.avatar}}
-										<div class="add_photo">
-											<a class="add"><p>Add your photo</p></a>
-											<p class="b_styling"><a href="http://blog.sitterfied.com/post/62361055222/a-pictures-worth-a-thousand-words-so-give-your-profile" target="_blank">Click here</a> for more photo tips</p>
-										</div>
-										<div class="add_photo_desc">
-											<p>Use these simple guidelines to get the most out of your photo.</p>
-											<ol>
-												<li>Smile <i>(really important)</i></li>
-												<li>Just you (can include kids too!)</li>
-												<li>Clear and Bright</li>
-												<li>Close up</li>
-											</ol>
-										</div>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						{{ formset.management_form }}
-					</form>
-			</div>
-			<div class="button_wrap"><a id="register" class="button button_small"><span class="icon_next">&nbsp;</span>next</a></div>
+					</p>
+				  </li>
+				</ul>
+			  </li>
+			  <li>
+				<ul>
+				  <li>
+					<span class="icon_pic">&nbsp;</span>Profile Picture
+					<p>Like it or not we’re visual beings and adding a photo of yourself breaks down big trust barriers. </p>
+					<p>You’ll have the option to use your Facebook pic or upload your own. </p>
+                    {% for error in form.avatar.errors %}
+                    <div class="icon_error avatar_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
+				  </li>
+				  <li>
+					{{form.avatar}}
+					<div class="add_photo">
+					  <a class="add"><p>Add your photo</p></a>
+					  <p class="b_styling"><a href="http://blog.sitterfied.com/post/62361055222/a-pictures-worth-a-thousand-words-so-give-your-profile" target="_blank">Click here</a> for more photo tips</p>
+					</div>
+					<div class="add_photo_desc">
+					  <p>Use these simple guidelines to get the most out of your photo.</p>
+					  <ol>
+						<li>Smile <i>(really important)</i></li>
+						<li>Just you (can include kids too!)</li>
+						<li>Clear and Bright</li>
+						<li>Close up</li>
+					  </ol>
+					</div>
+				  </li>
+				</ul>
+			  </li>
+               <li>
+				<ul>
+				  <li>
+					<span class="icon_pass2">&nbsp;</span>Terms of Service
+
+                    {% for error in form.tos.errors %}
+                    <div class="icon_error tos_error">
+                      <p>{{ error|escape }}</p>
+                    </div>
+                    {% endfor %}
+
+                  </li>
+				  <li>
+                    <p>
+					  {{form.tos}}
+                      <label for="id_tos">I have read and agree to the
+                        <a href="{% url 'tos' %}" target="_blank">Terms of Service.</a></label>
+                    </p>
+				  </li>
+				</ul>
+			  </li>
+			</ul>            
+			{{ formset.management_form }}
+		  </form>
 		</div>
-		<!-- /onboarding_block -->
+		<div class="button_wrap"><a id="register" class="button button_small"><span class="icon_next">&nbsp;</span>next</a></div>
+	  </div>
+	  <!-- /onboarding_block -->
 
 	</div>
-</div>
-<!-- /container -->
+  </div>
+  <!-- /container -->
 
-{% include "footer.html" %}
+  {% include "footer.html" %}
 
-<div id="fixed_tabs"></div>
+  <div id="fixed_tabs"></div>
 
-<div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
-<script type="text/javascript">
-$(function () {
-   var widgets = uploadcare.initialize();
-   var widget = widgets[0]
-   widget.onUploadComplete(function(info) {
-     url = info.cdnUrl
-	 path =  'url(' + url + ')'
+  <div class="back-to-top" id="back-top"><a href="javascript:void(0)" class="back-to-top">Top</a></div>
+  <script type="text/javascript">
+    $(function () {
+    var widgets = uploadcare.initialize();
+    var widget = widgets[0]
+    widget.onUploadComplete(function(info) {
+    url = info.cdnUrl
+	path =  'url(' + url + ')'
 
-	 add = $(".add");
-	 add.css('background', path );
-	 add.css("background-size","cover")
-	 add.css("background-repeat", "no-repeat");
-     add.css("max-width", "237px");
-     add.css("max-height", "237px");
-
-   });
+	add = $(".add");
+	add.css('background', path );
+	add.css("background-size","cover")
+	add.css("background-repeat", "no-repeat");
+    add.css("max-width", "237px");
+    add.css("max-height", "237px");
+    $(".add p").remove()
+    });
 
     $("#back-top").hide();
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 150) {
-            $('#back-top').fadeIn();
-        } else {
-            $('#back-top').fadeOut();
-        }
+    if ($(this).scrollTop() > 150) {
+    $('#back-top').fadeIn();
+    } else {
+    $('#back-top').fadeOut();
+    }
     });
-   $(".add_photo").click(function(){
-	 dialog = widget.openDialog();
-   })
-   $("#register").click(function(){
-	 cell = $("#id_cell")
-	 num = cell.val()
-	 formatted_num = formatE164("US", num);
-	 cell.val(formatted_num)
-	 $("form").submit();
-   });
-   $("#id_cell").blur(function(){
-	 that = $(this)
-	 num = that.val()
-	 formatted_num = formatLocal("US", num);
-	 that.val(formatted_num)
-   })
-   $("#newgroup-button").click(function(event){
-	 newGroupName = $("#newgroup").val()
-	 $.post("/api/groups/", {name: newGroupName}).done(function(data){
-	   newGroup = $("<option>");
-	   newGroup.attr("value", data.id);
-	   newGroup.text(data.name);
-	   $("#id_sitter_groups").append(newGroup);
-	   $("#newgroup").val("")
-	   oldval = $("#id_sitter_groups").select2("val")
-	   oldval.push(data.id)
-	   $("#id_sitter_groups").select2("val", oldval)
+    $(".add_photo").click(function(){
+	dialog = widget.openDialog();
+    })
+    $("#register").click(function(){
+    if (submitted) { return }
+    submitted = true
+	cell = $("#id_cell")
+	num = cell.val()
+	formatted_num = formatE164("US", num);
+	cell.val(formatted_num)
+	$("form").submit();
+    });
+    $("#id_cell").blur(function(){
+	that = $(this)
+	num = that.val()
+	formatted_num = formatLocal("US", num);
+	that.val(formatted_num)
+    })
+    $("#newgroup-button").click(function(event){
+	newGroupName = $("#newgroup").val()
+	$.post("/api/groups/", {name: newGroupName}).done(function(data){
+	newGroup = $("<option>");
+	  newGroup.attr("value", data.id);
+	  newGroup.text(data.name);
+	  $("#id_sitter_groups").append(newGroup);
+	  $("#newgroup").val("")
+	  oldval = $("#id_sitter_groups").select2("val")
+	  oldval.push(data.id)
+	  $("#id_sitter_groups").select2("val", oldval)
 
-	 })
+	  })
 
-   });
-   $(".newneed-button").on("click", function(event){
-	   newNeedInput = $(this).siblings('input')
-	   specialNeedsSelect = newNeedInput.parent().prev().find("select")
-	   newNeed = newNeedInput.val()
-	   $.post("/api/specialneeds/", {need: newNeed}).done(function(data){
-		   newNeedOption = $("<option>");
-		   newNeedOption.attr("value", data.id);
-		   newNeedOption.text(data.need);
-		   specialNeedsSelect.append(newNeedOption);
-		   newNeedInput.val("")
-		   oldval = specialNeedsSelect.select2("val")
-		   oldval.push(data.id)
-		   specialNeedsSelect.select2("val", oldval)
-	 })
+      });
+      $(".newneed-button").on("click", function(event){
+	  newNeedInput = $(this).siblings('input')
+	  specialNeedsSelect = newNeedInput.parent().prev().find("select")
+	  newNeed = newNeedInput.val()
+	  $.post("/api/specialneeds/", {need: newNeed}).done(function(data){
+	  newNeedOption = $("<option>");
+	  newNeedOption.attr("value", data.id);
+	  newNeedOption.text(data.need);
+	  specialNeedsSelect.append(newNeedOption);
+	  newNeedInput.val("")
+	  oldval = specialNeedsSelect.select2("val")
+	  oldval.push(data.id)
+	  specialNeedsSelect.select2("val", oldval)
+	  })
 
-   });
+      });
 
 
-    $('.form-container').formset({"addText": "", "deleteText":""});
-    
-    updateElementIndex = function(elem, prefix, ndx) {
+      $('.form-container').formset({"addText": "", "deleteText":""});
+      
+      updateElementIndex = function(elem, prefix, ndx) {
       var idRegex = new RegExp('(' + prefix + '-\\d+-)|(^)'),
-          replacement = prefix + '-' + ndx + '-';
+      replacement = prefix + '-' + ndx + '-';
       if (elem.attr("for")) elem.attr("for", elem.attr("for").replace(idRegex, replacement));
       if (elem.attr('id')) elem.attr('id', elem.attr('id').replace(idRegex, replacement));
       if (elem.attr('name')) elem.attr('name', elem.attr('name').replace(idRegex, replacement));
-    },
+      },
 
-    applyExtraClasses = function(row, ndx) {
+      applyExtraClasses = function(row, ndx) {
       if (options.extraClasses) {
-        row.removeClass(flatExtraClasses);
-        row.addClass(options.extraClasses[ndx % options.extraClasses.length]);
+      row.removeClass(flatExtraClasses);
+      row.addClass(options.extraClasses[ndx % options.extraClasses.length]);
       }
-    }
-    options = {
+      }
+      options = {
       prefix: 'children',                  // The form prefix for your django formset
       formTemplate: null,              // The jQuery selection cloned to generate new form instances
       addText: '',          // Text for the add link
@@ -441,84 +464,115 @@ $(function () {
       extraClasses: [],                // Additional CSS classes, which will be applied to each form in turn
       added: null,                     // Function called each time a new form is added
       removed: null                    // Function called each time a form is deleted
-    };
-    flatExtraClasses = options.extraClasses.join(' ')
+      };
+      flatExtraClasses = options.extraClasses.join(' ')
 
-    var template;
-    template = $('.' + options.formCssClass + ':last').clone(true).removeAttr('id');
-    template.find(".add_child_trigger").remove()
-    template.find(".remove_child_trigger").remove()
+      var template;
+      template = $('.' + options.formCssClass + ':last').clone(true).removeAttr('id');
+      template.find(".add_child_trigger").remove()
+      template.find(".remove_child_trigger").remove()
 
-    template.find('input:hidden[id $= "-DELETE"]').remove();
-    template.find('input,select,textarea,label').each(function() {
+      template.find('input:hidden[id $= "-DELETE"]').remove();
+      template.find('input,select,textarea,label').each(function() {
       var elem = $(this);
       // If this is a checkbox or radiobutton, uncheck it.
       // This fixes Issue 1, reported by Wilson.Andrew.J:
       if (elem.is('input:checkbox') || elem.is('input:radio')) {
-        elem.attr('checked', false);
+      elem.attr('checked', false);
       } else {
-        elem.val('');
+      elem.val('');
       }
-    });
-    options.formTemplate = template
+      });
+      options.formTemplate = template
 
-    
-    $(".remove_child_trigger").on("click", function(){
-	var formCount = parseInt($('#id_' + options.prefix + '-TOTAL_FORMS').val());
-	
-	if (formCount == 2) {
-          $(".remove_child_trigger").hide();
-	}
-	
-	last_child = $('.' + options.formCssClass + ':last');
-	last_child.remove();
-	
-	$('#id_' + options.prefix + '-TOTAL_FORMS').val(formCount - 1);
-    });
+      
+      $(".remove_child_trigger").on("click", function(){
+	  var formCount = parseInt($('#id_' + options.prefix + '-TOTAL_FORMS').val());
+	  
+	  if (formCount == 2) {
+      $(".remove_child_trigger").hide();
+	  }
+	  
+	  last_child = $('.' + options.formCssClass + ':last');
+	  last_child.remove();
+	  
+	  $('#id_' + options.prefix + '-TOTAL_FORMS').val(formCount - 1);
+      });
 
-    $(".add_child_trigger").on("click", function() {
+      $(".add_child_trigger").on("click", function() {
 
       var formCount = parseInt($('#id_' + options.prefix + '-TOTAL_FORMS').val()),
-          row = options.formTemplate.clone(true).removeClass('formset-custom-template'),
-          buttonRow = $(this).parents('tr.' + options.formCssClass + '-add').get(0) || this;
+      row = options.formTemplate.clone(true).removeClass('formset-custom-template'),
+      buttonRow = $(this).parents('tr.' + options.formCssClass + '-add').get(0) || this;
 
       // Active remove_child_trigger if there are more than 1 child
       if (formCount == 1) {
-        $(".remove_child_trigger").show();
-	/* 
-	 * Apply style directly since somewhere in the dynamic form api, this button is assigned
-	 * a style of display: inline which ruins the css of the remove_child_trigger button.
-	 */
-	$(".remove_child_trigger:first").attr("style", "display: inline-block");
+      $(".remove_child_trigger").show();
+	  /* 
+	  * Apply style directly since somewhere in the dynamic form api, this button is assigned
+	  * a style of display: inline which ruins the css of the remove_child_trigger button.
+	  */
+	  $(".remove_child_trigger:first").attr("style", "display: inline-block");
       }
-	
+	  
       applyExtraClasses(row, formCount);
       row.insertBefore($(buttonRow)).show();
       
       row.find('input,select,textarea,label').each(function() {
-        updateElementIndex($(this), options.prefix, formCount);
+      updateElementIndex($(this), options.prefix, formCount);
       });
       $('#id_' + options.prefix + '-TOTAL_FORMS').val(formCount + 1);
       // If a post-add callback was supplied, call it with the added form:
       if (options.added) options.added(row);
       row.find("select").select2({ width: 'resolve' });
-		
+	  
       return false;
-    });
-    $("select").select2({ width: 'resolve' })
+      });
+      $("select").select2({ width: 'resolve' })
 
-});
-jQuery('.back-to-top').click(function () {
-    jQuery('html, body').animate({
-        scrollTop: 0
-    }, 'slow');
-});
+      $("#id_password1, #id_password2").keyup(function() {
+      $(".icon_pass2").parent().children(".icon_error").remove(); 
+      });
 
-$(document).ready(function() {
-    $('.icon_error').parents('li').each(function() {
-        $(this).next('li').children('p').addClass('error_field');
-    });
-	$(".errorchild").children("p").addClass('error_field');
-});
-</script>
-{% endblock %}
+      $("#id_password1").blur(function() {
+      checkPassword();
+      });
+
+      $("#id_password2").keyup(function() {
+      checkPassword();
+      });
+
+      });
+      jQuery('.back-to-top').click(function () {
+      jQuery('html, body').animate({
+      scrollTop: 0
+      }, 'slow');
+      });
+
+      var submitted = false;
+
+      function clearErrorIndicator(icon_element, form_element) {
+      icon_element.parent().children(".icon_error").remove();
+      form_element.removeClass("error_field");
+      }
+
+      function checkPassword() {
+      var pass1 = $("#id_password1").val();
+      var pass2 = $("#id_password2").val();
+      console.log(pass1, pass2)
+      if (pass1 != pass2) {
+      $("#password_state").append('<div class="icon_error"><p>Passwords must match!</p></div>');
+      } else {
+      $("#password_state .icon_error").remove();
+      }
+      }
+
+      $(document).ready(function() {
+      $('.icon_error').parents('li').each(function() {
+      $(this).next('li').children('p').addClass('error_field');
+      });
+	  $(".errorchild").children("p").addClass('error_field');
+      });
+  </script>
+  {% endblock %}
+  
