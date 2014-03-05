@@ -1215,22 +1215,30 @@ function program5(depth0,data) {
 function program7(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n	  <a ");
+  data.buffer.push("\n      <span class=\"know-statement\">");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "removeFriend", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" class=\"button button_cancel removefriend\">\n	    <span class=\"icon_cancel\">\n	      &nbsp;\n	    </span>\n	    <span class=\"networktext\">\n	      REMOVE\n	    </span>\n	  </a>\n	");
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" is in your network</span>\n      <a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "removeFriend", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"button button_cancel removefriend\">\n	<span class=\"icon_cancel\">\n	  &nbsp;\n	</span>\n	<span class=\"networktext\">\n	  REMOVE\n	</span>\n      </a>\n    ");
   return buffer;
   }
 
 function program9(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n	  <a ");
+  data.buffer.push("\n      <span class=\"know-statement\">");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "addFriend", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" class=\"button addfriend\">\n	    <span class=\"icon_plus\">\n	      &nbsp;\n	    </span>\n	    <span class=\"networktext\">\n	      ADD TO NETWORK\n	    </span>\n	  </a>\n	");
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" is not in your network</span>\n      <a ");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "addFriend", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" class=\"button addfriend\">\n	<span class=\"icon_plus\">\n	  &nbsp;\n	</span>\n	<span class=\"networktext\">\n	  ADD\n	</span>\n      </a>\n    ");
   return buffer;
   }
 
@@ -1273,20 +1281,16 @@ function program11(depth0,data) {
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "state", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p>\n    <div class=\"know\">\n      <p>Do you know ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("?</p>\n      <p>\n        ");
+  data.buffer.push("</p>\n  </div>\n  <div class=\"know\">\n    ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "initializeFriend", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n	\n	");
+  data.buffer.push("\n    \n    ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "isFriend", {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n      </p>\n    </div>\n  </div>\n</div>\n<!-- /top info -->\n\n<!-- quick_info_list -->\n");
+  data.buffer.push("\n  </div>\n</div>\n<!-- /top info -->\n\n<!-- quick_info_list -->\n");
   hashContexts = {'class': depth0,'id': depth0};
   hashTypes = {'class': "STRING",'id': "STRING"};
   stack1 = helpers.view.call(depth0, "Sitterfied.FixedView", {hash:{
@@ -1894,7 +1898,11 @@ function program24(depth0,data) {
 function program26(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n      <a ");
+  data.buffer.push("\n      <span class=\"know-statement\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" is in your network</span>\n      <a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "removeFriend", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
@@ -1905,11 +1913,15 @@ function program26(depth0,data) {
 function program28(depth0,data) {
   
   var buffer = '', hashTypes, hashContexts;
-  data.buffer.push("\n      <a ");
+  data.buffer.push("\n      <span class=\"know-statement\">");
+  hashTypes = {};
+  hashContexts = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(" is not in your network</span>\n      <a ");
   hashTypes = {};
   hashContexts = {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "addFriend", "", {hash:{},contexts:[depth0,depth0],types:["ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push(" class=\"button addfriend\">\n	<span class=\"icon_plus\">\n	  &nbsp;\n	</span>\n	<span class=\"networktext\">\n	  ADD TO NETWORK\n	</span>\n      </a>\n    ");
+  data.buffer.push(" class=\"button addfriend\">\n	<span class=\"icon_plus\">\n	  &nbsp;\n	</span>\n	<span class=\"networktext\">\n	  ADD\n	</span>\n      </a>\n    ");
   return buffer;
   }
 
@@ -1985,11 +1997,7 @@ function program28(depth0,data) {
     'contentBinding': ("sitter_teams")
   },inverse:self.noop,fn:self.program(22, program22, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </ul>\n  </div>\n  \n  <div class=\"know\">\n    <span class=\"know-statement\">Do you know ");
-  hashTypes = {};
-  hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "first_name", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
-  data.buffer.push("?</span>\n      \n    ");
+  data.buffer.push("\n    </ul>\n  </div>\n  \n  <div class=\"know\">\n    ");
   hashTypes = {};
   hashContexts = {};
   stack1 = helpers['if'].call(depth0, "isFriend", {hash:{},inverse:self.program(28, program28, data),fn:self.program(26, program26, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});

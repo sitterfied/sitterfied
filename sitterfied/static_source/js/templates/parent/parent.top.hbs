@@ -13,32 +13,31 @@
   <div class="guest_top_info">
     <p>{{full_name}}</p>
     <p>{{children.length}} Children &nbsp;|&nbsp; {{city}}, {{state}}</p>
-    <div class="know">
-      <p>Do you know {{first_name}}?</p>
-      <p>
-        {{initializeFriend}}
-	
-	{{#if isFriend }}
-	  <a {{action removeFriend }} class="button button_cancel removefriend">
-	    <span class="icon_cancel">
-	      &nbsp;
-	    </span>
-	    <span class="networktext">
-	      REMOVE
-	    </span>
-	  </a>
-	{{else}}
-	  <a {{action addFriend }} class="button addfriend">
-	    <span class="icon_plus">
-	      &nbsp;
-	    </span>
-	    <span class="networktext">
-	      ADD TO NETWORK
-	    </span>
-	  </a>
-	{{/if}}
-      </p>
-    </div>
+  </div>
+  <div class="know">
+    {{initializeFriend}}
+    
+    {{#if isFriend }}
+      <span class="know-statement">{{first_name}} is in your network</span>
+      <a {{action removeFriend this }} class="button button_cancel removefriend">
+	<span class="icon_cancel">
+	  &nbsp;
+	</span>
+	<span class="networktext">
+	  REMOVE
+	</span>
+      </a>
+    {{else}}
+      <span class="know-statement">{{first_name}} is not in your network</span>
+      <a {{action addFriend this }} class="button addfriend">
+	<span class="icon_plus">
+	  &nbsp;
+	</span>
+	<span class="networktext">
+	  ADD
+	</span>
+      </a>
+    {{/if}}
   </div>
 </div>
 <!-- /top info -->

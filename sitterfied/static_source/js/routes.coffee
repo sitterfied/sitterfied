@@ -213,9 +213,9 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     sitterTeam = Sitterfied.currentUser.get('sitter_teams')
                     dupSitter = sitterTeam.findProperty('id', user.get('id'))
                     if dupSitter
-                        sitterTeam.removeObject(dupSitter)
-                        dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                        console.log("Dupsitter add:", dupSitter)
                     else
+                        console.log("No Dupsitter add:", user)
                         sitterTeam.pushObject(user)
                         user.get('sitter_teams').pushObject(Sitterfied.currentUser)
     
@@ -234,11 +234,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     dupSitter = sitterTeam.findProperty('id', user.get('id'))
                     sitterTeam.removeObject(user)
                     if dupSitter
+                        console.log("Dupsitter remove:", dupSitter)
                         sitterTeam.removeObject(dupSitter)
                         dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
                     else
-                        sitterTeam.pushObject(user)
-                        user.get('sitter_teams').pushObject(Sitterfied.currentUser)
+                        console.log("No Dupsitter remove:", user)
                 
                 Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()
