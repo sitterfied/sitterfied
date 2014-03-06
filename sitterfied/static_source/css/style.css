@@ -53,27 +53,67 @@
 	color: #fff !important;
 }
 
-.addfriend {
+.button.addfriend {
 	font-family: ProximaNova, Arial, Tahoma !important;
-	font-size: 14px !important;
+	font-size: 15px !important;
 	font-style: normal !important;
 	font-variant: normal !important;
 	font-weight: normal !important;
 	border-color: #da9040 !important;
 	background: #dd7c3f url(../images/edit_bg.gif) repeat-x !important;
+	height: 25px;
+	width: 100px;
+	margin-top: 15px;
 }
 
-.removefriend {
+.button.removefriend {
 	font-family: ProximaNova, Arial, Tahoma !important;
-	font-size: 14px !important;
+	font-size: 15px !important;
 	font-style: normal !important;
 	font-variant: normal !important;
 	font-weight: normal !important;
+	height: 25px;
+	width: 100px;
+	margin-top: 15px;
 }
 
 .networktext {
 margin-left: 10px;
 }
+
+.button.addfriend .icon_plus, .button.removefriend .icon_cancel {
+	position: relative;
+	float: left;
+	top: 5px;
+	left: 8px;
+	display: inline-block;
+}
+
+.button.addfriend .networktext {
+	position: relative;
+	float: right;
+	top: 0px;
+	display: inline-block;
+	height: 25px;
+	vertical-align: middle;
+	line-height: 25px;
+	margin-right: 25px;
+	margin-left: 0px;
+}
+
+.button.removefriend .networktext {
+	position: relative;
+	float: right;
+	top: 0px;
+	display: inline-block;
+	height: 25px;
+	vertical-align: middle;
+	line-height: 25px;
+	margin-right: 8px;
+	margin-left: 0px;
+}
+
+
 
 /* Resetting browser default styles */
 @font-face {font-family: "marketo";src: url(fonts/marketotbold.eot);src: url(fonts/marketotbold.eot?#iefix) format('eot'), url(fonts/marketotbold.woff) format('woff'), url(fonts/marketotbold.ttf) format('truetype'), url(fonts/marketotbold.svg) format('svg');}
@@ -466,8 +506,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .member_since {position:absolute;top:-3px;right:17px;width:94px;height:25px;padding-top:60px;background:url(../images/icons/member_since_t.png) no-repeat;text-align:center;color:#fff;font:bold 15px 'ProximaNovaCond';text-shadow:rgba(0,0,0,.35) 1px 1px 1px;}
 .header .top_info .member_since.guest {background:url(../images/icons/guest.png) no-repeat;}
 
-.header .top_info .know {float:right;}
-.header .top_info .know .know-statement {float:left;padding-top:27px;padding-right:15px;color:#3ea7b8;}
+.header .top_info .know {float:right;position:absolute;bottom:0;margin-bottom:10px;right:20px;}
+.header .top_info .know .know-statement {display:inline-block;height:25px;vertical-align:middle;line-height:25px;float:left;padding-top:15px;padding-right:15px;color:#3ea7b8;}
 .header .top_info .left ul li .know .button {float:right;}
 .header .top_info .find_form_block {padding:13px 0 90px 20px;}
 .header .top_info .find_form_block > p {color:#81abb0;font-size:22px;padding-bottom:15px;}

@@ -119,9 +119,8 @@
   </div>
   
   <div class="know">
-    <span class="know-statement">Do you know {{first_name}}?</span>
-      
     {{#if isFriend }}
+      <span class="know-statement">{{first_name}} is in your network</span>
       <a {{action removeFriend this }} class="button button_cancel removefriend">
 	<span class="icon_cancel">
 	  &nbsp;
@@ -131,12 +130,13 @@
 	</span>
       </a>
     {{else}}
+      <span class="know-statement">{{first_name}} is not in your network</span>
       <a {{action addFriend this }} class="button addfriend">
 	<span class="icon_plus">
 	  &nbsp;
 	</span>
 	<span class="networktext">
-	  ADD TO NETWORK
+	  ADD
 	</span>
       </a>
     {{/if}}
