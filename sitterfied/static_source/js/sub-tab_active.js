@@ -13,7 +13,7 @@ jQuery(function() {
 					jQuery('.tab_content .subtab_select').removeClass('movebg3 movebg4 movebg5 movebg2').addClass('movebg movebg6');
 		        } else {
 					jQuery('.tab_content .subtab_select').removeClass('movebg movebg2 movebg3 movebg4 movebg5 movebg6');
-		        };
+		        }; 
 				
 				
 });
