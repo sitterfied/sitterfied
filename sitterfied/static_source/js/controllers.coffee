@@ -418,9 +418,21 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     Sitterfied.SitterController  = Em.ObjectController.extend(
         interviewee: null
         isFriend: false # Create property so that template is updated upon change
+        sitter_teams_cache: []
 
         # Used by template to get initial value for sitters
         initializeSitter: (() ->
+            # Set sitter teams
+            sitter_id_set = new Em.Set()            
+            results = Em.A()
+            sitter_teams = this.get('model').get('sitter_teams').toArray()
+            for sitter_team in sitter_teams
+                if not sitter_id_set.contains(sitter_team.get('id'))
+                    results.pushObject(sitter_team)
+                    sitter_id_set.add(sitter_team.get('id'))
+            this.set('sitter_teams_cache', results)
+            console.log("Initialize Sitter Teams Cache:", this.get("sitter_teams_cache"))
+            
             # Set isFriend
             friends = Sitterfied.currentUser.get('friends').toArray()
             for friend in friends
@@ -431,6 +443,21 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             
             return null
         ).property('model', 'model.myFriends', 'model.myFriends.length', 'model.sitter_teams', 'model.sitter_teams.length')
+            
+        removeSitterInCache: ((propName, value) ->
+            obj = this.get('sitter_teams_cache').findProperty(propName, value)
+            this.get('sitter_teams_cache').removeObject(obj)
+        )
+            
+        addSitterInCache: ((sitter) ->
+            # Check if sitter exists
+            # Remove duplicates before pushing
+            obj = this.get('sitter_teams_cache').findProperty('id', sitter.get('id'))
+            console.log("Obj:", obj)
+            if obj
+                this.get('sitter_teams_cache').removeObject(obj)
+            this.get('sitter_teams_cache').pushObject(sitter)
+        )
         
         book: (sitter) ->
             onDeckBookingAttrs = Sitterfied.onDeckBookingAttrs || {}
