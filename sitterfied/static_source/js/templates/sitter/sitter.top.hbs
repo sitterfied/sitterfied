@@ -97,15 +97,15 @@
 	</ul>
       {{/ view}}
       
-      {{# view Sitterfied.PopUpView contentBinding=sitter_teams }}
+      {{# view Sitterfied.PopUpView contentBinding=sitter_teams_cache }}
         <span class="icon_team">&nbsp;</span>
 	<span class="number">
-	  {{sitter_teams.length}}
+	  {{sitter_teams_cache.length}}
 	</span>
 	sitter teams
 	<ul>
 	  <li>Friends who added {{first_name}} to their sitter team</li>
-	  {{# each friend in sitter_teams}}
+	  {{# each friend in sitter_teams_cache}}
 	    <li>
 	      {{# linkTo parent friend.parent}}
 	        <img {{bindAttr src="friend.avatarUrl"}} alt="" />

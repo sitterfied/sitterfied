@@ -1853,7 +1853,7 @@ function program22(depth0,data) {
   data.buffer.push("\n        <span class=\"icon_team\">&nbsp;</span>\n	<span class=\"number\">\n	  ");
   hashTypes = {};
   hashContexts = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "sitter_teams.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "sitter_teams_cache.length", {hash:{},contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n	</span>\n	sitter teams\n	<ul>\n	  <li>Friends who added ");
   hashTypes = {};
   hashContexts = {};
@@ -1861,7 +1861,7 @@ function program22(depth0,data) {
   data.buffer.push(" to their sitter team</li>\n	  ");
   hashTypes = {};
   hashContexts = {};
-  stack1 = helpers.each.call(depth0, "friend", "in", "sitter_teams", {hash:{},inverse:self.noop,fn:self.program(23, program23, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
+  stack1 = helpers.each.call(depth0, "friend", "in", "sitter_teams_cache", {hash:{},inverse:self.noop,fn:self.program(23, program23, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	</ul>\n      ");
   return buffer;
@@ -1994,7 +1994,7 @@ function program28(depth0,data) {
   hashContexts = {'contentBinding': depth0};
   hashTypes = {'contentBinding': "ID"};
   stack1 = helpers.view.call(depth0, "Sitterfied.PopUpView", {hash:{
-    'contentBinding': ("sitter_teams")
+    'contentBinding': ("sitter_teams_cache")
   },inverse:self.noop,fn:self.program(22, program22, data),contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    </ul>\n  </div>\n  \n  <div class=\"know\">\n    ");

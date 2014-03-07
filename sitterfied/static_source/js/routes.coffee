@@ -218,6 +218,8 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                         console.log("No Dupsitter add:", user)
                         sitterTeam.pushObject(user)
                         user.get('sitter_teams').pushObject(Sitterfied.currentUser)
+                        # Reflect changes to controller
+                        this.get("controller").addSitterInCache(Sitterfied.currentUser)
     
                 Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()
@@ -234,12 +236,37 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     dupSitter = sitterTeam.findProperty('id', user.get('id'))
                     sitterTeam.removeObject(user)
                     if dupSitter
-                        console.log("Dupsitter remove:", dupSitter)
                         sitterTeam.removeObject(dupSitter)
                         dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
-                    else
-                        console.log("No Dupsitter remove:", user)
+                        # Reflect changes to controller
+                        this.get("controller").removeSitterInCache('id', Sitterfied.currentUser.get('id'))
                 
+                Sitterfied.currentUser.set('isDirty', true)
+                Sitterfied.currentUser.save()
+                Em.run.end()
+                
+            addSitterTeam: (sitter) ->
+                # Copied from application route but with changes to get data
+                # from SitterController.
+                Em.run.begin()
+                sitterTeam = Sitterfied.currentUser.get('sitter_teams')
+                dupSitter = sitterTeam.findProperty('id', sitter.get('id'))
+                if dupSitter
+                    sitterTeam.removeObject(dupSitter)
+                    dupSitter.get('sitter_teams').removeObject(Sitterfied.currentUser)
+                    # Reflect changes to controller
+                    this.get("controller").removeSitterInCache('id', Sitterfied.currentUser.get('id'))
+                    this.get("controller").set("isFriend", false)
+                    # Remove to network
+                    Sitterfied.currentUser.removeFriend(dupSitter)
+                else
+                    sitterTeam.pushObject(sitter)
+                    sitter.get('sitter_teams').pushObject(Sitterfied.currentUser)
+                    # Reflect changes to controller
+                    this.get("controller").addSitterInCache(Sitterfied.currentUser)
+                    this.get("controller").set("isFriend", true)
+                    Sitterfied.currentUser.addFriend(sitter)
+
                 Sitterfied.currentUser.set('isDirty', true)
                 Sitterfied.currentUser.save()
                 Em.run.end()
