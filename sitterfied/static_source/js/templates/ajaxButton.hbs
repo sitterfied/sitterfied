@@ -1,10 +1,15 @@
-<a class="button button_small" {{action "doAction" target=view}}><span class="icon_ok2">&nbsp;</span>Save</a>
-{{# if view.isLoading }}
-  <img class="loading" src="/static/images/loading.gif">
-{{/ if}}
 {{# if view.isSaved }}
-  <span class="saved">Saved!</span>
+  {{ partial "save_successful_alert" }}
 {{/ if}}
 {{# if view.isError }}
-  <span class="error">There was an error saving your data</span>
+  {{ partial "save_failure_alert" }}
 {{/ if}}
+
+<a class="button button_small" {{action "doAction" target=view}}>
+  <span class="icon_ok2">&nbsp;</span>
+  {{#if view.isLoading }}
+    <i class="fa fa-spinner fa-spin"></i>
+  {{ else }}
+    Save
+  {{/if}}
+</a>

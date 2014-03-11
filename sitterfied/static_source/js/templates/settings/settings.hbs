@@ -1,102 +1,100 @@
 <div class="container clear">
   <div class="wraper settings_topmarg">
-
-	<!-- account_settings_block -->
-	<div class="account_settings_block clear">
-	  <form class="form_style">
-		<div class="left">
-		  <ul>
-			<li><label for="">NAME</label></li>
-			<li><p>{{view Ember.TextField valueBinding="full_name"}}</p></li>
-			<li><label for="">STATUS</label></li>
-			<li>
-			  <div class="member_since">{{memberSince}}</div>
+    <!-- account_settings_block -->
+    <div class="account_settings_block clear">
+      <form class="form_style">
+	<div class="left">
+	  <ul>
+ 	    <li><label for="">NAME</label></li>
+	    <li><p>{{view Ember.TextField valueBinding="full_name"}}</p></li>
+	    <li><label for="">STATUS</label></li>
+	    <li>
+	      <div class="member_since">{{memberSince}}</div>
               {{# if isParent }}
                 {{# comment }}
-			      <a class="button button_smaller button_edit" href="#"><span class="icon_settings2">&nbsp;</span>PAYMENT OPTIONS</a>
+		  <a class="button button_smaller button_edit" href="#"><span class="icon_settings2">&nbsp;</span>PAYMENT OPTIONS</a>
                 {{/ comment }}
-                {{ else }}
-                <span class="ur">You are <strong>Sitterfied</strong></span>
-                {{/if}}
-			</li>
-		  </ul>
-		</div>
-		<div class="right">
-		  <ul>
-			<li><label for="">PASSWORD</label></li>
-			<li><p>{{view Ember.TextField type="password" valueBinding="old_password"}}</p></li>
-			<li><label for="">NEW PASSWORD</label></li>
-			<li><p>{{view Ember.TextField type="password" valueBinding="new_password1"}}</p></li>
-			<li><label for="">NEW PASSWORD (CONFIRM)</label></li>
-			<li><p>{{view Ember.TextField type="password" valueBinding="new_password2"}}</p></li>
-			<li>
-              {{view Sitterfied.ResetAjaxStatusButtonView action=resetPassword}}
-            </li>
-		  </ul>
-		</div>
-		<p><a {{action 'deleteAccount'}}>DELETE MY ACCOUNT</a> Having problems? <strong><a href="mailto:hello@sitterfied.com">talk to us</a></strong>. Maybe we can work this out.</p>
-		<h4><span class="icon_mobile">&nbsp;</span>Mobile Notifications / Text Messages</h4>
-        {{# with settings}}
-		<ul class="clear">
-		  <li>Mobile Phone</li>
-		  <li>
-			<p class="mobile_info"><span>{{user.cell}}</span>You can edit the phone number on your account from your {{#linkTo profile}}profile page{{/linkTo}}</p>
-		  </li>
-		  <li>Notify me when</li>
-		  <li>
-              {{# if Sitterfied.isParent }}
-			    <p>{{view Ember.Checkbox id="mn_check" checkedBinding="mobile_booking_accepted_denied"}}<label for="mn_check">My outstanding booking request is accepted or declined</label></p>
-			    <p>{{view Ember.Checkbox id="mn_check2" checkedBinding="mobile_friend_joined"}}<label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
-			    <p>{{view Ember.Checkbox id="mn_check3" checkedBinding="mobile_groups_added_network"}}<label for="mn_check3">Someone has added one of my groups to their network</label></p>
-                {{ else }}
-                <p>{{view Ember.Checkbox id="mn_check" checkedBinding="mobile_booking_request"}}<label for="mn_check">I receive a booking request</label></p>
-			    <p>{{view Ember.Checkbox id="mn_check5" checkedBinding="mobile_new_review"}}<label for="mn_check5">A new review has been added</label></p>
-			    <p>{{view Ember.Checkbox id="mn_check2" checkedBinding="mobile_friend_joined"}}<label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
-			    <p>{{view Ember.Checkbox id="mn_check3" checkedBinding="mobile_groups_added_network"}}<label for="mn_check3">Someone has added one of my groups to their network</label></p>
-                {{/if}}
-		  </li>
-		  <li>Remind me when</li>
-		  <li>
-			<p>{{view Ember.Checkbox id="mn_check4" checkedBinding="mobile_upcoming_booking_remind"}}<label for="mn_check4">I have an upcoming booking</label></p>
-		  </li>
-		  <li>
-            {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
-          </li>
-		</ul>
-		<h4><span class="icon_eset">&nbsp;</span>Email Settings</h4>
-        <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>
-		<ul class="clear">
-		  <!--<li>Notify me when</li>
-		  <li>
-            {{# if Sitterfied.isParent }}
-			  <p>{{view Ember.Checkbox id="es_check" checkedBinding="email_booking_accepted_denied"}}<label for="es_check">My outstanding booking request is accepted or declined</label></p>
-			  <p>{{view Ember.Checkbox id="es_check2" checkedBinding="email_friend_joined"}}<label for="es_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
-			  <p>{{view Ember.Checkbox id="es_check3" checkedBinding="email_groups_added_network"}}<label for="es_check3">Someone has added one of my groups to their network</label></p>
               {{ else }}
-              <p>{{view Ember.Checkbox id="es_check" checkedBinding="email_booking_request"}}<label for="es_check">I receive a booking request</label></p>
-			  <p>{{view Ember.Checkbox id="es_check7" checkedBinding="email_new_review"}}<label for="es_check7">A new review has been added</label></p>
-			  <p>{{view Ember.Checkbox id="es_check2" checkedBinding="email_friend_joined"}}<label for="es_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
-			  <p>{{view Ember.Checkbox id="es_check3" checkedBinding="email_groups_added_network"}}<label for="es_check3">Someone has added one of my groups to their network</label></p>
+                <span class="ur">You are <strong>Sitterfied</strong></span>
               {{/if}}
-		  </li>
-		  <li>Remind me when</li>
-		  <li>
-			<p>{{view Ember.Checkbox id="es_check4" checkedBinding="email_upcoming_booking_remind"}}<label for="es_check4">I have an upcoming booking</label></p>
-		  </li>-->
-		  <li>EMAIL me when</li>
-		  <li>
-			<p>{{view Ember.Checkbox id="es_check5" checkedBinding="email_news"}}<label for="es_check5">Sitterfied has fun company news, as well as periodic emails</label></p>
-			<p>{{view Ember.Checkbox id="es_check6" checkedBinding="email_blog"}}<label for="es_check6">There’s a new blog post</label></p>
-		  </li>
-		  <li>
-            {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
-          </li>
-
-		</ul>
-        {{/with}}
-	  </form>
+	    </li>
+	  </ul>
 	</div>
-	<!-- /account_settings_block -->
+	<div class="right">
+	  <ul>
+	    <li><label for="">PASSWORD</label></li>
+	    <li><p>{{view Ember.TextField type="password" valueBinding="old_password"}}</p></li>
+	    <li><label for="">NEW PASSWORD</label></li>
+	    <li><p>{{view Ember.TextField type="password" valueBinding="new_password1"}}</p></li>
+	    <li><label for="">NEW PASSWORD (CONFIRM)</label></li>
+	    <li><p>{{view Ember.TextField type="password" valueBinding="new_password2"}}</p></li>
+	    <li>
+	      {{view Sitterfied.ResetAjaxStatusButtonView action=resetPassword}}
+            </li>
+	  </ul>
+	</div>
+	<p><a {{action 'deleteAccount'}}>DELETE MY ACCOUNT</a> Having problems? <strong><a href="mailto:hello@sitterfied.com">talk to us</a></strong>. Maybe we can work this out.</p>
+	<h4><span class="icon_mobile">&nbsp;</span>Mobile Notifications / Text Messages</h4>
+        {{# with settings}}
+	  <ul class="clear">
+	    <li>Mobile Phone</li>
+	    <li>
+	      <p class="mobile_info"><span>{{user.cell}}</span>You can edit the phone number on your account from your {{#linkTo profile}}profile page{{/linkTo}}</p>
+	    </li>
+	    <li>Notify me when</li>
+	    <li>
+	      {{# if Sitterfied.isParent }}
+	        <p>{{view Ember.Checkbox id="mn_check" checkedBinding="mobile_booking_accepted_denied"}}<label for="mn_check">My outstanding booking request is accepted or declined</label></p>
+	        <p>{{view Ember.Checkbox id="mn_check2" checkedBinding="mobile_friend_joined"}}<label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+	        <p>{{view Ember.Checkbox id="mn_check3" checkedBinding="mobile_groups_added_network"}}<label for="mn_check3">Someone has added one of my groups to their network</label></p>
+              {{ else }}
+                <p>{{view Ember.Checkbox id="mn_check" checkedBinding="mobile_booking_request"}}<label for="mn_check">I receive a booking request</label></p>
+		<p>{{view Ember.Checkbox id="mn_check5" checkedBinding="mobile_new_review"}}<label for="mn_check5">A new review has been added</label></p>
+		<p>{{view Ember.Checkbox id="mn_check2" checkedBinding="mobile_friend_joined"}}<label for="mn_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+		<p>{{view Ember.Checkbox id="mn_check3" checkedBinding="mobile_groups_added_network"}}<label for="mn_check3">Someone has added one of my groups to their network</label></p>
+	      {{/if}}
+	    </li>
+	    <li>Remind me when</li>
+	    <li>
+	      <p>{{view Ember.Checkbox id="mn_check4" checkedBinding="mobile_upcoming_booking_remind"}}<label for="mn_check4">I have an upcoming booking</label></p>
+	    </li>
+	    <li>
+	      {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
+	    </li>
+	  </ul>
+	  <h4><span class="icon_eset">&nbsp;</span>Email Settings</h4>
+	  <p>We will never spam. Enabling these emails ensures the best possible experience on Sitterfied but feel free to disable at any time.</p>
+	  <ul class="clear">
+	    <!--<li>Notify me when</li>
+	    <li>
+	      {{# if Sitterfied.isParent }}
+		<p>{{view Ember.Checkbox id="es_check" checkedBinding="email_booking_accepted_denied"}}<label for="es_check">My outstanding booking request is accepted or declined</label></p>
+		<p>{{view Ember.Checkbox id="es_check2" checkedBinding="email_friend_joined"}}<label for="es_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+		<p>{{view Ember.Checkbox id="es_check3" checkedBinding="email_groups_added_network"}}<label for="es_check3">Someone has added one of my groups to their network</label></p>
+	      {{ else }}
+	        <p>{{view Ember.Checkbox id="es_check" checkedBinding="email_booking_request"}}<label for="es_check">I receive a booking request</label></p>
+	        <p>{{view Ember.Checkbox id="es_check7" checkedBinding="email_new_review"}}<label for="es_check7">A new review has been added</label></p>
+	        <p>{{view Ember.Checkbox id="es_check2" checkedBinding="email_friend_joined"}}<label for="es_check2">A Facebook or Gmail friend has joined Sitterfied</label></p>
+	        <p>{{view Ember.Checkbox id="es_check3" checkedBinding="email_groups_added_network"}}<label for="es_check3">Someone has added one of my groups to their network</label></p>
+	      {{/if}}
+	    </li>
+	    <li>Remind me when</li>
+	    <li>
+	      <p>{{view Ember.Checkbox id="es_check4" checkedBinding="email_upcoming_booking_remind"}}<label for="es_check4">I have an upcoming booking</label></p>
+	    </li>-->
+	    <li>EMAIL me when</li>
+	    <li>
+	      <p>{{view Ember.Checkbox id="es_check5" checkedBinding="email_news"}}<label for="es_check5">Sitterfied has fun company news, as well as periodic emails</label></p>
+	      <p>{{view Ember.Checkbox id="es_check6" checkedBinding="email_blog"}}<label for="es_check6">There’s a new blog post</label></p>
+	    </li>
+	    <li>
+	      {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
+	    </li>
 
+	  </ul>
+	{{/with}}
+      </form>
+    </div>
+    <!-- /account_settings_block -->
   </div>
 </div>

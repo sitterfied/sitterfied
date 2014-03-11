@@ -12,6 +12,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         activeReviewPanelUser: null
         sitters_to_review: []
         reviews: []
+        isLoading: false
 
         isSitter: (() ->
             Sitterfied.accountType == "Sitter"
@@ -22,6 +23,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         ).property('parent_or_sitter', 'Sitterfied.accountType')
 
         saveSettings: () ->
+            # Set button animation
+            this.set("isLoading", true)
+            $(".save_button").bind 'click', (e) ->
+                e.preventDefault()
+                return
+            
             model = this.get('model')
             model.set('isDirty', true)
             modelP = model.save()
@@ -33,6 +40,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 Sitterfied.currentUser.get('children').set('data', children)
                 @newChild()
             )
+            
+            # Animation done
+            this.set("isLoading", false)
+            $("bookButton").unbind "click"
+            
+            # Show alert
+            $(".alert-save.alert-success").slideDown().delay(1000).slideUp("slow")
+            
             return Em.RSVP.all([modelP, settingsP?, childrenP])
 
         deleteAccount: () ->
