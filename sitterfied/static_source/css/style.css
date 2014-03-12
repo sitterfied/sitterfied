@@ -772,10 +772,11 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .sitter_tabs_wrap .tab_content {clear:both;}
 	/* My Tabs */
 #fixed_tabs.fixed {position:fixed;top:0;width:960px;z-index:1000;}
-.my_tabs_style {padding:0;margin-top:-106px;position:relative;z-index:2;left:-1px;background:#fff;}
+.my_tabs_style {padding:0;margin-top:-91px; top:-15px; position:relative;z-index:2;left:-1px;background:#fff;}
 .my_tabs_style:before {content:'';display:block;width:3px;height:108px;position:absolute;z-index:2;top:0;right:-2px;background:#028ea3 url(../images/my_tab.gif) repeat-x;}
-.my_tabs_style .tab_select {position:relative;min-height:110px;margin:0;overflow:hidden;}
+.my_tabs_style .tab_select {position:relative;min-height:110px;margin:0;overflow:hidden; clear:both;}
 .my_tabs_style .tab_select:before {display:none;}
+.my_tabs_style #fixed_tabs .tab_select:before { display:block;}
 .my_tabs_style .tab_select li {float:left;padding:0 0 25px 0;width:33.33%;}
 .my_tabs_style .tab_select li:nth-child(2){width:33.34%;}
 .my_tabs_style .tab_select li a, .my_tabs_style .tab_select li a:visited {float:none;box-shadow:rgba(0,0,0,.36) 0 7px 17px 0;background:#028ea3 url(../images/my_tab.gif) repeat-x;border:none;padding:33px 110px 0 130px;min-height:67px;border-radius:0;color:#fff;font:21px/21px 'ProximaNova';}
