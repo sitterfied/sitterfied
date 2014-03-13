@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 import re
-
 from datetime import datetime, timedelta
 
-import app.signals as signals
-import app.sms as sms
-import app.utils as utils
 import mock
-
-from app.models import Booking, Parent, Sitter
+import pytz
 from django.template.loader import render_to_string
 from hamcrest import *
+from pytz import timezone
+
+from app import signals, sms, utils
+from app.models import Booking, Parent, Sitter, Reminder
+
 
 def test_booking_request_message():
     sitter = Sitter()
@@ -89,3 +89,18 @@ def test_new_parent_signal():
     parent.last_name = 'Signals'
     
     signals.new_parent(parent, parent, created=True)
+
+
+def test_reminder_save_handler():
+    eastern = timezone('US/Eastern')
+
+    booking = Booking()
+    booking.start_date_time = datetime.now() + timedelta(days=1, minutes=5)
+    booking.stop_date_time = booking.start_date_time + timedelta(hours=3)
+    booking.parent = Parent()
+    booking.accepted_sitter = Sitter()
+
+    reminder = Reminder()
+    reminder.booking = booking
+    
+    signals.reminder_save_handler(instance=reminder)

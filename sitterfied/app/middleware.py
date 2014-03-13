@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-import app.tasks as tasks
+import app.tasks.users as tasks
 
 from django.utils import timezone
 

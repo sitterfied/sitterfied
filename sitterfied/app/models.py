@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 import time
 from datetime import datetime
@@ -6,27 +7,29 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 from django.dispatch import Signal
 from django.utils.functional import cached_property
+from intercom import generate_intercom_user_hash
 from model_utils.choices import Choices
 from model_utils.models import TimeStampedModel
 from pyuploadcare.dj import ImageField as UploadcareImageField
 
-from .us_states import US_STATES
+from app.models.us_states import US_STATES
 
 
 booking_accepted = Signal(providing_args=['booking'])
 booking_declined = Signal(providing_args=['booking'])
 booking_canceled = Signal(providing_args=['booking'])
 
-from intercom import generate_intercom_user_hash
 
 UPLOADS_DIR = 'uploads/{0}/{1.year:04}/{1.month:02}/{1.day:02}/{2}/{3}'
+
+
 def file_url(name):
     def inner(instance, filename):
         r = re.compile(r'[^\S]')
         filename = r.sub('', filename)
         now = datetime.now()
         timestamp = int(time.time())
-        return  UPLOADS_DIR.format(name, now, timestamp, filename)
+        return UPLOADS_DIR.format(name, now, timestamp, filename)
     return inner
 
 
@@ -38,10 +41,10 @@ class User(AbstractUser, TimeStampedModel):
     friends = models.ManyToManyField('self',  blank=True)
 
     sitter_groups = models.ManyToManyField('Group', blank=True)
-    invited_by = models.ManyToManyField('self',  symmetrical =False, blank=True)
+    invited_by = models.ManyToManyField('self',  symmetrical=False, blank=True)
     languages = models.ManyToManyField('Language', blank=True, related_name="users")
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
-    membership_exp_date  = models.DateTimeField(null=True)
+    membership_exp_date = models.DateTimeField(null=True)
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
     facebook_id = models.IntegerField(null=True, blank=True, unique=True)
@@ -100,7 +103,6 @@ class Phone(TimeStampedModel):
     user = models.ForeignKey(User)
 
 
-
 class Parent(User):
     emergency_contact_one_name = models.CharField(max_length=128, blank=True)
     emergency_contact_one_phone = models.CharField(max_length=10, blank=True)
@@ -111,7 +113,8 @@ class Parent(User):
     bookmarks = models.ManyToManyField('Sitter', related_name="bookmarks", blank=True)
 
     class Meta:
-         verbose_name = "Parent"
+        verbose_name = "Parent"
+
 
 class Sitter(User):
     biography = models.TextField(blank=True)
@@ -122,7 +125,7 @@ class Sitter(User):
 
     dob = models.DateTimeField(blank=False, default=datetime.now)
     smoker = models.BooleanField(default=False)
-    sick =  models.BooleanField(default=True)
+    sick = models.BooleanField(default=True)
     will_transport = models.BooleanField(default=True)
 
     total_exp = models.SmallIntegerField()
@@ -164,8 +167,7 @@ class Sitter(User):
     certifications = models.ManyToManyField("Certification", blank=True)
 
     class Meta:
-         verbose_name = "Sitter"
-
+        verbose_name = "Sitter"
 
 
 class Certification(TimeStampedModel):
@@ -188,6 +190,7 @@ class Language(TimeStampedModel):
     def __unicode__(self):
         return self.language
 
+
 class SpecialNeed(TimeStampedModel):
     need = models.CharField(max_length=100)
 
@@ -197,12 +200,12 @@ class SpecialNeed(TimeStampedModel):
 
 class Settings(TimeStampedModel):
     #parent specific
-    user =  models.OneToOneField('User', null=True)
+    user = models.OneToOneField('User', null=True)
 
     mobile_booking_accepted_denied = models.BooleanField(default=True)
 
     #sitter specific
-    mobile_new_review  = models.BooleanField(default=True)
+    mobile_new_review = models.BooleanField(default=True)
     mobile_booking_request = models.BooleanField(default=True)
 
     mobile_friend_joined = models.BooleanField(default=True)
@@ -213,7 +216,7 @@ class Settings(TimeStampedModel):
     email_booking_accepted_denied = models.BooleanField(default=True)
 
     #sitter specific
-    email_new_review  = models.BooleanField(default=True)
+    email_new_review = models.BooleanField(default=True)
     email_booking_request = models.BooleanField(default=True)
 
     email_friend_joined = models.BooleanField(default=True)
@@ -222,6 +225,7 @@ class Settings(TimeStampedModel):
 
     email_news = models.BooleanField()
     email_blog = models.BooleanField()
+
 
 class Child(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="children")
@@ -232,7 +236,6 @@ class Child(TimeStampedModel):
 
     class Meta:
         verbose_name_plural = "children"
-
 
 
 class Contact(TimeStampedModel):
@@ -302,17 +305,13 @@ class Schedule(TimeStampedModel):
 
 class SitterReview(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="reviews")
-    sitter  = models.ForeignKey(Sitter, related_name="reviews")
+    sitter = models.ForeignKey(Sitter, related_name="reviews")
     recommended = models.BooleanField()
     rehire = models.BooleanField()
     review = models.TextField(blank=True)
 
     class Meta:
         unique_together = ("parent", "sitter")
-
-
-
-
 
 
 class Booking(TimeStampedModel):
@@ -349,6 +348,10 @@ class Booking(TimeStampedModel):
         self.save()
         booking_accepted.send(sender=self, sitter=sitter)
 
+        reminder = Reminder()
+        reminder.booking = self
+        reminder.save()
+
     def decline(self, sitter):
         self.declined_sitters.add(sitter)
         self.save()
@@ -370,8 +373,14 @@ class IncomingSMSMessage(TimeStampedModel):
     status = models.CharField(max_length=12)
     #dealt_with = models.
 
+
 class Group(TimeStampedModel):
     name = models.CharField(max_length=128, blank=False)
 
     def __unicode__(self):
         return self.name
+
+
+class Reminder(TimeStampedModel):
+    booking = models.ForeignKey(Booking)
+    task_id = models.CharField(max_length=256)
