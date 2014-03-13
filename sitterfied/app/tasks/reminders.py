@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
+
+import pytz
 from celery.utils.log import get_task_logger
 from django.template.loader import render_to_string
 
@@ -31,7 +34,7 @@ def send_reminders(id, hours):
         })
         send_message(sms, parent.cell)
 
-    if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
+    if hours >= 2 and sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         template = 'sms/reminder/sitter/{0}_hour_reminder.sms'.format(hours)
         sms = render_to_string(template, {
             'parent_full_name': parent.get_full_name(),
@@ -43,3 +46,14 @@ def send_reminders(id, hours):
             'short_url': get_short_url('/mybooking/upcoming'),
         })
         send_message(sms, sitter.cell)
+
+    if hours == 24:
+        eta = booking.start_date_time - timedelta(hours=2)
+        result = send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': reminder.id, 'hours': 2})
+        reminder.task_id = result.task_id
+        reminder.save()
+    elif hours == 2:
+        eta = booking.stop_date_time - timedelta(hours=1)
+        result = send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': reminder.id, 'hours': 1})
+        reminder.task_id = result.task_id
+        reminder.save()

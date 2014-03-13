@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 
 import celery
+import pytz
 from django.conf import settings
 from django.db.models.signals import post_save, pre_save, pre_delete, m2m_changed
 from django.dispatch import receiver
@@ -342,13 +343,15 @@ def reminder_save_handler(*args, **kwargs):
 
     if not reminder.task_id:
         start_date_time = reminder.booking.start_date_time
-        delta = start_date_time - datetime.now()
+        tz = pytz.timezone(reminder.booking.parent.timezone)
+        delta = start_date_time - datetime.now(tz)
 
-        if delta.days > 1 or delta.total_seconds() > 2 * 3600:
+        if delta.total_seconds() > 24 * 3600 or delta.total_seconds() > 2 * 3600:
             hours = 24 if delta.days >= 1 and timedelta.seconds > 0 else 2
             eta = start_date_time - timedelta(hours=hours)
-            result = reminders.send_reminders.apply_async(eta=eta, kwargs={'id': reminder.id, 'hours': hours})
+            result = reminders.send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': reminder.id, 'hours': hours})
             reminder.task_id = result.task_id
+            reminder.save()
 
 
 @receiver(pre_delete, sender=Reminder)

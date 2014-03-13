@@ -93,4 +93,4 @@ def get_new_messages():
 
 
 def send_message(body, to):
-    client.messages.create(body, to=to, from_=sitterfied_number)
+    client.messages.create(body=body, to=to, from_=sitterfied_number)

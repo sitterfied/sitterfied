@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-import random
-import string
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 
-from django.db.models.signals import post_save, pre_save, m2m_changed, pre_delete
+from django.db.models.signals import pre_save, m2m_changed, pre_delete
 from pytz import timezone
 
 from app import signals
-from app.models import Booking, Parent, Reminder, Settings, Sitter
+from app.models import Booking, Parent, Reminder, Sitter
 from app.tasks import reminders
 from app.tasks.tests import utils
 
@@ -15,14 +13,14 @@ from app.tasks.tests import utils
 def test_send_reminders():
     try:
         disconnect_signals()
-        
+
         booking = create_booking()
         booking.save()
-        
+
         reminder = Reminder()
         reminder.booking = booking
         reminder.save()
-        
+
         reminders.send_reminders(reminder.id, 24)
         reminders.send_reminders(reminder.id, 2)
     finally:
@@ -31,6 +29,7 @@ def test_send_reminders():
             reminder.delete()
         finally:
             reconnect_signals()
+
 
 def create_booking():
     eastern = timezone('America/New_York')
@@ -42,7 +41,7 @@ def create_booking():
     booking.accepted_sitter = Sitter.objects.get(first_name='Sitter')
     return booking
 
-  
+
 def disconnect_signals():
     utils.disconnect_signal(m2m_changed, signals.receive_booking_request, Booking)
     utils.disconnect_signal(pre_save, signals.reminder_save_handler, Reminder)
