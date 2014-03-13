@@ -220,21 +220,12 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 /* Alerts */
 
 .alert {
+  display: block;
   padding: 15px;
+  margin-top: 20px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-}
-.alert.alert-save {
-  display: none;
-  margin-bottom: 0px;
-  margin-top: 20px;
-}
-
-.account_settings_block .alert.alert-save, .schedule_block .alert.alert-save {
-  display: block;
-  margin-bottom: 20px;
-  margin-top: 20px;
 }
 
 .alert h4 {
@@ -1054,8 +1045,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .profile_block .form_style > ul > li > ul > li .icon_iphone2, .profile_block .form_style > ul > li > ul > li .icon_experience2, .profile_block .form_style > ul > li > ul > li .icon_certification3 {top:45px;}
 .profile_block .form_style > ul > li > ul > li .button {position:absolute;top:24px;right:0;font-size:17px;display:none;}
 .profile_block .form_style > ul > li > ul > li input + .button {position:relative;top:0;right:0;font-size:12px;text-shadow:none;display:inline-block;float:none;width:auto;padding-right:10px;border:none;}
-.profile_block .form_style > ul > li:first-child > ul > li .button, .profile_block .form_style > ul > li:last-child > ul > li .button {display:block;}
-.profile_block .form_style > ul > li:last-child > ul > li .button {top:auto;bottom:30px;}
+.profile_block .form_style > ul > li:first-child > ul > li .button, .profile_block .form_style > ul > li:last-child > ul > li .button {display:block;float:right;position:relative;}
+.profile_block .form_style > ul > li:last-child > ul > li .button {top:auto;bottom:0px;}
 .profile_block .form_style > ul > li > ul > li .char {font:bold 12px/27px 'ProximaNovaCond';color:#fff;background:#bfced5;position:absolute;top:41px;left:465px;display:block;width:77px;height:27px;text-align:center;border-radius:3px;}
 .profile_block .form_style > ul > li:hover > ul > li:nth-child(2n+1), .profile_block .form_style > ul > li.focus > ul > li:nth-child(2n+1) {color:#616161;}
 .profile_block .form_style > ul > li:hover > ul > li .icon_pin4, .profile_block .form_style > ul > li.focus > ul > li .icon_pin4 {background-position:0 -2531px;}

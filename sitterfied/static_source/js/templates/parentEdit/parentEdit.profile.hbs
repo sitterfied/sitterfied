@@ -1,9 +1,6 @@
 <!-- profile_block -->
 {{# view Sitterfied.MobTriggerView active=true}} Profile {{/ view}}
 
-{{ partial "save_successful_alert" }}
-{{ partial "save_failure_alert" }}
-
 <div class="tab_content profile_block parent_profile_block" id="tab-1">
   <form method="post" action="#" class="form_style">
     <ul>
@@ -14,6 +11,7 @@
             </span>Children
           </li>
           <li>
+	    {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
             <p class="child_number">
               <a class="button button_smaller button_edit" {{action "newChild"}}>
                 <span class="icon_plus">&nbsp;
@@ -23,7 +21,6 @@
             {{# each child in controllers.children }}
               {{partial "child"}}
             {{/each}}
-	    {{view Sitterfied.AjaxStateButtonLink valueBinding="isLoading" action="saveSettings" class="button button_small save_button" saveText="Save"}}
           </li>
         </ul>
       </li>
@@ -53,7 +50,6 @@
                   required="" class="extra-small"}}
               {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
             </p>
-            <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
           </li>
         </ul>
       </li>
@@ -69,7 +65,7 @@
               </span>
               {{view Sitterfied.PhoneField placeholder="(123) 456-7890" valueBinding="cell" }}
             </p>
-            <a class="button button_small save_button" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+	    {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
           </li>
         </ul>
       </li>
@@ -112,10 +108,7 @@
               </span>
               {{view Sitterfied.PhoneField placeholder="(123) 456-7890" valueBinding="emergency_contact_two_phone" }}
             </p>
-            <a class="button button_small" href="#">
-              <span class="icon_ok2">&nbsp;
-              </span>Save
-            </a>
+            {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
           </li>
         </ul>
       </li>
@@ -128,10 +121,7 @@
             <p>
               <span>I speak:</span>
             </p>
-            <a class="button button_small" {{action 'saveSettings'}}>
-              <span class="icon_ok2">&nbsp;
-              </span>Save
-            </a>
+            {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
           </li>
         </ul>
       </li>
