@@ -24,7 +24,7 @@
                     {{view Ember.RadioButton id="male" selectionBinding="gender" value="male" name="gender" }}
                     <label for="male">Male</label>
                   </p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -49,7 +49,7 @@
                          required="" class="extra-small"}}
                     {{view Ember.TextField placeholder="Zip Code" valueBinding="zip" class="small"}}
                   </p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -60,7 +60,7 @@
 				  <p>
                     {{view Sitterfied.PhoneField placeholder="(123) 456-7890" valueBinding="cell" }}
                   </p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -69,7 +69,7 @@
 				<li><span class="icon_email3">&nbsp;</span>Email Address</li>
 				<li>
 				  <p>{{view Ember.TextField placeholder="Email" valueBinding="email"}}</p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -100,10 +100,7 @@
 					}}
 				  </p>
 				  {{/if }}
-				  <a class="button button_small" href="#">
-					<span class="icon_ok2">&nbsp;
-					</span>Save
-				  </a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -117,7 +114,7 @@
 		    {{view Ember.RadioButton id="no" selectionBinding="smoker" value="false" name="smoker" }}
                     <label for="no">NO</label>
                   </p>
-				  <a class="button button_small" {{action "saveSettings"}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -132,7 +129,7 @@
                     {{view Ember.RadioButton id="no2" selectionBinding="sick" value="false" name="sick" }}
                     <label for="no2">NO</label>
                   </p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -142,7 +139,7 @@
 				<li>
                   <p><span>distance willing to travel:</span>{{view Ember.TextField id="distance" placeholder="Distance" valueBinding="travel_distance" class="small"}}<label for="distance">Miles</label></p>
 				  <p><span>have a current driver’s license?</span>{{view Ember.Checkbox id="no3" checkedBinding="has_drivers_licence" }}<label for="no3"></label></p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -161,7 +158,7 @@
                   {{# comment }}
 				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="extra_exp"}}
                   <a class="button button_smaller button_edit" href="#"><span class="icon_plus">&nbsp;</span>ADD</a></p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
                   {{/ comment}}
 				</li>
 			  </ul>
@@ -188,7 +185,7 @@
                     </p>
 				  <p><span>Major (if yes):</span>{{view Ember.TextField placeholder="major" valueBinding="major"}}</p>
 				  <p><span>occupation (if no):</span>{{view Ember.TextField placeholder="occupation" valueBinding="occupation"}}</p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -217,7 +214,7 @@
                       <span class="icon_plus">&nbsp;</span>ADD
                     </a>
                   </p>
-				  <a class="button button_small" href="#"><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -231,7 +228,7 @@
 				  <p><span>Maximum for 2 children:</span>{{view Ember.TextField valueBinding="two_child_max_rate"}}</p>
 				  <p><span>Minimum for 3 or more children</span>{{view Ember.TextField valueBinding="three_child_min_rate"}}</p>
 				  <p><span>Maximum for 3 or more children</span>{{view Ember.TextField valueBinding="three_child_max_rate"}}</p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
@@ -276,7 +273,7 @@
                       {{/if}}
                     </p>
 				  <p><span>add another (if not listed above):</span>{{view Ember.TextField valueBinding="controllers.otherServices.newService"}}<a class="button button_smaller button_edit" {{action 'saveService'}}><span class="icon_plus">&nbsp;</span>ADD</a></p>
-				  <a class="button button_small" {{action 'saveSettings'}}><span class="icon_ok2">&nbsp;</span>Save</a>
+				  {{view Sitterfied.AjaxStatusButtonView action=saveSettings}}
 				</li>
 			  </ul>
 			</li>
