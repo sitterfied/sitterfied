@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 
 from app.models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule, Reminder
 from app.sms import send_message
-from app.tasks import reminders
+from app.tasks import notifications, reminders
 from app.utils import get_short_url, send_template_email
 
 
@@ -165,7 +165,6 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
         send_message(body=sms, to=parent.cell)
 
     if sitter:
-
         if sitter.settings.email_booking_accepted_denied:
             # TODO: send_html_email("Your booking request has been
             # canceled", "hello@sitterfied.com", sitter.email, text,
@@ -207,74 +206,8 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
         return
 
     if action == "post_add":
-        parent = instance.parent
-        email_sitters = instance.sitters.filter(settings__email_booking_request=True).filter(id__in=pk_set)
-        text_sitters = instance.sitters.filter(settings__mobile_booking_request=True).filter(id__in=pk_set)
-        multi_request_suffix = '_multiple' if len(instance.sitters.all()) > 1 else ''
-
-        for sitter in email_sitters:
-            """
-            *|FULL_NAME|* [URL link to parent's profile page] would like you to
-            sit for *|CHILD_1|*, *|CHILD_2|* and *|CHILD_3|* on *|JOB_DATE|* from
-            *|FROM_TIME|* to *|TO_TIME|*.
-
-            The job is located at *|JOB_ADDRESS|*
-
-            Go to your bookings page [URL link to sitter's bookings page] to
-            Accept or Decline this job.
-
-            *|FNAME|* added a note- "*|SHOW_NOTE|*"
-
-            You can reach *|FNAME|* by email: *|EMAIL|* or phone: *|MOBILE|*
-            """
-            message = create_message_base()
-            message['subject'] = 'You have a new job request!'
-            message['to'] = [create_email_to(sitter.email, sitter.get_full_name())]
-            message['global_merge_vars'] = [{
-                'FNAME': sitter.first_name,
-                'PARENT_NAME': parent.get_full_name(),
-                'PARENT_URL': '/profile/' + str(parent.id),
-            }]
-            # TODO: send_template_email('', message)
-
-        short_url = get_short_url('/mybookings/pending')
-
-        for sitter in text_sitters:
-            if not sitter.cell:
-                continue
-
-            if 'Interview' in instance.booking_type:
-                booking_type = instance.booking_type.replace(' Interview', '_Interview').lower()
-                sms_template = 'sms/interview/{0}_request_to_sitter.sms'.format(booking_type)
-            else:
-                sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
-
-            booking_date = instance.start_date_time.date()
-
-            sms = render_to_string(sms_template, {
-                'sitter_name': sitter.first_name,
-                'parent_name': parent.get_full_name(),
-                'booking_date': booking_date,
-                'start_date_time': instance.start_date_time,
-                'stop_date_time': instance.stop_date_time,
-                'parent_city': parent.city,
-                'short_url': short_url,
-                'booking_code': instance.id,
-                'num_sitters': len(instance.sitters.all()) - 1,
-            })
-            send_message(body=sms, to=sitter.cell)
-
-        # Notify parent that the job request was sent via email and/or mobile
-        if parent.settings.email_booking_accepted_denied:
-            pass  # TODO: implement email for parent request sent
-
-        if parent.settings.mobile_booking_accepted_denied:
-            if 'Interview' in instance.booking_type:
-                sms_template = 'sms/interview/interview_request_parent_confirmation.sms'
-            else:
-                sms_template = 'sms/booking/booking_request_sent.sms'
-            sms = render_to_string(sms_template, {'short_url': short_url})
-            send_message(body=sms, to=parent.cell)
+        notifications.notify_parent_of_job_request.s(instance.id).delay()
+        notifications.notify_sitters_of_job_request.s(instance.id, list(pk_set)).delay()
 
 
 @receiver(post_save, sender=SitterReview)
@@ -358,7 +291,6 @@ def reminder_save_handler(*args, **kwargs):
 def reminder_del_handler(sender, instance, **kwargs):
     reminder = instance
     if reminder.task_id:
-        # Revoke the scheduled task
         celery.task.control.revoke(reminder.task_id)
 
 
