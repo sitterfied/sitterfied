@@ -206,7 +206,10 @@ def receive_booking_request(sender, pk_set=None, instance=None, action=None, **k
         return
 
     if action == "post_add":
+        # Queue Celery task for sending parent confirmation
         notifications.notify_parent_of_job_request.s(instance.id).delay()
+
+        # Queue Celery task for sending job requests to sitters
         notifications.notify_sitters_of_job_request.s(instance.id, list(pk_set)).delay()
 
 
