@@ -7,9 +7,8 @@ from django_twilio.decorators import twilio_view
 from twilio.rest import TwilioRestClient
 from twilio.twiml import Response
 
-from .models import Sitter, Booking, IncomingSMSMessage
-from .utils import generate_short_url_code
-from .views import redis_client
+from app.models import Sitter, Booking, IncomingSMSMessage
+from app.utils import get_short_url
 
 
 # Your Account Sid and Auth Token from twilio.com/user/account
@@ -71,9 +70,7 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
         booking.accept(sitter)
     elif response == 'decline' or response == 'no':
         if booking.accepted_sitter == sitter:
-            short_url_code = generate_short_url_code()
-            short_url = settings.SHORT_URL + short_url_code
-            redis_client.set(short_url_code, '/mybookings/upcoming')
+            short_url = get_short_url('/mybookings/upcoming')
             resp.sms('You have already ACCEPTED this job. If you\'d like to cancel, go here: ' + short_url)
         else:
             booking.decline(sitter)
@@ -93,3 +90,7 @@ def get_new_messages():
     for message in messages:
         new_message = IncomingSMSMessage(**message)
         new_message.save()
+
+
+def send_message(body, to):
+    client.messages.create(body=body, to=to, from_=sitterfied_number)

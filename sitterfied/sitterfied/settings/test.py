@@ -16,13 +16,11 @@ REDIS_URL = env.get('DOTCLOUD_CACHE_REDIS_URL')
 
 # Celery Configuration
 BROKER_URL = REDIS_URL + '/0'
-CELERY_IGNORE_RESULTS = True
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+
 
 # Django Configuration
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
+
 
 CACHES = {
     'default': {
@@ -37,6 +35,7 @@ CACHES = {
     },
 }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -48,9 +47,11 @@ DATABASES = {
     }
 }
 
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = "/home/dotcloud/data/media/"
+
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -58,10 +59,12 @@ MEDIA_ROOT = "/home/dotcloud/data/media/"
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = PROJECT_ROOT.child("static")
 
+
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
 )
+
 
 # Google OAuth Configuration
 GOOGLE_OAUTH_CLIENT_ID = '305141264963-9gamu3g0ja74ch7pcssmmk75shtk9ftc.apps.googleusercontent.com'
@@ -79,6 +82,7 @@ TWILIO_DEFAULT_CALLERID = '+19088384816'
 
 # Override Facebook App ID
 FACEBOOK_APP_ID = '624946094225118'
+
 
 LOGGING = {
     'version': 1,

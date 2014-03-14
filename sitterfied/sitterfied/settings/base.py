@@ -191,3 +191,15 @@ AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend', 'app.authentic
 
 # Base URL for shortened URLs 
 SHORT_URL = 'www.sttrfd.us/'
+
+
+# Celery configuration
+CELERY_IGNORE_RESULTS = True
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_IMPORTS = (
+    'app.tasks.notifications',
+    'app.tasks.reminders',
+    'app.tasks.users',
+)

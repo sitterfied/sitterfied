@@ -70,12 +70,6 @@ DEVSERVER_MODULES = (
 
 DEVSERVER_AUTO_PROFILE = True
 
-# Celery configuration
-BROKER_URL = REDIS_URL + '/0'
-CELERY_IGNORE_RESULTS = True
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
 
 # Override Short URL
 SHORT_URL = 'localhost:8000/'
@@ -85,3 +79,7 @@ TWILIO_DEFAULT_CALLERID = '+19088384816'
 
 # Override Facebook App ID
 FACEBOOK_APP_ID = '746551758706532'
+
+
+# Celery configuration
+BROKER_URL = REDIS_URL + '/0'

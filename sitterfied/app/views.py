@@ -21,19 +21,17 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
 from ecl_facebook import Facebook
-from redis import Redis
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from signup import RegistrationView
 
-from .forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
-from .models import User, Sitter, Parent, Group, Child
-from .utils import send_html_email
+from app import utils
+from app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
+from app.models import User, Sitter, Parent, Group, Child
+from app.utils import send_html_email
 
 UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
-
-redis_client = Redis.from_url(settings.REDIS_URL + '/2')
 
 
 try:
@@ -42,13 +40,16 @@ try:
     from devserver.modules.profile import devserver_profile
 except ImportError:
     from functools import wraps
+
     class devserver_profile(object):
         def __init__(self, *args, **kwargs):
             pass
+
         def __call__(self, func):
             def nothing(*args, **kwargs):
                 return func(*args, **kwargs)
             return wraps(func)(nothing)
+
 
 class HttpResponseUnauthorized(HttpResponse):
     status_code = 401
@@ -63,14 +64,16 @@ def get_user_json(user):
         user_model = Parent.objects.prefetch_related('children', 'children__special_needs')
         seralizer = ParentSerializer
 
-    classed_user = user_model.select_related('settings').prefetch_related('bookings',
-                                                                          'sitter_teams',
-                                                                          'bookmarks',
-                                                                          'friends',
-                                                                          'languages',
-                                                                          'sitter_groups',
-                                                                          'reviews',
-                                                                      ).get(id=user.id)
+    classed_user = user_model.select_related('settings') \
+                             .prefetch_related('bookings',
+                                               'sitter_teams',
+                                               'bookmarks',
+                                               'friends',
+                                               'languages',
+                                               'sitter_groups',
+                                               'reviews',) \
+                             .get(id=user.id)
+
     serialized = seralizer(classed_user)
     user_json = JSONRenderer().render(serialized.data)
     return user_json
@@ -108,6 +111,7 @@ def index(request, referred_by=None):
         "first_time": request.GET.get("first_time", "")
     }
 
+
 def redirect_next(request):
     """Handles redirection based on current authentication status.
 
@@ -131,13 +135,14 @@ def short_url(request):
 
     """
     try:
-        long_url = redis_client.get(request.path[1:])
+        long_url = utils.lookup_short_url(request.path[1:])
         if long_url is not None:
             return HttpResponseRedirect(long_url)
         else:
             raise HttpResponseNotFound()
     except:
         return HttpResponseNotFound()
+
 
 @render_to()
 def onboarding2(request):
@@ -156,7 +161,7 @@ def onboarding2(request):
             else:
                 return {'TEMPLATE': "onboardingsitter.html",
                         'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form}
+                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form": form}
         elif request.POST["parent_or_sitter"] == "parent":
             form = ParentRegisterForm(request.POST)
             if form.is_valid():
@@ -175,7 +180,7 @@ def onboarding2(request):
                 formset = ChildFormSet(request.POST)
                 return {'TEMPLATE': "onboardingparent.html",
                         'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form":form, "formset":formset}
+                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form": form, "formset": formset}
 
     if request.method == "GET":
         fb_id = request.session.get("FACEBOOK_ID", None)
@@ -188,13 +193,13 @@ def onboarding2(request):
                 dob = datetime.strptime(birthday, "%m/%d/%Y")
             else:
                 dob = ""
-            initial = {"first_name":me.get('first_name', ""),
-                      "last_name":me.get('last_name', ""),
-                      "gender":me.get('gender', ""),
-                      "email":me.get("email", ""),
-                       'dob':dob,
-
-                  }
+                initial = {
+                    "first_name": me.get('first_name', ""),
+                    "last_name": me.get('last_name', ""),
+                    "gender": me.get('gender', ""),
+                    "email": me.get("email", ""),
+                    'dob': dob,
+                }
 
         else:
             initial = {}
@@ -212,31 +217,33 @@ def onboarding2(request):
         return {
             'TEMPLATE': template,
             'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, 
-            "form":form, 
+            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
+            "form": form,
             "formset": formset}
 
 
 @login_required
 @render_to("onboarding3.html")
 def onboarding3(request):
-    if request.method =="POST":
+    if request.method == "POST":
         if hasattr(request.user, 'parent'):
             return redirect("/search?first_time=1")
         else:
             return redirect("/profile")
     form = GroupsForm(instance=request.user)
-    return {"form":form, "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID}
+    return {"form": form, "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID}
+
 
 @render_to("onboarding4.html")
 def onboarding4(request):
     return {}
 
-""" Injects values into static pages.
 
-"""
 @render_to()
 def static_page(request, template):
+    """ Injects values into static pages.
+
+    """
     obj = {'TEMPLATE': template, "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID}
 
     if not request.user.is_anonymous():
@@ -244,21 +251,17 @@ def static_page(request, template):
         obj['intercom_activator'] = '#IntercomDefaultWidget'
         obj['INTERCOM_APP_ID'] = settings.INTERCOM_APP_ID
 
-    return obj;
-
-
-
-
+    return obj
 
 
 test_zips = [
     {
-      "zip_code": "11207",
-      "distance": 0
+        "zip_code": "11207",
+        "distance": 0
     },
     {
-      "zip_code": "12345",
-      "distance": 9.932
+        "zip_code": "12345",
+        "distance": 9.932
     },
 ]
 
@@ -293,64 +296,61 @@ def search(request):
     zipcodes = response.json()['zip_codes']
 
     #zipcodes = test_zips
-    q_list = [ Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes ]
+    q_list = [Q(zip=z['zip_code'], travel_distance__gte=z['distance']) for z in zipcodes]
     reduced_q = reduce(operator.or_, q_list)
 
     sitters = sitters.filter(reduced_q)
 
-
-
     #figure out which day we care about
     start_date = datetime.strptime(start_date, "%a, %b %d %Y")
-    day  = datetime.strftime(start_date, "%a").lower()
+    day = datetime.strftime(start_date, "%a").lower()
 
-
-    start_time =datetime.strptime(start_time, "%H%M")
+    start_time = datetime.strptime(start_time, "%H%M")
     start_time = time(start_time.hour, start_time.minute)
 
     stop_time = datetime.strptime(stop_time, "%H%M")
     stop_time = time(stop_time.hour, stop_time.minute)
 
-    times = dict(early_morning= time(hour=6), late_morning =time(hour=9),
-                 early_afternoon = time(hour=12), late_afternoon=time(hour=15),
-                 early_evening = time(hour=18), late_evening = time(hour=21),
-             )
+    times = dict(early_morning=time(hour=6), late_morning=time(hour=9),
+                 early_afternoon=time(hour=12), late_afternoon=time(hour=15),
+                 early_evening=time(hour=18), late_evening=time(hour=21),)
 
     search_terms = {}
     if overnight:
         stop_date = datetime.strptime(stop_date, "%a, %d %b %Y")
-        stop_day  = datetime.strftime(stop_date, "%a").lower()
+        stop_day = datetime.strftime(stop_date, "%a").lower()
         search_terms["schedule__%s_overnight" % day] = True
 
         for term, search_time in times.items():
-            if  start_time <= search_time:
+            if start_time <= search_time:
                 search_terms[("schedule__%s_" % day) + term] = True
-            if   search_time <= stop_time:
+            if search_time <= stop_time:
                 search_terms[("schedule__%s_" % stop_day) + term] = True
 
     else:
         for term, search_time in times.items():
-            if  start_time <= search_time <= stop_time:
+            if start_time <= search_time <= stop_time:
                 search_terms[("schedule__%s_" % day) + term] = True
-
-
-
 
     #filter by availiablity
     sitters = sitters.filter(**search_terms)
-
 
     serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
     return Response(serializer.data)
 
 
-
-
 @api_view(['GET'])
 def network_search(request):
     search_term = request.GET.get('search', '')
-    users = [{'label':u.get_full_name(), 'value':u.get_full_name(), "type":"user", "id":u.id} for u in User.objects.filter(Q(first_name__istartswith=search_term) | Q(last_name__istartswith=search_term))]
-    groups = [{'label':g.name, 'value':g.name, "type":"group", "id":g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
+
+    users = [{
+        'label': u.get_full_name(),
+        'value': u.get_full_name(),
+        "type": "user",
+        "id": u.id
+    } for u in User.objects.filter(Q(first_name__istartswith=search_term) | Q(last_name__istartswith=search_term))]
+
+    groups = [{'label': g.name, 'value': g.name, "type": "group", "id": g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
     users.extend(groups)
     return Response(users)
 
@@ -358,18 +358,16 @@ def network_search(request):
 @api_view(['GET'])
 def group_search(request):
     search_term = request.GET.get('search', '')
-    groups = [{'label':g.name,
-               'value':g.name,
-               "type":"group",
-               "id":g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
+    groups = [{'label': g.name,
+               'value': g.name,
+               "type": "group",
+               "id": g.id} for g in Group.objects.filter(Q(name__istartswith=search_term))]
     return Response(groups)
 
 
 def error(request):
     """for testing purposes"""
     raise Exception
-
-
 
 
 @sensitive_post_parameters()
@@ -395,8 +393,7 @@ def login_ajax(request,
     else:
         return HttpResponseUnauthorized()
     user_json = get_user_json(request.user)
-    return {"user":user_json}
-
+    return {"user": user_json}
 
 
 @sensitive_post_parameters()
@@ -424,22 +421,20 @@ def login_facebook(request):
     return {}
 
 
-
 class AjaxRegistrationView(RegistrationView):
     def register(self, request, **cleaned_data):
         new_user = super(AjaxRegistrationView, self).register(request, **cleaned_data)
         new_user.zip = cleaned_data['zipcode']
-        new_user.first_name =cleaned_data['first_name']
-        new_user.last_name =cleaned_data['last_name']
+        new_user.first_name = cleaned_data['first_name']
+        new_user.last_name = cleaned_data['last_name']
         new_user.save()
         return new_user
-
 
     def form_valid(self, request, form):
         new_user = self.register(request, **form.cleaned_data)
 
         user_json = get_user_json(new_user)
-        response =  {"user":user_json}
+        response = {"user": user_json}
         json_response = JsonResponse(response)
         json_response['content-length'] = len(json_response.content)
         return json_response
@@ -466,7 +461,6 @@ def facebook_import(request):
     return {}
 
 
-
 @ajax_request
 @require_POST
 def invite_email_submit(request):
@@ -476,19 +470,18 @@ def invite_email_submit(request):
     personal_message = request.POST['personal_message']
     emails = [email.strip() for email in request.POST.get('email').split(',') if email]
 
-    text = html = render_to_string("invitation_email.html",
-                                   {'inviter_first_name':first_name,
-                                    'inviter_full_name':full_name,
-                                    'personal_message':personal_message,
-                                    'signup_url': ComingSoonInterest.static_invite_url(interest_id),
-                                    'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
-                                    })
+    text = html = render_to_string("invitation_email.html", {
+        'inviter_first_name': first_name,
+        'inviter_full_name': full_name,
+        'personal_message': personal_message,
+        'signup_url': ComingSoonInterest.static_invite_url(interest_id),
+        'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
+    })
 
     for email in emails:
         send_html_email("You've been invited to Sitterfied", "hello@sitterfied.com", email, text, html)
 
     return {}
-
 
 
 @ajax_request
@@ -499,6 +492,8 @@ def remove_friend(request):
     friend = User.objects.get(id=friend_id)
     request.user.friends.remove(friend)
     return {}
+
+
 @ajax_request
 @login_required
 @require_POST
@@ -508,6 +503,7 @@ def remove_group(request):
     request.user.sitter_groups.remove(group)
     return {}
 
+
 @ajax_request
 @login_required
 @require_POST
@@ -515,14 +511,15 @@ def add_group(request):
     group_name = request.POST['group_name']
     group, created = Group.objects.get_or_create(name=group_name)
     request.user.sitter_groups.add(group)
-    return {"id":group.id,"name":group.name}
+    return {"id": group.id, "name": group.name}
 
 
 @render_to('unsubscribe.html')
 def unsubscribe(request):
     email = request.GET.get('email')
     EmailBlacklist.objects.get_or_create(email=email)
-    return {'email':email}
+    return {'email': email}
+
 
 @render_to('cancel_unsubscribe.html')
 def cancel_unsubscribe(request):
@@ -532,8 +529,7 @@ def cancel_unsubscribe(request):
         e.delete()
     except:
         pass
-    return {'email':email}
-
+    return {'email': email}
 
 
 class StaticView(TemplateView):
@@ -541,6 +537,7 @@ class StaticView(TemplateView):
         context = super(StaticView, self).get_context_data(**kwargs)
         context['full_static_url'] = self.request.build_absolute_uri(settings.STATIC_URL)
         return context
+
 
 def cloudhealthcheck(request):
     return HttpResponse()
