@@ -21,7 +21,8 @@ require({
 		'phoneformat': 'lib/PhoneFormat',
 		'ucare': 'lib/uploadcare-0.15.0.min',
         'purl': 'lib/purl',
-        'subtab': 'sub-tab_active'
+        'subtab': 'sub-tab_active',
+	'iemodal': 'lib/ie-popup'
     },
     waitSeconds: 0,
 
@@ -86,7 +87,10 @@ require({
         },
         subtab: {
             deps: ['jquery']
-        }
+        },
+	iemodal: {
+	    deps: ['jquery']
+	}
     },
     urlArgs: "bust=" +  (new Date()).getTime(),
 },
@@ -95,7 +99,7 @@ require({
          "cs!routes", "cs!models",
          "cs!injections", "cs!controllers",
          "cs!views",'facebook', 'scrollto',
-         "vasilli",'subtab'], function(require, $,  Em, Sitterfied){
+         "vasilli",'subtab', 'iemodal'], function(require, $,  Em, Sitterfied){
              // using jQuery
              Sitterfied.runInitializers();
              Sitterfied.advanceReadiness();

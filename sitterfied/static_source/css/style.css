@@ -485,6 +485,12 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 #interview_popup .info .fb_button {float:right;color:#8a8989;font-size:24px;font-weight:normal;padding:0 0 0 18px;}
 #interview_popup .info .fb_button img {margin-left:18px;position:relative;top:7px;}
 
+#ie_modal {display:none;}
+#ie_modal .tit {color:#fff;font-size:20px;text-align:center;background:#31a7b5 url(../images/top_title.gif) repeat-x;text-shadow:rgba(0,0,0,.35) 1px 1px 1px;padding:15px 10px;margin:0 0 30px 0;border-radius:4px 4px 0 0;}
+#ie_modal .info {padding:0 10px;text-align:center;}
+#ie_modal .info {color:#616161;font:normal 24px 'ProximaNova';padding:0px 40px 25px 40px;position:relative;clear:both;}
+#ie_modal .info .pad {padding-right:30px;}
+
 /* Header */
 .header {background:#007587 url(../images/header.jpg) repeat-x;min-height:320px;position:relative;}
 .header .logo {position:absolute;top:35px;left:0;z-index:5;}
