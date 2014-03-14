@@ -270,7 +270,7 @@ def new_parent(sender, instance=None, **kwargs):
         send_template_email('welcome-parent', message)
 
 
-@receiver(pre_save, sender=Reminder)
+@receiver(post_save, sender=Reminder)
 def reminder_save_handler(*args, **kwargs):
     reminder = kwargs.get('instance')
 

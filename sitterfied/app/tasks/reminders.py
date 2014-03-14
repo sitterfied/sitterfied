@@ -49,11 +49,11 @@ def send_reminders(id, hours):
 
     if hours == 24:
         eta = booking.start_date_time - timedelta(hours=2)
-        result = send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': reminder.id, 'hours': 2})
+        result = send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': id, 'hours': 2})
         reminder.task_id = result.task_id
         reminder.save()
     elif hours == 2:
         eta = booking.stop_date_time - timedelta(hours=1)
-        result = send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': reminder.id, 'hours': 1})
+        result = send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': id, 'hours': 1})
         reminder.task_id = result.task_id
         reminder.save()
