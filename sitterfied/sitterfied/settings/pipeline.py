@@ -32,8 +32,8 @@ PIPELINE_JS = {
             'js/lib/uploadcare-0.15.0.min.js',
             'js/lib/jquery.form.min.js',
             'js/lib/jquery.formset.min.js',
-            'js/lib/ie-popup.js',
-            'js/facebook.js'
+            'js/facebook.js',
+
         ),
         'output_filename': 'js/libs.js',
     }
