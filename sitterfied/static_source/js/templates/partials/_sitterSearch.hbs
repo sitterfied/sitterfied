@@ -59,17 +59,15 @@
       {{reviews.length}} reviews
       {{#if reviews}}
         <ul>
-          {{# with reviews.firstObject}}
-	        <li class="rev clear">
-	          {{#linkTo parent parent.parent}}
-		        <img {{bindAttr src=parent.avatarUrl}}  />
-	          {{/linkTo}}
-	          <div>
-		        <p>{{review}}</p>
-	            <p>{{#linkTo sitter sitter.sitter}}Read more reviews {{/linkTo}}</p>
-	          </div>
-	        </li>
-	        {{/with}}
+	    <li class="rev clear">
+	      {{#linkTo parent recentReview.parent}}
+		<img {{bindAttr src=avatarUrl}}  />
+	      {{/linkTo}}
+	      <div>
+		<p>{{recentReview.shortenReview}}</p>
+	        <p>{{#linkTo sitter sitter.sitter}}Read more reviews {{/linkTo}}</p>
+	      </div>
+	    </li>
         </ul>
       {{/if}}
     </li>

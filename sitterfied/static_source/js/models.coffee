@@ -474,6 +474,10 @@ define ['jquery'
         rehires: (() ->
             return this.get('reviews').filterProperty('rehire', true)
         ).property('reviews.@each.rehire', 'reviews')
+            
+        recentReview: (() ->
+            return this.get('reviews').get('lastObject')
+        ).property('reviews.@each', 'review')
 
         inSitterTeam: (() ->
             sitterTeam = Sitterfied.currentUser.get('sitter_teams')
@@ -639,6 +643,13 @@ define ['jquery'
                 return this.get('sitter').get('inSitterTeam')
             return null
         ).property('sitter')
+            
+        shortenReview: (() ->
+            if this.get('review') and this.get('review').length > 140
+                return this.get('review').substring(0, 140) + "..."
+            else
+                return this.get('review')
+        ).property('review')
     )
     Sitterfied.SitterReview.adapter = Adapter.create()
 
