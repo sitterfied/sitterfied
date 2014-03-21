@@ -2215,6 +2215,16 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
     border-right:2px solid #E6E6E6;
     padding-right:15%;
 }
+
+/* Tooltip */
+.iconquestion { width:15px; height:15px; vertical-align:middle; display:inline-block; background:url(../images/icons/icon_qestion.png) no-repeat; margin:0 3px;}
+.hastooltip { position:relative;}
+.hastooltip .toolTip {display:none; position:absolute;bottom:26px;left:-17px;border:1px solid #71becb;padding:8px 10px;border-radius:4px;z-index:4;width:330px;background:#fff;box-shadow:rgba(0,0,0,.10) 0 3px 1px 0;color:#3EA7B8;	font-size:13px;	line-height:1.3;}
+.hastooltip:hover .toolTip {display:block;}
+.hastooltip .toolTip:before {
+	content:'';display:block;width:22px;height:15px;background:url(../images/icons/arrow_bottom4.png) no-repeat;position:absolute;top:100%;left:15px;	
+}
+
 @media screen and (max-width: 479px) {/* Target Mobile (320px) */
     .container .notify_wraper.notify_done ul li {
         padding-left:0;
