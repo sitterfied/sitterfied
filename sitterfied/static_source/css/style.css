@@ -1942,12 +1942,12 @@ a {cursor:pointer}
 .landing_block .landing_top {min-height:531px;background:url(../images/demo/landing_bg.jpg) 0 0 no-repeat;position:relative;}
 .landing_block .landing_top .right_info {float:right;width:44%;}
 .landing_block .landing_top .right_info .log_in {position:absolute;top:10px;right:50px;color:#e88648;font-size:20px;}
-.landing_block .landing_top .right_info h1 {color:#1c8292;font-size:36px;font-weight:300;line-height:72px;text-align:center;padding:30px 20px 50px 20px;}
+.landing_block .landing_top .right_info h1 {color:#1c8292;font-size:36px;font-weight:300;line-height:60px;text-align:center;padding:30px 20px 45px 20px;}
 .landing_block .landing_top .right_info h1 span {position:relative;}
 .landing_block .landing_top .right_info h1 span:after {content:'';display:block;width:68px;height:74px;background:url(../images/trusted2.png) no-repeat;position:absolute;top:-17px;left:-30px;}
 .landing_block .landing_top .right_info h1 + p {font-size:25px;color:#1c8292;text-align:center;padding:0 0 120px 0;}
 .landing_block .landing_top .right_info h1 + p img {max-width:100%;height:auto;}
-.landing_block .landing_top .right_info .facebook_signup {text-align:center;padding-bottom:40px;}
+.landing_block .landing_top .right_info .facebook_signup {text-align:center;padding-bottom:30px;}
 .landing_block .landing_top .right_info .facebook_signup p {color:#9b9d9d;font:12px 'ProximaNova';}
 .landing_block .landing_top .right_info .facebook_signup p:first-child a, .landing_block .landing_top .right_info .facebook_signup p:first-child a:visited {margin:0 auto;font:20px/63px 'ProximaNova';color:#fff;display:block;width:260px;padding-left:40px;height:63px;background:url(../images/facebook_bg.png) no-repeat;}
 .landing_block .landing_top .right_info .facebook_signup p:first-child a:hover {opacity:.95;}
@@ -2224,6 +2224,11 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .hastooltip .toolTip:before {
 	content:'';display:block;width:22px;height:15px;background:url(../images/icons/arrow_bottom4.png) no-repeat;position:absolute;top:100%;left:15px;	
 }
+
+/* Facebook Privacy Message */
+.fb_privacy_message {font-size:11px;font-family:Tahoma, Geneva, sans-serif;	line-height:1.2;color:#1c8292;padding:5px 10px 5px 40px;background:#ffffff url(../images/icons/icon_privacy.png) no-repeat 7px center;	display:inline-block;-webkit-border-radius: 5px;    border-radius: 5px;   background-clip: padding-box;
+	border:1px solid #e7e7e7;	margin:10px 0 5px;}
+.fb_privacy_message em {font-weight:bold;}
 
 @media screen and (max-width: 479px) {/* Target Mobile (320px) */
     .container .notify_wraper.notify_done ul li {
