@@ -11,8 +11,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sitterfied',
-        'USER': 'sitterfied',
-        'PASSWORD': 'sitterfied',
+        'USER': 'vagrant',
+        'PASSWORD': 'vagrant',
         'HOST': '127.0.0.1',
         'PORT': '',
     }
@@ -67,6 +67,7 @@ DEVSERVER_MODULES = (
     'devserver.modules.profile.LineProfilerModule',
 )
 
+ALLOWED_HOSTS += '*'
 
 DEVSERVER_AUTO_PROFILE = True
 
