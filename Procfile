@@ -1,5 +1,2 @@
-web: python manage.py runserver
-worker: celery worker --app=sitterfied --workdir=sitterfied --loglevel=INFO
-broker: redis-server
+web: python manage.py runserver 0.0.0.0:8000
 watcher: python templates.py
-
