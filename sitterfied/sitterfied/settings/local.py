@@ -3,6 +3,12 @@ from .base import *
 from .mandrill import *
 
 DEBUG = True
+TEMPLATE_DEBUG = True
+INTERNAL_IPS = (
+    '127.0.0.1',
+    '192.168.111.1',
+)
+
 
 # ShortUrl Redis Configuration
 REDIS_URL = 'redis://localhost:6379'
@@ -50,7 +56,6 @@ DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
 
-INTERNAL_IPS = ('127.0.0.1',)
 
 DEVSERVER_ARGS = ['--werkzeug']
 
