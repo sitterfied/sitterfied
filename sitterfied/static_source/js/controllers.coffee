@@ -525,9 +525,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             
             $.fancybox.close()
 
+            if interview_type == "Phone"
+                minutes = 30
+            else
+                minutes = 60
+                
             onDeckBookingAttrs = Sitterfied.onDeckBookingAttrs || {}
             start_date_time = onDeckBookingAttrs['start_date_time'] || moment().minutes(30)
-            stop_date_time = onDeckBookingAttrs['stop_date_time'] || moment().startOf('hour').add('minutes', 60)
+            stop_date_time = start_date_time.clone().startOf('hour').add('minutes', minutes)
             kids = onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
             overnight = onDeckBookingAttrs['overnight'] || false
                 
@@ -960,10 +965,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             start_moment.minute(start_time.minute())
             start_date_time = start_moment.toDate()
 
-            stop_moment = moment(stop_date)
-            stop_time = moment(@get('stop_time'), "HHmm")
-            stop_moment.hour(stop_time.hour())
-            stop_moment.minute(stop_time.minute())
+            if interview_type == 'Phone'
+                minutes = 30
+            else
+                minutes = 60
+                
+            stop_moment = start_moment.clone().add('minutes', minutes)
             stop_date_time = stop_moment.toDate()
             
             booking_type = interview_type + " Interview"
