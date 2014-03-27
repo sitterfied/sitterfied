@@ -72,7 +72,6 @@ DEVSERVER_MODULES = (
     'devserver.modules.profile.LineProfilerModule',
 )
 
-ALLOWED_HOSTS += '*'
 
 DEVSERVER_AUTO_PROFILE = True
 
