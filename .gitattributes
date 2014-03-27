@@ -1,0 +1,2 @@
+#pattern  filter=crypt diff=crypt
+sitterfied/app/fixtures/superuser.json filter=crypt diff=crypt
