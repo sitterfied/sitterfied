@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from .models import User, Parent, Sitter
+
 
 class EmailAuthBackend(object):
     """
@@ -11,7 +13,7 @@ class EmailAuthBackend(object):
     def authenticate(self, username=None, password=None):
         """ Authenticate a user based on email address as the user name. """
         try:
-            user = User.objects.get(email=username)
+            user = User.objects.get(email__iexact=username)
             if user.check_password(password):
                 return user
         except User.DoesNotExist:
@@ -29,6 +31,7 @@ class EmailAuthBackend(object):
                 return user
         except User.DoesNotExist:
             return None
+
 
 class FacebookAuthBackend(object):
     """
