@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 
 from django.contrib.auth.models import AbstractUser, UserManager
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.dispatch import Signal
 from django.utils.functional import cached_property
@@ -162,7 +163,7 @@ class Sitter(User):
     other_animals_ok = models.BooleanField(default=True)
 
     has_drivers_licence = models.BooleanField(default=False)
-    travel_distance = models.IntegerField(default=10)
+    travel_distance = models.PositiveIntegerField(default=10, validators=[MinValueValidator(1)])
 
     certifications = models.ManyToManyField("Certification", blank=True)
 
