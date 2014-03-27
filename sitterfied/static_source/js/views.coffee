@@ -435,10 +435,20 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
             promise.then(
                 () =>
                     @set("ajaxState", "saved")
-                    Em.run.later (=> @set("ajaxState", "done")), 5000
+                    Em.run.later (=>
+                        $(".alert-save").slideUp("slow")
+                        Em.run.later (=>
+                            @set("ajaxState", "done")
+                        ), 2000
+                    ), 3000
                 () =>
                     @set("ajaxState", "error")
-                    Em.run.later (=> @set("ajaxState", "done")), 5000
+                    Em.run.later (=>
+                        $(".alert-save").slideUp("slow")
+                        Em.run.later (=>
+                            @set("ajaxState", "done")
+                        ), 2000
+                    ), 3000
             )
 
 
@@ -571,6 +581,20 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         
         template: (->
             return Ember.Handlebars.compile("{{#if view.value}}<i class=\"fa fa-spinner fa-spin\"></i>{{else}}{{view.saveText}}{{/if}}")
+        ).property()
+        
+        click: (event) ->
+            event.preventDefault()       
+            if !@get('value')
+                @triggerAction()
+    )
+    
+    Sitterfied.AjaxStateButtonLink = Ember.View.extend(Ember.ViewTargetActionSupport,
+        tagName: 'a'
+        attributeBindings: ['class']
+        
+        template: (->
+            return Ember.Handlebars.compile("<span class='icon_ok2'>&nbsp;</span>{{#if view.value}}<i class=\"fa fa-spinner fa-spin\"></i>{{else}}{{view.saveText}}{{/if}}")
         ).property()
         
         click: (event) ->

@@ -32,13 +32,16 @@
 
 	{%block extra_header%}
 	{% endblock extra_header %}
+	<script type="text/javascript" src="{{ STATIC_URL }}/js/lib/ie-popup.js"></script>
 	<!--[if lt IE9]><script src="js/ie9.js">IE7_PNG_SUFFIX=".png";</script><![end if]-->
     {% include "googleanalytics.html" %}
+    {% include "mixpanel.html" %}
   </head>
   <body {% block bodyclass %} {% endblock %}>
     {% block body %}
-	{% endblock body %}
+    {% endblock body %}
 
+    {% include 'ie_modal.html' %}
     {% include "intercom.html" %}
 
     <!-- Feedbackify Support -->
@@ -52,5 +55,6 @@
       })();
     </script>
 
+    {% include "perfectaudience.html" %}
   </body>
 </html>

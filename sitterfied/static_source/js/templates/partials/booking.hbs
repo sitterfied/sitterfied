@@ -8,7 +8,22 @@
       {{#if hasMultipleSitters }}
         {{# if Sitterfied.isParent }}
           <img width=73 hight=73 src="/static/images/MultiSitterPic.jpg">
-          <p><span>Multiple Sitters</span></p>
+          <div>
+            <p><span><a>Multiple Sitters</a></span></p>
+            <ul>
+              <li>Job request was sent to these sitters</li>
+              {{# each sitters}}
+                <li>
+                  {{# linkTo user this }}
+                    <img {{bindAttr src=avatarUrl alt=full_name}}>
+                    <span>
+                      {{full_name}}
+                    </span>
+                  {{/linkTo}}
+                </li>
+              {{/each}}
+            </ul>
+          </div>
         {{ else }}
           {{#linkTo user otherPerson}}
             <img width=73 hight=73 {{bindAttr src=otherPerson.avatarUrl alt=otherPerson.full_name}}>

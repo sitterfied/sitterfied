@@ -5,7 +5,7 @@ PIPELINE_CSS = {
         'source_filenames': (
           'css/style.css',
           'css/vendor/*.css',
-          'css/vendor/font-awesome-4.0.3/css/font-awesome.min.css',
+          'css/vendor/font-awesome-4.0.3/css/font-awesome.min.css'
         ),
         'output_filename': 'css/sitterfied.css',
         'variant': 'datauri',
@@ -32,6 +32,7 @@ PIPELINE_JS = {
             'js/lib/uploadcare-0.15.0.min.js',
             'js/lib/jquery.form.min.js',
             'js/lib/jquery.formset.min.js',
+            'js/lib/ie-popup.js',
             'js/facebook.js',
 
         ),

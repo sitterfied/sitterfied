@@ -2,13 +2,15 @@
 import time
 
 import requests
-
-from app.models import User
 from celery.utils.log import get_task_logger
 from geopy import geocoders
+
+from app.models import User
 from sitterfied.celeryapp import app
 
+
 logger = get_task_logger(__name__)
+
 
 @app.task
 def geocode_user(id):
@@ -25,6 +27,7 @@ def geocode_user(id):
     logger.info('Geocoding based on zip {0}'.format(zip_code))
     place, (lat, lng) = geocoders.GoogleV3().geocode(zip_code)
     return (lat, lng)
+
 
 @app.task
 def lookup_time_zone(latitude_and_longitude, id):

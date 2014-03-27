@@ -1,0 +1,1 @@
+Friendly reminder - you’re scheduled to sit for {{ parent_full_name }} tomorrow from {{ start_date_time|date:'fA'|lower }} to {{ stop_date_time|date:'fA'|lower }}. Go to {{ short_url }} for details.
