@@ -19,7 +19,7 @@ require({
         'scrollto': 'lib/jquery.scrollTo-1.4.3.1-min',
 		'imgareaselect': 'lib/jquery.imgareaselect.pack',
 		'phoneformat': 'lib/PhoneFormat',
-		'ucare': 'lib/uploadcare-0.15.0.min',
+		'ucare': 'lib/uploadcare-1.0.0rc2.min',
         'purl': 'lib/purl',
         'subtab': 'sub-tab_active',
 	'iemodal': 'lib/ie-popup'
