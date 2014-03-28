@@ -37,8 +37,22 @@
     {% include "googleanalytics.html" %}
     {% include "hublo.html" %}
     {% include "mixpanel.html" %}
+
+    {% if not debug %}
+    <link rel="stylesheet" type="text/css"
+          href="//d2dubfq97s02eu.cloudfront.net/appcues.min.css">
+    {% endif %}
   </head>
   <body {% block bodyclass %} {% endblock %}>
+
+    {% if not debug %}
+    <script type="text/javascript"
+            src="//dxg0aknohlgi.cloudfront.net/appcues.min.js"
+            onload="Appcues.init()" data-appcues-id="77"
+            data-user-id="{{ request.user.email }}"
+            data-user-email="{{ request.user.email }}"></script>    
+    {% endif %}
+
     {% block body %}
     {% endblock body %}
 
