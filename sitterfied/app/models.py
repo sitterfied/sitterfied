@@ -361,7 +361,7 @@ class Booking(TimeStampedModel):
     def cancel(self, parent_or_sitter):
         self.canceled = True
         self.save()
-        if self.reminder:
+        if hasattr(self, 'reminder'):
             self.reminder.delete()
         booking_canceled.send(sender=self, cancelled_by=parent_or_sitter)
 

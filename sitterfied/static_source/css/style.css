@@ -762,7 +762,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 	/* Sitter Tabs */
 .sitter_tabs_wrap {padding:21px 0 0 0;}
 .sitter_tabs_wrap .tab_select {position:relative;min-height:58px;margin:0 20px;overflow:hidden;}
-.sitter_tabs_wrap .tab_select:before {content:'';display:block;width:100%;height:0;border-bottom:1px solid #cbd8df;position:absolute;bottom:0;left:0;z-index:2;font-size:0;line-height:0;box-shadow:#000 0 0 9px 0;}
+.sitter_tabs_wrap .tab_select:before {display:block;width:100%;height:0;border-bottom:1px solid #cbd8df;position:absolute;bottom:0;left:0;z-index:2;font-size:0;line-height:0;box-shadow:#000 0 0 9px 0;}
 .sitter_tabs_wrap .tab_select li {float:left;padding:0 5px 0 0;}
 .sitter_tabs_wrap .tab_select li a, .tabs_wrap .tab_select li a:visited {display:block;float:left;background:#fff;border:1px solid #d8e8f0;border-bottom:none;padding:0 35px;min-height:58px;text-align:center;border-radius:2px 2px 0 0;color:#a6c1c7;font:18px/58px 'ProximaNova-Semibold';position:relative;}
 .sitter_tabs_wrap .tab_select li a.active, .tabs_wrap .tab_select li a.active:visited, .tabs_wrap .tab_select li a:hover {border-color:#cbd8df;color:#0694ab;z-index:3;background:#fff url(../images/dot.gif) 0 0 repeat-x;}
