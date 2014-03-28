@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
+
+
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
 
 PIPELINE_CSS = {
     'sitterfied': {
         'source_filenames': (
-          'css/style.css',
-          'css/vendor/*.css',
-          'css/vendor/font-awesome-4.0.3/css/font-awesome.min.css'
+            'css/style.css',
+            'css/vendor/*.css',
+            'css/vendor/font-awesome-4.0.3/css/font-awesome.min.css'
         ),
         'output_filename': 'css/sitterfied.css',
         'variant': 'datauri',
@@ -13,17 +17,14 @@ PIPELINE_CSS = {
             'media': 'screen,projection',
         },
     },
-
-
-
 }
+
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 
 
-
 PIPELINE_JS = {
-      'onboarding': {
+    'onboarding': {
         'source_filenames': (
             'js/lib/jquery-1.9.1.js',
             'js/lib/jquery.fancybox.pack.js',
@@ -39,12 +40,16 @@ PIPELINE_JS = {
         'output_filename': 'js/libs.js',
     }
 }
+
+
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.slimit.SlimItCompressor'
 
+
 PIPELINE_COMPILERS = (
-  'pipeline.compilers.coffee.CoffeeScriptCompiler',
-  'pipeline_compass.compiler.CompassCompiler',
+    'pipeline.compilers.coffee.CoffeeScriptCompiler',
+    'pipeline_compass.compiler.CompassCompiler',
 )
+
 
 #allow things to be global
 PIPELINE_DISABLE_WRAPPER = True

@@ -53,13 +53,6 @@ DATABASES = {
 MEDIA_ROOT = "/home/dotcloud/data/media/"
 
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
-STATIC_ROOT = PROJECT_ROOT.child("static")
-
-
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',

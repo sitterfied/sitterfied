@@ -1,13 +1,17 @@
+# -*- coding: utf-8 -*-
+from django.conf import settings
 from django.conf.urls import patterns, include, url
-
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import RedirectView
+from filebrowser.sites import site
+
+
 admin.autodiscover()
 
-from filebrowser.sites import site
-from django.views.generic import RedirectView
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^admin/filebrowser/?', include(site.urls)),
     url(r'^grappelli/?', include('grappelli.urls')),
     url(r'^admin/?', include(admin.site.urls)),
@@ -17,16 +21,19 @@ urlpatterns = patterns('',
 )
 
 
-from django.conf import settings
-#TODO dev
 if settings.DEBUG:
-    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': settings.MEDIA_ROOT,
-        }),
-   )
-urlpatterns += patterns('',
+    urlpatterns += patterns(
+        '',
+        url(
+            r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+                'document_root': settings.MEDIA_ROOT,
+            }
+        )
+    )
+
+
+urlpatterns += patterns(
+    '',
     url(r'', include('app.urls')),
-                        )
+)
