@@ -6,8 +6,13 @@
 
 <!-- top info -->
 <div class="top_info clear">
+  <!--<div class="member_since guest"></div>   // If guest user "guest" clase conditionally -->
+  <div class="member_since">{{memberSince}}</div>
+  
   <div class="photo">
-    <div class="photo_edit_wrap" style="background-image: url('{{unbound avatarUrl}}');">
+    <div class="photo_edit_wrap"">
+		<!-- Developer: make this image dynamic -->
+		<img alt="" src="http://www.ucarecdn.com/b886fd6f-98d9-4459-8f96-9a781b3d1e9b/-/crop/2336x2336/1168,0/-/resize/x174/">
     </div>
   </div>
   <div class="guest_top_info">
