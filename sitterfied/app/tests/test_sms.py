@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-import app.sms as sms
-import mock
+import re
 import xml.etree.ElementTree as ET
 
-from app.models import Booking, Sitter
+import mock
 from django.conf import settings
 from django.test.client import RequestFactory
 from hamcrest import *
 from twilio.rest import TwilioRestClient
+
+import app.sms as sms
+from app.models import Booking
+
 
 TWILIO_TEST_CALLERID = '+15005550006'
 
@@ -139,3 +142,24 @@ def test_sms_messages_success():
             xml = ET.fromstring(response.content)
             message = xml.find('Sms')
             assert_that(message, none())
+
+
+def test_regex_response_pattern():
+    pattern = sms.response_pattern
+
+    result = re.search(pattern, 'DEcline 187', re.I | re.S)
+    assert_that(result, not_none())
+    assert_that(len(result.groups()), is_(2))
+    assert_that(result.group(1).lower(), is_('decline'))
+    assert_that(result.group(2), is_('187'))
+
+    result = re.search(pattern, 'accePT 343', re.I | re.S)
+    assert_that(result, not_none())
+    assert_that(len(result.groups()), is_(2))
+    assert_that(result.group(1).lower(), is_('accept'))
+    assert_that(result.group(2), is_('343'))
+
+    assert_that(re.search(pattern, 'decCline   ', re.I | re.S), none())
+    assert_that(re.search(pattern, 'dsgdfgfdgfd', re.I | re.S), none())
+    assert_that(re.search(pattern, 'dsfdsw243242', re.I | re.S), none())
+    assert_that(re.search(pattern, '  accept', re.I | re.S), none())

@@ -18,6 +18,8 @@ sitterfied_number = settings.TWILIO_DEFAULT_CALLERID
 client = TwilioRestClient(account_sid, auth_token)
 
 
+response_pattern = '(accept|yes|decline|no)[^\d]*(\d+)'
+
 @twilio_view
 def sms_messages(request):
     from_number = request.POST.get('From', None)
@@ -30,7 +32,7 @@ def sms_messages(request):
         return resp
 
     body = request.POST.get('Body')
-    result = re.search('(accept|yes|decline|no)[^\d]*(\d*)', body, re.I | re.S)
+    result = re.search(response_pattern, body, re.I | re.S)
 
     if result is None or len(result.groups()) < 2:
         resp.sms('We\'re sorry, but we couldn\'t understand your response. \

@@ -87,10 +87,14 @@ define ['jquery'
             @get('parent_or_sitter') == "Parent"
         ).property('parent_or_sitter')
         myFriends: (() ->
-            friends = this.get('friends')
-            myself = friends.findProperty('id', this.get('id'))
+            friends = @get('friends')
+            myself = friends.findProperty('id', @get('id'))
             if myself
-                friends.removeObject(myself)
+                if friends.length > 1
+                    friends.removeObject(myself)
+                else
+                    @set('friends', Em.A())
+                    friends = @get('friends')
             return friends
         ).property('friends.@each', 'friends.length')
 
