@@ -349,9 +349,10 @@ class Booking(TimeStampedModel):
         self.save()
         booking_accepted.send(sender=self, sitter=sitter)
 
-        reminder = Reminder()
-        reminder.booking = self
-        reminder.save()
+        # TODO: Uncomment when reminders are fixed
+        # reminder = Reminder()
+        # reminder.booking = self
+        # reminder.save()
 
     def decline(self, sitter):
         self.declined_sitters.add(sitter)
