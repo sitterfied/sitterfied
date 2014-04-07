@@ -5,6 +5,7 @@ from .facebook import *
 from .intercom import *
 from .pipeline import *
 from .grappelli import *
+from .mixpanel import *
 from .rest_framework import *
 from .twilio import *
 from .uploadcare import *
@@ -211,4 +212,5 @@ CELERY_IMPORTS = (
     'app.tasks.notifications',
     'app.tasks.reminders',
     'app.tasks.users',
+    'mixpanel.tasks',
 )
