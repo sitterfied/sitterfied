@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import mock
+from hamcrest import *
 
 from app.tasks import notifications
 
@@ -22,3 +23,5 @@ def test_notify_sitters_of_job_requests():
             to=call_args['to'],
             from_=call_args['from_'],
         )
+
+        assert_that(call_args['body'], contains_string('6pm-10pm'))

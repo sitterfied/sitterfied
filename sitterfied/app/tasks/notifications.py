@@ -2,6 +2,7 @@
 import pytz
 from celery.utils.log import get_task_logger
 from django.template.loader import render_to_string
+from django.utils import timezone
 
 from app.models import Booking
 from app.sms import send_message
@@ -94,6 +95,10 @@ def notify_sitters_of_job_request(id, pk_set):
             stop_date_time = tz.normalize(booking.stop_date_time)
 
             try:
+                # Activate the timezone for the sitter so that dates
+                # are formatted correctly.
+                timezone.activate(sitter.timezone if sitter.timezone else pytz.UTC)
+
                 sms = render_to_string(sms_template, {
                     'sitter_name': sitter.first_name,
                     'parent_name': parent.get_full_name(),
@@ -106,5 +111,5 @@ def notify_sitters_of_job_request(id, pk_set):
                     'num_sitters': len(booking.sitters.all()) - 1,
                 })
                 send_message(body=sms, to=sitter.cell)
-            except:
-                pass
+            finally:
+                timezone.deactivate()
