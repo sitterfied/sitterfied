@@ -11,7 +11,7 @@ INTERNAL_IPS = (
 
 
 # ShortUrl Redis Configuration
-REDIS_URL = 'redis://localhost:6379'
+REDIS_URL = 'redis://192.168.111.12:6379'
 
 DATABASES = {
     'default': {
@@ -19,7 +19,7 @@ DATABASES = {
         'NAME': 'sitterfied',
         'USER': 'vagrant',
         'PASSWORD': 'vagrant',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.111.12',
         'PORT': '',
     }
 }

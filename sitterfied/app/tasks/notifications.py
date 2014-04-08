@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytz
 from celery.utils.log import get_task_logger
 from django.template.loader import render_to_string
 
@@ -88,13 +89,17 @@ def notify_sitters_of_job_request(id, pk_set):
                 sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
 
             booking_date = booking.start_date_time.date()
+            tz = pytz.timezone(sitter.timezone) if sitter.timezone else pytz.UTC
+            start_date_time = tz.normalize(booking.start_date_time)
+            stop_date_time = tz.normalize(booking.stop_date_time)
+
             try:
                 sms = render_to_string(sms_template, {
                     'sitter_name': sitter.first_name,
                     'parent_name': parent.get_full_name(),
                     'booking_date': booking_date,
-                    'start_date_time': booking.start_date_time,
-                    'stop_date_time': booking.stop_date_time,
+                    'start_date_time': start_date_time.replace(tzinfo=pytz.UTC),
+                    'stop_date_time': stop_date_time.replace(tzinfo=pytz.UTC),
                     'parent_city': parent.city,
                     'short_url': short_url,
                     'booking_code': booking.id,
