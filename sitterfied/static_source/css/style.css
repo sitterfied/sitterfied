@@ -2331,8 +2331,10 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .invites_block .invite_friends_count.step12 p {left:auto;right:0;width:auto;}
 .invites_block .invite_by_email, .invites_block .invite_social {padding:0;width:auto;float:none;border-right:none;}
 .invites_block .invite_share_link input[type="text"] {margin:7px;}
-
-
+.header .top_info .desc .sitter_profile_buttons .button2 { margin-top:5px;}
+.header .top_info .desc p:nth-child(-n+4) span { display:block;}
+.header .top_info .know { position:relative; clear:both; right:auto; float:none;}
+.header .top_info .know .addfriend { margin-top:5px;}
 
 }
 .avatarimage {height: 35px; width: 34px;}
@@ -2370,6 +2372,8 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .fb_privacy_message {font-size:11px;font-family:Tahoma, Geneva, sans-serif;	line-height:1.2;color:#1c8292;padding:5px 10px 5px 40px;background:#ffffff url(../images/icons/icon_privacy.png) no-repeat 7px center;	display:inline-block;-webkit-border-radius: 5px;    border-radius: 5px;   background-clip: padding-box;
 	border:1px solid #e7e7e7;	margin:10px 0 5px;}
 .fb_privacy_message em {font-weight:bold;}
+
+#myfriends_sitter_title .icon_heart2 { background:url(../images/my_friends_title.png) no-repeat  0 center;}
 
 @media screen and (max-width: 479px) {/* Target Mobile (320px) */
     .container .notify_wraper.notify_done ul li {
