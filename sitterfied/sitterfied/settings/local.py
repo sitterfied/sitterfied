@@ -80,3 +80,7 @@ FACEBOOK_APP_ID = '746551758706532'
 # Celery configuration
 BROKER_URL = REDIS_URL + '/0'
 CELERY_ALWAYS_EAGER = False
+
+
+# Mixpanel API Token Override
+MIXPANEL_API_TOKEN = '83b0afebdeb67627e35dd826c4da9f52'

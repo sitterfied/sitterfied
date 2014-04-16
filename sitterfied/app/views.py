@@ -26,7 +26,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from signup import RegistrationView
 
-from app import utils
+from app import mixpanel_utils, utils
 from app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
 from app.models import User, Sitter, Parent, Group, Child
 from app.utils import send_html_email
@@ -157,6 +157,7 @@ def onboarding2(request):
                 if fb_id:
                     facebook_import_logic(user, fb_token, fb_id)
                 auth_login(request, user)
+                mixpanel_utils.track_login(user)
                 return redirect("onboarding3")
             else:
                 return {'TEMPLATE': "onboardingsitter.html",
@@ -175,6 +176,7 @@ def onboarding2(request):
                 if formset.is_valid():
                     formset.save()
                     auth_login(request, user)
+                    mixpanel_utils.track_login(user)
                     return redirect("onboarding3")
             else:
                 formset = ChildFormSet(request.POST)
@@ -388,6 +390,8 @@ def login_ajax(request,
 
         auth_login(request, form.get_user())
 
+        mixpanel_utils.track_login(request.user)
+
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
     else:
@@ -415,6 +419,9 @@ def login_facebook(request):
         return HttpResponseUnauthorized()
 
     auth_login(request, user)
+
+    mixpanel_utils.track_login(user)
+
     if request.session.test_cookie_worked():
         request.session.delete_test_cookie()
 

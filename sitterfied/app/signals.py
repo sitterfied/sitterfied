@@ -8,6 +8,7 @@ from django.db.models.signals import post_save, pre_save, pre_delete, m2m_change
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
+from app import mixpanel_utils
 from app.models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule, Reminder
 from app.sms import send_message
 from app.tasks import notifications, reminders
@@ -271,6 +272,21 @@ def new_parent(sender, instance=None, **kwargs):
         message['to'] = [create_email_to(instance.email, instance.get_full_name())]
         message['global_merge_vars'] = [{'name': 'FNAME', 'content': instance.first_name}]
         send_template_email('welcome-parent', message)
+
+
+@receiver(pre_save, sender=Parent)
+def parent_save_handler(sender, instance=None, **kwargs):
+    try:
+        obj = Parent.objects.get(pk=instance.pk)
+        diff = [x for x in instance.sitter_teams.all() if x not in obj.sitter_teams.all()]
+        print 'Sitters added:' + str(diff)
+        if diff:
+            mixpanel_utils.track_event('Addition to sitter team', {
+                'distinct_id': instance.id,
+                'sitters_added': ','.join([sitter.get_full_name() for sitter in diff])
+            })
+    except Sitter.DoesNotExist:
+        raise
 
 
 @receiver(post_save, sender=Reminder)

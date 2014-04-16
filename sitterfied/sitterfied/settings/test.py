@@ -77,6 +77,10 @@ TWILIO_DEFAULT_CALLERID = '+19088384816'
 FACEBOOK_APP_ID = '624946094225118'
 
 
+# Mixpanel API Token Override
+MIXPANEL_API_TOKEN = '83b0afebdeb67627e35dd826c4da9f52'
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
