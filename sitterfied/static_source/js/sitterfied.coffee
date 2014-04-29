@@ -50,8 +50,8 @@ define ['jquery'
     )
 
     Sitterfied.Educations = Em.A [
-        "Some High Scool"
-        "High Scool Degree"
+        "Some High School"
+        "High School Degree"
         "Some College"
         "College Degree"
     ]
