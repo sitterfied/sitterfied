@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import api
 import google
-
 from django.conf.urls import patterns, url, include
-from django.views.generic.base import TemplateView
 from rest_framework.routers import DefaultRouter
 
 from .signals import *
@@ -30,7 +28,7 @@ router.register(r'groups', api.GroupViewSet)
 urlpatterns = patterns('app.views',
                        # Examples:
                        url(r'^error/', 'error', name='error'),
-                       url(r'^onboarding/$', TemplateView.as_view(template_name="onboarding1.html"), name='onboarding1'),
+                       url(r'^onboarding/$', 'onboarding1', name='onboarding1'),
                        url(r'^onboarding2/$', "onboarding2", name='onboarding2'),
                        url(r'^onboarding3/$', "onboarding3", name='onboarding3'),
                        url(r'^onboarding4/$', "onboarding4", name='onboarding4'),

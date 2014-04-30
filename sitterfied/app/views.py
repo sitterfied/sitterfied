@@ -144,6 +144,11 @@ def short_url(request):
         return HttpResponseNotFound()
 
 
+@render_to('onboarding1.html')
+def onboarding1(request):
+    return {'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID}
+
+
 @render_to()
 def onboarding2(request):
     ChildFormSet = inlineformset_factory(Parent, Child, form=ChildForm, extra=1, formset=RequiredFormSet)
@@ -185,24 +190,22 @@ def onboarding2(request):
     if request.method == "GET":
         fb_id = request.session.get("FACEBOOK_ID", None)
         fb_token = request.session.get("FACEBOOK_TOKEN", None)
+
         if fb_id:
             graph = facebook.GraphAPI(fb_token)
             me = graph.get_object("me")
             birthday = me.get("birthday", "")
-            if birthday:
-                dob = datetime.strptime(birthday, "%m/%d/%Y")
-            else:
-                dob = ""
-                initial = {
-                    "first_name": me.get('first_name', ""),
-                    "last_name": me.get('last_name', ""),
-                    "gender": me.get('gender', ""),
-                    "email": me.get("email", ""),
-                    'dob': dob,
-                }
-
+            dob = datetime.strptime(birthday, '%m/%d/%Y') if birthday else ''
+            initial = {
+                "first_name": me.get('first_name', ""),
+                "last_name": me.get('last_name', ""),
+                "gender": me.get('gender', ""),
+                "email": me.get("email", ""),
+                'dob': dob,
+            }
         else:
             initial = {}
+
         parent_or_sitter = request.GET.get('parent_or_sitter', "parent")
         if parent_or_sitter.lower() == "sitter":
             form = SitterRegisterForm(initial=initial)

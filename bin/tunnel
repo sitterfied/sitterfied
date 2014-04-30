@@ -1,1 +1,1 @@
-ngrok -subdomain=sitterfied 8000
+ngrok -subdomain=sitterfied 0.0.0.0:8000
