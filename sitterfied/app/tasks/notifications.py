@@ -3,6 +3,7 @@ import pytz
 from celery.utils.log import get_task_logger
 from django.template.loader import render_to_string
 from django.utils import timezone
+from twilio import TwilioRestException
 
 from app.models import Booking
 from app.sms import send_message
@@ -111,5 +112,12 @@ def notify_sitters_of_job_request(id, pk_set):
                     'num_sitters': len(booking.sitters.all()) - 1,
                 })
                 send_message(body=sms, to=sitter.cell)
+            except TwilioRestException as ex:
+                logger.exception(
+                    'Notification to {0} wih cell number {1} failed for the following reason: {3}',
+                    sitter.get_full_name(),
+                    sitter.cell,
+                    ex.message
+                )
             finally:
                 timezone.deactivate()
