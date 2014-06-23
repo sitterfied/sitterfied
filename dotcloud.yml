@@ -3,6 +3,8 @@ www:
   config:
     python_version: v2.7
   approot: sitterfied
+  systempackages:
+    - htop
 
 data:
   type: postgis
@@ -14,3 +16,5 @@ worker:
   type: python-worker
   config:
     python_version: v2.7
+  systempackages:
+    - htop
