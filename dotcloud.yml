@@ -3,6 +3,9 @@ www:
   config:
     python_version: v2.7
   approot: sitterfied
+  systempackages:
+    - htop
+    - tmux
 
 data:
   type: postgis
@@ -14,3 +17,7 @@ worker:
   type: python-worker
   config:
     python_version: v2.7
+  systempackages:
+    - htop
+    - tmux
+  postinstall: './worker_postinstall'

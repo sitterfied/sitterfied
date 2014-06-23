@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import psycopg2
 import requests
 
@@ -80,10 +80,13 @@ def main():
 
     try:
         r = requests.post('http://www.knowtify.io/api/v1/contacts/upsert', data=json, headers=headers)
+        response = r.content
+        print "API response\n      ->%s" % (r.content)
     except Exception as e:
         print "API error\n	->%s" % (e.message)
+        response = e.message
 
-    print "API response\n      ->%s" % (r.content)
+    return response
 
 
 if __name__ == "__main__":
