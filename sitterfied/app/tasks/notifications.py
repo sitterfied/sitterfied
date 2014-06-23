@@ -113,11 +113,11 @@ def notify_sitters_of_job_request(id, pk_set):
                 })
                 send_message(body=sms, to=sitter.cell)
             except TwilioRestException as ex:
-                logger.exception(
+                logger.error(
                     'Notification to {0} wih cell number {1} failed for the following reason: {3}',
                     sitter.get_full_name(),
                     sitter.cell,
-                    ex.message
+                    str(ex.message),
                 )
             finally:
                 timezone.deactivate()

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import celery
 import pytz
 from django.conf import settings
-from django.db.models.signals import post_save, pre_save, pre_delete, m2m_changed
+from django.db.models.signals import post_save, pre_delete, m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
@@ -25,7 +25,7 @@ def groups_added():
 
 
 #parent events
-@receiver(booking_accepted)
+@receiver(booking_accepted, dispatch_uid='app.booking.booking_accepted')
 def booking_request_accepted(sender, sitter=None, **kwargs):
     parent = sender.parent
 
@@ -67,7 +67,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
         send_message(body=sms, to=sitter.cell)
 
 
-@receiver(booking_declined)
+@receiver(booking_declined, dispatch_uid='app.booking.booking_declined')
 def booking_request_declined(sender, sitter=None, **kwargs):
     parent = sender.parent
     parent_settings = parent.settings
@@ -117,7 +117,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
         send_message(body=sms, to=sitter.cell)
 
 
-@receiver(booking_canceled)
+@receiver(booking_canceled, dispatch_uid='app.booking.booking_canceled')
 def booking_request_canceled(sender, cancelled_by, **kwargs):
     parent = sender.parent
     sitter = sender.accepted_sitter
