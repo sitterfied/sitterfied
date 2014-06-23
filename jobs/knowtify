@@ -1,11 +1,21 @@
 #!/usr/bin/env python
+import json
 import psycopg2
 import requests
 
 
+with open('/home/dotcloud/environment.json') as f:
+    env = json.load(f)
+
+
 def main():
     # conn_string = "host='sitterfied-alewisohn.azva.dotcloud.net' port='1631' dbname='sitterfied' user='root' password='5KwP90YVA1E9zGLl5pSj'"
-    conn_string = "host='beta-alewisohn.azva.dotcloud.net' port='1278' dbname='sitterfied' user='root' password='ge4WmFz38zPLSciaNcDs'"
+    conn_string = "host='{0}' port='{1}' dbname='sitterfied' user='{2}' password='{3}'".format(
+        env.get('DOTCLOUD_DATA_SQL_HOST'),
+        env.get('DOTCLOUD_DATA_SQL_PORT'),
+        env.get('DOTCLOUD_DATA_SQL_LOGIN'),
+        env.get('DOTCLOUD_DATA_SQL_PASSWORD')
+    )
 
     # print the connection string we will use to connect
     print "Connecting to database\n	->%s" % (conn_string)
@@ -75,8 +85,11 @@ def main():
 
     print "Request body\n	->%s" % (json)
 
-    # headers = {'Authorization': 'Token  # token="4a866b43f5f0f148d62fb8fcdf668d6f"'}  # Test
-    headers = {'Authorization': 'Token token="eeaf1c3b2d47247cc401a3e7dc9162b5"'}  # Production
+    api_token = env.get('KNOWTIFY_API_TOKEN')
+    if not api_token:
+        return 'The Knowtify API token is not set. Please set the KNOWTIFY_API_TOKEN environment variable.'
+
+    headers = {'Authorization': 'Token token="' + api_token + '"'}
 
     try:
         r = requests.post('http://www.knowtify.io/api/v1/contacts/upsert', data=json, headers=headers)

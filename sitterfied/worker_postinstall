@@ -1,2 +1,0 @@
-# Setup crontab
-crontab 00 18 * * Mon ~/current/jobs/knowtify | mail -s 'Knowtify API Update Run' alewisohn@sitterfied.com,jnanscawen@sitterfied.com
