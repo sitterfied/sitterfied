@@ -9,7 +9,6 @@ with open('/home/dotcloud/environment.json') as f:
 
 
 def main():
-    # conn_string = "host='sitterfied-alewisohn.azva.dotcloud.net' port='1631' dbname='sitterfied' user='root' password='5KwP90YVA1E9zGLl5pSj'"
     conn_string = "host='{0}' port='{1}' dbname='sitterfied' user='{2}' password='{3}'".format(
         env.get('DOTCLOUD_DATA_SQL_HOST'),
         env.get('DOTCLOUD_DATA_SQL_PORT'),
