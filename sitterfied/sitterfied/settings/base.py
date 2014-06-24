@@ -161,7 +161,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
-        'console':{
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler'
         },
@@ -198,11 +198,12 @@ ALLOWED_HOSTS = [
 AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend', 'app.authentication.FacebookAuthBackend',)
 
 
-# Base URL for shortened URLs 
+# Base URL for shortened URLs
 SHORT_URL = 'www.sttrfd.us/'
 
 
 # Celery configuration
+CELERY_DISABLE_RATE_LIMITS = True
 CELERY_IGNORE_RESULTS = True
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -212,3 +213,6 @@ CELERY_IMPORTS = (
     'app.tasks.reminders',
     'app.tasks.users',
 )
+BROKER_TRANSPORT_OPTIONS = {
+    'visibility_timeout': 31536000,
+}
