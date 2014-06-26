@@ -16,7 +16,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Andrew Lewisohn', 'alewisohn@gmail.com'),
+    ('Andrew Lewisohn', 'alewisohn@sitterfied.com'),
 )
 
 MANAGERS = ADMINS
@@ -203,6 +203,8 @@ SHORT_URL = 'www.sttrfd.us/'
 
 
 # Celery configuration
+CELERYD_HIJACK_ROOT_LOGGER = False
+CELERY_SEND_TASK_ERROR_EMAILS = True
 CELERY_DISABLE_RATE_LIMITS = True
 CELERY_IGNORE_RESULTS = True
 CELERY_ACCEPT_CONTENT = ['json']
@@ -216,3 +218,4 @@ CELERY_IMPORTS = (
 BROKER_TRANSPORT_OPTIONS = {
     'visibility_timeout': 31536000,
 }
+SERVER_EMAIL = 'no-reply@sitterfied.com'

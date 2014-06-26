@@ -27,19 +27,20 @@ def main():
 
     # execute our Query
     cursor.execute("""SELECT
-        up.first_name as first_name,
-        up.last_name as last_name,
-        up.email as email,
-        count(t.sitter_id) as team_size,
-        string_agg(us.first_name || ' ' || us.last_name, ', ') as sitter_name,
-        string_agg(us.email, ',') as sitter_email,
-        string_agg(us.avatar, ', ') as sitter_avatar
-    FROM public.app_parent_sitter_teams t
-    LEFT OUTER JOIN public.app_user up on up.id = t.parent_id
-    LEFT OUTER JOIN public.app_user us on us.id = t.sitter_id
-    GROUP BY t.parent_id, up.first_name, up.last_name, up.email
-    ORDER BY t.parent_id
-    """)
+    up.id as parent_id,
+    up.first_name as first_name,
+    up.last_name as last_name,
+    up.email as email,
+    count(t.sitter_id) as team_size,
+    string_agg(us.first_name || ' ' || us.last_name, ',') as sitter_name,
+    string_agg(us.email, ',') as sitter_email,
+    string_agg(us.avatar, ',') as sitter_avatar
+FROM public.app_parent as p
+LEFT OUTER JOIN public.app_user up on up.id = p.user_ptr_id
+LEFT OUTER JOIN public.app_parent_sitter_teams t on up.id = t.parent_id
+LEFT OUTER JOIN public.app_user us on us.id = t.sitter_id
+GROUP BY up.id, t.parent_id, up.first_name, up.last_name, up.email
+ORDER BY t.parent_id""")
 
     # retrieve the records from the database
     records = cursor.fetchall()
