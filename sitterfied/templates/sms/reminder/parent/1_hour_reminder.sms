@@ -1,1 +1,1 @@
-Friendly reminder that you need to relieve {{ sitter_first_name }} in 1 hour ({{ stop_date_time|date:'fA'|lower }}). {{ sitter_first_name }}’s # is: {{ sitter_cell }}. Try not to be late :)
+{{ sitter_full_name }} will be arriving in {{ hours }} hour. {{ sitter_first_name }}'s # is: {{ sitter_cell }}. Go to {{ short_url }} for details.

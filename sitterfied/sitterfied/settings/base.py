@@ -216,6 +216,8 @@ CELERY_IMPORTS = (
     'app.tasks.users',
 )
 BROKER_TRANSPORT_OPTIONS = {
+    # Set visibility timeout to 1 year, this is necessary to prevent
+    # celery from executing scheduled celery tasks multiple times.
     'visibility_timeout': 31536000,
 }
 SERVER_EMAIL = 'no-reply@sitterfied.com'

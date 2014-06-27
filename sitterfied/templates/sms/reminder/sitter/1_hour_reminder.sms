@@ -1,0 +1,1 @@
+You’re scheduled to sit for {{ parent_full_name }} in {{ hours }} hour. {{ parent_first_name }}'s # is: {{ parent_cell }}. Try not to be late :)

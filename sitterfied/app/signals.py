@@ -278,14 +278,25 @@ def reminder_save_handler(*args, **kwargs):
     reminder = kwargs.get('instance')
 
     if not reminder.task_id:
+        first_reminder = 24
+        second_reminder = 1
+        no_reminder = -1
+        seconds_in_hour = 3600
+
         start_date_time = reminder.booking.start_date_time
         tz = pytz.timezone(reminder.booking.parent.timezone)
         delta = start_date_time - datetime.now(tz)
 
-        if delta.total_seconds() > 24 * 3600 or delta.total_seconds() > 2 * 3600:
-            hours = 24 if delta.days >= 1 and timedelta.seconds > 0 else 2
+        if delta.total_seconds() > first_reminder * seconds_in_hour or delta.total_seconds() > second_reminder * seconds_in_hour:
+            hours = first_reminder if delta.days >= 1 and timedelta.seconds > 0 else second_reminder
+            next_reminder = second_reminder if hours == first_reminder else no_reminder
+
             eta = start_date_time - timedelta(hours=hours)
-            result = reminders.send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': reminder.id, 'hours': hours})
+            result = reminders.send_reminders.apply_async(
+                eta=eta.astimezone(pytz.UTC),
+                kwargs={'id': reminder.id, 'hours': hours, 'next_reminder': next_reminder}
+            )
+
             reminder.task_id = result.task_id
             reminder.save()
 
