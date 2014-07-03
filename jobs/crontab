@@ -1,1 +1,2 @@
-00 18 * * Mon ~/current/jobs/knowtify | mail -s 'Knowtify API Update Run' alewisohn@sitterfied.com,jnanscawen@sitterfied.com
+MAILTO=""
+* 22 * * Mon . /home/dotcloud/env/bin/activate && /home/dotcloud/current/jobs/knowtify | mail -s 'Knowtify API Weekly Update' alewisohn@sitterfied.com,jnanscawen@sitterfied.com
