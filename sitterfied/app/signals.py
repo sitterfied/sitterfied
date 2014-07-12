@@ -278,25 +278,50 @@ def reminder_save_handler(*args, **kwargs):
     reminder = kwargs.get('instance')
 
     if not reminder.task_id:
-        first_reminder = 24
-        second_reminder = 1
-        no_reminder = -1
-        seconds_in_hour = 3600
+        first_reminder = settings.DEFAULT_FIRST_REMINDER_SECONDS or 86400
+        second_reminder = settings.DEFAULT_SECOND_REMINDER_SECONDS or 3600
 
         start_date_time = reminder.booking.start_date_time
-        tz = pytz.timezone(reminder.booking.parent.timezone)
-        delta = start_date_time - datetime.now(tz)
+        stop_date_time = reminder.booking.stop_date_time
+        timezone = pytz.timezone(reminder.booking.parent.timezone)
+        delta = start_date_time - datetime.now(timezone)
 
-        if delta.total_seconds() > first_reminder * seconds_in_hour or delta.total_seconds() > second_reminder * seconds_in_hour:
-            hours = first_reminder if delta.days >= 1 and timedelta.seconds > 0 else second_reminder
-            next_reminder = second_reminder if hours == first_reminder else no_reminder
+        if delta.total_seconds() > first_reminder:
+            eta = start_date_time - timedelta(seconds=first_reminder)
+            seconds = first_reminder
+            next_reminders = [
+                {
+                    'eta': start_date_time - timedelta(seconds=second_reminder),
+                    'seconds': second_reminder
+                },
+                {
+                    'eta': stop_date_time - timedelta(seconds=second_reminder),
+                    'seconds': None
+                },
+            ]
+        elif delta.total_seconds() > second_reminder:
+            eta = start_date_time - timedelta(seconds=second_reminder)
+            seconds = second_reminder
+            next_reminders = [
+                {
+                    'eta': stop_date_time - timedelta(seconds=second_reminder),
+                    'seconds': None
+                },
+            ]
+        else:
+            eta = stop_date_time - timedelta(seconds=second_reminder)
+            seconds = None
+            next_reminders = []
 
-            eta = start_date_time - timedelta(hours=hours)
+        if eta:
             result = reminders.send_reminders.apply_async(
                 eta=eta.astimezone(pytz.UTC),
-                kwargs={'id': reminder.id, 'hours': hours, 'next_reminder': next_reminder}
+                kwargs={
+                    'id': reminder.id,
+                    'seconds': seconds,
+                    'reminders': next_reminders,
+                }
             )
-
             reminder.task_id = result.task_id
             reminder.save()
 
