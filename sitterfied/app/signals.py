@@ -289,29 +289,35 @@ def reminder_save_handler(*args, **kwargs):
 
         if delta.total_seconds() > first_reminder:
             eta = start_date_time - timedelta(seconds=first_reminder)
+            reminder_type = 'first'
             seconds = first_reminder
             next_reminders = [
                 {
                     'eta': (start_date_time - timedelta(seconds=second_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
-                    'seconds': second_reminder
+                    'reminder_type': 'second',
+                    'seconds': second_reminder,
                 },
                 {
                     'eta': (stop_date_time - timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
-                    'seconds': None
+                    'reminder_type': 'relief',
+                    'seconds': relief_reminder,
                 },
             ]
         elif delta.total_seconds() > second_reminder:
             eta = start_date_time - timedelta(seconds=second_reminder)
+            reminder_type = 'second'
             seconds = second_reminder
             next_reminders = [
                 {
                     'eta': (stop_date_time - timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
-                    'seconds': None
+                    'reminder_type': 'relief',
+                    'seconds': relief_reminder,
                 },
             ]
         else:
             eta = stop_date_time - timedelta(seconds=relief_reminder)
-            seconds = None
+            reminder_type = 'relief'
+            seconds = relief_reminder
             next_reminders = []
 
         if eta:
@@ -319,6 +325,7 @@ def reminder_save_handler(*args, **kwargs):
                 eta=eta.astimezone(timezone),
                 kwargs={
                     'id': reminder.id,
+                    'reminder_type': reminder_type,
                     'seconds': seconds,
                     'reminders': next_reminders,
                 }

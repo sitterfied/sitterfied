@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import math
 from datetime import datetime
 
 import pytz
@@ -18,8 +19,25 @@ logger = get_task_logger(__name__)
 seconds_in_hour = 3600
 
 
+def get_time_delta(seconds):
+    seconds_in_minute = 60
+    seconds_in_hour = 3600
+
+    if seconds >= seconds_in_hour:
+        hours = seconds / seconds_in_hour
+        if hours >= 48:
+            return 'in ' + ('%g' % round(math.ceil(hours / 24), 2)) + ' days'
+        elif hours >= 24:
+            return 'tomorrow'
+        else:
+            return 'in ' + str(hours) + ' ' + ('hours' if hours > 1 else 'hour')
+    else:
+        minutes = seconds / seconds_in_minute
+        return 'in ' + str(minutes) + ' ' + ('minutes' if minutes > 1 else 'minute')
+
+
 @app.task
-def send_reminders(id, seconds, reminders):
+def send_reminders(id, reminder_type, seconds, reminders):
     reminder = Reminder.objects.get(pk=id)
     booking = reminder.booking
     parent = booking.parent
@@ -30,10 +48,10 @@ def send_reminders(id, seconds, reminders):
     stop_date_time = tz.normalize(booking.stop_date_time)
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
-        send_parent_reminder(parent, sitter, start_date_time, stop_date_time, seconds, tz)
+        send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, tz)
 
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
-        send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, seconds, tz)
+        send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, tz)
 
     if reminders:
         queue_next_reminder(reminder, reminders)
@@ -42,12 +60,14 @@ def send_reminders(id, seconds, reminders):
 def queue_next_reminder(reminder, reminders):
     next_reminder = reminders.pop(0)
     next_eta = datetime.strptime(next_reminder['eta'], '%Y-%m-%d %H:%M:%S')
+    next_reminder_type = next_reminder['reminder_type']
     next_seconds = next_reminder['seconds']
 
     result = send_reminders.apply_async(
         eta=pytz.UTC.localize(next_eta),
         kwargs={
             'id': reminder.id,
+            'reminder_type': next_reminder_type,
             'seconds': next_seconds,
             'reminders': reminders,
         }
@@ -56,24 +76,17 @@ def queue_next_reminder(reminder, reminders):
     reminder.save()
 
 
-def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, seconds, tz):
+def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, tz):
     try:
         timezone.activate(tz)
 
-        if seconds:
-            if seconds == 180:
-                hours = 24
-            elif seconds == 60:
-                hours = 1
-            else:
-                hours = seconds / seconds_in_hour
-
-            template = 'sms/reminder/parent/{0}_hour_reminder.sms'.format(hours)
+        if reminder_type in ['first', 'second']:
+            template = 'sms/reminder/parent/{0}_reminder.sms'.format(reminder_type)
             sms = render_to_string(template, {
                 'sitter_full_name': sitter.get_full_name(),
                 'sitter_first_name': sitter.first_name,
                 'sitter_cell': sitter.cell,
-                'hours': hours,
+                'timedelta': get_time_delta(seconds),
                 'start_date_time': start_date_time.replace(),
                 'stop_date_time': stop_date_time.replace(),
                 'short_url': get_short_url('/mybookings/upcoming'),
@@ -83,6 +96,7 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, second
             sms = render_to_string(template, {
                 'sitter_first_name': sitter.first_name,
                 'sitter_cell': sitter.cell,
+                'timedelta': get_time_delta(seconds),
                 'stop_date_time': stop_date_time.replace(),
             })
 
@@ -93,24 +107,17 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, second
         timezone.deactivate()
 
 
-def send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, seconds, tz):
+def send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, tz):
     try:
         timezone.activate(tz)
 
-        if seconds:
-            if seconds == 180:
-                hours = 24
-            elif seconds == 60:
-                hours = 1
-            else:
-                hours = seconds / seconds_in_hour
-
-            template = 'sms/reminder/sitter/{0}_hour_reminder.sms'.format(hours)
+        if reminder_type in ['first', 'second']:
+            template = 'sms/reminder/sitter/{0}_reminder.sms'.format(reminder_type)
             sms = render_to_string(template, {
                 'parent_full_name': parent.get_full_name(),
                 'parent_first_name': parent.first_name,
                 'parent_cell': parent.cell,
-                'hours': hours,
+                'timedelta': get_time_delta(seconds),
                 'start_date_time': start_date_time.replace(),
                 'stop_date_time': stop_date_time.replace(),
                 'short_url': get_short_url('/mybookings/upcoming'),

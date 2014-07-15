@@ -1,1 +1,1 @@
-Friendly reminder that you need to relieve {{ sitter_first_name }} in 1 hour ({{ stop_date_time|date:'fA'|lower }}). {{ sitter_first_name }}’s # is: {{ sitter_cell }}. Try not to be late :)
+Friendly reminder that you need to relieve {{ sitter_first_name }} {{ timedelta }} ({{ stop_date_time|date:'fA'|lower }}). {{ sitter_first_name }}’s # is: {{ sitter_cell }}. Try not to be late :)

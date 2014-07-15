@@ -1,0 +1,1 @@
+Friendly reminder - {{ sitter_full_name }} will be sitting for you {{ timedelta }} ({{ start_date_time|date:'fA'|lower }}-{{ stop_date_time|date:'fA'|lower }}). Go to {{ short_url }} for details.
