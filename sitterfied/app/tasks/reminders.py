@@ -86,7 +86,7 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, second
                 'stop_date_time': stop_date_time.replace(),
             })
 
-            send_message(sms, parent.cell)
+        send_message(sms, parent.cell)
     except Exception as ex:
         raise ex
     finally:
