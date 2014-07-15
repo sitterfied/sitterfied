@@ -278,8 +278,9 @@ def reminder_save_handler(*args, **kwargs):
     reminder = kwargs.get('instance')
 
     if not reminder.task_id:
-        first_reminder = settings.DEFAULT_FIRST_REMINDER_SECONDS or 86400
-        second_reminder = settings.DEFAULT_SECOND_REMINDER_SECONDS or 3600
+        first_reminder = settings.JOB_FIRST_REMINDER
+        second_reminder = settings.JOB_SECOND_REMINDER
+        relief_reminder = settings.JOB_RELIEF_REMINDER
 
         start_date_time = reminder.booking.start_date_time
         stop_date_time = reminder.booking.stop_date_time
@@ -291,11 +292,11 @@ def reminder_save_handler(*args, **kwargs):
             seconds = first_reminder
             next_reminders = [
                 {
-                    'eta': start_date_time - timedelta(seconds=second_reminder),
+                    'eta': (start_date_time - timedelta(seconds=second_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'seconds': second_reminder
                 },
                 {
-                    'eta': stop_date_time - timedelta(seconds=second_reminder),
+                    'eta': (stop_date_time - timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'seconds': None
                 },
             ]
@@ -304,18 +305,18 @@ def reminder_save_handler(*args, **kwargs):
             seconds = second_reminder
             next_reminders = [
                 {
-                    'eta': stop_date_time - timedelta(seconds=second_reminder),
+                    'eta': (stop_date_time - timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'seconds': None
                 },
             ]
         else:
-            eta = stop_date_time - timedelta(seconds=second_reminder)
+            eta = stop_date_time - timedelta(seconds=relief_reminder)
             seconds = None
             next_reminders = []
 
         if eta:
             result = reminders.send_reminders.apply_async(
-                eta=eta.astimezone(pytz.UTC),
+                eta=eta.astimezone(timezone),
                 kwargs={
                     'id': reminder.id,
                     'seconds': seconds,

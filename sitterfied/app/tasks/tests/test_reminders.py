@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from datetime import datetime, timedelta
 
 from django.db.models.signals import pre_save, m2m_changed, pre_delete
@@ -8,6 +9,16 @@ from app import signals
 from app.models import Booking, Parent, Reminder, Sitter
 from app.tasks import reminders
 from app.tasks.tests import utils
+
+
+def test_time_conversions():
+    tz = timezone('America/New_York')
+    eta = (datetime.now(tz) - timedelta(seconds=3600)).strftime("%Y-%m-%d %H:%M:%S")
+    print eta
+    print json.dumps(eta)
+    pdate = datetime.strptime(eta, '%Y-%m-%d %H:%M:%S')
+    print pdate
+    print tz.localize(pdate)
 
 
 def test_send_reminders():
