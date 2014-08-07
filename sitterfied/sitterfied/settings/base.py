@@ -16,7 +16,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Andrew Lewisohn', 'alewisohn@gmail.com'),
+    ('Andrew Lewisohn', 'alewisohn@sitterfied.com'),
 )
 
 MANAGERS = ADMINS
@@ -161,7 +161,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
-        'console':{
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler'
         },
@@ -198,11 +198,14 @@ ALLOWED_HOSTS = [
 AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend', 'app.authentication.FacebookAuthBackend',)
 
 
-# Base URL for shortened URLs 
+# Base URL for shortened URLs
 SHORT_URL = 'www.sttrfd.us/'
 
 
 # Celery configuration
+CELERYD_HIJACK_ROOT_LOGGER = False
+CELERY_SEND_TASK_ERROR_EMAILS = True
+CELERY_DISABLE_RATE_LIMITS = True
 CELERY_IGNORE_RESULTS = True
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -212,3 +215,15 @@ CELERY_IMPORTS = (
     'app.tasks.reminders',
     'app.tasks.users',
 )
+BROKER_TRANSPORT_OPTIONS = {
+    # Set visibility timeout to 1 year, this is necessary to prevent
+    # celery from executing scheduled celery tasks multiple times.
+    'visibility_timeout': 31536000,
+}
+SERVER_EMAIL = 'no-reply@sitterfied.com'
+
+
+# Reminder times in seconds
+JOB_FIRST_REMINDER = 86400  # 24 Hours
+JOB_SECOND_REMINDER = 3600  # 1 Hour
+JOB_RELIEF_REMINDER = 3600  # 1 Hour

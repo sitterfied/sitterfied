@@ -77,6 +77,14 @@ TWILIO_DEFAULT_CALLERID = '+19088384816'
 FACEBOOK_APP_ID = '624946094225118'
 
 
+try:
+    JOB_FIRST_REMINDER = int(env.get('JOB_FIRST_REMINDER'))
+    JOB_SECOND_REMINDER = int(env.get('JOB_SECOND_REMINDER'))
+    JOB_RELIEF_REMINDER = int(env.get('JOB_RELIEF_REMINDER'))
+except:
+    pass
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

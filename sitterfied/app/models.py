@@ -38,11 +38,11 @@ class User(AbstractUser, TimeStampedModel):
     objects = UserManager()
 
     MEMBERSHIP_STATUS = Choices("Trial", "paid")
-    users_in_network = models.ManyToManyField('self',  blank=True, symmetrical=True)
-    friends = models.ManyToManyField('self',  blank=True)
+    users_in_network = models.ManyToManyField('self', blank=True, symmetrical=True)
+    friends = models.ManyToManyField('self', blank=True)
 
     sitter_groups = models.ManyToManyField('Group', blank=True)
-    invited_by = models.ManyToManyField('self',  symmetrical=False, blank=True)
+    invited_by = models.ManyToManyField('self', symmetrical=False, blank=True)
     languages = models.ManyToManyField('Language', blank=True, related_name="users")
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
     membership_exp_date = models.DateTimeField(null=True)
@@ -349,10 +349,9 @@ class Booking(TimeStampedModel):
         self.save()
         booking_accepted.send(sender=self, sitter=sitter)
 
-        # TODO: Uncomment when reminders are fixed
-        # reminder = Reminder()
-        # reminder.booking = self
-        # reminder.save()
+        reminder = Reminder()
+        reminder.booking = self
+        reminder.save()
 
     def decline(self, sitter):
         self.declined_sitters.add(sitter)

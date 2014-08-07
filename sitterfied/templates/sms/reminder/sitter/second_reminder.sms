@@ -1,0 +1,1 @@
+Friendly reminder - you’re scheduled to sit for {{ parent_full_name }} {{ timedelta }} ({{ start_date_time|date:'fA'|lower }}-{{ stop_date_time|date:'fA'|lower }}). Go to {{ short_url }} for details.

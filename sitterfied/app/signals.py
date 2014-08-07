@@ -278,14 +278,58 @@ def reminder_save_handler(*args, **kwargs):
     reminder = kwargs.get('instance')
 
     if not reminder.task_id:
-        start_date_time = reminder.booking.start_date_time
-        tz = pytz.timezone(reminder.booking.parent.timezone)
-        delta = start_date_time - datetime.now(tz)
+        first_reminder = settings.JOB_FIRST_REMINDER
+        second_reminder = settings.JOB_SECOND_REMINDER
+        relief_reminder = settings.JOB_RELIEF_REMINDER
 
-        if delta.total_seconds() > 24 * 3600 or delta.total_seconds() > 2 * 3600:
-            hours = 24 if delta.days >= 1 and timedelta.seconds > 0 else 2
-            eta = start_date_time - timedelta(hours=hours)
-            result = reminders.send_reminders.apply_async(eta=eta.astimezone(pytz.UTC), kwargs={'id': reminder.id, 'hours': hours})
+        start_date_time = reminder.booking.start_date_time
+        stop_date_time = reminder.booking.stop_date_time
+        timezone = pytz.timezone(reminder.booking.parent.timezone)
+        delta = start_date_time - datetime.now(timezone)
+
+        if delta.total_seconds() > first_reminder:
+            eta = start_date_time - timedelta(seconds=first_reminder)
+            reminder_type = 'first'
+            seconds = first_reminder
+            next_reminders = [
+                {
+                    'eta': (start_date_time - timedelta(seconds=second_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
+                    'reminder_type': 'second',
+                    'seconds': second_reminder,
+                },
+                {
+                    'eta': (stop_date_time - timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
+                    'reminder_type': 'relief',
+                    'seconds': relief_reminder,
+                },
+            ]
+        elif delta.total_seconds() > second_reminder:
+            eta = start_date_time - timedelta(seconds=second_reminder)
+            reminder_type = 'second'
+            seconds = second_reminder
+            next_reminders = [
+                {
+                    'eta': (stop_date_time - timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
+                    'reminder_type': 'relief',
+                    'seconds': relief_reminder,
+                },
+            ]
+        else:
+            eta = stop_date_time - timedelta(seconds=relief_reminder)
+            reminder_type = 'relief'
+            seconds = relief_reminder
+            next_reminders = []
+
+        if eta:
+            result = reminders.send_reminders.apply_async(
+                eta=eta.astimezone(timezone),
+                kwargs={
+                    'id': reminder.id,
+                    'reminder_type': reminder_type,
+                    'seconds': seconds,
+                    'reminders': next_reminders,
+                }
+            )
             reminder.task_id = result.task_id
             reminder.save()
 
