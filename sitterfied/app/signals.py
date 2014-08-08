@@ -43,6 +43,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
 
         sms = render_to_string(sms_template, {
             'sitter_name': sitter.first_name,
+	    'sitter_cell': sitter.cell,
             'start_date_time': sender.start_date_time,
             'stop_date_time': sender.stop_date_time,
             'short_url': short_url,
@@ -62,6 +63,8 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
 
         sms = render_to_string(sms_template, {
             'sitter_name': sitter.first_name,
+	    'parent_name': parent.first_name,
+	    'parent_cell': parent.cell,
             'short_url': short_url,
         })
         send_message(body=sms, to=sitter.cell)
