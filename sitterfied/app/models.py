@@ -346,20 +346,25 @@ class Booking(TimeStampedModel):
 
     def accept(self, sitter):
         self.accepted_sitter = sitter
+        self.booking_status = 'Accepted'
         self.save()
         booking_accepted.send(sender=self, sitter=sitter)
 
-        reminder = Reminder()
-        reminder.booking = self
-        reminder.save()
+        if self.booking_type == 'Job':
+            reminder = Reminder()
+            reminder.booking = self
+            reminder.save()
 
     def decline(self, sitter):
         self.declined_sitters.add(sitter)
+        if len(self.declined_sitters) == len(self.sitters):
+            self.booking_status = 'Declined'
         self.save()
         booking_declined.send(sender=self, sitter=sitter)
 
     def cancel(self, parent_or_sitter):
         self.canceled = True
+        self.booking_status = 'Canceled'
         self.save()
         if hasattr(self, 'reminder'):
             self.reminder.delete()
