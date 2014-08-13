@@ -155,7 +155,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                 sitter_contact_info = None
 
             if 'Interview' in sender.booking_type:
-                sms_template = 'sms/interivew/interview_cancelled_by_parent_confirmation.sms'
+                sms_template = 'sms/interview/interview_cancelled_by_parent_confirmation.sms'
             else:
                 sms_template = 'sms/booking/booking_request_canceled_by_parent.sms'
 
