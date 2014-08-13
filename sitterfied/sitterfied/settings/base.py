@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from unipath import Path
 
+from celery.schedules import crontab
+
 from .facebook import *
 from .intercom import *
 from .pipeline import *
@@ -211,6 +213,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_IMPORTS = (
+    'app.tasks.jobs',
     'app.tasks.notifications',
     'app.tasks.reminders',
     'app.tasks.users',
@@ -227,3 +230,16 @@ SERVER_EMAIL = 'no-reply@sitterfied.com'
 JOB_FIRST_REMINDER = 86400  # 24 Hours
 JOB_SECOND_REMINDER = 3600  # 1 Hour
 JOB_RELIEF_REMINDER = 3600  # 1 Hour
+
+
+# Celery Beat Configuration
+CELERYBEAT_SCHEDULE = {
+    'check-for-completed-jobs': {
+        'task': 'app.tasks.jobs.check_for_completed_jobs',
+        'schedule': crontab(minute='5'),
+    },
+    'check-for-canceled-jobs': {
+        'task': 'app.tasks.jobs.check_for_canceled_jobs_with_incorrect_status',
+        'schedule': crontab(minute='0', hour='0'),
+    },
+}
