@@ -1,1 +1,1 @@
-Congrats {{ sitter_name }}! This job has been added to your queue. Go to {{ short_url }} for details.
+Congrats {{ sitter_name }}! This job has been added to your queue. Go to {{ short_url }} for details. Contact {{ parent_name }} at {{ parent_cell }}.
