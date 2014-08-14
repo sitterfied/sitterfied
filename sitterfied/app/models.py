@@ -357,7 +357,7 @@ class Booking(TimeStampedModel):
 
     def decline(self, sitter):
         self.declined_sitters.add(sitter)
-        if len(self.declined_sitters) == len(self.sitters):
+        if len(self.declined_sitters.all()) == len(self.sitters.all()):
             self.booking_status = 'Declined'
         self.save()
         booking_declined.send(sender=self, sitter=sitter)
