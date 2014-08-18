@@ -6,12 +6,11 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = (
     '127.0.0.1',
-    '192.168.111.1',
 )
 
 
 # ShortUrl Redis Configuration
-REDIS_URL = 'redis://192.168.100.22:6379'
+REDIS_URL = 'redis://127.0.0.1:6379'
 
 DATABASES = {
     'default': {
@@ -19,7 +18,7 @@ DATABASES = {
         'NAME': 'sitterfied',
         'USER': 'vagrant',
         'PASSWORD': 'vagrant',
-        'HOST': '192.168.100.22',
+        'HOST': '',
         'PORT': '',
     }
 }
