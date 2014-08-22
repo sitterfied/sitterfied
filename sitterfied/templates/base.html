@@ -24,8 +24,7 @@
 	<!-- JavaScript -->
     <script>
       FACEBOOK_APP_ID = "{{ FACEBOOK_APP_ID }}";
-      POPCORN_METRICS_ID = "{{ POPCORN_METRICS_ID }}";
-	  UPLOADCARE_PUBLIC_KEY = "{{UPLOADCARE_PUBLIC_KEY}}";
+	  UPLOADCARE_PUBLIC_KEY = "{{ UPLOADCARE_PUBLIC_KEY }}";
 	  UPLOADCARE_TABS = "file facebook";
 	  UPLOADCARE_CROP = "171x171 upscale";
 	  UPLOADCARE_AUTOSTORE = true;
@@ -44,21 +43,8 @@
     {% block body %}
     {% endblock body %}
 
-    {% include 'ie_modal.html' %}
+    {% include "ie_modal.html" %}
     {% include "intercom.html" %}
-
-    <!-- Feedbackify Support -->
-    <script type="text/javascript">
-      var fby = fby || [];
-      fby.push(['showTab', {id: '6264', position: 'left', color: '#E48042'}]);
-      (function () {
-      var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true;
-      f.src = '//cdn.feedbackify.com/f.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(f, s);
-      })();
-    </script>
-
     {% include "perfectaudience.html" %}
-    {% include "popcornmetrics.html" %}
   </body>
 </html>

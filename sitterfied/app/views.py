@@ -35,26 +35,8 @@ from app.utils import send_html_email
 # Universal params used in all views
 view_params = {
     'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-    'POPCORN_METRICS_ID': settings.POPCORN_METRICS_ID,
     'UPLOADCARE_PUBLIC_KEY': settings.UPLOADCARE['pub_key'],
 }
-
-
-try:
-    if 'devserver' not in settings.INSTALLED_APPS:
-        raise ImportError
-    from devserver.modules.profile import devserver_profile
-except ImportError:
-    from functools import wraps
-
-    class devserver_profile(object):
-        def __init__(self, *args, **kwargs):
-            pass
-
-        def __call__(self, func):
-            def nothing(*args, **kwargs):
-                return func(*args, **kwargs)
-            return wraps(func)(nothing)
 
 
 class HttpResponseUnauthorized(HttpResponse):
@@ -85,7 +67,6 @@ def get_user_json(user):
     return user_json
 
 
-#@devserver_profile(follow=[get_user_json])
 @render_to()
 def index(request, referred_by=None):
     form = AuthenticationForm()

@@ -6,7 +6,6 @@ from celery.schedules import crontab
 from .facebook import *
 from .intercom import *
 from .pipeline import *
-from .popcornmetrics import *
 from .grappelli import *
 from .rest_framework import *
 from .twilio import *
@@ -175,7 +174,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
-            'filename': '/var/log/sitterfied/application.log',
+            'filename': '/var/log/uwsgi/application.log',
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
