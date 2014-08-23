@@ -31,24 +31,12 @@ from app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsF
 from app.models import User, Sitter, Parent, Group, Child
 from app.utils import send_html_email
 
-UPLOADCARE_PUBLIC_KEY = settings.UPLOADCARE['pub_key']
 
-
-try:
-    if 'devserver' not in settings.INSTALLED_APPS:
-        raise ImportError
-    from devserver.modules.profile import devserver_profile
-except ImportError:
-    from functools import wraps
-
-    class devserver_profile(object):
-        def __init__(self, *args, **kwargs):
-            pass
-
-        def __call__(self, func):
-            def nothing(*args, **kwargs):
-                return func(*args, **kwargs)
-            return wraps(func)(nothing)
+# Universal params used in all views
+view_params = {
+    'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
+    'UPLOADCARE_PUBLIC_KEY': settings.UPLOADCARE['pub_key'],
+}
 
 
 class HttpResponseUnauthorized(HttpResponse):
@@ -79,7 +67,6 @@ def get_user_json(user):
     return user_json
 
 
-@devserver_profile(follow=[get_user_json])
 @render_to()
 def index(request, referred_by=None):
     form = AuthenticationForm()
@@ -87,9 +74,7 @@ def index(request, referred_by=None):
     form.fields['password'].widget.attrs['placeholder'] = "Password"
 
     if not request.user.is_authenticated():
-        return {'TEMPLATE': 'landing.html',
-                'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-                'form': form, }
+        return dict({'TEMPLATE': 'landing.html', 'form': form}, **view_params)
 
     if 'next' in request.GET and request.GET['next'] != '':
         return redirect(request.GET['next'])
@@ -100,16 +85,14 @@ def index(request, referred_by=None):
     else:
         parent_or_sitter = "Parent"
 
-    return {
+    return dict({
         'user_json': user_json,
         "parent_or_sitter": parent_or_sitter,
         'intercom_activator': '#Intercom',
-        'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
         "TEMPLATE": "index.html",
-        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
         "INTERCOM_APP_ID": settings.INTERCOM_APP_ID,
         "first_time": request.GET.get("first_time", "")
-    }
+    }, **view_params)
 
 
 def redirect_next(request):
@@ -146,7 +129,7 @@ def short_url(request):
 
 @render_to('onboarding1.html')
 def onboarding1(request):
-    return {'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID}
+    return view_params
 
 
 @render_to()
@@ -164,9 +147,8 @@ def onboarding2(request):
                 auth_login(request, user)
                 return redirect("onboarding3")
             else:
-                return {'TEMPLATE': "onboardingsitter.html",
-                        'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form": form}
+                return dict({'TEMPLATE': "onboardingsitter.html", "form": form}, **view_params)
+
         elif request.POST["parent_or_sitter"] == "parent":
             form = ParentRegisterForm(request.POST)
             if form.is_valid():
@@ -183,9 +165,9 @@ def onboarding2(request):
                     return redirect("onboarding3")
             else:
                 formset = ChildFormSet(request.POST)
-                return {'TEMPLATE': "onboardingparent.html",
-                        'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-                        "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY, "form": form, "formset": formset}
+                return dict({'TEMPLATE': 'onboardingparent.html',
+                             'form': form,
+                             'formset': formset}, **view_params)
 
     if request.method == "GET":
         fb_id = request.session.get("FACEBOOK_ID", None)
@@ -217,12 +199,10 @@ def onboarding2(request):
             formset = ChildFormSet(instance=dummy_user)
             template = "onboardingparent.html"
 
-        return {
+        return dict({
             'TEMPLATE': template,
-            'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-            "UPLOADCARE_PUBLIC_KEY": UPLOADCARE_PUBLIC_KEY,
             "form": form,
-            "formset": formset}
+            "formset": formset}, **view_params)
 
 
 @login_required
@@ -234,7 +214,7 @@ def onboarding3(request):
         else:
             return redirect("/profile")
     form = GroupsForm(instance=request.user)
-    return {"form": form, "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID}
+    return dict({"form": form}, **view_params)
 
 
 @render_to("onboarding4.html")
@@ -247,7 +227,7 @@ def static_page(request, template):
     """ Injects values into static pages.
 
     """
-    obj = {'TEMPLATE': template, "FACEBOOK_APP_ID": settings.FACEBOOK_APP_ID}
+    obj = dict({'TEMPLATE': template}, **view_params)
 
     if not request.user.is_anonymous():
         obj['user_json'] = get_user_json(request.user)
