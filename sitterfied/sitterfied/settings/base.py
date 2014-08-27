@@ -6,6 +6,7 @@ from celery.schedules import crontab
 from .facebook import *
 from .intercom import *
 from .pipeline import *
+from .popcornmetrics import *
 from .grappelli import *
 from .rest_framework import *
 from .twilio import *
