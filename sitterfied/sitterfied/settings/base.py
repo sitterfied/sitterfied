@@ -264,3 +264,9 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute='0', hour='0'),
     },
 }
+
+
+# This sets the X-Frame-Options HTTP response header to allow loading
+# of the site in the Popcorn Metrics editor. This is only for the
+# Popcorn Metrics editor interface, which requires Firefox.
+X_FRAME_OPTIONS = 'ALLOW-FROM www.popcornmetrics.com'
