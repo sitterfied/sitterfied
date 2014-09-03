@@ -1,4 +1,4 @@
-{% if request.path != '/' and not debug %}
+{% if not request.user.is_anonymous and not debug %}
 <script type="text/javascript">
   var _sideswipe_q = _sideswipe_q || [['init', { help_center_token:'{{ SIDESWIPE_IO_TOKEN }}' }]];
   (function() {
