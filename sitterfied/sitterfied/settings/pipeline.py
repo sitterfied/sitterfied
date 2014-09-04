@@ -8,6 +8,7 @@ PIPELINE_CSS = {
     'sitterfied': {
         'source_filenames': (
             'css/style.css',
+            'css/style-payment.css',
             'css/vendor/*.css',
             'css/vendor/font-awesome-4.0.3/css/font-awesome.min.css'
         ),

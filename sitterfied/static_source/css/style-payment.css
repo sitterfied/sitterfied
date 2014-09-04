@@ -1,0 +1,1727 @@
+/* Clearfix */
+.clearfix:before,
+.clearfix:after {
+    content: " "; 
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+.page-payment-settings .top_title span.icon_settings {
+	background-image: url(../images/icons/icon_settings.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.account-payment-settings {
+	padding: 30px 0;
+}
+.form-text,
+.form-select,
+.form-textarea {
+	-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box; 
+          box-sizing: border-box; 
+}
+.form-text,
+.form-textarea {
+	padding:0 10px;
+	height:36px;
+	border:1px solid #d7d7d7;
+	box-shadow:#e9e9e9 0px 0px 2px 2px inset;
+	border-radius:4px;
+	font-family: 'ProximaNova',Arial,Tahoma;
+	color:#045865;
+	background:#fff;
+	font-size: 14px;
+}
+.form-text:hover,
+.form-text:focus,
+.form-textarea:hover,
+.form-textarea:focus {
+	border-color:#3ae4f8;
+	box-shadow:#e9e9e9 5px 3px 5px 0 inset, #3ae4f8 0 0 5px 1px;color:#616161;
+}
+.form-textarea {
+	height: auto;
+}
+.account-payment-settings .column-1 { 
+	width: 355px;
+	float: left;
+}
+.form-item {
+	margin-bottom: 15px;
+}
+.account-payment-settings .form-label {
+	font-size: 12px;
+	color: #81abb0;
+	text-transform: uppercase;
+	float: left;
+	width: 104px;
+	padding-top: 10px;
+}
+.account-payment-settings .form-feild {
+	margin-left: 105px;
+}
+.account-payment-settings .form-text {
+	width: 100%;
+} 
+.account-payment-settings .label-2line-text {
+	padding-top: 2px;
+}
+.account-payment-settings .form-action .button {
+	float: right;
+	padding:3px 15px;
+	cursor: pointer;
+	font-size: 12px;
+	line-height: normal;
+	width: auto;
+	height: auto;
+}
+.account-payment-settings .column-2 {
+	float: right;
+	width: 400px;
+}
+ .mycard-title {
+ 	font-size: 12px;
+ 	text-transform: uppercase;
+ 	color: #81abb0;
+ }
+.form-mycard-info {
+	position: relative;
+	margin-bottom: 10px;
+}
+.form-mycard-info .card-number {
+	width: 225px;
+	height: 24px;
+	line-height: 24px;
+	position: absolute;
+	top:76px;
+	left: 23px;
+	font-family: "OCR A Std", Arial;
+	overflow: hidden;
+}
+.form-mycard-info .card-number span {
+	display:block;
+	float: left;
+	width: 48px;
+	text-align: center;
+	margin-left: 5px;
+	font-size: 13px;
+}
+.form-mycard-info .card-number .slot1 {
+	margin-left: 0;
+}
+.form-mycard-info .cardcvc-number,
+.form-mycard-info .card-month-year {
+	width: 36px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 13px;
+	position: absolute;
+	top:76px;
+	left: 318px;
+}
+.form-mycard-info .card-month-year {
+	width: 124px;
+	top: 126px;
+	left: 52px;
+	overflow: hidden;
+}
+.form-mycard-info .card-month-year span {
+	display: block;
+	float: left;
+	width: 40px;
+	text-align: center;
+	margin-right: 14px;
+}
+.card-billing-info {
+	font-size: 14px;
+	color: #616161;
+}
+.card-billing-info span {
+	font-size: 13px;
+	text-transform: uppercase;
+	color: #81abb0;
+	display: inline-block;
+	margin-right: 5px;
+}
+.card-update-button {
+	text-align: right;
+	padding-top: 15px;
+	padding-right: 50px;
+}
+.card-update-button .button {
+	cursor: pointer;
+    float: right;
+    font-size: 12px;
+    height: auto;
+    padding: 4px 15px;
+    width: auto;
+    line-height: 1.1;
+}
+.dotedborder {
+	border-top: 1px dotted #e1e3e6;
+	margin: 24px 0 24px 104px;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+}
+.DeleteAccount {
+	text-align: center;
+	color: #81abb0;
+	font-size: 13px;
+	text-transform: uppercase;
+	padding: 10px 0 20px;
+	font-family: "ProximaNovaCond";
+}
+.DeleteAccount .grayButton { margin-right: 5px;}
+.grayButton,
+.grayButton:visited {
+	font-size: 12px;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 4px 8px 3px;
+	background-color: #bfced5;
+	border-radius: 3px;
+	line-height: 1;
+	vertical-align: middle;
+	color: #fff;
+}
+.grayButton:hover {
+	background-color: #adc1cb;
+	color: #fff;
+}
+.modalwindow {
+	background: #f9f9f9;
+	width: 840px;
+	border-radius:4px 4px 0 0;
+}
+#editcreditcardinfo { background-color: #fff;}
+.modalwindow-content {
+	padding: 30px 20px;
+}
+.modalwindow-title {
+	color:#fff;
+	font-size:29px;
+	text-align:center;
+	background:#31a7b5 url(../images/top_title.gif) repeat-x;
+	text-shadow:rgba(0,0,0,.35) 1px 1px 1px;
+	padding:30px 10px;
+	border-radius:4px 4px 0 0;
+}
+#editcreditcardinfo .modalwindow-title {
+	font-size: 35px;
+}
+.addcreditcard-alert {
+	padding: 10px 90px 30px;
+}
+.icon-alert {
+	width: 28px;
+	height: 28px;
+	display: inline-block;
+	background: url(../images/icons/icon_alert.png) no-repeat 0 0;
+}
+.modalwindow-content .icon-alert {
+	float:left;
+	margin: 5px;
+}
+.addcreditcard-alert .alert-message {
+	font-size: 18px;
+	color: #616161;
+	overflow: hidden;
+	padding: 0 0 0 5px;
+}
+.addcreditcard-alert .alert-message strong {
+	font-size: 18px;
+	color: #d27097;
+	display: block;
+	font-weight: 400;
+}
+.titlecard,
+.titlebilling {
+	font-size: 16px;
+	color: #616161;
+	padding: 3px 0 2px 50px;
+	font-family: "ProximaNova-Semibold";
+	background:url(../images/icons/icon_card.png) no-repeat 0 center;
+}
+.titlebilling {
+	background:url(../images/icons/icon_pin.png) no-repeat 0 center;
+	padding-top: 4px;
+	padding-bottom: 3px;
+}
+.add-edit-credit-card-info {
+	padding: 10px 50px 40px 30px;
+	margin-bottom: 40px;
+	border-bottom: 1px dotted #e1e3e6;
+}
+.block-add-edit-card {
+	width: 527px;
+	float: right;	
+}
+.block-add-edit-card .form-mycard-info {
+	position: relative;
+}
+.block-add-edit-card .form-mycard-info {
+	position: relative;
+}
+.block-add-edit-card .form-mycard-info .card-number {
+	width: 322px;
+	height: 36px;
+	position: absolute;
+	top: 105px;
+	left:34px;
+}
+.block-add-edit-card .form-mycard-info .card-number input,
+.block-add-edit-card .cardcvvnubmer,
+.add-edit-card-month-year input {
+	width: 68px;
+	height: 36px;
+	padding: 0;
+	border:3px solid #fff;
+	background: #fff;
+	float: left;
+	margin-right: 7px;
+	text-align: center;
+	font-family: "OCR A Std",Arial;
+	font-size: 15px;
+	border-radius: 3px;
+	-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box; 
+          box-sizing: border-box; 
+}
+.block-add-edit-card .form-mycard-info .card-number input:focus,
+.cardcvvnubmer:focus,
+.add-edit-card-month-year input:focus {
+	border-color: #d27097;
+}
+.block-add-edit-card .cardcvvnubmer {
+	display: block;
+    float: none;
+    left: 430px;
+    position: absolute;
+    top: 104px;
+}
+.add-edit-card-month-year {
+	width: 170px;
+	height: 36px;
+	position: absolute;
+	top: 177px;
+	left:75px;
+}
+.add-edit-card-month-year input {
+	width:59px;
+	margin-right: 18px;
+}
+.cardstatusmessages {
+	font-size: 18px;
+	font-family: "ProximaNova-Semibold";
+}
+.cardstatusmessages strong {
+	color: #81abb0;	
+	font-weight: normal;
+}
+.cardstatusmessages .green { color: #0cba18; font-style: normal;}
+.cardstatusmessages .red { color: #f71349; font-style: normal;}
+.cardstatusmessages .hide { display: none;}
+.form-billing-address {
+	width: 352px;
+	margin: 0 auto;
+}
+.form-billing-address .form-text {
+	height: 46px;
+	width: 100%;
+	font-size: 17px;
+}
+.form-billing-address .form-feild-street-address {
+	width: 232px;
+	float: left;
+}
+.form-billing-address .form-feild-suite {
+	width: 110px;
+	float: right;
+}
+.form-billing-address .form-feild-Zip {
+	width: 102px;
+	float: left;
+}
+.card-billing-address .form-action {
+	text-align: right;
+	padding: 20px 50px 20px 0;
+}
+.card-billing-address .form-action .button {
+	float:right;
+}
+.form-billing-address .form-feild-address-select1 {
+	width: 152px;
+	float: left;
+	margin-left: 10px;
+}
+.form-billing-address .form-feild-address-select1 select {
+	width: 152px;
+}
+.form-billing-address .form-feild-address-select2 {
+	width: 76px;
+	float: right;
+}
+.form-billing-address .form-feild-address-select2 select { width: 76px;}
+#editcreditcardinfo { display: none;}
+
+/* =============== Media Queries ================ */
+@media screen and (min-width:768px) and (max-width: 1023px) {
+	.page-payment-settings .wraper {width: 740px;	}
+	.page-payment-settings .container .wraper { width: 738px;}
+	html {
+	    min-width: 740px;
+	}
+	.account-payment-settings .column-2 { width: 376px}
+	.account-payment-settings .column-1 { width: 290px;}
+	.card-update-button { padding-right: 7px;}
+	.modalwindow {
+		width: 700px;
+	}
+	.titlebilling { margin-bottom: 20px;}
+}
+@media screen and (min-width:481px) and (max-width: 767px) {
+	.page-payment-settings .wraper {width: 450px;	}
+	.page-payment-settings .container .wraper { width: 448px;}
+	html {
+	    min-width: 450px;
+	}
+	.header .logo {
+		top: 10px;
+	}
+	.page-payment-settings .footer .logo_bottom {
+		position: relative;
+		top: auto;
+		left: auto;
+		display: block;
+		text-align: center;
+		padding: 10px 0;
+	}
+	.page-payment-settings .footer .social {
+		position: relative;
+		left: auto;
+		top: auto;
+		display: block;
+		text-align: center;
+	}
+	.page-payment-settings .footer .social li {
+		float: none;
+		padding: 0 10px;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.page-payment-settings .footer nav ul {
+		float: none;
+		width: 100%;
+		text-align: center;
+		padding-bottom: 10px;
+	}
+	.page-payment-settings .footer nav ul li {
+		float:none;
+		display: inline-block;
+		margin-top: 5px;
+	}
+}
+@media screen and (max-width: 767px) { 
+	.account-payment-settings .column-1 {
+		width: 100%;
+		float: left;
+		margin-bottom: 30px;
+	}
+	.account-payment-settings .form-label {
+		display: block;
+		float: none;
+		margin-bottom: 3px;
+		width: auto;
+		padding-top: 0;
+	}
+	.account-payment-settings .form-feild,
+	.dotedborder {
+		margin-left: 0;
+	}
+	.account-payment-settings .column-2 {
+		width: 100%;
+		float: none;
+	}
+	.page-payment-settings .section-heading {
+		padding-left: 0 !important;
+		display: block;
+		float: none;
+		width: auto;
+	}
+	.page-payment-settings .account_settings_block h4 + p {
+		padding-left: 0;
+	}
+	.modalwindow {
+		width: 440px;
+	}
+	.titlebilling { margin-bottom: 20px;}
+	.addcreditcard-alert,
+	.add-edit-credit-card-info { padding-right: 0; padding-left: 0;}
+	.card-billing-address .form-action { padding-right: 0;}
+	.block-add-edit-card { width: 390px;}
+	.block-add-edit-card img { max-width: 100%;}
+	.block-add-edit-card .form-mycard-info .card-number {
+		width: 240px;
+		top: 78px;
+		left: 24px;
+		height: 26px;
+	}
+	.block-add-edit-card .form-mycard-info .card-number input, 
+	.block-add-edit-card .cardcvvnubmer, 
+	.add-edit-card-month-year input {
+		width: 52px;
+		height: 26px;
+		margin-right: 4px;
+	}
+	.block-add-edit-card .cardcvvnubmer {
+		top: 78px;
+		left: 317px;
+	}
+	.add-edit-card-month-year {
+		left: 55px;
+		top: 131px;
+	}
+	.add-edit-card-month-year input {
+		width: 44px;
+		margin-right: 13px;
+	}
+}
+@media screen and (max-width: 480px) { 
+	.header .logo { top: 20px;}
+	.page-payment-settings .header .wraper {
+		padding-top: 84px;
+	}
+	.page-payment-settings .header { min-height: 216px;}
+	.page-payment-settings .account_settings_block {
+		padding: 15px 10px;
+	}
+	.form-mycard-info img {
+		width: 100%;
+	}
+	.card-update-button {
+		padding-right: 0;
+	}
+	.form-mycard-info .card-number {
+		width: 170px;
+		left: 15px;
+		top: 54px;
+	}
+	.form-mycard-info .card-number .slot1 {
+		margin-left: 1px;
+	}
+	.form-mycard-info .card-number span {
+		font-size: 10px;
+		width: 36px;
+	}
+	.form-mycard-info .cardcvc-number {
+		left: 236px;
+		top: 54px;
+		font-size: 11px;
+	}
+	.form-mycard-info .card-month-year {
+		left: 35px;
+		top: 92px;
+	}
+	.form-mycard-info .card-month-year span {
+		font-size: 11px;
+		width: 30px;
+	}
+	.DeleteAccount .grayButton {
+		margin: 0 0 7px;
+	}
+	.DeleteAccount span {
+		display:block;
+	}
+	.page-payment-settings .account_settings_block h4 {
+		padding-left: 35px;
+		text-align: left;
+	}
+	.page-payment-settings .account_settings_block h4 .icon_eset { left: 3px;}
+	.page-payment-settings .account_settings_block form > ul {
+		margin: 0;
+	}
+	.page-payment-settings ul .button-list {
+		display: block !important;
+		width: auto !important;
+		float: none !important;
+		clear: both !important;
+	}
+}
+/* Parent Book_Payments */
+.page-payment-settings .top_note_form textarea {
+	height: 65px;
+}
+.icon-promo {
+	display: inline-block;
+	width: 38px;
+	height: 38px;
+	background:url(../images/icons/icon_promo.png) no-repeat 0 0;
+	vertical-align: middle;
+}
+.form-item-promocode {
+	margin-bottom: 28px;
+}
+.form-item-promocode .label-promocode {
+	float: left;
+    font: 16px 'ProximaNova-Semibold';
+    margin: 0 0 0 50px;
+    padding: 0;
+    position: relative;
+    width:208px;
+}
+.form-item-promocode .label-promocode span.icon-promo {
+	margin-right: 5px;
+}
+.page-payment-settings .top_note_form .add_note {
+	margin-left: 58px;
+}
+.form-item-promocode .form-feild {
+	float: left;
+	width: 500px;
+}
+.form-item-promocode .formcode-feild .form-text {
+	float: left;
+	font: 16px 'ProximaNova-Semibold';
+}
+.form-item-promocode .formcode-feild .button {
+	font-size: 13px;
+    margin: 3px 0 0 15px;
+    padding: 2px 10px;
+}
+.promocode-message {
+	padding: 10px 0;
+	font-size: 11px;
+}
+.promocode-message .promocode-ok,
+.promocode-message .promocode-expired,
+.promocode-message .promocode-invalid {
+	color: #89984c;
+	display: inline-block;
+	padding: 2px 0 2px 22px;
+	background: url(../images/icons/tick.png) no-repeat 0 1px;
+}
+.promocode-message .promocode-ok strong,
+.promocode-message .promocode-expired strong,
+.promocode-message .promocode-invalid strong {
+	color: #616161;
+}
+.promocode-message .promocode-expired,
+.promocode-message .promocode-invalid {
+	background: url(../images/icons/icon_alert_small.png) no-repeat 0 1px;
+	color: #d27097;
+}
+.promocode-message .hide { display: none;}
+.icon-price-tag {
+	width: 18px;
+	height: 15px;
+	display: inline-block;
+	background: url(../images/icons/icon_price_tag.png) no-repeat 0 0;
+}
+.top_personal_info ul li.listwithpricetag {
+	position: relative;
+}
+.top_personal_info ul li.listwithpricetag .pricetag {
+	float: left;
+	border-right: 2px solid #e6e6e6;
+	padding: 2px 5px 2px 0;
+	width: 95px;
+	font-size: 17px;
+	color: #2a9db1;
+	font-style: normal;
+	font-weight: normal;
+	text-align: left;
+}
+.top_personal_info ul li.listwithpricetag strong {
+	font-weight: normal;
+	float: left;
+}
+.top_personal_info ul li.listwithpricetag strong .icon_date {
+	position:relative;
+	top: auto;
+	left: auto;
+	margin: 0;
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+}
+.top_personal_info ul li.listwithpricetag .pricetag .icon-price-tag {
+	margin:0 6px 0 0;
+	vertical-align: middle;
+}
+.top_personal_info ul li.listwithpricetag .pricetag a {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-color:#2a9db1;
+	color: #fff;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 16px;
+	font-size: 12px;
+	margin-left: 5px;
+	vertical-align: top;
+}
+.PriceInfoToolTip {
+	display: none;
+	width: 284px;
+	background:#fff;
+	border:1px solid #3ea7b8;
+	position: absolute;
+	z-index: 111;
+	bottom: 100%;
+	padding: 15px;
+	border-radius: 4px;
+	background-clip: padding-box;
+}
+.PriceInfoToolTipOpen .PriceInfoToolTip { display: block;}
+.PriceInfoToolTip:after, 
+.PriceInfoToolTip:before { top: 100%; left: 67px; border: solid transparent; content: " "; height: 0; width: 0; 
+position: absolute; pointer-events: none; } 
+.PriceInfoToolTip:after { border-color: rgba(255, 255, 255, 0); border-top-color: #fff; border-width: 10px; margin-left: -10px; } 
+.PriceInfoToolTip:before { border-color: rgba(62, 167, 184, 0); border-top-color: #3ea7b8; border-width: 11px; margin-left: -11px; }
+.PriceInfoToolTip .orange {
+	font-size: 11px;
+	color: #e68245;
+}
+.PriceInfo {
+	padding: 0 10px;
+	text-align: left;
+	font: 13px 'ProximaNova',Arial,Tahoma;
+	color: #1c8292;
+	font-weight: normal;
+}
+.PriceInfo > .clearfix {
+	margin-top:12px;
+}
+.PriceInfo .pi-col-1 {
+	width: 50px;
+	float: left;
+	padding-top: 3px;
+}
+.PriceInfo .pi-col-2 {
+	width: 55px;
+	padding-right: 35px;
+	float: left;
+	text-align: right;
+	font: 18px 'ProximaNova-Semibold',Arial,Tahoma;
+}
+.PriceInfo .pi-col-3 {
+	width: 120px;
+	float: left;
+	padding-top: 4px;
+	font-size: 11px;
+}
+.PriceInfo .total {
+	border-top: 1px dashed #1097ad;
+	padding-top: 12px;
+}
+.page-payment-settings .select2-container .select2-choice .select2-arrow {
+	left: auto;
+}
+.page-payment-settings .parent_book_block > ul > li > ul > li p > input.form-text-address {
+	width: 219px;
+}
+.page-payment-settings .parent_book_block > ul > li:last-child > ul > li span {
+	top: 40px;
+}
+@media screen and (min-width:768px) and (max-width: 1023px) {
+	.page-payment-settings .header .top_note {
+		position: relative;
+		top:auto;
+		left: auto;
+		margin: -10px 0 20px;
+	}
+	.page-payment-settings .top_note_form textarea,
+	.page-payment-settings .form-item-promocode .form-feild {
+		width: 430px;
+	}
+	.page-payment-settings .top_note_form p {
+		padding: 0 20px;
+		margin: 0;
+		text-align: center;
+	}
+	.page-payment-settings .top_note_form p span {
+		float: none;
+		display: block;
+		margin-bottom: 15px;
+	}
+	.page-payment-settings .top_note_form p .button_cancel {
+		margin-left: 248px;
+	}
+	.page-payment-settings .top_personal_info ul:before {
+		background: none;
+	}
+	.page-payment-settings .top_personal_info ul {
+		margin-top: 10px;
+	}
+	.page-payment-settings .parent_book_block > ul > li > .parentbooform-title {
+		display: block;
+	}
+	.page-payment-settings #fixed_tabs.fixed {
+	    position: relative;
+	    top: 0;
+	    width: auto;
+	    z-index: 1;
+	}
+	.page-payment-settings .parent_book_block > ul > li > ul > li.parentbooform-titlelist {
+		display: none;
+	}
+	.page-payment-settings  .parent_book_block > ul > li > ul > li:last-child { display: none;}
+	.page-payment-settings .parent_book_block > ul > li > ul > li { width: 48%;}
+	.parent_book_block p.parentbook_buttons {
+		padding: 10px 0;
+		text-align: right;
+	}
+	.parent_book_block p.parentbook_buttons .button {
+		float: none;
+		display: inline-block;
+	}
+	
+}
+@media screen and (min-width:481px) and (max-width: 767px) {
+	.page-payment-settings .header .top_note {
+		position: relative;
+		top:auto;
+		left: auto;
+		margin: -10px 0 20px;
+	}
+	.page-payment-settings .top_personal_info {
+		padding: 10px;
+	}
+	.page-payment-settings .top_personal_info ul:before {
+		background: none;
+	}
+	.page-payment-settings .top_personal_info ul {
+		margin-top: 10px;
+		width: auto;
+		display: block;
+		padding: 0 10px;
+	}
+	.page-payment-settings .top_personal_info ul .personalinfolist4 {
+		position: relative;
+		width: auto;
+		float: none;
+		top: auto;
+		left: auto;
+		border:0;
+		margin: 0;
+		border-top: 2px solid #e6e6e6;
+		clear: both;
+		text-align: left;
+		padding:10px 0 10px 37px;
+	}
+	.page-payment-settings .top_personal_info ul .personalinfolist4 span {
+		left: 2px;
+    	top: 9px;
+	}
+	.page-payment-settings .parent_book_block > ul > li > .parentbooform-title {
+		display: block;
+	}
+	.page-payment-settings .parent_book_block > ul > li > ul > li.parentbooform-titlelist {
+		display: none;
+	}
+	.page-payment-settings  .parent_book_block > ul > li > ul > li:last-child { display: none;}
+	.page-payment-settings .parent_book_block > ul > li > ul > li { width: 48%;}
+	.parent_book_block p.parentbook_buttons {
+		padding: 10px 0;
+		text-align: right;
+	}
+	.parent_book_block p.parentbook_buttons .button {
+		float: none;
+		display: inline-block;
+	}
+}
+@media screen and (max-width: 767px) { 
+	.page-payment-settings .top_note_form .add_note {
+		margin-left: 10px;
+		width: 300px;
+	}
+	.page-payment-settings .top_note_form textarea,
+	.page-payment-settings .form-item-promocode .form-feild {
+		width: 420px;
+		margin: 10px 0 0 10px;
+	}
+	.form-item-promocode {
+		padding-top: 30px;
+		margin-bottom: 5px;
+	}
+	.form-item-promocode .label-promocode {
+		margin-left: 10px;
+		width: 300px;
+	}
+	.page-payment-settings .top_note_form p {
+		padding: 10px;
+	}
+	.page-payment-settings .top_note_form p span {
+		padding: 0 0 10px;
+	}
+	.page-payment-settings .top_note_form p .button {
+		margin: 0 15px 0 0;
+	}
+	.page-payment-settings #fixed_tabs.fixed {
+	    position: relative;
+	    top: 0;
+	    width: auto;
+	    z-index: 1;
+	}
+	.page-payment-settings .parent_book_block > ul > li > ul > li p > input.form-text-address,
+	.locationfeilds-row-2 input.small {
+		margin-bottom: 5px;
+	}
+	.page-payment-settings .parent_book_block > ul > li > ul > li {
+		width: 100%;
+		padding: 0 10px;
+	}
+	
+}
+@media screen and (max-width: 480px) { 
+	.page-payment-settings .top_note_form .add_note {
+		text-align: left;
+		width: 240px;
+	}
+	.page-payment-settings .top_note_form .add_note span {
+		left: 0;
+	}
+	.page-payment-settings .top_note_form textarea, 
+	.page-payment-settings .form-item-promocode .form-feild {
+		width: 280px !important;
+		display:block;
+		max-width:280px !important;
+	}
+	.top_personal_info ul li.listwithpricetag {
+		padding-left: 0;
+	}
+	.top_personal_info ul li.listwithpricetag .pricetag {
+		width: 80%;
+		border:0;
+		margin-bottom: 10px;
+		float: none;
+		display: block;
+	}
+	.top_personal_info ul li.listwithpricetag strong {
+		width: 100%;
+		display: block;
+		float: none;
+	}
+	.top_personal_info ul li.listwithpricetag strong .icon_date {
+		left: -6px;
+	}
+	.page-payment-settings .parent_book_block {
+		padding: 10px;
+	}
+	.page-payment-settings .parent_book_block > ul > li > ul > li {
+		padding: 0;
+	}
+	.page-payment-settings .parent_book_block > ul > li:nth-last-child(5) > ul > li:nth-child(2), 
+	.page-payment-settings .parent_book_block > ul > li.lng > ul > li:nth-child(2) {
+		width: 100%;
+	}
+	.page-payment-settings .parent_book_block > ul > li > div span {
+		left: -2px;
+	}
+	.page-payment-settings  .parent_book_block > ul > li > div.parentbooform-title {
+		padding-left: 32px;
+	}
+}
+/* Payment Done */
+.page-payment-settings .top_notify {
+	width: 740px;
+}
+.page-payment-settings .top_notify .sent {
+	font-size: 46px;
+	padding-top: 50px;
+}
+.page-payment-settings .top_notify .sent em {
+	font:19px 'ProximaNova',Arial,Tahoma;
+	display: block;
+}
+.page-payment-settings .top_notify .sent:before {
+	left: 50%;
+	margin-left: -37px;
+}
+.page-payment-settings  .container .notify_wraper {
+	width: 738px;
+}
+.page-payment-settings .container .notify_wraper p {
+	font-size: 17px;
+}
+.notification-block-inner {
+	width: 600px;
+	margin: 0 auto;
+}
+.page-payment-settings .container .notify_wraper ul {
+	margin: 0;
+	float: none;
+	display: block;
+	width: auto;
+}
+.container .notify_wraper ul li {
+	padding: 15px 0;
+}
+.container .notify_wraper ul li .notification-price {
+	border-bottom: 2px solid #e6e6e6;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+}
+.container .notify_wraper .notification-date {
+	position: relative;
+}
+.container .notify_wraper ul li .notification-price .icon-price-tag,
+.container .notify_wraper .notification-date .icon_date {
+	float: left;
+	margin-left: 4px;
+	position: relative;
+	left: auto;
+	top: auto;
+}
+.container .notify_wraper .notification-date .icon_date {
+	height: 16px;
+	margin-left: 0;
+}
+.container .notify_wraper ul li.notificationlist-2 .icon_friends5 {
+	left:0;
+	top: 14px;
+}
+.container .notify_wraper ul li.notificationlist-3 {
+	padding-left: 40px;
+	width: auto;
+}
+.container .notify_wraper ul li.notificationlist-3 .icon_pin3 {
+	left: 8px;
+	top: 12px;
+}
+.container .notify_wraper p.booking-button {
+	float: none;
+	width: 100%;
+	padding: 30px 0 10px;
+	text-align: center;
+}
+.container .notify_wraper p.booking-button .button {
+	float: none;
+	width: auto;
+	height: auto;
+	line-height: 1.1;
+	padding: 14px 25px;
+	display: inline-block;
+	font-size: 20px;
+	text-shadow:-1px 1px 1px #626262;
+}
+@media screen and (min-width:481px) and (max-width: 767px) {
+	.page-payment-settings .top_notify {
+		width: 450px;
+	}
+	.page-payment-settings .container .notify_wraper {
+		width: 448px;
+	}
+}
+@media screen and (max-width: 767px) { 
+	.page-payment-settings .container .notify_wraper p {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.notification-block-inner {
+		width: 96%;
+	}	
+	.page-payment-settings .container .notify_wraper p {
+		width: auto;
+	}
+}
+@media screen and (max-width: 480px) { 
+	.page-payment-settings .top_notify {
+		width: 300px;
+		margin-top: 110px;
+	}
+	.page-payment-settings .container .notify_wraper {
+		width: 300px;
+	}
+	.page-payment-settings .top_notify .sent {
+		padding-right: 10px;
+		padding-left: 10px;
+		font-size: 30px;
+	}
+	.page-payment-settings .top_notify .sent em {
+		font-size: 16px;
+	}
+	.page-payment-settings .container .notify_wraper ul {
+		padding: 0 5px;
+	}
+	.container .notify_wraper ul li .notification-price {
+		padding-left: 30px;
+		position: relative;
+	}
+	.container .notify_wraper ul li .notification-price .icon-price-tag {
+		margin:0;
+		position: absolute;
+		top: 1px;
+		left: 2px;
+	}
+	.container .notify_wraper ul li .notification-price span {
+		display:inline-block;
+	}
+	.container .notify_wraper ul li .notification-date,
+	.container .notify_wraper ul li.notificationlist-2,
+	.container .notify_wraper ul li.notificationlist-3 {
+		padding-left: 30px;
+	}
+	.container .notify_wraper ul li .notification-date .icon_date {
+		left: 0;
+		top: 1px;
+		float: none;
+		position: absolute;
+	}
+	.container .notify_wraper ul li.notificationlist-3 .icon_pin3 {
+		left: 0;
+   	 	top: 12px;
+	}
+
+}
+/* Booking Parent Payment details */
+.tabcontentblock {
+	padding: 30px;
+}
+.page-payment-settings .bookings_block .booking_list > li .tagpriceinformation {
+	width: 142px;
+	border-bottom: 1px solid #e6e6e6;
+	position: absolute;
+	height: 34px;
+}
+.page-payment-settings .bookings_block .booking_list > li .tagpriceinformation  .pricetag {
+	font:17px 'ProximaNova-Semibold';
+	color: #3ea7b8;
+	display: block;
+	padding: 5px 0 0 5px;
+}
+.page-payment-settings .bookings_block .booking_list > li .tagpriceinformation  .pricetag .icon-price-tag {
+	vertical-align: top;
+	margin: 3px 10px 0 0;
+}
+.page-payment-settings .bookings_block .booking_list > li .tagpriceinformation  .pricetag a{
+	background-color: #2a9db1;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+    margin-left: 5px;
+    text-align: center;
+    vertical-align: top;
+    width: 16px;
+    margin: 3px 0 0 38px;
+}
+.tagpriceinformation .PriceInfoToolTip:after, 
+.tagpriceinformation .PriceInfoToolTip:before {
+	left: 109px;
+}
+.PriceInfo {
+	position: relative;
+}
+.PriceInfo .editpriceinfo {
+	display: inline-block;
+	font:17px 'ProximaNova-Semibold';
+	text-transform: uppercase;
+	color: #e68245;
+	text-decoration: underline;
+	right: 0;
+	bottom: -10px;
+	position: absolute;
+}
+.PriceInfo .editpriceinfo:hover { text-decoration: none;}
+#paymentinfoedit { display: none;}
+.editpaymentinfoform .formfieldrow {
+	border-bottom: 1px dashed #e1e3e6;
+	padding: 15px 30px 15px 100px;
+}
+.editpaymentinfoform .formfieldrow .formfield-label {
+	font:20px 'ProximaNova-Semibold';
+	color: #616161;
+	width: 230px;
+	float: left;
+	padding-top: 9px;
+}
+.editpaymentinfoform .formfieldrow .formfield-label.padding-top43 {
+	padding-top: 43px;
+}
+.editpaymentinfoform .formfieldrow .formfield-label.padding-top20 {
+	padding-top: 20px;
+}
+.editpaymentinfoform .formfieldrow .formfield-label.padding-top58 {
+	padding-top: 58px;
+}
+.editpaymentinfoform .formfieldrow .formfield-label span {
+	display: inline-block;
+	vertical-align: middle;
+	width: 25px;
+	height: 25px;
+	margin-right: 15px;
+	margin-top: -4px;
+}
+.editpaymentinfoform .formfieldrow .formfield-label span.icon-price-tag {
+	background:url(../images/icons/icon_paymentinfo.png) no-repeat 0 -59px;
+}
+.editpaymentinfoform .formfieldrow .formfield-label span.icon-hours {
+	background:url(../images/icons/icon_paymentinfo.png) no-repeat -28px 0;
+}
+.editpaymentinfoform .formfieldrow .formfield-label span.icon-bonus {
+	background:url(../images/icons/icon_paymentinfo.png) no-repeat -66px -51px;
+}
+.editpaymentinfoform .formfieldrow .form-text {
+	width: 110px;
+	height: 44px;
+	font-size: 18px;
+	text-align: center;
+}
+.editpaymentinfoform .formfieldrow .formrateperhour .form-text {
+	width: 170px;
+}
+.editpaymentinfoform .formfieldrow .formfieldselect select,
+.editpaymentinfoform .formfieldrow .formrateperhour.sitterrate .form-text {
+	width: 110px;
+}
+.editpaymentinfoform .formfieldrow .formrateperhour.sitterrate .form-text,
+.formtext-bonustip {
+	font-size: 17px;
+	color: #3ea7b8;
+	font-weight: bold;
+}
+.editpaymentinfoform .formfieldrow .formfield {
+	float: left;
+	width: 360px;
+}
+.editpaymentinfoform .formfieldrow .formfield .formhint {
+	display: inline-block;
+	vertical-align: middle;
+	color: #3ea7b8;
+	font-size: 11px;
+	font-style: italic;
+	margin: 0 0 0 20px;
+	width: 220px;
+}
+.editpaymentinfoform .formfieldrow .formfield .formhint ul {
+	list-style: disc;
+	padding-left: 30px;
+}
+.editpaymentinfoform .formfieldrow .formfield .formhint ul li {
+	margin: 10px 0;
+	list-style: disc;
+}
+.editpaymentinfoform .form-action {
+	padding: 30px 60px;
+}
+.editpaymentinfoform .form-action .button {
+	float:right;
+}
+.editpaymentinfoform .formfieldrow .formfield .hours-uneditable {
+	font-size: 17px;
+	color: #9b9a9a;
+	display: inline-block;
+	width: 110px;
+	text-align: center;
+	padding-top: 10px;
+}
+.modalwindow-content .rate-adjusted-message {
+	padding: 40px 0;
+	text-align: center;
+}
+.modalwindow-content .rate-adjusted-message strong {
+	display:block;
+	color: #23a1b0;
+	text-shadow:1px 1px 1px #b5b5b5;
+	font-weight: normal;
+	font: 30px 'ProximaNova-Semibold';
+	margin-bottom: 25px;
+	font-style: italic;
+}
+.modalwindow-content .rate-adjusted-message span {
+	font-size: 22px;
+	display: block;
+	padding: 10px 100px;
+}
+.modalwindow-content .text-right { text-align: right;}
+.close-popup-message {
+	display: inline-block;
+	padding: 3px 27px 6px 0;
+	vertical-align: middle;
+	font-size: 24px;
+	background: url(../images/icons/icon-close.png) no-repeat right center;
+	color: #616161;
+	position: absolute;
+	right: 40px;
+	bottom: 25px;
+}
+#paymentinfoedit-message {
+	display: none;
+}
+@media screen and (min-width:768px) and (max-width: 1023px) {
+	.page-payment-settings .header .top_info .photo img,
+	.page-payment-settings .header .top_info .photo,
+	.page-payment-settings .header .top_info .photo .photo_edit_wrap	{
+		width: 70px;
+	}	
+	.page-payment-settings .header .top_info .ranking_info {
+		clear: both;
+		padding: 10px 0 20px;
+		float: none;
+		width: 100%;
+	}
+	.page-payment-settings .header .top_info .ranking_info > p {
+		padding: 0 0 10px 0;
+		font-size: 18px;
+	}
+	.page-payment-settings .header .top_info .ranking_info > p:first-child {
+		font-size: 20px;
+		padding: 0 0 5px;
+	}
+	.page-payment-settings .profile_completion p {
+		display: block;
+		text-align: center;
+		float: none;
+		padding: 10px 0;
+		line-height: 1.2;
+	}
+	.page-payment-settings .profile_completion > div {
+		display: block;
+		float: none;
+		width: 235px;
+		margin: 0 auto;
+	}
+	.page-payment-settings .tabs_wrap .tab_select li a, 
+	.page-payment-settings .tabs_wrap .tab_select li a:visited {
+		padding-left: 28px;
+		padding-right: 28px;
+	}
+	.page-payment-settings .bookings_block .booking_list {
+		margin: 0 10px;
+	}
+	.page-payment-settings  .bookings_block .booking_list > li .desc:before {
+		background:none;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc {
+		width: 700px;
+		clear: left;
+		margin-top: 10px;
+	}
+	.page-payment-settings  .bookings_block .booking_list > li .desc .btn_wrap {
+		right: 4px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img {
+		text-align: left;
+		width:280px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img > a {
+		float: left;
+		width: 90px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img > p {
+		padding-top: 17px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img div > ul {
+		left: 90px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li header {
+		padding: 10px 0;
+	}
+	.page-payment-settings .bookings_block .booking_list > li header span {
+		right: 5px;
+	}
+	.footer .logo_bottom {
+		left: 0;
+	}
+	.footer .social {
+		left: 145px;
+	}
+	.editpaymentinfoform .formfieldrow {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+}
+@media screen and (min-width:481px) and (max-width: 767px) {
+	.page-payment-settings .header .top_info .photo img,
+	.page-payment-settings .header .top_info .photo,
+	.page-payment-settings .header .top_info .photo .photo_edit_wrap	{
+		width: 70px;
+	}
+	.page-payment-settings .header .top_info {
+		padding: 12px 5px 0;
+	}
+	.page-payment-settings .header .top_info .ranking_info fieldset legend {
+		font-size: 16px;
+	}
+	.page-payment-settings .header .top_info .ranking_info {
+		clear: both;
+		padding: 10px 0 20px;
+		float: none;
+		width: 100%;
+	}
+	.page-payment-settings .header .top_info .ranking_info > p {
+		padding: 0 0 10px 0;
+		font-size: 18px;
+	}
+	.page-payment-settings .header .top_info .ranking_info > p:first-child {
+		font-size: 20px;
+		padding: 0 0 5px;
+	}
+	.page-payment-settings .profile_completion p {
+		display: block;
+		text-align: center;
+		float: none;
+		padding: 10px 0;
+		line-height: 1.2;
+	}
+	.page-payment-settings .profile_completion > div {
+		display: block;
+		float: none;
+		width: 235px;
+		margin: 0 auto;
+	}
+	.page-payment-settings .tabs_wrap .tab_select li a, 
+	.page-payment-settings .tabs_wrap .tab_select li a:visited {
+		padding-left: 28px;
+		padding-right: 28px;
+	}
+	.page-payment-settings .bookings_block .booking_list {
+		margin: 0 10px;
+	}
+	.page-payment-settings  .bookings_block .booking_list > li .desc:before {
+		background:none;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc {
+		width: 410px;
+		clear: left;
+		margin-top: 10px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc ul {
+		padding: 0;
+		margin: 0;
+		width: 410px;
+		border:0;
+	}
+	.page-payment-settings  .bookings_block .booking_list > li .desc .btn_wrap {
+		right:0;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img {
+		text-align: left;
+		width:280px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img > a {
+		float: left;
+		width: 90px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img > p {
+		padding-top: 17px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .img div > ul {
+		left: 90px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li header {
+		padding: 10px 0;
+	}
+	.page-payment-settings .bookings_block .booking_list > li header span {
+		right: 5px;
+	}	
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li:first-child {
+		width: 370px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .tagpriceinformation {
+		position: relative;
+		clear: both;
+		width: 100%;
+		border-top: 1px solid #e6e6e6;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc .btn_wrap {
+		position: relative;
+		clear: both;
+		width: 100%;
+		padding: 5px 0;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc .btn_wrap .button {
+		float: none;
+		display: inline-block;
+		margin-right: 10px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc .note_wrap {
+		position: relative;
+		clear: both;
+		top: auto;
+		left: auto;
+		padding: 5px 0;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .note_desc {
+		width: 400px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li:nth-child(3) {
+		border-bottom: 1px solid #e6e6e6;
+		width: 258px;
+		border-right: 0;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li:nth-child(2) {
+		border-left: 0;
+	}	
+}
+@media screen and (max-width: 767px) { 
+	.editpaymentinfoform .formfieldrow {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.editpaymentinfoform .formfieldrow .formfield {
+		width: 100%;
+		float: none;
+		clear: both;
+		padding-top: 10px;
+	}
+	.editpaymentinfoform .form-action {
+		padding: 20px 0 0;
+	}
+	.editpaymentinfoform .formfieldrow .formfield-label {
+		padding-top: 0;
+	}
+	.modalwindow-content .rate-adjusted-message span {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+@media screen and (max-width: 480px) { 
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li:nth-child(4) {
+		padding-left: 120px;
+		width: 130px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li:nth-child(4) span.icon_email2 {
+		left: 93px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li:nth-child(4) p {
+		left: 3px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li {
+		padding-left: 30px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc ul li span {
+		left: -3px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc .btn_wrap {
+		clear: both;
+	    padding: 15px 0;
+	    position: relative;
+	    right: auto;
+	    text-align: center;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .desc .btn_wrap .button {
+		float: none;
+		display: inline-block;
+		margin: 0 10px;
+	}
+	.page-payment-settings .bookings_block .booking_list > li .tagpriceinformation {
+		position: relative;
+		clear: both;
+		width: 100%;
+	}
+	.editpaymentinfoform .form-action .button {
+		float: left;
+	}
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:first-child {
+	float: left;
+	width: 305px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(2) {
+	border-bottom:1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    border-right: 0;
+    width: 70px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(3) {
+	width: 135px;
+	border-right: 1px solid #e6e6e6;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) {
+	border-top: 0;
+    clear: none;
+    float: left;
+    padding-left: 160px;
+    width: 115px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) span {
+	left: 124px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc .btn_wrap {
+	top: 0;
+	right: 15px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc .note_wrap {
+	top: 48px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details .note_wrap {
+	top: 64px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc .additional_info {
+	top: 3px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details .additional_info {
+	top: 13px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li.hide { display: none;}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.datetime {
+	width: 416px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interview-address {
+	width: 190px;
+	padding-bottom: 5px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interview-address em {
+	font-style: normal;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info {
+	padding: 5px 5px 5px 10px;
+    width: 210px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info .contactname {
+	font-size: 12px;
+	color: #3ea7b8;
+	width: 65px;
+	float: left;
+	padding-top: 6px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info .contactname a {
+	color: #3ea7b8;
+	font: 12px 'ProximaNova';
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info .contactnumberemail {
+	float: left;
+	padding-top: 2px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details 
+ul li.interviewcontact-info .contactnumberemail .contactnumber {
+	margin-bottom:3px;
+}
+.icon-phone {
+	display: inline-block;
+	vertical-align: middle;
+	width: 17px;
+	height: 17px;
+	background: url(../images/icons/icon_phone.png) no-repeat 0 0;
+}
+.contactnumberemail .icon-phone {
+	margin-right: 10px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info .contactnumberemail
+ .contactemail .icon_email2 {
+ 	position:relative;
+ 	left: auto;
+ 	top: auto;
+ 	display: inline-block;
+ 	vertical-align: middle;
+ 	margin: 0 5px 0 -3px;
+ 	height: 18px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > 
+li .desc.interview-details .additional_info.phonecallinfo {
+	line-height: 1.1;
+	padding-bottom: 5px;
+}
+.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > 
+li .desc.interview-details .additional_info.phonecallinfo span {
+	display: block;
+	font:13px 'ProximaNova',Arial,Tahoma;
+	color: #104952;
+}
+@media screen and (min-width:768px) and (max-width: 1023px) {
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc .btn_wrap {
+		right: 4px;
+	}
+}
+@media screen and (min-width:481px) and (max-width: 767px) {
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:first-child {
+		width: 370px;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(2) {
+		border-left: 0;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(3) {
+		border-bottom: 1px solid #e6e6e6;
+	    border-right: 0 none;
+	    width: 258px;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc .btn_wrap {
+		right: 0;
+		width: auto;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc .note_wrap {
+		top: auto;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.datetime {
+		width: 370px;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interview-address {
+		width: 368px;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info
+	{
+		width: 394px;
+		border-bottom: 1px solid #e6e6e6;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details .note_wrap {
+		top: auto;
+	}	
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details .additional_info.phonecallinfo
+	, .page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details .additional_info{
+		clear: both;
+	    display: block;
+	    left: auto;
+	    line-height: 1.1;
+	    padding: 5px 5px 5px 10px;
+	    position: relative;
+	    text-align: left;
+	    top: auto;
+	    width: auto;
+	    min-height: 20px;
+	}
+}
+@media screen and (max-width: 767px) { 
+
+}
+@media screen and (max-width: 480px) { 
+	.bookings_block .booking_list {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:first-child {
+		width: auto;
+		float: none;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(2),
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(3) {
+		float: none;
+		width: auto;
+		border-right: 0;
+		border-left:0; 
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) {
+		border-top: 1px solid #e6e6e6;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) {
+		padding-left: 130px;
+    	width: 120px;
+    	float: none;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc ul li:nth-child(4) span {
+		left: 100px;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.datetime,
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interview-address,
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info {
+		width: auto;
+		display: block;
+		float: none;
+	}
+	.page-payment-settings .bookings_block .upcoming_jobs_block .booking_list > li .desc.interview-details ul li.interviewcontact-info {
+		overflow: hidden;
+		padding-left: 0;
+	}
+
+}
