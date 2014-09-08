@@ -47,6 +47,8 @@
 	  </div>
 	  
 	  <div class="column-2">
+	    <a href="javascript:void(0);" class="button-connect-paypal">Connect to PayPal</a>
+	    <div class="payemnt-method-divider"><span>OR</span></div>
 	    <div class="form-mycard-info">
               <img src="/static/images/icons/card.png">
 	      <div class="card-number">
@@ -70,16 +72,19 @@
 		<span class="year">
 		</span>
 	      </div>
+	      
+	      <div class="card-update-button clearfix">
+                <a {{action 'openUpdateCreditCardPopup'}} id="UpdateCreditCardInfo" class="button button_smaller button_edit">
+		  ADD CREDIT CARD
+		</a>
+              </div>
 	    </div>
+	    
 	    <div class="card-billing-info">
 	      <span>BILLING ADDRESS</span>
 	      501 Adams St, 3K Hoboken, NJ 07030
 	    </div>
-	    <div class="card-update-button clearfix">
-	      <a href="#editcreditcardinfo" id="UpdateCreditCardInfo" class="button button_smaller button_edit">
-		UPDATE
-	      </a>
-	    </div>
+	    
 	  </div>
 	</div>
 	

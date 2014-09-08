@@ -105,10 +105,16 @@ class Phone(TimeStampedModel):
 
 
 class Parent(User):
+    PAYMENT_OPTIONS = Choices("Paypal", "Credit Card")
+    
     emergency_contact_one_name = models.CharField(max_length=128, blank=True)
     emergency_contact_one_phone = models.CharField(max_length=10, blank=True)
     emergency_contact_two_name = models.CharField(max_length=128, blank=True)
     emergency_contact_two_phone = models.CharField(max_length=10, blank=True)
+    
+    payment_method = models.CharField(max_length=15, choices=PAYMENT_OPTIONS, blank=True)
+    billing_address1 = models.CharField(max_length=255, blank=True)
+    billing_address2 = models.CharField(max_length=255, blank=True, default="")
 
     sitter_teams = models.ManyToManyField('Sitter', related_name="sitter_teams", blank=True)
     bookmarks = models.ManyToManyField('Sitter', related_name="bookmarks", blank=True)

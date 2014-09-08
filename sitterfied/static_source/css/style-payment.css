@@ -82,7 +82,123 @@
 }
 .account-payment-settings .column-2 {
 	float: right;
-	width: 400px;
+	width: 500px;
+}
+.button-connect-paypal,
+.button-add-credit-card {
+	display: block;
+	margin: 0 auto;
+	width: 211px;
+	height: 43px;
+	font-size: 0;
+	line-height: 0;
+	text-align: left;
+	text-indent: -9999px;
+	background: url(../images/button_paypal.png) no-repeat 0 0;
+}
+.button-add-credit-card {
+	background: url(../images/button_add_credit_card.png) no-repeat 0 0;
+}
+.button-connect-paypal:hover,
+.button-add-credit-card:hover {
+	background-position: 0 -43px;
+}
+.add-payment-buttons-block {
+	text-align: center;
+}
+.add-payment-buttons-block .button-connect-paypal,
+.add-payment-buttons-block .button-add-credit-card {
+	display: inline-block;
+	vertical-align: middle;
+}
+.titile_choose_payment {
+	font: 16px "ProximaNova-Semibold";
+	margin: 50px 0;
+	text-align: center;
+}
+#choose-payment-method {
+	background: #fff;
+	display: none;
+}
+#choose-payment-method .add-payment-buttons-block {
+	padding-bottom: 70px;
+}
+.add-payment-buttons-block .or {
+	display: inline-block;
+	vertical-align: middle;
+	font-style: italic;
+	font: 16px "ProximaNova-Semibold";
+	margin: 0 30px;
+}
+.button-add-card-disabled {
+	display: inline-block;
+	position: relative;
+}
+.button-add-card-disabled span {
+	display: none;
+	position: absolute;
+	border: 1px solid #3ea7b8;
+	background: #fff;
+	top: 100%;
+	right: 0;
+	width: 210px;
+	padding: 10px;
+	font-size: 13px;
+	border-radius: 4px;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 2px 3px 0 #c1c1c1; 
+          box-shadow: 0 2px 3px 0 #c1c1c1;
+}
+.button-add-card-disabled span:after, 
+.button-add-card-disabled span:before { bottom: 100%; 
+	right: 10%; border: solid transparent; content: " "; 
+	height: 0; width: 0; position: absolute; pointer-events: none; 
+} 
+.button-add-card-disabled span:after { border-color: rgba(255, 255, 255, 0); border-bottom-color: #ffffff; 
+	border-width: 10px; margin-left: -10px;
+} 
+.button-add-card-disabled span:before { border-color: rgba(62, 167, 184, 0); border-bottom-color: #3ea7b8; 
+	border-width: 11px; margin-left: -11px; 
+}
+.button-add-card-disabled:hover span {
+	display: block;
+}
+.paypal-active {
+	border-top: 1px solid #e1e3e4;
+	border-bottom: 1px solid #e1e3e4;
+	background: #fbfbfb;
+	padding: 10px 15px;
+}
+.paypal-active .PayPalLogoSmall {
+	float: left;
+}
+.paypal-active .PayPalLogoSmall img {
+	vertical-align:middle;
+}
+.paypal-active .PayPalEmail {
+	overflow: hidden;
+	padding: 1px 0 0 10px;
+}
+.paypal-active .PayPalEmail  .cancelaccount {
+	float: right;
+	font-size: 13px;
+}
+.paypal-active .PayPalEmail  .cancelaccount:hover {
+	text-decoration: underline;
+}
+.payemnt-method-divider {
+	font-size: 14px;
+	color: #81abb0;
+	font-style: italic;
+	text-align: center;
+	background: url(../images/border.png) repeat-x 0 center;
+	width: 234px;
+	margin: 30px auto;
+}
+.payemnt-method-divider span {
+	display: inline-block;
+	padding: 2px 6px;
+	background: #fff;
 }
  .mycard-title {
  	font-size: 12px;
@@ -92,50 +208,55 @@
 .form-mycard-info {
 	position: relative;
 	margin-bottom: 10px;
+	width: 220px;
+	margin-left: 70px;
+}
+.form-mycard-info img {
+	max-width: 100%;
 }
 .form-mycard-info .card-number {
-	width: 225px;
-	height: 24px;
-	line-height: 24px;
+	width: 150px;
+	height: 16px;
+	line-height: 16px;
 	position: absolute;
-	top:76px;
-	left: 23px;
+	top:44px;
+	left: 13px;
 	font-family: "OCR A Std", Arial;
 	overflow: hidden;
 }
 .form-mycard-info .card-number span {
 	display:block;
 	float: left;
-	width: 48px;
+	width: 29px;
 	text-align: center;
-	margin-left: 5px;
-	font-size: 13px;
+	margin-left: 3px;
+	font-size: 8px;
 }
 .form-mycard-info .card-number .slot1 {
 	margin-left: 0;
 }
 .form-mycard-info .cardcvc-number,
 .form-mycard-info .card-month-year {
-	width: 36px;
-	height: 24px;
-	line-height: 24px;
-	font-size: 13px;
+	width: 30px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 8px;
 	position: absolute;
-	top:76px;
-	left: 318px;
+	top:44px;
+	left: 184px;
 }
 .form-mycard-info .card-month-year {
-	width: 124px;
-	top: 126px;
-	left: 52px;
+	width: 90px;
+	top: 74px;
+	left: 30px;
 	overflow: hidden;
 }
 .form-mycard-info .card-month-year span {
 	display: block;
 	float: left;
-	width: 40px;
+	width: 25px;
 	text-align: center;
-	margin-right: 14px;
+	margin-right: 7px;
 }
 .card-billing-info {
 	font-size: 14px;
@@ -149,13 +270,14 @@
 	margin-right: 5px;
 }
 .card-update-button {
-	text-align: right;
-	padding-top: 15px;
-	padding-right: 50px;
+	padding:0;
+	position: absolute;
+	top: 40px;
+	left: 245px;
+	width: 150px;
 }
 .card-update-button .button {
 	cursor: pointer;
-    float: right;
     font-size: 12px;
     height: auto;
     padding: 4px 15px;
@@ -261,6 +383,10 @@
 .block-add-edit-card {
 	width: 527px;
 	float: right;	
+}
+.block-add-edit-card .form-mycard-info {
+	width: auto;
+	margin-left: auto;
 }
 .block-add-edit-card .form-mycard-info {
 	position: relative;
@@ -384,6 +510,18 @@
 		width: 700px;
 	}
 	.titlebilling { margin-bottom: 20px;}
+	.account-payment-settings .form-mycard-info {
+		margin-left: 78px;
+	}
+	.account-payment-settings .card-update-button {
+		position: relative;
+		top: auto;
+		left: auto;
+		padding: 0;
+		width: 150px;
+		text-align: center;
+		padding: 10px 0 10px 52px;
+	}
 }
 @media screen and (min-width:481px) and (max-width: 767px) {
 	.page-payment-settings .wraper {width: 450px;	}
@@ -430,7 +568,7 @@
 @media screen and (max-width: 767px) { 
 	.account-payment-settings .column-1 {
 		width: 100%;
-		float: left;
+		float: none;
 		margin-bottom: 30px;
 	}
 	.account-payment-settings .form-label {
@@ -491,6 +629,31 @@
 		width: 44px;
 		margin-right: 13px;
 	}
+	.account-payment-settings .form-mycard-info {
+		width: 220px;
+		margin: 0 auto;
+	}
+	.account-payment-settings .card-update-button {
+		position: relative;
+		top: auto;
+		left: auto;
+		padding: 0;
+		width: 150px;
+		text-align: center;
+		padding: 10px 0 10px 52px;
+	}
+	.card-billing-info {
+		text-align: center;
+	}
+	.add-payment-buttons-block .button-connect-paypal {
+		display: block;
+		margin:0 auto 10px;
+	}
+	.add-payment-buttons-block .or {
+		display: block;
+		text-align: center;
+		margin-bottom: 10px;
+	}
 }
 @media screen and (max-width: 480px) { 
 	.header .logo { top: 20px;}
@@ -506,31 +669,6 @@
 	}
 	.card-update-button {
 		padding-right: 0;
-	}
-	.form-mycard-info .card-number {
-		width: 170px;
-		left: 15px;
-		top: 54px;
-	}
-	.form-mycard-info .card-number .slot1 {
-		margin-left: 1px;
-	}
-	.form-mycard-info .card-number span {
-		font-size: 10px;
-		width: 36px;
-	}
-	.form-mycard-info .cardcvc-number {
-		left: 236px;
-		top: 54px;
-		font-size: 11px;
-	}
-	.form-mycard-info .card-month-year {
-		left: 35px;
-		top: 92px;
-	}
-	.form-mycard-info .card-month-year span {
-		font-size: 11px;
-		width: 30px;
 	}
 	.DeleteAccount .grayButton {
 		margin: 0 0 7px;
