@@ -49,6 +49,13 @@ FACEBOOK_APP_ID = '746551758706532'
 BROKER_URL = REDIS_URL + '/0'
 
 #Braintree Settings
+import braintree
+
 BRAINTREE_MERCHANT_ID = 'sssrypp3qbvtckpg'
 BRAINTREE_PUBLIC_KEY = '6h63gm2wy9xxrpyq'
 BRAINTREE_PRIVATE_KEY = '32b90cc11eb21bd4e2be7f95547e10c4'
+
+braintree.Configuration.configure(braintree.Environment.Sandbox,
+                                  merchant_id=BRAINTREE_MERCHANT_ID,
+                                  public_key=BRAINTREE_PUBLIC_KEY,
+                                  private_key=BRAINTREE_PRIVATE_KEY)

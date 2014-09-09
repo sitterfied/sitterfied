@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 from .signals import *
 from .signup import RegistrationView
-from .views import AjaxRegistrationView, StaticView
+from .views import AjaxRegistrationView, StaticView, BraintreeClientTokenView, BraintreeUpdatePaymentDetailView
 
 
 router = DefaultRouter()
@@ -34,6 +34,12 @@ urlpatterns = patterns('app.views',
                        url(r'^onboarding4/$', "onboarding4", name='onboarding4'),
                        url(r'^facebook_import/', 'facebook_import', name='facebook_import'),
                        url(r'^api/search/$', 'search', name='search'),
+                       url(regex=r'^api/braintree_client/$',
+                           view=BraintreeClientTokenView.as_view(),
+                           name='braintree_client'),
+                       url(regex=r'^api/update_payment_method/$',
+                           view=BraintreeUpdatePaymentDetailView.as_view(),
+                           name='braintree_update_payment_detail_view'),
                        url(r'^api/', include(router.urls)),
                        url(r'^remove_friend', 'remove_friend', name='remove_friend'),
                        url(r'^remove_group', 'remove_group', name='remove_group'),

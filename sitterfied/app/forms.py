@@ -1,3 +1,4 @@
+import braintree
 import datetime
 import re
 
@@ -267,3 +268,28 @@ class ChildForm(forms.ModelForm):
             "school":widgets.TextInput(attrs={"placeholder":"School (if applicable)", "class":"long"}),
             "special_needs": widgets.SelectMultiple(attrs={"placeholder":"Special needs"}),
         }
+
+
+class BraintreeUpdatePaymentMethodForm(forms.Form):
+    """
+    Handle braintree vault feature.
+    Token used is <user_pk>_<payment_method:(credit_card or paypal)>
+    """
+    payment_method = forms.CharField(max_length=15)
+    payment_method_nonce = forms.CharField(max_length=50)
+    
+    def render_json_response(self, user):
+        if self.cleaned_data.get('payment_method_nonce') and self.cleaned_data.get('payment_method'):
+            token = "%s_%s" % (user.pk, self.cleaned_data.get('payment_method'))
+            result = braintree.PaymentMethod.create({
+                "customer_id": str(user.pk),
+                "payment_method_nonce": self.cleaned_data.get('payment_method_nonce'),
+                "options": {
+                    "make_default": True
+                }
+            })
+            
+            return {
+                "success": result.is_success
+            }
+        return {}

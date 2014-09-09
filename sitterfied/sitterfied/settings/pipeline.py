@@ -35,8 +35,8 @@ PIPELINE_JS = {
             'js/lib/jquery.form.min.js',
             'js/lib/jquery.formset.min.js',
             'js/lib/ie-popup.js',
+            'js/lib/braintree.js',
             'js/facebook.js',
-
         ),
         'output_filename': 'js/libs.js',
     }

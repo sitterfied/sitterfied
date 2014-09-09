@@ -413,6 +413,61 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
         events:{
+            savePaymentDetails: () ->
+                console.log('Start savePaymentDetails')
+                # Get braintree client token from server and display form
+                $.ajax(
+                    url: "/api/braintree_client/"
+                    method: "post"
+                ).done (data) ->
+                    # Create client
+                    client = new braintree.api.Client({
+                        clientToken: data.client_token
+                    })
+                    
+                    # Concatenate fields to get credit card number
+                    credit_card_1 = $("#creditcard_number1").val()
+                    credit_card_2 = $("#creditcard_number2").val()
+                    credit_card_3 = $("#creditcard_number3").val()
+                    credit_card_4 = $("#creditcard_number4").val()
+                    credit_card_number = '' + credit_card_1 + credit_card_2 + credit_card_3 + credit_card_4
+                    ccv = $("#ccv").val()
+                    credit_card_month = $("#creditcard_month").val()
+                    credit_card_year = $("#creditcard_year").val()
+                    
+                    # Billing address
+                    street_address = $("#billing_street_address").val()
+                    extended_address = $("#billing_extended_address").val()
+                    locality = $("#billing_locality").val()
+                    region = $("#billing_region").val()
+                    postal_code = $("#billing_postal_code").val()
+                    
+                    # Tokenize card
+                    client.tokenizeCard
+                        number: credit_card_number
+                        expirationMonth: credit_card_month
+                        expirationYear: credit_card_year
+                        cvv: ccv
+                        billingAddress:
+                            streetAddress: street_address
+                            extendedAddress: extended_address
+                            locality: locality
+                            region: region
+                            postalCode: postal_code
+                            countryCodeAlpha2: "US"
+                            
+                    , (err, nonce) ->
+                        $.ajax(
+                            url: "/api/update_payment_method/"
+                            method: "post"
+                            data:
+                                payment_method: "credit_card"
+                                payment_method_nonce: nonce
+                        ).done (data) ->
+                            console.log("Update Payment Method Result:", data)
+                        console.log("Nonce:", nonce)
+                    return
+            
             postReview: ()->
                 parent = Sitterfied.currentUser
                 sitter_id = $("#sitter_id").val()

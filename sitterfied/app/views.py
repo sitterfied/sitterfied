@@ -2,6 +2,7 @@
 import operator
 from datetime import datetime, time
 
+import braintree
 import facebook
 import requests
 from annoying.decorators import render_to, ajax_request, JsonResponse
@@ -19,15 +20,19 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.http import require_POST
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
+
 from ecl_facebook import Facebook
+from braces.views import LoginRequiredMixin
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 from signup import RegistrationView
 
 from app import utils
-from app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
+from app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet, BraintreeUpdatePaymentMethodForm
 from app.models import User, Sitter, Parent, Group, Child
 from app.utils import send_html_email
 
@@ -525,3 +530,57 @@ class StaticView(TemplateView):
 
 def cloudhealthcheck(request):
     return HttpResponse()
+
+
+# Braintree views
+class BraintreeClientTokenView(LoginRequiredMixin, APIView):
+    """
+    Return a client token from Braintree from a customer_id.
+    The customer_id to use is the pk for the User.
+    """
+    def post(self, request, *args, **kwargs):
+        customer = None
+        try:
+            customer = braintree.Customer.find(str(request.user.pk))
+        except braintree.exceptions.not_found_error.NotFoundError:
+            result = braintree.Customer.create({
+                'id': str(request.user.pk),
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'email': request.user.email,
+            })
+            if result.is_success:
+                customer = result.customer
+        if customer:
+            client_token = braintree.ClientToken.generate({
+                'customer_id': customer.id
+            })
+            return Response(
+                {
+                    'client_token': client_token
+                },
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            {'message': 'Error encountered using Braintree API'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+class BraintreeUpdatePaymentDetailView(LoginRequiredMixin, APIView):
+    """
+    Create/Update Payment method through Braintree.
+    Token used is <user_pk>_<payment_method:(credit_card or paypal)>
+    Accepts payment_method_nonce and payment_method as parameters.
+    """
+    def post(self, request, *args, **kwargs):
+        form = BraintreeUpdatePaymentMethodForm(request.POST)
+        if form.is_valid():
+            return Response(
+                form.render_json_response(request.user),
+                status=status.HTTP_200_OK
+            )
+        return Response(
+            {'message': 'Error encountered using Braintree API'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

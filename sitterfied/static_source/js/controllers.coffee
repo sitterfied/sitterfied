@@ -199,6 +199,11 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             return null
         ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
 
+        creditcard_number1: ''
+        creditcard_number2: ''
+        creditcard_number3: ''
+        creditcard_number4: ''
+        
         openUpdateCreditCardPopup: () ->
             $("select").select2
                 width:"element"
@@ -211,6 +216,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 fitToView: false
                 width: "90%"
                 height: "90%"
+                parent: "div#application"
+            
 
         openReviewPopup: (reviewedUser) ->
             parent = Sitterfied.currentUser
