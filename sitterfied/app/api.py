@@ -118,6 +118,16 @@ class ParentSerializer(serializers.ModelSerializer):
     #contacts
     avatar = serializers.Field(source="avatar_url")
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
+    masked_number = serializers.Field(source="masked_number")
+    expiration_month = serializers.Field(source="expiration_month")
+    expiration_year = serializers.Field(source="expiration_year")
+    full_billing_address = serializers.Field(source="full_billing_address")
+    billing_street_address = serializers.Field(source="billing_street_address")
+    billing_extended_address = serializers.Field(source="billing_extended_address")
+    billing_locality = serializers.Field(source="billing_locality")
+    billing_region = serializers.Field(source="billing_region")
+    billing_postal_code = serializers.Field(source="billing_postal_code")
+    
     class Meta:
         model = models.Parent
         fields = user_fields + ('emergency_contact_one_name',
@@ -125,7 +135,11 @@ class ParentSerializer(serializers.ModelSerializer):
                                 'emergency_contact_two_name',
                                 'emergency_contact_two_phone',
                                 'reviews', 'bookings', 'children',
-                                'bookmarks',  'sitter_teams', 'parent_or_sitter'
+                                'bookmarks',  'sitter_teams', 'parent_or_sitter',
+                                'masked_number', 'expiration_month', 'expiration_year',
+                                'full_billing_address', 'billing_street_address',
+                                'billing_extended_address', 'billing_locality',
+                                'billing_region', 'billing_postal_code',
         )
 
 

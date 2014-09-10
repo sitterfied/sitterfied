@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import braintree
 import re
 import time
 from datetime import datetime
@@ -112,6 +113,7 @@ class Parent(User):
     emergency_contact_two_name = models.CharField(max_length=128, blank=True)
     emergency_contact_two_phone = models.CharField(max_length=10, blank=True)
     
+    default_payment_method_token = models.CharField(max_length=20, blank=True)
     payment_method = models.CharField(max_length=15, choices=PAYMENT_OPTIONS, blank=True)
     billing_address1 = models.CharField(max_length=255, blank=True)
     billing_address2 = models.CharField(max_length=255, blank=True, default="")
@@ -121,6 +123,90 @@ class Parent(User):
 
     class Meta:
         verbose_name = "Parent"
+        
+    @property
+    def masked_number(self):
+        return self.get_payment_method_property("masked_number")
+    
+    @property
+    def expiration_month(self):
+        return self.get_payment_method_property("expiration_month")
+    
+    @property
+    def expiration_year(self):
+        expiration_year = self.get_payment_method_property("expiration_year")
+        if expiration_year:
+            return self.get_payment_method_property("expiration_year")[2:]
+        return expiration_year
+    
+    @property
+    def full_billing_address(self):
+        address = None
+        if self.default_payment_method_token:
+            # Search for payment method using token
+            try:
+                payment_method = braintree.PaymentMethod.find(self.default_payment_method_token)
+            except braintree.exceptions.not_found_error.NotFoundError:
+                return address
+            
+            address = "%s, %s %s %s %s" % (
+                payment_method.billing_address.street_address,
+                payment_method.billing_address.extended_address,
+                payment_method.billing_address.locality,
+                payment_method.billing_address.region,
+                payment_method.billing_address.postal_code,
+            )
+        return address
+    
+    @property
+    def billing_street_address(self):
+        return self.get_billing_address_property("street_address")
+    
+    @property
+    def billing_extended_address(self):
+        return self.get_billing_address_property("extended_address")
+    
+    @property
+    def billing_locality(self):
+        return self.get_billing_address_property("locality")
+    
+    @property
+    def billing_region(self):
+        return self.get_billing_address_property("region")
+    
+    @property
+    def billing_postal_code(self):
+        return self.get_billing_address_property("postal_code")
+    
+    def get_payment_method_property(self, property_name):
+        name = None
+        if self.default_payment_method_token:
+            # Search for payment method using token
+            try:
+                payment_method = braintree.PaymentMethod.find(self.default_payment_method_token)
+            except braintree.exceptions.not_found_error.NotFoundError:
+                return name
+            
+            # Check to see if payment_method is credit card
+            if hasattr(payment_method, property_name):
+                name = getattr(payment_method, property_name)
+            
+        return name
+    
+    def get_billing_address_property(self, property_name):
+        name = None
+        if self.default_payment_method_token:
+            # Search for payment method using token
+            try:
+                payment_method = braintree.PaymentMethod.find(self.default_payment_method_token)
+            except braintree.exceptions.not_found_error.NotFoundError:
+                return name
+            
+            # Check to see if payment_method is credit card
+            billing_address = payment_method.billing_address
+            name = getattr(billing_address, property_name)
+            
+        return name
 
 
 class Sitter(User):

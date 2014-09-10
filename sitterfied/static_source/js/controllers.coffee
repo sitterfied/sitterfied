@@ -198,15 +198,35 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.set('sitters_to_review', results.uniq())
             return null
         ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
-
-        creditcard_number1: ''
-        creditcard_number2: ''
-        creditcard_number3: ''
-        creditcard_number4: ''
         
         openUpdateCreditCardPopup: () ->
             $("select").select2
                 width:"element"
+            # Set default values for fields
+            card_number = Sitterfied.currentUser.get('masked_number')
+            index = 0
+            if card_number
+                while index < card_number.length
+                    $("#creditcard_number" + (index/4 + 1)).val(card_number.substring(index, index+4))
+                    index += 4
+            
+            expiration_month = Sitterfied.currentUser.get('expiration_month')
+            expiration_year = Sitterfied.currentUser.get('expiration_year')
+            $("#creditcard_month").val(expiration_month)
+            $("#creditcard_year").val(expiration_year)
+            
+            billing_street_address = Sitterfied.currentUser.get('billing_street_address')
+            billing_extended_address = Sitterfied.currentUser.get('billing_extended_address')
+            billing_locality = Sitterfied.currentUser.get('billing_locality')
+            billing_region = Sitterfied.currentUser.get('billing_region')
+            billing_postal_code = Sitterfied.currentUser.get('billing_postal_code')
+            $("#billing_street_address").val(billing_street_address)
+            $("#billing_extended_address").val(billing_extended_address)
+            $("#billing_locality").val(billing_locality)
+            $("#billing_region").val(billing_region)
+            $("#billing_postal_code").val(billing_postal_code)
+            
+            
             $.fancybox
                 href: "#editcreditcardinfo"
                 maxWidth: 960
@@ -217,6 +237,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 width: "90%"
                 height: "90%"
                 parent: "div#application"
+            
             
 
         openReviewPopup: (reviewedUser) ->

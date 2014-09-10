@@ -10,12 +10,12 @@
                         <div class="form-mycard-info">
                             <img src="/static/images/icons/card_big.png">
                             <div class="card-number clearfix">
-                                {{view Ember.TextField id="creditcard_number1" valueBinding="creditcard_number1" classNames="text-field1 cardnumberfeild" maxlength="4"}}
-                                {{view Ember.TextField id="creditcard_number2" valueBinding="creditcard_number2" classNames="text-field1 cardnumberfeild" maxlength="4"}}
-                                {{view Ember.TextField id="creditcard_number3" valueBinding="creditcard_number3" classNames="text-field1 cardnumberfeild" maxlength="4"}}
-                                {{view Ember.TextField id="creditcard_number4" valueBinding="creditcard_number4" classNames="text-field1 cardnumberfeild" maxlength="4"}}
+                                {{view Ember.TextField id="creditcard_number1" classNames="text-field1 cardnumberfeild" maxlength="4" }}
+                                {{view Ember.TextField id="creditcard_number2" classNames="text-field1 cardnumberfeild" maxlength="4" }}
+                                {{view Ember.TextField id="creditcard_number3" classNames="text-field1 cardnumberfeild" maxlength="4" }}
+                                {{view Ember.TextField id="creditcard_number4" classNames="text-field1 cardnumberfeild" maxlength="4" }}
                             </div>
-                            {{view Ember.TextField id="ccv" classNames="text-field5 cardcvvnubmer" maxlength="3"}}
+                            {{view Ember.TextField id="ccv" classNames="text-field5 cardcvvnubmer" maxlength="3" value="***"}}
                             <div class="add-edit-card-month-year clearfix">
                                 {{view Ember.TextField id="creditcard_month" classNames="text-field6 cardmonthyear" maxlength="2"}}
                                 {{view Ember.TextField id="creditcard_year" classNames="text-field6 cardmonthyear" maxlength="2"}}

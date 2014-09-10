@@ -414,7 +414,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
     Sitterfied.ApplicationRoute = Em.Route.extend(
         events:{
             savePaymentDetails: () ->
-                console.log('Start savePaymentDetails')
                 # Get braintree client token from server and display form
                 $.ajax(
                     url: "/api/braintree_client/"

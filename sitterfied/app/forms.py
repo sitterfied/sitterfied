@@ -289,6 +289,10 @@ class BraintreeUpdatePaymentMethodForm(forms.Form):
                 }
             })
             
+            # Save payment method token
+            user.default_payment_method_token = result.payment_method.token
+            user.save()
+            
             return {
                 "success": result.is_success
             }

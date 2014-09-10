@@ -284,6 +284,16 @@ define ['jquery'
         emergency_contact_one_phone : attr("string")
         emergency_contact_two_name : attr("string")
         emergency_contact_two_phone : attr("string")
+        masked_number: attr()
+        expiration_month: attr()
+        expiration_year: attr()
+        full_billing_address: attr()
+        billing_street_address: attr()
+        billing_extended_address: attr()
+        billing_locality: attr()
+        billing_region: attr()
+        billing_postal_code: attr()
+        default_payment_method_token: attr()
         payment_method: attr()
         billing_address1: attr()
         billing_address2: attr()
@@ -294,7 +304,43 @@ define ['jquery'
         parent: (() ->
             return this
         ).property()
-
+        
+        masked_number_array: (() ->
+            numbers = ['****', '****', '****', '****']
+            if this.get('masked_number') and this.get('masked_number').length > 0
+                numbers = []
+                card_number = this.get('masked_number')
+                index = 0
+                while index < card_number.length
+                    console.log("Sub:", card_number.substring(index, index+4))
+                    numbers.push(card_number.substring(index, index+4))
+                    index += 4
+            return numbers
+        ).property('masked_number')
+            
+        masked_number1: (() ->
+            if this.get('masked_number') and this.get('masked_number').length > 0
+                return this.get('masked_number').substring(0, 4)
+            return '****'
+        ).property('masked_number')
+            
+        masked_number2: (() ->
+            if this.get('masked_number') and this.get('masked_number').length > 0
+                return this.get('masked_number').substring(4, 8)
+            return '****'
+        ).property('masked_number')
+            
+        masked_number3: (() ->
+            if this.get('masked_number') and this.get('masked_number').length > 0
+                return this.get('masked_number').substring(8, 12)
+            return '****'
+        ).property('masked_number')
+            
+        masked_number4: (() ->
+            if this.get('masked_number') and this.get('masked_number').length > 0
+                return this.get('masked_number').substring(12, 16)
+            return '****'
+        ).property('masked_number')
 
         sitters_to_review: (() ->
             results = Em.A()
