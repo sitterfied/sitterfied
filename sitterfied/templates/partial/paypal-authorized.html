@@ -1,0 +1,10 @@
+{% load staticfiles %}
+<div class="paypal-active clearfix">
+    <span class="PayPalLogoSmall">
+        <img src="{% static 'images/paypal.png' %}">
+    </span>
+    <div class="PayPalEmail clearfix">
+        {{email}}
+        <a href="#" class="cancelaccount">Cancel</a>
+    </div>	
+</div>

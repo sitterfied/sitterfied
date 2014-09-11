@@ -358,6 +358,35 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
         renderTemplate: () ->
             this.render("settings", {controller: 'currentUser'})
             this.render("settings.top", {outlet: 'top'})
+            
+            if not Sitterfied.currentUser.get("paypal_email")
+                # Setup paypal button
+                $.ajax(
+                    url: "/api/braintree_client/"
+                    method: "post"
+                ).done (data) ->
+                    braintree.setup(data.client_token, "paypal", {
+                        container: "paypal-container"
+                        paymentMethodNonceInputField: "paypal-payment-method-nonce"
+                        singleUse: false
+                        onSuccess: ->
+                            paypal_method_nonce = $("#paypal-payment-method-nonce").val()
+                            $("#paypal-container").html("")
+                            $.ajax(
+                                url: "/api/update_payment_method/"
+                                method: "post"
+                                data:
+                                    payment_method: "paypal"
+                                    payment_method_nonce: paypal_method_nonce
+                            ).done (data) ->
+                                $("#paypal-container").html(data.paypal_html)
+                                console.log("Data:", data)
+                    })
+                    $("#braintree-paypal-button").html("")
+                    $("#braintree-paypal-button").removeAttr("style")
+                    $("#braintree-paypal-button").addClass("button-connect-paypal")
+                    return
+            
     )
 
     Sitterfied.ProfileRoute = Em.Route.extend(

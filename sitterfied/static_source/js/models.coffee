@@ -284,6 +284,7 @@ define ['jquery'
         emergency_contact_one_phone : attr("string")
         emergency_contact_two_name : attr("string")
         emergency_contact_two_phone : attr("string")
+        paypal_email: attr()
         masked_number: attr()
         expiration_month: attr()
         expiration_year: attr()

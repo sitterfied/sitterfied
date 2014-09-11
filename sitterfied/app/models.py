@@ -123,20 +123,24 @@ class Parent(User):
 
     class Meta:
         verbose_name = "Parent"
-        
+    
+    @property
+    def paypal_email(self):
+        return self.get_payment_method_property("email", "PayPalAccount")
+    
     @property
     def masked_number(self):
-        return self.get_payment_method_property("masked_number")
+        return self.get_payment_method_property("masked_number", "CreditCard")
     
     @property
     def expiration_month(self):
-        return self.get_payment_method_property("expiration_month")
+        return self.get_payment_method_property("expiration_month", "CreditCard")
     
     @property
     def expiration_year(self):
-        expiration_year = self.get_payment_method_property("expiration_year")
+        expiration_year = self.get_payment_method_property("expiration_year", "CreditCard")
         if expiration_year:
-            return self.get_payment_method_property("expiration_year")[2:]
+            return expiration_year[2:]
         return expiration_year
     
     @property
@@ -149,13 +153,14 @@ class Parent(User):
             except braintree.exceptions.not_found_error.NotFoundError:
                 return address
             
-            address = "%s, %s %s %s %s" % (
-                payment_method.billing_address.street_address,
-                payment_method.billing_address.extended_address,
-                payment_method.billing_address.locality,
-                payment_method.billing_address.region,
-                payment_method.billing_address.postal_code,
-            )
+            if payment_method.__class__.__name__ == "CreditCard":
+                address = "%s, %s %s %s %s" % (
+                    payment_method.billing_address.street_address,
+                    payment_method.billing_address.extended_address,
+                    payment_method.billing_address.locality,
+                    payment_method.billing_address.region,
+                    payment_method.billing_address.postal_code,
+                )
         return address
     
     @property
@@ -178,7 +183,7 @@ class Parent(User):
     def billing_postal_code(self):
         return self.get_billing_address_property("postal_code")
     
-    def get_payment_method_property(self, property_name):
+    def get_payment_method_property(self, property_name, payment_method_class):
         name = None
         if self.default_payment_method_token:
             # Search for payment method using token
@@ -188,7 +193,7 @@ class Parent(User):
                 return name
             
             # Check to see if payment_method is credit card
-            if hasattr(payment_method, property_name):
+            if payment_method.__class__.__name__ == payment_method_class:
                 name = getattr(payment_method, property_name)
             
         return name
@@ -203,8 +208,9 @@ class Parent(User):
                 return name
             
             # Check to see if payment_method is credit card
-            billing_address = payment_method.billing_address
-            name = getattr(billing_address, property_name)
+            if payment_method.__class__.__name__ == "CreditCard":
+                billing_address = payment_method.billing_address
+                name = getattr(billing_address, property_name)
             
         return name
 

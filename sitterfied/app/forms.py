@@ -6,6 +6,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.forms import ModelForm, widgets
 from django.forms.models import BaseInlineFormSet
+from django.template.loader import render_to_string
 
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils.translation import ugettext_lazy as _
@@ -280,7 +281,6 @@ class BraintreeUpdatePaymentMethodForm(forms.Form):
     
     def render_json_response(self, user):
         if self.cleaned_data.get('payment_method_nonce') and self.cleaned_data.get('payment_method'):
-            token = "%s_%s" % (user.pk, self.cleaned_data.get('payment_method'))
             result = braintree.PaymentMethod.create({
                 "customer_id": str(user.pk),
                 "payment_method_nonce": self.cleaned_data.get('payment_method_nonce'),
@@ -292,6 +292,17 @@ class BraintreeUpdatePaymentMethodForm(forms.Form):
             # Save payment method token
             user.default_payment_method_token = result.payment_method.token
             user.save()
+            
+            if result.payment_method.__class__.__name__ == "PayPalAccount":
+                return {
+                    "success": result.is_success,
+                    "email": result.payment_method.email,
+                    "token": result.payment_method.token,
+                    "paypal_html": render_to_string('partial/paypal-authorized.html',{
+                        "email": result.payment_method.email,
+                        "token": result.payment_method.token
+                    })
+                }
             
             return {
                 "success": result.is_success

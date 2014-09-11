@@ -118,6 +118,7 @@ class ParentSerializer(serializers.ModelSerializer):
     #contacts
     avatar = serializers.Field(source="avatar_url")
     parent_or_sitter = serializers.Field(source="is_parent_or_sitter")
+    paypal_email = serializers.Field(source="paypal_email")
     masked_number = serializers.Field(source="masked_number")
     expiration_month = serializers.Field(source="expiration_month")
     expiration_year = serializers.Field(source="expiration_year")
@@ -139,7 +140,7 @@ class ParentSerializer(serializers.ModelSerializer):
                                 'masked_number', 'expiration_month', 'expiration_year',
                                 'full_billing_address', 'billing_street_address',
                                 'billing_extended_address', 'billing_locality',
-                                'billing_region', 'billing_postal_code',
+                                'billing_region', 'billing_postal_code', 'paypal_email'
         )
 
 

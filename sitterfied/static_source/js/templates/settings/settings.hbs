@@ -2,7 +2,7 @@
   <div class="wraper settings_topmarg">
     <!-- account_settings_block -->
     <div class="account_settings_block clear">
-      <form class="form_style">
+      <form id="settings-form" class="form_style">
 	<div class="clearfix account-payment-settings">
 	  <div class="column-1">
 	    <div class="form-item clearfix">
@@ -47,7 +47,23 @@
 	  </div>
 	  
 	  <div class="column-2">
-	    <a href="javascript:void(0);" class="button-connect-paypal">Connect to PayPal</a>
+	    {{# if Sitterfied.currentUser.paypal_email }}
+	      <div class="paypal-active clearfix">
+		<span class="PayPalLogoSmall">
+		  <img src="/static/images/paypal.png" />
+		</span>
+		<div class="PayPalEmail clearfix">
+		  {{Sitterfied.currentUser.paypal_email}}
+		  <a href="#" class="cancelaccount">Cancel</a>
+		</div>	
+	      </div>
+            {{ else }}
+	      <input type="hidden" name="payment_method_nonce" id="paypal-payment-method-nonce" />
+	      <div id="paypal-container">
+	      </div>
+	    {{/if}}
+	    
+	    
 	    <div class="payemnt-method-divider"><span>OR</span></div>
 	    <div class="form-mycard-info">
               <img src="/static/images/icons/card.png">
