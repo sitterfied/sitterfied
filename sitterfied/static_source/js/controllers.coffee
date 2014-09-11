@@ -198,8 +198,51 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             this.set('sitters_to_review', results.uniq())
             return null
         ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
+            
+        openChoosePaymentMethodPopup: () ->
+            # Setup paypal button
+            $.ajax(
+                url: "/api/braintree_client/"
+                method: "post"
+            ).done (data) ->
+                braintree.setup(data.client_token, "paypal", {
+                    container: "paypal-container-payment-method"
+                    paymentMethodNonceInputField: "paypal-payment-method-nonce-payment-method"
+                    singleUse: false
+                    onSuccess: ->
+                        paypal_method_nonce = $("#paypal-payment-method-nonce-payment-method").val()
+                        $("#paypal-container-payment-method").html("")
+                        $.ajax(
+                            url: "/api/update_payment_method/"
+                            method: "post"
+                            data:
+                                payment_method: "paypal"
+                                payment_method_nonce: paypal_method_nonce
+                        )
+                        $.fancybox.close()
+                })
+                # Adjust layout produced by braintree setup
+                $("#choose-payment-method #braintree-paypal-button").html("")
+                $("#choose-payment-method #braintree-paypal-button").removeAttr("style")
+                $("#choose-payment-method #braintree-paypal-button").addClass("button-connect-paypal")
+                $("#choose-payment-method .or.payment-method").appendTo("#choose-payment-method #braintree-paypal-loggedout")
+                $("#choose-payment-method .button-add-credit-card.payment-method").appendTo("#choose-payment-method #braintree-paypal-loggedout")
+            
+            $.fancybox
+                href: "#choose-payment-method"
+                maxWidth: 960
+                maxHeight: 1800
+                minWidth: 300
+                minHeight: 480
+                fitToView: false
+                width: "90%"
+                height: "90%"
+                parent: "div#application"
         
         openUpdateCreditCardPopup: () ->
+            # Close existing pop-ups
+            $.fancybox.close()
+            
             $("select").select2
                 width:"element"
             # Set default values for fields

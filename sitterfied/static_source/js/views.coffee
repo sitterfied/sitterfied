@@ -594,11 +594,12 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         attributeBindings: ['class']
         
         template: (->
+            userController = this.get('controller.controllers.currentUser')
             return Ember.Handlebars.compile("<span class='icon_ok2'>&nbsp;</span>{{#if view.value}}<i class=\"fa fa-spinner fa-spin\"></i>{{else}}{{view.saveText}}{{/if}}")
         ).property()
         
         click: (event) ->
-            event.preventDefault()       
+            event.preventDefault()
             if !@get('value')
                 @triggerAction()
     )

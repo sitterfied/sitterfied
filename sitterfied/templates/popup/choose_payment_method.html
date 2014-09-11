@@ -1,0 +1,30 @@
+{% verbatim %}
+<div id="choose-payment-method" class="modalwindow">
+    <div class="modalwindow-title">Update payment details</div>
+    <div class="modalwindow-content">
+        <div class="clearfix addcreditcard-alert">
+            <span class="icon-alert"></span>
+            <div class="alert-message">
+                <strong>You haven't added a credit card to your account. Please add one now.</strong>
+                <em>As soon as you're done, we'll take you right back to the action!</em>
+            </div>
+        </div>
+        <div class="payment-method-buttons">
+            <div class="titile_choose_payment">
+                CHOOSE A PAYMENT METHOD
+            </div>
+            <div class="add-payment-buttons-block">
+                <form>
+                    <input type="hidden" name="payment_method_nonce" id="paypal-payment-method-nonce-payment-method" />
+                    <div id="paypal-container-payment-method">
+                    </div>
+                </form>
+                <span class="or payment-method">OR</span>
+                <a  {{action 'openUpdateCreditCardPopup'}} id="UpdateCreditCardInfo" class="button-add-credit-card payment-method">
+                    Add Credit Card
+                </a>
+            </div>
+        </div> 
+    </div>
+</div>
+{% endverbatim %}

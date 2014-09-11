@@ -57,7 +57,7 @@
                     </div>                    
                 </div>
                 <div class="form-action clearfix">
-                    <a {{action 'savePaymentDetails'}} class="button button_small"><span class="icon_ok2">&nbsp;</span>Save</a>
+                    {{view Sitterfied.AjaxStateButtonLink valueBinding="controllers.controller.currentUser.isLoading" action="savePaymentDetails" class="button button_small save_payment_details" saveText="Save"}}
                 </div>
             </div>            
         </form>
