@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'cities_light',
     'django_twilio',
     'django_mandrill',
     'registration',
@@ -284,3 +285,8 @@ braintree.Configuration.configure(braintree.Environment.Sandbox,
                                   merchant_id=BRAINTREE_MERCHANT_ID,
                                   public_key=BRAINTREE_PUBLIC_KEY,
                                   private_key=BRAINTREE_PRIVATE_KEY)
+
+# Django Cities Lite
+SOUTH_MIGRATION_MODULES = {
+    'cities_light': 'cities_light.south_migrations',
+}

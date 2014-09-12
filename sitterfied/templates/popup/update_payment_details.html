@@ -48,14 +48,16 @@
                         </div>
                         <div class="form-item form-feild-address-select1">
                             <select id="billing_locality" data-placeholder="">
-                                <option>Hoboken</option>
-                                <option>Hoboken 2 dsgsd sdghsdhs</option>
+                                {{# each city in controllers.controller.currentUser.cities }}
+                                    <option>{{city.name}}</option>
+                                {{/each}}
                             </select>                        
                         </div>
                         <div class="form-item form-feild-address-select2">
                             <select id="billing_region" data-placeholder="">
-                                <option>NZ</option>
-                                <option>NY</option>
+                                {{# each state in controllers.controller.currentUser.states }}
+                                    <option>{{state.geoname_code}}</option>
+                                {{/each}}
                             </select>                        
                         </div>
                     </div>                    

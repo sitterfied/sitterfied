@@ -179,6 +179,14 @@ class ChildSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Group
+        
+class StateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.USState
+
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.USCity
 
 
 from drf_ujson.renderers import UJSONRenderer
@@ -473,6 +481,20 @@ class ChildrenViewSet(IdFilterViewset):
     serializer_class = ChildSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     filter_fields = ('parent', 'school', 'special_needs')
+
+
+class StateViewSet(IdFilterViewset):
+    queryset = models.USState.objects.all()
+    serializer_class = StateSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('name', 'geoname_code')
+    
+    
+class CityViewSet(IdFilterViewset):
+    queryset = models.USCity.objects.all()
+    serializer_class = CitySerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    filter_fields = ('name')
 
 
 #bookings

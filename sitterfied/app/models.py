@@ -13,6 +13,7 @@ from intercom import generate_intercom_user_hash
 from model_utils.choices import Choices
 from model_utils.models import TimeStampedModel
 from pyuploadcare.dj import ImageField as UploadcareImageField
+from cities_light.models import Region, City
 
 from app.us_states import US_STATES
 
@@ -499,3 +500,22 @@ class Group(TimeStampedModel):
 class Reminder(TimeStampedModel):
     booking = models.ForeignKey(Booking)
     task_id = models.CharField(max_length=256)
+
+
+class USManager(models.Manager):
+    def get_query_set(self):
+        return super(USManager, self).get_query_set().filter(country__name='United States')
+
+
+class USState(Region):
+    objects = USManager()
+    
+    class Meta:
+        proxy = True
+
+
+class USCity(City):
+    objects = USManager()
+    
+    class Meta:
+        proxy = True

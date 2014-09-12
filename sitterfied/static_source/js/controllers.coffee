@@ -21,6 +21,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         isParent: (() ->
             Sitterfied.accountType == "Parent"
         ).property('parent_or_sitter', 'Sitterfied.accountType')
+            
+        cities: (() ->
+            return Sitterfied.City.findAll()
+        ).property('Sitterfied.city.@each')
+            
+        states: (() ->
+            return Sitterfied.State.findAll()
+        ).property('Sitterfied.state.@each')
 
         saveSettings: () ->
             # Set button animation

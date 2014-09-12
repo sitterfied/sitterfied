@@ -23,6 +23,8 @@ router.register(r'languages', api.LanguageViewSet)
 router.register(r'children', api.ChildrenViewSet)
 router.register(r'bookings', api.BookingViewSet)
 router.register(r'groups', api.GroupViewSet)
+router.register(r'states', api.StateViewSet)
+router.register(r'cities', api.CityViewSet)
 
 
 urlpatterns = patterns('app.views',

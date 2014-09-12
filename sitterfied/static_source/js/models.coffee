@@ -51,6 +51,20 @@ define ['jquery'
         deserialize: (bool) ->
             return bool
     }
+    
+    Sitterfied.State = Ember.Model.extend(
+        id: attr()
+        name: attr()
+        geoname_code: attr()
+    )
+    Sitterfied.State.adapter = Adapter.create()
+    
+    Sitterfied.City = Ember.Model.extend(
+        id: attr()
+        name: attr()
+    )
+    Sitterfied.City.adapter = Adapter.create()
+    Sitterfied.City.url = "cities"
 
     Sitterfied.User = Ember.Model.extend(
         id: attr()
