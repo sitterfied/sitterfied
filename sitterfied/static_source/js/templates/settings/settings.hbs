@@ -47,26 +47,13 @@
 	  </div>
 	  
 	  <div class="column-2">
-	    {{# if Sitterfied.currentUser.paypal_email }}
-	      <div class="paypal-active clearfix">
-		<span class="PayPalLogoSmall">
-		  <img src="/static/images/paypal.png" />
-		</span>
-		<div class="PayPalEmail clearfix">
-		  {{Sitterfied.currentUser.paypal_email}}
-		  <a href="#" class="cancelaccount">Cancel</a>
-		</div>	
-	      </div>
-            {{ else }}
-	      <input type="hidden" name="payment_method_nonce" id="paypal-payment-method-nonce" />
-	      <div id="paypal-container">
-	      </div>
-	    {{/if}}
-	    
+	    {{view Sitterfied.PaypalView valueBinding="Sitterfied.currentUser.is_paypal"}}
 	    
 	    <div class="payemnt-method-divider"><span>OR</span></div>
 	    <div class="form-mycard-info">
-              <img src="/static/images/icons/card.png">
+	    
+	      {{view Sitterfied.CreditCardImageView valueBinding="Sitterfied.currentUser.is_paypal"}}
+	      
 	      <div class="card-number">
 		<span class="slot1">
 		  {{Sitterfied.currentUser.masked_number1}}
@@ -96,9 +83,7 @@
 	      </div>
 	      
 	      <div class="card-update-button clearfix">
-                <a {{action 'openUpdateCreditCardPopup'}} id="UpdateCreditCardInfo" class="button button_smaller button_edit">
-		  ADD CREDIT CARD
-		</a>
+		{{view Sitterfied.AddCreditCardButtonView valueBinding="Sitterfied.currentUser.is_paypal"}}
               </div>
 	    </div>
 	    

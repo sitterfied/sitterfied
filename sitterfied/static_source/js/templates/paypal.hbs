@@ -1,0 +1,15 @@
+{{# if Sitterfied.currentUser.is_paypal }}
+    <div class="paypal-active clearfix">
+        <span class="PayPalLogoSmall">
+            <img src="/static/images/paypal.png" />
+        </span>
+        <div class="PayPalEmail clearfix">
+            {{Sitterfied.currentUser.paypal_email}}
+            <a {{action 'cancelPaymentMethod'}} class="cancelaccount">Cancel</a>
+        </div>	
+    </div>
+{{ else }}
+    <input type="hidden" name="payment_method_nonce" id="paypal-payment-method-nonce" />
+    <div id="paypal-container">
+    </div>
+{{/if}}

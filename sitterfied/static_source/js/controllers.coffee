@@ -199,6 +199,16 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             return null
         ).property("Sitterfied.currentUser.reviews.@each", "Sitterfied.currentUser.reviews.@each.sitter", "Sitterfied.currentUser.bookings.@each", "Sitterfied.currentUser.bookings.@each.accepted_sitter")
             
+        cancelPaymentMethod: () ->
+            console.log("Cancel Payment Method Start")
+            Sitterfied.currentUser.set('isDirty', true)
+            Sitterfied.currentUser.set("default_payment_method_token", null)
+            Sitterfied.currentUser.set("is_paypal", false)
+            Sitterfied.currentUser.set("paypal_email", null)
+            Sitterfied.currentUser.save()
+            console.log("Cancel Payment Method End")
+            
+        
         openChoosePaymentMethodPopup: () ->
             # Setup paypal button
             $.ajax(

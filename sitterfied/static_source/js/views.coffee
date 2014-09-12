@@ -83,6 +83,50 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
     Sitterfied.LoginView = Ember.View.extend(
         templateName: "login"
     )
+    
+    Sitterfied.AddCreditCardButtonView = Ember.View.extend(
+        templateName: "addCreditCard"
+    )
+    
+    Sitterfied.CreditCardImageView = Ember.View.extend(
+        templateName: "creditCardImage"
+    )
+    
+    Sitterfied.PaypalView = Ember.View.extend(
+        templateName: "paypal"
+        
+        paypalEmailChanged: (->
+            # Setup paypal button
+            if not Sitterfied.currentUser.get('is_paypal')
+                $.ajax(
+                    url: "/api/braintree_client/"
+                    method: "post"
+                ).done (data) ->
+                    braintree.setup(data.client_token, "paypal", {
+                        container: "paypal-container"
+                        paymentMethodNonceInputField: "paypal-payment-method-nonce"
+                        singleUse: false
+                        onSuccess: ->
+                            paypal_method_nonce = $("#paypal-payment-method-nonce").val()
+                            $("#paypal-container").html("")
+                            $.ajax(
+                                url: "/api/update_payment_method/"
+                                method: "post"
+                                data:
+                                    payment_method: "paypal"
+                                    payment_method_nonce: paypal_method_nonce
+                            ).done (data) ->
+                                Sitterfied.currentUser.set('paypal_email', data.email)
+                                Sitterfied.currentUser.set('is_paypal', true)
+                            $.fancybox.close()
+                    })
+                    # Adjust layout produced by braintree setup
+                    $("#braintree-paypal-button").html("")
+                    $("#braintree-paypal-button").removeAttr("style")
+                    $("#braintree-paypal-button").addClass("button-connect-paypal")
+                    return
+        ).observes("Sitterfied.currentUser.is_paypal")
+    )
 
 
 

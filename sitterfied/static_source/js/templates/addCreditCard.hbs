@@ -1,0 +1,12 @@
+{{# if Sitterfied.currentUser.is_paypal }}
+    <a href="javascript:void(0);" class="button-add-card-disabled">
+        <img src="/static/images/button_add_card_gray.png">
+        <span>
+            Disconnect your PayPal account if you want to add a credit card
+        </span>
+    </a>
+{{else}}
+    <a {{action 'openUpdateCreditCardPopup'}} id="UpdateCreditCardInfo" class="button button_smaller button_edit">
+        ADD CREDIT CARD
+    </a>
+{{/if}}

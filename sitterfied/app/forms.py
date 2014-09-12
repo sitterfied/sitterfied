@@ -299,11 +299,7 @@ class BraintreeUpdatePaymentMethodForm(forms.Form):
                     return {
                         "success": result.is_success,
                         "email": result.payment_method.email,
-                        "token": result.payment_method.token,
-                        "paypal_html": render_to_string('partial/paypal-authorized.html',{
-                            "email": result.payment_method.email,
-                            "token": result.payment_method.token
-                        })
+                        "token": result.payment_method.token
                     }
                 return {
                     "success": True

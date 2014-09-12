@@ -113,7 +113,7 @@ class Parent(User):
     emergency_contact_two_name = models.CharField(max_length=128, blank=True)
     emergency_contact_two_phone = models.CharField(max_length=10, blank=True)
     
-    default_payment_method_token = models.CharField(max_length=20, blank=True)
+    default_payment_method_token = models.CharField(max_length=20, blank=True, null=True)
     payment_method = models.CharField(max_length=15, choices=PAYMENT_OPTIONS, blank=True)
     billing_address1 = models.CharField(max_length=255, blank=True)
     billing_address2 = models.CharField(max_length=255, blank=True, default="")
@@ -123,6 +123,15 @@ class Parent(User):
 
     class Meta:
         verbose_name = "Parent"
+    
+    @property
+    def payment_method_type(self):
+        if self.default_payment_method_token:
+            try:
+                payment_method = braintree.PaymentMethod.find(self.default_payment_method_token)
+            except braintree.exceptions.not_found_error.NotFoundError:
+                return None
+            return payment_method.__class__.__name__
     
     @property
     def paypal_email(self):

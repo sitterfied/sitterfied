@@ -284,6 +284,7 @@ define ['jquery'
         emergency_contact_one_phone : attr("string")
         emergency_contact_two_name : attr("string")
         emergency_contact_two_phone : attr("string")
+        payment_method_type: attr()
         paypal_email: attr()
         masked_number: attr()
         expiration_month: attr()
@@ -305,6 +306,14 @@ define ['jquery'
         parent: (() ->
             return this
         ).property()
+            
+        is_credit_card: (() ->
+            return this.get('payment_method_type') == 'CreditCard'
+        ).property('payment_method_type')
+            
+        is_paypal: (() ->
+            return this.get('payment_method_type') == 'PayPalAccount'
+        ).property('payment_method_type')
         
         masked_number_array: (() ->
             numbers = ['****', '****', '****', '****']

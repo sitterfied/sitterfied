@@ -379,8 +379,8 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                                     payment_method: "paypal"
                                     payment_method_nonce: paypal_method_nonce
                             ).done (data) ->
-                                $("#paypal-container").html(data.paypal_html)
-                                console.log("Data:", data)
+                                Sitterfied.currentUser.set('paypal_email', data.email)
+                                Sitterfied.currentUser.set('is_paypal', true)
                     })
                     $("#braintree-paypal-button").html("")
                     $("#braintree-paypal-button").removeAttr("style")
