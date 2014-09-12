@@ -243,6 +243,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             # Close existing pop-ups
             $.fancybox.close()
             
+            # Add event for credit card identification
+            $("#creditcard_number1").keyup(handleCreditCardIndetification)
+            $("#creditcard_number1").blur(handleCreditCardIndetification)
+            
             $("select").select2
                 width:"element"
             # Set default values for fields
@@ -252,6 +256,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 while index < card_number.length
                     $("#creditcard_number" + (index/4 + 1)).val(card_number.substring(index, index+4))
                     index += 4
+            # Set credit card logo
+            setCreditCardLogo($("#creditcard_number1").val())
             
             expiration_month = Sitterfied.currentUser.get('expiration_month')
             expiration_year = Sitterfied.currentUser.get('expiration_year')

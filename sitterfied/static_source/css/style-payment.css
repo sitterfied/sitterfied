@@ -442,6 +442,14 @@
 	width:59px;
 	margin-right: 18px;
 }
+.credit-card-logo {
+    height: 49px;
+    width: 94px;
+    position: absolute;
+    top: 177px;
+    left: 247px;
+}
+
 .cardstatusmessages {
 	font-size: 18px;
 	font-family: "ProximaNova-Semibold";

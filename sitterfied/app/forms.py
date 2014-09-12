@@ -285,26 +285,52 @@ class BraintreeUpdatePaymentMethodForm(forms.Form):
                 "customer_id": str(user.pk),
                 "payment_method_nonce": self.cleaned_data.get('payment_method_nonce'),
                 "options": {
-                    "make_default": True
+                    "make_default": True,
+                    "verify_card": True
                 }
             })
             
-            # Save payment method token
-            user.default_payment_method_token = result.payment_method.token
-            user.save()
+            if result.is_success:
+                # Save payment method token
+                user.default_payment_method_token = result.payment_method.token
+                user.save()
             
-            if result.payment_method.__class__.__name__ == "PayPalAccount":
-                return {
-                    "success": result.is_success,
-                    "email": result.payment_method.email,
-                    "token": result.payment_method.token,
-                    "paypal_html": render_to_string('partial/paypal-authorized.html',{
+                if result.payment_method.__class__.__name__ == "PayPalAccount":
+                    return {
+                        "success": result.is_success,
                         "email": result.payment_method.email,
-                        "token": result.payment_method.token
-                    })
+                        "token": result.payment_method.token,
+                        "paypal_html": render_to_string('partial/paypal-authorized.html',{
+                            "email": result.payment_method.email,
+                            "token": result.payment_method.token
+                        })
+                    }
+                return {
+                    "success": True
                 }
-            
-            return {
-                "success": result.is_success
+                
+            # Return error
+            error_result = {
+                "success": False
             }
+            # Verification errors
+            if hasattr(result, "credit_card_verification"):
+                verification = result.credit_card_verification
+                if verification:
+                    error_result["verification"] = {
+                        "message": verification.status
+                    }
+            # Credit Card Number Errors
+            number_errors = result.errors.for_object("credit_card").on("number")
+            if number_errors:
+                error_result["number_errors"] = {
+                    "message": number_errors[0].message
+                }
+            # CVV Errors
+            cvv_errors = result.errors.for_object("credit_card").on("cvv")
+            if cvv_errors:
+                error_result["cvv_errors"] = {
+                    "message": cvv_errors[0].message
+                }
+            return error_result
         return {}

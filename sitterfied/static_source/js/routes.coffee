@@ -448,6 +448,11 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                 # Close existing pop-ups
                 $.fancybox.close()
                 
+                # Add event for credit card identification
+                setCreditCardLogo($("#creditcard_number1").val())
+                $("#creditcard_number1").keyup(handleCreditCardIndetification)
+                $("#creditcard_number1").blur(handleCreditCardIndetification)
+                
                 $("select").select2
                     width:"element"
                 # Set default values for fields
@@ -486,10 +491,14 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                     parent: "div#application"
 
             savePaymentDetails: () ->
-                # Set loading button
+                # Set loading button and status
                 userController = this.get('controller').get("controllers.currentUser")
                 userController.set("isLoading", true)
                 $(".save_payment_details").attr("disabled", true)
+                $(".verify_message").html("Verifying...")
+                $(".verify_message").removeClass("green")
+                $(".verify_message").removeClass("red")
+                
                 
                 # Get braintree client token from server and display form
                 $.ajax(
@@ -543,7 +552,15 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                             console.log("Update Payment Method Result:", data)
                             userController.set("isLoading", false)
                             $(".save_payment_details").attr("disabled", false)
-                            $.fancybox.close()
+                            # Change status
+                            if data.success
+                                $(".verify_message").html("Verified")
+                                $(".verify_message").removeClass("red")
+                                $(".verify_message").addClass("green")
+                            else
+                                $(".verify_message").html("Unverified")
+                                $(".verify_message").removeClass("green")
+                                $(".verify_message").addClass("red")
                     return
             
             postReview: ()->
