@@ -65,6 +65,10 @@ function getCreditCardType(accountNumber) {
   {
     result = "amex";
   }
+  
+  else if (/^6(?:011|5)/.test(accountNumber)) {
+    result = "discover"
+  }
 
   return result;
 }
@@ -78,13 +82,16 @@ function setCreditCardLogo(value) {
     var type = getCreditCardType(value);
     switch(type) {
         case "mastercard":
-            $(".credit-card-logo").html("Mastercard");
+            $(".credit-card-logo").html('<img id="creditcard-image" src="/static/images/icons/mastercard.png" />');
             break;
         case "visa":
-            $(".credit-card-logo").html("Visa");
+            $(".credit-card-logo").html('<img id="creditcard-image" src="/static/images/icons/visa.png" />');
             break;
         case "amex":
-            $(".credit-card-logo").html("American Express");
+            $(".credit-card-logo").html('<img id="creditcard-image" src="/static/images/icons/americanexpress.png" />');
+            break;
+        case "discover":
+            $(".credit-card-logo").html('<img id="creditcard-image" src="/static/images/icons/discover.png" />');
             break;
 
         default:
