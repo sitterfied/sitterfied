@@ -28,6 +28,7 @@
 	  UPLOADCARE_TABS = "file facebook";
 	  UPLOADCARE_CROP = "171x171 upscale";
 	  UPLOADCARE_AUTOSTORE = true;
+      UPLOADCARE_CDN_BASE = "{{ UPLOADCARE_CDN_BASE }}";
     </script>
 
 	{%block extra_header%}
@@ -45,7 +46,6 @@
     {% include "ie_modal.html" %}
     {% include "intercom.html" %}
     {% include "perfectaudience.html" %}
-    {% include "popcornmetrics.html" %}
     {% include "sideswipeio.html" %}
   </body>
 </html>

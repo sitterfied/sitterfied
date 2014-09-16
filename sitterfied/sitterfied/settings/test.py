@@ -69,10 +69,6 @@ GOOGLE_OAUTH_REDIRECT_URI = 'http://test.sitterfied.com'
 SHORT_URL = 'test.sttrfd.us/'
 
 
-# Override Popcorn Metrics ID
-POPCORN_METRICS_ID = '53f62873ed69ca02000003ef'
-
-
 # Override Twilio Configuration
 TWILIO_DEFAULT_CALLERID = '+19088384816'
 

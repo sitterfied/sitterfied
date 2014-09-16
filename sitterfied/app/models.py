@@ -3,6 +3,7 @@ import re
 import time
 from datetime import datetime
 
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core.validators import MinValueValidator
 from django.db import models
@@ -63,7 +64,10 @@ class User(AbstractUser, TimeStampedModel):
 
     @property
     def avatar_url(self):
-        return getattr(self.avatar, 'cdn_url', None)
+        cdn_url = getattr(self.avatar, 'cdn_url', None)
+        if cdn_url:
+            return cdn_url.replace('http://www.ucarecdn.com/', settings.UPLOADCARE.get('upload_base_url'))
+        return cdn_url
 
     @property
     def hash(self):
