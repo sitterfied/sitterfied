@@ -647,3 +647,14 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
             if !@get('value')
                 @triggerAction()
     )
+
+    Sitterfied.ShowToolTip = Em.View.extend(Ember.ViewTargetActionSupport,
+        tagName: 'a'
+
+        mouseEnter: () ->
+            this.$().parents(".listwithpricetag").addClass "PriceInfoToolTipOpen"
+
+        mouseLeave: () ->
+            this.$().parents(".listwithpricetag").removeClass "PriceInfoToolTipOpen"
+
+    )

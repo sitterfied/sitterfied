@@ -691,9 +691,9 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .top_personal_info ul:before {content:'';display:block;width:11px;height:10px;background:url(../images/icons/arrow_left2.png) no-repeat;position:absolute;top:31px;left:-10px;}
 .top_personal_info ul li {position:relative;float:left;color:#104952;font:14px 'ProximaNova-Semibold';padding:8px 0;text-align:center;margin:0 0 2px 0;}
 .top_personal_info ul li span {color:#e68245;}
-.top_personal_info ul li:first-child {border-bottom:2px solid #e6e6e6;float:none;}
+.top_personal_info ul li.price_date_detail {border-bottom:2px solid #e6e6e6;float:none;}
 .top_personal_info ul li.num_children_detail {border-right:2px solid #e6e6e6;width:100px;}
-.top_personal_info ul li.address_detail_book {padding-left: 25px; width: 275px;}
+.top_personal_info ul li.address_detail_book {width:300px;}
 .top_personal_info ul li span {top:8px;left:10px;}
 .top_personal_info ul li.num_children_detail span {left:-5px;}
 .top_personal_info ul li.address_detail_book span {top:6px;left:-1px;}
@@ -1530,7 +1530,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .top_personal_info {padding:20px 10px;}
 .top_personal_info ul {float:left;width:260px;padding:0 10px;}
 .top_personal_info ul li {float:none;padding:8px 0 8px 25px;text-align:left;}
-.top_personal_info ul li:first-child {border-bottom-width:1px;}
+.top_personal_info ul li.price_date_detail {border-bottom-width:1px;}
 .top_personal_info ul li.num_children_detail {border-right:none;width:auto;border-bottom:1px solid #e6e6e6;}
 .top_personal_info ul li.address_detail_book {width:auto;border-bottom:1px solid #e6e6e6;}
 .top_personal_info ul li span {top:8px;left:-3px;display:block;}
