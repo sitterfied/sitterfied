@@ -1076,32 +1076,32 @@ position: absolute; pointer-events: none; }
 	}
 }
 /* Payment Done */
-.page-payment-settings .top_notify {
+.page-payment-settings.top_notify {
 	width: 740px;
 }
-.page-payment-settings .top_notify .sent {
+.page-payment-settings.top_notify .sent {
 	font-size: 46px;
 	padding-top: 50px;
 }
-.page-payment-settings .top_notify .sent em {
+.page-payment-settings.top_notify .sent em {
 	font:19px 'ProximaNova',Arial,Tahoma;
 	display: block;
 }
-.page-payment-settings .top_notify .sent:before {
+.page-payment-settings.top_notify .sent:before {
 	left: 50%;
 	margin-left: -37px;
 }
-.page-payment-settings  .container .notify_wraper {
+.page-payment-settings.container .notify_wraper {
 	width: 738px;
 }
-.page-payment-settings .container .notify_wraper p {
+.page-payment-settings.container .notify_wraper p {
 	font-size: 17px;
 }
 .notification-block-inner {
 	width: 600px;
 	margin: 0 auto;
 }
-.page-payment-settings .container .notify_wraper ul {
+.page-payment-settings.container .notify_wraper ul {
 	margin: 0;
 	float: none;
 	display: block;
@@ -1159,42 +1159,42 @@ position: absolute; pointer-events: none; }
 	text-shadow:-1px 1px 1px #626262;
 }
 @media screen and (min-width:481px) and (max-width: 767px) {
-	.page-payment-settings .top_notify {
+	.page-payment-settings.top_notify {
 		width: 450px;
 	}
-	.page-payment-settings .container .notify_wraper {
+	.page-payment-settings.container .notify_wraper {
 		width: 448px;
 	}
 }
 @media screen and (max-width: 767px) { 
-	.page-payment-settings .container .notify_wraper p {
+	.page-payment-settings.container .notify_wraper p {
 		padding-left: 10px;
 		padding-right: 10px;
 	}
 	.notification-block-inner {
 		width: 96%;
 	}	
-	.page-payment-settings .container .notify_wraper p {
+	.page-payment-settings.container .notify_wraper p {
 		width: auto;
 	}
 }
 @media screen and (max-width: 480px) { 
-	.page-payment-settings .top_notify {
+	.page-payment-settings.top_notify {
 		width: 300px;
 		margin-top: 110px;
 	}
-	.page-payment-settings .container .notify_wraper {
+	.page-payment-settings.container .notify_wraper {
 		width: 300px;
 	}
-	.page-payment-settings .top_notify .sent {
+	.page-payment-settings.top_notify .sent {
 		padding-right: 10px;
 		padding-left: 10px;
 		font-size: 30px;
 	}
-	.page-payment-settings .top_notify .sent em {
+	.page-payment-settings.top_notify .sent em {
 		font-size: 16px;
 	}
-	.page-payment-settings .container .notify_wraper ul {
+	.page-payment-settings.container .notify_wraper ul {
 		padding: 0 5px;
 	}
 	.container .notify_wraper ul li .notification-price {

@@ -265,6 +265,10 @@ CELERYBEAT_SCHEDULE = {
         'task': 'app.tasks.jobs.check_for_canceled_jobs_with_incorrect_status',
         'schedule': crontab(minute='0', hour='0'),
     },
+    'check-for-due-payments': {
+        'task': 'app.tasks.jobs.check_for_due_payments',
+        'schedule': crontab(minute='*/10'),
+    },
 }
 
 

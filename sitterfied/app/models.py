@@ -424,7 +424,7 @@ class SitterReview(TimeStampedModel):
 
 
 class Booking(TimeStampedModel):
-    BOOKING_STATUS = Choices('Active', 'Pending', 'Completed', 'Expired', 'Declined', 'Canceled',)
+    BOOKING_STATUS = Choices('Active', 'Pending', 'Completed', 'Expired', 'Declined', 'Canceled', 'Paid',)
     BOOKING_TYPES = Choices('Job', 'Interview', 'Meetup Interview', 'Phone Interview')
     parent = models.ForeignKey(Parent, related_name="bookings")
     sitters = models.ManyToManyField(Sitter, related_name="bookings")

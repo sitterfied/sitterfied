@@ -761,6 +761,24 @@ define ['jquery'
             return @get('booking_type')
         ).property('booking_type')
 
+        hours: (() ->
+            start = this.get('start_date_time')
+            stop = this.get('stop_date_time')
+            if not start or not stop
+                return 0
+            ms = moment.duration(moment(stop).diff(moment(start))).asHours()
+            return Math.floor(ms)
+        ).property('start_date_time', 'stop_date_time')
+
+        sitterCut: (() ->
+            return (this.get('hours') * this.get('rate'))
+        ).property('hours', 'rate')
+
+        # TODO add transaction fee and promo discount
+        totalDue: (() ->
+            return this.get('sitterCut')
+        ).property('sitterCut')
+
         isInterview: (() ->
             return @get('booking_type') && @get('booking_type').indexOf("Interview") != -1
         ).property('booking_type')
