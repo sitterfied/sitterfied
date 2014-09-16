@@ -36,6 +36,7 @@ from app.utils import send_html_email
 view_params = {
     'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
     'UPLOADCARE_PUBLIC_KEY': settings.UPLOADCARE['pub_key'],
+    'UPLOADCARE_CDN_BASE': settings.UPLOADCARE['upload_base_url'],
 }
 
 
