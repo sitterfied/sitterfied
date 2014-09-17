@@ -775,9 +775,13 @@ define ['jquery'
         ).property('hours', 'rate')
 
         # TODO add transaction fee and promo discount
-        totalDue: (() ->
-            return this.get('sitterCut')
+        transactionFee: (() ->
+            return (this.get('sitterCut') * 0.10)
         ).property('sitterCut')
+
+        totalDue: (() ->
+            return (this.get('sitterCut') + this.get('transactionFee'))
+        ).property('sitterCut', 'transactionFee')
 
         isInterview: (() ->
             return @get('booking_type') && @get('booking_type').indexOf("Interview") != -1
@@ -826,6 +830,12 @@ define ['jquery'
             if not date
                 return ""
             return moment(date).format('ddd, MMM Do')
+        ).property("start_date_time")
+        formattedDateDone: (() ->
+            date = @get('start_date_time')
+            if not date
+                return ""
+            return moment(date).format('dddd D MMMM YYYY')
         ).property("start_date_time")
         formattedHours: (() ->
             start = @get('start_date_time')

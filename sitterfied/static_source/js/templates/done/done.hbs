@@ -4,13 +4,15 @@
     <div class="notification-block-inner">
       <ul class="clearfix">
         <li class="notificationlist-1">
+          {{#unless isInterview}}
           <div class="notification-price clearfix">
             <i class="icon-price-tag">&nbsp;</i>
             At the end of the job, <span>${{totalDue}}</span> will be charged to 
   your card
           </div>
+          {{/unless}}
           <div class="notification-date clearfix">
-            <span class="icon_date">&nbsp;</span>{{formattedDate}}&nbsp;<span>{{formattedHours}}</span>
+            <span class="icon_date">&nbsp;</span>{{formattedDateDone}}&nbsp;<span>{{formattedHours}}</span>
           </div>
         </li>
         {{#unless isInterview}}
@@ -27,8 +29,7 @@
         
         {{#if isMeetupInterview}}
           <li class="interview_detail meetup_interview_detail">
-            <span class="icon_pin3">&nbsp;</span>
-            {{address1}} {{address2}} {{city}}, {{state}}
+            <span class="icon_pin3">&nbsp;</span>{{address1}} {{address2}} {{city}}, {{state}} {{zip}}</li>
           </li>
         {{/if}}
       </ul>

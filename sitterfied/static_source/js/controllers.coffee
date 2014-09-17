@@ -994,9 +994,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     selected.pushObject(sitter)
 
         book: (sitters) ->
-            console.log sitters
             if not Sitterfied.typeIsArray sitters
                 sitters = [sitters]
+
+            console.log(sitters, sitters.length, sitters[0])
 
             if @get('overnight')
                 stop_date = @get('stop_date')
@@ -1010,6 +1011,16 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             start_moment.minute(start_time.minutes())
             start_date_time = start_moment.toDate()
 
+            num_children = @get('kids')
+            rate = 0
+            if sitters.length is 1
+                sitter = sitters.get(0)
+                if num_children is 1
+                    rate = sitter.get('one_child_min_rate')
+                else if num_children is 2
+                    rate = sitter.get('two_child_min_rate')
+                else
+                    rate = sitter.get('three_child_min_rate')
 
             stop_moment = moment(stop_date)
             stop_time = moment(@get('stop_time'), "HHmm")
@@ -1030,9 +1041,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 city: Sitterfied.get('currentUser.city')
                 state: Sitterfied.get('currentUser.state')
                 zip: Sitterfied.get('currentUser.zip')
-                num_children: kids
+                num_children: @get('kids')
                 emergency_phone: Sitterfied.get('currentUser.cell')
-                rate: 0
+                rate: rate
             booking.get('sitters').addObjects(sitters)
             
             Sitterfied.set('onDeckBooking', booking)

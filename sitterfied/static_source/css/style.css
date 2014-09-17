@@ -700,7 +700,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .top_personal_info ul li.phone_detail_book {position:absolute;top:5px;right:8px;padding:22px 0 22px 40px;border-left:2px solid #e6e6e6;width:105px;}
 .top_personal_info ul li.phone_detail_book span {top:21px;left:11px;}
 .top_personal_info ul li.interview_detail {width:300px;}
-.top_personal_info ul li.phone_interview_detail {width:220px}
+.top_personal_info ul li.phone_interview_detail {width:410px}
 .top_personal_info ul li.meetup_interview_detail {width:410px}
 
 
@@ -732,11 +732,11 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .container .notify_wraper ul li {position:relative;float:left;color:#104952;font:14px 'ProximaNova-Semibold';padding:8px 0;text-align:center;margin:0 0 2px 0;}
 .container .notify_wraper ul li span {color:#e68245;}
 .container .notify_wraper ul li:first-child {border-bottom:2px solid #e6e6e6;float:none;}
-.container .notify_wraper ul li:nth-child(2) {border-right:2px solid #e6e6e6;width:100px;}
-.container .notify_wraper ul li:nth-child(3) {width:300px;}
+.container .notify_wraper ul li.notificationlist-2 {border-right:2px solid #e6e6e6;width:100px;}
+.container .notify_wraper ul li.notificationlist-3 {width:300px;}
 .container .notify_wraper ul li span {top:8px;left:10px;}
-.container .notify_wraper ul li:nth-child(2) span {left:-5px;}
-.container .notify_wraper ul li:nth-child(3) span {top:6px;left:-1px;}
+.container .notify_wraper ul li.notificationlist-2 span {left:-5px;}
+.container .notify_wraper ul li.notificationlist-3 span {top:6px;left:-1px;}
 .container .notify_wraper ul + p {clear:both;padding:0 60px 25px 0;float:right;}
 .container .notify_wraper ul + p .button {margin-left:20px;font:15px/40px 'ProximaNova-Semibold';padding-left:26px;}
 .container .notify_wraper ul + p .button span {top:12px;}
@@ -2343,22 +2343,6 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .error_field_login {border-color: #d27097;box-shadow: #e9e9e9 5px 3px 5px 0 inset, #d27097 0 0 5px 1px !important;}
 .error_text {margin: -25px 0px 0px 40px; font-weight: bold; color: #d27097; font-size: 16px; width: 140px;}
 
-.container .notify_wraper.notify_done ul li {
-    text-align: left;
-    text-indent: 40px;
-}
-.container .notify_wraper.notify_done ul li.address_detail_book {
-    width:100%;
-    border-bottom:2px solid #E6E6E6;
-}
-.container .notify_wraper.notify_done ul li.address_detail_book span.icon_pin3 {
-    left:10px;
-}
-.container .notify_wraper.notify_done ul li.num_children_detail {
-    border-right:2px solid #E6E6E6;
-    padding-right:15%;
-}
-
 /* Tooltip */
 .iconquestion { width:15px; height:15px; vertical-align:middle; display:inline-block; background:url(../images/icons/icon_qestion.png) no-repeat; margin:0 3px;}
 .hastooltip { position:relative;}
@@ -2375,19 +2359,3 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 
 #myfriends_sitter_title .icon_heart2 { background:url(../images/my_friends_title.png) no-repeat  0 center;}
 
-@media screen and (max-width: 479px) {/* Target Mobile (320px) */
-    .container .notify_wraper.notify_done ul li {
-        padding-left:0;
-    }
-    .container .notify_wraper.notify_done ul li.address_detail_book {
-        border-bottom:1px solid #E6E6E6;
-    }
-    .container .notify_wraper.notify_done ul li.address_detail_book span.icon_pin3 {
-        left:-2px;
-    }
-    .container .notify_wraper.notify_done ul li.num_children_detail {
-        border-right:0;
-        padding-right:0;
-        border-bottom:1px solid #E6E6E6;
-    }
-}

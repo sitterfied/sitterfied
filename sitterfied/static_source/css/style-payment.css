@@ -1130,6 +1130,13 @@ position: absolute; pointer-events: none; }
 	height: 16px;
 	margin-left: 0;
 }
+.container .notify_wraper ul li.interview_detail {
+	width: 566px;
+}
+.container .notify_wraper ul li.interview_detail span {
+	top: 14px;
+	left: 0px;
+}
 .container .notify_wraper ul li.notificationlist-2 .icon_friends5 {
 	left:0;
 	top: 14px;
