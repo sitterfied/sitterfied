@@ -8,7 +8,7 @@
           <div class="notification-price clearfix">
             <i class="icon-price-tag">&nbsp;</i>
             At the end of the job, <span>${{totalDue}}</span> will be charged to 
-  your card
+  your {{#if parent.is_credit_card}}card (ending in xxxx-{{parent.masked_number4}}){{else}}Paypal account{{/if}}
           </div>
           {{/unless}}
           <div class="notification-date clearfix">
