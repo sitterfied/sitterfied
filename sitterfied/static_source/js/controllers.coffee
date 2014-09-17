@@ -213,6 +213,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             Sitterfied.currentUser.set("default_payment_method_token", null)
             Sitterfied.currentUser.set("is_paypal", false)
             Sitterfied.currentUser.set("paypal_email", null)
+            Sitterfied.currentUser.set("masked_number1", '****')
+            Sitterfied.currentUser.set("masked_number2", '****')
+            Sitterfied.currentUser.set("masked_number3", '****')
+            Sitterfied.currentUser.set("masked_number4", '****')
             Sitterfied.currentUser.save()
             console.log("Cancel Payment Method End")
             
@@ -230,13 +234,19 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     onSuccess: ->
                         paypal_method_nonce = $("#paypal-payment-method-nonce-payment-method").val()
                         $("#paypal-container-payment-method").html("")
+                        console.log("Paypal Method Nonce:", paypal_method_nonce)
                         $.ajax(
                             url: "/api/update_payment_method/"
                             method: "post"
                             data:
                                 payment_method: "paypal"
                                 payment_method_nonce: paypal_method_nonce
-                        )
+                        ).done (data) ->
+                            console.log("Data:", data)
+                            if data.success
+                                Sitterfied.currentUser.set('paypal_email', data.email)
+                                Sitterfied.currentUser.set('is_paypal', true)
+                                Sitterfied.currentUser.set("default_payment_method_token", data.token)
                         $.fancybox.close()
                 })
                 # Adjust layout produced by braintree setup
@@ -434,37 +444,83 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         book: () ->
             console.log("Start book")
 
-            #debounce clicks
-            if @get("pending")
-                return
+            #check if user has default_payment_method_token
+            if Sitterfied.currentUser.get("default_payment_method_token")
+                #debounce clicks
+                if @get("pending")
+                    return
+                    
+                @set("pending", true)
+                booking = Sitterfied.get('onDeckBooking')
                 
-            @set("pending", true)
-            booking = Sitterfied.get('onDeckBooking')
-            
-            console.log("Booking:", booking)
-            
-            this.set("isLoading", true)
-            $(".bookButton").bind 'click', (e) ->
-                e.preventDefault()
-                return
+                console.log("Booking:", booking)
                 
-            booking.save()
-                .then (booking) =>
-                    p = booking.reload()
-                    p.then =>
-                        Sitterfied.currentUser.get('bookings').pushObject(booking)
-                        @set('pending', false)
-                        this.set("isLoading", false)
-                        $("bookButton").unbind "click"
-                        @transitionToRoute('done', booking)
+                this.set("isLoading", true)
+                $(".bookButton").bind 'click', (e) ->
+                    e.preventDefault()
+                    return
+                    
+                booking.save()
+                    .then (booking) =>
+                        p = booking.reload()
+                        p.then =>
+                            Sitterfied.currentUser.get('bookings').pushObject(booking)
+                            @set('pending', false)
+                            this.set("isLoading", false)
+                            $("bookButton").unbind "click"
+                            @transitionToRoute('done', booking)
+                        .then null, (reason) =>
+                            this.set("isLoading", false)
+                            $("bookButton").unbind "click"
+                            @set('pending', false)
                     .then null, (reason) =>
+                        @set('pending', false)
                         this.set("isLoading", false)
                         $("bookButton").unbind "click"
-                        @set('pending', false)
-                .then null, (reason) =>
-                    @set('pending', false)
-                    this.set("isLoading", false)
-                    $("bookButton").unbind "click"
+            else
+                # Setup paypal button
+                $.ajax(
+                    url: "/api/braintree_client/"
+                    method: "post"
+                ).done (data) ->
+                    braintree.setup(data.client_token, "paypal", {
+                        container: "paypal-container-payment-method"
+                        paymentMethodNonceInputField: "paypal-payment-method-nonce-payment-method"
+                        singleUse: false
+                        onSuccess: ->
+                            paypal_method_nonce = $("#paypal-payment-method-nonce-payment-method").val()
+                            $("#paypal-container-payment-method").html("")
+                            $.ajax(
+                                url: "/api/update_payment_method/"
+                                method: "post"
+                                data:
+                                    payment_method: "paypal"
+                                    payment_method_nonce: paypal_method_nonce
+                            ).done (data) ->
+                                console.log("Data:", data)
+                                if data.success
+                                    Sitterfied.currentUser.set('paypal_email', data.email)
+                                    Sitterfied.currentUser.set('is_paypal', true)
+                                    Sitterfied.currentUser.set("default_payment_method_token", data.token)
+                            $.fancybox.close()
+                    })
+                    # Adjust layout produced by braintree setup
+                    $("#choose-payment-method #braintree-paypal-button").html("")
+                    $("#choose-payment-method #braintree-paypal-button").removeAttr("style")
+                    $("#choose-payment-method #braintree-paypal-button").addClass("button-connect-paypal")
+                    $("#choose-payment-method .or.payment-method").appendTo("#choose-payment-method #braintree-paypal-loggedout")
+                    $("#choose-payment-method .button-add-credit-card.payment-method").appendTo("#choose-payment-method #braintree-paypal-loggedout")
+                
+                $.fancybox
+                    href: "#choose-payment-method"
+                    maxWidth: 960
+                    maxHeight: 1800
+                    minWidth: 300
+                    minHeight: 480
+                    fitToView: false
+                    width: "90%"
+                    height: "90%"
+                    parent: "div#application"
             
         multiple: (() ->
             return @get('sitters.length') > 1

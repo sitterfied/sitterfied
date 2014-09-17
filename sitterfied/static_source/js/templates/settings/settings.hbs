@@ -47,53 +47,55 @@
 	  </div>
 	  
 	  <div class="column-2">
-	    {{view Sitterfied.PaypalView valueBinding="Sitterfied.currentUser.is_paypal"}}
-	    
-	    <div class="payemnt-method-divider"><span>OR</span></div>
-	    <div class="form-mycard-info">
-	    
-	      {{view Sitterfied.CreditCardImageView valueBinding="Sitterfied.currentUser.is_paypal"}}
+	    {{# if Sitterfied.isParent }}
+	      {{view Sitterfied.PaypalView valueBinding="Sitterfied.currentUser.is_paypal"}}
 	      
-	      <div class="card-number">
-		<span class="slot1">
-		  {{Sitterfied.currentUser.masked_number1}}
-		</span>
-		<span class="slot2">
-		  {{Sitterfied.currentUser.masked_number2}}
-		</span>
-		<span class="slot3">
-		  {{Sitterfied.currentUser.masked_number3}}
-		</span>
-		<span class="slot4">
-		  {{Sitterfied.currentUser.masked_number4}}
-		</span>
+	      <div class="payemnt-method-divider"><span>OR</span></div>
+	      <div class="form-mycard-info">
+	      
+		{{view Sitterfied.CreditCardImageView valueBinding="Sitterfied.currentUser.is_paypal"}}
+		
+		<div class="card-number">
+		  <span class="slot1">
+		    {{Sitterfied.currentUser.masked_number1}}
+		  </span>
+		  <span class="slot2">
+		    {{Sitterfied.currentUser.masked_number2}}
+		  </span>
+		  <span class="slot3">
+		    {{Sitterfied.currentUser.masked_number3}}
+		  </span>
+		  <span class="slot4">
+		    {{Sitterfied.currentUser.masked_number4}}
+		  </span>
+		</div>
+		
+		<div class="cardcvc-number">
+		  ***
+		</div>
+		
+		<div class="card-month-year">
+		  <span class="month">
+		    {{Sitterfied.currentUser.expiration_month}}
+		  </span>
+		  <span class="year">
+		    {{Sitterfied.currentUser.expiration_year}}
+		  </span>
+		</div>
+		
+		<div class="card-update-button clearfix">
+		  {{view Sitterfied.AddCreditCardButtonView valueBinding="Sitterfied.currentUser.is_paypal"}}
+		</div>
 	      </div>
 	      
-	      <div class="cardcvc-number">
-		***
+	      <div class="card-billing-info">
+		<span>BILLING ADDRESS</span>
+		{{Sitterfied.currentUser.full_billing_address}}
 	      </div>
-	      
-	      <div class="card-month-year">
-		<span class="month">
-		  {{Sitterfied.currentUser.expiration_month}}
-		</span>
-		<span class="year">
-		  {{Sitterfied.currentUser.expiration_year}}
-		</span>
-	      </div>
-	      
-	      <div class="card-update-button clearfix">
-		{{view Sitterfied.AddCreditCardButtonView valueBinding="Sitterfied.currentUser.is_paypal"}}
-              </div>
-	    </div>
-	    
-	    <div class="card-billing-info">
-	      <span>BILLING ADDRESS</span>
-	      {{Sitterfied.currentUser.full_billing_address}}
-	    </div>
-	    
+	    {{/ if }}
 	  </div>
 	</div>
+	
 	
 	<div class="DeleteAccount">
           <a {{action 'deleteAccount'}} class="grayButton">DELETE MY ACCOUNT</a>

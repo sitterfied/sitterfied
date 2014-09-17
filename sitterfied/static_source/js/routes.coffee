@@ -359,33 +359,36 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.render("settings", {controller: 'currentUser'})
             this.render("settings.top", {outlet: 'top'})
             
-            if not Sitterfied.currentUser.get("paypal_email")
-                # Setup paypal button
-                $.ajax(
-                    url: "/api/braintree_client/"
-                    method: "post"
-                ).done (data) ->
-                    braintree.setup(data.client_token, "paypal", {
-                        container: "paypal-container"
-                        paymentMethodNonceInputField: "paypal-payment-method-nonce"
-                        singleUse: false
-                        onSuccess: ->
-                            paypal_method_nonce = $("#paypal-payment-method-nonce").val()
-                            $("#paypal-container").html("")
-                            $.ajax(
-                                url: "/api/update_payment_method/"
-                                method: "post"
-                                data:
-                                    payment_method: "paypal"
-                                    payment_method_nonce: paypal_method_nonce
-                            ).done (data) ->
-                                Sitterfied.currentUser.set('paypal_email', data.email)
-                                Sitterfied.currentUser.set('is_paypal', true)
-                    })
-                    $("#braintree-paypal-button").html("")
-                    $("#braintree-paypal-button").removeAttr("style")
-                    $("#braintree-paypal-button").addClass("button-connect-paypal")
-                    return
+            if Sitterfied.currentUser.get("isParent")
+                if not Sitterfied.currentUser.get("paypal_email")
+                    # Setup paypal button
+                    $.ajax(
+                        url: "/api/braintree_client/"
+                        method: "post"
+                    ).done (data) ->
+                        braintree.setup(data.client_token, "paypal", {
+                            container: "paypal-container"
+                            paymentMethodNonceInputField: "paypal-payment-method-nonce"
+                            singleUse: false
+                            onSuccess: ->
+                                paypal_method_nonce = $("#paypal-payment-method-nonce").val()
+                                $("#paypal-container").html("")
+                                $.ajax(
+                                    url: "/api/update_payment_method/"
+                                    method: "post"
+                                    data:
+                                        payment_method: "paypal"
+                                        payment_method_nonce: paypal_method_nonce
+                                ).done (data) ->
+                                    if data.success
+                                        Sitterfied.currentUser.set('paypal_email', data.email)
+                                        Sitterfied.currentUser.set('is_paypal', true)
+                                        Sitterfied.currentUser.set("default_payment_method_token", data.token)
+                        })
+                        $("#braintree-paypal-button").html("")
+                        $("#braintree-paypal-button").removeAttr("style")
+                        $("#braintree-paypal-button").addClass("button-connect-paypal")
+                        return
             
     )
 
@@ -550,7 +553,12 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
                                 payment_method_nonce: nonce
                         ).done (data) ->
                             console.log("Update Payment Method Result:", data)
+                            if data.success
+                                Sitterfied.currentUser.set("default_payment_method_token", data.token)
+                                Sitterfied.currentUser.set("is_paypal", false)
+
                             userController.set("isLoading", false)
+                            
                             $(".save_payment_details").attr("disabled", false)
                             # Change status
                             if data.success

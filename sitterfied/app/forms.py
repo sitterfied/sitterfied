@@ -290,6 +290,8 @@ class BraintreeUpdatePaymentMethodForm(forms.Form):
                 }
             })
             
+            print "Result:", result
+            
             if result.is_success:
                 # Save payment method token
                 user.default_payment_method_token = result.payment_method.token
@@ -302,7 +304,8 @@ class BraintreeUpdatePaymentMethodForm(forms.Form):
                         "token": result.payment_method.token
                     }
                 return {
-                    "success": True
+                    "success": True,
+                    "token": result.payment_method.token
                 }
                 
             # Return error
