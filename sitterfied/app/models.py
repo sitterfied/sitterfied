@@ -122,6 +122,8 @@ class Parent(User):
     sitter_teams = models.ManyToManyField('Sitter', related_name="sitter_teams", blank=True)
     bookmarks = models.ManyToManyField('Sitter', related_name="bookmarks", blank=True)
 
+    promo_code = models.ForeignKey('PromoCode', blank=True, null=True, on_delete=models.SET_NULL)
+
     class Meta:
         verbose_name = "Parent"
     
@@ -448,6 +450,8 @@ class Booking(TimeStampedModel):
     overnight = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
 
+    promo_code = models.ForeignKey('PromoCode', blank=True, null=True, on_delete=models.SET_NULL)
+
     @cached_property
     def accepted(self):
         return bool(self.accepted_sitter)
@@ -519,3 +523,19 @@ class USCity(City):
     
     class Meta:
         proxy = True
+
+
+class PromoCode(TimeStampedModel):
+    PROMO_TYPES = Choices('Percent', 'Flat',)
+
+    name = models.CharField(max_length=50)
+    promo_type = models.CharField(max_length=10, choices=PROMO_TYPES, default='Percent')
+    value = models.DecimalField('discount value', max_digits=5, decimal_places=2)
+    start_date_time = models.DateTimeField()
+    stop_date_time = models.DateTimeField()
+
+    def is_active(self):
+        return self.start_date_time <= datetime.now() <= self.stop_date_time
+
+    def __unicode__(self):
+        return self.name

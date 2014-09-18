@@ -87,6 +87,7 @@ class ParentAdmin(UserAdmin):
                                 'emergency_contact_one_phone',
                                 'emergency_contact_two_name',
                                 'emergency_contact_two_phone',
+                                'promo_code',
                                 'sitter_teams',
                                 'users_in_network',
                                 'friends',
@@ -173,6 +174,31 @@ class BookingAdmin(admin.ModelAdmin):
     # list_filter = ('over', 'active',)
 
 
+class PromoCodeForm(forms.ModelForm):
+    class Meta:
+        model = PromoCode
+
+    parents = forms.ModelMultipleChoiceField(required=False, help_text='Hold down "Control", or "Command" on a Mac, to select more than one.', queryset=Parent.objects.all())
+    bookings = forms.ModelMultipleChoiceField(required=False, help_text='Hold down "Control", or "Command" on a Mac, to select more than one.', queryset=Booking.objects.all())
+
+    def __init__(self, *args, **kwargs):
+        super(PromoCodeForm, self).__init__(*args, **kwargs)
+        if self.instance:
+            self.fields['parents'].initial = self.instance.parent_set.all()
+            self.fields['bookings'].initial = self.instance.booking_set.all()
+
+    def save(self, *args, **kwargs):
+        instance = super(PromoCodeForm, self).save(commit=False)
+        self.fields['parents'].initial.update(promo_code=None)
+        self.fields['bookings'].initial.update(promo_code=None)
+        self.cleaned_data['parents'].update(promo_code=instance)
+        self.cleaned_data['bookings'].update(promo_code=instance)
+        return instance
+
+
+class PromoCodeAdmin(admin.ModelAdmin):
+    form = PromoCodeForm
+
 admin.site.register(Parent, ParentAdmin)
 admin.site.register(Sitter, SitterAdmin)
 
@@ -181,6 +207,8 @@ admin.site.register(OtherService)
 admin.site.register(Certification)
 admin.site.register(SitterReview)
 admin.site.register(Booking, BookingAdmin)
+
+admin.site.register(PromoCode, PromoCodeAdmin)
 
 admin.site.register(Address)
 admin.site.register(Phone)
