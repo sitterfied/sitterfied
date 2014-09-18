@@ -8,6 +8,7 @@ from django.contrib.auth.models import AbstractUser, UserManager
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.dispatch import Signal
+from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from intercom import generate_intercom_user_hash
 from model_utils.choices import Choices
@@ -451,6 +452,14 @@ class Booking(TimeStampedModel):
     @cached_property
     def accepted(self):
         return bool(self.accepted_sitter)
+    
+    @property
+    def work_hours(self):
+        delta = self.stop_date_time - self.start_date_time
+        minutes = delta / 60
+        if minutes % 60 == 0:
+            return minutes / 60
+        return minutes / 60.0
 
     def accept(self, sitter):
         self.accepted_sitter = sitter
@@ -477,6 +486,22 @@ class Booking(TimeStampedModel):
         if hasattr(self, 'reminder'):
             self.reminder.delete()
         booking_canceled.send(sender=self, cancelled_by=parent_or_sitter)
+        
+    def send_completed_sms(self):
+        """
+        Sends a text message to the accepted sitter when a job is completed.
+        """
+        from app.sms import send_message #Avoid circular imports
+        
+        sms_template = 'sms/booking/booking_completed_notification.sms'
+        sms = render_to_string(sms_template, {
+            'hours': self.work_hours,
+            'start_time': self.start_date_time.strftime("%l:%M%P"),
+            'end_time': self.stop_date_time.strftime("%l:%M%P"),
+        })
+        send_message(body=sms, to=self.accepted_sitter.cell)
+        
+    
 
 
 class IncomingSMSMessage(TimeStampedModel):

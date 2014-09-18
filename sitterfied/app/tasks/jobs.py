@@ -47,11 +47,15 @@ def check_for_completed_jobs():
     time. Update the status of any jobs found to 'Completed'.
 
     """
-    return get_jobs_completed_since(
+    completed_jobs = get_jobs_completed_since(
         datetime.now(pytz.UTC)
     ).update(
         booking_status='Completed'
     )
+    # Send sms to sitters for completed jobs
+    for job in completed_jobs:
+        completed_jobs.send_completed_sms()
+    return completed_jobs
 
 
 @app.task

@@ -1,0 +1,1 @@
+Your job shoould now be completed. You worked {% if hours > 1 %}hours{% else %}hour{% endif %} ({{start_time}} - {{endtime}}). Is that correct? If yes, respond with DONE. If you need to change hours worked, click this link.
