@@ -228,8 +228,8 @@ class Settings(TimeStampedModel):
     email_groups_added_network = models.BooleanField(default=True)
     email_upcoming_booking_remind = models.BooleanField(default=True)
 
-    email_news = models.BooleanField()
-    email_blog = models.BooleanField()
+    email_news = models.BooleanField(default=False)
+    email_blog = models.BooleanField(default=False)
 
 
 class Child(TimeStampedModel):

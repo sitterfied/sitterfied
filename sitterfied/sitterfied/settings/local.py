@@ -26,7 +26,7 @@ DATABASES = {
 
 
 MIDDLEWARE_CLASSES += (
-    'qinspect.middleware.QueryInspectMiddleware',
+    #'qinspect.middleware.QueryInspectMiddleware',
 )
 
 
