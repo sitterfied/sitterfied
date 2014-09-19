@@ -214,7 +214,7 @@ def onboarding3(request):
         if hasattr(request.user, 'parent'):
             return redirect("/search?first_time=1")
         else:
-            return redirect("/profile")
+            return redirect("/profile?first_time=1")
     form = GroupsForm(instance=request.user)
     return dict({"form": form}, **view_params)
 
