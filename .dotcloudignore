@@ -1,0 +1,14 @@
+.DS_Store
+.dir-locals.el
+.vagrant
+Vagrantfile
+README.md
+ansible
+ansible.cfg
+bin
+build
+docs
+templates.py
+
+\#*
+.#*
