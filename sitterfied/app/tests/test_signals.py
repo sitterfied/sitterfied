@@ -9,9 +9,9 @@ from django.template.loader import render_to_string
 from hamcrest import *
 from pytz import timezone
 
-from app import signals, sms, utils
-from app.models import Booking, Parent, Sitter, Reminder
-from app.tasks.tests import utils
+from sitterfied.app import signals, sms, utils
+from sitterfied.app.models import Booking, Parent, Sitter, Reminder
+from sitterfied.app.tasks.tests import utils
 
 
 def test_booking_request_message():

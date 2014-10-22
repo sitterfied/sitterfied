@@ -16,7 +16,7 @@ urlpatterns = patterns(
     url(r'^grappelli/?', include('grappelli.urls')),
     url(r'^admin/?', include(admin.site.urls)),
     url(r'^', include('favicon.urls')),
-    url(r'^favicon.ico/$', RedirectView.as_view(url="/static/favicon.ico")),
+    url(r'^favicon.ico/$', RedirectView.as_view(url="/www/static/favicon.ico")),
 
 )
 
@@ -35,5 +35,5 @@ if settings.DEBUG:
 
 urlpatterns += patterns(
     '',
-    url(r'', include('app.urls')),
+    url(r'', include('sitterfied.app.urls')),
 )

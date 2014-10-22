@@ -2,7 +2,7 @@
 from django.conf import settings
 from hamcrest import *
 
-from app import utils
+from sitterfied.app import utils
 
 
 def test_generate_short_url_code():

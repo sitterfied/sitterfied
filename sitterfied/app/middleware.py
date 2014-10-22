@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import logging
 
-import app.tasks.users as tasks
-
 from django.utils import timezone
+
+from sitterfied.app.tasks import users as tasks
 
 __all__ = [
     'TimezoneMiddleware'

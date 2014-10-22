@@ -8,8 +8,8 @@ from django.test.client import RequestFactory
 from hamcrest import *
 from twilio.rest import TwilioRestClient
 
-import app.sms as sms
-from app.models import Booking
+from sitterfied.app import sms
+from sitterfied.app.models import Booking
 
 
 TWILIO_TEST_CALLERID = '+15005550006'
@@ -49,7 +49,7 @@ def test_sms_messages_no_cell():
                                             'Body': 'Accept 0'})
 
     with mock.patch('app.sms.Sitter') as mock_model:
-        from app.models import Sitter
+        from sitterfied.app.models import Sitter
 
         mock_model.objects.get.side_effect = Sitter.DoesNotExist
 

@@ -1,1 +1,0 @@
-sitterfied/manage.py

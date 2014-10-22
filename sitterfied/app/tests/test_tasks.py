@@ -2,8 +2,8 @@
 import mock
 import requests
 
-from app import tasks
-from app.models import User
+from sitterfied.app import tasks
+from sitterfied.app.models import User
 from hamcrest import *
 
 def test_geocode_user():

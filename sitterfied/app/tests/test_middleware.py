@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import mock
 
-from app.middleware import TimezoneMiddleware
-from app.models import User
+from sitterfied.app.middleware import TimezoneMiddleware
+from sitterfied.app.models import User
 from django.test.client import RequestFactory
 from hamcrest import *
 

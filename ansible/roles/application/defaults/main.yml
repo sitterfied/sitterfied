@@ -8,7 +8,7 @@ application_user_home: /home/{{ application_user }}
 application_server_name: dev.sitterfied.com
 
 # important application paths
-application_root: /opt/sitterfied/sitterfied
+application_root: /opt/sitterfied
 
 # virtualenv paths
 application_virtualenv_root: /opt/envs/sitterfied

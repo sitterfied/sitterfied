@@ -13,7 +13,7 @@ from .twilio import *
 from .uploadcare import *
 
 
-PROJECT_ROOT = Path(__file__).ancestor(3)
+PROJECT_ROOT = Path(__file__).ancestor(2)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -101,7 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'app.middleware.TimezoneMiddleware',
+    'sitterfied.app.middleware.TimezoneMiddleware',
 )
 
 ROOT_URLCONF = 'sitterfied.urls'
@@ -126,10 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
     'django_twilio',
     'django_mandrill',
     'registration',
@@ -143,7 +140,7 @@ INSTALLED_APPS = (
     'pipeline',
     'pyuploadcare.dj',
     'favicon',
-    'app',
+    'sitterfied.app',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -219,7 +216,7 @@ ALLOWED_HOSTS = [
     'ping',
 ]
 
-AUTHENTICATION_BACKENDS = ('app.authentication.EmailAuthBackend', 'app.authentication.FacebookAuthBackend',)
+AUTHENTICATION_BACKENDS = ('sitterfied.app.authentication.EmailAuthBackend', 'sitterfied.app.authentication.FacebookAuthBackend',)
 
 
 # Base URL for shortened URLs
