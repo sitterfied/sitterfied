@@ -5,7 +5,7 @@ import pytz
 from django.db import transaction
 from hamcrest import *
 
-from app.tasks import jobs
+from sitterfied.app.tasks import jobs
 
 
 @transaction.commit_manually

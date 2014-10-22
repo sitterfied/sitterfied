@@ -1,0 +1,4 @@
+---
+
+# what ip address(es) for postgresql to listen on
+postgresql_listen_address: "*"

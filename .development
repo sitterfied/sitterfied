@@ -1,2 +1,0 @@
-PYTHONUNBUFFERED=True
-DJANGO_SETTINGS_MODULE=sitterfied.settings.local

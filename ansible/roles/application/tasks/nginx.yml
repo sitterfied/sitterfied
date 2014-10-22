@@ -1,0 +1,20 @@
+---
+
+- name: install application nginx config
+  sudo: true
+  template:
+    src=sitterfied.conf.j2
+    dest=/etc/nginx/conf.d/sitterfied.conf
+    owner={{ application_user }}
+    group={{ application_user }}
+  notify:
+    - restart nginx
+
+- name: create application static content directory
+  sudo: true
+  file:
+    path=/www/static
+    state=directory
+    owner={{ application_user }}
+    group={{ application_user }}
+    mode=755

@@ -1,0 +1,5 @@
+---
+
+- name: install the tmux package
+  sudo: true
+  apt: pkg=tmux state=present

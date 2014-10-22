@@ -2,7 +2,7 @@
 import mock
 from hamcrest import *
 
-from app.tasks import notifications
+from sitterfied.app.tasks import notifications
 
 call_args = None
 

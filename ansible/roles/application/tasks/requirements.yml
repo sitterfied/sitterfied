@@ -1,0 +1,13 @@
+---
+
+- name: check for a requirements.txt file
+  stat: path={{ application_root }}/requirements.txt
+  register: application_requirements_file
+
+- name: install application requirements into the virtualenv
+  sudo: true
+  sudo_user: "{{ application_user }}"
+  pip:
+    requirements={{ application_root }}/requirements.txt
+    virtualenv={{ application_virtualenv_root }}
+  when: application_requirements_file.stat.exists

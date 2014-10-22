@@ -1,0 +1,10 @@
+---
+
+application_user: vagrant
+
+# application paths
+application_root: /opt/sitterfied
+
+# virtualenv paths
+application_virtualenv_root: /opt/envs/sitterfied
+application_virtualenv_bin: /opt/envs/sitterfied/bin

@@ -7,8 +7,8 @@ from django_twilio.decorators import twilio_view
 from twilio.rest import TwilioRestClient
 from twilio.twiml import Response
 
-from app.models import Sitter, Booking, IncomingSMSMessage
-from app.utils import get_short_url
+from sitterfied.app.models import Sitter, Booking, IncomingSMSMessage
+from sitterfied.app.utils import get_short_url
 
 
 # Your Account Sid and Auth Token from twilio.com/user/account

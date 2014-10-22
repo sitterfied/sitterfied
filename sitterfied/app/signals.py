@@ -8,10 +8,10 @@ from django.db.models.signals import post_save, pre_delete, m2m_changed
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
-from app.models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule, Reminder
-from app.sms import send_message
-from app.tasks import notifications, reminders
-from app.utils import get_short_url, send_template_email
+from sitterfied.app.models import Settings, SitterReview, User, Booking, booking_accepted, booking_declined, booking_canceled, Parent, Sitter, Schedule, Reminder
+from sitterfied.app.sms import send_message
+from sitterfied.app.tasks import notifications, reminders
+from sitterfied.app.utils import get_short_url, send_template_email
 
 
 #mutual events

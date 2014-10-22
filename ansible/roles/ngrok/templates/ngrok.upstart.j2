@@ -1,0 +1,11 @@
+description "Ngrok Tunneler"
+
+start on runlevel [2345]
+stop on runlevel [016]
+
+respawn
+respawn limit 10 5
+
+console log
+
+exec ngrok start {{ ngrok_tunnels }} --xheaders
