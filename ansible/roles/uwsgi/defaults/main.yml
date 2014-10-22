@@ -1,0 +1,6 @@
+---
+
+uwsgi_processes: 2
+uwsgi_socket: 127.0.0.1:8000
+uwsgi_threads: 4
+uwsgi_user: vagrant

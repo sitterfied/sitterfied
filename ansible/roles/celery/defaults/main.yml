@@ -1,0 +1,22 @@
+---
+# See the README.md for details on these variables
+
+celery_enabled: "true"
+
+celery_nodes: "celery"
+
+celery_opts: "--time-limit=300 --concurrency=8"
+
+celery_pid_file: "/var/run/celery/%n.pid"
+
+celery_log_file: "/var/log/celery/%n.log"
+
+celery_log_level: "INFO"
+
+celery_multi: "celery multi"
+
+celery_celeryctl: "celeryctl"
+
+celery_user: "celery"
+
+celery_group: "celery"

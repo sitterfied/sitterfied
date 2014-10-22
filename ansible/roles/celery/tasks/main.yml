@@ -1,0 +1,33 @@
+---
+
+- name: install the python-dev package
+  sudo: true
+  apt: pkg=python-dev state=present
+
+- name: install the celery package
+  sudo: true
+  pip: name=celery state=present
+
+- name: add a system group for celery
+  sudo: true
+  group: name=celery system=yes state=present
+
+- name: add a system user for celery
+  sudo: true
+  user: name=celery group=celery comment="Celery daemon" state=present
+    system=yes home=/nonexistent createhome=no shell=/bin/bash
+
+- name: add the celery init script
+  sudo: true
+  copy: src=celeryd.init dest=/etc/init.d/celeryd
+    owner=root group=root mode=0755
+
+- name: add the celery configuration file
+  sudo: true
+  template: src=celeryd.conf.j2 dest=/etc/default/celeryd
+    owner=root group=root mode=0644
+  notify: restart the celery daemon
+
+- name: start the celery daemon and enable it on boot
+  sudo: true
+  service: name=celeryd state=started enabled=true

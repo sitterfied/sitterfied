@@ -1,0 +1,15 @@
+---
+
+# the user that owns the application fiels
+application_user: vagrant
+application_user_home: /home/{{ application_user }}
+
+# the name of the server for nginx
+application_server_name: dev.sitterfied.com
+
+# important application paths
+application_root: /opt/sitterfied/sitterfied
+
+# virtualenv paths
+application_virtualenv_root: /opt/envs/sitterfied
+application_virtualenv_bin: /opt/envs/sitterfied/bin

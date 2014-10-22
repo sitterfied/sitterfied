@@ -1,0 +1,71 @@
+---
+
+- name: create the celerybeat schedule directory
+  sudo: true
+  file: 
+    path=/etc/celery
+    state=directory
+    owner={{ application_user }}
+    group={{ application_user }}
+    mode=0755
+  notify:
+    - restart supervisor
+
+- name: create the celery run directory
+  sudo: true
+  file: 
+    path=/var/run/celery
+    state=directory
+    state=directory
+    owner={{ application_user }}
+    group={{ application_user }}
+    mode=0755
+  notify:
+    - restart supervisor
+
+- name: create the postrgresql database user for vagrant
+  sudo: true
+  sudo_user: postgres
+  postgresql_user:
+    name=vagrant
+    password=vagrant
+    state=present
+    role_attr_flags="SUPERUSER,CREATEROLE,CREATEDB,REPLICATION"
+
+- name: create the citext extension
+  action: command psql -d template1 -c "CREATE EXTENSION IF NOT EXISTS citext;"
+
+- name: add the sitterfied database
+  postgresql_db:
+    encoding="UTF-8"
+    login_password=vagrant
+    login_user=vagrant
+    name=sitterfied
+
+- name: restart the postgresql daemon
+  sudo: true
+  service: name=postgresql state=restarted
+
+- name: collect static files
+  command: django-admin.py collectstatic --noinput
+
+- name: run database sync
+  command: django-admin.py syncdb --noinput
+
+- name: run database migrations
+  command: django-admin.py migrate --noinput
+
+- name: create the django superuser admin account
+  command: django-admin.py loaddata dev-data
+
+- name: install npm packages
+  sudo: true
+  npm: name=ember-precompile version=0.2.2 global=yes
+
+- name: copy the ngrok configuration file
+  copy: 
+    src=ngrok
+    dest=/home/vagrant/.ngrok
+    owner={{ application_user }}
+    group={{ application_user }}
+    mode=0777

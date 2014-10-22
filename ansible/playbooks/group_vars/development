@@ -1,0 +1,5 @@
+---
+
+env: local
+
+no_python_bytecode_please: true

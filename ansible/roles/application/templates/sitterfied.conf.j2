@@ -1,0 +1,22 @@
+server {
+    listen 8443;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 80;
+    server_name {{ application_server_name }};
+    client_max_body_size 100M;
+    access_log /var/log/nginx/sitterfied.access.log;
+    error_log  /var/log/nginx/sitterfied.error.log;
+
+    location /static/ {
+        alias /www/static/;
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass 127.0.0.1:8000;
+        uwsgi_read_timeout 300;
+    }
+}

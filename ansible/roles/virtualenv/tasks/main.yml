@@ -1,0 +1,5 @@
+---
+
+- name: install virtualenv
+  sudo: true
+  pip: name=virtualenv version=1.11

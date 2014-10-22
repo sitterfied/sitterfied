@@ -1,0 +1,39 @@
+---
+
+- hosts: all
+  roles:
+    - common
+    - application
+    - uwsgi
+
+- hosts: development
+  roles:
+    - postgres
+
+    - role: ngrok
+      ngrok_tunnels: "web"
+
+    - nodejs
+
+    - role: redis
+      with_redmon: false
+
+    - role: supervisor
+      name: celery
+      command: 'celery worker --concurrency=8 --app=sitterfied --loglevel=INFO'
+      directory: '{{ application_root }}'
+      stdout_logfile: /var/log/supervisor/sitterfied.worker.log
+      env_vars:
+        DJANGO_SETTINGS_MODULE: 'sitterfied.settings.{{ env }}'
+      user: vagrant
+
+    - role: supervisor
+      name: celerybeat
+      command: 'celery beat --app=sitterfied --loglevel=INFO --schedule=/etc/celery/celerybeat.db --pidfile=/var/run/celery/celerybeat.pid'
+      directory: '{{ application_root }}'
+      stdout_logfile: /var/log/supervisor/sitterfied.beat.log
+      env_vars:
+        DJANGO_SETTINGS_MODULE: 'sitterfied.settings.{{ env }}'
+      user: vagrant
+
+    - dev

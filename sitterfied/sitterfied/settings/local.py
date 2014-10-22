@@ -35,6 +35,7 @@ MIDDLEWARE_CLASSES += (
 MEDIA_ROOT = PROJECT_ROOT.child("media")
 MEDIA_URL = "/media/"
 
+STATIC_ROOT = "/www/static"
 
 GOOGLE_OAUTH_CLIENT_ID = '213296649304-10d5ppglkmjmq7l60uub4r5nvnklfjoa.apps.googleusercontent.com'
 GOOGLE_OAUTH_CLIENT_SECRET = 'u9BePfC9OC9Z3XkO0SMJbwkq'
