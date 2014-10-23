@@ -1,19 +1,14 @@
-import models
-from forms import AvatarForm, ActiveForm, AcceptBookingForm, DeclineBookingForm
 from django.contrib.auth import logout
 
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 from rest_framework import serializers, viewsets, permissions
-from rest_framework import filters
-from rest_framework.parsers import FileUploadParser
-
-from rest_framework import viewsets
-
 from rest_framework.response import Response
 from rest_framework.decorators import action, link
-from sitterfied.app.models import Language
+
+import sitterfied.app.models as models
+from sitterfied.app.forms import AvatarForm, ActiveForm
 
 # class MyselfSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:

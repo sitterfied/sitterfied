@@ -9,11 +9,11 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.dispatch import Signal
 from django.utils.functional import cached_property
-from intercom import generate_intercom_user_hash
-from model_utils.choices import Choices
-from model_utils.models import TimeStampedModel
+#from model_utils.choices import Choices
+from django_extensions.db.models import TimeStampedModel
 from pyuploadcare.dj import ImageField as UploadcareImageField
 
+from sitterfied.app.intercom import generate_intercom_user_hash
 from sitterfied.app.us_states import US_STATES
 
 
@@ -38,14 +38,19 @@ def file_url(name):
 class User(AbstractUser, TimeStampedModel):
     objects = UserManager()
 
-    MEMBERSHIP_STATUS = Choices("Trial", "paid")
+    MEMBERSHIP_STATUS_PAID = 'paid'
+    MEMBERSHIP_STATUS_TRIAL = 'trial'
+    MEMBERSHIP_STATUS = (
+        (MEMBERSHIP_STATUS_PAID, MEMBERSHIP_STATUS_PAID),
+        (MEMBERSHIP_STATUS_TRIAL, MEMBERSHIP_STATUS_TRIAL),
+    )
     users_in_network = models.ManyToManyField('self', blank=True, symmetrical=True)
     friends = models.ManyToManyField('self', blank=True)
 
     sitter_groups = models.ManyToManyField('Group', blank=True)
     invited_by = models.ManyToManyField('self', symmetrical=False, blank=True)
     languages = models.ManyToManyField('Language', blank=True, related_name="users")
-    status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default="Trial")
+    status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default=MEMBERSHIP_STATUS_TRIAL)
     membership_exp_date = models.DateTimeField(null=True)
 
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
@@ -99,9 +104,22 @@ class Address(TimeStampedModel):
 
 
 class Phone(TimeStampedModel):
-    PHONE_TYPES = Choices("Work", "Home", "Cell", "Emergency", "Contact", "Other")
+    PHONE_TYPE_CELL = 'Cell'
+    PHONE_TYPE_CONTACT = 'Contact'
+    PHONE_TYPE_EMERGENCY = 'Emergency'
+    PHONE_TYPE_HOME = 'Home'
+    PHONE_TYPE_OTHER = 'Other'
+    PHONE_TYPE_WORK = 'Work'
+    PHONE_TYPES = (
+        (PHONE_TYPE_CELL, PHONE_TYPE_CELL),
+        (PHONE_TYPE_CONTACT, PHONE_TYPE_CONTACT),
+        (PHONE_TYPE_EMERGENCY, PHONE_TYPE_EMERGENCY),
+        (PHONE_TYPE_HOME, PHONE_TYPE_HOME),
+        (PHONE_TYPE_OTHER, PHONE_TYPE_OTHER),
+        (PHONE_TYPE_WORK, PHONE_TYPE_WORK),
+    )
 
-    phone_type = models.CharField(max_length=10, choices=PHONE_TYPES, default="work")
+    phone_type = models.CharField(max_length=10, choices=PHONE_TYPES, default=PHONE_TYPE_WORK)
     number = models.CharField(max_length=25)
     #TODO: use a unique partial index to ensure that a user only has a single primary
     primary = models.BooleanField()
@@ -124,8 +142,13 @@ class Parent(User):
 class Sitter(User):
     biography = models.TextField(blank=True)
 
-    GENDERS = Choices('male', 'female')
-    gender = models.CharField(max_length=10, choices=GENDERS, default='female')
+    GENDER_FEMALE = 'female'
+    GENDER_MALE = 'male'
+    GENDERS = (
+        (GENDER_FEMALE, GENDER_FEMALE),
+        (GENDER_MALE, GENDER_MALE),
+    )
+    gender = models.CharField(max_length=10, choices=GENDERS, default=GENDER_FEMALE)
     id_verified = models.BooleanField(default=False)
 
     dob = models.DateTimeField(blank=False, default=datetime.now)
@@ -320,8 +343,32 @@ class SitterReview(TimeStampedModel):
 
 
 class Booking(TimeStampedModel):
-    BOOKING_STATUS = Choices('Active', 'Pending', 'Completed', 'Expired', 'Declined', 'Canceled',)
-    BOOKING_TYPES = Choices('Job', 'Interview', 'Meetup Interview', 'Phone Interview')
+    BOOKING_STATUS_ACTIVE = 'Active'
+    BOOKING_STATUS_CANCELED = 'Canceled'
+    BOOKING_STATUS_COMPLETED = 'Completed'
+    BOOKING_STATUS_DECLINED = 'Declined'
+    BOOKING_STATUS_EXPIRED = 'Expired'
+    BOOKING_STATUS_PENDING = 'Pending'
+    BOOKING_STATUS = (
+        (BOOKING_STATUS_ACTIVE, BOOKING_STATUS_ACTIVE),
+        (BOOKING_STATUS_CANCELED, BOOKING_STATUS_CANCELED),
+        (BOOKING_STATUS_COMPLETED, BOOKING_STATUS_COMPLETED),
+        (BOOKING_STATUS_DECLINED, BOOKING_STATUS_DECLINED),
+        (BOOKING_STATUS_EXPIRED, BOOKING_STATUS_EXPIRED),
+        (BOOKING_STATUS_PENDING, BOOKING_STATUS_PENDING),
+    )
+
+    BOOKING_TYPE_INTERVIEW = 'Interview'
+    BOOKING_TYPE_JOB = 'Job'
+    BOOKING_TYPE_MEETUP = 'Meetup Interview'
+    BOOKING_TYPE_PHONE = 'Phone Interview'
+    BOOKING_TYPES = (
+        (BOOKING_TYPE_INTERVIEW, BOOKING_TYPE_INTERVIEW),
+        (BOOKING_TYPE_JOB, BOOKING_TYPE_JOB),
+        (BOOKING_TYPE_MEETUP, BOOKING_TYPE_MEETUP),
+        (BOOKING_TYPE_PHONE, BOOKING_TYPE_PHONE),
+    )
+
     parent = models.ForeignKey(Parent, related_name="bookings")
     sitters = models.ManyToManyField(Sitter, related_name="bookings")
     declined_sitters = models.ManyToManyField(Sitter, blank=True, related_name="declined_bookings")
@@ -338,8 +385,8 @@ class Booking(TimeStampedModel):
     state = models.CharField(choices=US_STATES, max_length=2, blank=True, default="AL")
     zip = models.CharField(max_length=9, blank=True)
     rate = models.DecimalField(max_digits=5, decimal_places=2, default=0, blank=True)
-    booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Active')
-    booking_type = models.CharField(max_length=20, choices=BOOKING_TYPES, default='Job')
+    booking_status = models.CharField(max_length=10, choices=BOOKING_STATUS, default=BOOKING_STATUS_ACTIVE)
+    booking_type = models.CharField(max_length=20, choices=BOOKING_TYPES, default=BOOKING_TYPE_JOB)
     accepted_sitter = models.ForeignKey(Sitter, blank=True, null=True)
     overnight = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)

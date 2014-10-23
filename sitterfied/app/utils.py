@@ -4,8 +4,7 @@ import string
 from datetime import timedelta
 
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
-from django_mandrill.mail.mandrillmail import MandrillTemplateMail
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from redis import Redis
 
 
@@ -19,7 +18,10 @@ def send_html_email(subject, frm, address, text, html):
 
 
 def send_template_email(template_name, message):
-    MandrillTemplateMail(template_name, [], message).send()
+    msg = EmailMessage()
+    msg.template_content = message
+    msg.template_name = template_name
+    msg.send()
 
 
 def generate_short_url_code(chars=5):

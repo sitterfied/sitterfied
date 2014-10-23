@@ -4,4 +4,5 @@ dependencies:
   - git
   - nginx
   - python
+  - python3
   - virtualenv

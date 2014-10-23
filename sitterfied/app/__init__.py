@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-import signals
+import sitterfied.app.signals

@@ -6,7 +6,7 @@ IFS=$'\n\t'
 ENV_PATH=/opt/envs/sitterfied
 
 # Create the environment without pip
-pyenv-3.4 --without-pip "$ENV_PATH"
+pyvenv-3.4 --without-pip "$ENV_PATH"
 
 cd /tmp
 

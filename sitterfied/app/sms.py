@@ -87,7 +87,7 @@ def get_new_messages():
         most_recent = most_recent_message.date_created
         messages = client.sms.messages.list(to=sitterfied_number, after=most_recent)
     except IndexError:
-        print "no messages yet"
+        print("no messages yet")
         messages = client.sms.messages.list(to=sitterfied_number)
     for message in messages:
         new_message = IncomingSMSMessage(**message)

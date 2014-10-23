@@ -39,9 +39,18 @@
     owner={{ application_user }}
     mode=755
 
-- name: create a virtualenv
-  sudo: true
-  command: virtualenv {{ application_virtualenv_root }}
+# Temporary: Because python3 on ubuntu 14.04 does not ship with `ensurepip`, so
+# `env` fails. A workaround for this, for now, is to create a new python 3
+# virtualenv using pyvenv-3.4 --without-pip which will skip the ensurepip step.
+# After the env is created, we can install setuptools and pip into it from
+# source.
+- name: Create a new python3 virtualenv on ubuntu without ensurepip
+  sudo: True
+  script: create_sitterfied_env.sh creates=/opt/envs/sitterfied-python3/bin/pip
+
+#- name: create a virtualenv
+#  sudo: true
+#  command: virtualenv {{ application_virtualenv_root }}
 
 - name: change ownership of virtualenv to the default user
   sudo: true

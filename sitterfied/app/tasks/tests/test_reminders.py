@@ -16,11 +16,11 @@ from sitterfied.app.tasks.tests import utils
 def test_time_conversions():
     tz = timezone('America/New_York')
     eta = (datetime.now(tz) - timedelta(seconds=3600)).strftime("%Y-%m-%d %H:%M:%S")
-    print eta
-    print json.dumps(eta)
+    print(eta)
+    print(json.dumps(eta))
     pdate = datetime.strptime(eta, '%Y-%m-%d %H:%M:%S')
-    print pdate
-    print tz.localize(pdate)
+    print(pdate)
+    print(tz.localize(pdate))
 
 
 def test_get_time_delta():

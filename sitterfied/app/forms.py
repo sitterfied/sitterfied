@@ -8,8 +8,9 @@ from django.forms.models import BaseInlineFormSet
 
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils.translation import ugettext_lazy as _
-from models import User, Sitter, Parent, Booking, Child
 from pyuploadcare.dj.forms import ImageField as UploadcareImageField
+
+from sitterfied.app.models import User, Sitter, Parent, Booking, Child
 
 
 USER_FIELDS =  ["address1", "address2", "city", "state", "zip", "cell", "first_name", "last_name", "email", "avatar", "tos"]

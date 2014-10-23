@@ -113,13 +113,10 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    PROJECT_ROOT.child('templates')
+    PROJECT_ROOT.child('templates'),
 )
 
 INSTALLED_APPS = (
-    'grappelli.dashboard',
-    'grappelli',
-    'filebrowser',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -127,19 +124,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'django_twilio',
-    'django_mandrill',
-    'registration',
-    'crispy_forms',
-    'floppyforms',
-    'annoying',
+#    'django.contrib.admin.apps.SimpleAdminConfig',
     'rest_framework',
+#    'south',
+    'django_twilio',
+    'djrill',
+
     'django_extensions',
-    'model_utils',
-    'south',
-    'pipeline',
+
     'pyuploadcare.dj',
-    'favicon',
+#    'sitterfied.accounts',
     'sitterfied.app',
 )
 
