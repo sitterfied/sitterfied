@@ -5,7 +5,7 @@ import pytz
 from celery.utils.log import get_task_logger
 from django.db.models import Q
 
-from app.models import Booking
+from sitterfied.app.models import Booking
 from sitterfied.celeryapp import app
 
 

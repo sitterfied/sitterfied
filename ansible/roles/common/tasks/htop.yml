@@ -1,0 +1,5 @@
+---
+
+- name: install the htop package
+  sudo: true
+  apt: pkg=htop state=present

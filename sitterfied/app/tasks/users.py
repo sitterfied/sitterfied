@@ -5,7 +5,7 @@ import requests
 from celery.utils.log import get_task_logger
 from geopy import geocoders
 
-from app.models import User
+from sitterfied.app.models import User
 from sitterfied.celeryapp import app
 
 

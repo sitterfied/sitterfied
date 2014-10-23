@@ -1,0 +1,7 @@
+---
+
+dependencies:
+  - git
+  - nginx
+  - python
+  - virtualenv

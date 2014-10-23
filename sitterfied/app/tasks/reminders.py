@@ -7,9 +7,9 @@ from celery.utils.log import get_task_logger
 from django.template.loader import render_to_string
 from django.utils import timezone
 
-from app.models import Reminder
-from app.sms import send_message
-from app.utils import get_short_url
+from sitterfied.app.models import Reminder
+from sitterfied.app.sms import send_message
+from sitterfied.app.utils import get_short_url
 from sitterfied.celeryapp import app
 
 

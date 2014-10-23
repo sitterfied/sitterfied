@@ -14,7 +14,7 @@ from model_utils.choices import Choices
 from model_utils.models import TimeStampedModel
 from pyuploadcare.dj import ImageField as UploadcareImageField
 
-from app.us_states import US_STATES
+from sitterfied.app.us_states import US_STATES
 
 
 booking_accepted = Signal(providing_args=['booking'])

@@ -26,10 +26,10 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from signup import RegistrationView
 
-from app import utils
-from app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
-from app.models import User, Sitter, Parent, Group, Child
-from app.utils import send_html_email
+from sitterfied.app import utils
+from sitterfied.app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
+from sitterfied.app.models import User, Sitter, Parent, Group, Child
+from sitterfied.app.utils import send_html_email
 
 
 # Universal params used in all views

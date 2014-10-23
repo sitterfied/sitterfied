@@ -7,10 +7,10 @@ from django.template.loader import render_to_string
 from hamcrest import *
 from pytz import timezone
 
-from app import signals
-from app.models import Booking, Parent, Reminder, Sitter
-from app.tasks import reminders
-from app.tasks.tests import utils
+from sitterfied.app import signals
+from sitterfied.app.models import Booking, Parent, Reminder, Sitter
+from sitterfied.app.tasks import reminders
+from sitterfied.app.tasks.tests import utils
 
 
 def test_time_conversions():

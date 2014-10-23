@@ -1,0 +1,35 @@
+---
+
+- name: install postgresql and related packages
+  sudo: true
+  apt: name={{ item }} state=present
+  with_items:
+    - libpq-dev
+    - postgresql-9.3
+    - postgresql-9.3-postgis-2.1
+    - postgresql-contrib-9.3
+    - python-psycopg2
+  environment:
+    LC_ALL: en_US.utf8
+
+- name: add the postgresql server configuration file
+  sudo: true
+  template: 
+    src=postgresql.conf.j2
+    dest=/etc/postgresql/9.3/main/postgresql.conf
+    owner=postgres
+    group=postgres
+    mode=0644
+  notify:
+    - restart postgresql
+
+- name: add the postgresql client authentication configuration file
+  sudo: true
+  copy: 
+    src=pg_hba.conf
+    dest=/etc/postgresql/9.3/main/pg_hba.conf
+    owner=postgres
+    group=postgres
+    mode=0640
+  notify:
+    - restart postgresql

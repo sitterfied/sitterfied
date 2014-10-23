@@ -1,0 +1,62 @@
+---
+
+- name: install dependency packages
+  sudo: true
+  apt: name={{ item }}
+  with_items:
+    - build-essential
+    - default-jre
+    - libpq-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - postgresql-client
+    - python-psycopg2
+
+- name: create a central environment folder
+  sudo: true
+  file:
+    path=/opt/envs/
+    state=directory
+    group={{ application_user }}
+    owner={{ application_user }}
+    mode=755
+
+- name: create a log directory
+  sudo: true
+  file:
+    path=/var/log/sitterfied/
+    state=directory
+    group={{ application_user }}
+    owner={{ application_user }}
+    mode=755
+
+- name: create the static root directory
+  sudo: true
+  file:
+    path=/www/
+    state=directory
+    group={{ application_user }}
+    owner={{ application_user }}
+    mode=755
+
+- name: create a virtualenv
+  sudo: true
+  command: virtualenv {{ application_virtualenv_root }}
+
+- name: change ownership of virtualenv to the default user
+  sudo: true
+  file:
+    path={{ application_virtualenv_root }}
+    state=directory
+    group={{ application_user }}
+    owner={{ application_user }}
+    recurse=yes
+
+- name: create .bashrc helper
+  sudo: true
+  template:
+    src=bashrc.sh.j2
+    dest="{{ application_user_home }}/.bashrc"
+    owner={{ application_user }}
+    group={{ application_user }}
+    mode=644

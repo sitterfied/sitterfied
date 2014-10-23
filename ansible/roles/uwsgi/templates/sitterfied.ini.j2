@@ -1,0 +1,10 @@
+[uwsgi]
+master = true
+die-on-term = true
+socket = {{ uwsgi_socket }}
+pythonpath = {{ application_root }}
+env = DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
+module = sitterfied.wsgi:application
+processes = {{ uwsgi_processes }}
+threads = {{ uwsgi_threads }}
+logto = /var/log/sitterfied/uwsgi.log
