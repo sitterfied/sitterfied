@@ -113,13 +113,10 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    PROJECT_ROOT.child('templates')
+    PROJECT_ROOT.child('templates'),
 )
 
 INSTALLED_APPS = (
-    'grappelli.dashboard',
-    'grappelli',
-    'filebrowser',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -136,7 +133,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_extensions',
     'model_utils',
-    'south',
     'pipeline',
     'pyuploadcare.dj',
     'favicon',
@@ -216,7 +212,10 @@ ALLOWED_HOSTS = [
     'ping',
 ]
 
-AUTHENTICATION_BACKENDS = ('sitterfied.app.authentication.EmailAuthBackend', 'sitterfied.app.authentication.FacebookAuthBackend',)
+AUTHENTICATION_BACKENDS = (
+    'sitterfied.app.authentication.EmailAuthBackend',
+    'sitterfied.app.authentication.FacebookAuthBackend',
+)
 
 
 # Base URL for shortened URLs

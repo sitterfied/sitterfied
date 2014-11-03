@@ -4,7 +4,7 @@ from datetime import datetime, time
 
 import facebook
 import requests
-from annoying.decorators import render_to, ajax_request, JsonResponse
+from annoying.decorators import render_to, ajax_request
 from api import ParentSerializer, SitterSerializer, SitterSearchSerializer
 from django.conf import settings
 from django.contrib.auth import login as auth_login, authenticate
@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q, Count
 from django.forms.models import inlineformset_factory
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.views.decorators.cache import never_cache

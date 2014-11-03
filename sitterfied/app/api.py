@@ -1,24 +1,14 @@
-import models
-from forms import AvatarForm, ActiveForm, AcceptBookingForm, DeclineBookingForm
+# -*- coding: utf-8 -*-
 from django.contrib.auth import logout
-
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
 from rest_framework import serializers, viewsets, permissions
-from rest_framework import filters
-from rest_framework.parsers import FileUploadParser
-
-from rest_framework import viewsets
-
 from rest_framework.response import Response
 from rest_framework.decorators import action, link
-from sitterfied.app.models import Language
 
-# class MyselfSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = models.User
-#         fields = ('first_name', 'last_name', 'username', 'email')
+from sitterfied.app import models
+from sitterfied.app.forms import AvatarForm, ActiveForm
 
 user_fields = ('first_name', 'last_name',
                'username', 'last_login',
