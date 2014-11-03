@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-import api
-import google
 from django.conf.urls import patterns, url, include
 from rest_framework.routers import DefaultRouter
+
+from sitterfied.app import api, google
 
 from .signals import *
 from .signup import RegistrationView

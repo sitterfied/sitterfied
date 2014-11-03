@@ -9,11 +9,11 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.dispatch import Signal
 from django.utils.functional import cached_property
-from intercom import generate_intercom_user_hash
 from model_utils.choices import Choices
 from model_utils.models import TimeStampedModel
 from pyuploadcare.dj import ImageField as UploadcareImageField
 
+from sitterfied.app.intercom import generate_intercom_user_hash
 from sitterfied.app.us_states import US_STATES
 
 
@@ -101,10 +101,10 @@ class Address(TimeStampedModel):
 class Phone(TimeStampedModel):
     PHONE_TYPES = Choices("Work", "Home", "Cell", "Emergency", "Contact", "Other")
 
-    phone_type = models.CharField(max_length=10, choices=PHONE_TYPES, default="work")
+    phone_type = models.CharField(max_length=10, choices=PHONE_TYPES, default='cell')
     number = models.CharField(max_length=25)
     #TODO: use a unique partial index to ensure that a user only has a single primary
-    primary = models.BooleanField()
+    primary = models.BooleanField(default=True)
     user = models.ForeignKey(User)
 
 
@@ -311,8 +311,8 @@ class Schedule(TimeStampedModel):
 class SitterReview(TimeStampedModel):
     parent = models.ForeignKey(Parent, related_name="reviews")
     sitter = models.ForeignKey(Sitter, related_name="reviews")
-    recommended = models.BooleanField()
-    rehire = models.BooleanField()
+    recommended = models.BooleanField(default=False)
+    rehire = models.BooleanField(default=False)
     review = models.TextField(blank=True)
 
     class Meta:
