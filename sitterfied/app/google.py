@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from annoying.decorators import render_to, ajax_request
 
-from sitterfied.app.models import User
+from sitterfied.users.models import User
 from itertools import chain
 
 import requests

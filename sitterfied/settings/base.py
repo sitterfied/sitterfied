@@ -139,6 +139,13 @@ INSTALLED_APPS = (
     'pyuploadcare.dj',
     'favicon',
     'sitterfied.app',
+    'sitterfied.bookings',
+    'sitterfied.children',
+    'sitterfied.parents',
+    'sitterfied.schedules',
+    'sitterfied.sitters',
+    'sitterfied.users',
+    'sitterfied.utils',
 )
 
 # A sample logging configuration. The only tangible logging

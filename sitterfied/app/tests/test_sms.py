@@ -9,7 +9,7 @@ from hamcrest import *
 from twilio.rest import TwilioRestClient
 
 from sitterfied.app import sms
-from sitterfied.app.models import Booking
+from sitterfied.bookings.models import Booking
 
 
 TWILIO_TEST_CALLERID = '+15005550006'

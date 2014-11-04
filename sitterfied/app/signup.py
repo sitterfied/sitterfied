@@ -11,7 +11,11 @@ from django.contrib.sites.models import Site
 from django.contrib.auth import login, authenticate
 
 from forms import RegistrationForm
-from models import Parent, Sitter, Settings, Schedule
+from sitterfied.parents.models import Parent
+from sitterfied.schedules.models import Schedule
+from sitterfied.sitters.models import Sitter
+from sitterfied.users.models import Settings
+
 
 class RegistrationView(DjangoRegistrationView):
     form_class = RegistrationForm

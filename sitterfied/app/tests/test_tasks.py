@@ -3,7 +3,7 @@ import mock
 import requests
 
 from sitterfied.app import tasks
-from sitterfied.app.models import User
+from sitterfied.users.models import User
 from hamcrest import *
 
 def test_geocode_user():
