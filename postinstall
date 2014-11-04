@@ -2,6 +2,8 @@
 
 case "$(cat /etc/hostname)" in
 *-www-*)
+echo "We are on a www node; run django commands..."
+
 echo "migrate"
 django-admin migrate --noinput
 
@@ -13,13 +15,12 @@ REVISION=`cd .. && ls | grep rsync`
 MESSAGE="Build $REVISION was deployed to $DOTCLOUD_PROJECT.$DOTCLOUD_SERVICE_NAME.$DOTCLOUD_SERVICE_ID."
 curl -X POST --data-urlencode "payload={\"channel\": \"#general\", \"username\": \"dotCloud\", \"text\": \"$MESSAGE\"}" https://sitterfied.slack.com/services/hooks/incoming-webhook?token=uGwyPaDHU0gvyEs267453khP
 ;;
-esac
-
-case "$(cat /etc/hostname)" in
-*-worker*)
+*-worker-*)
 echo "We are on a worker node; creating crontab..."
+
 set -e
 crontab ~/current/jobs/crontab
+
 echo "copying supervisor configuration..."
 cp ~/current/jobs/supervisord.conf ~/current/supervisord.conf
 ;;

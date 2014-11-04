@@ -24,6 +24,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+SITE_ID = 1
+
+SILENCED_SYSTEM_CHECKS = ('1_6.W001',)
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -34,8 +37,6 @@ TIME_ZONE = 'UTC'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
-
-SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -231,10 +232,10 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_IMPORTS = (
-    'app.tasks.jobs',
-    'app.tasks.notifications',
-    'app.tasks.reminders',
-    'app.tasks.users',
+    'sitterfied.app.tasks.jobs',
+    'sitterfied.app.tasks.notifications',
+    'sitterfied.app.tasks.reminders',
+    'sitterfied.app.tasks.users',
 )
 BROKER_TRANSPORT_OPTIONS = {
     # Set visibility timeout to 1 year, this is necessary to prevent
@@ -253,11 +254,11 @@ JOB_RELIEF_REMINDER = 3600  # 1 Hour
 # Celery Beat Configuration
 CELERYBEAT_SCHEDULE = {
     'check-for-completed-jobs': {
-        'task': 'app.tasks.jobs.check_for_completed_jobs',
+        'task': 'sitterfied.app.tasks.jobs.check_for_completed_jobs',
         'schedule': crontab(minute='5'),
     },
     'check-for-canceled-jobs': {
-        'task': 'app.tasks.jobs.check_for_canceled_jobs_with_incorrect_status',
+        'task': 'sitterfied.app.tasks.jobs.check_for_canceled_jobs_with_incorrect_status',
         'schedule': crontab(minute='0', hour='0'),
     },
 }
