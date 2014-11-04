@@ -57,7 +57,7 @@ class User(AbstractUser, TimeStampedModel):
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(choices=US_STATES, max_length=2, blank=True, default="AL")
     zip = models.CharField(max_length=9, blank=True)  # there is
-    timezone = models.CharField(max_length=255, blank=True)
+    timezone = models.CharField(max_length=255, default='America/New_York', blank=True)
     cell = models.CharField(max_length=12, blank=True)
 
     avatar = UploadcareImageField(blank=True, manual_crop="174x174 upscale")
