@@ -194,7 +194,7 @@ class ParentViewSet(IdFilterViewset):
                 'settings',
             ).filter(sitter_teams=pk)
 
-        serializer = SitterSerializer(queryset, many=True)
+        serializer = SitterSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
 
     @link()

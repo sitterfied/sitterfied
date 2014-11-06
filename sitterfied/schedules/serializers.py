@@ -4,7 +4,7 @@ from rest_framework import serializers
 from sitterfied.schedules.models import Schedule
 
 
-class ScheduleSerializer(serializers.HyperlinkedModelSerializer):
+class ScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Schedule

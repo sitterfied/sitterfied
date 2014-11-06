@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import json
 import os
+from datetime import datetime, timedelta
 
 import psycopg2
 import psycopg2.extras
@@ -59,7 +60,7 @@ ORDER BY up.id
     return friends
 
 
-def get_sitters(parent_id):
+def get_sitters(parent_id, added_since=datetime(1970, 1, 1)):
     sitters = []
 
     query = """
@@ -67,15 +68,16 @@ SELECT
     us.id as sitter_id,
     us.first_name || ' ' || us.last_name as sitter_name,
     us.email as sitter_email,
-    us.avatar as sitter_avatar
+    us.avatar as sitter_avatar,
+    t.created as sitter_added
 FROM public.app_parent as p
 LEFT OUTER JOIN public.app_user up on up.id = p.user_ptr_id
 LEFT OUTER JOIN public.app_parent_sitter_teams t on up.id = t.parent_id
 LEFT OUTER JOIN public.app_user us on us.id = t.sitter_id
-WHERE up.id = {0}
+WHERE up.id = {0} AND t.created >= {1}
 GROUP BY us.id, up.id, us.first_name, us.last_name, us.email, us.avatar
 ORDER BY up.id
-    """.format(parent_id)
+    """.format(parent_id, added_since.strftime('%Y-%m-%d %H:%M:%S'))
 
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cursor.execute(query)
@@ -88,6 +90,7 @@ ORDER BY up.id
                 'name': record['sitter_name'],
                 'email': record['sitter_email'],
                 'avatar': record['sitter_avatar'],
+                'added': record['sitter_added'],
             }
             sitters.append(sitter)
 
@@ -135,6 +138,11 @@ def main():
         sitters = get_sitters(parent_id)
         parent['data']['sitters'] = sitters
         parent['data']['sitter_team_size'] = len(sitters)
+
+        added_since = datetime.now() - timedelta(days=7)
+        new_sitters = get_sitters(parent_id, added_since)
+        parent['data']['new_sitters'] = new_sitters
+        parent['data']['num_sitters_added'] = len(new_sitters)
 
         data['contacts'].append(parent)
 
