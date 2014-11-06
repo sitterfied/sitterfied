@@ -397,9 +397,26 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.CreateModel(
+            name='SitterTeamMembership',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('parent', models.ForeignKey(to='app.Parent')),
+                ('sitter', models.ForeignKey(to='app.Sitter')),
+            ],
+            options={
+                'db_table': 'app_parent_sitter_teams',
+            },
+            bases=(models.Model,),
+        ),
         migrations.AlterUniqueTogether(
             name='sitterreview',
             unique_together=set([('parent', 'sitter')]),
+        ),
+        migrations.AddField(
+            model_name='parent',
+            name='sitter_teams',
+            field=models.ManyToManyField(related_name=b'parents', through='app.SitterTeamMembership', to=b'app.Sitter', blank=True),
         ),
         migrations.AddField(
             model_name='settings',
@@ -423,12 +440,6 @@ class Migration(migrations.Migration):
             model_name='parent',
             name='bookmarks',
             field=models.ManyToManyField(related_name=b'bookmarks', to='app.Sitter', blank=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='parent',
-            name='sitter_teams',
-            field=models.ManyToManyField(related_name=b'sitter_teams', to='app.Sitter', blank=True),
             preserve_default=True,
         ),
         migrations.AddField(

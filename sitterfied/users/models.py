@@ -70,6 +70,7 @@ class User(AbstractUser, TimeStampedModel):
 
     class Meta:
         app_label = 'app'
+        unique_together = (('email',))
 
 
 class Settings(TimeStampedModel):
@@ -96,3 +97,5 @@ class Settings(TimeStampedModel):
 
     class Meta:
         app_label = 'app'
+        verbose_name = 'Settings'
+        verbose_name_plural = 'Settings'

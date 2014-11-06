@@ -23,22 +23,21 @@ default_fields = (
     'settings',
     'sitter_groups',
     'state',
-    'url',
     'username',
     'zip',
 )
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     avatar = serializers.Field(source='avatar_url')
     parent_or_sitter = serializers.Field(source='is_parent_or_sitter')
 
     class Meta:
         model = User
-        fields = default_fields + ('parent_or_sitter',)
+        fields = sorted(default_fields + ('parent_or_sitter',))
 
 
-class SettingsSerializer(serializers.HyperlinkedModelSerializer):
+class SettingsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Settings

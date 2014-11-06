@@ -6,7 +6,7 @@ from sitterfied.sitters.models import Sitter, SitterReview
 from sitterfied.users.serializers import default_fields
 
 
-class SitterSerializer(serializers.HyperlinkedModelSerializer):
+class SitterSerializer(serializers.ModelSerializer):
     avatar = serializers.Field(source='avatar_url')
     languages = serializers.PrimaryKeyRelatedField(many=True)
     parent_or_sitter = serializers.Field(source='is_parent_or_sitter')
@@ -97,7 +97,7 @@ class SitterSearchSerializer(SitterSerializer):
         )
 
 
-class ReviewSerializer(serializers.HyperlinkedModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SitterReview
@@ -108,5 +108,4 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
             'rehire',
             'review',
             'sitter',
-            'url',
         )

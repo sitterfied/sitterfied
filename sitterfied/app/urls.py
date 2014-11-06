@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url, include
 from rest_framework.routers import DefaultRouter
 
 from sitterfied.app import api, google
+from sitterfied.parents.views import ParentViewSet
 
 from .signals import *
 from .signup import RegistrationView
@@ -12,7 +13,7 @@ from .views import AjaxRegistrationView, StaticView
 router = DefaultRouter()
 router.register(r'sitters', api.SitterViewSet)
 router.register(r'users', api.UserViewSet)
-router.register(r'parents', api.ParentViewSet)
+router.register(r'parents', ParentViewSet)
 router.register(r'settings', api.SettingsViewSet)
 router.register(r'certifications', api.CertificationViewSet)
 router.register(r'otherservices', api.OtherServiceViewSet)

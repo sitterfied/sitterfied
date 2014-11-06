@@ -22,6 +22,7 @@ USER_FIELDS =  ["address1", "address2", "city", "state", "zip", "cell", "first_n
 class RegistrationForm(ModelForm):
     class Meta:
         model = User
+        exclude = ()
 
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Password"}),
                                 label=_("Password"), )
