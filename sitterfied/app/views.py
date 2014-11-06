@@ -5,7 +5,6 @@ from datetime import datetime, time
 import facebook
 import requests
 from annoying.decorators import render_to, ajax_request
-from api import ParentSerializer, SitterSerializer, SitterSearchSerializer
 from django.conf import settings
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -28,7 +27,15 @@ from signup import RegistrationView
 
 from sitterfied.app import utils
 from sitterfied.app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
-from sitterfied.app.models import User, Sitter, Parent, Group, Child
+
+from sitterfied.children.models import Child
+from sitterfied.parents.models import Parent
+from sitterfied.parents.serializers import ParentSerializer
+from sitterfied.sitters.models import Sitter
+from sitterfied.sitters.serializers import SitterSerializer, SitterSearchSerializer
+from sitterfied.users.models import User
+from sitterfied.utils.models import Group
+
 from sitterfied.app.utils import send_html_email
 
 
@@ -46,26 +53,30 @@ class HttpResponseUnauthorized(HttpResponse):
     status_code = 401
 
 
-def get_user_json(user):
-    if hasattr(user, 'sitter'):
+def get_user_json(request):
+    if not hasattr(request, 'user'):
+        return None
+
+    if hasattr(request.user, 'sitter'):
         user_model = Sitter.objects
         seralizer = SitterSerializer
 
-    elif hasattr(user, 'parent'):
+    elif hasattr(request.user, 'parent'):
         user_model = Parent.objects.prefetch_related('children', 'children__special_needs')
         seralizer = ParentSerializer
 
-    classed_user = user_model.select_related('settings') \
-                             .prefetch_related('bookings',
-                                               'sitter_teams',
-                                               'bookmarks',
-                                               'friends',
-                                               'languages',
-                                               'sitter_groups',
-                                               'reviews',) \
-                             .get(id=user.id)
+    classed_user = user_model \
+        .select_related('settings') \
+        .prefetch_related('bookings',
+                          'sitter_teams',
+                          'bookmarks',
+                          'friends',
+                          'languages',
+                          'sitter_groups',
+                          'reviews',) \
+        .get(id=request.user.id)
 
-    serialized = seralizer(classed_user)
+    serialized = seralizer(classed_user, context={'request': request})
     user_json = JSONRenderer().render(serialized.data)
     return user_json
 
@@ -82,7 +93,7 @@ def index(request, referred_by=None):
     if 'next' in request.GET and request.GET['next'] != '':
         return redirect(request.GET['next'])
 
-    user_json = get_user_json(request.user)
+    user_json = get_user_json(request)
     if hasattr(request.user, 'sitter'):
         parent_or_sitter = "Sitter"
     else:
@@ -233,7 +244,7 @@ def static_page(request, template):
     obj = dict({'TEMPLATE': template}, **view_params)
 
     if not request.user.is_anonymous():
-        obj['user_json'] = get_user_json(request.user)
+        obj['user_json'] = get_user_json(request)
         obj['intercom_activator'] = '#IntercomDefaultWidget'
         obj['INTERCOM_APP_ID'] = settings.INTERCOM_APP_ID
 
@@ -378,7 +389,7 @@ def login_ajax(request,
             request.session.delete_test_cookie()
     else:
         return HttpResponseUnauthorized()
-    user_json = get_user_json(request.user)
+    user_json = get_user_json(request)
     return {"user": user_json}
 
 
@@ -417,9 +428,9 @@ class AjaxRegistrationView(RegistrationView):
         return new_user
 
     def form_valid(self, request, form):
-        new_user = self.register(request, **form.cleaned_data)
+        self.register(request, **form.cleaned_data)
 
-        user_json = get_user_json(new_user)
+        user_json = get_user_json(request)
         response = {"user": user_json}
         json_response = JsonResponse(response)
         json_response['content-length'] = len(json_response.content)

@@ -10,8 +10,10 @@ from hamcrest import *
 from pytz import timezone
 
 from sitterfied.app import signals, sms, utils
-from sitterfied.app.models import Booking, Parent, Sitter, Reminder
 from sitterfied.app.tasks.tests import utils
+from sitterfied.bookings.models import Booking, Reminder
+from sitterfied.parents.models import Parent
+from sitterfied.sitters.models import Sitter
 
 
 def test_booking_request_message():

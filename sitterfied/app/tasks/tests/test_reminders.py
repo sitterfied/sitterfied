@@ -8,10 +8,11 @@ from hamcrest import *
 from pytz import timezone
 
 from sitterfied.app import signals
-from sitterfied.app.models import Booking, Parent, Reminder, Sitter
 from sitterfied.app.tasks import reminders
 from sitterfied.app.tasks.tests import utils
-
+from sitterfied.bookings.models import Booking, Reminder
+from sitterfied.parents.models import Parent
+from sitterfied.sitters.models import Sitter
 
 def test_time_conversions():
     tz = timezone('America/New_York')

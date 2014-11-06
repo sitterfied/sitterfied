@@ -5,9 +5,9 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from twilio import TwilioRestException
 
-from sitterfied.app.models import Booking
 from sitterfied.app.sms import send_message
 from sitterfied.app.utils import get_short_url
+from sitterfied.bookings.models import Booking
 from sitterfied.celeryapp import app
 
 

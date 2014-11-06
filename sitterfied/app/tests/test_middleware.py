@@ -2,7 +2,7 @@
 import mock
 
 from sitterfied.app.middleware import TimezoneMiddleware
-from sitterfied.app.models import User
+from sitterfied.users.models import User
 from django.test.client import RequestFactory
 from hamcrest import *
 

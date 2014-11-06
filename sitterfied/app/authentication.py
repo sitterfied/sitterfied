@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from .models import User, Parent, Sitter
+from sitterfied.parents.models import Parent
+from sitterfied.sitters.models import Sitter
+from sitterfied.users.models import User
 
 
 class EmailAuthBackend(object):
