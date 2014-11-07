@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.core import validators
 from django.db import models
-from django.utils import timezone
 from model_utils.models import TimeStampedModel
 
 from sitterfied.users.models import User
@@ -23,7 +22,7 @@ class Sitter(User):
     cats_ok = models.BooleanField(default=True)
     certifications = models.ManyToManyField('Certification', blank=True)
     current_student = models.BooleanField(default=False)
-    dob = models.DateTimeField(blank=False, default=timezone.now)
+    dob = models.DateField(blank=False)
     dogs_ok = models.BooleanField(default=True)
     extra_exp = models.TextField(blank=True, default='', null=True)
     gender = models.CharField(max_length=10, choices=GENDERS, default=GENDER_FEMALE)

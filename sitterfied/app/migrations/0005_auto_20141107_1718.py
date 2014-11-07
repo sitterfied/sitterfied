@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.utils.timezone
 
 
 class Migration(migrations.Migration):
@@ -15,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='child',
             name='dob',
-            field=models.DateTimeField(default=django.utils.timezone.now, null=True, blank=True),
+            field=models.DateField(),
         ),
         migrations.AlterField(
             model_name='sitter',
             name='dob',
-            field=models.DateTimeField(default=django.utils.timezone.now),
+            field=models.DateField(),
         ),
     ]

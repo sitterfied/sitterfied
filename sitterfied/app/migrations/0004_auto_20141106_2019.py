@@ -25,18 +25,9 @@ class Migration(migrations.Migration):
             field=model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, verbose_name='modified', editable=False),
             preserve_default=True,
         ),
-        migrations.AlterUniqueTogether(
-            name='sitterteammembership',
-            unique_together=set([('parent', 'sitter')]),
-        ),
         migrations.AlterModelOptions(
             name='settings',
             options={'verbose_name': 'Settings', 'verbose_name_plural': 'Settings'},
-        ),
-        migrations.AlterField(
-            model_name='parent',
-            name='sitter_teams',
-            field=models.ManyToManyField(related_name=b'parents', through='app.SitterTeamMembership', to=b'app.Sitter', blank=True),
         ),
         migrations.AlterUniqueTogether(
             name='user',

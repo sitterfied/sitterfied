@@ -105,7 +105,7 @@ class Reminder(TimeStampedModel):
     Reminder model
 
     """
-    booking = models.ForeignKey('Booking', unique=True)
+    booking = models.ForeignKey('Booking')
     task_id = models.CharField(max_length=256)
 
     class Meta:

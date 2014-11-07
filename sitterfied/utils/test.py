@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import random
 import string
 
@@ -21,7 +22,10 @@ def create_sitters(count=10):
     sitters = []
     for _ in range(count):
         username = random_string(8)
+        current_year = datetime.datetime.now().year - 18
+        year = random.randrange(current_year - 65, current_year - 18)
         sitter = Sitter.objects.create(
+            dob=datetime.date(year, random.randrange(1, 12), random.randrange(1, 28)),
             email='{}@sitterfied.com'.format(username),
             username=username,
             first_name=random_string(8),

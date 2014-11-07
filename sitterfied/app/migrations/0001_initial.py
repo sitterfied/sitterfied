@@ -413,6 +413,10 @@ class Migration(migrations.Migration):
             name='sitterreview',
             unique_together=set([('parent', 'sitter')]),
         ),
+        migrations.AlterUniqueTogether(
+            name='sitterteammembership',
+            unique_together=set([('parent', 'sitter')]),
+        ),
         migrations.AddField(
             model_name='parent',
             name='sitter_teams',
