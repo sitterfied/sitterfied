@@ -34,7 +34,11 @@ class ParentViewSet(SubSerializerViewMixin, IdFilterViewset):
     serializer_class = ParentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     sub_serializers = {
-        'sitter_teams': (SitterTeamMembershipSerializer, 'sitter',)
+        'sitter_teams': {
+            'serializer': SitterTeamMembershipSerializer,
+            'to_field': 'sitter',
+            'from_field': 'parent',
+        }
     }
 
     def get_serializer_class(self):

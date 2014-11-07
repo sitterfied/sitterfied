@@ -4,6 +4,8 @@ from rest_framework import status, viewsets
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
+from sitterfied.utils import NODATA
+
 
 class IdFilterViewset(viewsets.ModelViewSet):
     renderer_classes = (BrowsableAPIRenderer, UJSONRenderer)
@@ -23,17 +25,35 @@ class SubSerializerViewMixin(object):
         """
         Get sub-serializers for the keys defined in the sub_serializers property.
 
+        The expected behavior from a client on an update for a given `key` value is:
+        {key: null} -> clear key
+        {key: []} -> clear key
+        {key: [<value>] -> replace
+        {} -> no modification (NODATA)
+
+        Because of this, there is a difference between null -> None and not passing a value (NODATA).
+
         """
         sub_serializers = []
         for key, value in sub_data.items():
-            if value:
-                sub_serializer_class = self.sub_serializers.get(key)[0]
-                sub_serializer_field_name = self.sub_serializers.get(key)[1]
-                sub_serializer_list = [sub_serializer_class(
-                    data={sub_serializer_field_name: val},
-                    context={'request': request},
-                ) for val in value]
-                sub_serializers.extend(sub_serializer_list)
+            # Value that should not modify the artists
+            if value == NODATA:
+                return None
+            # Values that should replace the artists with an empty []
+            elif value in (None, []):
+                return []
+
+            sub_serializer_dict = self.sub_serializers.get(key)
+            sub_serializer_class = sub_serializer_dict.get('serializer')
+            sub_serializer_field_name = sub_serializer_dict.get('to_field')
+            sub_serializer_from_field = sub_serializer_dict.get('from_field')
+
+            sub_serializer_list = [sub_serializer_class(
+                data={sub_serializer_field_name: val},
+                context={'request': request, 'from_field': sub_serializer_from_field},
+            ) for val in value]
+            sub_serializers.extend(sub_serializer_list)
+
         return sub_serializers
 
     def sub_serializers_are_valid(self, sub_serializers):
@@ -124,9 +144,27 @@ class SubSerializerViewMixin(object):
         self.pre_save(serializer.object)
         self.object = serializer.save()
         self.post_save(self.object, created=False)
+
+        # Delete sub_serializers if we explicitly set it to an empty array
+        # or are passing in new values. Also delete sub_serialziers on a PUT
+        # with no value.
+        if (
+            sub_serializers == [] or
+            sub_serializers or
+            (
+                not partial and
+                sub_serializers is None
+            )
+        ):
+            for key in self.sub_serializers.keys():
+                if hasattr(self.object, key):
+                    getattr(self.object, key).all().delete()
+
         if sub_serializers:
             for serializer in sub_serializers:
-                serializer.object.parent = self.object
+                from_field = serializer.context.get('from_field', None)
+                if from_field:
+                    setattr(serializer.object, from_field, self.object)
                 serializer.save()
 
         response_serializer = self.serializer_class(self.get_object_or_none(), context={"request": self.request})

@@ -95,3 +95,13 @@ class TestViews(SitterfiedApiTestCase):
         response = self.client.patch(url, data, format='json')
         assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
         assert_that(response.data, has_entry('sitter_teams', list(sitter_ids)))
+
+        data.update({'sitter_teams': None})
+        response = self.client.patch(url, data, format='json')
+        assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
+        assert_that(response.data, has_entry('sitter_teams', []))
+
+        data.update({'sitter_teams': []})
+        response = self.client.patch(url, data, format='json')
+        assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
+        assert_that(response.data, has_entry('sitter_teams', []))
