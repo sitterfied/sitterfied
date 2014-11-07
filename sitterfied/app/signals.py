@@ -40,7 +40,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         short_url = get_short_url('/mybookings/upcoming')
 
-        if 'Interview' in sender.booking_type:
+        if sender.booking_type in ['meetup', 'phone']:
             sms_template = 'sms/interview/interview_request_accepted_parent.sms'
         else:
             sms_template = 'sms/booking/booking_request_accepted.sms'
@@ -60,7 +60,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url = get_short_url('/mybookings/upcoming')
 
-        if 'Interview' in sender.booking_type:
+        if sender.booking_type in ['meetup', 'phone']:
             sms_template = 'sms/interview/interview_request_accepted_sitter.sms'
         else:
             sms_template = 'sms/booking/booking_request_accepted_sitter.sms'
@@ -88,7 +88,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
         if len(sender.declined_sitters.all()) == len(sender.sitters.all()):
             short_url = get_short_url('/search')
 
-            if 'Interview' in sender.booking_type:
+            if sender.booking_type in ['meetup', 'phone']:
                 sms_template = 'sms/interview/interview_request_declined_parent.sms'
             else:
                 sms_template = ('sms/booking/booking_request_declined.sms'
@@ -110,7 +110,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url = get_short_url('/sitter/' + str(sitter.id) + '/edit/schedule')
 
-        if 'Interview' in sender.booking_type:
+        if sender.booking_type in ['meetup', 'phone']:
             sms_template = 'sms/interview/interview_request_declined_sitter.sms'
         else:
             sms_template = 'sms/booking/booking_request_declined_sitter.sms'
@@ -138,7 +138,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
         if cancelled_by == sitter:
             short_url = get_short_url('/search')
 
-            if 'Interview' in sender.booking_type:
+            if sender.booking_type in ['meetup', 'phone']:
                 sms_template = 'sms/interview/interview_cancelled_by_sitter_parent_notification.sms'
             else:
                 sms_template = 'sms/booking/booking_request_canceled_by_sitter_to_parent.sms'
@@ -158,7 +158,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                 sitter_first_name = None
                 sitter_contact_info = None
 
-            if 'Interview' in sender.booking_type:
+            if sender.booking_type in ['meetup', 'phone']:
                 sms_template = 'sms/interview/interview_cancelled_by_parent_confirmation.sms'
             else:
                 sms_template = 'sms/booking/booking_request_canceled_by_parent.sms'
@@ -182,7 +182,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             if cancelled_by == sitter:
                 parent_contact_info = parent.cell if parent.cell else parent.email
 
-                if 'Interview' in sender.booking_type:
+                if sender.booking_type in ['meetup', 'phone']:
                     sms_template = 'sms/interview/interview_cancelled_by_sitter_confirmation.sms'
                 else:
                     sms_template = 'sms/booking/booking_request_canceled_by_sitter.sms'
@@ -193,7 +193,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                     'parent_contact_info': parent_contact_info,
                 })
             else:
-                if 'Interview' in sender.booking_type:
+                if sender.booking_type in ['meetup', 'phone']:
                     sms_template = 'sms/interview/interview_cancelled_by_parent_sitter_notification.sms'
                 else:
                     sms_template = 'sms/booking/booking_request_canceled_by_parent_to_sitter.sms'

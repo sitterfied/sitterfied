@@ -689,15 +689,15 @@ define ['jquery'
         ).property('booking_type')
 
         isInterview: (() ->
-            return @get('booking_type') && @get('booking_type').indexOf("Interview") != -1
+            return @get('booking_type') && (@get('booking_type') == 'meetup' || @get('booking_type') == 'phone')
         ).property('booking_type')
             
         isMeetupInterview: (() ->
-            return @get('booking_type') == "Meetup Interview" || @get('booking_type') == "Interview"
+            return @get('booking_type') == "meetup"
         ).property('booking_type')
             
         isPhoneInterview: (() ->
-            return @get('booking_type') == "Phone Interview"
+            return @get('booking_type') == "phone"
         ).property('booking_type')
 
         kidsString: (() ->

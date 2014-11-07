@@ -269,6 +269,10 @@ CELERYBEAT_SCHEDULE = {
         'task': 'sitterfied.app.tasks.jobs.check_for_canceled_jobs_with_incorrect_status',
         'schedule': crontab(minute='0', hour='0'),
     },
+    'mark-expired-jobs': {
+        'task': 'sitterfied.app.tasks.jobs.mark_expired_jobs',
+        'schedule': crontab(minute='5'),
+    }
 }
 
 

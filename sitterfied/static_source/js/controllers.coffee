@@ -485,8 +485,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: overnight
-                booking_status: "Pending"
-                booking_type: "Job"
+                booking_status: "pending"
+                booking_type: "job"
                 start_date_time: start_date_time
                 stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
@@ -536,7 +536,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             kids = onDeckBookingAttrs['kids'] || Sitterfied.get('currentUser.children.length')
             overnight = onDeckBookingAttrs['overnight'] || false
                 
-            booking_type = interview_type + " Interview"
+            booking_type = interview_type.toLowerCase()
 
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
@@ -912,8 +912,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: @get("overnight")
-                booking_status: "Pending"
-                booking_type: "Job"
+                booking_status: "pending"
+                booking_type: "job"
                 start_date_time: start_date_time
                 stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
@@ -973,13 +973,13 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             stop_moment = start_moment.clone().add('minutes', minutes)
             stop_date_time = stop_moment.toDate()
             
-            booking_type = interview_type + " Interview"
+            booking_type = interview_type.toLowerCase()
 
             booking = Sitterfied.Booking.create
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
-                booking_status: "Pending"
+                booking_status: "pending"
                 booking_type: booking_type
                 start_date_time: start_date_time
                 stop_date_time: stop_date_time
@@ -1019,8 +1019,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: @get("overnight")
-                booking_status: "Pending"
-                booking_type: "Job"
+                booking_status: "pending"
+                booking_type: "job"
                 start_date_time: start_date_time
                 stop_date_time: stop_date_time
                 address1: Sitterfied.get('currentUser.address1')
@@ -1109,8 +1109,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: false
-                booking_status: "Pending"
-                booking_type: "Job"
+                booking_status: "pending"
+                booking_type: "job"
                 start_date_time: moment().minutes(30)
                 stop_date_time: moment().startOf('hour').add('minutes', 60)
                 address1: Sitterfied.get('currentUser.address1')

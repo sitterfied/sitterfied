@@ -28,7 +28,7 @@ def notify_parent_of_job_request(id):
             pass  # TODO: implement email for parent request sent
 
         if parent.settings.mobile_booking_accepted_denied:
-            if 'Interview' in booking.booking_type:
+            if booking.booking_type in ['meetup', 'phone']:
                 sms_template = 'sms/interview/interview_request_parent_confirmation.sms'
             else:
                 sms_template = 'sms/booking/booking_request_sent.sms'
@@ -84,8 +84,8 @@ def notify_sitters_of_job_request(id, pk_set):
             if not sitter.cell:
                 continue
 
-            if 'Interview' in booking.booking_type:
-                booking_type = booking.booking_type.replace(' Interview', '_Interview').lower()
+            if booking.booking_type in ['meetup', 'phone']:
+                booking_type = '{}_interview'.format(booking.booking_type)
                 sms_template = 'sms/interview/{0}_request_to_sitter.sms'.format(booking_type)
             else:
                 sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
