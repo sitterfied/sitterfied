@@ -77,7 +77,7 @@ LEFT OUTER JOIN public.app_user up on up.id = p.user_ptr_id
 LEFT OUTER JOIN public.app_parent_sitter_teams t on up.id = t.parent_id
 LEFT OUTER JOIN public.app_user us on us.id = t.sitter_id
 WHERE up.id = {0} AND t.created >= '{1}'
-GROUP BY us.id, up.id, us.first_name, us.last_name, us.email, us.avatar
+GROUP BY us.id, up.id, us.first_name, us.last_name, us.email, us.avatar, t.created
 ORDER BY up.id
     """.format(parent_id, added_since.strftime('%Y-%m-%d %H:%M:%S'))
 
@@ -93,7 +93,7 @@ ORDER BY up.id
                 'name': record['sitter_name'],
                 'email': record['sitter_email'],
                 'avatar': record['sitter_avatar'],
-                'added': record['sitter_added'],
+                'added': record['sitter_added'].isoformat(),
             }
             sitters.append(sitter)
 
@@ -260,7 +260,7 @@ def main():
 
         sitter = {}
         sitter['name'] = '{} {}'.format(record['first_name'].strip(), record['last_name'].strip())
-        sitter['email'] = record['sitter_email'].strip()
+        sitter['email'] = record['email'].strip()
         sitter['data'] = {
             'id': sitter_id,
             'first_name': record['first_name'].strip(),
@@ -268,7 +268,7 @@ def main():
             'type': 'sitter',
         }
 
-        new_parents = get_sitter_sitter_team_activity(added_since)
+        new_parents = get_sitter_sitter_team_activity(sitter_id, added_since)
         sitter['data']['new_parents'] = new_parents
         sitter['data']['num_new_parents'] = len(new_parents)
 

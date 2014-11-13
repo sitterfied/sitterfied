@@ -1,4 +1,0 @@
-#!/bin/sh
-# Setup crontab
-set -e
-crontab ~/current/jobs/crontab
