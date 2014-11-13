@@ -71,6 +71,12 @@ def mark_expired_jobs():
     Mark any jobs that have expired since the last check as 'expired.'
 
     """
-    return get_jobs_expired_since(datetime.now(pytz.UTC)).update(
-        booking_status=Booking.BOOKING_STATUS_EXPIRED
-    )
+    jobs = get_jobs_expired_since(datetime.now(pytz.UTC))
+
+    for job in jobs:
+        job.responses.filter(
+            response=Booking.BOOKING_STATUS_PENDING
+        ).update(
+            response=Booking.BOOOKING_STATUS_EXPIRED, responded_at=datetime.now(pytz.UTC))
+
+    return jobs.update(booking_status=Booking.BOOKING_STATUS_EXPIRED)

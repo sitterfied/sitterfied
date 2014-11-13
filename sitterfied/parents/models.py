@@ -16,7 +16,7 @@ class Parent(User):
     emergency_contact_two_name = models.CharField(max_length=128, blank=True)
     emergency_contact_two_phone = models.CharField(max_length=10, blank=True)
     sitter_teams = models.ManyToManyField(
-        'Sitter', related_name='parents', through='SitterTeamMembership', symmetrical=False, blank=True)
+        'Sitter', related_name='sitter_teams', through='SitterTeamMembership', blank=True)
 
     class Meta:
         app_label = 'app'

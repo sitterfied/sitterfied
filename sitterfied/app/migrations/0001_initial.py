@@ -409,6 +409,22 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.CreateModel(
+            name='BookingResponse',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('booking', models.ForeignKey(to='app.Booking')),
+                ('sitter', models.ForeignKey(to='app.Sitter')),
+            ],
+            options={
+                'db_table': 'app_booking_sitters',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AlterUniqueTogether(
+            name='bookingresponse',
+            unique_together=set([('booking', 'sitter')]),
+        ),
         migrations.AlterUniqueTogether(
             name='sitterreview',
             unique_together=set([('parent', 'sitter')]),
@@ -485,8 +501,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='booking',
             name='sitters',
-            field=models.ManyToManyField(related_name=b'bookings', to='app.Sitter'),
-            preserve_default=True,
+            field=models.ManyToManyField(related_name=b'bookings', through='app.BookingResponse', to=b'app.Sitter', blank=True),
         ),
         migrations.AddField(
             model_name='address',

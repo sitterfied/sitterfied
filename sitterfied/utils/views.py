@@ -1,21 +1,17 @@
 # -*- coding: utf-8 -*-
-from drf_ujson.renderers import UJSONRenderer
 from rest_framework import status, viewsets
-from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
 from sitterfied.utils import NODATA
 
 
 class IdFilterViewset(viewsets.ModelViewSet):
-    renderer_classes = (BrowsableAPIRenderer, UJSONRenderer)
 
     def get_queryset(self):
         queryset = super(IdFilterViewset, self).get_queryset()
         if 'id' in self.request.GET:
             ids = self.request.GET.get('id')
-            ids = ids.split(",")
-            queryset = queryset.filter(id__in=ids)
+            queryset = queryset.filter(id__in=ids.split(','))
         return queryset
 
 
@@ -47,10 +43,22 @@ class SubSerializerViewMixin(object):
             sub_serializer_class = sub_serializer_dict.get('serializer')
             sub_serializer_field_name = sub_serializer_dict.get('to_field')
             sub_serializer_from_field = sub_serializer_dict.get('from_field')
+            sub_serializer_related_name = sub_serializer_dict.get('related_name')
+
+            def get_object(id):
+                try:
+                    return getattr(self.object, sub_serializer_related_name).get(**{sub_serializer_field_name: id})
+                except Exception:
+                    return None
 
             sub_serializer_list = [sub_serializer_class(
+                get_object(val),
                 data={sub_serializer_field_name: val},
-                context={'request': request, 'from_field': sub_serializer_from_field},
+                context={
+                    'request': request,
+                    'from_field': sub_serializer_from_field,
+                    'related_name': sub_serializer_related_name,
+                }
             ) for val in value]
             sub_serializers.extend(sub_serializer_list)
 
@@ -104,7 +112,9 @@ class SubSerializerViewMixin(object):
         self.post_save(self.object, created=True)
         if sub_serializers is not None:
             for serializer in sub_serializers:
-                serializer.object.parent = self.object
+                from_field = serializer.context.get('from_field', None)
+                if from_field:
+                    setattr(serializer.object, from_field, self.object)
                 serializer.save()
 
         response_serializer = self.serializer_class(self.object, context={'request': request})
@@ -156,16 +166,26 @@ class SubSerializerViewMixin(object):
                 sub_serializers is None
             )
         ):
-            for key in self.sub_serializers.keys():
-                if hasattr(self.object, key):
-                    getattr(self.object, key).all().delete()
+            if not sub_serializers:
+                for data in self.sub_serializers.values():
+                    related_name = data.get('related_name', None)
+                    if hasattr(self.object, related_name):
+                        getattr(self.object, related_name).all().delete()
+            else:
+                for key, data in self.sub_serializers.items():
+                    pks = sub_data.get(key)
+                    related_name = data.get('related_name', None)
+                    to_field = data.get('to_field')
+                    if hasattr(self.object, related_name):
+                        exclude_args = {'{}__in'.format(to_field): pks}
+                        getattr(self.object, related_name).exclude(**exclude_args).delete()
 
         if sub_serializers:
-            for serializer in sub_serializers:
-                from_field = serializer.context.get('from_field', None)
+            for sub_serializer in sub_serializers:
+                from_field = sub_serializer.context.get('from_field', None)
                 if from_field:
-                    setattr(serializer.object, from_field, self.object)
-                serializer.save()
+                    setattr(sub_serializer.object, from_field, self.object)
+                sub_serializer.save()
 
         response_serializer = self.serializer_class(self.get_object_or_none(), context={"request": self.request})
         headers = self.get_success_headers(response_serializer.data)

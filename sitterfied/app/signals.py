@@ -4,14 +4,14 @@ from datetime import datetime, timedelta
 import celery
 import pytz
 from django.conf import settings
-from django.db.models.signals import post_save, pre_delete, m2m_changed
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
 from sitterfied.app.sms import send_message
 from sitterfied.app.tasks import notifications, reminders
 from sitterfied.app.utils import get_short_url, send_template_email
-from sitterfied.bookings.models import booking_accepted, booking_canceled, booking_declined, Booking, Reminder
+from sitterfied.bookings.models import booking_accepted, booking_canceled, booking_declined, Booking, BookingResponse, Reminder
 from sitterfied.parents.models import Parent
 from sitterfied.schedules.models import Schedule
 from sitterfied.sitters.models import Sitter, SitterReview
@@ -85,7 +85,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
         pass
 
     if parent_settings.mobile_booking_accepted_denied and parent.cell:
-        if len(sender.declined_sitters.all()) == len(sender.sitters.all()):
+        if sender.declined_sitters.count() == sender.sitters.count():
             short_url = get_short_url('/search')
 
             if sender.booking_type in ['meetup', 'phone']:
@@ -207,17 +207,18 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             send_message(body=sms, to=sitter.cell)
 
 
-@receiver(m2m_changed, sender=Booking.sitters.through)
-def receive_booking_request(sender, pk_set=None, instance=None, action=None, **kwargs):
-    if kwargs.get('reverse', False):
-        return
-
-    if action == "post_add":
+@receiver(post_save, sender=Booking, dispatch_uid='booking_created')
+def receive_booking(sender, instance=None, created=False, **kwargs):
+    if created:
         # Queue Celery task for sending parent confirmation
         notifications.notify_parent_of_job_request.s(instance.id).delay()
 
+
+@receiver(post_save, sender=BookingResponse, dispatch_uid='booking_response_sitter')
+def receive_booking_response(sender, instance=None, created=False, **kwargs):
+    if created:
         # Queue Celery task for sending job requests to sitters
-        notifications.notify_sitters_of_job_request.s(instance.id, list(pk_set)).delay()
+        notifications.notify_sitter_of_job_request.s(instance.id).delay()
 
 
 @receiver(post_save, sender=SitterReview)

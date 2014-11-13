@@ -38,6 +38,7 @@ class ParentViewSet(SubSerializerViewMixin, IdFilterViewset):
             'serializer': SitterTeamMembershipSerializer,
             'to_field': 'sitter',
             'from_field': 'parent',
+            'related_name': 'sitterteammembership_set',
         }
     }
 
@@ -96,10 +97,8 @@ class ParentViewSet(SubSerializerViewMixin, IdFilterViewset):
     def bookings(self, request, pk=None):
         queryset = Booking.objects \
             .select_related('parent') \
-            .prefetch_related(
-                'sitters',
-                'declined_sitters',
-            ).filter(Q(parent=pk) | Q(sitters=pk))
+            .prefetch_related('sitters') \
+            .filter(Q(parent=pk) | Q(sitters=pk))
 
         serializer = BookingSerializer(queryset, many=True)
         return Response(serializer.data)

@@ -78,7 +78,7 @@ class Settings(TimeStampedModel):
     User settings model
 
     """
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, unique=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, unique=True, null=True)
 
     email_booking_accepted_denied = models.BooleanField(default=True)
     email_booking_request = models.BooleanField(default=True)

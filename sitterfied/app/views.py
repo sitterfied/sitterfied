@@ -27,6 +27,7 @@ from signup import RegistrationView
 
 from sitterfied.app import utils
 from sitterfied.app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
+from sitterfied.app.utils import send_html_email
 
 from sitterfied.children.models import Child
 from sitterfied.parents.models import Parent
@@ -35,8 +36,6 @@ from sitterfied.sitters.models import Sitter
 from sitterfied.sitters.serializers import SitterSerializer, SitterSearchSerializer
 from sitterfied.users.models import User
 from sitterfied.utils.models import Group
-
-from sitterfied.app.utils import send_html_email
 
 
 # Universal params used in all views
