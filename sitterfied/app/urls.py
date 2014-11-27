@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url, include
 from rest_framework.routers import DefaultRouter
 
 from sitterfied.app import api, google
+from sitterfied.bookings.views import BookingViewSet
 from sitterfied.parents.views import ParentViewSet
 
 from .signals import *
@@ -22,7 +23,7 @@ router.register(r'schedules', api.ScheduleViewSet)
 router.register(r'sitterreviews', api.ReviewViewSet)
 router.register(r'languages', api.LanguageViewSet)
 router.register(r'children', api.ChildrenViewSet)
-router.register(r'bookings', api.BookingViewSet)
+router.register(r'bookings', BookingViewSet)
 router.register(r'groups', api.GroupViewSet)
 
 
