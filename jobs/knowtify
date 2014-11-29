@@ -191,29 +191,35 @@ SELECT
     pst.sitter_id as sitter_id,
     u.avatar as sitter_avatar,
     u.email as sitter_email,
-    u.first_name || ' ' || u.last_name as sitter_name
+    u.first_name || ' ' || u.last_name as sitter_name,
+    pst.parent_id as parent_id,
+    p.first_name || ' ' || p.last_name as parent_name
 FROM
     app_parent_sitter_teams pst
 INNER JOIN
     app_user u ON u.id = pst.sitter_id
+INNER JOIN
+    app_user p ON p.id = pst.parent_id
 WHERE
     pst.parent_id IN (SELECT uf.to_user_id FROM app_user_friends uf WHERE uf.from_user_id = {})
     AND
     pst.sitter_id NOT IN (SELECT pst.sitter_id FROM app_parent_sitter_teams pst WHERE pst.parent_id = {})
 GROUP BY
-    pst.sitter_id, u.avatar, u.email, u.first_name, u.last_name""".format(parent_id, parent_id)
+    pst.parent_id, p.first_name, p.last_name, pst.sitter_id, u.avatar, u.email, u.first_name, u.last_name""".format(parent_id, parent_id)
 
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cursor.execute(query)
     records = cursor.fetchall()
     random.shuffle(records)
-    records = records[:3]
+    records = records[:count]
 
     return [{
         'id': record['sitter_id'],
         'name': record['sitter_name'],
         'email': record['sitter_email'],
         'avatar': record['sitter_avatar'],
+        'parent_id': record['parent_id'],
+        'parent_name': record['parent_name'],
     } for record in records]
 
 
