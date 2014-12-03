@@ -280,7 +280,7 @@ def main():
 
         data['contacts'].append(sitter)
 
-    print('Request body\n	->%s' % (json.dumps(data)))
+    #print('Request body\n	->%s' % (json.dumps(data)))
 
     api_token = env.get('KNOWTIFY_API_TOKEN')
     if api_token:

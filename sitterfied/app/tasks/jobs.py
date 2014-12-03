@@ -77,6 +77,6 @@ def mark_expired_jobs():
         job.responses.filter(
             response=Booking.BOOKING_STATUS_PENDING
         ).update(
-            response=Booking.BOOOKING_STATUS_EXPIRED, responded_at=datetime.now(pytz.UTC))
+            response=Booking.BOOKING_STATUS_EXPIRED, responded_at=datetime.now(pytz.UTC))
 
     return jobs.update(booking_status=Booking.BOOKING_STATUS_EXPIRED)
