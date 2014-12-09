@@ -2,6 +2,7 @@
 import json
 import os
 import random
+import sys
 from datetime import datetime, timedelta
 
 import psycopg2
@@ -205,7 +206,14 @@ WHERE
     AND
     pst.sitter_id NOT IN (SELECT pst.sitter_id FROM app_parent_sitter_teams pst WHERE pst.parent_id = {})
 GROUP BY
-    pst.parent_id, p.first_name, p.last_name, pst.sitter_id, u.avatar, u.email, u.first_name, u.last_name""".format(parent_id, parent_id)
+    pst.parent_id,
+    p.first_name,
+    p.last_name,
+    pst.sitter_id,
+    u.avatar,
+    u.email,
+    u.first_name,
+    u.last_name""".format(parent_id, parent_id)
 
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     cursor.execute(query)
@@ -223,9 +231,9 @@ GROUP BY
     } for record in records]
 
 
-def main():
+def main(added_since=None):
     data = {'contacts': []}
-    added_since = datetime.now() - timedelta(days=7)
+    added_since = added_since or datetime.now() - timedelta(days=7)
 
     for record in get_parents():
         parent_id = record['parent_id']
@@ -254,7 +262,7 @@ def main():
         parent['data']['new_sitters'] = new_sitters
         parent['data']['num_sitters_added'] = num_sitters_added
 
-        if num_sitters_added > 0 or sitter_team_size == 0:
+        if sitter_team_size < 4:
             suggested_sitters = get_suggested_sitters(parent_id, 3)
             parent['data']['suggested_sitters'] = suggested_sitters
             parent['data']['num_suggested_sitters'] = len(suggested_sitters)
@@ -315,4 +323,6 @@ conn = get_connection()
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        added_since = datetime.strptime(sys.argv[1], '%Y-%m-%dT%H:%M:%S')
+    main(added_since)
