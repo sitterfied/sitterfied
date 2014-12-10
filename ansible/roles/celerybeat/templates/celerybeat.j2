@@ -1,0 +1,17 @@
+export DJANGO_SETTINGS_MODULE="sitterfied.settings.{{ env }}"
+
+CELERYBEAT_CHDIR="{{ application_root }}"
+
+CELERY_BIN="{{ application_virtualenv_root }}/bin/celery"
+
+CELERYBEAT_OPTS="--schedule={{ celerybeat_schedule }}"
+
+CELERY_APP="{{ celerybeat_app }}"
+
+CELERYBEAT_LOG_FILE="/var/log/celery/beat.log"
+CELERYBEAT_PID_FILE="/var/run/celery/beat.pid"
+
+CELERYBEAT_USER="{{ application_user }}"
+CELERYBEAT_GROUP="{{ application_user }}"
+
+CELERY_CREATE_DIRS=1

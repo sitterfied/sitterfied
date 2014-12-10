@@ -1,5 +1,0 @@
----
-
-- name: restart the celery daemon
-  sudo: true
-  service: name=celeryd state=restarted

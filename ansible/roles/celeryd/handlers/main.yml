@@ -1,0 +1,6 @@
+---
+- name: restart celeryd
+  sudo: True
+  service:
+    name=celeryd
+    state=restarted
