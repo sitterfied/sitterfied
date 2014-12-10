@@ -4,11 +4,12 @@ from .mandrill import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-INTERNAL_IPS = (
-    '127.0.0.1',
-    '192.168.100.22',
-)
 
+INTERNAL_IPS = (
+    '::1',
+    '127.0.0.1',
+    '192.168.100.1',
+)
 
 # ShortUrl Redis Configuration
 REDIS_URL = 'redis://192.168.100.22:6379'

@@ -281,7 +281,7 @@ def search(request):
                                                                'other_services',
                                                                'bookings',
                                                                'bookmarks',
-                                                               'settings').annotate(rehires=Count("booking__parent"))
+                                                               'settings').annotate(rehires=Count("bookings__parent"))
 
     if not settings.DEBUG:
         #filter by radius

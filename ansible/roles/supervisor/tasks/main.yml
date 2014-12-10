@@ -20,7 +20,5 @@
 
 - name: reloading conf for {{ name }}
   when: supervisor_task_conf|changed and not supervisor_task_started|changed
-  shell: >
-    {{ supervisorctl_command }} reload
+  supervisorctl: name={{ name }} state=restarted
   sudo: true
-  notify: restart the supervisor daemon

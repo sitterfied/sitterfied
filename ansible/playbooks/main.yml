@@ -29,7 +29,7 @@
 
     - role: supervisor
       name: celerybeat
-      command: '{{ application_virtualenv_bin }}/celerybeat --app=sitterfied --loglevel=INFO --schedule=/etc/celery/celerybeat.db --pidfile=/var/run/celery/celerybeat.pid'
+      command: '{{ application_virtualenv_bin }}/celery beat --app=sitterfied --loglevel=INFO --schedule=/etc/celery/celerybeat.db --pidfile=/var/run/celery/celerybeat.pid'
       directory: '{{ application_root }}'
       stdout_logfile: /var/log/supervisor/sitterfied.beat.log
       env_vars:

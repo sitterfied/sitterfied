@@ -39,9 +39,14 @@
     owner={{ application_user }}
     mode=755
 
+- name: check if virtualenv exists
+  stat: path={{ application_virtualenv_root }}
+  register: virtualenv_path
+
 - name: create a virtualenv
   sudo: true
   command: virtualenv {{ application_virtualenv_root }}
+  when: virtualenv_path.stat.exists == false
 
 - name: change ownership of virtualenv to the default user
   sudo: true
