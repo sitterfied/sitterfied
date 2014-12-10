@@ -291,18 +291,27 @@ def main(added_since=None):
     #print('Request body\n	->%s' % (json.dumps(data)))
 
     api_token = env.get('KNOWTIFY_API_TOKEN')
-    if api_token:
-        try:
-            r = requests.post(
-                'http://www.knowtify.io/api/v1/contacts/upsert',
-                data=json.dumps(data),
-                headers={'Authorization': 'Token token="' + api_token + '"'}
-            )
-            print('API response\n      ->%s' % (r.content))
-        except Exception as e:
-            print('API error\n	->%s' % (e.message))
-    else:
+    if not api_token:
         print('An error occurred\n       ->The Knowtify API token is not set. Please set the KNOWTIFY_API_TOKEN environment variable.')
+        return
+
+    response = {'body': data}
+
+    try:
+        r = requests.post(
+            'http://www.knowtify.io/api/v1/contacts/upsert',
+            data=json.dumps(data),
+            headers={'Authorization': 'Token token="' + api_token + '"'}
+        )
+
+        response.update({
+            'status_code': r.status_code,
+            'content': r.content,
+        })
+    except Exception as e:
+        response.update({'exception': e.message})
+
+    print(response)
 
 
 try:
@@ -318,11 +327,15 @@ except:
     env['DOTCLOUD_DATA_SQL_PASSWORD'] = os.environ.get('DOTCLOUD_DATA_SQL_PASSWORD')
     env['KNOWTIFY_API_TOKEN'] = os.environ.get('KNOWTIFY_API_TOKEN')
 
-
 conn = get_connection()
 
-
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        added_since = datetime.strptime(sys.argv[1], '%Y-%m-%dT%H:%M:%S')
+    try:
+        if len(sys.argv) > 1:
+            added_since = datetime.strptime(sys.argv[1], '%Y-%m-%dT%H:%M:%S')
+        else:
+            added_since = None
+    except:
+        added_since = None
+
     main(added_since)
