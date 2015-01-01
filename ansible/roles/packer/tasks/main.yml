@@ -1,0 +1,17 @@
+---
+
+- name: install the unzip package
+  sudo: true
+  apt: name=unzip state=installed
+
+- name: download the packer zip archive
+  sudo: true
+  get_url: url=https://dl.bintray.com/mitchellh/packer/packer_{{ packer_version }}_linux_amd64.zip
+    dest=/tmp/packer_{{ packer_version }}_linux_amd64.zip
+    owner=root group=root mode=0644
+  register: packer_downloaded
+
+- name: extract the packer binaries into the standard path
+  sudo: true
+  command: /usr/bin/unzip -o -d /usr/local/bin/ /tmp/packer_{{ packer_version }}_linux_amd64.zip
+  when: packer_downloaded.changed

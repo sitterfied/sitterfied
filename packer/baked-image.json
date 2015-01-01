@@ -1,0 +1,55 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{ user `aws_region` }}",
+      "source_ami": "{{ user `base_ami` }}",
+      "instance_type": "m1.small",
+      "ssh_username": "ubuntu",
+      "ami_name": "{{ user `container` }}-baked-{{ user `project_hyphen` }}-{{ user `aws_deploy_id` | clean_ami_name }}",
+      "associate_public_ip_address": true,
+      "vpc_id": "vpc-e90a6d8c",
+      "subnet_id": "subnet-09a1227e",
+      "tags": {
+        "image-type": "baked",
+        "container": "{{ user `container` }}"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": [
+        "scripts/sleep.sh",
+        "scripts/ansible-staging-directory.sh"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "../ansible/roles",
+      "destination": "{{ user `ansible_staging_directory` }}"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "../ansible/playbooks/packer_{{ user `container` }}/baked_{{ user `project_underscore` }}.yml",
+      "extra_arguments": ""
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": [
+        "scripts/cleanup.sh"
+      ]
+    }
+  ],
+  "variables": {
+    "ansible_staging_directory": "/tmp/packer-provisioner-ansible-local",
+    "aws_region": "us-east-1",
+    "container": "website",
+    "aws_deploy_id": null,
+    "project_hyphen": "website-server",
+    "project_underscore": null,
+    "base_ami": null
+  }
+}

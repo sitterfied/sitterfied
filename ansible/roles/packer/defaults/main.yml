@@ -1,0 +1,4 @@
+---
+
+# the version of packer to install
+packer_version: 0.7.2

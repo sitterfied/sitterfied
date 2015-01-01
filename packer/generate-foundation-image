@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+#
+# generate-foundation-image
+#
+# Use packer to generate a foundation AMI.
+#
+
+readonly AWS_DEPLOY_ID=$(date -u '+%Y%m%d-%H%M')  # the time-based deployment identifier
+readonly CONTAINER=${CONTAINER:-website}              # the beatport container to prefix aws resources
+
+##### Functions
+
+# print a message to stderr
+warn() {
+	local fmt="$1"
+	shift
+	printf "generate-foundation-image: $fmt\n" "$@" >&2
+}
+
+# print a message to stderr and exit with either
+# the given status or that of the most recent command
+die() {
+	local st="$?"
+	if [[ "$1" != *[^0-9]* ]]; then
+		st="$1"
+		shift
+	fi
+	warn "$@"
+	exit "$st"
+}
+
+# print this script's usage message to stderr
+usage() {
+	cat <<-EOF >&2
+	Usage: generate-foundation-image REGION
+	Generate a foundation AMI for the given REGION
+	EOF
+}
+
+##### Main
+
+# check command line arguments
+if [[ -z $1 ]]; then
+	usage
+	exit 1
+else
+	region=$1
+fi
+
+# check for dependencies
+for cmd in curl; do
+	if ! command -v $cmd > /dev/null; then
+		die 1 'required command "%s" was not found' "$cmd"
+	fi
+done
+
+DAILY_IMAGES=$(curl --silent https://cloud-images.ubuntu.com/query/trusty/server/daily.current.txt)
+REGIONAL_AMI=$(printf '%s' "$DAILY_IMAGES" | awk "/ebs\tamd64\t${region}.*paravirtual/{ print \$8 }")
+if [[ -z $REGIONAL_AMI ]]; then
+	warn 'unable to find an ebs-backed ubuntu cloud image for the "%s" region' "$region"
+	die 1 "open the following url to debug:\n  https://cloud-images.ubuntu.com/query/trusty/server/daily.current.txt"
+fi
+
+packer build \
+	-var "aws_region=$region" \
+	-var "container=$CONTAINER" \
+	-var "aws_deploy_id=$AWS_DEPLOY_ID" \
+	-var "ubuntu_cloud_image_ami=$REGIONAL_AMI" \
+	foundation-image.json
+
+exit $?

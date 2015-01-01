@@ -1,0 +1,429 @@
+#!/usr/bin/env bash
+
+#
+# deploy-image
+#
+# Deploy a baked AMI into the appropriate Auto Scaling Group, seamlessly
+# replacing the existing instances.
+#
+
+##### Contants
+
+readonly DEFAULT_KEY_PAIR='sitterfied-web-2014-12-30'   # name of the EC2 key pair
+readonly DEFAULT_SECURITY_GROUP='sg-37b07753'  # default VPC security group ID
+
+readonly AWS_DEPLOY_ID=$(date -u '+%Y%m%d-%H%M')  # timestamp for the launch configuration
+readonly BASENAME="${0##*/}"                      # name of this script for error output
+readonly POLL_INTERVAL=20                         # seconds to wait in between health checks
+
+
+##### Functions
+
+# print a message to stderr
+warn() {
+	local fmt="$1"
+	shift
+	printf "%s: $fmt\n" "$BASENAME" "$@" >&2
+}
+
+# print a message to stderr and exit with either
+# the given status or that of the most recent command
+die() {
+	local st="$?"
+	if [[ "$1" != *[^0-9]* ]]; then
+		st="$1"
+		shift
+	fi
+	warn "$@"
+	exit "$st"
+}
+
+# print this script's usage message to stderr
+usage() {
+	cat <<-EOF >&2
+	usage: deploy-image -r REGION -c CONTAINER -e ENVIROMENT -p PROJECT [-a AMI] [-s TYPE] [-k KEY] [-g GROUP] [-i IAM] [-n SIZE] [-v SIZE] [-u BLOB] [-h]
+	EOF
+}
+
+# print this script's help message to sdtout
+help() {
+	cat <<-EOF
+
+	NAME
+	     deploy-image -- replace the instances within an auto scaling group
+
+	SYNOPSIS
+	     deploy-image [options...]
+
+	DESCRIPTION
+	     deploy-image will deploy a "baked" AMI into an environment's Auto
+	     Scaling Group (ASG) by seamlessly replacing the existing instances. It
+	     does this by creating a new Launch Configuration with the latest
+	     available baked AMI, assigning that Launch Configuration to the existing
+	     ASG, doubling the "desired" instances amount, waiting for the new
+	     instances to be added to the Elastic Load Balancer (ELB), then cutting
+	     the desired instances amount back down to the original value (which will
+	     terminate the older instances).
+
+	OPTIONS
+	     -r, --region=REGION
+	            the AWS region to deploy to; valid values are:
+	            us-west-2
+
+	     -c, --container=CONTAINER
+	            the name of the vpc container used to prefix AWS resource names;
+	            valid values are: api
+
+	     -e, --environment=ENVIRONMENT
+	            the environment to deploy to; valid values are:
+	            stage, prod
+
+	     -p, --project=PROJECT
+	            the container project to deploy; valid values are:
+	            api-server, jenkins-master
+
+	     -a, --ami=AMI
+	            the AMI ID to deploy (optional);
+	            defaults to the PROJECT's latest baked AMI or the AMI that's
+	            currently running in the PROJECT's staging environment, depending
+	            on whether or not -b is also specified
+
+	     -b, --bless-staging
+	            use the current AMI that's running in the PROJECT's staging
+	            environment instead of the latest baked AMI
+
+	     -s, --size=size
+	            the EC2 instance type to deploy (optional);
+	            defaults to current launch configuration type
+
+	     -k, --key=KEY
+	            the key pair to deploy (optional);
+	            defaults to "$DEFAULT_KEY_PAIR"
+
+	     -g, --group=GROUP
+	            the EC2 security group id to assign (optional);
+	            defaults to the region's allow-all-from-vpc security group id
+
+	     -i, --iam=IAM
+	            the name or the ARN of the instance profile associated with the
+	            IAM role for the instances (optional);
+	            defaults to none
+
+	     -n, --number-instances=SIZE
+	            the number of desired instances to override what's currently set
+	            by the Auto Scaling Group (optional);
+	            defaults to none
+
+	     -v, --volume-size=SIZE
+	            the size in gigabytes for an attached elastic block storage
+	            device. currently only a single device mapping is supported by
+	            this script (optional);
+	            defaults to none
+
+	     -u, --user-data=BLOB
+	            the EC2 instance user data to assign (optional);
+	            defaults to none
+
+	     -h, --help
+	            view this help message
+
+	EOF
+}
+
+
+##### Main
+
+# reset all variables that might be set
+region=''
+container=''
+environment=''
+project=''
+ami=''
+use_staging_ami=''
+instance_type=''
+key_pair=''
+security_group=''
+iam_role=''
+capacity=''
+ebs_size=''
+user_data=''
+
+# parse command line options
+while [[ "$1" != '' ]]
+do
+	case $1 in
+		-r | --region)
+			region=$2
+			shift
+			;;
+		--region=*)
+			region=${1#*=}
+			;;
+		-c | --container)
+			container=$2
+			shift
+			;;
+		--container=*)
+			container=${1#*=}
+			;;
+		-e | --environment)
+			environment=$2
+			shift
+			;;
+		--environment=*)
+			environment=${1#*=}
+			;;
+		-p | --project)
+			project=$2
+			shift
+			;;
+		--project=*)
+			project=${1#*=}
+			;;
+		-a | --ami)
+			ami=$2
+			shift
+			;;
+		--ami=*)
+			ami=${1#*=}
+			;;
+		-b | --bless-staging)
+			use_staging_ami='true'
+			;;
+		-s | --size)
+			instance_type=$2
+			shift
+			;;
+		--size=*)
+			instance_type=${1#*=}
+			;;
+		-k | --key)
+			key_pair=$2
+			shift
+			;;
+		--key=*)
+			key_pair=${1#*=}
+			;;
+		-g | --group)
+			security_group=$2
+			shift
+			;;
+		--group=*)
+			security_group=${1#*=}
+			;;
+		-i | --iam)
+			iam_role=$2
+			shift
+			;;
+		--iam=*)
+			iam_role=${1#*=}
+			;;
+		-n | --number-instances)
+			capacity=$2
+			shift
+			;;
+		--number-instances=*)
+			capacity=${1#*=}
+			;;
+		-v | --volume-size)
+			ebs_size=$2
+			shift
+			;;
+		--volume-size=*)
+			ebs_size=${1#*=}
+			;;
+		-u | --user-data)
+			user_data=$2
+			shift
+			;;
+		--user-data=*)
+			user_data=${1#*=}
+			;;
+		-h | --help | -\?)
+			help
+			exit 0
+			;;
+		--*)
+			warn "unknown option -- ${1#--}"
+			usage
+			exit 1
+			;;
+		*)
+			warn "unknown option -- ${1#-}"
+			usage
+			exit 1
+			;;
+	esac
+	shift
+done
+
+# check for dependencies
+for cmd in {aws,jq}; do
+	if ! command -v $cmd > /dev/null; then
+		die 1 'required command "%s" was not found' "$cmd"
+	fi
+done
+
+# check for required command line options
+if [[ ! $region ]]; then
+	die 1 "option '--region=REGION' not given; see --help"
+elif [[ ! $environment ]]; then
+	die 1 "option '--environment=ENVIRONMENT' not given; see --help"
+elif [[ ! $container ]]; then
+	die 1 "option '--container=CONTAINER' not given; see --help"
+elif [[ ! $project ]]; then
+	die 1 "option '--project=PROJECT' not given; see --help"
+fi
+
+# set remaining options to their defaults if no value was specified
+if [[ ! $ami ]]; then
+	if [[ $use_staging_ami ]]; then
+		STAGING_ASG="${container}-stage-${project}"
+		STAGING_LAUNCH_CONFIG=$(aws --region "$region" autoscaling describe-auto-scaling-groups --auto-scaling-group-names "$STAGING_ASG" | jq --raw-output '.[][].LaunchConfigurationName')
+		[[ -z $STAGING_LAUNCH_CONFIG ]] && die 1 'unable to find an ASG Launch Config in staging for the %s container %s project' "$container" "$project"
+		STAGING_IMAGE=$(aws --region "$region" autoscaling describe-launch-configurations --launch-configuration-names "$STAGING_LAUNCH_CONFIG" | jq --raw-output '.[][].ImageId')
+		[[ -z $STAGING_IMAGE ]] && die 1 'unable to find an image in staging for the %s container %s project' "$container" "$project"
+		ami="$STAGING_IMAGE"
+	else
+		BAKED_IMAGES=$(aws --region "$region" ec2 describe-images --filters "Name=tag:container, Values=${container}" "Name=name, Values=${container}-baked-${project}*")
+		LATEST_BAKED_IMAGE=$(printf '%s' "$BAKED_IMAGES" | jq --raw-output '.[] | sort_by(.Name) | reverse | .[0].ImageId')
+		[[ -z $LATEST_BAKED_IMAGE ]] && die 1 'unable to find a baked image for the %s container %s project' "$container" "$project"
+		ami="$LATEST_BAKED_IMAGE"
+	fi
+fi
+if [[ ! $instance_type ]]; then
+	ASG="${container}-${environment}-${project}"
+	EXISTING_CONFIG=$(aws --region "$region" autoscaling describe-auto-scaling-groups --auto-scaling-group-names "$ASG" | jq --raw-output '.[][].LaunchConfigurationName')
+	[[ -z $EXISTING_CONFIG ]] && die 1 'unable to find a Launch Config for the %s ASG' "$ASG"
+	DEPLOYED_TYPE=$(aws --region "$region" autoscaling describe-launch-configurations --launch-configuration-names "$EXISTING_CONFIG" | jq --raw-output '.[][].InstanceType')
+	[[ -z $DEPLOYED_TYPE ]] && die 1 'unable to obtain an instance type for the %s ASG' "$ASG"
+	instance_type="$DEPLOYED_TYPE"
+fi
+if [[ ! $key_pair ]]; then
+	key_pair="$DEFAULT_KEY_PAIR"
+fi
+if [[ ! $security_group ]]; then
+	security_group="$DEFAULT_SECURITY_GROUP"
+fi
+if [[ ! $iam_role ]]; then
+	IAM_OPTION=''
+else
+	IAM_OPTION="--iam-instance-profile $iam_role"
+fi
+if [[ ! $ebs_size ]]; then
+	EBS_OPTION=''
+	EBS_MAPPING=''
+else
+	EBS_OPTION="--block-device-mappings"
+	EBS_MAPPING="[{\"DeviceName\": \"/dev/sdc\", \"Ebs\":{\"VolumeSize\":${ebs_size}}}]"
+fi
+if [[ ! $user_data ]]; then
+	USER_DATA_OPTION=''
+else
+	USER_DATA_OPTION="--user-data $user_data"
+fi
+
+# grab the current auto scaling group information
+ASG="${container}-${environment}-${project}"
+ORIGINAL_ASG_INFO=$(aws --region "$region" autoscaling describe-auto-scaling-groups --auto-scaling-group-names "$ASG")
+[[ -z $ORIGINAL_ASG_INFO ]] && die 1 'unable to grab info for the ASG (%s)' "$ASG"
+
+# save relevant config info for rollback
+EXISTING_CONFIG=$(printf '%s' "$ORIGINAL_ASG_INFO" | jq --raw-output '.[][].LaunchConfigurationName')
+EXISTING_AMI=$(aws --region "$region" autoscaling describe-launch-configurations --launch-configuration-names "$EXISTING_CONFIG" | jq --raw-output '.[][].ImageId')
+[[ $? -ne 0 ]] && die 1 'unable to preserve rollback info for Launch Config (%s)' "$EXISTING_CONFIG"
+
+# create the new launch configuration
+LAUNCH_CONFIG="${container}-${environment}-${project}-${AWS_DEPLOY_ID}"
+aws --region "$region" autoscaling create-launch-configuration --launch-configuration-name "$LAUNCH_CONFIG" --image-id "$ami" --key-name "$key_pair" --security-groups "$security_group" --instance-type "$instance_type" $IAM_OPTION $EBS_OPTION "$EBS_MAPPING" $USER_DATA_OPTION
+[[ $? -ne 0 ]] && die 1 'unable to create the new Launch Config (%s)' "$LAUNCH_CONFIG"
+
+# assign the new launch configuration to the auto scaling group
+aws --region "$region" autoscaling update-auto-scaling-group --auto-scaling-group-name "$ASG" --launch-configuration-name "$LAUNCH_CONFIG"
+[[ $? -ne 0 ]] && die 1 'unable to assign Launch Config (%s) to ASG (%s)' "$LAUNCH_CONFIG" "$ASG"
+
+# double the desired instances amount
+CURRENT_CAPACITY=$(printf '%s' "$ORIGINAL_ASG_INFO" | jq --raw-output '.[][].DesiredCapacity')
+if [[ ! $capacity ]]; then
+	DESIRED_CAPACITY=$CURRENT_CAPACITY
+elif (( $capacity < 1 )); then
+	DESIRED_CAPACITY=$CURRENT_CAPACITY
+else
+	DESIRED_CAPACITY="$capacity"
+fi
+TEMP_CAPACITY=$(( $CURRENT_CAPACITY + $DESIRED_CAPACITY ))
+aws --region "$region" autoscaling update-auto-scaling-group --auto-scaling-group-name "$ASG" --max-size "$TEMP_CAPACITY" --desired-capacity "$TEMP_CAPACITY"
+[[ $? -ne 0 ]] && die 1 'unable to update capacity of ASG (%s)' "$ASG"
+
+# wait for new instances to be added into the load balancer
+# ASG and ELB names match per our naming standard
+ELB="${container}-${environment}-${project}"
+ATTEMPT=0
+MAX_TRIES=36
+HEALTHY_INSTANCE_COUNT=$(aws --region "$region" elb describe-instance-health --load-balancer-name "$ELB" | jq --raw-output '.InstanceStates | map(select(.State == "InService")) | length')
+until (( $HEALTHY_INSTANCE_COUNT == $TEMP_CAPACITY )); do
+	((ATTEMPT++))
+	if [[ $ATTEMPT -eq $MAX_TRIES ]]; then
+		# attempt to restore ASG settings
+		aws --region "$region" autoscaling update-auto-scaling-group --auto-scaling-group-name "$ASG" --launch-configuration-name "$EXISTING_CONFIG"
+		aws --region "$region" autoscaling update-auto-scaling-group --auto-scaling-group-name "$ASG" --max-size "$CURRENT_CAPACITY" --desired-capacity "$CURRENT_CAPACITY"
+		die 1 "timed out waiting for new instances to pass health check"
+	else
+		printf 'Waiting for %d healthy instances; currently have %d\n' "$TEMP_CAPACITY" "$HEALTHY_INSTANCE_COUNT"
+		sleep $POLL_INTERVAL
+		HEALTHY_INSTANCE_COUNT=$(aws --region "$region" elb describe-instance-health --load-balancer-name "$ELB" | jq --raw-output '.InstanceStates | map(select(.State == "InService")) | length')
+	fi
+done
+
+# if the a user has set min-instances on the ASG to be other than zero (or one)
+# this could interfere with lowering the number of running instances... thus,
+# attempt to set the value to something predictable, which will not cause
+# any issues when we terminate instances
+# (we ran dozens of deployments before this became an issue, but when the script fails
+# due to a min value violation, it is confusing to users... so let's avoid that)
+aws --region "$region" autoscaling update-auto-scaling-group --auto-scaling-group-name "$ASG" --min-size 1
+[[ $? -ne 0 ]] && die 1 'unable to set min capacity of ASG (%s)...' "$ASG"
+
+# terminate the original instances and reduce the desired instances amount
+ORIGINAL_INSTANCES=$(printf '%s' "$ORIGINAL_ASG_INFO" | jq --raw-output '.[][].Instances[].InstanceId')
+for id in $ORIGINAL_INSTANCES; do
+	aws --region "$region" autoscaling terminate-instance-in-auto-scaling-group --instance-id "$id" --should-decrement-desired-capacity > /dev/null
+	# we are trying to catch all possible errors, but this is a weird possible
+	# case -- where an old instance could have failed while bringing up the
+	# new instances, so it would not make sense to exit on failure here
+done
+
+# ensure max capacity levels are back where we want them to be; if the
+# --number-instances flag was given, the above terminations might not set things back
+# to where we expect
+aws --region "$region" autoscaling update-auto-scaling-group --auto-scaling-group-name "$ASG" --max-size "$DESIRED_CAPACITY" --desired-capacity "$DESIRED_CAPACITY"
+[[ $? -ne 0 ]] && die 1 'unable to lower max capacity of ASG (%s), we may have excessive capacity...' "$ASG"
+
+# annotate deployment -- ease debugging and rollback
+set +x
+export TZ=America/New_York
+NYC_TIME=$(date)
+export TZ=America/Denver
+DEN_TIME=$(date)
+export TZ=America/San_Fransisco
+LAX_TIME=$(date)
+export TZ=Europe/Berlin
+BER_TIME=$(date)
+unset TZ
+UTC_TIME=$(date)
+printf "DEPLOYMENT DETAILS\n"
+printf "New York City Time: %s\n" "$NYC_TIME"
+printf "Denver CO Time:     %s\n" "$DEN_TIME"
+printf "San Fransisco Time: %s\n" "$LAX_TIME"
+printf "Berlin EU Time:     %s\n" "$BER_TIME"
+printf "Universal Time:     %s\n\n" "$UTC_TIME"
+printf "ENVIRONMENT: %s\n" "$environment"
+printf "Deploy ASG: %s\n" "$ASG"
+printf "Depoy Config: %s\n" "$LAUNCH_CONFIG"
+printf "Deployed AMI: %s\n" "$ami"
+printf "Previous Launch Config: %s\n" "$EXISTING_CONFIG"
+printf "****************************************\n"
+printf "**   Previous AMI: %s       **\n" "$EXISTING_AMI"
+printf "****************************************\n"
+
+exit 0

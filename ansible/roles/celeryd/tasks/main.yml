@@ -35,5 +35,5 @@
   sudo: True
   service:
     name=celeryd
-    state={{ celery_state }}
+    state=started
     enabled=True

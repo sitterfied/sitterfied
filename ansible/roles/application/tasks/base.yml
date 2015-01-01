@@ -1,5 +1,9 @@
 ---
 
+- name: install the Ember Precompile library
+  sudo: true
+  shell: npm -g install ember-precompile@0.2.2
+
 - name: install dependency packages
   sudo: true
   apt: name={{ item }}

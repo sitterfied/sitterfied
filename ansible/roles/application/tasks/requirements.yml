@@ -1,13 +1,33 @@
 ---
 
-- name: check for a requirements.txt file
+- name: Check for an existing requirements file
   stat: path={{ application_root }}/requirements.txt
   register: application_requirements_file
 
-- name: install application requirements into the virtualenv
-  sudo: true
+- name: Install app requirements into the virtualenv
+  sudo: True
   sudo_user: "{{ application_user }}"
   pip:
     requirements={{ application_root }}/requirements.txt
     virtualenv={{ application_virtualenv_root }}
   when: application_requirements_file.stat.exists
+
+# We duplicate the requirements.txt file in this role because Packer doesn't
+# have access the top-level directory where the real version lives (it only
+# copies ansible/roles). Until I think of a beter solution, we'll have to
+# periodically update the dulicate file. Either way, it will be beneficial for
+# speed and the final baking process sets the final requirements.
+- name: copy a temp requirements file to pre-cache deps
+  copy:
+    src=precache-requirements.txt
+    dest=/tmp/requirements.txt
+    mode=644
+  when: not application_requirements_file.stat.exists
+
+- name: pre-cache app requirements into the virtualenv
+  sudo: True
+  sudo_user: "{{ application_user }}"
+  pip:
+    requirements=/tmp/requirements.txt
+    virtualenv={{ application_virtualenv_root }}
+  when: not application_requirements_file.stat.exists

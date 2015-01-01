@@ -1,0 +1,7 @@
+---
+
+# the directory in which to build packages
+packaging_build_dir: /usr/local/src
+
+# the user who should own the build tree files
+packaging_user: vagrant
