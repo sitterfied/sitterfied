@@ -43,7 +43,7 @@ DATABASES = {
         'NAME': 'sitterfied',
         'USER': 'sitterfied',
         'PASSWORD': '^uM*e3xj79eFLrc',
-        'HOST': 'test-website-server-database.cd92rfe8vffs.us-east-1.rds.amazonaws.com',
+        'HOST': 'website-test-website-server-database.cd92rfe8vffs.us-east-1.rds.amazonaws.com',
         'PORT': 5432,
     }
 }
