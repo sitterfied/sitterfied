@@ -1,0 +1,16 @@
+---
+
+- hosts: localhost
+  roles:
+    - application_package
+    - uwsgi
+    # For now until we have dedicated task boxes
+    - celeryd
+    - celerybeat
+  vars:
+    application_server_name: test.sitterfied.com
+    application_user: ubuntu
+    celeryd_state: started
+    env: test
+    uwsgi_proceses: 6
+    uwsgi_user: ubuntu

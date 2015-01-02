@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  roles:
+    - nodejs
+    - common
+    - common_aws
+    - application
+  vars:
+    application_server_name: test.sitterfied.com
+    application_user: ubuntu
+    env: test

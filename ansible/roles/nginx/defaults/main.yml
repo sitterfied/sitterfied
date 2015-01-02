@@ -1,4 +1,0 @@
----
-
-# http://wiki.nginx.org/NginxHttpMainModule#user
-nginx_user: vagrant

@@ -20,6 +20,7 @@
     findNestedDependencies: true,
     mainConfigFile: './main.js',
     name: "sitterfied",
+    logLevel: 3,
     // modules: [
     //     {
     //         name: "main",

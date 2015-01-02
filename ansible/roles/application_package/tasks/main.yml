@@ -1,0 +1,55 @@
+---
+
+- name: copy the private deploy key
+  sudo: true
+  sudo_user: "{{ application_user }}"
+  copy:
+    src: packer_ansible_rsa
+    dest: "{{ application_user_home }}/.ssh/id_rsa"
+    group: "{{ application_user }}"
+    owner: "{{ application_user }}"
+    mode: 0600
+
+- name: copy the public deploy key
+  sudo: true
+  sudo_user: "{{ application_user }}"
+  copy:
+    src: packer_ansible_rsa.pub
+    dest: "{{ application_user_home }}/.ssh/id_rsa.pub"
+    group: "{{ application_user }}"
+    owner: "{{ application_user }}"
+    mode: 0644
+
+- name: create the root application directory
+  sudo: true
+  file:
+    path: "{{ application_root }}"
+    state: directory
+    group: "{{ application_user }}"
+    owner: "{{ application_user }}"
+    mode: 0755
+
+- name: clone the sitterfied git repository
+  sudo: true
+  git: 
+    repo: "{{ git_repo }}"
+    dest: "{{ application_root }}"
+    version: "{{ git_branch }}"
+    accept_hostkey: yes
+    key_file: "{{ application_user_home }}/.ssh/id_rsa"
+
+- name: change ownership of the git checkout to the application user
+  sudo: true
+  file:
+    path: "{{ application_root }}"
+    state: directory
+    group: "{{ application_user }}"
+    owner: "{{ application_user }}"
+    recurse: yes
+
+- include: requirements.yml
+
+- name: compile js templates
+  shell: "{{ application_root }}/build/build.sh"
+
+- include: django-admin.yml

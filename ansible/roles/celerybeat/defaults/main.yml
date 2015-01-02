@@ -1,4 +1,5 @@
 ---
 
 celerybeat_app: sitterfied.celeryapp:app
+
 celerybeat_schedule: /etc/celery/celerybeat.db

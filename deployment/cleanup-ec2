@@ -1,0 +1,205 @@
+#!/usr/bin/env bash
+
+#
+# cleanup-ec2
+#
+# Clean up the EC2 related resources (AMIs and Launch Configurations) for
+# a specific project by removing older items.
+#
+
+##### Contants
+
+readonly BASENAME="${0##*/}"                      # name of this script for error output
+
+
+##### Functions
+
+# print a message to stderr
+warn() {
+	local fmt="$1"
+	shift
+	printf "%s: $fmt\n" "$BASENAME" "$@" >&2
+}
+
+# print a message to stderr and exit with either
+# the given status or that of the most recent command
+die() {
+	local st="$?"
+	if [[ "$1" != *[^0-9]* ]]; then
+		st="$1"
+		shift
+	fi
+	warn "$@"
+	exit "$st"
+}
+
+# print this script's usage message to stderr
+usage() {
+	cat <<-EOF >&2
+	usage: cleanup-ec2 -r REGION -c CONTAINER -e ENVIRONMENT -p PROJECT [-k NUMBER] [-h]
+	EOF
+}
+
+# print this script's help message to sdtout
+help() {
+	cat <<-EOF
+
+	NAME
+	     cleanup-ec2 -- remove old AMIs and Launch Configurations
+
+	SYNOPSIS
+	     cleanup-ec2 [options...]
+
+	DESCRIPTION
+	     cleanup-ec2 will remove the older AMIs and Launch Configurations for
+	     a specific project. The script looks at the deployment ID timestamp of
+	     what is was previously deployed into the production environment and
+	     deletes anything older than that.
+
+	OPTIONS
+	     -r, --region=REGION
+	            the AWS region to query
+
+	     -c, --container=CONTAINER
+	            the name of the Beatport container
+
+	     -e, --environment=ENVIRONMENT
+	            the environment to clean up; valid values are:
+	            stage, prod
+
+	     -p, --project=PROJECT
+	            the container project to clean up
+
+	     -k, --keep=NUMBER
+	            the number of previous resources to keep
+
+	     -h, --help
+	            view this help message
+
+	EOF
+}
+
+
+##### Main
+
+# reset all variables that might be set
+region=''
+container=''
+environment=''
+project=''
+keep=''
+
+# parse command line options
+while [[ "$1" != '' ]]
+do
+	case $1 in
+		-r | --region)
+			region=$2
+			shift
+			;;
+		--region=*)
+			region=${1#*=}
+			;;
+		-c | --container)
+			container=$2
+			shift
+			;;
+		--container=*)
+			container=${1#*=}
+			;;
+		-e | --environment)
+			environment=$2
+			shift
+			;;
+		--environment=*)
+			environment=${1#*=}
+			;;
+		-p | --project)
+			project=$2
+			shift
+			;;
+		--project=*)
+			project=${1#*=}
+			;;
+		-k | --keep)
+			keep=$2
+			shift
+			;;
+		--keep=*)
+			keep=${1#*=}
+			;;
+		-h | --help | -\?)
+			help
+			exit 0
+			;;
+		--*)
+			warn "unknown option -- ${1#--}"
+			usage
+			exit 1
+			;;
+		*)
+			warn "unknown option -- ${1#-}"
+			usage
+			exit 1
+			;;
+	esac
+	shift
+done
+
+# check for dependencies
+for cmd in {aws,jq}; do
+	if ! command -v $cmd > /dev/null; then
+		die 1 'required command "%s" was not found' "$cmd"
+	fi
+done
+
+# check for required command line options
+if [[ ! $region ]]; then
+	die 1 "option '--region=REGION' not given; see --help"
+elif [[ ! $container ]]; then
+	die 1 "option '--container=CONTAINER' not given; see --help"
+elif [[ ! $environment ]]; then
+	die 1 "option '--environment=ENVIRONMENT' not given; see --help"
+elif [[ ! $project ]]; then
+	die 1 "option '--project=PROJECT' not given; see --help"
+fi
+
+# set remaining options to their defaults if no value was specified
+if [[ ! $keep ]]; then
+	keep="10"
+fi
+
+PROJECT_LAUNCH_CONFIGS=$(aws --region "$region" autoscaling describe-launch-configurations --query 'LaunchConfigurations[*].LaunchConfigurationName' | jq --raw-output '.[]' | grep "^${container}-${environment}-${project}" | sort -n -r)
+KEEP_TO_LAUNCH_CONFIG=$(printf '%s\n' "$PROJECT_LAUNCH_CONFIGS" | sed ${keep}'q;d')
+
+if [[ -z $KEEP_TO_LAUNCH_CONFIG ]]; then
+	die 0 'there were less than %d launch configurations...keeping them all' "$keep"
+else
+	printf '%d LAUNCH CONFIGS AGO:\n  * %s\n' "$keep" "$KEEP_TO_LAUNCH_CONFIG"
+	printf 'Deleting older launch configurations...\n'
+	for launch_config in $PROJECT_LAUNCH_CONFIGS; do
+		if [[ $launch_config < $KEEP_TO_LAUNCH_CONFIG ]]; then
+			printf '    %s\n' "$launch_config"
+			aws --region "$region" autoscaling delete-launch-configuration --launch-configuration-name "$launch_config"
+		fi
+	done
+fi
+
+# only clean up the older AMIs if we're targeting production
+if [[ $environment = 'prod' ]]; then
+	PROJECT_BAKED_AMIS=$(aws --region "$region" ec2 describe-images --filters "Name=name,Values=${container}-baked-${project}-*" --query 'Images[*].{Name:Name,ImageId:ImageId}')
+	KEEP_TO_BAKED_AMI_ID=$(aws --region "$region" autoscaling describe-launch-configurations --launch-configuration-names "$KEEP_TO_LAUNCH_CONFIG" | jq --raw-output '.[][].ImageId')
+	KEEP_TO_BAKED_AMI_NAME=$(aws --region "$region" ec2 describe-images --image-ids "$KEEP_TO_BAKED_AMI_ID" | jq --raw-output '.[][].Name')
+
+	printf '\nOLDEST BAKED AMI TO KEEP:\n  * %s (%s)\n' "$KEEP_TO_BAKED_AMI_NAME" "$KEEP_TO_BAKED_AMI_ID"
+	printf 'Deleting older baked AMIs...\n'
+
+	# each line will be in the form "name:id" so we split on the colon to display the parts approprately
+	OLD_BAKED_AMIS=$(printf '%s' "$PROJECT_BAKED_AMIS" | jq --raw-output 'map(select(.Name < '\"$KEEP_TO_BAKED_AMI_NAME\"')) | .[] | join(":")' | sort -n -r)
+	for ami in $OLD_BAKED_AMIS; do
+		printf '    %s (%s)\n' "${ami%%:*}" "${ami##*:}"
+		delete-ami -r "$region" -a "${ami##*:}"
+	done
+fi
+
+exit 0

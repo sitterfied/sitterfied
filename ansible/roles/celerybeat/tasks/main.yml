@@ -17,6 +17,8 @@
     owner=root
     group=root
     mode=755
+  notify:
+    - restart celerybeat
 
 - name: Install celerybeat config
   sudo: True
@@ -33,5 +35,5 @@
   sudo: True
   service:
     name=celerybeat
-    state={{ celery_state }}
+    state=started
     enabled=True

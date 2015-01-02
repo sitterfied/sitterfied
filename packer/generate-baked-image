@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+
+#
+# generate-baked-image
+#
+# Use packer to generate a baked AMI for the given project
+# using the latest available foundation image.
+#
+
+readonly ABS_DIRNAME=$(cd "${0%/*}" 2> /dev/null; echo $PWD)  # absolute path to the directory containing this script
+readonly AWS_DEPLOY_ID=$(date -u '+%Y%m%d-%H%M')              # the time-based deployment identifier
+
+##### Functions
+
+# print a message to stderr
+warn() {
+	local fmt="$1"
+	shift
+	printf "generate-baked-image: $fmt\n" "$@" >&2
+}
+
+# print a message to stderr and exit with either
+# the given status or that of the most recent command
+die() {
+	local st="$?"
+	if [[ "$1" != *[^0-9]* ]]; then
+		st="$1"
+		shift
+	fi
+	warn "$@"
+	exit "$st"
+}
+
+# print this script's usage message to stderr
+usage() {
+	cat <<-EOF >&2
+	Usage: generate-baked-image -r REGION -c CONTAINER -p PROJECT [-h]
+	Generate a baked AMI for the given PROJECT
+
+	Valid CONTAINERs / PROJECTs:
+	EOF
+	for playbook in $(find "$ABS_DIRNAME"/../ansible/playbooks -name "baked_*.yml"); do
+		playbook=${playbook#*../ansible/playbooks/packer_}
+		playbook=${playbook%.yml}
+		playbook=${playbook/\/baked_/ \/ }
+		playbook=${playbook/_/-}
+		printf '  * %s\n' "$playbook"
+	done
+}
+
+
+##### Main
+
+# reset all variables that might be set
+region=''
+container=''
+project=''
+
+# parse command line options
+while [[ "$1" != '' ]]
+do
+  case $1 in
+    -r | --region)
+      region=$2
+      shift
+      ;;
+    --region=*)
+      region=${1#*=}
+      ;;
+    -c | --container)
+      container=$2
+      shift
+      ;;
+    --container=*)
+      container=${1#*=}
+      ;;
+    -p | --project)
+      project=$2
+      shift
+      ;;
+    --project=*)
+      project=${1#*=}
+      ;;
+    -h | --help | -\?)
+      usage
+      exit 0
+      ;;
+    --*)
+      warn "unknown option -- ${1#--}"
+      usage
+      exit 1
+      ;;
+    *)
+      warn "unknown option -- ${1#-}"
+      usage
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+# check for required command line options
+if [[ ! $region ]]; then
+  die 1 "option '--region=REGION' not given; see --help"
+elif [[ ! $container ]]; then
+  die 1 "option '--container=CONTAINER' not given; see --help"
+elif [[ ! $project ]]; then
+  die 1 "option '--project=PROJECT' not given; see --help"
+fi
+
+# validate the given project name
+for playbook in $(find "$ABS_DIRNAME"/../ansible/playbooks/packer_${container} -name "baked_*.yml"); do
+	if [[ $playbook = "${ABS_DIRNAME}/../ansible/playbooks/packer_${container}/baked_${project/-/_}.yml" ]]; then
+		VALID_PROJECT='true'
+		break
+	fi
+done
+if [[ -z $VALID_PROJECT ]]; then
+	warn '"%s" is not a valid PROJECT\n' "$project"
+	usage
+	exit 1
+fi
+
+# check for dependencies
+for cmd in {aws,jq}; do
+	if ! command -v $cmd > /dev/null; then
+		die 1 'required command "%s" was not found' "$cmd"
+	fi
+done
+
+BASE_IMAGES=$(aws --region "$region" ec2 describe-images --filters "Name=tag:container, Values=${container}" "Name=name, Values=${container}-base-${project}*")
+LATEST_BASE_IMAGE=$(printf '%s' "$BASE_IMAGES" | jq --raw-output '.[] | sort_by(.Name) | reverse | .[0].ImageId')
+if [[ -z $LATEST_BASE_IMAGE ]]; then
+	warn 'unable to find a base image for the %s container %s project' "$container" "$project"
+	die 1 'run the following command to debug:\n  aws --region %s ec2 describe-images --filters "Name=tag:container, Values=%s" "Name=name, Values=%s-base-%s*"' "$region" "$container" "$container" "$project"
+fi
+
+export BASE_AMI="$LATEST_BASE_IMAGE"
+export AWS_REGION="$region"
+export CONTAINER="$container"
+export PROJECT_HYPHEN="$project"
+export PROJECT_UNDERSCORE="${project/-/_}"
+cd "$ABS_DIRNAME"
+packer build \
+	-var "aws_region=$region" \
+	-var "container=$container" \
+	-var "aws_deploy_id=$AWS_DEPLOY_ID" \
+	-var "project_hyphen=$project" \
+	-var "project_underscore=${project/-/_}" \
+	-var "base_ami=$LATEST_BASE_IMAGE" \
+	baked-image.json
+
+exit $?

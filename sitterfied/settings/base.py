@@ -59,8 +59,8 @@ STATIC_URL = '/static/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = PROJECT_ROOT.child("static")
-
+#STATIC_ROOT = PROJECT_ROOT.child("static")
+STATIC_ROOT = '/www/static'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -214,10 +214,13 @@ ACCOUNT_ACTIVATION_DAYS = 30
 
 DEFAULT_FROM_EMAIL = 'hello@sitterfied.com'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 ALLOWED_HOSTS = [
     'localhost',
     '.sitterfied.com',
     '.sttrfd.us',
+    'elbhealthcheck.biz',
     'ping',
 ]
 

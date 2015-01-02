@@ -1,89 +1,77 @@
 # -*-coding: utf-8 -*-
-import os
-import json
-
 from .base import *
 from .mandrill import *
 
-with open('/home/dotcloud/environment.json') as f:
-    env = json.load(f)
+from kombu import Exchange, Queue
+from urllib import quote_plus
 
 DEBUG = False
 
-# ShortUrl Redis Configuration
-REDIS_URL = env.get('DOTCLOUD_CACHE_REDIS_URL')
+# AWS Settings
+AWS_REGION = 'us-east-1'
+AWS_ACCESS_KEY_ID = 'AKIAIRC5KBNUD4ERCW5A'
+AWS_SECRET_ACCESS_KEY = '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'
+ELASTICACHE_ENDPOINT = 'website-test.ug6jhv.0001.use1.cache.amazonaws.com:6379'
 
+# ShortUrl Redis Configuration
+REDIS_URL = 'redis://{}'.format(ELASTICACHE_ENDPOINT)
 
 # Celery Configuration
-BROKER_URL = REDIS_URL + '/0'
-
-
-# Django Configuration
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
-
+BROKER_TRANSPORT_OPTIONS = {'region': AWS_REGION}
+DEFAULT_TASK_LOCK_EXPIRE = 60 * 5
+BROKER_URL = 'sqs://{}:{}@'.format(AWS_ACCESS_KEY_ID, quote_plus(AWS_SECRET_ACCESS_KEY))
+CELERY_DEFAULT_QUEUE = 'sitterfied-test'
+CELERY_QUEUES = (
+    Queue(CELERY_DEFAULT_QUEUE, Exchange(CELERY_DEFAULT_QUEUE, routing_key=CELERY_DEFAULT_QUEUE)),
+)
 
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': env.get('DOTCLOUD_CACHE_REDIS_HOST', '') + ":" + env.get('DOTCLOUD_CACHE_REDIS_PORT', ''),
+        'LOCATION': ELASTICACHE_ENDPOINT,
         'OPTIONS': {
             'DB': 1,
-            'PASSWORD': env.get('DOTCLOUD_CACHE_REDIS_PASSWORD', ''),
             'PARSER_CLASS': 'redis.connection.HiredisParser',
             'PICKLE_VERSION': 2,
         },
     },
 }
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sitterfied',
-        'USER': env.get('DOTCLOUD_DATA_SQL_LOGIN', ''),
-        'PASSWORD': env.get('DOTCLOUD_DATA_SQL_PASSWORD', ''),
-        'HOST': env.get('DOTCLOUD_DATA_SQL_HOST', ''),
-        'PORT': int(env.get('DOTCLOUD_DATA_SQL_PORT', '0')),
+        'USER': 'sitterfied',
+        'PASSWORD': '^uM*e3xj79eFLrc',
+        'HOST': 'test-website-server-database.cd92rfe8vffs.us-east-1.rds.amazonaws.com',
+        'PORT': 5432,
     }
 }
-
-
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
-MEDIA_ROOT = "/home/dotcloud/data/media/"
-
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
 )
 
-
 # Google OAuth Configuration
 GOOGLE_OAUTH_CLIENT_ID = '305141264963-9gamu3g0ja74ch7pcssmmk75shtk9ftc.apps.googleusercontent.com'
 GOOGLE_OAUTH_CLIENT_SECRET = 'LSeO2JmrERhe_vRNUFnVsfuc'
 GOOGLE_OAUTH_REDIRECT_URI = 'http://test.sitterfied.com'
 
-
 # Override URL Shortening
 SHORT_URL = 'test.sttrfd.us/'
-
 
 # Override Popcorn Metrics ID
 POPCORN_METRICS_ID = '53f62873ed69ca02000003ef'
 
-
 # Override Twilio Configuration
 TWILIO_DEFAULT_CALLERID = '+19088384816'
-
 
 # Override Facebook App ID
 FACEBOOK_APP_ID = '624946094225118'
 
-
 # Override Sideswipe.io Token
 SIDESWIPE_IO_TOKEN = 'd647eccfe96499d0f8aa85a7f96a2cd5'
-
 
 try:
     JOB_FIRST_REMINDER = int(env.get('JOB_FIRST_REMINDER'))
@@ -91,7 +79,6 @@ try:
     JOB_RELIEF_REMINDER = int(env.get('JOB_RELIEF_REMINDER'))
 except:
     pass
-
 
 LOGGING = {
     'version': 1,
@@ -118,7 +105,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
-            'filename': '/var/log/supervisor/application.log',
+            'filename': '/var/log/sitterfied/application.log',
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
