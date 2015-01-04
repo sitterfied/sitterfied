@@ -70,7 +70,7 @@ class Booking(TimeStampedModel):
     @cached_property
     def accepted_sitter(self):
         results = self.sitters.filter(responses__booking=self, responses__response=Booking.BOOKING_STATUS_ACCEPTED)
-        return results[0] if results.count() == 1 else None
+        return results.first().id if results.count() == 1 else None
 
     @property
     def declined_sitters(self):
