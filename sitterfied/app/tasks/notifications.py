@@ -106,7 +106,7 @@ def notify_sitter_of_job_request(id):
             send_message(body=sms, to=sitter.cell)
         except TwilioRestException as ex:
             logger.error(
-                'Notification to {0} with cell number {1} failed for the following reason: {3}',
+                'Notification to {0} with cell number {1} failed for the following reason: {2}',
                 sitter.get_full_name(),
                 sitter.cell,
                 str(ex),
