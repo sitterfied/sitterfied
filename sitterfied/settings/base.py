@@ -160,6 +160,9 @@ LOGGING = {
         'ignore_http_header': {
             '()': 'sitterfied.utils.log.IgnoreRegularExpressionFilter',
             'pattern': r'^Invalid HTTP_HOST header',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
         }
     },
     'formatters': {
@@ -189,7 +192,7 @@ LOGGING = {
             'backupCount': 5,
         },
         'mail_admins': {
-            'filters': ['ignore_http_header'],
+            'filters': ['ignore_http_header', 'require_debug_false'],
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
         },
