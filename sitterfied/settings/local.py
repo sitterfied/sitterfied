@@ -25,12 +25,6 @@ DATABASES = {
     }
 }
 
-
-MIDDLEWARE_CLASSES += (
-    #'qinspect.middleware.QueryInspectMiddleware',
-)
-
-
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = PROJECT_ROOT.child("media")
@@ -42,7 +36,6 @@ GOOGLE_OAUTH_CLIENT_ID = '213296649304-10d5ppglkmjmq7l60uub4r5nvnklfjoa.apps.goo
 GOOGLE_OAUTH_CLIENT_SECRET = 'u9BePfC9OC9Z3XkO0SMJbwkq'
 GOOGLE_OAUTH_REDIRECT_URI = "http://sitterfied.ngrok.com"
 
-
 # Override Short URL
 SHORT_URL = 'localhost:8000/'
 
@@ -52,10 +45,13 @@ TWILIO_DEFAULT_CALLERID = '+19088384816'
 # Override Facebook App ID
 FACEBOOK_APP_ID = '746551758706532'
 
-
 # Celery configuration
 BROKER_URL = REDIS_URL + '/0'
-
+BROKER_TRANSPORT_OPTIONS = {
+    # Set visibility timeout to 1 year, this is necessary to prevent
+    # celery from executing scheduled celery tasks multiple times.
+    'visibility_timeout': 31536000,
+}
 
 # Whether the Query Inspector should do anything (default: False)
 QUERY_INSPECT_ENABLED = True

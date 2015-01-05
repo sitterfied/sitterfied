@@ -155,7 +155,13 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'filters': {
+        'ignore_http_header': {
+            '()': 'sitterfied.utils.log.IgnoreRegularExpressionFilter',
+            'pattern': r'^Invalid HTTP_HOST header',
+        }
+    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -167,11 +173,12 @@ LOGGING = {
     'handlers': {
         'null': {
             'level': 'DEBUG',
-            'class': 'logging.NullHandler',
+            'class': 'django.utils.log.NullHandler',
         },
         'console': {
             'level': 'DEBUG',
-            'class': 'logging.StreamHandler'
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
         },
         'log_file': {
             'level': 'DEBUG',
@@ -181,25 +188,30 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
+        'mail_admins': {
+            'filters': ['ignore_http_header'],
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'log_file'],
+            'handlers': ['console', 'log_file', 'mail_admins'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'log_file'],
+            'handlers': ['console', 'log_file', 'mail_admins'],
             'level': 'ERROR',
             'propagate': False,
         },
         'django.db.backends': {
-            'handlers': ['console', 'log_file'],
+            'handlers': ['console', 'log_file', 'mail_admins'],
             'level': 'ERROR',
             'propagate': False,
         },
         '': {
-            'handlers': ['console', 'log_file'],
+            'handlers': ['console', 'log_file', 'mail_admins'],
             'level': 'INFO',
             'propagate': True,
         },
@@ -248,36 +260,13 @@ CELERY_IMPORTS = (
     'sitterfied.app.tasks.reminders',
     'sitterfied.app.tasks.users',
 )
-BROKER_TRANSPORT_OPTIONS = {
-    # Set visibility timeout to 1 year, this is necessary to prevent
-    # celery from executing scheduled celery tasks multiple times.
-    'visibility_timeout': 31536000,
-}
-SERVER_EMAIL = 'no-reply@sitterfied.com'
 
+SERVER_EMAIL = 'no-reply@sitterfied.com'
 
 # Reminder times in seconds
 JOB_FIRST_REMINDER = 86400  # 24 Hours
 JOB_SECOND_REMINDER = 3600  # 1 Hour
 JOB_RELIEF_REMINDER = 3600  # 1 Hour
-
-
-# Celery Beat Configuration
-CELERYBEAT_SCHEDULE = {
-    'check-for-completed-jobs': {
-        'task': 'sitterfied.app.tasks.jobs.check_for_completed_jobs',
-        'schedule': crontab(minute='5'),
-    },
-    'check-for-canceled-jobs': {
-        'task': 'sitterfied.app.tasks.jobs.check_for_canceled_jobs_with_incorrect_status',
-        'schedule': crontab(minute='0', hour='0'),
-    },
-    'mark-expired-jobs': {
-        'task': 'sitterfied.app.tasks.jobs.mark_expired_jobs',
-        'schedule': crontab(minute='5'),
-    }
-}
-
 
 # This sets the X-Frame-Options HTTP response header to allow loading
 # of the site in the Popcorn Metrics editor. This is only for the
