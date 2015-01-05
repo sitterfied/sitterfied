@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from unipath import Path
 
-from celery.schedules import crontab
-
 from .facebook import *
 from .intercom import *
 from .pipeline import *
@@ -244,10 +242,8 @@ AUTHENTICATION_BACKENDS = (
     'sitterfied.app.authentication.FacebookAuthBackend',
 )
 
-
 # Base URL for shortened URLs
 SHORT_URL = 'www.sttrfd.us/'
-
 
 # Celery configuration
 CELERYD_HIJACK_ROOT_LOGGER = False

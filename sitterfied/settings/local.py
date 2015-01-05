@@ -5,6 +5,8 @@ from .mandrill import *
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+SESSION_COOKIE_NAME = 'sitterfied-dev'
+
 INTERNAL_IPS = (
     '::1',
     '127.0.0.1',

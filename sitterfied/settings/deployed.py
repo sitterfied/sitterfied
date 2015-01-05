@@ -18,7 +18,13 @@ MIDDLEWARE_CLASSES += (
 )
 
 # Celery Configuration
-BROKER_TRANSPORT_OPTIONS = {'region': AWS_REGION}
+BROKER_TRANSPORT_OPTIONS = {
+    'region': AWS_REGION,
+    # Set visibility timeout to 1 year, this is necessary to prevent
+    # celery from executing scheduled celery tasks multiple times.
+    'visibility_timeout': 31536000,
+
+}
 DEFAULT_TASK_LOCK_EXPIRE = 60 * 5
 BROKER_URL = 'sqs://{}:{}@'.format(AWS_ACCESS_KEY_ID, quote_plus(AWS_SECRET_ACCESS_KEY))
 

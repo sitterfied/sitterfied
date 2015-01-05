@@ -3,6 +3,7 @@ from .deployed import *
 
 from kombu import Exchange, Queue
 
+SESSION_COOKIE_NAME = 'sitterfied-test'
 
 ELASTICACHE_ENDPOINT = 'website-test.ug6jhv.0001.use1.cache.amazonaws.com:6379'
 
