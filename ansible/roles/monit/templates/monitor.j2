@@ -2,11 +2,11 @@
 # {{ ansible_managed }}
 
 {% if monit_monitor.type == 'process' %}
-{% if monit_monitor.matching %}
+{% if monit_monitor.matching is defined %}
 check process {{ monit_monitor.name }} with matching {{ monit_monitor.target }}
 {% else %}
 check process {{ monit_monitor.name }} with pidfile {{ monit_monitor.target }}
-{% endif %}
+{% endif -%}
   {% if monit_monitor.start is defined %}
   start program = "{{ monit_monitor.start }}"
   {% endif %}

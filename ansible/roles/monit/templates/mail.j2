@@ -12,7 +12,11 @@ set alert {{ monit_alert_address }}
 
 set mail-format {
   from: {{ monit_alert_mail_from }}
+  {% if monit_alert_mail_subject is defined -%}
   subject: {{ monit_alert_mail_subject }}
+  {% endif -%}
+  {% if monit_alert_mail_message is defined -%}
   message: {{ monit_alert_mail_message }}
+  {% endif -%}
 }
 

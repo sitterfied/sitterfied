@@ -11,8 +11,9 @@ DEBUG = False
 AWS_REGION = 'us-east-1'
 AWS_ACCESS_KEY_ID = 'AKIAIRC5KBNUD4ERCW5A'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_SES_ACCESS_KEY_ID = 'AKIAJXALS5HET4AUB67Q'
-AWS_SES_SECRET_ACCESS_KEY = 'Ajfw+odSSi9MVv3Rmoe8+vcVqTWh4rN/DS5EjL/0Dtx8'
+
+# Send Admin emails from the test subdomain
+SERVER_EMAIL = 'no-reply@test.sitterfied.com'
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
@@ -50,9 +51,6 @@ CELERYBEAT_SCHEDULE = {
     }
 }
 
-try:
-    JOB_FIRST_REMINDER = int(env.get('JOB_FIRST_REMINDER'))
-    JOB_SECOND_REMINDER = int(env.get('JOB_SECOND_REMINDER'))
-    JOB_RELIEF_REMINDER = int(env.get('JOB_RELIEF_REMINDER'))
-except:
-    pass
+JOB_FIRST_REMINDER = 180  # 3 minutes
+JOB_RELIEF_REMINDER = 1680  # 28 minutes
+JOB_SECOND_REMINDER = 60  # 1 minute
