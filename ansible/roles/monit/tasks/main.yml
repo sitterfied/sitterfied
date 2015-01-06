@@ -1,0 +1,9 @@
+---
+- include: pkg.yml
+  tags: monit_pkg
+
+- include: config.yml
+  tags: monit_config
+
+- include: monitors.yml
+  tags: monit_monitors

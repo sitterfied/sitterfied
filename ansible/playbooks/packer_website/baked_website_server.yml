@@ -38,18 +38,12 @@
           - "if cpu is greater than 40% for 2 cycles then alert"
           - "if cpu > 60% for 5 cycles then restart"
           - "if 10 restarts within 10 cycles then timeout"
-      - name: sshd
-        type: process
-        target: /var/run/sshd.pid
-        start: /etc/init.d/sshd start
-        stop: /etc/init.d/sshd stop
-        rules:
-          - "if failed port 22 type tcp then restart"
-          - "if 5 restarts within 5 cycles then timeout"
     monit_webinterface_enabled: true
     monit_webinterface_bind: 0.0.0.0
     monit_webinterface_acl_rules: 
-      - 71.187.22.110 # home
-      - 38.140.37.82 # office
+      - 172.31.0.0/8 # vpc
+      - 71.187.22.110/32 # home
+      - 38.140.37.82/32 # office
+      - 0.0.0.0 # local
     uwsgi_proceses: 6
     uwsgi_user: ubuntu
