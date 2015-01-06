@@ -7,10 +7,49 @@
     # For now until we have dedicated task boxes
     - celeryd
     - celerybeat
+    - monit
   vars:
     application_server_name: test.sitterfied.com
     application_user: ubuntu
     celeryd_state: started
     env: test
+    monit_cycle: 60
+    monit_services:
+      - name: celeryd
+        type: process
+        target: /var/run/celery/worker0.pid
+        start: /etc/init.d/celeryd start
+        stop: /etc/init.d/celeryd stop
+        rules:
+          - "if 5 restarts within 5 cycles then timeout"
+          - "if totalmem > 500 Mb for 3 cycles then restart"
+      - name: celerybeat
+        type: process
+        target: /var/run/celery/beat.pid
+        start: /etc/init.d/celerybeat start
+        stop: /etc/init.d/celerybeat stop
+      - name: nginx
+        type: process
+        target: /var/run/nginx.pid
+        start: /etc/init.d/nginx start
+        stop: /etc/init.d/nginx stop
+        rules:
+          - "if failed host 127.0.0.1 port 80 then restart"
+          - "if cpu is greater than 40% for 2 cycles then alert"
+          - "if cpu > 60% for 5 cycles then restart"
+          - "if 10 restarts within 10 cycles then timeout"
+      - name: sshd
+        type: process
+        target: /var/run/sshd.pid
+        start: /etc/init.d/sshd start
+        stop: /etc/init.d/sshd stop
+        rules:
+          - "if failed port 22 type tcp then restart"
+          - "if 5 restarts within 5 cycles then timeout"
+    monit_webinterface_enabled: true
+    monit_webinterface_bind: 0.0.0.0
+    monit_webinterface_acl_rules: 
+      - 71.187.22.110 # home
+      - 38.140.37.82 # office
     uwsgi_proceses: 6
     uwsgi_user: ubuntu
