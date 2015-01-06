@@ -2,20 +2,26 @@
 # {{ ansible_managed }}
 
 {% if monit_monitor.type == 'process' %}
+{% if monit_monitor.matching %}
+check process {{ monit_monitor.name }} with matching {{ monit_monitor.target }}
+{% else %}
 check process {{ monit_monitor.name }} with pidfile {{ monit_monitor.target }}
-{% if monit_monitor.start is defined %}
+{% endif %}
+  {% if monit_monitor.start is defined %}
   start program = "{{ monit_monitor.start }}"
-{% endif %}
-{% if monit_monitor.stop is defined %}
+  {% endif %}
+  {% if monit_monitor.stop is defined %}
   stop program = "{{ monit_monitor.stop }}"
-{% endif %}
+  {% endif %}
 {% elif monit_monitor.type == 'system' %}
 check system {{ monit_monitor.name }}
 {% elif monit_monitor.type == 'host' %}
 check host {{ monit_monitor.name }} with address {{ monit_monitor.target }}
+{% elif monit_monitor.type == 'filesystem' %}
+check filesystem {{ monit_monitor.name }} with path {{ monit_monitor.target }}
 {% endif -%}
 {% if monit_monitor.rules is defined %}
-{% for rule in monit_monitor.rules %}
+  {% for rule in monit_monitor.rules %}
   {{ rule }}
-{% endfor %}
+  {% endfor %}
 {% endif %}

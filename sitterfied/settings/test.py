@@ -100,6 +100,7 @@ LOGGING = {
             'filters': ['ignore_http_header', 'require_debug_false'],
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
+            'email_backend': 'django_ses.SESBackend',
         },
     },
     'loggers': {
