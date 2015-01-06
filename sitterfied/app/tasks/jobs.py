@@ -6,7 +6,7 @@ from celery.utils.log import get_task_logger
 
 from sitterfied.bookings.models import Booking
 from sitterfied.celeryapp import app
-
+from sitterfied.utils.tasks import acquire_lock
 
 logger = get_task_logger(__name__)
 
@@ -46,11 +46,13 @@ def check_for_completed_jobs():
     time. Update the status of any jobs found to 'completed'.
 
     """
-    return get_jobs_completed_since(
-        datetime.now(pytz.UTC)
-    ).update(
-        booking_status=Booking.BOOKING_STATUS_COMPLETED
-    )
+    with acquire_lock('check-for-completed-since') as acquired:
+        if acquired:
+            return get_jobs_completed_since(
+                datetime.now(pytz.UTC)
+            ).update(
+                booking_status=Booking.BOOKING_STATUS_COMPLETED
+            )
 
 
 @app.task
@@ -60,9 +62,11 @@ def check_for_canceled_jobs_with_incorrect_status():
     is not 'canceled'. Update status to 'canceled'.
 
     """
-    return get_canceled_jobs_with_incorrect_status().update(
-        booking_status=Booking.BOOKING_STATUS_CANCELED
-    )
+    with acquire_lock('check-for-canceled-jobs-with-incorrect-status') as acquired:
+        if acquired:
+            return get_canceled_jobs_with_incorrect_status().update(
+                booking_status=Booking.BOOKING_STATUS_CANCELED
+            )
 
 
 @app.task
@@ -71,12 +75,13 @@ def mark_expired_jobs():
     Mark any jobs that have expired since the last check as 'expired.'
 
     """
-    jobs = get_jobs_expired_since(datetime.now(pytz.UTC))
+    with acquire_lock('mark-expired-jobs') as acquired:
+        if acquired:
+            jobs = get_jobs_expired_since(datetime.now(pytz.UTC))
+            for job in jobs:
+                job.responses.filter(
+                    response=Booking.BOOKING_STATUS_PENDING
+                ).update(
+                    response=Booking.BOOKING_STATUS_EXPIRED, responded_at=datetime.now(pytz.UTC))
 
-    for job in jobs:
-        job.responses.filter(
-            response=Booking.BOOKING_STATUS_PENDING
-        ).update(
-            response=Booking.BOOKING_STATUS_EXPIRED, responded_at=datetime.now(pytz.UTC))
-
-    return jobs.update(booking_status=Booking.BOOKING_STATUS_EXPIRED)
+            return jobs.update(booking_status=Booking.BOOKING_STATUS_EXPIRED)

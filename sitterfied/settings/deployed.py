@@ -22,7 +22,7 @@ BROKER_TRANSPORT_OPTIONS = {
     'region': AWS_REGION,
     # Set visibility timeout to 1 year, this is necessary to prevent
     # celery from executing scheduled celery tasks multiple times.
-    'visibility_timeout': 31536000,
+    'visibility_timeout': 43200,
 
 }
 DEFAULT_TASK_LOCK_EXPIRE = 60 * 5
