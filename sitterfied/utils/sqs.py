@@ -5,6 +5,7 @@ import re
 from boto import ec2
 from boto import sqs
 from boto.exception import SQSError
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 queue_ip_re = re.compile(r'ip-(?P<ip>\d+-\d+-\d+-\d+)')
@@ -16,7 +17,11 @@ def get_running_ips(region='us-east-1'):
 
     """
     ips = []
-    conn = ec2.connect_to_region(region)
+    conn = ec2.connect_to_region(
+        region,
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    )
     reservations = conn.get_all_instances()
     for reservation in reservations:
         for instance in reservation.instances:
@@ -29,7 +34,11 @@ def get_all_queues(region='us-east-1'):
     Retrieve all the sqs queues within a region
 
     """
-    conn = sqs.connect_to_region(region)
+    conn = sqs.connect_to_region(
+        region,
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    )
     return conn.get_all_queues()
 
 
@@ -38,8 +47,8 @@ def queue_name_to_ip(queue_name):
     Convert a queue name to an ip address or None
 
     Celery queue names in sqs look like:
-    "worker4_ip-10-36-60-46-celery-pidbox"
-    Which we need to convert to 10.36.60.46 to then match against.
+    "worker0_ip-172-31-16-150-celery-pidbox"
+    Which we need to convert to 172.31.16.150 to then match against.
     """
     try:
         return queue_ip_re.search(queue_name).group('ip').replace('-', '.')
