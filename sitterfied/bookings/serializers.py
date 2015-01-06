@@ -9,7 +9,7 @@ class BookingSerializer(serializers.ModelSerializer):
     Booking serializer.
 
     """
-    accepted = serializers.BooleanField()
+    accepted = serializers.BooleanField(required=False)
     accepted_sitter = serializers.PrimaryKeyRelatedField(read_only=True)
     declined_sitters = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 

@@ -154,15 +154,6 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
-    'filters': {
-        'ignore_http_header': {
-            '()': 'sitterfied.utils.log.IgnoreRegularExpressionFilter',
-            'pattern': r'^Invalid HTTP_HOST header',
-        },
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        }
-    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -189,31 +180,26 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
-        'mail_admins': {
-            'filters': ['ignore_http_header', 'require_debug_false'],
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-        },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
+            'handlers': ['console', 'log_file'],
             'level': 'INFO',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
+            'handlers': ['console', 'log_file'],
+            'level': 'INFO',
             'propagate': False,
         },
         'django.db.backends': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
+            'handlers': ['console', 'log_file'],
+            'level': 'INFO',
             'propagate': False,
         },
         '': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'INFO',
+            'handlers': ['console', 'log_file'],
+            'level': 'DEBUG',
             'propagate': True,
         },
     }
