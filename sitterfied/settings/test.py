@@ -33,6 +33,7 @@ DATABASES = {
     }
 }
 
+BROKER_TRANSPORT_OPTIONS.update(queue_name_prefix='test-')
 CELERY_DEFAULT_QUEUE = 'sitterfied-test'
 CELERY_QUEUES = (
     Queue(CELERY_DEFAULT_QUEUE, Exchange(CELERY_DEFAULT_QUEUE, routing_key=CELERY_DEFAULT_QUEUE)),

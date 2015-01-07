@@ -1,0 +1,21 @@
+description "BeatCop Service"
+author "Andrew Lewisohn <alewisohn@sitterfied.com>"
+
+# When to start the service
+start on virtual-filesystems
+
+# When to stop the service
+stop on runlevel [06]
+
+# Automatically restart process if crashed
+respawn
+
+# Run before process
+pre-start script
+    [ -d /var/run/beatcop ] || mkdir -p /var/run/beatcop
+end script
+
+env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
+
+# Start the process
+exec {{ application_virtualenv_bin }}/python {{ application_virtualenv_bin}}/beatcop /etc/beatcop.d/beatcop.ini >> /var/log/beatcop.log 2>&1

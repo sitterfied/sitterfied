@@ -11,7 +11,7 @@ from sitterfied.app.sms import send_message
 from sitterfied.app.utils import get_short_url
 from sitterfied.bookings.models import Reminder
 from sitterfied.celeryapp import app
-
+from sitterfied.utils.tasks import acquire_lock
 
 logger = get_task_logger(__name__)
 
@@ -38,23 +38,26 @@ def get_time_delta(seconds):
 
 @app.task
 def send_reminders(id, reminder_type, seconds, reminders):
-    reminder = Reminder.objects.get(pk=id)
-    booking = reminder.booking
-    parent = booking.parent
-    sitter = booking.accepted_sitter
+    with acquire_lock('send-reminders') as acquired:
+        if acquired:
+            logger.info('Sending reminders...')
+            reminder = Reminder.objects.get(pk=id)
+            booking = reminder.booking
+            parent = booking.parent
+            sitter = booking.accepted_sitter
 
-    tz = pytz.timezone(parent.timezone) if parent.timezone else pytz.UTC
-    start_date_time = tz.normalize(booking.start_date_time)
-    stop_date_time = tz.normalize(booking.stop_date_time)
+            tz = pytz.timezone(parent.timezone) if parent.timezone else pytz.UTC
+            start_date_time = tz.normalize(booking.start_date_time)
+            stop_date_time = tz.normalize(booking.stop_date_time)
 
-    if parent.settings.mobile_booking_accepted_denied and parent.cell:
-        send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, tz)
+            if parent.settings.mobile_booking_accepted_denied and parent.cell:
+                send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, tz)
 
-    if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
-        send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, tz)
+            if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
+                send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, tz)
 
-    if reminders:
-        queue_next_reminder(reminder, reminders)
+            if reminders:
+                queue_next_reminder(reminder, reminders)
 
 
 def queue_next_reminder(reminder, reminders):

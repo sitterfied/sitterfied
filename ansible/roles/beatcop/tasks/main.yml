@@ -1,0 +1,50 @@
+---
+
+- name: create the beatcop config directory
+  sudo: true
+  file:
+    dest=/etc/beatcop.d/
+    owner=root
+    group=root
+    mode=755
+    state=directory
+
+- name: create the beatcop config
+  sudo: True
+  template:
+    src=beatcop.ini.j2
+    dest=/etc/beatcop.d/beatcop.ini
+    owner=root
+    group=root
+    mode=644
+  notify:
+    - restart beatcop
+
+- name: create the beatcop upstart script
+  sudo: True
+  template:
+    src=beatcop.conf.j2
+    dest=/etc/init/beatcop.conf
+    owner=root
+    group=root
+    mode=644
+  notify:
+    - restart beatcop
+
+- name: create the beatcop script
+  sudo: True
+  copy:
+    src=beatcop
+    dest="{{ application_virtualenv_bin }}/beatcop"
+    owner="{{ application_user }}"
+    group="{{ application_user }}"
+    mode=0775
+  notify:
+    - restart beatcop
+
+- name: start and enable the beatcop service
+  sudo: True
+  service:
+    name=beatcop
+    state=started
+    enabled=True

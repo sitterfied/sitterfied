@@ -8,8 +8,8 @@ CELERYBEAT_OPTS="--schedule={{ celerybeat_schedule }}"
 
 CELERY_APP="{{ celerybeat_app }}"
 
-CELERYBEAT_LOG_FILE="/var/log/celery/beat.log"
-CELERYBEAT_PID_FILE="/var/run/celery/beat.pid"
+CELERYBEAT_LOG_FILE="{{ celerybeat_logfile }}"
+CELERYBEAT_PID_FILE="{{ celerybeat_pidfile }}"
 
 CELERYBEAT_USER="{{ application_user }}"
 CELERYBEAT_GROUP="{{ application_user }}"

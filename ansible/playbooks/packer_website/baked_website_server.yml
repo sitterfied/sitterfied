@@ -8,10 +8,12 @@
     - celeryd
     - celerybeat
     - monit
+    - beatcop
   vars:
     application_server_name: test.sitterfied.com
     application_user: ubuntu
-    celeryd_state: started
+    beatcop_command: "{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} -f {{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}"
+    celerybeat_state: stopped
     env: test
     monit_alert_address: sysalerts@sitterfied.com
     monit_alert_mail_from: monit@sitterfied.com
@@ -31,11 +33,6 @@
         rules:
           - "if 5 restarts within 5 cycles then timeout"
           - "if totalmem > 500 Mb for 3 cycles then restart"
-      - name: celerybeat
-        type: process
-        target: /var/run/celery/beat.pid
-        start: /etc/init.d/celerybeat start
-        stop: /etc/init.d/celerybeat stop
       - name: nginx
         type: process
         target: /var/run/nginx.pid

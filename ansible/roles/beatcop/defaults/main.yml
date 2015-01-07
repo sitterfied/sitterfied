@@ -1,0 +1,8 @@
+---
+
+beatcop_command: ping localhost
+beatcop_lockname: beatcop-celerybeat
+beatcop_redis_host: localhost
+beatcop_redis_port: 6379
+beatcop_timeout: 5000
+beatcop_use_shell: no

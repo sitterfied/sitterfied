@@ -5,3 +5,4 @@
   service:
     name=celerybeat
     state=restarted
+  when: celerybeat_state == "started"

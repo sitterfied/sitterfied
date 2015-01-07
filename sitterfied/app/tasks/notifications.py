@@ -10,7 +10,6 @@ from sitterfied.app.utils import get_short_url
 from sitterfied.bookings.models import Booking, BookingResponse
 from sitterfied.celeryapp import app
 
-
 logger = get_task_logger(__name__)
 
 

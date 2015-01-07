@@ -35,5 +35,5 @@
   sudo: True
   service:
     name=celerybeat
-    state=started
+    state={{ celerybeat_state }}
     enabled=True

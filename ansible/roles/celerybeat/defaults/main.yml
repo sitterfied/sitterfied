@@ -2,4 +2,10 @@
 
 celerybeat_app: sitterfied.celeryapp:app
 
+celerybeat_logfile: /var/log/celery/beat.log
+
+celerybeat_pidfile: /var/run/celery/beat.pid
+
 celerybeat_schedule: /etc/celery/celerybeat.db
+
+celerybeat_state: started
