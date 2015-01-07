@@ -10,8 +10,16 @@ class BookingSerializer(serializers.ModelSerializer):
 
     """
     accepted = serializers.BooleanField(required=False)
-    accepted_sitter = serializers.PrimaryKeyRelatedField(read_only=True)
+    accepted_sitter = serializers.SerializerMethodField('get_id')
     declined_sitters = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    def get_id(self, obj):
+        if obj and hasattr(obj, 'accepted_sitter'):
+            accepted_sitter = getattr(obj, 'accepted_sitter', None)
+            if accepted_sitter:
+                return accepted_sitter.id
+
+        return None
 
     class Meta:
         model = Booking
