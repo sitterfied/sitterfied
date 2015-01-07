@@ -245,6 +245,7 @@ CELERY_IMPORTS = (
     'sitterfied.app.tasks.reminders',
     'sitterfied.app.tasks.users',
 )
+DEFAULT_TASK_LOCK_EXPIRE = 60 * 5
 
 SERVER_EMAIL = 'no-reply@sitterfied.com'
 

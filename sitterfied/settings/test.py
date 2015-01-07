@@ -58,6 +58,9 @@ FACEBOOK_APP_ID = '624946094225118'
 # Override Sideswipe.io Token
 SIDESWIPE_IO_TOKEN = 'd647eccfe96499d0f8aa85a7f96a2cd5'
 
+# Knowtify Config
+KNOWTIFY_API_TOKEN = '4a866b43f5f0f148d62fb8fcdf668d6f'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

@@ -28,7 +28,7 @@ BROKER_TRANSPORT_OPTIONS = {
     'visibility_timeout': 43200,
 
 }
-DEFAULT_TASK_LOCK_EXPIRE = 60 * 5
+
 BROKER_URL = 'sqs://{}:{}@'.format(AWS_ACCESS_KEY_ID, quote_plus(AWS_SECRET_ACCESS_KEY))
 
 # Celery Beat Configuration
@@ -48,7 +48,11 @@ CELERYBEAT_SCHEDULE = {
     'cleanup-stale-sqs-queues': {
         'task': 'sitterfied.utils.tasks.cleanup_stale_sqs_queues',
         'schedule': crontab(hour='*', minute=0, day_of_week='*'),
-    }
+    },
+    'update-knowtify': {
+        'task': 'sitterfied.utils.knowtify.update_knowtify',
+        'schedule': crontab(hour=22, minute=3, day_of_week='Mon'),
+    },
 }
 
 JOB_FIRST_REMINDER = 180  # 3 minutes
