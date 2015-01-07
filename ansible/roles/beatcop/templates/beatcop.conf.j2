@@ -15,6 +15,7 @@ pre-start script
     [ -d /var/run/beatcop ] || mkdir -p /var/run/beatcop
 end script
 
+env PYTHONPATH={{ application_root }}
 env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
 
 # Start the process
