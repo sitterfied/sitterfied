@@ -62,6 +62,11 @@ SIDESWIPE_IO_TOKEN = 'd647eccfe96499d0f8aa85a7f96a2cd5'
 # Knowtify Config
 KNOWTIFY_API_TOKEN = '4a866b43f5f0f148d62fb8fcdf668d6f'
 
+# Override Job Reminder Times
+JOB_FIRST_REMINDER = 180  # 3 minutes
+JOB_RELIEF_REMINDER = 1680  # 28 minutes
+JOB_SECOND_REMINDER = 60  # 1 minute
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

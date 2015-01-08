@@ -52,8 +52,14 @@ BROKER_URL = REDIS_URL + '/0'
 BROKER_TRANSPORT_OPTIONS = {
     # Set visibility timeout to 1 year, this is necessary to prevent
     # celery from executing scheduled celery tasks multiple times.
-    'visibility_timeout': 31536000,
+    'visibility_timeout': 10,
 }
+
+# Override Job Reminder Times
+FAST_SEND_REMINDERS = True
+JOB_FIRST_REMINDER = 60
+JOB_RELIEF_REMINDER = 180
+JOB_SECOND_REMINDER = 120
 
 # Whether the Query Inspector should do anything (default: False)
 QUERY_INSPECT_ENABLED = True

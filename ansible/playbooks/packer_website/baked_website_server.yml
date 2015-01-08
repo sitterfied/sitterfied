@@ -6,13 +6,12 @@
     - uwsgi
     # For now until we have dedicated task boxes
     - celeryd
-    - celerybeat
+    - beatcop  # controls celerybeat cluster
     - monit
-    - beatcop
   vars:
     application_server_name: test.sitterfied.com
     application_user: ubuntu
-    beatcop_command: "{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} -f {{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}"
+    beatcop_command: "{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} --logfile={{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}"
     celerybeat_state: stopped
     env: test
     monit_alert_address: sysalerts@sitterfied.com

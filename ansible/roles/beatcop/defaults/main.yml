@@ -6,3 +6,8 @@ beatcop_redis_host: localhost
 beatcop_redis_port: 6379
 beatcop_timeout: 5000
 beatcop_use_shell: no
+
+celerybeat_app: sitterfied.celeryapp:app
+celerybeat_logfile: /var/log/celery/beat.log
+celerybeat_pidfile: /var/run/celery/beat.pid
+celerybeat_schedule: /tmp/celerybeat.db

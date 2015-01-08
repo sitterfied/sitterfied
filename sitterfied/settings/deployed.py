@@ -54,7 +54,3 @@ CELERYBEAT_SCHEDULE = {
         'schedule': crontab(hour=22, minute=3, day_of_week='Mon'),
     },
 }
-
-JOB_FIRST_REMINDER = 180  # 3 minutes
-JOB_RELIEF_REMINDER = 1680  # 28 minutes
-JOB_SECOND_REMINDER = 60  # 1 minute

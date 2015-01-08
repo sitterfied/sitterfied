@@ -20,3 +20,14 @@ env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
 
 # Start the process
 exec {{ application_virtualenv_bin }}/python {{ application_virtualenv_bin}}/beatcop /etc/beatcop.d/beatcop.ini >> /var/log/beatcop.log 2>&1
+
+# Run after start
+post-start script
+    PID=`status beatcop | egrep -oi '([0-9]+)$' | head -n1`
+    echo $PID > /var/run/beatcop/beatcop.pid
+end script
+
+# Run after stop
+post-stop script
+    rm -f /var/run/beatcop/beatcop.pid
+end script

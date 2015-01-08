@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 import logging
+from datetime import datetime, timedelta
+from functools import wraps
 
+import pytz
+from celery import signature
 from django.conf import settings
 from django.core.cache import cache
+from django.utils import timezone
 
 from sitterfied.celeryapp import app
 from sitterfied.utils.sqs import cleanup_stale_queues
@@ -25,6 +30,37 @@ class acquire_lock(object):
 
     def __exit__(self, exc_type, exc_value, traceback):
         return cache.delete(self.lock_key)
+
+
+def get_eta(desired_eta):
+    visibility_timeout = settings.BROKER_TRANSPORT_OPTIONS.get('visibility_timeout')
+    return min(desired_eta, timezone.now() + timedelta(seconds=visibility_timeout))
+
+
+def reschedule(delta=None):
+    delta = delta or timedelta(minutes=5)
+
+    def reschedule_decorator(func):
+        @wraps(func)
+        def func_wrapper(*args, **kwargs):
+            desired_eta = kwargs.get('desired_eta', None)
+            if not desired_eta:
+                logger.info('No desired eta specified, executing task.')
+                return func(*args, **kwargs)
+
+            eta = desired_eta
+            if isinstance(eta, (unicode, str)):
+                eta = timezone.make_aware(datetime.strptime(eta, '%Y-%m-%d %H:%M:%S'), pytz.UTC)
+            now = timezone.now()
+            if now - delta < eta < now + delta:
+                logger.info('Desired eta falls within in timedelta, executing task.')
+                return func(*args, **kwargs)
+
+            logger.info('Desired eta not yet reached, rescheduling task.')
+            task_name = '{}.{}'.format(func.func_globals.get('__name__'), func.func_name)
+            return signature(task_name, args=args, kwargs=kwargs, eta=get_eta(eta)).apply_async()
+        return func_wrapper
+    return reschedule_decorator
 
 
 @app.task
