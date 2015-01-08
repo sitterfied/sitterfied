@@ -17,29 +17,30 @@ define(['jquery', 'jqueryui', 'select2', 'fancybox'], function($){
             $('.tab_content .subtab_content').hide();
             $('.tab_content .subtab_content:first').show();
             $('.tab_content .subtab_select li:first').addClass('active');
-            $('.tab_content .subtab_select li a').click(function(){
+            /*$('.tab_content .subtab_select li a').click(function(){
+                
                 $('.tab_content .subtab_select li').removeClass('active');
                 $(this).parent().addClass('active');
                 var currentTab = $(this).attr('href');
                 $('.tab_content .subtab_content').hide();
                 $(currentTab).show();
-                if($('.tab_content .subtab_select li:nth-child(2)').hasClass('active')) {
+                if($('.tab_content .subtab_select li:nth-child(2) a').hasClass('active')) {
                     $('.tab_content .subtab_select').removeClass('movebg2 movebg3 movebg4 movebg5 movebg6').addClass('movebg');
-                } else if($('.tab_content .subtab_select li:nth-child(3)').hasClass('active')) {
+                } else if($('.tab_content .subtab_select li:nth-child(3) a').hasClass('active')) {
                     $('.tab_content .subtab_select').removeClass('movebg3 movebg4 movebg5 movebg6').addClass('movebg movebg2');
-                } else if($('.tab_content .subtab_select li:nth-child(4)').hasClass('active')) {
+                } else if($('.tab_content .subtab_select li:nth-child(4) a').hasClass('active')) {
                     $('.tab_content .subtab_select').removeClass('movebg2 movebg4 movebg5 movebg6').addClass('movebg movebg3');
-                } else if($('.tab_content .subtab_select li:nth-child(5)').hasClass('active')) {
+                } else if($('.tab_content .subtab_select li:nth-child(5) a').hasClass('active')) {
                     $('.tab_content .subtab_select').removeClass('movebg3 movebg2 movebg5 movebg6').addClass('movebg movebg4');
-                } else if($('.tab_content .subtab_select li:nth-child(6)').hasClass('active')) {
+                } else if($('.tab_content .subtab_select li:nth-child(6) a').hasClass('active')) {
                     $('.tab_content .subtab_select').removeClass('movebg3 movebg4 movebg2 movebg6').addClass('movebg movebg5');
-                } else if($('.tab_content .subtab_select li:nth-child(7)').hasClass('active')) {
+                } else if($('.tab_content .subtab_select li:nth-child(7) a').hasClass('active')) {
                     $('.tab_content .subtab_select').removeClass('movebg3 movebg4 movebg5 movebg2').addClass('movebg movebg6');
                 } else {
                     $('.tab_content .subtab_select').removeClass('movebg movebg2 movebg3 movebg4 movebg5 movebg6');
                 };
                 return false;
-            });
+            });*/
 
 
     // Find form block hide/show

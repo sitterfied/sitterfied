@@ -1125,8 +1125,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .subtab_select li:last-child {border-right:none;}
 .bookings_block .subtab_select li a, .bookings_block .subtab_select li a:visited {color:#bcbdbd;position:relative;display:block;height:37px;padding:3px 7px 0 0;text-align:center;}
 .bookings_block .subtab_select li a span {font-size:30px;float:left;padding:0 0 0 18px;}
-.bookings_block .subtab_select li.active a, .bookings_block .subtab_select li.active a:visited, .bookings_block .subtab_select li a:hover {color:#fff;background:#0e96ac;}
-.bookings_block .subtab_select li.active:first-child a, .bookings_block .subtab_select li.active:first-child a:visited, .bookings_block .subtab_select li:first-child a:hover {color:#fff;background:#c7698f;}
+.bookings_block .subtab_select li a:hover {color:#fff;background:#0e96ac;}
+.bookings_block .subtab_select li a.active, .bookings_block .subtab_select li a.active:visited {color:#fff;background:#c7698f;}
 .bookings_block .subtab_content {clear:both;}
 
 .bookings_block .booking_list {margin:0 20px 0 30px;}
@@ -1150,7 +1150,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .img div > ul li {text-align:left;float:left;color:#4693a1;padding:0 3px 0 0;font-size:0;line-height:0;position:relative;}
 .bookings_block .booking_list > li .img div > ul li:first-child {float:none;font:14px 'ProximaNova-Semibold';padding-bottom:5px;}
 .bookings_block .booking_list > li .img div > ul li:last-child {padding-right:0;}
-.bookings_block .booking_list > li .img div > ul li span {display:none;position:absolute;top:auto;bottom:-26px;left:-33px;font:12px 'ProximaNova-Semibold';color:#115a65;text-align:center;background:#d7f5fb url(../images/tooltip.gif) repeat-x;border:1px solid #b1dce4;width:94px;padding:3px 4px;}
+.bookings_block .booking_list > li .img div > ul li span {display:none;position:absolute;top:auto;bottom:-26px;left:-33px;font:12px 'ProximaNova-Semibold';color:#115a65;text-align:center;background:#d7f5fb url(../images/tooltip.gif) repeat-x;border:1px solid #b1dce4;width:94px;padding:3px 4px;z-index:1000;}
 .bookings_block .booking_list > li .img div > ul li:hover span {display:block;}
 .bookings_block .booking_list > li .img div > ul li img {width:38px;height:38px;}
 .bookings_block .booking_list > li .desc {border:1px solid #d8e8f0;border-radius:4px;box-shadow:rgba(0,0,0,.11) 0 2px 2px 0;float:left;width:724px;padding:2px 8px;position:relative;min-height:71px;}

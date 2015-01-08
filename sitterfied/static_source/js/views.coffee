@@ -464,8 +464,25 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         ).property("content.@each", "content")
 
 
-
-    #Sitterfied.BookingView = Em.View.extend
+    Sitterfied.SubTabView = Ember.View.extend
+        didInsertElement: () ->
+            $menu = $('.tab_content .subtab_select')
+            active_idx = $menu.find('a.active').parent('li').index()
+            console.log active_idx
+            $menu.addClass('movebg' + active_idx)
+            $menu.find('a').on 'click', () ->
+                $menu.removeClass( (index, css) ->
+                    classes = css.match (/\bmovebg\d*/g)
+                    return classes.join(' ') if classes?
+                )
+                idx = $(this).parent('li').index()
+                idx = '' if idx is 1
+                $menu.removeClass( (index, css) ->
+                    classes = css.match (/\bmovebg\d*/g)
+                    return classes.join(' ') if classes?
+                )
+                $menu.addClass('movebg' + idx) if idx isnt 0
+                return
 
 
     # Select box utilizing Select2 functionality that overrides Ember.Select;
