@@ -12,6 +12,7 @@
         {{#linkTo parentEdit.profile content  tag="div" class="mob_tab_trigger"}}Profile{{/linkTo}}
       {{/ if }}
       {{# view Sitterfied.MobTriggerView }} Bookings {{/ view}}
+        {{# view Sitterfied.SubTabView }}
         <div class="tab_content bookings_block" id="tab-3">
 	      <ul class="subtab_select">
 	        <li>{{# linkTo mybookings.pending }}
@@ -49,6 +50,7 @@
 	      </ul>
           {{outlet}}
         </div>
+        {{/ view}}
 {{# if Sitterfied.isParent }}
   {{#linkTo parentEdit.sitterTeam content tag="div" class="mob_tab_trigger"}}Sitter Team{{/linkTo}}
   {{#linkTo parentEdit.network content tag="div" class="mob_tab_trigger"}}Network{{/linkTo}}
