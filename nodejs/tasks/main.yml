@@ -1,9 +1,0 @@
----
-
-- name: install node.js and npm
-  sudo: true
-  apt: name={{ item }} state=present
-  with_items:
-    - nodejs
-    - nodejs-legacy
-    - npm
