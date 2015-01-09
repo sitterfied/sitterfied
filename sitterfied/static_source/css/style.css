@@ -917,7 +917,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .friends_block > ul > li > ul > li > ul li {float:left;color:#4693a1;padding:0 3px 0 0;font-size:0;line-height:0;position:relative;}
 .friends_block > ul > li > ul > li > ul li:first-child {float:none;font:14px 'ProximaNova-Semibold';padding-bottom:5px;}
 .friends_block > ul > li > ul > li > ul li:last-child {padding-right:0;}
-.friends_block > ul > li > ul > li > ul li span {display:none;position:absolute;top:auto;bottom:-26px;left:-33px;font:12px 'ProximaNova-Semibold';color:#115a65;text-align:center;background:#d7f5fb url(../images/tooltip.gif) repeat-x;border:1px solid #b1dce4;width:94px;padding:3px 4px;}
+.friends_block > ul > li > ul > li > ul li span {display:none;position:absolute;top:auto;bottom:-26px;left:-33px;font:12px 'ProximaNova-Semibold';color:#115a65;text-align:center;background:#d7f5fb url(../images/tooltip.gif) repeat-x;border:1px solid #b1dce4;width:94px;padding:3px 4px;z-index:1000;}
 .friends_block > ul > li > ul > li > ul li:hover span {display:block;}
 .friends_block > ul > li > ul > li > ul li img {width:38px;height:38px;}
 .friends_block > ul > li > ul > li > ul li.rev {color:#616161;padding:5px;}
