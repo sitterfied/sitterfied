@@ -113,6 +113,11 @@ LOGGING = {
         },
     },
     'loggers': {
+        'boto': {
+            'handlers': ['console', 'log_file', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         'django': {
             'handlers': ['console', 'log_file', 'mail_admins'],
             'level': 'ERROR',
