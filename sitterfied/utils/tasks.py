@@ -46,7 +46,8 @@ def reschedule(delta=None):
             desired_eta = kwargs.get('desired_eta', None)
             if not desired_eta:
                 logger.info('No desired eta specified, executing task.')
-                return func(*args, **kwargs)
+                func(*args, **kwargs)
+                return
 
             eta = desired_eta
             if isinstance(eta, (unicode, str)):
@@ -54,11 +55,15 @@ def reschedule(delta=None):
             now = timezone.now()
             if now - delta < eta < now + delta:
                 logger.info('Desired eta falls within in timedelta, executing task.')
-                return func(*args, **kwargs)
+                func(*args, **kwargs)
+                return
 
-            logger.info('Desired eta not yet reached, rescheduling task.')
+            eta = get_eta(eta)
+            logger.info(
+                'Desired eta ({}) not yet reached, rescheduling task for {}.'
+                .format(desired_eta, eta.strftime('%Y-%m-%d %H:%M:%S')))
             task_name = '{}.{}'.format(func.func_globals.get('__name__'), func.func_name)
-            return signature(task_name, args=args, kwargs=kwargs, eta=get_eta(eta)).apply_async()
+            signature(task_name).apply_async(eta=eta, kwargs=kwargs)
         return func_wrapper
     return reschedule_decorator
 
