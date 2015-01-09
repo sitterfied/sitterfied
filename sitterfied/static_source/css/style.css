@@ -586,7 +586,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .ico ul li ul li:first-child {float:none;font:14px 'ProximaNova';padding-bottom:5px;}
 .header .top_info .ico ul li ul li img {width:38px;height:38px;}
 .header .top_info .ico ul li ul li:last-child {padding-right:0;}
-.header .top_info .ico ul li ul li span {display:none;position:absolute;bottom:-26px;left:-33px;font:12px 'ProximaNova-Semibold';color:#115a65;text-align:center;background:#d7f5fb url(../images/tooltip.gif) repeat-x;border:1px solid #b1dce4;width:94px;padding:3px 4px;}
+.header .top_info .ico ul li ul li span {display:none;position:absolute;bottom:-26px;left:-33px;font:12px 'ProximaNova-Semibold';color:#115a65;text-align:center;background:#d7f5fb url(../images/tooltip.gif) repeat-x;border:1px solid #b1dce4;width:94px;padding:3px 4px;z-index:1000;}
 .header .top_info .ico ul li ul li:hover span {display:block;}
 .header .top_info .member_since {position:absolute;top:-3px;right:17px;width:94px;height:25px;padding-top:60px;background:url(../images/icons/member_since_t.png) no-repeat;text-align:center;color:#fff;font:bold 15px 'ProximaNovaCond';text-shadow:rgba(0,0,0,.35) 1px 1px 1px;}
 .header .top_info .member_since.guest {background:url(../images/icons/guest.png) no-repeat;}
