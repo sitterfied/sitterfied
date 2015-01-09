@@ -54,7 +54,11 @@ def reschedule(delta=None):
                 eta = timezone.make_aware(datetime.strptime(eta, '%Y-%m-%d %H:%M:%S'), pytz.UTC)
             now = timezone.now()
             if now - delta < eta < now + delta:
-                logger.info('Desired eta falls within in timedelta, executing task.')
+                logger.info('Desired eta falls within time window, executing task.')
+                func(*args, **kwargs)
+                return
+            elif eta > now:
+                logger.info('Desired eta has passed, executing task.')
                 func(*args, **kwargs)
                 return
 

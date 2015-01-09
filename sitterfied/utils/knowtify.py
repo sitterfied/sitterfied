@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 import logging
+import random
 from datetime import datetime, timedelta
 
 import requests
@@ -48,7 +49,9 @@ def get_contacts(dry_run=False):
     if not dry_run:
         api_token = settings.KNOWTIFY_API_TOKEN
         if not api_token:
-            logger.error('An error occurred\n       ->The Knowtify API token is not set. Please set the KNOWTIFY_API_TOKEN environment variable.')
+            logger.error(
+                'An error occurred\n       ->The Knowtify API token is not set. '
+                'Please set the KNOWTIFY_API_TOKEN environment variable.')
             return
 
     added_since = datetime.now() - timedelta(days=7)
@@ -66,6 +69,8 @@ def get_contacts(dry_run=False):
                 'id': parent.id,
                 'first_name': parent.first_name,
                 'last_name': parent.last_name,
+                'city': parent.city,
+                'zip': parent.zip,
                 'type': 'parent',
                 'friends': format_generic(parent.friends.all()),
                 'num_friends': parent.friends.count(),
@@ -80,8 +85,9 @@ def get_contacts(dry_run=False):
             suggested_sitters = Sitter.objects.filter(
                 friends__in=parent.friends.filter(parent__isnull=False)
             ).distinct().exclude(sitter_teams=parent)
+            random.shuffle(suggested_sitters)
             data['data'].update({
-                'suggested_sitters': format_suggested_sitters(parent, suggested_sitters),
+                'suggested_sitters': format_suggested_sitters(parent, suggested_sitters[:3]),
                 'num_suggested_sitters': suggested_sitters.count(),
             })
 
@@ -96,6 +102,8 @@ def get_contacts(dry_run=False):
                 'id': sitter.id,
                 'first_name': sitter.first_name,
                 'last_name': sitter.last_name,
+                'city': sitter.city,
+                'zip': parent.zip,
                 'type': 'sitter',
                 'new_parents': format_generic(new_parents),
                 'num_new_parents': new_parents.count(),
