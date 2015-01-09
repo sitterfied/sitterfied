@@ -1114,7 +1114,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 /* Bookings block */
 .bookings_block .subtab_select {margin:18px 0 0 18px; overflow:hidden; background:url(../images/icons/arrow_bottom11.png) 48px 44px no-repeat; 
 -webkit-transition: all linear .4s;-moz-transition: all linear .4s;-o-transition: all linear .4s;transition: all linear .4s;}
-.bookings_block .subtab_select.movebg {background:url(../images/icons/arrow_bottom12.png) 182px 44px no-repeat;}
+.bookings_block .subtab_select.movebg {background-position:182px 44px;}
 .bookings_block .subtab_select.movebg2 {background-position:314px 44px;}
 .bookings_block .subtab_select.movebg3 {background-position:447px 44px;}
 .bookings_block .subtab_select.movebg4 {background-position:580px 44px;}

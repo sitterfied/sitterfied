@@ -468,8 +468,8 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
         didInsertElement: () ->
             $menu = $('.tab_content .subtab_select')
             active_idx = $menu.find('a.active').parent('li').index()
-            console.log active_idx
-            $menu.addClass('movebg' + active_idx)
+            active_idx = '' if active_idx is 1
+            $menu.addClass('movebg' + active_idx) if active_idx isnt 0
             $menu.find('a').on 'click', () ->
                 $menu.removeClass( (index, css) ->
                     classes = css.match (/\bmovebg\d*/g)
