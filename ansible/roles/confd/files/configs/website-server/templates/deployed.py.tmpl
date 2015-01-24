@@ -30,7 +30,6 @@ else:
 
 DEBUG = TEMPLATE_DEBUG = {{getv "/sitterfied/website/debug"}}
 
-# Send Admin emails from the test subdomain
 SERVER_EMAIL = '{{getv "/sitterfied/website/server/email"}}'
 
 SESSION_COOKIE_NAME = '{{getv "/sitterfied/website/session/cookie/name"}}'
@@ -87,10 +86,6 @@ CELERYBEAT_SCHEDULE = {
     'mark-expired-jobs': {
         'task': 'sitterfied.app.tasks.jobs.mark_expired_jobs',
         'schedule': crontab(minute='10'),
-    },
-    'cleanup-stale-sqs-queues': {
-        'task': 'sitterfied.utils.tasks.cleanup_stale_sqs_queues',
-        'schedule': crontab(hour='*', minute=0, day_of_week='*'),
     },
     'update-knowtify': {
         'task': 'sitterfied.utils.knowtify.update_knowtify',

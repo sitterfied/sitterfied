@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import celery
 import pytz
@@ -24,14 +24,19 @@ from sitterfied.parents.models import Parent
 from sitterfied.schedules.models import Schedule
 from sitterfied.sitters.models import Sitter, SitterReview
 from sitterfied.users.models import User, Settings
+from sitterfied.utils import time
 from sitterfied.utils.tasks import get_eta
 
 
 #mutual events
 @receiver(post_save, sender=User)
 def user_added(instance, created, **kwargs):
+    """
+    Geocode a user on creation.
+
+    """
     if created and not instance.timezone:
-        users.geocode_user.s(instance.id).delay()
+        users.geocode_user(instance.id)
 
 
 #parent events
@@ -299,7 +304,7 @@ def reminder_save_handler(*args, **kwargs):
         start_date_time = reminder.booking.start_date_time
         stop_date_time = reminder.booking.stop_date_time
         timezone = pytz.timezone(reminder.booking.parent.timezone)
-        delta = start_date_time - datetime.now(timezone)
+        delta = start_date_time - time.now()
 
         if delta.total_seconds() > first_reminder:
             eta = calculate_eta(start_date_time, timedelta(seconds=first_reminder))

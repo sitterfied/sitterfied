@@ -2,7 +2,7 @@
 import json
 import logging
 import random
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import requests
 from django.conf import settings
@@ -10,6 +10,7 @@ from django.conf import settings
 from sitterfied.celeryapp import app
 from sitterfied.parents.models import Parent
 from sitterfied.sitters.models import Sitter
+from sitterfied.utils import time
 from sitterfied.utils.tasks import acquire_lock
 
 logger = logging.getLogger(__name__)
@@ -54,7 +55,7 @@ def get_contacts(dry_run=False):
                 'Please set the KNOWTIFY_API_TOKEN environment variable.')
             return
 
-    added_since = datetime.now() - timedelta(days=7)
+    added_since = time.now() - timedelta(days=7)
     contacts = {'contacts': []}
 
     for parent in Parent.objects.all():
