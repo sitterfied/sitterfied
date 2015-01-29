@@ -16,10 +16,13 @@ pre-start script
 end script
 
 env PYTHONPATH={{ application_root }}
-env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
 
 # Start the process
-exec {{ application_virtualenv_bin }}/python {{ application_virtualenv_bin}}/beatcop /etc/beatcop.d/beatcop.ini >> /var/log/beatcop.log 2>&1
+script
+    . /etc/environment
+    export DJANGO_SETTINGS_MODULE
+    exec {{ application_virtualenv_bin }}/python {{ application_virtualenv_bin}}/beatcop /etc/beatcop.d/beatcop.ini >> /var/log/beatcop.log 2>&1
+end script
 
 # Run after start
 post-start script

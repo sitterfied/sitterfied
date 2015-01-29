@@ -244,7 +244,7 @@ CELERY_IMPORTS = (
     'sitterfied.app.tasks.notifications',
     'sitterfied.app.tasks.reminders',
     'sitterfied.app.tasks.users',
-    'sitterfied.utils.knowtify.update_knowtify',
+    'sitterfied.utils.knowtify',
 )
 DEFAULT_TASK_LOCK_EXPIRE = 60 * 5
 

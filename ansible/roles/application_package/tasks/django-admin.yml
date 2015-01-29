@@ -2,9 +2,15 @@
 
 - name: collect static files
   command: django-admin collectstatic --noinput
+  environment:
+    DJANGO_SETTINGS_MODULE: sitterfied.settings.{{ env }}
 
 - name: run database migrations
   command: django-admin migrate
+  environment:
+    DJANGO_SETTINGS_MODULE: sitterfied.settings.{{ env }}
 
 - name: load fixtures
   command: django-admin loaddata language_data.json
+  environment:
+    DJANGO_SETTINGS_MODULE: sitterfied.settings.{{ env }}
