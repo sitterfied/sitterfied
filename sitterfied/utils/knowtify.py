@@ -82,9 +82,9 @@ def get_contacts(dry_run=False):
         }
 
         if sitter_team_size < 4:
-            suggested_sitters = Sitter.objects.filter(
+            suggested_sitters = list(Sitter.objects.filter(
                 friends__in=parent.friends.filter(parent__isnull=False)
-            ).distinct().exclude(sitter_teams=parent)
+            ).distinct().exclude(sitter_teams=parent))
             random.shuffle(suggested_sitters)
             data['data'].update({
                 'suggested_sitters': format_suggested_sitters(parent, suggested_sitters[:3]),
