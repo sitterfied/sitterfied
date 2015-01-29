@@ -88,7 +88,7 @@ def get_contacts(dry_run=False):
             random.shuffle(suggested_sitters)
             data['data'].update({
                 'suggested_sitters': format_suggested_sitters(parent, suggested_sitters[:3]),
-                'num_suggested_sitters': suggested_sitters.count(),
+                'num_suggested_sitters': len(suggested_sitters),
             })
 
         contacts['contacts'].append(data)
