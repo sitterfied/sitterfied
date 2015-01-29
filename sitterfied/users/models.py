@@ -34,7 +34,7 @@ class User(AbstractUser, TimeStampedModel):
     sitter_groups = models.ManyToManyField('Group', blank=True)
     state = models.CharField(choices=us_states.US_STATES, max_length=2, blank=True, default="AL")
     status = models.CharField(blank=False, max_length=10, choices=MEMBERSHIP_STATUS, default=MEMBERSHIP_STATUS_TRIAL)
-    timezone = models.CharField(max_length=255, default='America/New_York', blank=True)
+    timezone = models.CharField(max_length=255, blank=True)
     zip = models.CharField(max_length=9, blank=True)  # there is
 
     @property
