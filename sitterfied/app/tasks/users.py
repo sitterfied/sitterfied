@@ -1,56 +1,44 @@
 # -*- coding: utf-8 -*-
-import time
-
-import requests
 from celery.utils.log import get_task_logger
-from geopy import geocoders
+from django.conf import settings
+from geopy import exc as geopy_exc, geocoders
 
 from sitterfied.celeryapp import app
 from sitterfied.users.models import User
 
 
 logger = get_task_logger(__name__)
+geolocator = geocoders.OpenCage(settings.OPEN_CAGE_API_KEY)
 
 
-@app.task
-def geocode_user(id):
+@app.task(bind=True)
+def geocode_user(self, id):
     try:
         user = User.objects.get(pk=id)
     except User.DoesNotExist:
-        return None
+        return
+
+    if user.timezone:
+        return
 
     zip_code = user.zip
     if not zip_code:
-        logger.info('Cannot geocode without a zip.')
-        return None
+        logger.warning('Cannot geocode without a zip.')
+        return
 
-    logger.info('Geocoding based on zip {0}'.format(zip_code))
-    place, (lat, lng) = geocoders.GoogleV3().geocode(zip_code)
-    return (lat, lng)
-
-
-@app.task
-def lookup_time_zone(latitude_and_longitude, id):
-    if not id or not latitude_and_longitude:
-        return None
-
+    logger.info('Geocoding {} using zip code {}.'.format(user.get_full_name(), zip_code))
     try:
-        user = User.objects.get(pk=id)
-    except User.DoesNotExist:
-        return None
+        location = geolocator.geocode(zip_code)
+        if not location:
+            raise geopy_exc.GeopyError('No location retrieved.')
+    except geopy_exc.GeopyError as exc:
+        raise self.retry(exc=exc)
 
-    if user.timezone:
-        return None
+    timezone = location.raw.get('annotations', {}).get('timezone', {}).get('name', None)
+    if not timezone:
+        logger.warning('Location retrieved, but no time zone found.')
+        return
 
-    latitude, longitude = latitude_and_longitude
-    logger.info('Looking up timezone for {0}, {1}'.format(latitude, longitude))
-    r = requests.get('https://maps.googleapis.com/maps/api/timezone/json?location={0},{1}&timestamp={2}&sensor=false'
-                     .format(latitude, longitude, int(time.time())))
-    json = r.json()
-    try:
-        user.timezone = json.get('timeZoneId')
-        user.save()
-    except Exception:
-        return None
-
-    return user.timezone
+    logger.info('Setting {}\'s time zone to {}.'.format(user.get_full_name(), timezone))
+    user.timezone = timezone
+    user.save()

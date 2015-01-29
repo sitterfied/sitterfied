@@ -9,7 +9,7 @@ from django.dispatch import receiver
 from django.template.loader import render_to_string
 
 from sitterfied.app.sms import send_message
-from sitterfied.app.tasks import notifications, reminders
+from sitterfied.app.tasks import notifications, reminders, users
 from sitterfied.app.tasks.reminders import calculate_eta
 from sitterfied.app.utils import get_short_url, send_template_email
 from sitterfied.bookings.models import (
@@ -29,12 +29,9 @@ from sitterfied.utils.tasks import get_eta
 
 #mutual events
 @receiver(post_save, sender=User)
-def friend_joined(sender, **kwargs):
-    pass
-
-
-def groups_added():
-    pass
+def user_added(instance, created, **kwargs):
+    if created and not instance.timezone:
+        users.geocode_user.s(instance.id).delay()
 
 
 #parent events

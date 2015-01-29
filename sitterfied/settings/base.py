@@ -244,6 +244,7 @@ CELERY_IMPORTS = (
     'sitterfied.app.tasks.notifications',
     'sitterfied.app.tasks.reminders',
     'sitterfied.app.tasks.users',
+    'sitterfied.utils.knowtify.update_knowtify',
 )
 DEFAULT_TASK_LOCK_EXPIRE = 60 * 5
 
@@ -258,3 +259,6 @@ JOB_RELIEF_REMINDER = 3600  # 1 Hour
 # of the site in the Popcorn Metrics editor. This is only for the
 # Popcorn Metrics editor interface, which requires Firefox.
 X_FRAME_OPTIONS = 'ALLOW-FROM www.popcornmetrics.com'
+
+# API Key for OpenCage
+OPEN_CAGE_API_KEY = '5c60dbbfd592484f7835ae9a976b96b4'
