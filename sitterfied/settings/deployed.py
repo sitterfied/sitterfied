@@ -15,6 +15,8 @@ AWS_SECRET_ACCESS_KEY = 'pCbkIwkv3yKjqT2DYQaDWMuQ8v2UeKu2Jm8wS2w1'
 # Send Admin emails from the test subdomain
 SERVER_EMAIL = 'no-reply@test.sitterfied.com'
 
+REDIS_URL = 'redis://127.0.0.1:6379'
+
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
