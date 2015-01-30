@@ -220,6 +220,7 @@ ALLOWED_HOSTS = [
     '.sitterfied.com',
     '.sttrfd.us',
     'elbhealthcheck.biz',
+    '.elb.amazonaws.com',
     'ping',
 ]
 

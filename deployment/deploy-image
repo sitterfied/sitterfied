@@ -278,7 +278,7 @@ fi
 # set remaining options to their defaults if no value was specified
 if [[ ! $ami ]]; then
 	if [[ $use_staging_ami ]]; then
-		STAGING_ASG="${container}-stage-${project}"
+		STAGING_ASG="${container}-test-${project}"
 		STAGING_LAUNCH_CONFIG=$(aws --region "$region" autoscaling describe-auto-scaling-groups --auto-scaling-group-names "$STAGING_ASG" | jq --raw-output '.[][].LaunchConfigurationName')
 		[[ -z $STAGING_LAUNCH_CONFIG ]] && die 1 'unable to find an ASG Launch Config in staging for the %s container %s project' "$container" "$project"
 		STAGING_IMAGE=$(aws --region "$region" autoscaling describe-launch-configurations --launch-configuration-names "$STAGING_LAUNCH_CONFIG" | jq --raw-output '.[][].ImageId')
