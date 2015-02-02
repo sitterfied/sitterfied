@@ -80,7 +80,7 @@ class TestViews(SitterfiedApiTestCase):
     def test_delete_parent(self):
         url = reverse('parent-detail', args=[self.parent_id])
         response = self.client.delete(url)
-        assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
+        assert_that(response.status_code, is_(status.HTTP_204_NO_CONTENT), str(response.data))
         assert_that(response.data, none())
 
     def test_update_parent(self):

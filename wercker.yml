@@ -1,0 +1,49 @@
+box: alewisohn/ubuntu14.04-packer0.7.5@1.0.4
+build:
+  steps:
+    - script:
+        name: install build dependencies
+        code: |
+          sudo apt-get update
+          sudo apt-get install libpq-dev
+          sudo apt-get install libxml2-dev
+          sudo apt-get install libxslt1-dev
+          sudo apt-get install postgresql-client
+          sudo apt-get install python-dev
+          sudo apt-get install python-pip
+    - script:
+        name: install virtualenv
+        code: |
+          sudo pip install virtualenv
+    - virtualenv:
+        name: setup virtual environment
+    - script:
+        name: install requirements
+        code: |
+          sudo pip install -r requirements.txt
+    - script:
+        name: test build
+        code: |
+          django-admin test --settings=sitterfied.settings.ci --pythonpath=$WERCKER_SOURCE_DIR -v 2
+  #after-steps:
+  #  - wantedly/pretty-slack-notify@0.2.7:
+  #      webhook_url: $SLACK_WEBHOOK_URL
+deploy:
+  steps:
+    - script:
+        name: configure aws cli
+        code: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          aws configure set default.region $AWS_REGION
+    - script:
+        name: build baked image
+        code: |
+          packer/generate-baked-image --region $AWS_REGION --container website --project website-server
+    - script:
+        name: deploy to test
+        code: |
+          deployment/deploy-image --container website --project website-server --region $AWS_REGION --environment $ENVIRONMENT --iam website-server
+  #after-steps:
+  #  - wantedly/pretty-slack-notify@0.2.7:
+  #      webhook_url: $SLACK_WEBHOOK_URL
