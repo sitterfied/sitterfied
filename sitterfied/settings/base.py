@@ -1,21 +1,11 @@
 # -*- coding: utf-8 -*-
 from unipath import Path
 
-from .facebook import *
-from .intercom import *
 from .pipeline import *
-from .popcornmetrics import *
-from .grappelli import *
-from .rest_framework import *
-from .sideswipeio import *
-from .twilio import *
-from .uploadcare import *
-
 
 PROJECT_ROOT = Path(__file__).ancestor(2)
 
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+DEBUG = TEMPLATE_DEBUG = False
 
 ADMINS = (
     ('Andrew Lewisohn', 'alewisohn@sitterfied.com'),
@@ -205,6 +195,7 @@ LOGGING = {
     }
 }
 
+EMAIL_BACKEND = 'django_mandrill.mail.backends.mandrillbackend.EmailBackend'
 
 AUTH_USER_MODEL = 'app.User'
 LOGIN_URL = '/'
@@ -263,3 +254,18 @@ X_FRAME_OPTIONS = 'ALLOW-FROM www.popcornmetrics.com'
 
 # API Key for OpenCage
 OPEN_CAGE_API_KEY = '5c60dbbfd592484f7835ae9a976b96b4'
+
+# AWS Settings
+AWS_REGION = 'us-east-1'
+AWS_ACCESS_KEY_ID = 'AKIAIRC5KBNUD4ERCW5A'
+AWS_SECRET_ACCESS_KEY = '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'
+
+REDIS_URL = 'redis://127.0.0.1:6379'
+
+# Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}

@@ -1,33 +1,24 @@
-box: alewisohn/ubuntu14.04-packer0.7.5@1.0.4
+box: alewisohn/ubuntu14.04-packer0.7.5@1.0.5
+no-response-timeout: 5
 build:
   steps:
-    - script:
-        name: install build dependencies
-        code: |
-          sudo apt-get update
-          sudo apt-get install libpq-dev
-          sudo apt-get install libxml2-dev
-          sudo apt-get install libxslt1-dev
-          sudo apt-get install postgresql-client
-          sudo apt-get install python-dev
-          sudo apt-get install python-pip
+    - install-packages:
+        packages: libpq-dev libxml2-dev libxslt-dev postgresql-client python-dev python-pip
     - script:
         name: install virtualenv
         code: |
           sudo pip install virtualenv
     - virtualenv:
         name: setup virtual environment
-    - script:
+    - pip-install:
         name: install requirements
-        code: |
-          sudo pip install -r requirements.txt
     - script:
         name: test build
         code: |
           django-admin test --settings=sitterfied.settings.ci --pythonpath=$WERCKER_SOURCE_DIR -v 2
-  #after-steps:
-  #  - wantedly/pretty-slack-notify@0.2.7:
-  #      webhook_url: $SLACK_WEBHOOK_URL
+  after-steps:
+    - wantedly/pretty-slack-notify@0.2.7:
+        webhook_url: $SLACK_WEBHOOK_URL
 deploy:
   steps:
     - script:
@@ -38,16 +29,26 @@ deploy:
           aws configure set default.region $AWS_REGION
     - script:
         name: build baked image
-        code: |
-          packer/generate-baked-image --region $AWS_REGION --container website --project website-server
+        code: >
+          if [[ -z "$DEPLOY_ARGS" ]]; then
+          echo "building AMI for deployment to $ENVIRONMENT in $AWS_REGION";
+          packer/generate-baked-image --region=$AWS_REGION --container=website --project=website-server;
+          else
+          echo "Staging blessed; use previously baked ami.";
+          fi;
     - script:
-        name: deploy to test
-        code: |
-          deployment/deploy-image --container website --project website-server --region $AWS_REGION --environment $ENVIRONMENT --iam website-server
+        name: deploy to ec2
+        code: >
+          USER_DATA_OPTION='';
+          if [[ -n "$USER_DATA" ]]; then
+          USER_DATA_OPTION="--user-data=$USER_DATA";
+          fi;
+          DEPLOY_ARGS_OPTION="${DEPLOY_ARGS-}";
+          deployment/deploy-image --container=website --project=website-server --region=$AWS_REGION --environment=$ENVIRONMENT --iam website-server $DEPLOY_ARGS_OPTION $USER_DATA_OPTION;
     - script:
         name: prune previous builds
         code: |
-          deployment/cleanup-ec2 --region "$AWS_REGION" --container webiste --project website-server --environment $ENVIRONMENT --keep 3
-  #after-steps:
-  #  - wantedly/pretty-slack-notify@0.2.7:
-  #      webhook_url: $SLACK_WEBHOOK_URL
+          deployment/cleanup-ec2 --region $AWS_REGION --container website --project website-server --environment $ENVIRONMENT --keep 3
+  after-steps:
+    - wantedly/pretty-slack-notify@0.2.7:
+        webhook_url: $SLACK_WEBHOOK_URL

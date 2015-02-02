@@ -1,5 +1,5 @@
 ---
 
-env: local
+env: development
 
 no_python_bytecode_please: true

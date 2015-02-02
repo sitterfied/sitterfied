@@ -1,6 +1,4 @@
-{% if env == 'local' | default(False) %}
 export DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
-{% endif %}
 
 CELERYD_CHDIR="{{ application_root }}"
 

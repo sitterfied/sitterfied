@@ -1,0 +1,21 @@
+---
+
+- name: check if confd is installed
+  command: /usr/bin/test -d /etc/confd/conf.d
+  ignore_errors: true
+  changed_when: false
+  register: confd_installed
+
+- name: copy the confd config files
+  sudo: true
+  copy: src={{ item }} dest=/etc/confd/conf.d/{{ item | basename }}
+  with_fileglob:
+    - configs/{{ confd_profile }}/conf.d/*
+  when: confd_installed | success
+
+- name: copy the confd template files
+  sudo: true
+  copy: src={{ item }} dest=/etc/confd/templates/{{ item | basename }}
+  with_fileglob:
+    - configs/{{ confd_profile }}/templates/*
+  when: confd_installed | success

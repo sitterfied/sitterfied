@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-
-
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
 
 PIPELINE_CSS = {
     'sitterfied': {
@@ -19,9 +16,7 @@ PIPELINE_CSS = {
     },
 }
 
-
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
-
 
 PIPELINE_JS = {
     'onboarding': {
@@ -41,15 +36,12 @@ PIPELINE_JS = {
     }
 }
 
-
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.slimit.SlimItCompressor'
-
 
 PIPELINE_COMPILERS = (
     'pipeline.compilers.coffee.CoffeeScriptCompiler',
     'pipeline_compass.compiler.CompassCompiler',
 )
-
 
 #allow things to be global
 PIPELINE_DISABLE_WRAPPER = True
