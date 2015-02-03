@@ -44,6 +44,10 @@ deploy:
         name: deploy to test
         code: |
           deployment/deploy-image --container website --project website-server --region $AWS_REGION --environment $ENVIRONMENT --iam website-server
+    - script:
+        name: prune previous builds
+        code: |
+          deployment/cleanup-ec2 --region "$AWS_REGION" --container webiste --project website-server --environment $ENVIRONMENT --keep 3
   #after-steps:
   #  - wantedly/pretty-slack-notify@0.2.7:
   #      webhook_url: $SLACK_WEBHOOK_URL
