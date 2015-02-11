@@ -1,3 +1,7 @@
+{% if env == 'local' | default(False) %}
+export DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
+{% endif %}
+
 CELERYD_CHDIR="{{ application_root }}"
 
 CELERYD_NODES="{% for n in range(celeryd_workers) %}worker{{ n }} {% endfor %}"

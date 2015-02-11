@@ -8,6 +8,9 @@ env PYTHONPATH={{ application_root }}
 {% if no_python_bytecode_please | default(False) %}
 env PYTHONDONTWRITEBYTECODE=1
 {% endif %}
+{% if env == 'local' | default(False) %}
+env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
+{% endif %}
 
 script
     . /etc/environment
