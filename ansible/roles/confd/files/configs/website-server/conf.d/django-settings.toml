@@ -1,0 +1,7 @@
+[template]
+src = "deployed.py.tmpl"
+dest = "/opt/sitterfied/sitterfied/settings/deployed.py"
+keys = [
+  "/sitterfied/website",
+]
+reload_cmd = "/sbin/reload uwsgi"

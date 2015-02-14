@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 from .base import *
-from .mandrill import *
+from .test.facebook import *
+from .test.google import *
+from .test.intercom import *
+from .test.knowtify import *
+from .test.mandrill import *
+from .test.popcornmetrics import *
+from .test.sideswipeio import *
+from .test.twilio import *
+from .test.uploadcare import *
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = TEMPLATE_DEBUG = True
 
 SESSION_COOKIE_NAME = 'sitterfied-dev'
 

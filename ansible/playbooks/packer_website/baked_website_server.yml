@@ -4,16 +4,16 @@
   roles:
     - application_package
     - uwsgi
-    # For now until we have dedicated task boxes
     - celeryd
     - beatcop  # controls celerybeat cluster
     - monit
+  tasks:
+    - include: roles/confd/tasks/configs.yml confd_profile=website-server
   vars:
     application_server_name: test.sitterfied.com
     application_user: ubuntu
     beatcop_command: "{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} --logfile={{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}"
-    celerybeat_state: stopped
-    env: test
+    env: deployed
     monit_alert_address: sysalerts@sitterfied.com
     monit_alert_mail_from: monit@sitterfied.com
     monit_mailserver_host: email-smtp.us-east-1.amazonaws.com

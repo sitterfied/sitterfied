@@ -1,0 +1,19 @@
+export DJANGO_SETTINGS_MODULE="sitterfied.settings.deployed"
+
+CELERYD_CHDIR="/opt/sitterfied"
+
+CELERYD_NODES="{{getv "/sitterfied/website/celery/workers"}}"
+
+CELERY_BIN="/opt/envs/sitterfied/bin/celery"
+
+CELERYD_OPTS="--concurrency={{getv "/sitterfied/website/celery/concurrency"}} --without-mingle --without-gossip"
+
+CELERY_APP="sitterfied.celeryapp:app"
+
+CELERYD_LOG_FILE="/var/log/celery/%N.log"
+CELERYD_PID_FILE="/var/run/celery/%N.pid"
+
+CELERYD_USER="ubuntu"
+CELERYD_GROUP="ubuntu"
+
+CELERY_CREATE_DIRS=1

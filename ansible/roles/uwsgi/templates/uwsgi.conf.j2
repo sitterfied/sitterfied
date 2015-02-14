@@ -5,15 +5,9 @@ setuid {{ uwsgi_user }}
 setgid {{ uwsgi_user }}
 
 env PYTHONPATH={{ application_root }}
+env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
 {% if no_python_bytecode_please | default(False) %}
 env PYTHONDONTWRITEBYTECODE=1
 {% endif %}
-{% if env == 'local' | default(False) %}
-env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
-{% endif %}
 
-script
-    . /etc/environment
-    export DJANGO_SETTINGS_MODULE
-    exec {{ application_virtualenv_bin }}/uwsgi /etc/uwsgi.d/sitterfied.ini
-end script
+exec {{ application_virtualenv_bin }}/uwsgi /etc/uwsgi.d/sitterfied.ini
