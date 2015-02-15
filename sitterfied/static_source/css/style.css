@@ -1199,6 +1199,8 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .bookings_block .booking_list > li .desc .children span {top:8px;}
 .bookings_block .booking_list > li .desc .btn_wrap {position:absolute;top:0;right:15px;}
 .bookings_block .booking_list > li .desc .btn_wrap .button {float:none;margin-top:8px;}
+.bookings_block .booking_list > li .desc .btn_wrap .button.disabled {font-size:15px;padding:0;width:74px;background-image:none;}
+.bookings_block .booking_list > li .desc .btn_wrap .button.disabled:hover {background:#bc6387;cursor:default;}
 .bookings_block .booking_list > li .desc .note_wrap {position:absolute;top:48px;left:30px;}
 .bookings_block .booking_list > li .desc .note_wrap a {padding-right:30px;background:url(../images/icons/arrow_bottom12.png) right center no-repeat;}
 .bookings_block .booking_list > li .desc .note_wrap a .hide {display:none;}

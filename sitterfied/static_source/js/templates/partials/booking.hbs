@@ -185,12 +185,18 @@
         {{# if Sitterfied.isParent }}
           {{# unless isInPast }}
             <div class="btn_wrap">
-              <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
-                <span class="icon_cancel">
-                  &nbsp;
-                </span>
-                CANCEL
-              </a>
+              {{#if isWorking}}
+                <a class="button button_smaller button_cancel disabled">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </a>
+              {{else}}
+                <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+                  <span class="icon_cancel">
+                    &nbsp;
+                  </span>
+                    CANCEL
+                </a>
+              {{/if}}
             </div>
           {{/ unless }}
         {{ else }}
@@ -198,29 +204,48 @@
             {{# if thisSitterAccepted }}
               {{# unless isInPast }}
                 <div class="btn_wrap">
-                  <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
-                    <span class="icon_cancel">
-                      &nbsp;
-                    </span>
-                    CANCEL
-                  </a>
+                  {{#if isWorking}}
+                    <a class="button button_smaller button_cancel disabled">
+                      <i class="fa fa-spinner fa-spin"></i>
+                    </a>
+                  {{else}}
+                    <a class="button button_smaller button_cancel" {{action 'cancelBooking' booking}}>
+                      <span class="icon_cancel">
+                        &nbsp;
+                      </span>
+                      CANCEL
+                    </a>
+                  {{/if}}
                 </div>
               {{/ unless}}
             {{/ if}}
           {{ else }}
             {{# unless isInPast }}
             <div class="btn_wrap">
-              <a class="button button_smaller" {{action 'acceptBooking' booking}}>
-                <span class="icon_ok2">
-                &nbsp;
-                </span>
-                ACCEPT
-              </a>
-              <a class="button button_smaller button_cancel" {{action 'declineBooking' booking}}>
-                <span class="icon_cancel">
+              {{#if isAccepting}}
+                <a class="button button_smaller disabled">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+              {{else}}
+                <a class="button button_smaller" {{action 'acceptBooking' booking}}>
+                  <span class="icon_ok2">
                   &nbsp;
-                </span>DECLINE
-              </a>
+                  </span>
+                  ACCEPT
+                </a>
+              {{/if}}
+              
+              {{#if isDeclining}}
+                <a class="button button_smaller button_cancel disabled">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </a>
+              {{else}}
+                <a class="button button_smaller button_cancel" {{action 'declineBooking' booking}}>
+                  <span class="icon_cancel">
+                    &nbsp;
+                  </span>DECLINE
+                </a>
+              {{/if}}
             </div>
             {{/ unless}}
           {{/ if }}
