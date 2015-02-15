@@ -22,8 +22,7 @@
       "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
         "scripts/sleep.sh",
-        "scripts/ansible-staging-directory.sh",
-        "scripts/environment.sh"
+        "scripts/ansible-staging-directory.sh"
       ]
     },
     {

@@ -5,3 +5,4 @@
   service:
     name=celeryd
     state=restarted
+  when: celeryd_state == "started"

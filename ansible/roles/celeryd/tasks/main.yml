@@ -35,5 +35,5 @@
   sudo: True
   service:
     name=celeryd
-    state=started
+    state={{ celeryd_state }}
     enabled=True

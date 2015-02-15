@@ -13,6 +13,7 @@
     application_server_name: test.sitterfied.com
     application_user: ubuntu
     beatcop_command: "{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} --logfile={{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}"
+    celeryd_state: stopped
     env: deployed
     monit_alert_address: sysalerts@sitterfied.com
     monit_alert_mail_from: monit@sitterfied.com

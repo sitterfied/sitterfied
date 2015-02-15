@@ -3,4 +3,4 @@
 - name: collect static files
   command: django-admin collectstatic --noinput
   environment:
-    DJANGO_SETTINGS_MODULE=sitterfied.settings.ci
+    DJANGO_SETTINGS_MODULE: sitterfied.settings.ci
