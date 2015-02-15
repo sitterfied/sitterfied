@@ -9,6 +9,7 @@ export TEST_SITTERFIED_WEBSITE_DATABASE_HOST=website-test-website-server-databas
 export TEST_SITTERFIED_WEBSITE_DATABASE_PASSWORD=^uM*e3xj79eFLrc
 export TEST_SITTERFIED_WEBSITE_DEBUG=True
 export TEST_SITTERFIED_WEBSITE_ELASTICACHE_ENDPOINT=website-test.ug6jhv.0001.use1.cache.amazonaws.com:6379 
+export TEST_SITTERFIED_WEBSITE_ENVIRONMENT=test
 export TEST_SITTERFIED_WEBSITE_LOG_LEVEL=DEBUG
 export TEST_SITTERFIED_WEBSITE_SERVER_EMAIL=no-reply@test.sitterfied.com
 export TEST_SITTERFIED_WEBSITE_SESSION_COOKIE_NAME=sitterfied-test
@@ -21,6 +22,6 @@ fi
 
 # Restart services that depend on the Django settings file
 service beatcop restart
-service celery restart
+service celeryd restart
 
 exit 0

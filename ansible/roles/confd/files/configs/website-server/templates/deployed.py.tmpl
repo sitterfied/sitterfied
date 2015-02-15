@@ -6,7 +6,7 @@ from urllib import quote_plus
 from .base import *
 
 # Import environment specific values
-if '{{getenv "ENVIRONMENT"}}' == 'test':
+if '{{getv "/sitterfied/website/environment"}}' == 'test':
     from .test.facebook import *
     from .test.google import *
     from .test.intercom import *
