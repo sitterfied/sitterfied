@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # -*- mode: python -*-
 from celery.schedules import crontab
+from kombu import Exchange, Queue
 from urllib import quote_plus
 
 from .base import *
