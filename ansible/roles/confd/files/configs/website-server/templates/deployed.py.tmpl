@@ -69,7 +69,7 @@ MIDDLEWARE_CLASSES += (
 # Celery Configuration
 BROKER_TRANSPORT_OPTIONS = {
     'region': AWS_REGION,
-    'queue_name_prefix': '{{getv "/sitterfied/website/celery/queue/name/prefix"}}'
+    'queue_name_prefix': '{{getv "/sitterfied/website/celery/queue/name/prefix"}}',
     # Set visibility timeout to 1 year, this is necessary to prevent
     # celery from executing scheduled celery tasks multiple times.
     'visibility_timeout': 43200,

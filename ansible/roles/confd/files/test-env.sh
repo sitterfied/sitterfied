@@ -22,6 +22,5 @@ fi
 
 # Restart services that depend on the Django settings file
 service beatcop restart
-service celeryd restart
 
 exit 0
