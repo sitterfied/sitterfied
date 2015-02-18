@@ -1038,6 +1038,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     )
 
     Sitterfied.BookingController = Em.ObjectController.extend(
+        
+        isWorking: false
+
         isNoteShown: (() ->
             notes = @get('notes')
             return notes && notes.trim().length > 0
@@ -1048,6 +1051,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             @set('isNoteShown', !isNoteShown)
 
         cancelBooking: (booking) ->
+            return if this.isWorking
+            this.set("isWorking", true)
             $.ajax
                 type: "POST"
                 url:"/api/bookings/" + booking.get('id') + "/cancel_booking/"
@@ -1056,8 +1061,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     booking.load(booking.get('id'), response)
                 error: () ->
                     alert("There was a problem canceling this booking. Please try again")
+                complete: ()->
+                    this.set("isWorking", false)
 
         declineBooking: (booking) ->
+            return if this.isDeclining
+            this.set("isDeclining", true)
             $.ajax
                 type: "POST"
                 url:"/api/bookings/" + booking.get('id') + "/decline_booking/"
@@ -1066,8 +1075,12 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     booking.load(booking.get('id'), response)
                 error: () ->
                     alert("There was a problem declining this booking. Please try again")
+                complete: ()->
+                    this.set("isDeclining", false)
 
         acceptBooking: (booking) ->
+            return if this.isAccepting
+            this.set("isAccepting", true)
             $.ajax
                 type: "POST"
                 url:"/api/bookings/" + booking.get('id') + "/accept_booking/"
@@ -1078,7 +1091,8 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     booking.load(booking.get('id'), response)
                 error: () ->
                     alert("There was a problem accepting this booking. Please try again")
-
+                complete: ()->
+                    this.set("isAccepting", false)
 
         rate: ( () ->
             num_children = @get('num_children')
