@@ -1489,7 +1489,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 .header .top_info .find_form_block ul li input[type="submit"] {font-size:22px;line-height:41px;height:41px;width:250px;}
 .header .top_info .find_form_block ul li input[type="button"] {font-size:22px;line-height:41px;height:41px;width:250px;}
 .header .top_info .find_form_block ul li.clear_pad {padding-left:0;margin-bottom:-40px;}
-.header .top_info .find_form_block form > ul > li:last-child:before {width:18px;height:19px;top:11px;left:20px;}
+.header .top_info .find_form_block form > ul > li:last-child:before {width:18px;height:19px;top:37px;left:20px;}
 .header .top_info .find_form_block .hide {display:block;padding:10px 0 0 0;font-size:17px;text-align:center;}
 .header .top_info .find_form_block .hide a {padding-left:20px;background:url(../images/icons/arrow_top2.png) left center no-repeat;}
 .header .top_info .find_form_block .show {padding:10px 0 0 0;font-size:17px;text-align:center;}
