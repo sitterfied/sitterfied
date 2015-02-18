@@ -13,15 +13,32 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
 
     Ember.DatePicker = Em.TextField.extend({
         didInsertElement: ()->
+            if (@$(window).width() <= 540) 
+                monthsOption = 1
+            else
+                monthsOption = [ 1, 2 ]
             #setup datepicker and keep ember insync with it
             @$().datepicker(
                 dateFormat: 'D, M dd yy',
                 showOtherMonths: true,
                 selectOtherMonths: true,
-                numberOfMonths: [ 1, 2 ],
+                numberOfMonths: monthsOption,
                 minDate:0
             ).on 'changeDate', =>
                 @$().trigger('change')
+            
+            @$(window).resize( ()->
+                if (@$(window).width() <= 540) 
+                   if size isnt "mobile"
+                        _this.$().datepicker("option", "numberOfMonths", 1)
+                        size = "mobile"
+                else
+                    if size isnt "desktop"
+                        _this.$().datepicker("option", "numberOfMonths", [1, 2])
+                        size = "desktop"
+            )
+
+            return
     })
 
 
