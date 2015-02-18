@@ -21,7 +21,7 @@ server {
     # can set this to a known host and allow it in our django app.
     set $my_host $host;
     if ($host ~ "\d+\.\d+\.\d+\.\d+") {
-        set $my_host "elbhealthcheck.biz";
+        set $my_host "healthcheck.sitterfied.com";
     }
     
     location /static/ {

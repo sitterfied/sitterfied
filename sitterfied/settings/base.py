@@ -210,7 +210,6 @@ ALLOWED_HOSTS = [
     'localhost',
     '.sitterfied.com',
     '.sttrfd.us',
-    'elbhealthcheck.biz',
     '.elb.amazonaws.com',
     'ping',
 ]

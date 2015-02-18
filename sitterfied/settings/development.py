@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from celery.schedules import crontab
+from kombu import Exchange, Queue
+
 from .base import *
 from .test.facebook import *
 from .test.google import *
@@ -55,11 +58,30 @@ TWILIO_DEFAULT_CALLERID = '+19088384816'
 FACEBOOK_APP_ID = '746551758706532'
 
 # Celery configuration
-BROKER_URL = REDIS_URL + '/0'
-BROKER_TRANSPORT_OPTIONS = {
-    # Set visibility timeout to 1 year, this is necessary to prevent
-    # celery from executing scheduled celery tasks multiple times.
-    'visibility_timeout': 10,
+BROKER_URL = 'amqp://pefpvhja:AxNSZh1hNBt_XiTu_59GDg_Oezfuw0BF@tiger.cloudamqp.com/pefpvhja'
+BROKER_POOL_LIMIT = 1  # Will decrease connection usage
+BROKER_CONNECTION_TIMEOUT = 30  # May require a long timeout due to Linux DNS timeouts etc
+BROKER_HEARTBEAT = 30  # Will detect stale connections faster
+
+CELERY_DEFAULT_QUEUE = 'sitterfied-dev'
+CELERY_QUEUES = (
+    Queue(CELERY_DEFAULT_QUEUE, Exchange(CELERY_DEFAULT_QUEUE, routing_key=CELERY_DEFAULT_QUEUE)),
+)
+
+# Celery Beat Configuration
+CELERYBEAT_SCHEDULE = {
+    'check-for-completed-jobs': {
+        'task': 'sitterfied.app.tasks.jobs.check_for_completed_jobs',
+        'schedule': crontab(minute='5'),
+    },
+    'check-for-canceled-jobs': {
+        'task': 'sitterfied.app.tasks.jobs.check_for_canceled_jobs_with_incorrect_status',
+        'schedule': crontab(hour='0', minute='15',),
+    },
+    'mark-expired-jobs': {
+        'task': 'sitterfied.app.tasks.jobs.mark_expired_jobs',
+        'schedule': crontab(minute='10'),
+    },
 }
 
 # Override Job Reminder Times
