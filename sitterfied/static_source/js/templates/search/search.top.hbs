@@ -79,7 +79,7 @@
 		</li>
 		<li>
 		  <label for="when">{{# unless overnight }}When{{else}}From{{/unless}}</label>
-            {{view Ember.DatePicker placeholder="DATE" id="datepicker" class="datepicker" valueBinding="start_date"}}
+            {{view Ember.DatePicker placeholder="DATE" id="datepicker" class="datepicker" valueBinding="start_date" readonly="true"}}
 		</li>
 		<li class="fatselect">
 		  <label for="from">From</label>

@@ -12,6 +12,7 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
     })
 
     Ember.DatePicker = Em.TextField.extend({
+        attributeBindings: ['readonly'],
         didInsertElement: ()->
             if (@$(window).width() <= 540) 
                 monthsOption = 1
@@ -39,6 +40,9 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
             )
 
             return
+        willDestroyElement: ()->
+            @$().datepicker('destroy');
+            @$(window).off('resize');
     })
 
 
