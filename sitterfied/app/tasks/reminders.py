@@ -12,6 +12,7 @@ from sitterfied.app.sms import send_message
 from sitterfied.app.utils import get_short_url
 from sitterfied.bookings.models import Reminder
 from sitterfied.celeryapp import app
+from sitterfied.utils import time
 from sitterfied.utils.tasks import get_eta, reschedule
 
 logger = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ seconds_in_hour = 3600
 
 def calculate_eta(timestamp, delta):
     if getattr(settings, 'FAST_SEND_REMINDERS', False):
-        return timezone.now() + delta
+        return time.now() + delta
     else:
         return timestamp - delta
 
@@ -42,7 +43,7 @@ def get_time_delta(seconds):
         return 'in ' + str(minutes) + ' ' + ('minutes' if minutes > 1 else 'minute')
 
 
-@app.task()
+@app.task(acks_late=True)
 @reschedule()
 def send_reminders(id, reminder_type, seconds, reminders, *args, **kwargs):
     logger.info('Send reminders task starting...')

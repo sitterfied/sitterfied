@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
 import re
 
 from django import forms
@@ -15,6 +14,7 @@ from sitterfied.bookings.models import Booking
 from sitterfied.parents.models import Parent
 from sitterfied.sitters.models import Sitter
 from sitterfied.users.models import User
+from sitterfied.utils import time
 
 
 USER_FIELDS =  ["address1", "address2", "city", "state", "zip", "cell", "first_name", "last_name", "email", "avatar", "tos"]
@@ -142,7 +142,7 @@ class SitterRegisterForm(RegistrationForm):
 
     def clean_dob(self):
         dob = self.cleaned_data['dob']
-        if dob.year > datetime.date.today().year - 18:
+        if dob.year > time.now().year - 18:
             raise forms.ValidationError("You are too young to register!")
         return dob
 
@@ -203,7 +203,7 @@ class SitterRegisterForm(RegistrationForm):
             "last_name":widgets.TextInput(attrs={"placeholder":"Last"}),
             "email":widgets.TextInput(attrs={"placeholder":"Email", "class": "large"}),
             'gender':widgets.RadioSelect(attrs={'id': 'gender'}),
-            'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-100, datetime.date.today().year + 1)))),
+            'dob':SelectDateWidget(years=list(reversed(range(time.now().year-100, time.now().year + 1)))),
             "biography":widgets.Textarea(),
             "one_child_min_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
             "one_child_max_rate": widgets.TextInput(attrs={"placeholder": rate_prompt}),
@@ -269,7 +269,7 @@ class ChildForm(forms.ModelForm):
         fields = ('name', 'dob', 'school', 'special_needs')
         widgets = {
             "name":widgets.TextInput(attrs={"placeholder":"Name", "class":"left"}),
-            'dob':SelectDateWidget(years=list(reversed(range(datetime.date.today().year-50, datetime.date.today().year + 1)))),
+            'dob':SelectDateWidget(years=list(reversed(range(time.now().year-50, time.now().year + 1)))),
             "school":widgets.TextInput(attrs={"placeholder":"School (if applicable)", "class":"long"}),
             "special_needs": widgets.SelectMultiple(attrs={"placeholder":"Special needs"}),
         }

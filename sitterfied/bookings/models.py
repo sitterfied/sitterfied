@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.dispatch import Signal
-from django.utils import timezone
 from django.utils.functional import cached_property
 from model_utils.models import TimeStampedModel
 
 from sitterfied.app import us_states
+from sitterfied.utils import time
 
 
 booking_accepted = Signal(providing_args=['booking'])
@@ -78,7 +78,7 @@ class Booking(TimeStampedModel):
     def accept(self, sitter):
         booking_response = sitter.responses.get(booking=self)
         booking_response.response = Booking.BOOKING_STATUS_ACCEPTED
-        booking_response.responded_at = timezone.now()
+        booking_response.responded_at = time.now()
         booking_response.save()
 
         self.booking_status = Booking.BOOKING_STATUS_ACCEPTED
@@ -94,7 +94,7 @@ class Booking(TimeStampedModel):
     def decline(self, sitter):
         booking_response = sitter.responses.get(booking=self)
         booking_response.response = Booking.BOOKING_STATUS_DECLINED
-        booking_response.responded_at = timezone.now()
+        booking_response.responded_at = time.now()
         booking_response.save()
 
         if self.declined_sitters.count() == self.sitters.all().count():
@@ -112,7 +112,7 @@ class Booking(TimeStampedModel):
         self.responses.filter(
             response=Booking.BOOKING_STATUS_PENDING
         ).update(
-            response=Booking.BOOKING_STATUS_CANCELED, responded_at=timezone.now())
+            response=Booking.BOOKING_STATUS_CANCELED, responded_at=time.now())
 
         # Delete any reminders
         if hasattr(self, 'reminder'):

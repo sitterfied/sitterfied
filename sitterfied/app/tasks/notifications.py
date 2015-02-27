@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
 import pytz
-from celery.utils.log import get_task_logger
+
 from django.template.loader import render_to_string
 from django.utils import timezone
 from twilio import TwilioRestException
@@ -9,8 +10,9 @@ from sitterfied.app.sms import send_message
 from sitterfied.app.utils import get_short_url
 from sitterfied.bookings.models import Booking, BookingResponse
 from sitterfied.celeryapp import app
+from sitterfied.utils import time
 
-logger = get_task_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
 @app.task
@@ -83,7 +85,7 @@ def notify_sitter_of_job_request(id):
             sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
 
         booking_date = booking.start_date_time.date()
-        tz = pytz.timezone(sitter.timezone) if sitter.timezone else pytz.UTC
+        tz = time.get_timezone(sitter.timezone)
         start_date_time = tz.normalize(booking.start_date_time)
         stop_date_time = tz.normalize(booking.stop_date_time)
 

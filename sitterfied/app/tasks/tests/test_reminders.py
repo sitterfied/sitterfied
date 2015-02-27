@@ -14,6 +14,7 @@ from sitterfied.bookings.models import Booking, Reminder
 from sitterfied.parents.models import Parent
 from sitterfied.sitters.models import Sitter
 
+
 def test_time_conversions():
     tz = timezone('America/New_York')
     eta = (datetime.now(tz) - timedelta(seconds=3600)).strftime("%Y-%m-%d %H:%M:%S")

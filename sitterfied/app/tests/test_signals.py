@@ -3,14 +3,12 @@ import re
 from datetime import datetime, timedelta
 
 import mock
-import pytz
 from django.db.models.signals import pre_save, m2m_changed, pre_delete
 from django.template.loader import render_to_string
 from hamcrest import *
 from pytz import timezone
 
-from sitterfied.app import signals, sms, utils
-from sitterfied.app.tasks.tests import utils
+from sitterfied.app import signals, utils
 from sitterfied.bookings.models import Booking, Reminder
 from sitterfied.parents.models import Parent
 from sitterfied.sitters.models import Sitter

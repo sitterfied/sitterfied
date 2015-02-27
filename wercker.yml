@@ -4,10 +4,10 @@ build:
   steps:
     - install-packages:
         packages: libpq-dev libxml2-dev libxslt-dev postgresql-client python-dev python-pip
-    - script:
+    - pip-install:
         name: install virtualenv
-        code: |
-          sudo pip install virtualenv
+        packages_list: "virtualenv"
+        requirements_file: ""
     - virtualenv:
         name: setup virtual environment
     - pip-install:
