@@ -45,7 +45,8 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
     parent = sender.parent
 
     if parent.settings.email_booking_accepted_denied:
-        # TODO: send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
+        # TODO: send_html_email("Your booking request has been
+        # accepted", "hello@sitterfied.com", parent.email, text, html)
         pass
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
@@ -312,12 +313,16 @@ def reminder_save_handler(*args, **kwargs):
             seconds = first_reminder
             next_reminders = [
                 {
-                    'eta': (calculate_eta(start_date_time, timedelta(seconds=second_reminder))).strftime('%Y-%m-%d %H:%M:%S'),
+                    'eta': calculate_eta(
+                        start_date_time,
+                        timedelta(seconds=second_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'reminder_type': 'second',
                     'seconds': second_reminder,
                 },
                 {
-                    'eta': (calculate_eta(stop_date_time, timedelta(seconds=relief_reminder))).strftime('%Y-%m-%d %H:%M:%S'),
+                    'eta': calculate_eta(
+                        stop_date_time,
+                        timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'reminder_type': 'relief',
                     'seconds': relief_reminder,
                 },
@@ -328,7 +333,9 @@ def reminder_save_handler(*args, **kwargs):
             seconds = second_reminder
             next_reminders = [
                 {
-                    'eta': calculate_eta((stop_date_timem, timedelta(seconds=relief_reminder))).strftime('%Y-%m-%d %H:%M:%S'),
+                    'eta': calculate_eta(
+                        stop_date_time,
+                        timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'reminder_type': 'relief',
                     'seconds': relief_reminder,
                 },

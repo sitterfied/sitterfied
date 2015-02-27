@@ -1,5 +1,5 @@
 box: alewisohn/ubuntu14.04-packer0.7.5@1.0.5
-no-response-timeout: 5
+no-response-timeout: 10
 build:
   steps:
     - install-packages:
