@@ -33,7 +33,10 @@ class acquire_lock(object):
 
 
 def get_eta(desired_eta):
-    visibility_timeout = settings.BROKER_TRANSPORT_OPTIONS.get('visibility_timeout')
+    visibility_timeout = settings.BROKER_TRANSPORT_OPTIONS.get('visibility_timeout', -1)
+    if visibility_timeout == -1:
+        return desired_eta
+
     return min(desired_eta, time.now() + timedelta(seconds=visibility_timeout))
 
 
