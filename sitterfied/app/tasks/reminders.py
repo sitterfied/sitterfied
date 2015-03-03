@@ -44,7 +44,6 @@ def get_time_delta(seconds):
 
 
 @app.task(acks_late=True)
-@reschedule()
 def send_reminders(id, reminder_type, seconds, reminders, *args, **kwargs):
     logger.info('Send reminders task starting...')
     reminder = Reminder.objects.get(pk=id)

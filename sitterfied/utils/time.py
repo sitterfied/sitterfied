@@ -10,8 +10,8 @@ def get_timezone(timezone=None):
     return pytz.timezone(timezone) if timezone else pytz.timezone(DEFAULT_TIMEZONE)
 
 
-def make_aware(value, timezone):
-    return timezone.make_aware(value, timezone)
+def make_aware(value, tz):
+    return timezone.make_aware(value, tz)
 
 
 def now():

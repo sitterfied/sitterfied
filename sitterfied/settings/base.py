@@ -220,7 +220,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Base URL for shortened URLs
-SHORT_URL = 'www.sttrfd.us/'
+SHORT_URL = 'sttrfd.us/'
 
 # Celery configuration
 CELERYD_HIJACK_ROOT_LOGGER = False
