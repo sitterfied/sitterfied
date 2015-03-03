@@ -17,5 +17,6 @@
     - dev
   vars:
     beatcop_command: '{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} -f {{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}'
+    celeryd_state: 'started'
     ngrok_tunnels: 'web'
     with_redmon: false

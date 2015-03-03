@@ -67,6 +67,9 @@ MIDDLEWARE_CLASSES += (
 )
 
 BROKER_URL = '{{getv "/sitterfied/website/celery/broker/url"}}'
+BROKER_POOL_LIMIT = 1  # Will decrease connection usage
+BROKER_CONNECTION_TIMEOUT = 30  # May require a long timeout due to Linux DNS timeouts etc
+BROKER_HEARTBEAT = 30  # Will detect stale connections faster
 
 CELERY_DEFAULT_QUEUE = '{{getv "/sitterfied/website/celery/default/queue"}}'
 CELERY_QUEUES = (
@@ -91,80 +94,4 @@ CELERYBEAT_SCHEDULE = {
         'task': 'sitterfied.utils.knowtify.update_knowtify',
         'schedule': crontab(hour=22, minute=3, day_of_week='Mon'),
     },
-}
-
-LOG_LEVEL = '{{getv "/sitterfied/website/log/level"}}'
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'filters': {
-        'ignore_http_header': {
-            '()': 'sitterfied.utils.log.IgnoreRegularExpressionFilter',
-            'pattern': r'^Invalid HTTP_HOST header',
-        },
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        }
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'null': {
-            'level': LOG_LEVEL,
-            'class': 'django.utils.log.NullHandler',
-        },
-        'console': {
-            'level': LOG_LEVEL,
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'log_file': {
-            'level': LOG_LEVEL,
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'verbose',
-            'filename': '/var/log/sitterfied/application.log',
-            'maxBytes': 1024 * 1024 * 25,  # 25 MB
-            'backupCount': 5,
-        },
-        'mail_admins': {
-            'filters': ['ignore_http_header', 'require_debug_false'],
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'email_backend': 'django_ses.SESBackend',
-        },
-    },
-    'loggers': {
-        'boto': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.db.backends': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        '': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    }
 }

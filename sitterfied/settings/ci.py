@@ -63,7 +63,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
-        '': {
+        'sitterfied': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,

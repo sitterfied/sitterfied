@@ -6,7 +6,6 @@ from rest_framework.response import Response
 
 from sitterfied.bookings.models import Booking
 from sitterfied.bookings.serializers import BookingResponseSerializer, BookingSerializer
-from sitterfied.sitters.models import Sitter
 from sitterfied.sitters.serializers import SitterSerializer
 from sitterfied.utils import views
 

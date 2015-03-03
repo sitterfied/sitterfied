@@ -143,7 +143,11 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        }
+    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -162,7 +166,7 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'log_file': {
+        'file': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
@@ -170,27 +174,41 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
+        'app': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'filename': '/var/log/sitterfied/application.log',
+            'maxBytes': 1024 * 1024 * 25,  # 25 MB
+            'backupCount': 5,
+        },
+        'mail_admins': {
+            'filters': ['require_debug_false'],
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'email_backend': 'django_ses.SESBackend',
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'log_file'],
-            'level': 'INFO',
+            'handlers': ['file', 'console'],
+            'level': 'WARNING',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'log_file'],
-            'level': 'INFO',
-            'propagate': False,
+            'handlers': ['file', 'console'],
+            'level': 'WARNING',
+            'propagate': True,
         },
         'django.db.backends': {
-            'handlers': ['console', 'log_file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        '': {
-            'handlers': ['console', 'log_file'],
-            'level': 'DEBUG',
+            'handlers': ['file', 'console'],
+            'level': 'WARNING',
             'propagate': True,
+        },
+        'sitterfied': {
+            'handlers': ['app', 'console', 'mail_admins'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     }
 }

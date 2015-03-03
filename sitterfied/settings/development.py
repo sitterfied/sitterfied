@@ -32,7 +32,7 @@ DATABASES = {
         'NAME': 'sitterfied',
         'USER': 'vagrant',
         'PASSWORD': 'vagrant',
-        'HOST': '192.168.100.22',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -51,18 +51,11 @@ GOOGLE_OAUTH_REDIRECT_URI = "http://sitterfied.ngrok.com"
 # Override Short URL
 SHORT_URL = 'localhost:8000/'
 
-# Override Twilio Settings
-TWILIO_DEFAULT_CALLERID = '+19088384816'
-
 # Override Facebook App ID
 FACEBOOK_APP_ID = '746551758706532'
 
 # Celery configuration
-BROKER_URL = 'amqp://pefpvhja:AxNSZh1hNBt_XiTu_59GDg_Oezfuw0BF@tiger.cloudamqp.com/pefpvhja'
-BROKER_POOL_LIMIT = 1  # Will decrease connection usage
-BROKER_CONNECTION_TIMEOUT = 30  # May require a long timeout due to Linux DNS timeouts etc
-BROKER_HEARTBEAT = 30  # Will detect stale connections faster
-
+BROKER_URL = REDIS_URL + '/1'
 CELERY_DEFAULT_QUEUE = 'sitterfied-dev'
 CELERY_QUEUES = (
     Queue(CELERY_DEFAULT_QUEUE, Exchange(CELERY_DEFAULT_QUEUE, routing_key=CELERY_DEFAULT_QUEUE)),
