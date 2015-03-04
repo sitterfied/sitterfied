@@ -1,6 +1,7 @@
 #!/bin/bash -x
 
 # Export environment variables
+export PRODUCTION_SITTERFIED_WEBSITE_CELERY_BROKER_URL=amqp://skcgsiqg:9elSAgOlB78PubEJso7YyNqgvbKp4dTq@turtle.rmq.cloudamqp.com/skcgsiqg
 export PRODUCTION_SITTERFIED_WEBSITE_CELERY_CONCURRENCY=2
 export PRODUCTION_SITTERFIED_WEBSITE_CELERY_DEFAULT_QUEUE=sitterfied-production
 export PRODUCTION_SITTERFIED_WEBSITE_CELERY_QUEUE_NAME_PREFIX=production-
@@ -10,7 +11,6 @@ export PRODUCTION_SITTERFIED_WEBSITE_DATABASE_PASSWORD=XXcCBqyRsHWA3D2
 export PRODUCTION_SITTERFIED_WEBSITE_DEBUG=False
 export PRODUCTION_SITTERFIED_WEBSITE_ELASTICACHE_ENDPOINT=website-prod-001.ug6jhv.0001.use1.cache.amazonaws.com:6379
 export PRODUCTION_SITTERFIED_WEBSITE_ENVIRONMENT=production
-export PRODUCTION_SITTERFIED_WEBSITE_LOG_LEVEL=DEBUG
 export PRODUCTION_SITTERFIED_WEBSITE_SERVER_EMAIL=no-reply@sitterfied.com
 export PRODUCTION_SITTERFIED_WEBSITE_SESSION_COOKIE_NAME=sitterfied-production
 
@@ -18,5 +18,8 @@ export PRODUCTION_SITTERFIED_WEBSITE_SESSION_COOKIE_NAME=sitterfied-production
 if [[ -f /etc/confd/confd.toml ]]; then
 	/usr/local/bin/confd -onetime
 fi
+
+# Restart services that depend on the Django settings file
+service beatcop restart
 
 exit 0

@@ -170,7 +170,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
-            'filename': '/var/log/sitterfied/application.log',
+            'filename': '/var/log/sitterfied/django.log',
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
