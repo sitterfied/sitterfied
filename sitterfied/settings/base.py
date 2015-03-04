@@ -272,11 +272,6 @@ X_FRAME_OPTIONS = 'ALLOW-FROM www.popcornmetrics.com'
 # API Key for OpenCage
 OPEN_CAGE_API_KEY = '5c60dbbfd592484f7835ae9a976b96b4'
 
-# AWS Settings
-AWS_REGION = 'us-east-1'
-AWS_ACCESS_KEY_ID = 'AKIAIRC5KBNUD4ERCW5A'
-AWS_SECRET_ACCESS_KEY = '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'
-
 REDIS_URL = 'redis://127.0.0.1:6379'
 
 # Django REST Framework
