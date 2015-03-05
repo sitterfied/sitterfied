@@ -264,11 +264,6 @@ JOB_FIRST_REMINDER = 86400  # 24 Hours
 JOB_SECOND_REMINDER = 3600  # 1 Hour
 JOB_RELIEF_REMINDER = 3600  # 1 Hour
 
-# This sets the X-Frame-Options HTTP response header to allow loading
-# of the site in the Popcorn Metrics editor. This is only for the
-# Popcorn Metrics editor interface, which requires Firefox.
-X_FRAME_OPTIONS = 'ALLOW-FROM www.popcornmetrics.com'
-
 # API Key for OpenCage
 OPEN_CAGE_API_KEY = '5c60dbbfd592484f7835ae9a976b96b4'
 

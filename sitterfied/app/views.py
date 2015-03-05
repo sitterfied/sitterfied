@@ -41,7 +41,6 @@ from sitterfied.utils.models import Group
 # Universal params used in all views
 view_params = {
     'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
-    'POPCORN_METRICS_ID': settings.POPCORN_METRICS_ID,
     'SIDESWIPE_IO_TOKEN': settings.SIDESWIPE_IO_TOKEN,
     'UPLOADCARE_PUBLIC_KEY': settings.UPLOADCARE['pub_key'],
     'UPLOADCARE_CDN_BASE': settings.UPLOADCARE['upload_base_url'],
