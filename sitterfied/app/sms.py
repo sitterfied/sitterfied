@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
 import re
+import requests
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -12,6 +14,7 @@ from sitterfied.bookings.models import Booking
 from sitterfied.sitters.models import Sitter
 from sitterfied.utils.models import IncomingSMSMessage
 
+logger = logging.getLogger(__name__)
 
 # Your Account Sid and Auth Token from twilio.com/user/account
 account_sid = settings.TWILIO_ACCOUNT_SID
@@ -55,11 +58,11 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
         resp.sms('We\'re sorry, but this job has been cancelled.')
         return resp
 
-    if sitter in booking.declined_sitters.all():
+    if booking.declined_sitters.filter(pk=sitter.pk).exists():
         resp.sms('We\'re sorry, but you\'ve already declined this job.')
         return resp
 
-    if not sitter in booking.sitters.all():
+    if not booking.sitters.filter(pk=sitter.pk).exists():
         resp.sms(
             'We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
@@ -72,9 +75,9 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
             resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
         return resp
 
-    if response == 'accept' or response == 'yes':
+    if response in ['accept', 'yes', 'yeah', 'y', 'yup']:
         booking.accept(sitter)
-    elif response == 'decline' or response == 'no':
+    elif response in ['decline', 'no', 'nope', 'n']:
         if booking.accepted_sitter == sitter:
             short_url = get_short_url('/mybookings/upcoming')
             resp.sms('You have already ACCEPTED this job. If you\'d like to cancel, go here: ' + short_url)
@@ -98,5 +101,19 @@ def get_new_messages():
         new_message.save()
 
 
-def send_message(body, to):
-    client.messages.create(body=body, to=to, from_=sitterfied_number)
+def send_message(body, to, is_parent=False):
+    # Messages to parents are sent via the textit api so that all
+    # messages originate from the same phone number. Messages to
+    # sitters are sent directly via the twilio api.
+    if is_parent:
+        data = {
+            'urns': ['tel:{}'.format(to)],
+            'text': body,
+        }
+        requests.post(
+            settings.TEXTIT_API_URL,
+            data=data,
+            headers={'Authorization': 'Token {}'.format(settings.TEXTIT_API_TOKEN)}
+        )
+    else:
+        client.messages.create(body=body, to=to, from_=sitterfied_number)

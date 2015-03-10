@@ -1,1 +1,1 @@
-Great news! {{ parent_name }} requested a phone interview with you on {{ start_date_time|date:'M j' }}, {{ start_date_time|date:'fA'|lower }}-{{ stop_date_time|date:'fA'|lower }}. Details at {{ short_url }}. Reply ACCEPT {{ booking_code }} or DECLINE {{ booking_code }}
+Great news! {{ parent_name }} requested a phone interview with you on {{ start_date_time|date:'D, M j' }}, {{ start_date_time|date:'fA'|lower }}-{{ stop_date_time|date:'fA'|lower }}. Details at {{ short_url }}. Reply ACCEPT {{ booking_code }} or DECLINE {{ booking_code }}

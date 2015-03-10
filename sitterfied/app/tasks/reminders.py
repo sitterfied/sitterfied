@@ -113,7 +113,7 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, remind
                 'stop_date_time': stop_date_time.shift(time_zone).datetime,
             })
 
-        send_message(sms, parent.cell)
+        send_message(sms, parent.cell, is_parent=True)
     except Exception as ex:
         raise ex
     finally:

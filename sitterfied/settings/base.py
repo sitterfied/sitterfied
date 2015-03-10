@@ -106,25 +106,29 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    # django apps
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin.apps.SimpleAdminConfig',
+    # third-party apps
+    'annoying',
+    'crispy_forms',
+    'django_extensions',
     'django_twilio',
     'djrill',
-    'registration',
-    'crispy_forms',
+    'favicon',
     'floppyforms',
-    'annoying',
-    'rest_framework',
-    'django_extensions',
     'model_utils',
     'pipeline',
     'pyuploadcare.dj',
-    'favicon',
+    'registration',
+    'rest_framework',
+    'rest_framework.authtoken',
+    # sitterfied apps
     'sitterfied.app',
     'sitterfied.bookings',
     'sitterfied.children',
@@ -278,3 +282,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
 }
+
+# TextIt API Integration
+TEXTIT_API_TOKEN = 'defc4dbcc4611a3ec48f284b74dd163244d533c9'
+TEXTIT_API_URL = 'https://api.textit.in/api/v1/broadcasts.json'

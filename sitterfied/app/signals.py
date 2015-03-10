@@ -49,7 +49,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
                 'stop_date_time': sender.stop_date_time,
                 'short_url': short_url,
             })
-            send_message(body=sms, to=parent.cell)
+            send_message(body=sms, to=parent.cell, is_parent=True)
         finally:
             timezone.deactivate()
 
@@ -99,7 +99,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
                     'short_url': short_url,
                     'single_sitter_requested': len(sender.sitters.all()) == 1,
                 })
-                send_message(body=sms, to=parent.cell)
+                send_message(body=sms, to=parent.cell, is_parent=True)
             finally:
                 timezone.deactivate()
 
@@ -172,7 +172,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             finally:
                 timezone.deactivate()
 
-        send_message(body=sms, to=parent.cell)
+        send_message(body=sms, to=parent.cell, is_parent=True)
 
     if sitter:
         if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
@@ -210,20 +210,6 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                     timezone.deactivate()
 
             send_message(body=sms, to=sitter.cell)
-
-
-@receiver(post_save, sender=Booking, dispatch_uid='booking_created')
-def receive_booking(sender, instance=None, created=False, **kwargs):
-    if created:
-        # Queue Celery task for sending parent confirmation
-        notifications.notify_parent_of_job_request.delay(instance.id)
-
-
-@receiver(post_save, sender=BookingResponse, dispatch_uid='booking_response_sitter')
-def receive_booking_response(sender, instance=None, created=False, **kwargs):
-    if created:
-        # Queue Celery task for sending job requests to sitters
-        notifications.notify_sitter_of_job_request.delay(instance.id)
 
 
 @receiver(post_save, sender=SitterReview)

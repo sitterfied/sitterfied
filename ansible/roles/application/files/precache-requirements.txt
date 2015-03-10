@@ -1,8 +1,11 @@
 # ECL Facebook Fork
 git+https://github.com/sitterfied/ECL-Facebook.git#egg=ecl-facebook
 
+# Parse DateTime Master
+git+https://github.com/bear/parsedatetime.git@863c066338db80edd4045626a196f4f9f9e7ae71
+
 boto==2.19.0
-celery[redis]==3.1.16
+celery[librabbitmq]==3.1.18
 cssmin==0.2.0
 delorean==0.4.5
 django==1.7
@@ -20,7 +23,7 @@ django-pipeline-compass==0.1.4
 django-redis-cache==0.10.0
 django-redis-sessions==0.4.0
 django-registration-redux==1.1
-django-ses==0.4.1
+django-ses==0.7.0
 django-smtp-ssl==1.0
 django-storages==1.1.8
 django-twilio==0.7.2

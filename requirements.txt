@@ -1,8 +1,11 @@
 # ECL Facebook Fork
 git+https://github.com/sitterfied/ECL-Facebook.git#egg=ecl-facebook
 
+# Parse DateTime Master
+git+https://github.com/bear/parsedatetime.git@863c066338db80edd4045626a196f4f9f9e7ae71
+
 boto==2.19.0
-celery[sqs]==3.1.16
+celery[librabbitmq]==3.1.18
 cssmin==0.2.0
 delorean==0.4.5
 django==1.7

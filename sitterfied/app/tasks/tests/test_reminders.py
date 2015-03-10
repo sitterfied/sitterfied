@@ -10,7 +10,7 @@ from mock import patch
 from sitterfied.app import signals
 from sitterfied.app.tasks import reminders
 from sitterfied.app.tasks.tests import utils
-from sitterfied.bookings.models import Booking, BookingResponse, Reminder
+from sitterfied.bookings.models import Booking, Reminder
 from sitterfied.utils.test import SitterfiedApiTestCase
 
 
@@ -119,14 +119,10 @@ def get_time_code(instant):
 
 
 def disconnect_signals():
-    utils.disconnect_signal(post_save, signals.receive_booking, Booking)
-    utils.disconnect_signal(post_save, signals.receive_booking_response, BookingResponse)
     utils.disconnect_signal(post_save, signals.reminder_save_handler, Reminder)
     utils.disconnect_signal(pre_delete, signals.reminder_del_handler, Reminder)
 
 
 def reconnect_signals():
-    utils.reconnect_signal(post_save, signals.receive_booking, Booking)
-    utils.reconnect_signal(post_save, signals.receive_booking_response, BookingResponse)
     utils.reconnect_signal(post_save, signals.reminder_save_handler, Reminder)
     utils.reconnect_signal(pre_delete, signals.reminder_del_handler, Reminder)

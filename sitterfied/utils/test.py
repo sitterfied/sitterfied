@@ -15,7 +15,7 @@ def random_string(length):
 class SitterfiedApiTestCase(APITestCase):
 
     def setUp(self):
-        autofixture.create_one('app.User')
+        autofixture.create_one('app.User', field_values={'email': 'test@sitterfied.com'})
 
         self.login_with_staff_user()
 
