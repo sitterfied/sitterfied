@@ -19,7 +19,7 @@ env PYTHONPATH={{ application_root }}
 env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
 
 # Start the process
-exec {{ application_virtualenv_bin }}/python {{ application_virtualenv_bin}}/beatcop /etc/beatcop.d/beatcop.ini >> /var/log/beatcop.log 2>&1
+exec {{ application_virtualenv_bin }}/python {{ application_virtualenv_bin}}/beatcop /etc/beatcop.d/celerybeat.ini >> /var/log/beatcop.log 2>&1
 
 # Run after start
 post-start script
