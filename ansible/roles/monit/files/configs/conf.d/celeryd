@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+check process celeryd with matching /var/run/celery/worker[0-9]+.pid
+  start program = "/etc/init.d/celeryd start"
+  stop program = "/etc/init.d/celeryd stop"
+  if 5 restarts within 5 cycles then timeout
+  if totalmem > 500 Mb for 3 cycles then restart
+  if uptime > 1 day then restart

@@ -19,7 +19,7 @@ if [[ -f /etc/confd/confd.toml ]]; then
 	/usr/local/bin/confd -onetime
 fi
 
-# Restart services that depend on the Django settings file
-service beatcop restart
+# Restart services
+service monit restart
 
 exit 0

@@ -2,3 +2,4 @@
 - name: restart monit
   sudo: true
   service: name=monit state=restarted
+  when: monit_state == "started"
