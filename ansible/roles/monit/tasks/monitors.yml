@@ -1,10 +1,12 @@
 ---
-- name: monitors - Write monitors
+
+- name: write monitors
   sudo: true
-  template:
-    src: monitor.j2
-    dest: "/etc/monit/conf.d/{{ item.name }}"
+  copy: 
+    src: "{{ item }}"
+    dest: "/etc/monit/conf.d/{{ item | basename }}"
     owner: root
     group: root
-  with_items: monit_services
+  with_fileglob:
+    - configs/conf.d/*
   notify: restart monit

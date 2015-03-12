@@ -14,8 +14,13 @@
     - redis
     - beatcop
     - celeryd
+    - monit
     - dev
   vars:
-    celeryd_state: 'started'
-    ngrok_tunnels: 'web'
+    celeryd_state: "started"
+    monit_state: "started"
+    monit_webinterface_acl_rules: 
+      - 192.168.100.1 # vpc
+      - 0.0.0.0 # local
+    ngrok_tunnels: "web"
     with_redmon: false

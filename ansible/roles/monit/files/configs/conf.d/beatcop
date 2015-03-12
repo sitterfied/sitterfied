@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+
+check process beatcop with pidfile /var/run/beatcop/beatcop.pid
+  start program = "/sbin/start beatcop"
+  stop program = "/sbin/stop beatcop"
+  if 5 restarts within 5 cycles then timeout
+  if totalmem > 500 Mb for 3 cycles then restart
