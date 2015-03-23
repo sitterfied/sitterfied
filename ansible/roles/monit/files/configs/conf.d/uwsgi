@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+check process uwsgi with pidfile /tmp/uwsgi.pid
+  start program = "/sbin/start uwsgi"
+  stop program = "/sbin/stop uwsgi"
+  if 5 restarts within 5 cycles then timeout
+  if totalmem > 500 Mb for 3 cycles then restart
+  if uptime > 1 day then restart

@@ -1,5 +1,6 @@
 [uwsgi]
 master = true
+pidfile = /tmp/uwsgi.pid
 die-on-term = true
 socket = {{ uwsgi_socket }}
 pythonpath = {{ application_root }}
