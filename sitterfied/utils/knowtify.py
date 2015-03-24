@@ -36,6 +36,14 @@ def format_sitter_team_sitters(sitters):
 
 
 def format_suggested_sitters(parent, sitters):
+    # Select a parent from the set of mutually shared parent friends
+    # between the current parent and the sitter.
+    for sitter in sitters:
+        shared_parents = parent.friends.filter(
+            id__in=sitter.friends.values_list('id', flat=True)
+        )
+        sitter.selected_parent = random.choice(shared_parents)
+
     return [{
         'id': sitter.id,
         'name': sitter.get_full_name(),
@@ -62,6 +70,7 @@ def get_contacts(dry_run=False):
         sitter_team = parent.sitter_teams.all()
         sitter_team_size = sitter_team.count()
         new_sitters = parent.sitter_teams.filter(created__gte=added_since)
+        friends = parent.friends.filter(parent__isnull=False)
 
         data = {
             'name': parent.get_full_name(),
@@ -73,8 +82,8 @@ def get_contacts(dry_run=False):
                 'city': parent.city,
                 'zip': parent.zip,
                 'type': 'parent',
-                'friends': format_generic(parent.friends.all()),
-                'num_friends': parent.friends.count(),
+                'friends': format_generic(friends),
+                'num_friends': len(friends),
                 'sitters': format_sitter_team_sitters(sitter_team),
                 'sitter_team_size': sitter_team_size,
                 'new_sitters': format_sitter_team_sitters(new_sitters),
@@ -86,10 +95,18 @@ def get_contacts(dry_run=False):
             suggested_sitters = list(Sitter.objects.filter(
                 friends__in=parent.friends.filter(parent__isnull=False)
             ).distinct().exclude(sitter_teams=parent))
+
             random.shuffle(suggested_sitters)
+            suggested_sitters = suggested_sitters[:3]
+
             data['data'].update({
-                'suggested_sitters': format_suggested_sitters(parent, suggested_sitters[:3]),
+                'suggested_sitters': format_suggested_sitters(parent, suggested_sitters),
                 'num_suggested_sitters': len(suggested_sitters),
+            })
+        else:
+            data['data'].update({
+                'suggested_sitters': [],
+                'num_suggested_sitters': 0,
             })
 
         contacts['contacts'].append(data)
@@ -123,7 +140,10 @@ def get_contacts(dry_run=False):
         response = requests.post(
             'http://www.knowtify.io/api/v1/contacts/upsert',
             data=json.dumps(contacts),
-            headers={'Authorization': 'Token token="' + api_token + '"'},
+            headers={
+                'Authorization': 'Token token="' + api_token + '"',
+                'Content-Type': 'application/json',
+            },
         )
 
         output.update({
