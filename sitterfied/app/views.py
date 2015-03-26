@@ -35,12 +35,14 @@ from sitterfied.parents.serializers import ParentSerializer
 from sitterfied.sitters.models import Sitter
 from sitterfied.sitters.serializers import SitterSerializer, SitterSearchSerializer
 from sitterfied.users.models import User
+from sitterfied.users.serializers import UserSerializer
 from sitterfied.utils.models import Group
 
 
 # Universal params used in all views
 view_params = {
     'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
+    'SEGMENT_API_TOKEN': settings.SEGMENT_API_KEY,
     'SIDESWIPE_IO_TOKEN': settings.SIDESWIPE_IO_TOKEN,
     'UPLOADCARE_PUBLIC_KEY': settings.UPLOADCARE['pub_key'],
     'UPLOADCARE_CDN_BASE': settings.UPLOADCARE['upload_base_url'],
@@ -57,13 +59,13 @@ def get_user_json(request):
 
     if hasattr(request.user, 'sitter'):
         user_model = Sitter.objects
-        seralizer = SitterSerializer
-
+        serializer = SitterSerializer
     elif hasattr(request.user, 'parent'):
         user_model = Parent.objects.prefetch_related('children', 'children__special_needs')
-        seralizer = ParentSerializer
+        serializer = ParentSerializer
     elif request.user.is_superuser:
         user_model = User.objects
+        serializer = UserSerializer
     else:
         return None
 
@@ -78,7 +80,7 @@ def get_user_json(request):
                           'reviews',) \
         .get(id=request.user.id)
 
-    serialized = seralizer(classed_user, context={'request': request})
+    serialized = serializer(classed_user, context={'request': request})
     user_json = JSONRenderer().render(serialized.data)
     return user_json
 
