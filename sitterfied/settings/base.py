@@ -113,9 +113,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django_twilio',
-    'django_mandrill',
+    'djrill',
     'registration',
     'crispy_forms',
     'floppyforms',
@@ -213,7 +213,7 @@ LOGGING = {
     }
 }
 
-EMAIL_BACKEND = 'django_mandrill.mail.backends.mandrillbackend.EmailBackend'
+EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
 
 AUTH_USER_MODEL = 'app.User'
 LOGIN_URL = '/'

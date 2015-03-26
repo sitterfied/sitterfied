@@ -62,6 +62,10 @@ def get_user_json(request):
     elif hasattr(request.user, 'parent'):
         user_model = Parent.objects.prefetch_related('children', 'children__special_needs')
         seralizer = ParentSerializer
+    elif request.user.is_superuser:
+        user_model = User.objects
+    else:
+        return None
 
     classed_user = user_model \
         .select_related('settings') \

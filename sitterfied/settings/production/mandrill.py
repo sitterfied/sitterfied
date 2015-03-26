@@ -1,2 +1,2 @@
-EMAIL_BACKEND = 'django_mandrill.mail.backends.mandrillbackend.EmailBackend'
+EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
 MANDRILL_API_KEY = 'rHxnHSkpJG_ZDrRgIHIUWQ'
