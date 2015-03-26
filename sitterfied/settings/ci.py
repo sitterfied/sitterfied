@@ -9,8 +9,6 @@ REDIS_URL = 'redis://'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-STATIC_ROOT = ''
-
 # For testing, use sqlite which will run in-memory
 DATABASES = {
     'default': {
