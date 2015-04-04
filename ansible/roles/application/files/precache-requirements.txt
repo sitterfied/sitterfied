@@ -4,6 +4,7 @@ git+https://github.com/sitterfied/ECL-Facebook.git#egg=ecl-facebook
 boto==2.19.0
 celery[redis]==3.1.16
 cssmin==0.2.0
+delorean==0.4.5
 django==1.7
 django-annoying==0.8.0
 django-crispy-forms==1.4.0

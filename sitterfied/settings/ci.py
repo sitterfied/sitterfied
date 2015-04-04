@@ -5,6 +5,8 @@ DEBUG = TEMPLATE_DEBUG = False
 
 CELERY_ALWAYS_EAGER = True
 
+DISABLE_SHORT_URL = True
+
 REDIS_URL = 'redis://'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

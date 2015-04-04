@@ -34,7 +34,8 @@ def send_template_email(template_name, message):
 
 
 def generate_short_url_code(chars=5):
-    """Creates a randomized alphanumeric string the specified number of
+    """
+    Creates a randomized alphanumeric string the specified number of
     characters long.
 
     """
@@ -47,16 +48,26 @@ def generate_short_url_code(chars=5):
 
 
 def lookup_short_url(key):
-    """Retrieve a shortened URL from Redis."""
+    """
+    Retrieve a shortened URL from Redis.
+
+    """
+    if getattr(settings, 'DISABLE_SHORT_URL', False):
+        return None
+
     return redis_client.get(key)
 
 
 def get_short_url(url, expires=None):
-    """Create and persists a shortened URL.
+    """
+    Create and persists a shortened URL.
 
     If :expires is not set, the shortened URL will expire in 7 days.
 
     """
+    if getattr(settings, 'DISABLE_SHORT_URL', False):
+        return None
+
     ex = expires if expires else timedelta(days=7)
     short_url_code = generate_short_url_code()
     short_url = settings.SHORT_URL + short_url_code
