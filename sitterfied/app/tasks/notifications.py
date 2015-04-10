@@ -4,6 +4,7 @@ import re
 
 from delorean import Delorean
 from django.template.loader import render_to_string
+from django.utils import timezone
 from twilio import TwilioRestException
 
 from sitterfied.app.sms import send_message
@@ -66,6 +67,11 @@ def notify_sitter_of_job_request(id):
         stop_date_time = Delorean(booking.stop_date_time)
 
         try:
+            # Django templates will shift the time based on the
+            # time zone so we need to activate the time zone of the
+            # job.
+            timezone.activate(parent.timezone)
+
             sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
                 'parent_name': parent.get_full_name(),
@@ -85,3 +91,5 @@ def notify_sitter_of_job_request(id):
                 sitter.cell,
                 ansi_escape.sub('', ex.msg),
             )
+        finally:
+            timezone.deactivate()
