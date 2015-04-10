@@ -26,6 +26,7 @@ def create_sitters(count=10):
         current_year = time.now().year - 18
         year = random.randrange(current_year - 65, current_year - 18)
         sitter = Sitter.objects.create(
+            cell='+1555{}'.format(random.randint(1000000, 9999999)),
             dob=date(year, random.randrange(1, 12), random.randrange(1, 28)),
             email='{}@sitterfied.com'.format(username),
             username=username,

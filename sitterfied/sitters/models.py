@@ -3,14 +3,24 @@ from django.core import validators
 from django.db import models
 from model_utils.models import TimeStampedModel
 
+from sitterfied.app.tasks.users import geocode_user
 from sitterfied.users.models import User
+from sitterfied.utils.models import WatchedFieldsMixin
 
 
-class Sitter(User):
+class Sitter(WatchedFieldsMixin, User):
     """
     This model represents a sitter.
 
     """
+    _watched_fields = [
+        'address1',
+        'address2',
+        'city',
+        'state',
+        'zip',
+    ]
+
     GENDER_FEMALE = 'female'
     GENDER_MALE = 'male'
     GENDERS = (
@@ -53,6 +63,14 @@ class Sitter(User):
     two_child_max_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
     two_child_min_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
     will_transport = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        super(Sitter, self).save(*args, **kwargs)
+
+        # If any address fields have changed then we need to geocode
+        # the user again.
+        if self.has_changed():
+            geocode_user.delay(self.id)
 
     class Meta:
         app_label = 'app'
