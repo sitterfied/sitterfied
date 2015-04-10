@@ -55,6 +55,7 @@ usage() {
 region=''
 container=''
 project=''
+branch=''
 
 # parse command line options
 while [[ "$1" != '' ]]
@@ -80,6 +81,13 @@ do
       ;;
     --project=*)
       project=${1#*=}
+      ;;
+    -b | --branch)
+      branch=$2
+      shift
+      ;;
+    --branch=*)
+      branch=${1#*=}
       ;;
     -h | --help | -\?)
       usage
@@ -141,6 +149,7 @@ export CONTAINER="$container"
 export PROJECT_HYPHEN="$project"
 export PROJECT_UNDERSCORE="${project/-/_}"
 cd "$ABS_DIRNAME"
+
 packer build \
 	-var "aws_region=$region" \
 	-var "container=$container" \
@@ -148,6 +157,7 @@ packer build \
 	-var "project_hyphen=$project" \
 	-var "project_underscore=${project/-/_}" \
 	-var "base_ami=$LATEST_BASE_IMAGE" \
+    -var "branch=${branch:-master}" \
 	baked-image.json
 
 exit $?

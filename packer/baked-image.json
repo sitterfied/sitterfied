@@ -33,7 +33,7 @@
     {
       "type": "ansible-local",
       "playbook_file": "../ansible/playbooks/packer_{{ user `container` }}/baked_{{ user `project_underscore` }}.yml",
-      "extra_arguments": ""
+      "extra_arguments": "--extra-vars git_branch={{ user `branch` }}"
     },
     {
       "type": "shell",
@@ -50,6 +50,7 @@
     "aws_deploy_id": null,
     "project_hyphen": "website-server",
     "project_underscore": null,
-    "base_ami": null
+    "base_ami": null,
+    "branch": "master"
   }
 }

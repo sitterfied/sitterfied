@@ -41,7 +41,7 @@ deploy:
         code: >
           if [[ -z "$DEPLOY_ARGS" ]]; then
           echo "building AMI for deployment to $ENVIRONMENT in $AWS_REGION";
-          packer/generate-baked-image --region=$AWS_REGION --container=website --project=website-server;
+          packer/generate-baked-image --region=$AWS_REGION --container=website --project=website-server --branch=$WERCKER_GIT_BRANCH;
           else
           echo "Staging blessed; use previously baked ami.";
           fi;
