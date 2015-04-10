@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
+from delorean import Delorean
 from delorean.dates import utc
 from hamcrest import all_of, assert_that, contains_string, is_
 from mock import patch
@@ -8,6 +9,8 @@ from sitterfied.app.tasks import notifications
 from sitterfied.bookings.models import Booking, BookingResponse
 from sitterfied.parents.models import Parent
 from sitterfied.utils.test import SitterfiedApiTestCase, create_sitters
+
+time_zone = 'America/New_York'
 
 
 def convert_time_string(time):
@@ -54,8 +57,8 @@ class TestNotifications(SitterfiedApiTestCase):
     def test_notify_sitter_of_job_request(self, send_message):
         notifications.notify_sitter_of_job_request(self.response.id)
         assert_that(send_message.call_count, is_(1))
-        start_time = convert_time_string(self.start_date_time)
-        stop_time = convert_time_string(self.stop_date_time)
+        start_time = convert_time_string(Delorean(self.start_date_time).shift(time_zone).datetime)
+        stop_time = convert_time_string(Delorean(self.stop_date_time).shift(time_zone).datetime)
         assert_that(send_message.call_args[1].get('body'),
             all_of(contains_string('{0}-{1}'.format(start_time, stop_time)), contains_string('ACCEPT 1 or DECLINE 1'))
         )
