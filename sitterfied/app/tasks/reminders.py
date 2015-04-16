@@ -13,7 +13,7 @@ from sitterfied.app.utils import get_short_url
 from sitterfied.bookings.models import Reminder
 from sitterfied.celeryapp import app
 from sitterfied.utils import time
-from sitterfied.utils.tasks import get_eta, reschedule
+from sitterfied.utils.tasks import get_eta
 
 logger = logging.getLogger(__name__)
 seconds_in_hour = 3600
@@ -51,7 +51,7 @@ def send_reminders(id, reminder_type, seconds, reminders, *args, **kwargs):
     parent = booking.parent
     sitter = booking.accepted_sitter
 
-    tz = pytz.timezone(parent.timezone) if parent.timezone else pytz.UTC
+    tz = pytz.timezone(booking.time_zone) if booking.time_zone else pytz.UTC
     start_date_time = tz.normalize(booking.start_date_time)
     stop_date_time = tz.normalize(booking.stop_date_time)
 

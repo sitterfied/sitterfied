@@ -91,7 +91,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'sitterfied.app.middleware.TimezoneMiddleware',
 )
 
 ROOT_URLCONF = 'sitterfied.urls'
@@ -266,6 +265,9 @@ JOB_RELIEF_REMINDER = 3600  # 1 Hour
 
 # API Key for OpenCage
 OPEN_CAGE_API_KEY = '5c60dbbfd592484f7835ae9a976b96b4'
+
+# API Key for Zip Code API
+ZIP_CODE_API_KEY = 'YTvbDNIBSw6RCaTc3AKLMvgrLz2P3sa1mGdZtWAmsHd4S7hVI2GuyWWjvY8zrjAN'
 
 REDIS_URL = 'redis://127.0.0.1:6379'
 
