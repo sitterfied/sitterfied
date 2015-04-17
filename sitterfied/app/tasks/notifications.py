@@ -70,14 +70,14 @@ def notify_sitter_of_job_request(id):
             # Django templates will shift the time based on the
             # time zone so we need to activate the time zone of the
             # job.
-            timezone.activate(parent.timezone)
+            timezone.activate(booking.time_zone)
 
             sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
                 'parent_name': parent.get_full_name(),
                 'booking_date': booking_date,
-                'start_date_time': start_date_time.shift(parent.timezone).datetime,
-                'stop_date_time': stop_date_time.shift(parent.timezone).datetime,
+                'start_date_time': start_date_time.shift(booking.time_zone).datetime,
+                'stop_date_time': stop_date_time.shift(booking.time_zone).datetime,
                 'parent_city': parent.city,
                 'short_url': get_short_url('/mybookings/pending'),
                 'booking_code': booking.id,

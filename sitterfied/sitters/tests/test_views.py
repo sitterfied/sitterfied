@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 from hamcrest import assert_that, has_entry, is_
-from mock import patch
 from rest_framework import reverse, status
 
 from sitterfied.utils.test import SitterfiedApiTestCase
@@ -43,8 +42,7 @@ create_url = '/onboarding2/'
 
 class TestViews(SitterfiedApiTestCase):
 
-    @patch('sitterfied.sitters.models.geocode_user.delay')
-    def setUp(self, geocode_user):
+    def setUp(self):
         super(SitterfiedApiTestCase, self).setUp()
 
         response = self.client.get(create_url)
@@ -53,10 +51,8 @@ class TestViews(SitterfiedApiTestCase):
 
         response = self.client.post(create_url, sitter_data, format='multipart')
         assert_that(response.status_code, is_(status.HTTP_302_FOUND))
-        assert_that(geocode_user.called, is_(True))
 
-    @patch('sitterfied.sitters.models.geocode_user.delay')
-    def test_dob_formats(self, geocode_user):
+    def test_dob_formats(self):
         url = reverse.reverse('sitter-detail', args=[1])
         response = self.client.get(url)
         assert_that(response.status_code, is_(status.HTTP_200_OK))
@@ -67,13 +63,10 @@ class TestViews(SitterfiedApiTestCase):
         response = self.client.patch(url, data, format='json')
         assert_that(response.status_code, is_(status.HTTP_200_OK))
         assert_that(response.data, has_entry('dob', date(1988, 3, 20)))
-        assert_that(geocode_user.called, is_(False))
 
-    @patch('sitterfied.sitters.models.geocode_user.delay')
-    def test_address_change(self, geocode_user):
+    def test_address_change(self):
         data = sitter_data.copy()
         data.update(address1='50 Main St')
         url = reverse.reverse('sitter-detail', args=[1])
         response = self.client.patch(url, data, format='json')
         assert_that(response.status_code, is_(status.HTTP_200_OK))
-        assert_that(geocode_user.call_count, is_(1))

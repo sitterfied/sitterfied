@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 
 from sitterfied.app.sms import send_message
-from sitterfied.app.tasks import notifications, reminders, users
+from sitterfied.app.tasks import notifications, reminders
 from sitterfied.app.tasks.reminders import calculate_eta
 from sitterfied.app.utils import get_short_url, send_template_email
 from sitterfied.bookings.models import (
@@ -24,20 +24,9 @@ from sitterfied.bookings.models import (
 from sitterfied.parents.models import Parent
 from sitterfied.schedules.models import Schedule
 from sitterfied.sitters.models import Sitter, SitterReview
-from sitterfied.users.models import User, Settings
+from sitterfied.users.models import Settings
 from sitterfied.utils import time
 from sitterfied.utils.tasks import get_eta
-
-
-#mutual events
-@receiver(post_save, sender=User)
-def user_added(instance, created, **kwargs):
-    """
-    Geocode a user on creation.
-
-    """
-    if created and not instance.timezone:
-        users.geocode_user(instance.id)
 
 
 #parent events
@@ -54,7 +43,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
             sms_template = 'sms/booking/booking_request_accepted.sms'
 
         try:
-            timezone.activate(parent.timezone)
+            timezone.activate(sender.time_zone)
             sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
                 'sitter_cell': sitter.cell,
@@ -75,7 +64,7 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
             sms_template = 'sms/booking/booking_request_accepted_sitter.sms'
 
         try:
-            timezone.activate(parent.timezone)
+            timezone.activate(sender.time_zone)
             sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
                 'parent_name': parent.first_name,
@@ -104,7 +93,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
                                 else 'sms/booking/booking_request_declined_all.sms')
 
             try:
-                timezone.activate(parent.timezone)
+                timezone.activate(sender.time_zone)
                 sms = render_to_string(sms_template, {
                     'sitter_name': sitter.first_name,
                     'parent_name': parent.first_name,
@@ -125,7 +114,7 @@ def booking_request_declined(sender, sitter=None, **kwargs):
             sms_template = 'sms/booking/booking_request_declined_sitter.sms'
 
         try:
-            timezone.activate(parent.timezone)
+            timezone.activate(sender.time_zone)
             sms = render_to_string(sms_template, {
                 'sitter_name': sitter.first_name,
                 'parent_name': parent.first_name,
@@ -152,7 +141,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                 sms_template = 'sms/booking/booking_request_canceled_by_sitter_to_parent.sms'
 
             try:
-                timezone.activate(parent.timezone)
+                timezone.activate(sender.time_zone)
                 sms = render_to_string(sms_template, {
                     'sitter_name': sitter.first_name,
                     'sitter_contact': sitter.cell if sitter.cell else sitter.email,
@@ -176,7 +165,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                 sms_template = 'sms/booking/booking_request_canceled_by_parent.sms'
 
             try:
-                timezone.activate(parent.timezone)
+                timezone.activate(sender.time_zone)
                 sms = render_to_string(sms_template, {
                     'sitter_name': sitter_first_name,
                     'start_date_time': sender.start_date_time,
@@ -198,7 +187,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                     sms_template = 'sms/booking/booking_request_canceled_by_sitter.sms'
 
                 try:
-                    timezone.activate(parent.timezone)
+                    timezone.activate(sender.time_zone)
                     sms = render_to_string(sms_template, {
                         'start_date_time': sender.start_date_time,
                         'parent_name': parent.first_name,
@@ -213,7 +202,7 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                     sms_template = 'sms/booking/booking_request_canceled_by_parent_to_sitter.sms'
 
                 try:
-                    timezone.activate(parent.timezone)
+                    timezone.activate(sender.time_zone)
                     sms = render_to_string(sms_template, {
                         'parent_name': parent.first_name,
                         'start_date_time': sender.start_date_time,
@@ -229,14 +218,14 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
 def receive_booking(sender, instance=None, created=False, **kwargs):
     if created:
         # Queue Celery task for sending parent confirmation
-        notifications.notify_parent_of_job_request.s(instance.id).delay()
+        notifications.notify_parent_of_job_request.delay(instance.id)
 
 
 @receiver(post_save, sender=BookingResponse, dispatch_uid='booking_response_sitter')
 def receive_booking_response(sender, instance=None, created=False, **kwargs):
     if created:
         # Queue Celery task for sending job requests to sitters
-        notifications.notify_sitter_of_job_request.s(instance.id).delay()
+        notifications.notify_sitter_of_job_request.delay(instance.id)
 
 
 @receiver(post_save, sender=SitterReview)
@@ -310,7 +299,7 @@ def reminder_save_handler(*args, **kwargs):
 
         start_date_time = reminder.booking.start_date_time
         stop_date_time = reminder.booking.stop_date_time
-        timezone = pytz.timezone(reminder.booking.parent.timezone)
+        timezone = pytz.timezone(reminder.booking.time_zone)
         delta = start_date_time - time.now()
 
         if delta.total_seconds() > first_reminder:

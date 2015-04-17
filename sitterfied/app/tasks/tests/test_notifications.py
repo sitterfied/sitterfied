@@ -27,7 +27,6 @@ class TestNotifications(SitterfiedApiTestCase):
             last_name='One',
             cell='+15555555555',
             email='parent.one@gmail.com',
-            timezone='America/New_York',
         )
         sitter = create_sitters(1)[0]
         self.start_date_time = datetime.now(utc)

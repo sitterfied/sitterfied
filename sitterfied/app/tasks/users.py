@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
+import requests
+
 from celery.utils.log import get_task_logger
 from django.conf import settings
-from geopy import exc as geopy_exc, geocoders
 
 from sitterfied.celeryapp import app
 from sitterfied.users.models import User
 
-
 logger = get_task_logger(__name__)
-geolocator = geocoders.OpenCage(settings.OPEN_CAGE_API_KEY)
 
 
 @app.task(bind=True)
@@ -23,22 +22,20 @@ def geocode_user(self, id):
 
     zip_code = user.zip
     if not zip_code:
-        logger.warning('Cannot geocode without a zip.')
+        logger.warning('Cannot retrieve time zone without a zip.')
         return
 
-    logger.info('Geocoding {} using zip code {}.'.format(user.get_full_name(), zip_code))
-    try:
-        location = geolocator.geocode(zip_code)
-        if not location:
-            raise geopy_exc.GeopyError('No location retrieved.')
-    except geopy_exc.GeopyError as exc:
-        raise self.retry(exc=exc)
-
-    timezone = location.raw.get('annotations', {}).get('timezone', {}).get('name', None)
-    if not timezone:
-        logger.warning('Location retrieved, but no time zone found.')
+    logger.info('Retrieving time zone for {} using zip code {}.'.format(user.get_full_name(), zip_code))
+    request_url = 'http://www.zipcodeapi.com/rest/{api_key}/info.json/{zip_code}/degrees'.format(
+        api_key=settings.ZIP_CODE_API_KEY,
+        zip_code=zip_code
+    )
+    response = requests.get(request_url)
+    if response.status_code != 200:
+        logger.warning('No time zone found.')
         return
 
-    logger.info('Setting {}\'s time zone to {}.'.format(user.get_full_name(), timezone))
-    user.timezone = timezone
+    time_zone = response.json().get('timezone').get('timezone_identifier')
+    logger.info('Setting {}\'s time zone to {}.'.format(user.get_full_name(), time_zone))
+    user.timezone = time_zone
     user.save()

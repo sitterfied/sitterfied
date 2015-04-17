@@ -9,12 +9,33 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.test import APITestCase
 
 from sitterfied.app import signals
+from sitterfied.parents.models import Parent
 from sitterfied.sitters.models import Sitter
 from sitterfied.utils import time
 
 
 def random_string(length):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
+
+
+def create_parents(count=10):
+    Signal.disconnect(post_save, receiver=signals.new_parent, sender=Parent)
+
+    parents = []
+    for _ in range(count):
+        parent = Parent.objects.create(
+            email='parentone@sitterfied.com',
+            username='parentone',
+            first_name='Parent',
+            last_name='One',
+            cell='+15005550006',
+            password=make_password('password'),
+        )
+        parents.append(parent)
+
+    Signal.connect(post_save, receiver=signals.new_parent, sender=Parent)
+
+    return parents
 
 
 def create_sitters(count=10):
@@ -26,7 +47,7 @@ def create_sitters(count=10):
         current_year = time.now().year - 18
         year = random.randrange(current_year - 65, current_year - 18)
         sitter = Sitter.objects.create(
-            cell='+1555{}'.format(random.randint(1000000, 9999999)),
+            cell='+1500555{}'.format(random.randint(1000, 9999)),
             dob=date(year, random.randrange(1, 12), random.randrange(1, 28)),
             email='{}@sitterfied.com'.format(username),
             username=username,

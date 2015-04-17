@@ -6,18 +6,26 @@ from model_utils.models import TimeStampedModel
 
 from sitterfied.app import us_states
 from sitterfied.utils import time
-
+from sitterfied.utils.models import WatchedFieldsMixin
 
 booking_accepted = Signal(providing_args=['booking'])
 booking_declined = Signal(providing_args=['booking'])
 booking_canceled = Signal(providing_args=['booking'])
 
 
-class Booking(TimeStampedModel):
+class Booking(WatchedFieldsMixin, TimeStampedModel):
     """
     Booking model
 
     """
+    _watched_fields = [
+        'address1',
+        'address2',
+        'city',
+        'state',
+        'zip',
+    ]
+
     BOOKING_STATUS_ACCEPTED = 'accepted'
     BOOKING_STATUS_ACTIVE = 'active'
     BOOKING_STATUS_CANCELED = 'canceled'
@@ -61,6 +69,7 @@ class Booking(TimeStampedModel):
     start_date_time = models.DateTimeField()
     state = models.CharField(choices=us_states.US_STATES, max_length=2, blank=True, default='NJ')
     stop_date_time = models.DateTimeField()
+    time_zone = models.CharField(max_length=255, default='America/New_York')
     zip = models.CharField(max_length=9, blank=True)
 
     @cached_property
@@ -120,6 +129,12 @@ class Booking(TimeStampedModel):
                 reminder.delete()
 
         booking_canceled.send(sender=self, cancelled_by=parent_or_sitter)
+
+    def save(self, *args, **kwargs):
+        if self.has_changed():
+            self.time_zone = time.get_time_zone_for_zip(self.zip)
+
+        super(Booking, self).save(*args, **kwargs)
 
     class Meta:
         app_label = 'app'

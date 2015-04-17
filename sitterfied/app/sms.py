@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-import pytz
 import re
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django_twilio.decorators import twilio_view
-from django.utils import timezone
 from twilio.rest import TwilioRestClient
 from twilio.twiml import Response
 
@@ -49,7 +47,8 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
     try:
         booking = Booking.objects.get(id=request_id)
     except (Booking.DoesNotExist, ObjectDoesNotExist):
-        resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
+        resp.sms(
+            'We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
     if booking.canceled:
@@ -61,7 +60,8 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
         return resp
 
     if not sitter in booking.sitters.all():
-        resp.sms('We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
+        resp.sms(
+            'We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
     if booking.accepted_sitter:
@@ -72,18 +72,14 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
             resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
         return resp
 
-    try:
-        timezone.activate(sitter.timezone if sitter.timezone else pytz.UTC)
-        if response == 'accept' or response == 'yes':
-            booking.accept(sitter)
-        elif response == 'decline' or response == 'no':
-            if booking.accepted_sitter == sitter:
-                short_url = get_short_url('/mybookings/upcoming')
-                resp.sms('You have already ACCEPTED this job. If you\'d like to cancel, go here: ' + short_url)
-            else:
-                booking.decline(sitter)
-    finally:
-        timezone.deactivate()
+    if response == 'accept' or response == 'yes':
+        booking.accept(sitter)
+    elif response == 'decline' or response == 'no':
+        if booking.accepted_sitter == sitter:
+            short_url = get_short_url('/mybookings/upcoming')
+            resp.sms('You have already ACCEPTED this job. If you\'d like to cancel, go here: ' + short_url)
+        else:
+            booking.decline(sitter)
 
     return resp
 
