@@ -1,13 +1,10 @@
-box: alewisohn/ubuntu14.04-packer0.7.5@1.0.5
+box: sitterfied/sitterfied-base-box
 no-response-timeout: 10
 build:
   steps:
-    - install-packages:
-        packages: libpq-dev libxml2-dev libxslt-dev postgresql-client python-dev python-pip
-    - pip-install:
-        name: install virtualenv
-        packages_list: "virtualenv"
-        requirements_file: ""
+    - script:
+        code: |
+          export
     - virtualenv:
         name: setup virtual environment
     - pip-install:
@@ -26,8 +23,10 @@ build:
         code: |
           django-admin test --settings=sitterfied.settings.ci --pythonpath=$WERCKER_SOURCE_DIR -v 2
   after-steps:
-    - wantedly/pretty-slack-notify@0.2.7:
-        webhook_url: $SLACK_WEBHOOK_URL
+    - slack-notifier:
+        url: $SLACK_WEBHOOK_URL
+        channel: notifications
+        username: werckerbot
 deploy:
   steps:
     - script:
@@ -59,5 +58,7 @@ deploy:
         code: |
           deployment/cleanup-ec2 --region $AWS_REGION --container website --project website-server --environment $ENVIRONMENT --keep 3
   after-steps:
-    - wantedly/pretty-slack-notify@0.2.7:
-        webhook_url: $SLACK_WEBHOOK_URL
+    - slack-notifier:
+        url: $SLACK_WEBHOOK_URL
+        channel: notifications
+        username: werckerbot
