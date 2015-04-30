@@ -593,6 +593,7 @@ input[type="radio"]:checked + label:before {background:url(../images/icons/check
 
 .header .top_info .know {float:right;position:absolute;bottom:0;margin-bottom:10px;right:20px;}
 .header .top_info .know .know-statement {display:inline-block;height:25px;vertical-align:middle;line-height:25px;float:left;padding-top:15px;padding-right:15px;color:#3ea7b8;}
+.header .top_info .know-mobile {display:none;}
 .header .top_info .left ul li .know .button {float:right;}
 .header .top_info .find_form_block {padding:13px 0 90px 20px;}
 .header .top_info .find_form_block > p {color:#81abb0;font-size:22px;padding-bottom:15px;}
@@ -2341,7 +2342,7 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .header .top_info .desc .sitter_profile_buttons .button2 { margin-top:5px;}
 .header .top_info .desc p:nth-child(-n+4) span { display:block;padding:0;border:0;}
 .header .top_info .know { display: none;}
-.header .top_info .know-mobile {text-align: center;padding-bottom: 20px;}
+.header .top_info .know-mobile {display:block;text-align: center;padding-bottom: 20px;}
 .header .top_info .know-mobile span {vertical-align: middle;display: inline-block;}
 .header .top_info .know-mobile [class^="icon_"] {width:21px;height:21px;position:static;}
 .header .top_info .know-mobile .icon_plus {background-position: -4px -3589px;}
