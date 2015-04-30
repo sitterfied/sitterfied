@@ -433,6 +433,9 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
     Sitterfied.SitterController  = Em.ObjectController.extend(
         interviewee: null
         isFriend: false # Create property so that template is updated upon change
+        moreThanOneFriendInCommon: false
+        moreThanOneRecommendation: false
+        moreThanOneSitterTeam: false
         sitter_teams_cache: []
 
         # Used by template to get initial value for sitters
@@ -455,6 +458,10 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     this.set("isFriend", true)
                     return null
             this.set("isFriend", false)
+
+            this.set("moreThanOneFriendInCommon", @get('friends_in_common').length > 1)
+            this.set("moreThanOneRecommendation", @get('recommends').length > 1)
+            this.set("moreThanOneSitterTeam", @get('sitter_teams_cache').length > 1)
             
             return null
         ).property('model', 'model.myFriends', 'model.myFriends.length', 'model.sitter_teams', 'model.sitter_teams.length')

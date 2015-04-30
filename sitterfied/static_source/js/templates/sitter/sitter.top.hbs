@@ -43,6 +43,29 @@
       <span>
 	Hi, I'm <strong>{{full_name}}</strong>
       </span>
+
+  <div class="know-mobile">
+    {{#if isFriend }}
+      <a {{action removeFriend this }} class="removefriend">
+  <span class="icon_cancel">
+    &nbsp;
+  </span>
+  <span class="networktext">
+    REMOVE FROM SITTER TEAM
+  </span>
+      </a>
+    {{else}}
+      <a {{action addFriend this }} class="addfriend">
+  <span class="icon_plus">
+    &nbsp;
+  </span>
+  <span class="networktext">
+    ADD TO SITTER TEAM
+  </span>
+      </a>
+    {{/if}}
+  </div>
+
     </p>
     <span class="short_bio">
       {{shortBio}}
@@ -64,8 +87,9 @@
         <span class="number">
 	  {{friends_in_common.length}}
 	</span>
-        mutual friends
-	<ul>
+        mutual friends 
+
+	<ul {{bindAttr class="moreThanOneFriendInCommon:multiple"}}>
 	  <li>Friends you have in common with {{first_name}}</li>
           {{# each friend in friends_in_common}}
 	    <li>
@@ -84,7 +108,7 @@
 	  {{recommends.length}}
 	</span>
 	recommends
-	<ul>
+  <ul {{bindAttr class="moreThanOneRecommendation:multiple"}}>
           <li>Friends who recommend {{first_name}}</li>
           {{# each reccomend in recommends}}
 	    <li>
@@ -103,7 +127,7 @@
 	  {{sitter_teams_cache.length}}
 	</span>
 	sitter teams
-	<ul>
+  <ul {{bindAttr class="moreThanOneSitterTeam:multiple"}}>
 	  <li>Friends who added {{first_name}} to their sitter team</li>
 	  {{# each friend in sitter_teams_cache}}
 	    <li>
