@@ -299,7 +299,6 @@ def reminder_save_handler(*args, **kwargs):
 
         start_date_time = reminder.booking.start_date_time
         stop_date_time = reminder.booking.stop_date_time
-        timezone = pytz.timezone(reminder.booking.time_zone)
         delta = start_date_time - time.now()
 
         if delta.total_seconds() > first_reminder:
@@ -343,9 +342,9 @@ def reminder_save_handler(*args, **kwargs):
 
         if eta:
             result = reminders.send_reminders.apply_async(
-                eta=get_eta(eta.astimezone(timezone)),
+                eta=get_eta(eta),
                 kwargs={
-                    'desired_eta': eta.astimezone(timezone).strftime('%Y-%m-%d %H:%M:%S'),
+                    'desired_eta': eta.strftime('%Y-%m-%d %H:%M:%S'),
                     'id': reminder.id,
                     'reminder_type': reminder_type,
                     'seconds': seconds,
