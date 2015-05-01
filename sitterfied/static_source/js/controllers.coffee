@@ -640,6 +640,25 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 ]
         searched: false
         isLoading: false
+        content: []
+
+        init: () ->
+            this._super();
+            $.get("/api/sitters/").then ((response) =>
+                sitters = Em.A()
+                for sitter in response
+                    s = Sitterfied.Sitter.create()
+                    s.load(sitter['id'], sitter)
+                    sitters.pushObject(s)
+                this.set('model', sitters)
+                @set('searched', true)
+                this.set("isLoading", false)
+            ), (reason) =>
+                $(".findSitter").attr("disabled", false)
+                this.set("isLoading", false)
+            
+            this.set('content', Ember.A());
+
 
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
@@ -761,9 +780,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             ), (reason) =>
                 $(".findSitter").attr("disabled", false)
                 this.set("isLoading", false)
-                
 
-        content: []
         selectedSitters:  Ember.ArrayProxy.create
             content: Ember.A()
 

@@ -3,10 +3,6 @@
     <div {{action bookmark this}} {{bindAttr class=":bookmark isBookmarked:active"}}>
     </div>
   {{/if}}
-  <div class="tit">
-    <span><strong>${{one_child_min_rate}}</strong> /hr</span>
-    {{#linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}
-  </div>
   <div class="img">
     {{#if Sitterfied.currentUser.isParent}}
       <div {{action addSitterTeam this}} {{bindAttr class="inSitterTeam:active :heart" }}>
@@ -18,6 +14,9 @@
     {{# if id_verified }}
       <span>Background Cleared</span>
       {{/if}}
+  </div>
+  <div class="tit">
+    {{#linkTo sitter this.sitter}}{{full_name}}{{/linkTo}}
   </div>
   <ul>
     <li>

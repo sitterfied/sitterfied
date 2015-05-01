@@ -427,13 +427,6 @@ define ["ember", "cs!sitterfied", 'imgareaselect', 'ucare', 'waypoints', 'phonef
             @$().toggleClass('active')
             $('.header nav').fadeToggle()
 
-    Sitterfied.WaypointActiveView = Em.View.extend
-        didInsertElement: () ->
-            @$().waypoint () =>
-                targetClass = @get('targetClass')
-                $("li.active").removeClass('active')
-                $("." +targetClass).addClass('active')
-
     Sitterfied.AjaxStatusButtonView = Em.View.extend
         templateName: "ajaxButton"
         action: null

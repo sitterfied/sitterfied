@@ -408,7 +408,6 @@ define ["ember","cs!sitterfied", "cs!models", "templates", "fancybox"], (Em, Sit
             this.controllerFor('otherServices').set('model', Sitterfied.OtherService.find())
 
         renderTemplate: () ->
-            this.render('search.top', {outlet: 'top'})
             this.render('search')
     )
     Sitterfied.ApplicationRoute = Em.Route.extend(
