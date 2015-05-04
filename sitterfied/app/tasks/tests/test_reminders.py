@@ -19,6 +19,12 @@ from sitterfied.utils.test import create_parents, create_sitters, SitterfiedApiT
 
 class TestReminders(SitterfiedApiTestCase):
 
+    def setUp(self):
+        disconnect_signals()
+
+    def teardown(self):
+        reconnect_signals()
+
     def test_get_time_delta(self):
         # Hours
         assert_that(reminders.get_time_delta(1 * 3600), is_('in 1 hour'))
@@ -80,9 +86,10 @@ class TestReminders(SitterfiedApiTestCase):
     @patch('sitterfied.app.tasks.reminders.send_message')
     def test_send_reminders(self, send_message):
         booking = None
-        try:
-            disconnect_signals()
+        reminder = None
+        response = None
 
+        try:
             create_parents(1)
             create_sitters(1)
 
@@ -98,12 +105,9 @@ class TestReminders(SitterfiedApiTestCase):
             reminders.send_reminders(reminder.id, 'second', 2, [])
             assert_that(send_message.call_count, is_(4))
         finally:
-            try:
-                booking.delete()
-                response.delete()
-                reminder.delete()
-            finally:
-                reconnect_signals()
+            booking.delete()
+            response.delete()
+            reminder.delete()
 
 
 def get_time_code(instant):

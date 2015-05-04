@@ -46,7 +46,7 @@ class TestViews(SitterfiedApiTestCase):
         response = self.client.post(url, self.data, format='json')
         assert_that(response.status_code, is_(status.HTTP_201_CREATED), str(response.data))
         assert_that(response.data.keys(), contains(*self.expected_properties))
-        assert_that(notify_parent.called, is_(True))
+        assert_that(notify_parent.call_count, is_(1))
         assert_that(notify_sitter.call_count, is_(3))
 
         booking = Booking.objects.get(pk=response.data.get('id'))
