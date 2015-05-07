@@ -5,6 +5,7 @@ from kombu import Exchange, Queue
 from .base import *
 from .test.facebook import *
 from .test.google import *
+from .test.hellobar import *
 from .test.intercom import *
 from .test.knowtify import *
 from .test.mandrill import *

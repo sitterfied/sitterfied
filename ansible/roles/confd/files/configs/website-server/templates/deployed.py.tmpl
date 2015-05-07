@@ -10,6 +10,7 @@ from .base import *
 if '{{getv "/sitterfied/website/environment"}}' == 'test':
     from .test.facebook import *
     from .test.google import *
+    from .test.hellobar import *
     from .test.intercom import *
     from .test.knowtify import *
     from .test.mandrill import *
@@ -20,6 +21,7 @@ if '{{getv "/sitterfied/website/environment"}}' == 'test':
 else:
     from .production.facebook import *
     from .production.google import *
+    from .production.hellobar import *
     from .production.intercom import *
     from .production.knowtify import *
     from .production.mandrill import *
