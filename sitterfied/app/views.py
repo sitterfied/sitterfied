@@ -42,6 +42,7 @@ from sitterfied.utils.models import Group
 # Universal params used in all views
 view_params = {
     'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
+    'HELLOBAR_APP_ID': settings.HELLOBAR_APP_ID,
     'SEGMENT_API_KEY': settings.SEGMENT_API_KEY,
     'SIDESWIPE_IO_TOKEN': settings.SIDESWIPE_IO_TOKEN,
     'UPLOADCARE_PUBLIC_KEY': settings.UPLOADCARE['pub_key'],
