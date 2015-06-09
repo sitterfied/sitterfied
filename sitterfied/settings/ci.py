@@ -5,7 +5,13 @@ DEBUG = TEMPLATE_DEBUG = False
 
 CELERY_ALWAYS_EAGER = True
 
+DISABLE_SHORT_URL = True
+
 REDIS_URL = 'redis://'
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+STATIC_ROOT = '/tmp/www'
 
 # For testing, use sqlite which will run in-memory
 DATABASES = {
@@ -63,7 +69,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
-        '': {
+        'sitterfied': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,

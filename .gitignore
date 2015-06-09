@@ -2,7 +2,7 @@
 *.pyc
 *.sql
 .ropeproject
-_flymake*
+_*
 */static/*
 sitterfied*.js
 templates.js

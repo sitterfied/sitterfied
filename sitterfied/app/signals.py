@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 import celery
 import pytz
@@ -7,9 +7,10 @@ from django.conf import settings
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+from django.utils import timezone
 
 from sitterfied.app.sms import send_message
-from sitterfied.app.tasks import notifications, reminders, users
+from sitterfied.app.tasks import notifications, reminders
 from sitterfied.app.tasks.reminders import calculate_eta
 from sitterfied.app.utils import get_short_url, send_template_email
 from sitterfied.bookings.models import (
@@ -23,25 +24,15 @@ from sitterfied.bookings.models import (
 from sitterfied.parents.models import Parent
 from sitterfied.schedules.models import Schedule
 from sitterfied.sitters.models import Sitter, SitterReview
-from sitterfied.users.models import User, Settings
+from sitterfied.users.models import Settings
+from sitterfied.utils import time
 from sitterfied.utils.tasks import get_eta
-
-
-#mutual events
-@receiver(post_save, sender=User)
-def user_added(instance, created, **kwargs):
-    if created and not instance.timezone:
-        users.geocode_user.s(instance.id).delay()
 
 
 #parent events
 @receiver(booking_accepted, dispatch_uid='app.booking.booking_accepted')
 def booking_request_accepted(sender, sitter=None, **kwargs):
     parent = sender.parent
-
-    if parent.settings.email_booking_accepted_denied:
-        # TODO: send_html_email("Your booking request has been accepted", "hello@sitterfied.com", parent.email, text, html)
-        pass
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         short_url = get_short_url('/mybookings/upcoming')
@@ -51,17 +42,18 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
         else:
             sms_template = 'sms/booking/booking_request_accepted.sms'
 
-        sms = render_to_string(sms_template, {
-            'sitter_name': sitter.first_name,
-            'sitter_cell': sitter.cell,
-            'start_date_time': sender.start_date_time,
-            'stop_date_time': sender.stop_date_time,
-            'short_url': short_url,
-        })
-        send_message(body=sms, to=parent.cell)
-
-    if sitter.settings.email_booking_accepted_denied:
-        pass
+        try:
+            timezone.activate(sender.time_zone)
+            sms = render_to_string(sms_template, {
+                'sitter_name': sitter.first_name,
+                'sitter_cell': sitter.cell,
+                'start_date_time': sender.start_date_time,
+                'stop_date_time': sender.stop_date_time,
+                'short_url': short_url,
+            })
+            send_message(body=sms, to=parent.cell)
+        finally:
+            timezone.deactivate()
 
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url = get_short_url('/mybookings/upcoming')
@@ -71,24 +63,23 @@ def booking_request_accepted(sender, sitter=None, **kwargs):
         else:
             sms_template = 'sms/booking/booking_request_accepted_sitter.sms'
 
-        sms = render_to_string(sms_template, {
-            'sitter_name': sitter.first_name,
-            'parent_name': parent.first_name,
-            'parent_cell': parent.cell,
-            'short_url': short_url,
-        })
-        send_message(body=sms, to=sitter.cell)
+        try:
+            timezone.activate(sender.time_zone)
+            sms = render_to_string(sms_template, {
+                'sitter_name': sitter.first_name,
+                'parent_name': parent.first_name,
+                'parent_cell': parent.cell,
+                'short_url': short_url,
+            })
+            send_message(body=sms, to=sitter.cell)
+        finally:
+            timezone.deactivate()
 
 
 @receiver(booking_declined, dispatch_uid='app.booking.booking_declined')
 def booking_request_declined(sender, sitter=None, **kwargs):
     parent = sender.parent
     parent_settings = parent.settings
-
-    if parent_settings.email_booking_accepted_denied:
-        # TODO: send_html_email("Your booking request has been
-        # declined", "hello@sitterfied.com", parent.email, text, html)
-        pass
 
     if parent_settings.mobile_booking_accepted_denied and parent.cell:
         if sender.declined_sitters.count() == sender.sitters.count():
@@ -101,17 +92,18 @@ def booking_request_declined(sender, sitter=None, **kwargs):
                                 if len(sender.sitters.all()) == 1
                                 else 'sms/booking/booking_request_declined_all.sms')
 
-            sms = render_to_string(sms_template, {
-                'sitter_name': sitter.first_name,
-                'parent_name': parent.first_name,
-                'start_date_time': sender.start_date_time,
-                'short_url': short_url,
-                'single_sitter_requested': len(sender.sitters.all()) == 1,
-            })
-            send_message(body=sms, to=parent.cell)
-
-    if sitter.settings.email_booking_accepted_denied:
-        pass
+            try:
+                timezone.activate(sender.time_zone)
+                sms = render_to_string(sms_template, {
+                    'sitter_name': sitter.first_name,
+                    'parent_name': parent.first_name,
+                    'start_date_time': sender.start_date_time,
+                    'short_url': short_url,
+                    'single_sitter_requested': len(sender.sitters.all()) == 1,
+                })
+                send_message(body=sms, to=parent.cell)
+            finally:
+                timezone.deactivate()
 
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
         short_url = get_short_url('/sitter/' + str(sitter.id) + '/edit/schedule')
@@ -121,24 +113,23 @@ def booking_request_declined(sender, sitter=None, **kwargs):
         else:
             sms_template = 'sms/booking/booking_request_declined_sitter.sms'
 
-        sms = render_to_string(sms_template, {
-            'sitter_name': sitter.first_name,
-            'parent_name': parent.first_name,
-            'parent_cell': parent.cell,
-            'short_url': short_url,
-        })
-        send_message(body=sms, to=sitter.cell)
+        try:
+            timezone.activate(sender.time_zone)
+            sms = render_to_string(sms_template, {
+                'sitter_name': sitter.first_name,
+                'parent_name': parent.first_name,
+                'parent_cell': parent.cell,
+                'short_url': short_url,
+            })
+            send_message(body=sms, to=sitter.cell)
+        finally:
+            timezone.deactivate()
 
 
 @receiver(booking_canceled, dispatch_uid='app.booking.booking_canceled')
 def booking_request_canceled(sender, cancelled_by, **kwargs):
     parent = sender.parent
     sitter = sender.accepted_sitter
-
-    if parent.settings.email_booking_accepted_denied:
-        # TODO: send_html_email("Your booking request has been
-        # canceled", "hello@sitterfied.com", parent.email, text, html)
-        pass
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
         if cancelled_by == sitter:
@@ -149,13 +140,17 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             else:
                 sms_template = 'sms/booking/booking_request_canceled_by_sitter_to_parent.sms'
 
-            sms = render_to_string(sms_template, {
-                'sitter_name': sitter.first_name,
-                'sitter_contact': sitter.cell if sitter.cell else sitter.email,
-                'start_date_time': sender.start_date_time,
-                'stop_date_time': sender.stop_date_time,
-                'short_url': short_url,
-            })
+            try:
+                timezone.activate(sender.time_zone)
+                sms = render_to_string(sms_template, {
+                    'sitter_name': sitter.first_name,
+                    'sitter_contact': sitter.cell if sitter.cell else sitter.email,
+                    'start_date_time': sender.start_date_time,
+                    'stop_date_time': sender.stop_date_time,
+                    'short_url': short_url,
+                })
+            finally:
+                timezone.deactivate()
         else:
             if sitter:
                 sitter_first_name = sitter.first_name
@@ -169,21 +164,19 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
             else:
                 sms_template = 'sms/booking/booking_request_canceled_by_parent.sms'
 
-            sms = render_to_string(sms_template, {
-                'sitter_name': sitter_first_name,
-                'start_date_time': sender.start_date_time,
-                'sitter_contact_info': sitter_contact_info,
-            })
+            try:
+                timezone.activate(sender.time_zone)
+                sms = render_to_string(sms_template, {
+                    'sitter_name': sitter_first_name,
+                    'start_date_time': sender.start_date_time,
+                    'sitter_contact_info': sitter_contact_info,
+                })
+            finally:
+                timezone.deactivate()
 
         send_message(body=sms, to=parent.cell)
 
     if sitter:
-        if sitter.settings.email_booking_accepted_denied:
-            # TODO: send_html_email("Your booking request has been
-            # canceled", "hello@sitterfied.com", sitter.email, text,
-            # html)
-            pass
-
         if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
             if cancelled_by == sitter:
                 parent_contact_info = parent.cell if parent.cell else parent.email
@@ -193,22 +186,30 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
                 else:
                     sms_template = 'sms/booking/booking_request_canceled_by_sitter.sms'
 
-                sms = render_to_string(sms_template, {
-                    'start_date_time': sender.start_date_time,
-                    'parent_name': parent.first_name,
-                    'parent_contact_info': parent_contact_info,
-                })
+                try:
+                    timezone.activate(sender.time_zone)
+                    sms = render_to_string(sms_template, {
+                        'start_date_time': sender.start_date_time,
+                        'parent_name': parent.first_name,
+                        'parent_contact_info': parent_contact_info,
+                    })
+                finally:
+                    timezone.deactivate()
             else:
                 if sender.booking_type in ['meetup', 'phone']:
                     sms_template = 'sms/interview/interview_cancelled_by_parent_sitter_notification.sms'
                 else:
                     sms_template = 'sms/booking/booking_request_canceled_by_parent_to_sitter.sms'
 
-                sms = render_to_string(sms_template, {
-                    'parent_name': parent.first_name,
-                    'start_date_time': sender.start_date_time,
-                    'stop_date_time': sender.stop_date_time,
-                })
+                try:
+                    timezone.activate(sender.time_zone)
+                    sms = render_to_string(sms_template, {
+                        'parent_name': parent.first_name,
+                        'start_date_time': sender.start_date_time,
+                        'stop_date_time': sender.stop_date_time,
+                    })
+                finally:
+                    timezone.deactivate()
 
             send_message(body=sms, to=sitter.cell)
 
@@ -217,14 +218,14 @@ def booking_request_canceled(sender, cancelled_by, **kwargs):
 def receive_booking(sender, instance=None, created=False, **kwargs):
     if created:
         # Queue Celery task for sending parent confirmation
-        notifications.notify_parent_of_job_request.s(instance.id).delay()
+        notifications.notify_parent_of_job_request.delay(instance.id)
 
 
 @receiver(post_save, sender=BookingResponse, dispatch_uid='booking_response_sitter')
 def receive_booking_response(sender, instance=None, created=False, **kwargs):
     if created:
         # Queue Celery task for sending job requests to sitters
-        notifications.notify_sitter_of_job_request.s(instance.id).delay()
+        notifications.notify_sitter_of_job_request.delay(instance.id)
 
 
 @receiver(post_save, sender=SitterReview)
@@ -298,8 +299,7 @@ def reminder_save_handler(*args, **kwargs):
 
         start_date_time = reminder.booking.start_date_time
         stop_date_time = reminder.booking.stop_date_time
-        timezone = pytz.timezone(reminder.booking.parent.timezone)
-        delta = start_date_time - datetime.now(timezone)
+        delta = start_date_time - time.now()
 
         if delta.total_seconds() > first_reminder:
             eta = calculate_eta(start_date_time, timedelta(seconds=first_reminder))
@@ -307,12 +307,16 @@ def reminder_save_handler(*args, **kwargs):
             seconds = first_reminder
             next_reminders = [
                 {
-                    'eta': (calculate_eta(start_date_time, timedelta(seconds=second_reminder))).strftime('%Y-%m-%d %H:%M:%S'),
+                    'eta': calculate_eta(
+                        start_date_time,
+                        timedelta(seconds=second_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'reminder_type': 'second',
                     'seconds': second_reminder,
                 },
                 {
-                    'eta': (calculate_eta(stop_date_time, timedelta(seconds=relief_reminder))).strftime('%Y-%m-%d %H:%M:%S'),
+                    'eta': calculate_eta(
+                        stop_date_time,
+                        timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'reminder_type': 'relief',
                     'seconds': relief_reminder,
                 },
@@ -323,7 +327,9 @@ def reminder_save_handler(*args, **kwargs):
             seconds = second_reminder
             next_reminders = [
                 {
-                    'eta': calculate_eta((stop_date_timem, timedelta(seconds=relief_reminder))).strftime('%Y-%m-%d %H:%M:%S'),
+                    'eta': calculate_eta(
+                        stop_date_time,
+                        timedelta(seconds=relief_reminder)).strftime('%Y-%m-%d %H:%M:%S'),
                     'reminder_type': 'relief',
                     'seconds': relief_reminder,
                 },
@@ -336,9 +342,9 @@ def reminder_save_handler(*args, **kwargs):
 
         if eta:
             result = reminders.send_reminders.apply_async(
-                eta=get_eta(eta.astimezone(timezone)),
+                eta=get_eta(eta),
                 kwargs={
-                    'desired_eta': eta.astimezone(timezone).strftime('%Y-%m-%d %H:%M:%S'),
+                    'desired_eta': eta.strftime('%Y-%m-%d %H:%M:%S'),
                     'id': reminder.id,
                     'reminder_type': reminder_type,
                     'seconds': seconds,
@@ -357,7 +363,7 @@ def reminder_del_handler(sender, instance, **kwargs):
 
 
 def create_email_to(email, name):
-    return {'email': email, 'name': name}
+    return '{name} {email}'.format(**{'email': email, 'name': name})
 
 
 def create_message_base():

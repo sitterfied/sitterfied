@@ -10,7 +10,7 @@ timeout = {{ beatcop_timeout }}
 lockname = {{ beatcop_lockname }}
 
 # Command to execute
-command = {{ beatcop_command }}
+command = {{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} -f {{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}
 
 # If you want above command to run in a shell or directly
 shell = {{ beatcop_use_shell }}

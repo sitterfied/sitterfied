@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
-import pytz
-from celery.utils.log import get_task_logger
+import logging
 
 from sitterfied.bookings.models import Booking
 from sitterfied.celeryapp import app
+from sitterfied.utils import time
 from sitterfied.utils.tasks import acquire_lock
 
-logger = get_task_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def get_jobs_completed_since(timestamp):
@@ -48,11 +46,7 @@ def check_for_completed_jobs():
     """
     with acquire_lock('check-for-completed-since') as acquired:
         if acquired:
-            return get_jobs_completed_since(
-                datetime.now(pytz.UTC)
-            ).update(
-                booking_status=Booking.BOOKING_STATUS_COMPLETED
-            )
+            return get_jobs_completed_since(time.now()).update(booking_status=Booking.BOOKING_STATUS_COMPLETED)
 
 
 @app.task
@@ -77,11 +71,10 @@ def mark_expired_jobs():
     """
     with acquire_lock('mark-expired-jobs') as acquired:
         if acquired:
-            jobs = get_jobs_expired_since(datetime.now(pytz.UTC))
+            jobs = get_jobs_expired_since(time.now())
             for job in jobs:
-                job.responses.filter(
-                    response=Booking.BOOKING_STATUS_PENDING
-                ).update(
-                    response=Booking.BOOKING_STATUS_EXPIRED, responded_at=datetime.now(pytz.UTC))
+                job.responses \
+                   .filter(response=Booking.BOOKING_STATUS_PENDING) \
+                   .update(response=Booking.BOOKING_STATUS_EXPIRED, responded_at=time.now())
 
             return jobs.update(booking_status=Booking.BOOKING_STATUS_EXPIRED)

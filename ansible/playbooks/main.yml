@@ -14,8 +14,13 @@
     - redis
     - beatcop
     - celeryd
+    - monit
     - dev
   vars:
-    beatcop_command: '{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} -f {{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}'
-    ngrok_tunnels: 'web'
+    celeryd_state: "started"
+    monit_state: "started"
+    monit_webinterface_acl_rules: 
+      - 192.168.100.1 # vpc
+      - 0.0.0.0 # local
+    ngrok_tunnels: "web"
     with_redmon: false

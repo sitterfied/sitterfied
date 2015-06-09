@@ -1,24 +1,32 @@
-box: alewisohn/ubuntu14.04-packer0.7.5@1.0.5
-no-response-timeout: 5
+box: sitterfied/sitterfied-base-box
+no-response-timeout: 10
 build:
   steps:
-    - install-packages:
-        packages: libpq-dev libxml2-dev libxslt-dev postgresql-client python-dev python-pip
     - script:
-        name: install virtualenv
         code: |
-          sudo pip install virtualenv
+          export
     - virtualenv:
         name: setup virtual environment
     - pip-install:
         name: install requirements
     - script:
+        name: echo python information
+        code: |
+          echo "python version $(python --version) running"
+          echo "pip version $(pip --version) running"
+    - script:
+        name: collect static files
+        code: |
+          django-admin collectstatic --noinput --settings=sitterfied.settings.ci --pythonpath=$WERCKER_SOURCE_DIR
+    - script:
         name: test build
         code: |
           django-admin test --settings=sitterfied.settings.ci --pythonpath=$WERCKER_SOURCE_DIR -v 2
   after-steps:
-    - wantedly/pretty-slack-notify@0.2.7:
-        webhook_url: $SLACK_WEBHOOK_URL
+    - slack-notifier:
+        url: $SLACK_WEBHOOK_URL
+        channel: notifications
+        username: werckerbot
 deploy:
   steps:
     - script:
@@ -32,7 +40,7 @@ deploy:
         code: >
           if [[ -z "$DEPLOY_ARGS" ]]; then
           echo "building AMI for deployment to $ENVIRONMENT in $AWS_REGION";
-          packer/generate-baked-image --region=$AWS_REGION --container=website --project=website-server;
+          packer/generate-baked-image --region=$AWS_REGION --container=website --project=website-server --branch=$WERCKER_GIT_BRANCH;
           else
           echo "Staging blessed; use previously baked ami.";
           fi;
@@ -50,5 +58,7 @@ deploy:
         code: |
           deployment/cleanup-ec2 --region $AWS_REGION --container website --project website-server --environment $ENVIRONMENT --keep 3
   after-steps:
-    - wantedly/pretty-slack-notify@0.2.7:
-        webhook_url: $SLACK_WEBHOOK_URL
+    - slack-notifier:
+        url: $SLACK_WEBHOOK_URL
+        channel: notifications
+        username: werckerbot

@@ -9,11 +9,11 @@
     mode=755
     state=directory
 
-- name: create the beatcop config
+- name: create the celerybeat beatcop config
   sudo: True
   template:
-    src=beatcop.ini.j2
-    dest=/etc/beatcop.d/beatcop.ini
+    src=celerybeat.ini.j2
+    dest=/etc/beatcop.d/celerybeat.ini
     owner=root
     group=root
     mode=644
@@ -31,7 +31,7 @@
   notify:
     - restart beatcop
 
-- name: create the beatcop script
+- name: create the beatcop python script
   sudo: True
   copy:
     src=beatcop

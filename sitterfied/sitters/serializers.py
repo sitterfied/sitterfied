@@ -11,6 +11,12 @@ class SitterSerializer(serializers.ModelSerializer):
     languages = serializers.PrimaryKeyRelatedField(many=True)
     parent_or_sitter = serializers.Field(source='is_parent_or_sitter')
 
+    # Allow legacy datetime formats
+    dob = serializers.DateField(input_formats=[
+        'iso-8601',
+        '%Y-%m-%dT%H:%M:%S.%fZ',
+    ])
+
     class Meta:
         model = Sitter
         fields = default_fields + (

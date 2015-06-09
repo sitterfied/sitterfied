@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging
-from datetime import datetime, timedelta
-from functools import wraps
-
 import pytz
+
 from celery import signature
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.cache import cache
-from django.utils import timezone
+from functools import wraps
 
 from sitterfied.celeryapp import app
+from sitterfied.utils import time
 from sitterfied.utils.sqs import cleanup_stale_queues
 
 logger = logging.getLogger(__name__)
@@ -33,8 +33,13 @@ class acquire_lock(object):
 
 
 def get_eta(desired_eta):
-    visibility_timeout = settings.BROKER_TRANSPORT_OPTIONS.get('visibility_timeout')
-    return min(desired_eta, timezone.now() + timedelta(seconds=visibility_timeout))
+    if not hasattr(settings, 'BROKER_TRANSPORT_OPTIONS'):
+        return desired_eta
+
+    visibility_timeout = settings.BROKER_TRANSPORT_OPTIONS.get('visibility_timeout', -1)
+    if visibility_timeout == -1:
+        return desired_eta
+    return min(desired_eta, time.now() + timedelta(seconds=visibility_timeout))
 
 
 def reschedule(delta=None):
@@ -51,8 +56,8 @@ def reschedule(delta=None):
 
             eta = desired_eta
             if isinstance(eta, (unicode, str)):
-                eta = timezone.make_aware(datetime.strptime(eta, '%Y-%m-%d %H:%M:%S'), pytz.UTC)
-            now = timezone.now()
+                eta = time.make_aware(datetime.strptime(eta, '%Y-%m-%d %H:%M:%S'), pytz.UTC)
+            now = time.now()
             if now - delta < eta < now + delta:
                 logger.info('Desired eta falls within time window, executing task.')
                 func(*args, **kwargs)

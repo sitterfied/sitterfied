@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import logging
 import math
-from datetime import datetime
 
-import pytz
+from datetime import datetime
+from delorean import Delorean
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -12,7 +12,8 @@ from sitterfied.app.sms import send_message
 from sitterfied.app.utils import get_short_url
 from sitterfied.bookings.models import Reminder
 from sitterfied.celeryapp import app
-from sitterfied.utils.tasks import get_eta, reschedule
+from sitterfied.utils import time
+from sitterfied.utils.tasks import get_eta
 
 logger = logging.getLogger(__name__)
 seconds_in_hour = 3600
@@ -20,7 +21,7 @@ seconds_in_hour = 3600
 
 def calculate_eta(timestamp, delta):
     if getattr(settings, 'FAST_SEND_REMINDERS', False):
-        return timezone.now() + delta
+        return time.now() + delta
     else:
         return timestamp - delta
 
@@ -42,8 +43,7 @@ def get_time_delta(seconds):
         return 'in ' + str(minutes) + ' ' + ('minutes' if minutes > 1 else 'minute')
 
 
-@app.task()
-@reschedule()
+@app.task(acks_late=True)
 def send_reminders(id, reminder_type, seconds, reminders, *args, **kwargs):
     logger.info('Send reminders task starting...')
     reminder = Reminder.objects.get(pk=id)
@@ -51,15 +51,14 @@ def send_reminders(id, reminder_type, seconds, reminders, *args, **kwargs):
     parent = booking.parent
     sitter = booking.accepted_sitter
 
-    tz = pytz.timezone(parent.timezone) if parent.timezone else pytz.UTC
-    start_date_time = tz.normalize(booking.start_date_time)
-    stop_date_time = tz.normalize(booking.stop_date_time)
+    start_date_time = Delorean(booking.start_date_time)
+    stop_date_time = Delorean(booking.stop_date_time)
 
     if parent.settings.mobile_booking_accepted_denied and parent.cell:
-        send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, tz)
+        send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, booking.time_zone)
 
     if sitter.settings.mobile_booking_accepted_denied and sitter.cell:
-        send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, tz)
+        send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, booking.time_zone)
 
     if reminders:
         queue_next_reminder(reminder, reminders)
@@ -72,9 +71,9 @@ def queue_next_reminder(reminder, reminders):
     next_seconds = next_reminder['seconds']
 
     result = send_reminders.apply_async(
-        eta=get_eta(pytz.UTC.localize(next_eta)),
+        eta=get_eta(next_eta),
         kwargs={
-            'desired_eta': pytz.UTC.localize(next_eta).strftime('%Y-%m-%d %H:%M:%S'),
+            'desired_eta': next_eta.strftime('%Y-%m-%d %H:%M:%S'),
             'id': reminder.id,
             'reminder_type': next_reminder_type,
             'seconds': next_seconds,
@@ -85,9 +84,9 @@ def queue_next_reminder(reminder, reminders):
     reminder.save()
 
 
-def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, tz):
+def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, reminder_type, seconds, time_zone):
     try:
-        timezone.activate(tz)
+        timezone.activate(time_zone)
 
         if reminder_type in ['first', 'second']:
             template = 'sms/reminder/parent/{0}_reminder.sms'.format(reminder_type)
@@ -96,8 +95,8 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, remind
                 'sitter_first_name': sitter.first_name,
                 'sitter_cell': sitter.cell,
                 'timedelta': get_time_delta(seconds),
-                'start_date_time': start_date_time.replace(),
-                'stop_date_time': stop_date_time.replace(),
+                'start_date_time': start_date_time.shift(time_zone).datetime,
+                'stop_date_time': stop_date_time.shift(time_zone).datetime,
                 'short_url': get_short_url('/mybookings/upcoming'),
             })
         else:
@@ -116,9 +115,9 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, remind
         timezone.deactivate()
 
 
-def send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, tz):
+def send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, reminder_type, seconds, time_zone):
     try:
-        timezone.activate(tz)
+        timezone.activate(time_zone)
 
         if reminder_type in ['first', 'second']:
             template = 'sms/reminder/sitter/{0}_reminder.sms'.format(reminder_type)
@@ -127,8 +126,8 @@ def send_sitter_reminder(sitter, parent, start_date_time, stop_date_time, remind
                 'parent_first_name': parent.first_name,
                 'parent_cell': parent.cell,
                 'timedelta': get_time_delta(seconds),
-                'start_date_time': start_date_time.replace(),
-                'stop_date_time': stop_date_time.replace(),
+                'start_date_time': start_date_time.shift(time_zone).datetime,
+                'stop_date_time': stop_date_time.shift(time_zone).datetime,
                 'short_url': get_short_url('/mybookings/upcoming'),
             })
 

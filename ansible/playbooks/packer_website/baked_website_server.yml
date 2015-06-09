@@ -12,58 +12,8 @@
   vars:
     application_server_name: test.sitterfied.com
     application_user: ubuntu
-    beatcop_command: "{{ application_virtualenv_bin }}/celery beat --app={{ celerybeat_app }} --schedule={{ celerybeat_schedule }} --logfile={{ celerybeat_logfile }} --loglevel=INFO --workdir={{ application_root }} --pidfile={{ celerybeat_pidfile }}"
     celeryd_state: stopped
     env: deployed
-    monit_alert_address: sysalerts@sitterfied.com
-    monit_alert_mail_from: monit@sitterfied.com
-    monit_mailserver_host: email-smtp.us-east-1.amazonaws.com
-    monit_mailserver_port: 465
-    monit_mailserver_user: AKIAJXALS5HET4AUB67Q
-    monit_mailserver_password: "Ajfw+odSSi9MVv3Rmoe8+vcVqTWh4rN/DS5EjL/0Dtx8"
-    monit_mailserver_ssl_version: SSLV3
-    monit_mailserver_timeout: 10
-    monit_services:
-      - name: celeryd
-        type: process
-        matching: true
-        target: /var/run/celery/worker[0-9]+.pid
-        start: /etc/init.d/celeryd start
-        stop: /etc/init.d/celeryd stop
-        rules:
-          - "if 5 restarts within 5 cycles then timeout"
-          - "if totalmem > 500 Mb for 3 cycles then restart"
-      - name: nginx
-        type: process
-        target: /var/run/nginx.pid
-        start: /etc/init.d/nginx start
-        stop: /etc/init.d/nginx stop
-        rules:
-          - "if failed host 127.0.0.1 port 80 then restart"
-          - "if cpu is greater than 40% for 2 cycles then alert"
-          - "if cpu > 60% for 5 cycles then restart"
-          - "if 10 restarts within 10 cycles then timeout"
-      - name: sshd
-        type: process
-        target: /var/run/sshd.pid
-        start: /etc/init.d/ssh start
-        stop: /etc/init.d/ssh stop
-        rules:
-          - "if failed port 22 type tcp then restart"
-          - "if 5 restarts within 5 cycles then timeout"
-      - name: website-test-website-server
-        type: system
-        rules:
-          - "if loadavg (1min) > 8 then alert"
-          - "if loadavg (5min) > 4 then alert"
-          - "if memory usage > 85% then alert"
-          - "if cpu usage (user) > 80% then alert"
-          - "if cpu usage (system) > 40% then alert"
-          - "if cpu usage (wait) > 30% then alert"
-    monit_webinterface_acl_rules: 
-      - 172.31.0.0/8 # vpc
-      - 71.187.22.110/32 # home
-      - 38.140.37.82/32 # office
-      - 0.0.0.0 # local
+    monit_state: "stopped"
     uwsgi_proceses: 6
     uwsgi_user: ubuntu

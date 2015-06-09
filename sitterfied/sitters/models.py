@@ -4,9 +4,10 @@ from django.db import models
 from model_utils.models import TimeStampedModel
 
 from sitterfied.users.models import User
+from sitterfied.utils.models import WatchedFieldsMixin
 
 
-class Sitter(User):
+class Sitter(WatchedFieldsMixin, User):
     """
     This model represents a sitter.
 

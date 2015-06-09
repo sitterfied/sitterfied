@@ -1,0 +1,2 @@
+# -*- coding: utf-8 -*-
+SEGMENT_API_KEY = 'NMTOJEsFZj98UT5vWkJ9HET5bhE2Z04N'

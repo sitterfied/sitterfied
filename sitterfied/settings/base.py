@@ -91,7 +91,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'sitterfied.app.middleware.TimezoneMiddleware',
 )
 
 ROOT_URLCONF = 'sitterfied.urls'
@@ -113,9 +112,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django_twilio',
-    'django_mandrill',
+    'djrill',
     'registration',
     'crispy_forms',
     'floppyforms',
@@ -143,7 +142,11 @@ INSTALLED_APPS = (
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        }
+    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
@@ -162,7 +165,15 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'log_file': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'verbose',
+            'filename': '/var/log/sitterfied/django.log',
+            'maxBytes': 1024 * 1024 * 25,  # 25 MB
+            'backupCount': 5,
+        },
+        'app': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
@@ -170,32 +181,38 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
+        'mail_admins': {
+            'filters': ['require_debug_false'],
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'email_backend': 'django_ses.SESBackend',
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'log_file'],
-            'level': 'INFO',
+            'handlers': ['file', 'console'],
+            'level': 'WARNING',
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['console', 'log_file'],
-            'level': 'INFO',
-            'propagate': False,
+            'handlers': ['file', 'console'],
+            'level': 'WARNING',
+            'propagate': True,
         },
         'django.db.backends': {
-            'handlers': ['console', 'log_file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        '': {
-            'handlers': ['console', 'log_file'],
-            'level': 'DEBUG',
+            'handlers': ['file', 'console'],
+            'level': 'WARNING',
             'propagate': True,
+        },
+        'sitterfied': {
+            'handlers': ['app', 'console', 'mail_admins'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     }
 }
 
-EMAIL_BACKEND = 'django_mandrill.mail.backends.mandrillbackend.EmailBackend'
+EMAIL_BACKEND = 'djrill.mail.backends.djrill.DjrillBackend'
 
 AUTH_USER_MODEL = 'app.User'
 LOGIN_URL = '/'
@@ -210,7 +227,6 @@ ALLOWED_HOSTS = [
     'localhost',
     '.sitterfied.com',
     '.sttrfd.us',
-    'elbhealthcheck.biz',
     '.elb.amazonaws.com',
     'ping',
 ]
@@ -221,7 +237,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Base URL for shortened URLs
-SHORT_URL = 'www.sttrfd.us/'
+SHORT_URL = 'sttrfd.us/'
 
 # Celery configuration
 CELERYD_HIJACK_ROOT_LOGGER = False
@@ -247,18 +263,11 @@ JOB_FIRST_REMINDER = 86400  # 24 Hours
 JOB_SECOND_REMINDER = 3600  # 1 Hour
 JOB_RELIEF_REMINDER = 3600  # 1 Hour
 
-# This sets the X-Frame-Options HTTP response header to allow loading
-# of the site in the Popcorn Metrics editor. This is only for the
-# Popcorn Metrics editor interface, which requires Firefox.
-X_FRAME_OPTIONS = 'ALLOW-FROM www.popcornmetrics.com'
-
 # API Key for OpenCage
 OPEN_CAGE_API_KEY = '5c60dbbfd592484f7835ae9a976b96b4'
 
-# AWS Settings
-AWS_REGION = 'us-east-1'
-AWS_ACCESS_KEY_ID = 'AKIAIRC5KBNUD4ERCW5A'
-AWS_SECRET_ACCESS_KEY = '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'
+# API Key for Zip Code API
+ZIP_CODE_API_KEY = 'YTvbDNIBSw6RCaTc3AKLMvgrLz2P3sa1mGdZtWAmsHd4S7hVI2GuyWWjvY8zrjAN'
 
 REDIS_URL = 'redis://127.0.0.1:6379'
 

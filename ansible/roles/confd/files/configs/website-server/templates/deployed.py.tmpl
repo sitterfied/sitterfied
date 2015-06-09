@@ -10,27 +10,28 @@ from .base import *
 if '{{getv "/sitterfied/website/environment"}}' == 'test':
     from .test.facebook import *
     from .test.google import *
+    from .test.hellobar import *
     from .test.intercom import *
     from .test.knowtify import *
     from .test.mandrill import *
-    from .test.popcornmetrics import *
+    from .test.segment import *
     from .test.sideswipeio import *
     from .test.twilio import *
     from .test.uploadcare import *
 else:
     from .production.facebook import *
     from .production.google import *
+    from .production.hellobar import *
     from .production.intercom import *
     from .production.knowtify import *
     from .production.mandrill import *
-    from .production.popcornmetrics import *
+    from .production.segment import *
     from .production.sideswipeio import *
     from .production.twilio import *
     from .production.uploadcare import *
 
 DEBUG = TEMPLATE_DEBUG = {{getv "/sitterfied/website/debug"}}
 
-# Send Admin emails from the test subdomain
 SERVER_EMAIL = '{{getv "/sitterfied/website/server/email"}}'
 
 SESSION_COOKIE_NAME = '{{getv "/sitterfied/website/session/cookie/name"}}'
@@ -68,6 +69,9 @@ MIDDLEWARE_CLASSES += (
 )
 
 BROKER_URL = '{{getv "/sitterfied/website/celery/broker/url"}}'
+BROKER_POOL_LIMIT = 1  # Will decrease connection usage
+BROKER_CONNECTION_TIMEOUT = 30  # May require a long timeout due to Linux DNS timeouts etc
+BROKER_HEARTBEAT = 30  # Will detect stale connections faster
 
 CELERY_DEFAULT_QUEUE = '{{getv "/sitterfied/website/celery/default/queue"}}'
 CELERY_QUEUES = (
@@ -88,88 +92,8 @@ CELERYBEAT_SCHEDULE = {
         'task': 'sitterfied.app.tasks.jobs.mark_expired_jobs',
         'schedule': crontab(minute='10'),
     },
-    'cleanup-stale-sqs-queues': {
-        'task': 'sitterfied.utils.tasks.cleanup_stale_sqs_queues',
-        'schedule': crontab(hour='*', minute=0, day_of_week='*'),
-    },
     'update-knowtify': {
         'task': 'sitterfied.utils.knowtify.update_knowtify',
         'schedule': crontab(hour=22, minute=3, day_of_week='Mon'),
     },
-}
-
-LOG_LEVEL = '{{getv "/sitterfied/website/log/level"}}'
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'filters': {
-        'ignore_http_header': {
-            '()': 'sitterfied.utils.log.IgnoreRegularExpressionFilter',
-            'pattern': r'^Invalid HTTP_HOST header',
-        },
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        }
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'null': {
-            'level': LOG_LEVEL,
-            'class': 'django.utils.log.NullHandler',
-        },
-        'console': {
-            'level': LOG_LEVEL,
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'log_file': {
-            'level': LOG_LEVEL,
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'verbose',
-            'filename': '/var/log/sitterfied/application.log',
-            'maxBytes': 1024 * 1024 * 25,  # 25 MB
-            'backupCount': 5,
-        },
-        'mail_admins': {
-            'filters': ['ignore_http_header', 'require_debug_false'],
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'email_backend': 'django_ses.SESBackend',
-        },
-    },
-    'loggers': {
-        'boto': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'django.db.backends': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        '': {
-            'handlers': ['console', 'log_file', 'mail_admins'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    }
 }

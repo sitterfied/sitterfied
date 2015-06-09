@@ -91,3 +91,35 @@ class SpecialNeed(TimeStampedModel):
 
     class Meta:
         app_label = 'app'
+
+
+class WatchedFieldsMixin(models.Model):
+    """
+    This mixin provides a means of "watching" model fields for changes.
+
+    """
+    _watched_fields = []
+
+    def __init__(self, *args, **kwargs):
+        super(WatchedFieldsMixin, self).__init__(*args, **kwargs)
+
+        for field in self._watched_fields:
+            setattr(self, '__original_{}'.format(field), getattr(self, field))
+
+    def field_has_changed(self, field):
+        if field in self._watched_fields:
+            return getattr(self, '__original_{}'.format(field)) != getattr(self, field)
+        return False
+
+    def get_original_value(self, field):
+        return getattr(self, '__original_{}'.format(field), None)
+
+    def has_changed(self):
+        for field in self._watched_fields:
+            if self.field_has_changed(field):
+                return True
+
+        return False
+
+    class Meta:
+        abstract = True
