@@ -659,7 +659,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             
             this.set('content', Ember.A());
 
-
         toggleSortSitters: () ->
             isSortSitters = @get('sortSitters')
             @set('sortSitters', !isSortSitters)
@@ -861,13 +860,6 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         filteredLocalTeam: (() ->
             return @get('localTeam').filterProperty("passesFilters", true)
         ).property('localTeam.@each.passesFilters', 'localTeam.length')
-
-        zoomToLocalTeam: () ->
-            $.scrollTo("#local_sitter_title", 500, {offset:-300})
-        zoomToFriendTeam: () ->
-            $.scrollTo("#myfriends_sitter_title", 500, {offset:-300})
-        zoomToSitterTeam: () ->
-            $.scrollTo("#sitterteam", 500, {offset:-200})
 
         multipleSittersText: (() ->
             selectedSitters = @get('selectedSitters')
