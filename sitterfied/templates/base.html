@@ -38,15 +38,15 @@
     {% include "googleanalytics.html" %}
     {% include "mixpanel.html" %}
     {% include "segment.html" %}
+    <link rel="stylesheet" type="text/css" href="//fast.appcues.com/appcues.min.css">
   </head>
   <body {% block bodyclass %} {% endblock %}>
-
     {% block body %}
     {% endblock body %}
 
     {% include "ie_modal.html" %}
+    {% include "appcues.html" %}
     {% include "intercom.html" %}
     {% include "perfectaudience.html" %}
-    {% include "sideswipeio.html" %}
   </body>
 </html>

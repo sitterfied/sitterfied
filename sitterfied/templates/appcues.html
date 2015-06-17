@@ -1,0 +1,20 @@
+{% if request.user.is_authenticated and not debug %}
+<script src="//fast.appcues.com/77.js"></script>
+<script>
+  Appcues.identify('{{ request.user.id }}', {
+    email: '{{ request.user.email }}',
+    name: '{{ request.user.get_full_name }}',
+    first_name: '{{ request.user.first_name }}',
+    last_name: '{{ request.user.last_name }}',
+    city: '{{ request.user.city }}',
+    created_at: {{ request.user.date_joined|date:'U' }},
+    user_hash: '{{ request.user.hash }}',
+    facebook_connected: {{ request.user.is_facebook_connected|yesno:'true,false' }},
+    google_imported: {{ request.user.google_imported|yesno:'true,false' }},
+    profile_completed: {{ request.user.profile_completed|yesno:'true,false' }},
+    schedule_last_updated: {{ request.user.schedlue.modified|date:'U'|default:'"N/A"' }},
+    state: '{{ request.user.state }}',
+    user_type: '{{ request.user.is_parent_or_sitter|lower }}'
+  })
+</script>
+{% endif %}

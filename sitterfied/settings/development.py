@@ -10,7 +10,6 @@ from .test.intercom import *
 from .test.knowtify import *
 from .test.mandrill import *
 from .test.segment import *
-from .test.sideswipeio import *
 from .test.twilio import *
 from .test.uploadcare import *
 

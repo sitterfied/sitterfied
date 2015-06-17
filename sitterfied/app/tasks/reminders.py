@@ -48,6 +48,11 @@ def send_reminders(id, reminder_type, seconds, reminders, *args, **kwargs):
     logger.info('Send reminders task starting...')
     reminder = Reminder.objects.get(pk=id)
     booking = reminder.booking
+
+    if booking.canceled:
+        logger.info('Booking canceled, aborting sending reminders.')
+        return
+
     parent = booking.parent
     sitter = booking.accepted_sitter
 
@@ -105,7 +110,7 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, remind
                 'sitter_first_name': sitter.first_name,
                 'sitter_cell': sitter.cell,
                 'timedelta': get_time_delta(seconds),
-                'stop_date_time': stop_date_time.replace(),
+                'stop_date_time': stop_date_time.shift(time_zone).datetime,
             })
 
         send_message(sms, parent.cell)
