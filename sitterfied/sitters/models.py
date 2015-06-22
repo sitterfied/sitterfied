@@ -21,6 +21,12 @@ class Sitter(WatchedFieldsMixin, User):
 
     biography = models.TextField(blank=True)
     cats_ok = models.BooleanField(default=True)
+    cell = models.CharField(max_length=17, blank=True, unique=True, validators=[
+        validators.RegexValidator(
+            regex=r'^\+?1?\d{10,15}$',
+            message='Phone number must be entered in the format: "+9999999999". Up to 15 digits allowed.')],
+        null=True
+    )
     certifications = models.ManyToManyField('Certification', blank=True)
     current_student = models.BooleanField(default=False)
     dob = models.DateField(blank=False)

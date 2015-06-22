@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.core.validators import RegexValidator
 from django.db import models
 from model_utils.models import TimeStampedModel
 
@@ -11,6 +12,12 @@ class Parent(User):
 
     """
     bookmarks = models.ManyToManyField('Sitter', related_name='bookmarks', blank=True)
+    cell = models.CharField(max_length=17, blank=True, unique=True, validators=[
+        RegexValidator(
+            regex=r'^\+?1?\d{10,15}$',
+            message='Phone number must be entered in the format: "+9999999999". Up to 15 digits allowed.')],
+        null=True
+    )
     emergency_contact_one_name = models.CharField(max_length=128, blank=True)
     emergency_contact_one_phone = models.CharField(max_length=10, blank=True)
     emergency_contact_two_name = models.CharField(max_length=128, blank=True)
