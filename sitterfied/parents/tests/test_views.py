@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.hashers import make_password
 from django.db.models.signals import post_save, Signal
-from hamcrest import assert_that, has_entries, has_entry, contains, is_, none
+from hamcrest import assert_that, contains, has_entries, has_entry, has_items, is_, none
 from rest_framework import status
 from rest_framework.reverse import reverse
 
@@ -57,7 +57,7 @@ class TestViews(SitterfiedApiTestCase):
 
         response = self.client.post(url, data, format='json')
         assert_that(response.status_code, is_(status.HTTP_201_CREATED), str(response.data))
-        assert_that(response.data, has_entry('sitter_teams', list(sitter_ids)))
+        assert_that(response.data, has_entry('sitter_teams', has_items(*sitter_ids)))
 
     def test_list_parents(self):
         url = reverse('parent-list')
@@ -94,7 +94,7 @@ class TestViews(SitterfiedApiTestCase):
         url = reverse('parent-detail', args=[self.parent_id])
         response = self.client.patch(url, data, format='json')
         assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
-        assert_that(response.data, has_entry('sitter_teams', list(sitter_ids)))
+        assert_that(response.data, has_entry('sitter_teams', has_items(*sitter_ids)))
 
         data.update({'sitter_teams': None})
         response = self.client.patch(url, data, format='json')
