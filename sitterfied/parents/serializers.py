@@ -15,6 +15,7 @@ class ParentSerializer(serializers.ModelSerializer):
         fields = sorted(default_fields + (
             'bookings',
             'bookmarks',
+            'cell',
             'children',
             'emergency_contact_one_name',
             'emergency_contact_one_phone',

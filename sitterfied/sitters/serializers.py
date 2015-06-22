@@ -24,6 +24,7 @@ class SitterSerializer(serializers.ModelSerializer):
             'bookings',
             'bookmarks',
             'cats_ok',
+            'cell',
             'certifications',
             'current_student',
             'dob',

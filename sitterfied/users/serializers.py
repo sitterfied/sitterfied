@@ -8,7 +8,6 @@ default_fields = (
     'avatar',
     'address1',
     'address2',
-    'cell',
     'city',
     'date_joined',
     'email',

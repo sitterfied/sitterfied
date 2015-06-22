@@ -273,7 +273,7 @@ def new_sitter(sender, instance=None, **kwargs):
         message = create_message_base()
         message['subject'] = 'Welcome to Sitterfied!'
         message['to'] = [create_email_to(instance.email, instance.get_full_name())]
-        message['global_merge_vars'] = [{'name': 'FNAME', 'content': instance.first_name}]
+        message['global_merge_vars'] = {'FNAME': instance.first_name}
         send_template_email('welcome-sitter', message)
 
 
@@ -284,7 +284,7 @@ def new_parent(sender, instance=None, **kwargs):
         message = create_message_base()
         message['subject'] = 'Welcome to Sitterfied!'
         message['to'] = [create_email_to(instance.email, instance.get_full_name())]
-        message['global_merge_vars'] = [{'name': 'FNAME', 'content': instance.first_name}]
+        message['global_merge_vars'] = {'FNAME': instance.first_name}
         send_template_email('welcome-parent', message)
 
 
