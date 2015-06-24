@@ -2351,6 +2351,9 @@ input[type="checkbox"]:checked + label:before {background:url(../images/icons/ch
 .header .top_info .know-mobile .icon_plus:before {background: #99b527 url(../images/book_bg.gif) repeat-x center center;}
 .header .top_info .know-mobile .icon_cancel:before {background: #bc6387 url(../images/cancel_bg.gif) repeat-x center center;}
 .header .top_info .know-mobile .networktext {margin-left: 5px;}
+
+}
+
 .avatarimage {height: 35px; width: 34px;}
 
 
