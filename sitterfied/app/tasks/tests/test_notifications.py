@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import autofixture
 import random
 
 from delorean import Delorean

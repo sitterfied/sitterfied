@@ -2,7 +2,8 @@
 *.pyc
 *.sql
 .ropeproject
-_*
+_builds
+_steps
 */static/*
 sitterfied*.js
 templates.js
