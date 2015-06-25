@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.hashers import make_password
-from django.db.models.signals import post_save, Signal
+import autofixture
+import random
+
 from hamcrest import assert_that, contains, has_entries, has_entry, has_items, is_, none
 from rest_framework import status
 from rest_framework.reverse import reverse
 
-from sitterfied.app import signals
-from sitterfied.parents.models import Parent
 from sitterfied.parents.serializers import ParentSerializer
-from sitterfied.sitters.models import Sitter
-from sitterfied.utils.test import create_sitters, random_string, SitterfiedApiTestCase
+from sitterfied.utils.test import random_string, SitterfiedApiTestCase
 
 
 class TestViews(SitterfiedApiTestCase):
@@ -19,16 +17,7 @@ class TestViews(SitterfiedApiTestCase):
     def setUp(self):
         super(TestViews, self).setUp()
 
-        Signal.disconnect(post_save, receiver=signals.new_parent, sender=Parent)
-
-        parent = Parent.objects.create(
-            email='parentone@sitterfied.com',
-            username='parentone',
-            first_name='Parent',
-            last_name='One',
-            password=make_password('password'),
-        )
-        self.parent_id = parent.id
+        self.parents = autofixture.get('app.Parent').create(5)
 
     def test_create_parent(self):
         username = random_string(8)
@@ -43,9 +32,8 @@ class TestViews(SitterfiedApiTestCase):
         assert_that(response.status_code, is_(status.HTTP_201_CREATED), str(response.data))
         assert_that(response.data.keys(), contains(*self.expected_properties))
 
-        create_sitters(2)
-
-        sitter_ids = Sitter.objects.values_list('id', flat=True)
+        sitters = autofixture.get('app.Sitter').create(2)
+        sitter_ids = [sitter.id for sitter in sitters]
         username = random_string(8)
         data = {
             'username': username,
@@ -63,35 +51,35 @@ class TestViews(SitterfiedApiTestCase):
         url = reverse('parent-list')
         response = self.client.get(url)
         assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
-        assert_that(len(response.data), is_(1))
+        assert_that(len(response.data), is_(len(self.parents)))
 
     def test_retrieve_parent(self):
-        url = reverse('parent-detail', args=[self.parent_id])
+        parent = random.choice(self.parents)
+        url = reverse('parent-detail', args=[parent.id])
         response = self.client.get(url)
         assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
         assert_that(response.data.keys(), contains(*self.expected_properties))
         assert_that(response.data, has_entries(
-            username='parentone',
-            first_name='Parent',
-            last_name='One',
-            email='parentone@sitterfied.com',
+            username=parent.username,
+            first_name=parent.first_name,
+            last_name=parent.last_name,
+            email=parent.email,
         ))
 
     def test_delete_parent(self):
-        url = reverse('parent-detail', args=[self.parent_id])
+        parent = random.choice(self.parents)
+        url = reverse('parent-detail', args=[parent.id])
         response = self.client.delete(url)
         assert_that(response.status_code, is_(status.HTTP_204_NO_CONTENT), str(response.data))
         assert_that(response.data, none())
 
     def test_update_parent(self):
-        create_sitters(10)
-        sitter_ids = Sitter.objects.values_list('id', flat=True)
+        sitters = autofixture.get('app.Sitter').create(10)
+        sitter_ids = [sitter.id for sitter in sitters]
 
-        data = {
-            'sitter_teams': sitter_ids,
-        }
-
-        url = reverse('parent-detail', args=[self.parent_id])
+        parent = random.choice(self.parents)
+        data = {'sitter_teams': sitter_ids}
+        url = reverse('parent-detail', args=[parent.id])
         response = self.client.patch(url, data, format='json')
         assert_that(response.status_code, is_(status.HTTP_200_OK), str(response.data))
         assert_that(response.data, has_entry('sitter_teams', has_items(*sitter_ids)))

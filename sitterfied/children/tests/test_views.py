@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+import autofixture
+
 from hamcrest import assert_that, is_
 from rest_framework import reverse, status
 
-from sitterfied.parents.models import Parent
 from sitterfied.utils.test import SitterfiedApiTestCase
 
 
@@ -11,11 +12,7 @@ class TestViews(SitterfiedApiTestCase):
     def setUp(self):
         super(TestViews, self).setUp()
 
-        self.parent = Parent.objects.create(
-            first_name='Parent',
-            last_name='One',
-            email='parent.one@sitterfied.com',
-        )
+        self.parent = autofixture.get('app.Parent').create_one()
 
     def test_dob_formats(self):
         url = reverse.reverse('child-list')

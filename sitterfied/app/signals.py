@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta
-
 import celery
-import pytz
+
+from datetime import timedelta
 from django.conf import settings
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
@@ -29,7 +28,6 @@ from sitterfied.utils import time
 from sitterfied.utils.tasks import get_eta
 
 
-#parent events
 @receiver(booking_accepted, dispatch_uid='app.booking.booking_accepted')
 def booking_request_accepted(sender, sitter=None, **kwargs):
     parent = sender.parent

@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
-import json
+import autofixture
 
 from datetime import datetime, timedelta
 from django.db.models.signals import post_save, pre_delete
 from django.template.loader import render_to_string
-from hamcrest import *
+from hamcrest import assert_that, is_
 from mock import patch
-from pytz import timezone
 
 from sitterfied.app import signals
 from sitterfied.app.tasks import reminders
 from sitterfied.app.tasks.tests import utils
 from sitterfied.bookings.models import Booking, BookingResponse, Reminder
-from sitterfied.parents.models import Parent
-from sitterfied.sitters.models import Sitter
-from sitterfied.utils.test import create_parents, create_sitters, SitterfiedApiTestCase
+from sitterfied.utils.test import SitterfiedApiTestCase
 
 
 class TestReminders(SitterfiedApiTestCase):
@@ -83,17 +80,22 @@ class TestReminders(SitterfiedApiTestCase):
             delta,
         )))
 
+    @patch('sitterfied.utils.time.get_time_zone_for_zip', return_value='America/New_York')
+    @patch('sitterfied.app.signals.notifications.notify_sitter_of_job_request.delay')
+    @patch('sitterfied.app.signals.notifications.notify_parent_of_job_request.delay')
     @patch('sitterfied.app.tasks.reminders.send_message')
-    def test_send_reminders(self, send_message):
+    def test_send_reminders(self, send_message, notify_parent, notify_sitter, get_time_zone):
         booking = None
         reminder = None
         response = None
 
         try:
-            create_parents(1)
-            create_sitters(1)
+            booking = autofixture.get('app.Booking').create_one()
 
-            booking, response = create_booking()
+            response = booking.responses.first()
+            response.response = Booking.BOOKING_STATUS_ACCEPTED
+            response.responded_at = datetime.now()
+            response.save()
 
             reminder = Reminder()
             reminder.booking = booking
@@ -114,23 +116,6 @@ def get_time_code(instant):
     hour = instant.strftime('%I').lstrip('0')
     rest = instant.strftime(':%M%p').lower()
     return hour + rest
-
-
-def create_booking():
-    booking = Booking()
-    booking.start_date_time = datetime.now(tz=timezone('UTC'))
-    booking.stop_date_time = booking.start_date_time + timedelta(hours=3)
-    booking.parent = Parent.objects.first()
-    booking.save()
-
-    booking_response = BookingResponse()
-    booking_response.sitter = Sitter.objects.first()
-    booking_response.booking = booking
-    booking_response.response = Booking.BOOKING_STATUS_ACCEPTED
-    booking_response.responded_at = datetime.now()
-    booking_response.save()
-
-    return (booking, booking_response)
 
 
 def disconnect_signals():
