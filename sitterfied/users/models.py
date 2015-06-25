@@ -21,7 +21,6 @@ class User(AbstractUser, TimeStampedModel):
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True, default='')
     avatar = UploadcareImageField(blank=True, manual_crop='174x174 upscale')
-    old_cell = models.CharField(max_length=12, blank=True, default='+11111111111')
     city = models.CharField(max_length=50, blank=True)
     facebook_id = models.IntegerField(null=True, blank=True, unique=True)
     facebook_token = models.CharField(max_length=256, null=True, blank=True)

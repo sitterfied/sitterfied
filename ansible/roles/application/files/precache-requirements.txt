@@ -7,6 +7,7 @@ cssmin==0.2.0
 delorean==0.4.5
 django==1.7
 django-annoying==0.8.0
+django-autofixture==0.10.1
 django-crispy-forms==1.4.0
 django-extensions==1.2.5
 django-favicon==0.1.1
