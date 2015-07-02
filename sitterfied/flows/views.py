@@ -41,7 +41,7 @@ def booking_requests(request, *args, **kwargs):
         'is_valid': False,
     }
 
-    serializer = TextItInWebhookSerializer(data=request.DATA)
+    serializer = TextItInWebhookSerializer(data=request.data)
     if not serializer.is_valid():
         data.update({
             'reason': 'bad_data',
@@ -50,12 +50,12 @@ def booking_requests(request, *args, **kwargs):
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     # Ensure that a user exists with the given cellphone number
-    if not Parent.objects.filter(cell=serializer.object.get('phone')).exists():
+    if not Parent.objects.filter(cell=serializer.validated_data.get('phone')).exists():
         data.update({'reason': 'no_user'})
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     # Attempt to parse the request into a date range
-    text = serializer.object.get('text')
+    text = serializer.validated_data.get('text')
     start, end, type = calendar.evalRanges(text, get_today().timetuple())
     if type != 2:  # 2, parsed as a time
         data.update({'reason': 'invalid_date_range'})
@@ -77,11 +77,11 @@ def booking_requests(request, *args, **kwargs):
 @authentication_classes([authentication.TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
 def booking_tier(request, *args, **kwargs):
-    serializer = TextItInWebhookSerializer(data=request.DATA)
+    serializer = TextItInWebhookSerializer(data=request.data)
     if not serializer.is_valid():
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    text = serializer.object.get('text', '')
+    text = serializer.validated_data.get('text', '')
     response_pattern = r'(yes|yeah|yup|y)'
 
     result = re.search(response_pattern, text, re.I | re.S)
@@ -92,18 +92,18 @@ def booking_tier(request, *args, **kwargs):
         parent = Parent.objects \
             .prefetch_related('sitter_teams', 'friends') \
             .annotate(num_children=Count('children')) \
-            .get(cell=serializer.object.get('phone'))
+            .get(cell=serializer.validated_data.get('phone'))
     except Parent.DoesNotExist as exc:
         return Response(str(exc), status=status.HTTP_400_BAD_REQUEST)
 
     tier, num_sitters = _get_sitter_tier(parent)
-    book_friends_sitters = request.QUERY_PARAMS.get('tier', None)
+    book_friends_sitters = request.query_params.get('tier', None)
     if tier == TIER_1_SITTER_TEAM or book_friends_sitters == TIER_2_FRIENDS_WITH_SITTER:
         # A user can run through this flow multiple times and the
         # array of values will contain all of the user's texts so we
         # need to get the most recent text that requests a time.
         time_values = [
-            value for value in serializer.object.get('values')
+            value for value in serializer.validated_data.get('values')
             if value.get('label') == 'is_valid' and value.get('text') is not None
         ]
         sorted_values = sorted(time_values, key=lambda k: k['time'], reverse=True)

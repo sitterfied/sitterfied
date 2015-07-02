@@ -28,8 +28,8 @@ default_fields = (
 
 
 class UserSerializer(serializers.ModelSerializer):
-    avatar = serializers.Field(source='avatar_url')
-    parent_or_sitter = serializers.Field(source='is_parent_or_sitter')
+    avatar = serializers.ReadOnlyField(source='avatar_url')
+    parent_or_sitter = serializers.ReadOnlyField(source='is_parent_or_sitter')
 
     class Meta:
         model = User

@@ -6,8 +6,9 @@ from hamcrest import all_of, assert_that, contains_string, is_
 from mock import patch
 
 from sitterfied.app.tasks import notifications
-from sitterfied.utils.test import SitterfiedApiTestCase
-from sitterfied.utils.tests.autofixtures import create_bookings
+from sitterfied.test.testcases import SitterfiedApiTestCase
+from sitterfied.test.autofixtures import create_bookings
+
 
 time_zone = 'America/New_York'
 

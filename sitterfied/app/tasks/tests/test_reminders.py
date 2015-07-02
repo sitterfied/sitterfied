@@ -11,7 +11,7 @@ from sitterfied.app import signals
 from sitterfied.app.tasks import reminders
 from sitterfied.app.tasks.tests import utils
 from sitterfied.bookings.models import Booking, Reminder
-from sitterfied.utils.test import SitterfiedApiTestCase
+from sitterfied.test.testcases import SitterfiedApiTestCase
 
 
 class TestReminders(SitterfiedApiTestCase):
