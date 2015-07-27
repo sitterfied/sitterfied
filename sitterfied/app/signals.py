@@ -361,7 +361,7 @@ def reminder_del_handler(sender, instance, **kwargs):
 
 
 def create_email_to(email, name):
-    return '{name} {email}'.format(**{'email': email, 'name': name})
+    return '{name} <{email}>'.format(**{'email': email, 'name': name})
 
 
 def create_message_base():
