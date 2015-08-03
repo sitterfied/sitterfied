@@ -33,8 +33,8 @@ def notify_parent_of_job_request(id):
 
         try:
             sms = render_to_string(sms_template, {'short_url': get_short_url('/mybookings/pending')})
-            send_message(body=sms, to=parent.cell)
-        except TwilioRestException as ex:
+            send_message(body=sms, to=parent.cell, is_parent=True)
+        except Exception as ex:
             logger.error(
                 'Notification to %s with cell number %s failed for the following reason: %s',
                 parent.get_full_name(),
@@ -62,9 +62,9 @@ def notify_sitter_of_job_request(id):
         else:
             sms_template = 'sms/booking/booking_request_received{0}.sms'.format(multi_request_suffix)
 
-        booking_date = booking.start_date_time.date()
-        start_date_time = Delorean(booking.start_date_time)
-        stop_date_time = Delorean(booking.stop_date_time)
+        start_date_time = Delorean(booking.start_date_time).shift(booking.time_zone).datetime
+        stop_date_time = Delorean(booking.stop_date_time).shift(booking.time_zone).datetime
+        booking_date = start_date_time.date()
 
         try:
             # Django templates will shift the time based on the
@@ -76,12 +76,12 @@ def notify_sitter_of_job_request(id):
                 'sitter_name': sitter.first_name,
                 'parent_name': parent.get_full_name(),
                 'booking_date': booking_date,
-                'start_date_time': start_date_time.shift(booking.time_zone).datetime,
-                'stop_date_time': stop_date_time.shift(booking.time_zone).datetime,
+                'start_date_time': start_date_time,
+                'stop_date_time': stop_date_time,
                 'parent_city': parent.city,
                 'short_url': get_short_url('/mybookings/pending'),
                 'booking_code': booking.id,
-                'num_sitters': len(booking.sitters.all()) - 1,
+                'num_sitters': booking.sitters.count() - 1,
             })
             send_message(body=sms, to=sitter.cell)
         except TwilioRestException as ex:

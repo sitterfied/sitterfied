@@ -26,6 +26,8 @@ CACHES = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,

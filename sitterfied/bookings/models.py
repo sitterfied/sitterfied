@@ -130,11 +130,17 @@ class Booking(WatchedFieldsMixin, TimeStampedModel):
 
         booking_canceled.send(sender=self, cancelled_by=parent_or_sitter)
 
-    def save(self, *args, **kwargs):
+    def save(self, send_notifications=True, *args, **kwargs):
+        created = self.id is None
+
         if self.has_changed():
             self.time_zone = time.get_time_zone_for_zip(self.zip)
 
         super(Booking, self).save(*args, **kwargs)
+
+        if created and send_notifications:
+            from sitterfied.app.tasks import notifications
+            notifications.notify_parent_of_job_request.delay(self.id)
 
     class Meta:
         app_label = 'app'
@@ -145,6 +151,15 @@ class BookingResponse(TimeStampedModel):
     booking = models.ForeignKey(Booking, related_name='responses')
     response = models.CharField(max_length=10, choices=Booking.BOOKING_STATUS, default=Booking.BOOKING_STATUS_PENDING)
     responded_at = models.DateTimeField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        created = self.id is None
+
+        super(BookingResponse, self).save(*args, **kwargs)
+
+        if created:
+            from sitterfied.app.tasks import notifications
+            notifications.notify_sitter_of_job_request.delay(self.id)
 
     class Meta:
         app_label = 'app'

@@ -1,0 +1,747 @@
+{
+  "version": 5, 
+  "flows": [
+    {
+      "definition": {
+        "base_language": "eng", 
+        "action_sets": [
+          {
+            "y": 1205, 
+            "x": 14, 
+            "destination": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+            "uuid": "590c7315-c212-439e-a941-4e1274bc3b8f", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "Great! Your request is being sent to @extra.num_sitters sitter(s). Sit tight and give your sitter(s) a chance to respond."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1230, 
+            "x": 287, 
+            "destination": "f4c8edab-9412-477d-9340-847c8dfed833", 
+            "uuid": "d80a5486-cfbc-4803-a936-ff6dcabf59e3", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "We see you don't have a sitter team, but your friends do. Would you like me to send your request to your friends' sitters? YES, NO or MORE INFO"
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1051, 
+            "x": 686, 
+            "destination": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+            "uuid": "8184d7b6-8aa7-47ce-92ab-5ed0725605d7", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "Ok. I see that you don't have a sitter team or network yet. To text a job request, I need to know who your or your friends' favorite sitters are. Go here - https://www.sitterfied.com/parent/@extra.sitterfied_id/edit/network - and build up your network now."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1554, 
+            "x": 36, 
+            "destination": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+            "uuid": "dd8d1819-8571-43eb-a2ce-f95000127774", 
+            "actions": [
+              {
+                "action": "POST", 
+                "type": "api", 
+                "webhook": "https://www.sitterfied.com/api/flows/bookings/tiers?token=1fe271fdd33561adf66bb7e42aae5f1ef8daaf9e&tier=2"
+              }, 
+              {
+                "msg": {
+                  "eng": "Great! Your request is being sent to @extra.num_sitters of your friends' sitters. Sit tight and give them time to respond."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 265, 
+            "x": 91, 
+            "destination": "7fbcb52b-550a-4314-a90e-1f63053c3b3d", 
+            "uuid": "05bb5015-ded4-444a-bfdb-83c615777778", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "So you need a sitter on @extra.start_date from @extra.start_time until @extra.end_time. Is that right? YES or NO."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 504, 
+            "x": 940, 
+            "destination": "7fbcb52b-550a-4314-a90e-1f63053c3b3d", 
+            "uuid": "00c384e5-449d-4b99-af46-fbd153bb9750", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "We're sorry, but we couldn't understand your response. Please respond YES or NO."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 716, 
+            "x": 784, 
+            "destination": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+            "uuid": "9c2aab46-0caf-4b48-9867-bc0261767853", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "Hmm. I guess we didn't understand your request. Can you please try again? Your message should look something like this, \"Find me a sitter on Jan 1 from 7pm-11pm.\" Thanks."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 1883, 
+            "x": 439, 
+            "destination": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+            "uuid": "701a4b37-9245-461d-abef-934760bb9b48", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "OK. Let us know if we can help you with something else."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 295, 
+            "x": 947, 
+            "destination": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+            "uuid": "1b0b134f-6f51-4f71-982e-c7abe9a1122f", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "We're sorry, but there appears to be a problem with our system. Please try back in a little while."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 684, 
+            "x": 14, 
+            "destination": "b998df99-d537-4635-95e9-60f812f55451", 
+            "uuid": "482be983-09dc-4ff7-a728-b393b04f015b", 
+            "actions": [
+              {
+                "action": "POST", 
+                "type": "api", 
+                "webhook": "https://www.sitterfied.com/api/flows/bookings/tiers?token=1fe271fdd33561adf66bb7e42aae5f1ef8daaf9e"
+              }
+            ]
+          }, 
+          {
+            "y": 917, 
+            "x": 447, 
+            "destination": "7fbcb52b-550a-4314-a90e-1f63053c3b3d", 
+            "uuid": "bebb3435-878a-4b6e-ad5b-ad41d59d04be", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "We're sorry, but there appears to be a problem with our system. Please try back in a little while."
+                }, 
+                "type": "reply"
+              }, 
+              {
+                "msg": {
+                  "eng": "Webhook problem."
+                }, 
+                "variables": [], 
+                "type": "send", 
+                "groups": [], 
+                "contacts": [
+                  {
+                    "urns": [
+                      {
+                        "priority": 50, 
+                        "path": "+17322397588", 
+                        "scheme": "tel"
+                      }
+                    ], 
+                    "name": "Andrew Lewisohn", 
+                    "id": 438990
+                  }
+                ]
+              }
+            ]
+          }, 
+          {
+            "y": 1711, 
+            "x": 698, 
+            "destination": null, 
+            "uuid": "59caa68a-da4f-45fa-b3ae-44fcf8ca6b8a", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "Alright, sit tight and someone will get in touch with you shortly."
+                }, 
+                "type": "reply"
+              }, 
+              {
+                "msg": {
+                  "eng": "MORE INFO requested."
+                }, 
+                "variables": [], 
+                "type": "send", 
+                "groups": [], 
+                "contacts": [
+                  {
+                    "urns": [
+                      {
+                        "priority": 50, 
+                        "path": "+12035175070", 
+                        "scheme": "tel"
+                      }
+                    ], 
+                    "name": "James Nanscawen", 
+                    "id": 436362
+                  }
+                ]
+              }
+            ]
+          }, 
+          {
+            "y": 1489, 
+            "x": 770, 
+            "destination": "f4c8edab-9412-477d-9340-847c8dfed833", 
+            "uuid": "92f56205-04c2-4b21-927b-92b47acae9b2", 
+            "actions": [
+              {
+                "msg": {
+                  "eng": "Sorry, we couldn't understand your response. Please reply YES, NO, or MORE INFO."
+                }, 
+                "type": "reply"
+              }
+            ]
+          }, 
+          {
+            "y": 109, 
+            "x": 482, 
+            "destination": "c4dabb7e-a429-465a-81ed-46e3d200d3a0", 
+            "uuid": "febfd335-2a59-4f78-a153-b8350d089c76", 
+            "actions": [
+              {
+                "action": "POST", 
+                "type": "api", 
+                "webhook": "https://www.sitterfied.com/api/flows/bookings/requests/?token=1fe271fdd33561adf66bb7e42aae5f1ef8daaf9e"
+              }
+            ]
+          }
+        ], 
+        "last_saved": "2015-08-03T14:43:31.833687Z", 
+        "entry": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+        "rule_sets": [
+          {
+            "uuid": "f4c8edab-9412-477d-9340-847c8dfed833", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": {
+                    "eng": "Yes Yeah Yup Y"
+                  }, 
+                  "type": "contains_any"
+                }, 
+                "category": {
+                  "base": "Yes", 
+                  "eng": "Yes"
+                }, 
+                "destination": "dd8d1819-8571-43eb-a2ce-f95000127774", 
+                "uuid": "4c9d3699-862d-4e04-a48e-51ab0946c7c1", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "test": {
+                    "eng": "Nope No N"
+                  }, 
+                  "type": "contains_any"
+                }, 
+                "category": {
+                  "base": "No", 
+                  "eng": "No"
+                }, 
+                "destination": "701a4b37-9245-461d-abef-934760bb9b48", 
+                "uuid": "b20c5957-77d7-40e2-aa9e-74b324ed7520", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "test": {
+                    "eng": "More Info"
+                  }, 
+                  "type": "contains"
+                }, 
+                "category": {
+                  "base": "More Info", 
+                  "eng": "More Info"
+                }, 
+                "destination": "59caa68a-da4f-45fa-b3ae-44fcf8ca6b8a", 
+                "uuid": "f8c4ed0f-0e75-41e2-aff6-f2d162a0c874", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "type": "true"
+                }, 
+                "category": {
+                  "base": "Other", 
+                  "eng": "Other"
+                }, 
+                "destination": "92f56205-04c2-4b21-927b-92b47acae9b2", 
+                "uuid": "e267c44d-2d25-43b1-8fd9-4fc41d6f9473", 
+                "destination_type": "A"
+              }
+            ], 
+            "webhook": null, 
+            "ruleset_type": "wait_message", 
+            "label": "book_friends_sitters", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "", 
+            "y": 1459, 
+            "x": 298
+          }, 
+          {
+            "uuid": "7fbcb52b-550a-4314-a90e-1f63053c3b3d", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": {
+                    "eng": "Yes Yeah Yup Y"
+                  }, 
+                  "type": "contains_any"
+                }, 
+                "category": {
+                  "base": "yes", 
+                  "eng": "yes"
+                }, 
+                "destination": "482be983-09dc-4ff7-a728-b393b04f015b", 
+                "uuid": "4354cf0b-771e-4c26-b79d-70cd2ee2a9d2", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "test": {
+                    "eng": "Nope No N"
+                  }, 
+                  "type": "contains_any"
+                }, 
+                "category": {
+                  "base": "no", 
+                  "eng": "no"
+                }, 
+                "destination": "9c2aab46-0caf-4b48-9867-bc0261767853", 
+                "uuid": "94f2f5a5-1c8a-4913-bb89-c040c554d7bd", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "type": "true"
+                }, 
+                "category": {
+                  "base": "Other", 
+                  "eng": "Other"
+                }, 
+                "destination": "00c384e5-449d-4b99-af46-fbd153bb9750", 
+                "uuid": "a6935745-b52b-4b38-a280-8e8c898b7648", 
+                "destination_type": "A"
+              }
+            ], 
+            "webhook": null, 
+            "ruleset_type": "wait_message", 
+            "label": "is_parse_correct", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "", 
+            "y": 476, 
+            "x": 317
+          }, 
+          {
+            "uuid": "b998df99-d537-4635-95e9-60f812f55451", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": "1", 
+                  "type": "eq"
+                }, 
+                "category": {
+                  "base": "sitter_team", 
+                  "eng": "sitter_team"
+                }, 
+                "destination": "590c7315-c212-439e-a941-4e1274bc3b8f", 
+                "uuid": "4e7a46b5-6ff9-40d7-8ee1-cadda548bbeb", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "test": "2", 
+                  "type": "eq"
+                }, 
+                "category": {
+                  "base": "friends_sitters", 
+                  "eng": "friends_sitters"
+                }, 
+                "destination": "d80a5486-cfbc-4803-a936-ff6dcabf59e3", 
+                "uuid": "90c9ea8c-4db2-41c4-8dd8-4c3a668ce91c", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "test": "3", 
+                  "type": "eq"
+                }, 
+                "category": {
+                  "base": "no_network", 
+                  "eng": "no_network"
+                }, 
+                "destination": "8184d7b6-8aa7-47ce-92ab-5ed0725605d7", 
+                "uuid": "8e55b90d-2993-4586-98fe-92311a9dc3e0", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "type": "true"
+                }, 
+                "category": {
+                  "base": "Other", 
+                  "eng": "Other"
+                }, 
+                "destination": "bebb3435-878a-4b6e-ad5b-ad41d59d04be", 
+                "uuid": "464c1a62-ed3c-4fca-90aa-90ac42bfa50a", 
+                "destination_type": "A"
+              }
+            ], 
+            "webhook": null, 
+            "ruleset_type": "expression", 
+            "label": "tier", 
+            "operand": "@extra.tier", 
+            "finished_key": null, 
+            "response_type": "", 
+            "y": 869, 
+            "x": 19
+          }, 
+          {
+            "uuid": "c4dabb7e-a429-465a-81ed-46e3d200d3a0", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "test": {
+                    "eng": "true"
+                  }, 
+                  "type": "contains"
+                }, 
+                "category": {
+                  "base": "Valid", 
+                  "eng": "Valid"
+                }, 
+                "destination": "05bb5015-ded4-444a-bfdb-83c615777778", 
+                "uuid": "663ef31c-324b-433a-8396-14297ffc7194", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "test": {
+                    "eng": "false"
+                  }, 
+                  "type": "contains"
+                }, 
+                "category": {
+                  "base": "Invalid", 
+                  "eng": "Invalid"
+                }, 
+                "destination": "9c2aab46-0caf-4b48-9867-bc0261767853", 
+                "uuid": "6a076daf-5ac2-43f5-8dfc-91d1840b4196", 
+                "destination_type": "A"
+              }, 
+              {
+                "test": {
+                  "type": "true"
+                }, 
+                "category": {
+                  "base": "Other", 
+                  "eng": "Other"
+                }, 
+                "destination": "1b0b134f-6f51-4f71-982e-c7abe9a1122f", 
+                "uuid": "9c24cc6d-8f82-4159-9aef-b0bf8fd8088c", 
+                "destination_type": "A"
+              }
+            ], 
+            "webhook": null, 
+            "ruleset_type": "expression", 
+            "label": "is_valid", 
+            "operand": "@extra.is_valid", 
+            "finished_key": null, 
+            "response_type": "", 
+            "y": 288, 
+            "x": 449
+          }, 
+          {
+            "uuid": "af323ab5-d6a7-4b86-ad59-50012cb60351", 
+            "webhook_action": null, 
+            "rules": [
+              {
+                "test": {
+                  "type": "true"
+                }, 
+                "category": {
+                  "base": "All Responses", 
+                  "eng": "All Responses"
+                }, 
+                "destination": "febfd335-2a59-4f78-a153-b8350d089c76", 
+                "uuid": "29d466b4-d2a5-4ea3-b228-6791f66f25a8", 
+                "destination_type": "A"
+              }
+            ], 
+            "webhook": null, 
+            "ruleset_type": "wait_message", 
+            "label": "initial", 
+            "operand": "@step.value", 
+            "finished_key": null, 
+            "response_type": "", 
+            "y": 0, 
+            "x": 463
+          }
+        ], 
+        "metadata": {
+          "notes": [
+            {
+              "y": 1375, 
+              "x": 789, 
+              "body": "This path needs to fleshed out.", 
+              "title": "More Info"
+            }
+          ]
+        }
+      }, 
+      "expires": 5, 
+      "id": 34698, 
+      "flow_type": "F", 
+      "name": "Prod: Find a sitter"
+    }
+  ], 
+  "triggers": [
+    {
+      "trigger_type": "C", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": null, 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "saturday", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "monday", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "wed", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "fri", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "thu", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "friday", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "find", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "wednesday", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "thursday", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "tomorrow", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "tue", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "sitter", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "mon", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "need", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "today", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "next", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "tuesday", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "sunday", 
+      "channel": null
+    }, 
+    {
+      "trigger_type": "K", 
+      "flow": {
+        "name": "Prod: Find a sitter", 
+        "id": 34698
+      }, 
+      "groups": [], 
+      "keyword": "sat", 
+      "channel": null
+    }
+  ]
+}

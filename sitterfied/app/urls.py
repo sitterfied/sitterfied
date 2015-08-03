@@ -4,7 +4,9 @@ from rest_framework.routers import DefaultRouter
 
 from sitterfied.app import api, google
 from sitterfied.bookings.views import BookingViewSet
+from sitterfied.flows import views as flows_views
 from sitterfied.parents.views import ParentViewSet
+
 
 from .signals import *
 from .signup import RegistrationView
@@ -26,45 +28,46 @@ router.register(r'children', api.ChildrenViewSet)
 router.register(r'bookings', BookingViewSet)
 router.register(r'groups', api.GroupViewSet)
 
-
 urlpatterns = patterns('sitterfied.app.views',
-                       # Examples:
-                       url(r'^error/', 'error', name='error'),
-                       url(r'^onboarding/$', 'onboarding1', name='onboarding1'),
-                       url(r'^onboarding2/$', "onboarding2", name='onboarding2'),
-                       url(r'^onboarding3/$', "onboarding3", name='onboarding3'),
-                       url(r'^onboarding4/$', "onboarding4", name='onboarding4'),
-                       url(r'^facebook_import/', 'facebook_import', name='facebook_import'),
-                       url(r'^api/search/$', 'search', name='search'),
-                       url(r'^api/', include(router.urls)),
-                       url(r'^remove_friend', 'remove_friend', name='remove_friend'),
-                       url(r'^remove_group', 'remove_group', name='remove_group'),
-                       url(r'^add_group', 'add_group', name='add_group'),
-                       url(r'^network_search', 'network_search', name='network_search'),
-                       url(r'^invite_email_submit/$', 'invite_email_submit', name='invite_email_submit'),
-                       url(r'^unsubscribe/$', 'unsubscribe', name='unsubscribe'),
-                       url(r'^cancel-unsubscribe/$', 'cancel_unsubscribe', name='cancel_unsubscribe'),
-                       url(r'^email/$', StaticView.as_view(template_name='invitation_email.html'), name="email"),
-                       url(r'^signup/$', RegistrationView.as_view(), name='signup'),
-                       url(r'^googleoauthbegin/$', google.google_oauth_begin, name='googleoauthbegin'),
-                       url(r'^oauth2callback/$', google.oauth2callback, name='googlecallback'),
-                       url(r'^tos/', 'static_page', kwargs=dict(template='tos.html'), name='tos'),
-                       url(r'^privacy/', "static_page", kwargs=dict(template='privacy.html'), name="privacy"),
-                       url(r'^CloudHealthCheck/', "cloudhealthcheck", name="cloudhealthcheck"),)
+    # Examples:
+    url(r'^error/', 'error', name='error'),
+    url(r'^onboarding/$', 'onboarding1', name='onboarding1'),
+    url(r'^onboarding2/$', "onboarding2", name='onboarding2'),
+    url(r'^onboarding3/$', "onboarding3", name='onboarding3'),
+    url(r'^onboarding4/$', "onboarding4", name='onboarding4'),
+    url(r'^facebook_import/', 'facebook_import', name='facebook_import'),
+    url(r'^api/flows/bookings/requests/', flows_views.booking_requests, name='flows-booking-requests'),
+    url(r'^api/flows/bookings/tiers', flows_views.booking_tier, name='flows-booking-tier'),
+    url(r'^api/search/$', 'search', name='search'),
+    url(r'^api/', include(router.urls)),
+    url(r'^remove_friend', 'remove_friend', name='remove_friend'),
+    url(r'^remove_group', 'remove_group', name='remove_group'),
+    url(r'^add_group', 'add_group', name='add_group'),
+    url(r'^network_search', 'network_search', name='network_search'),
+    url(r'^invite_email_submit/$', 'invite_email_submit', name='invite_email_submit'),
+    url(r'^unsubscribe/$', 'unsubscribe', name='unsubscribe'),
+    url(r'^cancel-unsubscribe/$', 'cancel_unsubscribe', name='cancel_unsubscribe'),
+    url(r'^email/$', StaticView.as_view(template_name='invitation_email.html'), name="email"),
+    url(r'^signup/$', RegistrationView.as_view(), name='signup'),
+    url(r'^googleoauthbegin/$', google.google_oauth_begin, name='googleoauthbegin'),
+    url(r'^oauth2callback/$', google.oauth2callback, name='googlecallback'),
+    url(r'^tos/', 'static_page', kwargs=dict(template='tos.html'), name='tos'),
+    url(r'^privacy/', "static_page", kwargs=dict(template='privacy.html'), name="privacy"),
+    url(r'^CloudHealthCheck/', "cloudhealthcheck", name="cloudhealthcheck"),)
 
 urlpatterns += patterns('',
-                        (r'^accounts/', include('registration.backends.default.urls')),
-                        url(r'^login/$', 'django.contrib.auth.views.login', name="login", ),
-                        url(r'^login-facebook/$', 'sitterfied.app.views.login_facebook', name="login-facebook", ),
-                        url(r'^login-ajax/$', 'sitterfied.app.views.login_ajax', name="login-ajax", ),
-                        url(r'^signup-ajax/$', AjaxRegistrationView.as_view(), name="signup-ajax", ),
-                        url(r'^password_change/$', 'django.contrib.auth.views.password_change', {'post_change_redirect': '/'}, name="password_change", ),
-                        url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name="logout", ),
-                        url(r'^sms/$', 'sitterfied.app.sms.sms_messages', name="sms_messages"),
+    (r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^login/$', 'django.contrib.auth.views.login', name="login", ),
+    url(r'^login-facebook/$', 'sitterfied.app.views.login_facebook', name="login-facebook", ),
+    url(r'^login-ajax/$', 'sitterfied.app.views.login_ajax', name="login-ajax", ),
+    url(r'^signup-ajax/$', AjaxRegistrationView.as_view(), name="signup-ajax", ),
+    url(r'^password_change/$', 'django.contrib.auth.views.password_change', {'post_change_redirect': '/'}, name="password_change", ),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name="logout", ),
+    url(r'^sms/$', 'sitterfied.app.sms.sms_messages', name="sms_messages"),
 
-                        # Catch Short URLs
-                        url(r'^[a-zA-Z0-9]{5}$', 'sitterfied.app.views.short_url'),
+    # Catch Short URLs
+    url(r'^[a-zA-Z0-9]{5}$', 'sitterfied.app.views.short_url'),
 
-                        # Finally our catch all
-                        url(r'^.*/$', 'sitterfied.app.views.redirect_next'),
-                        url(r'^$', 'sitterfied.app.views.index', name='index'),)
+    # Finally our catch all
+    url(r'^.*/$', 'sitterfied.app.views.redirect_next'),
+    url(r'^$', 'sitterfied.app.views.index', name='index'),)

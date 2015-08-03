@@ -99,3 +99,5 @@ QUERY_INSPECT_STANDARD_DEVIATION_LIMIT = 2
 QUERY_INSPECT_LOG_TRACEBACKS = True
 # Project root (one or several colon-separated directories, default empty)
 QUERY_INSPECT_TRACEBACK_ROOTS = ['./']
+
+TWILIO_DEFAULT_CALLERID = '+18622067249'

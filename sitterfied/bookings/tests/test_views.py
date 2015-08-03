@@ -48,8 +48,8 @@ class TestViews(SitterfiedApiTestCase):
         assert_that(booking.time_zone, is_('America/New_York'))
 
     @patch('sitterfied.utils.time.get_time_zone_for_zip', return_value='America/New_York')
-    @patch('sitterfied.app.signals.notifications.notify_sitter_of_job_request.delay')
-    @patch('sitterfied.app.signals.notifications.notify_parent_of_job_request.delay')
+    @patch('sitterfied.app.tasks.notifications.notify_sitter_of_job_request.delay')
+    @patch('sitterfied.app.tasks.notifications.notify_parent_of_job_request.delay')
     def test_update_booking(self, notify_parent, notify_sitter, get_time_zone):
         url = reverse.reverse('booking-list')
         response = self.client.post(url, self.data, format='json')

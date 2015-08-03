@@ -1,1 +1,1 @@
-{{ sitter_name }} had to cancel the upcoming interview with you on {{ start_date_time|date:'M j' }} from {{ start_date_time|date:'fA'|lower }} to {{ stop_date_time|date:'fA'|lower }}. Please contact {{ sitter_name }}, {{ sitter_contact }}, to find a mutually agreeable time.
+{{ sitter_name }} had to cancel the upcoming interview with you on {{ start_date_time|date:'D, M j' }} from {{ start_date_time|date:'fA'|lower }} to {{ stop_date_time|date:'fA'|lower }}. Please contact {{ sitter_name }}, {{ sitter_contact }}, to find a mutually agreeable time.

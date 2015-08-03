@@ -1,1 +1,1 @@
-Your job on {{ start_date_time|date:'M j' }} has been cancelled and {{ parent_name }} has been notified. Please get in touch with {{ parent_name }} as a courtesy: {{ parent_contact_info }}.
+Your job on {{ start_date_time|date:'D, M j' }} has been cancelled and {{ parent_name }} has been notified. Please get in touch with {{ parent_name }} as a courtesy: {{ parent_contact_info }}.

@@ -14,6 +14,9 @@ class Child(TimeStampedModel):
     school = models.CharField(max_length=50, blank=True, default="")
     special_needs = models.ManyToManyField('SpecialNeed', blank=True)
 
+    def __unicode__(self):
+        return self.name
+
     class Meta:
         app_label = 'app'
         verbose_name_plural = 'children'

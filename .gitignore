@@ -4,6 +4,7 @@
 .ropeproject
 _builds
 _steps
+_projects
 */static/*
 sitterfied*.js
 templates.js

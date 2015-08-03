@@ -1,4 +1,8 @@
+{% if env == "deployed" %}
 start on virtual-filesystems
+{% else %}
+start on mounted MOUNTPOINT=/opt/sitterfied
+{% endif %}
 stop on runlevel [06]
 
 setuid {{ uwsgi_user }}

@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import inspect
 import random
 import string
+import warnings
 
-from autofixture import AutoFixture, generators, get, register
+from autofixture import AutoFixture, base, generators, get, register, signals
+from autofixture.compat import GenericRelation
 from datetime import datetime, timedelta
 from django.contrib.auth.hashers import make_password
 from django.db.models.fields import related
@@ -57,6 +60,112 @@ class UsernameGenerator(generators.StringGenerator):
 
 class BaseFixture(AutoFixture):
 
+    def update_follow_fk(self, follow_fk):
+        if follow_fk is not None:
+            self.follow_fk = follow_fk
+        if not isinstance(self.follow_fk, base.Link):
+            self.follow_fk = base.Link(self.follow_fk)
+        return self
+
+    def update_follow_m2m(self, follow_m2m):
+        if follow_m2m is not None:
+            if not isinstance(follow_m2m, dict):
+                if follow_m2m:
+                    follow_m2m = base.Link({'ALL': follow_m2m})
+                else:
+                    follow_m2m = base.Link(False)
+            self.follow_m2m = follow_m2m
+        if not isinstance(self.follow_m2m, base.Link):
+            self.follow_m2m = base.Link(self.follow_m2m)
+        return self
+
+    def update_generate_fk(self, generate_fk):
+        if generate_fk is not None:
+            self.generate_fk = generate_fk
+        if not isinstance(self.generate_fk, base.Link):
+            self.generate_fk = base.Link(self.generate_fk)
+        return self
+
+    def update_generate_m2m(self, generate_m2m):
+        if generate_m2m is not None:
+            if not isinstance(generate_m2m, dict):
+                if generate_m2m:
+                    generate_m2m = base.Link({'ALL': generate_m2m})
+                else:
+                    generate_m2m = base.Link(False)
+            self.generate_m2m = generate_m2m
+        if not isinstance(self.generate_m2m, base.Link):
+            self.generate_m2m = base.Link(self.generate_m2m)
+        return self
+
+    def create_one(self, commit=True):
+        '''
+        Create and return one model instance. If *commit* is ``False`` the
+        instance will not be saved and many to many relations will not be
+        processed.
+        Subclasses that override ``create_one`` can specify arbitrary keyword
+        arguments. They will be passed through by the
+        :meth:`autofixture.base.AutoFixture.create` method and the helper
+        functions :func:`autofixture.create` and
+        :func:`autofixture.create_one`.
+        May raise :exc:`CreateInstanceError` if constraints are not satisfied.
+        '''
+        tries = self.tries
+        instance = self.model()
+        process = instance._meta.fields
+        while process and tries > 0:
+            for field in process:
+                self.process_field(instance, field)
+            process = self.check_constraints(instance)
+            tries -= 1
+        if tries == 0:
+            raise base.CreateInstanceError(
+                u'Cannot solve constraints for "%s", tried %d times. '
+                u'Please check value generators or model constraints. '
+                u'At least the following fields are involved: %s' % (
+                    '%s.%s' % (
+                        self.model._meta.app_label,
+                        self.model._meta.object_name),
+                    self.tries,
+                    ', '.join([field.name for field in process]),
+                ))
+
+        instance = self.pre_process_instance(instance)
+
+        if commit:
+            instance.save()
+
+            # to handle particular case of GenericRelation
+            # in Django pre 1.6 it appears in .many_to_many
+            many_to_many = [
+                f for f in instance._meta.many_to_many
+                if not isinstance(f, GenericRelation)
+            ]
+            for field in many_to_many:
+                self.process_m2m(instance, field)
+
+            related_objects = [
+                f for f in instance._meta.get_all_related_objects()
+                if isinstance(f.field.rel, related.ManyToOneRel)
+            ]
+            for related_object in related_objects:
+                self.process_related_object(instance, related_object)
+
+        signals.instance_created.send(
+            sender=self,
+            model=self.model,
+            instance=instance,
+            committed=commit)
+
+        post_process_kwargs = {}
+        if 'commit' in inspect.getargspec(self.post_process_instance).args:
+            post_process_kwargs['commit'] = commit
+        else:
+            warnings.warn(
+                "Subclasses of AutoFixture need to provide a `commit` "
+                "argument for post_process_instance methods", DeprecationWarning)
+        return self.post_process_instance(instance, **post_process_kwargs)
+
     def process_m2m(self, instance, field):
         # check django's version number to determine how intermediary models
         # are checked if they are auto created or not.
@@ -65,7 +174,9 @@ class BaseFixture(AutoFixture):
         auto_created_through_model = through._meta.auto_created
 
         if auto_created_through_model:
-            return self.process_field(instance, field)
+            if field.name in self.follow_m2m or field.name in self.generate_m2m:
+                return self.process_field(instance, field)
+
         # if m2m relation has intermediary model:
         #   * only generate relation if 'generate_m2m' is given
         #   * first generate intermediary model and assign a newly created
@@ -86,7 +197,7 @@ class BaseFixture(AutoFixture):
             related_fk = related_fks[0]
             self_fk = self_fks[0]
             min_count, max_count = self.generate_m2m[field.name]
-            intermediary_model = generators.MultipleInstanceGenerator(
+            generators.MultipleInstanceGenerator(
                 AutoFixture(
                     through,
                     field_values={
@@ -94,6 +205,24 @@ class BaseFixture(AutoFixture):
                         related_fk.name: generators.InstanceGenerator(
                             get(field.rel.to))
                     }),
+                min_count=min_count,
+                max_count=max_count,
+                **kwargs).generate()
+
+    def process_related_object(self, instance, related_object):
+        """
+        Create objects that have a many-to-one relationship with the instance.
+
+        """
+        kwargs = {}
+        field_name = related_object.name
+        if field_name in self.generate_m2m:
+            self_fk = related_object.field
+            min_count, max_count = self.generate_m2m[field_name]
+            autofixture = get(related_object.related_model)
+            autofixture.add_field_value(self_fk.name, instance)
+            generators.MultipleInstanceGenerator(
+                autofixture,
                 min_count=min_count,
                 max_count=max_count,
                 **kwargs).generate()
@@ -114,12 +243,18 @@ class BookingFixture(BaseFixture):
         'sitters': (3, 5),
     }
 
+register('app.Booking', BookingFixture)
+
 
 class ChildFixture(BaseFixture):
     field_values = {
         'dob': ChildDobGenerator(),
         'name': NameGenerator(),
     }
+    follow_fk = False
+    generate_fk = False
+
+register('app.Child', ChildFixture)
 
 
 class ParentFixture(BaseFixture):
@@ -132,7 +267,12 @@ class ParentFixture(BaseFixture):
         'username': UsernameGenerator(),
     }
     generate_fk = True
-    generate_m2m = {'sitter_teams': (3, 5)}
+    generate_m2m = {
+        'children': (1, 3),
+        'sitter_teams': (3, 5)
+    }
+
+register('app.Parent', ParentFixture)
 
 
 class SitterFixture(BaseFixture):
@@ -161,6 +301,8 @@ class SitterFixture(BaseFixture):
     }
     generate_fk = True
 
+register('app.Sitter', SitterFixture)
+
 
 class StaffUserFixture(BaseFixture):
     """
@@ -169,18 +311,14 @@ class StaffUserFixture(BaseFixture):
     """
     field_values = {
         'cell': phone_number_generator,
-        'email': 'test@sitterfied.com',
+        'email': generators.EmailGenerator(tlds=['sitterfied.com']),
         'first_name': generators.FirstNameGenerator(),
         'last_name': generators.LastNameGenerator(),
         'password': make_password('password'),
-        'username': 'test',
+        'username': UsernameGenerator(),
         'is_staff': True,
     }
-    generate_fk = ('parent',)
+    follow_m2m = False
+    generate_fk = ['parent', 'auth_token']
 
-
-register('app.Booking', BookingFixture)
-register('app.Child', ChildFixture)
-register('app.Parent', ParentFixture)
-register('app.Sitter', SitterFixture)
 register('app.User', StaffUserFixture)
