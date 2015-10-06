@@ -7,7 +7,7 @@ class TokenAuthentication(authentication.TokenAuthentication):
     def _get_authorization_header(self, request):
         auth = authentication.get_authorization_header(request)
         if not auth:
-            token = request.QUERY_PARAMS.get('token', None)
+            token = request.query_params.get('token', None)
             if token:
                 auth = 'Token {}'.format(token)
         return auth

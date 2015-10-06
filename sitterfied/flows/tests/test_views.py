@@ -12,7 +12,7 @@ from mock import patch
 from rest_framework import reverse, status
 from rest_framework.authtoken.models import Token
 
-from sitterfied.utils.test import SitterfiedApiTestCase
+from sitterfied.test.testcases import SitterfiedApiTestCase
 from sitterfied.utils.time import get_today
 
 
@@ -60,11 +60,11 @@ class ViewsTestCase(SitterfiedApiTestCase):
 
     def test_booking_flow_requires_valid_data(self):
         url = '{}?token={}'.format(reverse.reverse('flows-booking-requests'), self.token.key)
-        response = self.client.post(url, {}, format=format)
+        response = self.client.post(url, {}, format='multipart')
         assert_that(response.status_code, is_(status.HTTP_400_BAD_REQUEST))
 
         url = '{}?token={}'.format(reverse.reverse('flows-booking-tier'), self.token.key)
-        response = self.client.post(url, {}, format=format)
+        response = self.client.post(url, {}, format='multipart')
         assert_that(response.status_code, is_(status.HTTP_400_BAD_REQUEST))
 
     def test_request_a_sitter(self):

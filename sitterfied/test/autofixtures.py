@@ -252,7 +252,7 @@ class ChildFixture(BaseFixture):
         'name': NameGenerator(),
     }
     follow_fk = False
-    generate_fk = False
+    generate_fk = True
 
 register('app.Child', ChildFixture)
 

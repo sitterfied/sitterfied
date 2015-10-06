@@ -549,7 +549,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                 parent: Sitterfied.currentUser
                 notes: ""
                 overnight: overnight
-                booking_status: "Pending"
+                booking_status: "pending"
                 booking_type: booking_type
                 start_date_time: start_date_time
                 stop_date_time: stop_date_time

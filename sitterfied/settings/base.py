@@ -47,7 +47,6 @@ STATIC_URL = '/static/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-#STATIC_ROOT = PROJECT_ROOT.child("static")
 STATIC_ROOT = '/www/static'
 
 # Additional locations of static files
@@ -85,6 +84,7 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
                                "django.contrib.messages.context_processors.messages")
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # third-party apps
     'annoying',
+    'corsheaders',
     'crispy_forms',
     'django_extensions',
     'django_twilio',
@@ -137,6 +138,22 @@ INSTALLED_APPS = (
     'sitterfied.sitters',
     'sitterfied.users',
     'sitterfied.utils',
+)
+
+# CORS configuration
+CORS_ORIGIN_REGEX_WHITELIST = (
+    '.*\.sitterfied\.com',
+)
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'origin',
+    'x-csrftoken',
+    'x-requested-with',
+    'cache-control',
 )
 
 # A sample logging configuration. The only tangible logging

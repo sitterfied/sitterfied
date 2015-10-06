@@ -133,7 +133,7 @@ class Booking(WatchedFieldsMixin, TimeStampedModel):
     def save(self, send_notifications=True, *args, **kwargs):
         created = self.id is None
 
-        if self.has_changed():
+        if created or self.has_changed():
             self.time_zone = time.get_time_zone_for_zip(self.zip)
 
         super(Booking, self).save(*args, **kwargs)

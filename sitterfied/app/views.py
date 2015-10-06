@@ -1,10 +1,10 @@
 # Create your views here.
-import operator
-from datetime import datetime, time
-
 import facebook
+import operator
 import requests
+
 from annoying.decorators import render_to, ajax_request
+from datetime import datetime, time
 from django.conf import settings
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -13,12 +13,10 @@ from django.db.models import Q, Count
 from django.forms.models import inlineformset_factory
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, JsonResponse
 from django.shortcuts import redirect
-from django.template.loader import render_to_string
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.http import require_POST
-from django.views.generic import TemplateView
 from ecl_facebook import Facebook
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
@@ -27,8 +25,6 @@ from signup import RegistrationView
 
 from sitterfied.app import utils
 from sitterfied.app.forms import SitterRegisterForm, ParentRegisterForm, ChildForm, GroupsForm, RequiredFormSet
-from sitterfied.app.utils import send_html_email
-
 from sitterfied.children.models import Child
 from sitterfied.parents.models import Parent
 from sitterfied.parents.serializers import ParentSerializer
@@ -336,7 +332,7 @@ def search(request):
     #filter by availiablity
     sitters = sitters.filter(**search_terms)
 
-    serializer = SitterSearchSerializer(sitters, many=True, user=request.user)
+    serializer = SitterSearchSerializer(sitters, many=True, context={'request': request})
     return Response(serializer.data)
 
 
@@ -463,29 +459,6 @@ def facebook_import(request):
 
 
 @ajax_request
-@require_POST
-def invite_email_submit(request):
-    full_name = request.session.get('full_name')
-    first_name = request.session.get('first_name')
-    interest_id = request.session.get('id')
-    personal_message = request.POST['personal_message']
-    emails = [email.strip() for email in request.POST.get('email').split(',') if email]
-
-    text = html = render_to_string("invitation_email.html", {
-        'inviter_first_name': first_name,
-        'inviter_full_name': full_name,
-        'personal_message': personal_message,
-        'signup_url': ComingSoonInterest.static_invite_url(interest_id),
-        'full_static_url': request.build_absolute_uri(settings.STATIC_URL),
-    })
-
-    for email in emails:
-        send_html_email("You've been invited to Sitterfied", "hello@sitterfied.com", email, text, html)
-
-    return {}
-
-
-@ajax_request
 @login_required
 @require_POST
 def remove_friend(request):
@@ -513,31 +486,6 @@ def add_group(request):
     group, created = Group.objects.get_or_create(name=group_name)
     request.user.sitter_groups.add(group)
     return {"id": group.id, "name": group.name}
-
-
-@render_to('unsubscribe.html')
-def unsubscribe(request):
-    email = request.GET.get('email')
-    EmailBlacklist.objects.get_or_create(email=email)
-    return {'email': email}
-
-
-@render_to('cancel_unsubscribe.html')
-def cancel_unsubscribe(request):
-    email = request.GET.get('email')
-    try:
-        e = EmailBlacklist.objects.get(email=email)
-        e.delete()
-    except:
-        pass
-    return {'email': email}
-
-
-class StaticView(TemplateView):
-    def get_context_data(self, **kwargs):
-        context = super(StaticView, self).get_context_data(**kwargs)
-        context['full_static_url'] = self.request.build_absolute_uri(settings.STATIC_URL)
-        return context
 
 
 def cloudhealthcheck(request):

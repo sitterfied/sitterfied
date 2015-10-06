@@ -4,18 +4,22 @@ from rest_framework import serializers
 
 from sitterfied.sitters.models import Sitter, SitterReview
 from sitterfied.users.serializers import default_fields
+from sitterfied.utils.models import Language
 
 
 class SitterSerializer(serializers.ModelSerializer):
-    avatar = serializers.Field(source='avatar_url')
-    languages = serializers.PrimaryKeyRelatedField(many=True)
-    parent_or_sitter = serializers.Field(source='is_parent_or_sitter')
-
-    # Allow legacy datetime formats
+    avatar = serializers.ReadOnlyField(source='avatar_url')
     dob = serializers.DateField(input_formats=[
         'iso-8601',
         '%Y-%m-%dT%H:%M:%S.%fZ',
     ])
+    languages = serializers.PrimaryKeyRelatedField(queryset=Language.objects.all(), many=True)
+    parent_or_sitter = serializers.ReadOnlyField(source='is_parent_or_sitter')
+    url = serializers.HyperlinkedIdentityField(
+        lookup_field='id',
+        read_only=True,
+        view_name='sitter-detail',
+    )
 
     class Meta:
         model = Sitter
@@ -60,8 +64,13 @@ class SitterSerializer(serializers.ModelSerializer):
             'travel_distance',
             'two_child_max_rate',
             'two_child_min_rate',
+            'url',
             'will_transport',
         )
+        extra_kwargs = {
+            'schedule': {'allow_null': True, 'required': False},
+            'settings': {'allow_null': True, 'required': False},
+        }
 
 
 class SitterSearchSerializer(SitterSerializer):
@@ -70,7 +79,7 @@ class SitterSearchSerializer(SitterSerializer):
     rehires = serializers.IntegerField(read_only=True)
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
+        self.user = kwargs['context']['request'].user
         self.friends = self.user.friends \
             .select_related('parent') \
             .prefetch_related('parent__sitter_teams') \

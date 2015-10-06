@@ -14,6 +14,7 @@ from sitterfied.bookings.models import Booking
 from sitterfied.parents.models import Parent
 from sitterfied.sitters.models import Sitter
 from sitterfied.users.models import User
+from sitterfied.users.utils import get_valid_username
 from sitterfied.utils import time
 
 
@@ -36,10 +37,8 @@ class RegistrationForm(ModelForm):
 
     def save(self, *args, **kwargs):
         email, password = self.cleaned_data['email'], self.cleaned_data['password1']
-        username = (self.cleaned_data['first_name'][0] + self.cleaned_data['last_name']).lower()
-        username = re.sub('\W', "", username)
-        otherusers = User.objects.filter(username__startswith=username).count() + 1
-        username = username + str(otherusers)
+        username = get_valid_username(email.split('@')[0])
+
         user = super(RegistrationForm, self).save(*args,commit=False, **kwargs)
         user.username = username
         user.set_password(password)
