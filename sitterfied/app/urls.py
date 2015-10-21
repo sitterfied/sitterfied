@@ -6,6 +6,7 @@ from sitterfied.app import api, google
 from sitterfied.bookings.views import BookingViewSet
 from sitterfied.children.views import ChildViewSet
 from sitterfied.flows import views as flows_views
+from sitterfied.integrations import typeform
 from sitterfied.parents.views import ParentViewSet
 from sitterfied.sitters.views import SitterViewSet
 from sitterfied.users.views import UserViewSet
@@ -37,6 +38,7 @@ urlpatterns = patterns('sitterfied.app.views',
     url(r'^facebook_import/', 'facebook_import', name='facebook_import'),
     url(r'^api/flows/bookings/requests/', flows_views.booking_requests, name='flows-booking-requests'),
     url(r'^api/flows/bookings/tiers', flows_views.booking_tier, name='flows-booking-tier'),
+    url(r'^api/integrations/typeform/sitterchoices', typeform.views.sitterchoices, name='typeform-sitterchoices'),
     url(r'^api/search/$', 'search', name='search'),
     url(r'^api/', include(router.urls)),
     url(r'^remove_friend', 'remove_friend', name='remove_friend'),
