@@ -5,8 +5,7 @@ from rest_framework.routers import DefaultRouter
 from sitterfied.app import api, google
 from sitterfied.bookings.views import BookingViewSet
 from sitterfied.children.views import ChildViewSet
-from sitterfied.flows import views as flows_views
-from sitterfied.integrations import typeform
+from sitterfied.integrations import textit, typeform
 from sitterfied.parents.views import ParentViewSet
 from sitterfied.sitters.views import SitterViewSet
 from sitterfied.users.views import UserViewSet
@@ -36,8 +35,8 @@ urlpatterns = patterns('sitterfied.app.views',
     url(r'^onboarding3/$', "onboarding3", name='onboarding3'),
     url(r'^onboarding4/$', "onboarding4", name='onboarding4'),
     url(r'^facebook_import/', 'facebook_import', name='facebook_import'),
-    url(r'^api/flows/bookings/requests/', flows_views.booking_requests, name='flows-booking-requests'),
-    url(r'^api/flows/bookings/tiers', flows_views.booking_tier, name='flows-booking-tier'),
+    url(r'^api/integrations/textit/bookings/requests', textit.views.booking_requests, name='textit-booking-requests'),
+    url(r'^api/integrations/textit/bookings/tiers', textit.views.booking_tier, name='textit-booking-tier'),
     url(r'^api/integrations/typeform/sitterchoices', typeform.views.sitterchoices, name='typeform-sitterchoices'),
     url(r'^api/search/$', 'search', name='search'),
     url(r'^api/', include(router.urls)),
