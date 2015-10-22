@@ -11,7 +11,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.response import Response
 
 from sitterfied.bookings.models import Booking, BookingResponse
-from sitterfied.flows.serializers import TextItInWebhookSerializer
+from sitterfied.integrations.textit.serializers import TextItInWebhookSerializer
 from sitterfied.parents.models import Parent
 from sitterfied.sitters.models import Sitter
 from sitterfied.utils import authentication

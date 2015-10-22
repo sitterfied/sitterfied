@@ -50,26 +50,26 @@ class ViewsTestCase(SitterfiedApiTestCase):
         self.parent_three.friends.add(self.parent_two)
 
     def test_booking_flow_requires_authentication(self):
-        url = reverse.reverse('flows-booking-requests')
+        url = reverse.reverse('textit-booking-requests')
         response = self.client.post(url, {}, format='multipart')
         assert_that(response.status_code, is_(status.HTTP_401_UNAUTHORIZED))
 
-        url = reverse.reverse('flows-booking-tier')
+        url = reverse.reverse('textit-booking-tier')
         response = self.client.post(url, {}, format='multipart')
         assert_that(response.status_code, is_(status.HTTP_401_UNAUTHORIZED))
 
     def test_booking_flow_requires_valid_data(self):
-        url = '{}?token={}'.format(reverse.reverse('flows-booking-requests'), self.token.key)
+        url = '{}?token={}'.format(reverse.reverse('textit-booking-requests'), self.token.key)
         response = self.client.post(url, {}, format='multipart')
         assert_that(response.status_code, is_(status.HTTP_400_BAD_REQUEST))
 
-        url = '{}?token={}'.format(reverse.reverse('flows-booking-tier'), self.token.key)
+        url = '{}?token={}'.format(reverse.reverse('textit-booking-tier'), self.token.key)
         response = self.client.post(url, {}, format='multipart')
         assert_that(response.status_code, is_(status.HTTP_400_BAD_REQUEST))
 
     def test_request_a_sitter(self):
         format = 'multipart'
-        url = '{}?token={}'.format(reverse.reverse('flows-booking-requests'), self.token.key)
+        url = '{}?token={}'.format(reverse.reverse('textit-booking-requests'), self.token.key)
         relayer = random.randint(1000, 5000)
         flow_id = random.randint(1000, 5000)
 
@@ -127,11 +127,11 @@ class ViewsTestCase(SitterfiedApiTestCase):
             end_time='10:00pm',
         ))
 
-    @patch('sitterfied.flows.views.get_time_zone_for_zip', return_value='America/New_York')
+    @patch('sitterfied.integrations.textit.views.get_time_zone_for_zip', return_value='America/New_York')
     @patch('sitterfied.app.tasks.notifications.send_message')
     def test_determine_tier(self, send_message, time_zone):
         format = 'multipart'
-        url = '{}?token={}'.format(reverse.reverse('flows-booking-tier'), self.token.key)
+        url = '{}?token={}'.format(reverse.reverse('textit-booking-tier'), self.token.key)
         relayer = random.randint(1000, 5000)
         flow_id = random.randint(1000, 5000)
         date = get_today() + timedelta(days=10)
