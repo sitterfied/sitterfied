@@ -2,6 +2,8 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
 
+from sitterfied.db.fields import CaseInsensitiveCharField
+
 
 class Certification(TimeStampedModel):
     """
@@ -22,7 +24,7 @@ class Group(TimeStampedModel):
     Group model
 
     """
-    name = models.CharField(max_length=128, blank=False)
+    name = CaseInsensitiveCharField(max_length=128, blank=False)
 
     def __unicode__(self):
         return self.name

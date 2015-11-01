@@ -1,6 +1,21 @@
 # -*- coding: utf-8 -*-
 from .development import *
 
+
+class MigrationRouter():
+
+    def allow_migrate(self, db, app_label, model=None, **hints):
+        """
+        SQLite cannot handle certain actions so we add an `ignore` key to the
+        `hints` dictionary. If `True`, then the migration operation is ignored.
+
+        """
+        if hints.get('ignore', False):
+            return False
+
+        return True
+
+
 DEBUG = TEMPLATE_DEBUG = False
 
 CELERY_ALWAYS_EAGER = True
@@ -19,6 +34,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
     },
 }
+
+DATABASE_ROUTERS = (
+    'sitterfied.settings.ci.MigrationRouter',
+)
 
 CACHES = {
     'default': {

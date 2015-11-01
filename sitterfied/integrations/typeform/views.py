@@ -81,10 +81,12 @@ def sitterchoices(request, *args, **kwargs):
     # Create a sitter team membership for each sitter in the array, ignore
     # errors
     for sitter in sitters:
-        SitterTeamMembership.objects.get_or_create(
+        SitterTeamMembership.objects.update_or_create(
             parent=parent,
             sitter=sitter,
-            source='typeform:{}'.format(request.data.get('ID', '')),
+            defaults={
+                'source': 'typeform:{}'.format(request.data.get('ID', ''))
+            },
         )
 
     return Response(status=status.HTTP_204_NO_CONTENT)
