@@ -68,6 +68,7 @@ class SitterSerializer(serializers.ModelSerializer):
             'will_transport',
         )
         extra_kwargs = {
+            'bookmarks': {'required': False},
             'schedule': {'allow_null': True, 'required': False},
             'settings': {'allow_null': True, 'required': False},
         }
