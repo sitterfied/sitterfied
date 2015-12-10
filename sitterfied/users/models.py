@@ -91,8 +91,14 @@ class User(TimeStampedModel, PermissionsMixin, AbstractBaseUser):
         Returns the first_name plus the last_name, with a space in between.
 
         """
-        full_name = '%s %s' % (self.first_name, self.last_name)
-        return full_name.strip()
+        return ('%s %s' % (self.first_name, self.last_name)).strip()
+
+    def get_short_name(self):
+        """
+        Return the account's `first_name` value.
+
+        """
+        return self.first_name
 
     def is_facebook_connected(self):
         return self.facebook_id is not None
