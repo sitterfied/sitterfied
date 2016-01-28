@@ -23,6 +23,10 @@ server {
     if ($host ~ "\d+\.\d+\.\d+\.\d+") {
         set $my_host "healthcheck.sitterfied.com";
     }
+
+	location ~* /events/.*$ {
+		rewrite /events/(.*)$ http://$1.splashthat.com last;
+	}
     
     location /static/ {
         alias /www/static/;

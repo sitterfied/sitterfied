@@ -28,7 +28,7 @@ class User(TimeStampedModel, PermissionsMixin, AbstractBaseUser):
     city = models.CharField(max_length=50, blank=True)
     date_joined = models.DateTimeField('date joined', default=timezone.now)
     email = fields.CaseInsensitiveEmailField('email address', blank=True, unique=True)
-    facebook_id = models.IntegerField(null=True, blank=True, unique=True)
+    facebook_id = models.BigIntegerField(null=True, blank=True, unique=True)
     facebook_token = models.CharField(max_length=256, null=True, blank=True)
     first_name = fields.CaseInsensitiveCharField('first name', max_length=30, blank=True, unique=False)
     friends = models.ManyToManyField('self', blank=True)
