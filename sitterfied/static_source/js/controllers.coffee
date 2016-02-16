@@ -387,12 +387,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
             attrs = Object.keys(model.toJSON())
             attrs.pop('sitter')
             for x in attrs
+              if x != 'id'
                 @set(x, true)
         clearAll: () ->
             model = @get('model')
             attrs = Object.keys(model.toJSON())
             attrs.pop('sitter')
             for x in attrs
+              if x != 'id'
                 @set(x, false)
 
     })
