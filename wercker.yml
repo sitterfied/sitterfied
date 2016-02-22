@@ -1,10 +1,10 @@
-box:
-  id: sitterfied/ec2-deploy-base-box
-  username: $DOCKER_USERNAME
-  password: $DOCKER_PASSWORD
-  tag: latest
 no-response-timeout: 10
 build:
+  box:
+    id: sitterfied/ec2-deploy-base-box
+    username: $DOCKER_USERNAME
+    password: $DOCKER_PASSWORD
+    tag: latest
   steps:
     - script:
         code: |
@@ -32,6 +32,11 @@ build:
         channel: general
         username: werckerbot
 deploy:
+  box:
+    id: sitterfied/ec2-deploy-base-box
+    username: $DOCKER_USERNAME
+    password: $DOCKER_PASSWORD
+    tag: latest
   steps:
     - script:
         name: configure aws cli

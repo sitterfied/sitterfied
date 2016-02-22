@@ -33,7 +33,7 @@ class Parent(User):
 class SitterTeamMembership(TimeStampedModel):
     parent = models.ForeignKey('Parent')
     sitter = models.ForeignKey('Sitter')
-    source = models.CharField(max_length=255, null=True)
+    source = models.CharField(max_length=255, blank=True, null=True)
 
     def __unicode__(self):
         return '{} is a member of {}\'s sitter team'.format(self.sitter, self.parent)

@@ -64,8 +64,8 @@ class SitterAdmin(UserAdmin):
             'dogs_ok',
             'cats_ok',
             'other_animals_ok',
-            'users_in_network',
-            'friends',
+            # 'users_in_network',
+            # 'friends',
         )
     }),
 

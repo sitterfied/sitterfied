@@ -9,12 +9,10 @@
       "users_in_network": [],
       "google_imported": false,
       "user_permissions": [],
-      "timezone": "",
       "date_joined": "2014-03-26T18:10:10.954Z",
       "city": "",
       "first_name": "",
       "zip": "",
-      "cell": "",
       "is_superuser": true,
       "state": "NJ",
       "last_login": "2014-03-26T18:10:10.954Z",
@@ -33,8 +31,7 @@
       "sitter_groups": [],
       "created": "2014-03-26T18:10:10.954Z",
       "modified": "2014-03-26T18:10:10.983Z",
-      "is_staff": true,
-      "avatar": ""
+      "is_staff": true
     }
   }
 ]
