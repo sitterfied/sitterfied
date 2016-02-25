@@ -23,11 +23,11 @@ class SitterCreationForm(UserCreationForm):
         exclude = ()
 
 
-class ScheduleInline(admin.TabularInline):
+class ScheduleInline(admin.StackedInline):
     model = Schedule
 
 
-class ReviewsInline(admin.TabularInline):
+class ReviewsInline(admin.StackedInline):
     model = SitterReview
 
 

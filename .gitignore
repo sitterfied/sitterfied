@@ -3,8 +3,9 @@
 *.sql
 .ropeproject
 _builds
-_steps
+_cache
 _projects
+_steps
 */static/*
 sitterfied*.js
 templates.js
