@@ -349,11 +349,11 @@ def network_search(request):
         filter_kwargs = Q(first_name__istartswith=search_term) | Q(last_name__istartswith=search_term)
 
     users = [{
-        'label': u.get_full_name(),
-        'value': u.get_full_name(),
+        'label': parent.get_full_name(),
+        'value': parent.get_full_name(),
         "type": "user",
-        "id": u.id
-    } for u in User.objects.filter(filter_kwargs)]
+        "id": parent.id
+    } for parent in Parent.objects.filter(filter_kwargs)]
 
     groups = [{
         'label': g.name,

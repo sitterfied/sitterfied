@@ -483,6 +483,18 @@ define ['jquery'
             return this.get('reviews').get('lastObject')
         ).property('reviews.@each', 'review')
 
+        inFriendsSitterTeam: (() ->
+          isInFriendsSitterTeam = false
+          Sitterfied.currentUser.get('friends').forEach((friend) =>
+            if friend.get('isParent')?
+              sitterTeam = friend.get('parent').get('sitter_teams')
+              if sitterTeam.findProperty('id', @get('id'))?
+                isInFriendsSitterTeam = true
+          )
+          console.log(isInFriendsSitterTeam)
+          return isInFriendsSitterTeam
+        ).property('Sitterfied.currentUser.friends.@each')
+
         inSitterTeam: (() ->
             sitterTeam = Sitterfied.currentUser.get('sitter_teams')
             return sitterTeam.findProperty('id', this.get('id'))?
