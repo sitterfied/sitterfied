@@ -250,28 +250,6 @@ def new_schedule_parent(sender, instance=None, **kwargs):
         Schedule.objects.create(sitter=instance)
 
 
-@receiver(post_save, sender=Sitter)
-def new_sitter(sender, instance=None, **kwargs):
-    created = kwargs.get('created', False)
-    if created:
-        message = create_message_base()
-        message['subject'] = 'Welcome to Sitterfied!'
-        message['to'] = [create_email_to(instance.email, instance.get_full_name())]
-        message['global_merge_vars'] = {'FNAME': instance.first_name}
-        send_template_email('welcome-sitter', message)
-
-
-@receiver(post_save, sender=Parent)
-def new_parent(sender, instance=None, **kwargs):
-    created = kwargs.get('created', False)
-    if created:
-        message = create_message_base()
-        message['subject'] = 'Welcome to Sitterfied!'
-        message['to'] = [create_email_to(instance.email, instance.get_full_name())]
-        message['global_merge_vars'] = {'FNAME': instance.first_name}
-        send_template_email('welcome-parent', message)
-
-
 @receiver(post_save, sender=Reminder)
 def reminder_save_handler(*args, **kwargs):
     reminder = kwargs.get('instance')

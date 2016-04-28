@@ -2,7 +2,7 @@
 import random
 
 from delorean import Delorean
-from hamcrest import all_of, assert_that, contains_string, is_
+from hamcrest import all_of, assert_that, contains_string, is_, matches_regexp
 from mock import patch
 
 from sitterfied.app.tasks import notifications
@@ -46,5 +46,5 @@ class TestNotifications(SitterfiedApiTestCase):
                 timezone='UTC').shift(time_zone).datetime
         )
         assert_that(send_message.call_args[1].get('body'),
-            all_of(contains_string('{0}-{1}'.format(start_time, stop_time)), contains_string('ACCEPT 1 or DECLINE 1'))
+            all_of(contains_string('{0}-{1}'.format(start_time, stop_time)), matches_regexp('ACCEPT \d or DECLINE \d'))
         )
