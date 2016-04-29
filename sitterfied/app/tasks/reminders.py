@@ -104,16 +104,8 @@ def send_parent_reminder(parent, sitter, start_date_time, stop_date_time, remind
                 'stop_date_time': stop_date_time.shift(time_zone).datetime,
                 'short_url': get_short_url('/mybookings/upcoming'),
             })
-        else:
-            template = 'sms/reminder/parent/relieve_sitter_reminder.sms'
-            sms = render_to_string(template, {
-                'sitter_first_name': sitter.first_name,
-                'sitter_cell': sitter.cell,
-                'timedelta': get_time_delta(seconds),
-                'stop_date_time': stop_date_time.shift(time_zone).datetime,
-            })
 
-        send_message(sms, parent.cell, is_parent=True)
+            send_message(sms, parent.cell, is_parent=True)
     except Exception as ex:
         raise ex
     finally:
