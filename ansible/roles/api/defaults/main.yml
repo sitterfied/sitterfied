@@ -1,0 +1,15 @@
+---
+
+# the user that owns the api files
+api_user: vagrant
+api_user_home: /home/{{ api_user }}
+
+# the name of the server for nginx
+api_server_name: dev.sitterfied.com
+
+# important api paths
+api_root: /opt/sitterfied/api
+
+# virtualenv paths
+api_virtualenv_root: /opt/envs/api
+api_virtualenv_bin: /opt/envs/api/bin

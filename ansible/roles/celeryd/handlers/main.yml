@@ -1,8 +1,6 @@
 ---
 
 - name: restart celeryd
-  sudo: True
-  service:
-    name=celeryd
-    state=restarted
+  become: true
+  service: name=celeryd state=restarted
   when: celeryd_state == "started"

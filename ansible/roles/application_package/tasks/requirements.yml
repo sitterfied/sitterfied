@@ -1,8 +1,0 @@
----
-
-- name: Install app requirements into the virtualenv
-  sudo: True
-  sudo_user: "{{ application_user }}"
-  pip:
-    requirements={{ application_root }}/requirements.txt
-    virtualenv={{ application_virtualenv_root }}

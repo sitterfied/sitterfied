@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Helper environment variables for the sitterfied api django app
+export PATH="{{ api_virtualenv_bin }}:$PATH"
+export PYTHONPATH="{{ api_root }}"
+export DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
+
+{% if no_python_bytecode_please | default(False) %}
+export PYTHONDONTWRITEBYTECODE=1
+{% endif %}

@@ -1,5 +1,4 @@
 ---
 
 - name: install the git package
-  sudo: true
   apt: name=git state=present

@@ -1,7 +1,0 @@
-Package: sitterfied-website-server
-Priority: optional
-Section: web
-Maintainer: Andrew Lewisohn <alewisohn@sitterfied.com>
-Architecture: amd64
-Version: 0.1.0
-Description: Sitterfied Website Server

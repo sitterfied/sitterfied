@@ -1,17 +1,18 @@
 ---
 # Install Redis server
 - name: "install redis server"
-  sudo: yes
+  become: true
+  become_user: 'root'
   action: '{{ ansible_pkg_mgr }} pkg={{ redis.deb.package }} state=latest update-cache=yes'
 
 # Bind Redis server to all interfaces
 - name: "bind redis server to all interfaces"
-  sudo: yes
+  become: true
   action: lineinfile dest=/etc/redis/redis.conf state=present regexp="^#?bind" line="#bind 127.0.0.1"
   notify:
     - "restart redis"
 
 # Ensure Redis server is running
 - name: "ensure redis server is running"
-  sudo: yes
+  become: true
   action: service name={{ redis.deb.service }} state=started

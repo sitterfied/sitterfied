@@ -1,0 +1,13 @@
+---
+
+- name: install supervisor
+  apt:
+    pkg=supervisor
+    state=present
+    update_cache=true
+
+- name: start supervisor and enable it on boot
+  service:
+    name=supervisor
+    state=started
+    enabled=true

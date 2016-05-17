@@ -1,5 +1,0 @@
----
-
-- name: restart ngrok
-  sudo: true
-  service: name=ngrok state=restarted

@@ -1,7 +1,11 @@
 ---
 
+- name: install uwsgi (via pip)
+  pip:
+    name=uwsgi
+    version=2.0.7
+
 - name: create the uwsgi config directory
-  sudo: true
   file:
     dest=/etc/uwsgi.d/
     owner=root
@@ -9,21 +13,9 @@
     mode=755
     state=directory
 
-- name: create the uwsgi config
-  sudo: True
-  template:
-    src=sitterfied.ini.j2
-    dest=/etc/uwsgi.d/sitterfied.ini
-    owner=root
-    group=root
-    mode=644
-  notify:
-    - restart uwsgi
-
 - name: create the uwsgi upstart script
-  sudo: True
   template:
-    src=uwsgi.conf.j2
+    src=uwsgi.conf
     dest=/etc/init/uwsgi.conf
     owner=root
     group=root
@@ -31,9 +23,8 @@
   notify:
     - restart uwsgi
 
-- name: start and enable the uwsgi service
-  sudo: True
+- name: enable uwsgi on boot
   service:
     name=uwsgi
-    state=started
-    enabled=True
+    state=stopped
+    enabled=true

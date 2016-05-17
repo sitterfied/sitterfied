@@ -1,4 +1,4 @@
 ---
 
-with_redmon: True
+with_redmon: False
 redmon_opts: ""

@@ -1,6 +1,7 @@
 ---
 
-celeryd_workers: 1
-celeryd_concurrency: 2
 celeryd_app: sitterfied.celeryapp:app
-celeryd_extra_opts: "--without-mingle --without-gossip"
+celeryd_concurrency: 2
+celeryd_extra_opts: '--without-mingle --without-gossip'
+celeryd_state: 'started'
+celeryd_workers: 1

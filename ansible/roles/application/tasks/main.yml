@@ -1,7 +1,0 @@
----
-
-- include: base.yml
-
-- include: nginx.yml
-
-- include: requirements.yml

@@ -1,8 +1,0 @@
----
-
-- name: restart celerybeat
-  sudo: True
-  service:
-    name=celerybeat
-    state=restarted
-  when: celerybeat_state == "started"

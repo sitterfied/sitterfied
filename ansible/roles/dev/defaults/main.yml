@@ -1,10 +1,10 @@
 ---
 
-application_user: vagrant
+api_user: vagrant
 
 # application paths
-application_root: /opt/sitterfied
+api_root: /opt/sitterfied/api
 
 # virtualenv paths
-application_virtualenv_root: /opt/envs/sitterfied
-application_virtualenv_bin: /opt/envs/sitterfied/bin
+api_virtualenv_root: /opt/envs/api
+api_virtualenv_bin: /opt/envs/api/bin

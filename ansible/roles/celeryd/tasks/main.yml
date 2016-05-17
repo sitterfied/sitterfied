@@ -1,7 +1,7 @@
 ---
 
-- name: Install celeryd init
-  sudo: True
+- name: install celeryd init
+  become: true
   copy:
     src=celeryd.init
     dest=/etc/init.d/celeryd
@@ -11,8 +11,8 @@
   notify:
     - restart celeryd
 
-- name: Install celeryd clean restart script
-  sudo: True
+- name: install celeryd clean restart script
+  become: true
   copy:
     src=celeryd-clean-restart.sh
     dest=/usr/local/bin/celeryd-clean-restart
@@ -20,8 +20,8 @@
     group=root
     mode=755
 
-- name: Install celeryd config
-  sudo: True
+- name: install celeryd config
+  become: true
   template:
     src=celeryd.j2
     dest=/etc/default/celeryd
@@ -31,9 +31,9 @@
   notify:
     - restart celeryd
 
-- name: Enable celeryd
-  sudo: True
+- name: enable celeryd on boot
+  become: true
   service:
     name=celeryd
     state={{ celeryd_state }}
-    enabled=True
+    enabled=true

@@ -1,5 +1,5 @@
 ---
 
 - name: restart beatcop
-  sudo: true
+  become: true
   service: name=beatcop state=restarted

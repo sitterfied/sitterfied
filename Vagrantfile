@@ -8,11 +8,11 @@ SITTERFIED_MEMORY = ENV['SITTERFIED_MEMORY'] ||= '2048'
 VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
   config.vm.define :sitterfied do |sitterfied|
-    sitterfied.vm.box = 'trusty'
-    sitterfied.vm.box_url = 'http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
-    sitterfied.vm.hostname = 'dev.sitterfied.com'
+    sitterfied.vm.box = 'ubuntu/trusty64'
     sitterfied.vm.network :private_network, ip: '192.168.100.22'
+    sitterfied.vm.synced_folder '.', '/opt/sitterfied', type: 'nfs', mount_options: ['sync']
 
     sitterfied.vm.provider :virtualbox do |vb|
       vb.customize ['modifyvm', :id, '--cpus', SITTERFIED_CPUS]
@@ -21,7 +21,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     sitterfied.ssh.forward_agent = true
-    sitterfied.vm.synced_folder '.', '/opt/sitterfied', type: 'nfs'
 
     if Vagrant.has_plugin?('vagrant-cachier')
       sitterfied.cache.auto_detect = true
@@ -29,9 +28,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     sitterfied.vm.provision 'ansible' do |ansible|
+      ansible.host_key_checking = false
       ansible.inventory_path = 'ansible/hosts'
       ansible.playbook = 'ansible/playbooks/main.yml'
-      ansible.host_key_checking = false
     end
   end
 end

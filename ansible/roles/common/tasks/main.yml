@@ -2,18 +2,16 @@
 # These are common plays that will be run on all nodes.
 
 - name: ensure the apt package cache is up-to-date
-  sudo: true
   apt: update_cache=yes cache_valid_time=3600
   register: apt_cache_update
 
 # There are some old packages left over from Ubuntu's process for building the
 # cloud images, which cause dependency issues elsewhere.
 - name: remove orphaned dependency packages
-  sudo: true
   command: /usr/bin/apt-get --assume-yes autoremove
   changed_when: false
 
-- include: openssh.yml tags=ssh
-- include: ntp.yml tags=ntp
-- include: htop.yml tags=ntp
-- include: tmux.yml tags=tmux
+- include: openssh.yml
+- include: ntp.yml
+- include: htop.yml
+- include: tmux.yml

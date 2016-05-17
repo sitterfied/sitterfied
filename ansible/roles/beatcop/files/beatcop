@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-## Python 2.7
+# Python 2.7
 """
 Beatcop tries to ensure that a specified process runs on exactly one node in a cluster.
 It does this by acquiring an expiring lock in Redis, which it then continually refreshes.

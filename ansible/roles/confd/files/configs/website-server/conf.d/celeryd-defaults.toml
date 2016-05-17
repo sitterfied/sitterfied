@@ -1,7 +1,0 @@
-[template]
-src = "celeryd-defaults.tmpl"
-dest = "/etc/default/celeryd"
-keys = [
-  "/sitterfied/website/celery",
-]
-reload_cmd = "/usr/local/bin/celeryd-clean-restart"

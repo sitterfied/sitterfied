@@ -1,8 +1,8 @@
 ---
 
 - name: create the postrgresql database user for vagrant
-  sudo: true
-  sudo_user: postgres
+  become: true
+  become_user: 'postgres'
   postgresql_user:
     name=vagrant
     password=vagrant
@@ -19,12 +19,6 @@
     login_user=vagrant
     name=sitterfied
 
-- name: restart the postgresql daemon
-  sudo: true
-  service:
-    name=postgresql
-    state=restarted
-
 - name: collect static files
   command: django-admin.py collectstatic --noinput
 
@@ -33,18 +27,3 @@
 
 - name: create the django superuser admin account
   command: django-admin.py loaddata dev-data
-
-- name: install npm packages
-  sudo: true
-  npm:
-    name=ember-precompile
-    version=0.2.2
-    global=yes
-
-- name: copy the ngrok configuration file
-  copy: 
-    src=ngrok
-    dest=/home/vagrant/.ngrok
-    owner={{ application_user }}
-    group={{ application_user }}
-    mode=777

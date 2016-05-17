@@ -1,8 +1,0 @@
-auth_token: eTgmyKETmoWrjmIqk41-
-inspect_addr: "0.0.0.0:8200"
-tunnels:
-  web:
-    auth: "developer:password"
-    subdomain: "sitterfied"
-    proto:
-      https: 0.0.0.0:8000

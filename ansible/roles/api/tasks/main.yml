@@ -1,0 +1,90 @@
+---
+
+- name: install ember precompile library
+  npm:
+    name=ember-precompile
+    version=0.2.2
+    global=true
+    executable=/opt/nvm/v0.10.32/bin/npm
+
+- name: install dependency packages
+  apt: name={{ item }}
+  with_items:
+    - build-essential
+    - default-jre
+    - libpq-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - postgresql-client
+    - python-psycopg2
+
+- name: create the environments directory
+  file:
+    path=/opt/envs
+    state=directory
+    group={{ api_user }}
+    owner={{ api_user }}
+    mode=755
+
+- name: create the log directory
+  file:
+    path=/var/log/api
+    state=directory
+    group={{ api_user }}
+    owner={{ api_user }}
+    mode=755
+
+- name: create the static content directory
+  file:
+    path=/www/static
+    state=directory
+    group={{ api_user }}
+    owner={{ api_user }}
+    mode=755
+
+- name: check for a virtualenv
+  stat: path={{ api_virtualenv_root}}
+  register: virtualenv_path
+
+- name: create the api virtualenv
+  command: virtualenv {{ api_virtualenv_root }}
+  when: not virtualenv_path.stat.exists
+
+- name: change the owner of the api virtualenv to the api user
+  file:
+    path={{ api_virtualenv_root }}
+    state=directory
+    group={{ api_user }}
+    owner={{ api_user }}
+    recurse=true
+
+- name: create the .bashrc helper
+  template:
+    src=bashrc.sh
+    dest='{{ api_user_home }}/.bashrc'
+    group={{ api_user }}
+    owner={{ api_user }}
+    mode=644
+
+- name: install the api nginx config
+  template:
+    src=api-nginx.conf
+    dest=/etc/nginx/conf.d/api.conf
+    group={{ api_user }}
+    owner={{ api_user }}
+  notify:
+    - restart nginx
+
+- name: install the api uwsgi config
+  template:
+    src=api-uwsgi.conf
+    dest=/etc/uwsgi.d/api.ini
+    group={{ api_user }}
+    owner={{ api_user }}
+  notify:
+    - restart uwsgi
+    
+- name: install api python dependencies
+  pip:
+    requirements={{ api_root }}/requirements.txt
+    virtualenv={{ api_virtualenv_root }}

@@ -1,9 +1,7 @@
 ---
 
 - name: restart the ntp daemon
-  sudo: true
   service: name=ntp state=restarted
 
 - name: restart the openssh daemon
-  sudo: true
   service: name=ssh state=restarted

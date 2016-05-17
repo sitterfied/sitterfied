@@ -1,7 +1,7 @@
 ---
 
 - name: create the beatcop config directory
-  sudo: true
+  become: true
   file:
     dest=/etc/beatcop.d/
     owner=root
@@ -10,7 +10,7 @@
     state=directory
 
 - name: create the celerybeat beatcop config
-  sudo: True
+  become: true
   template:
     src=celerybeat.ini.j2
     dest=/etc/beatcop.d/celerybeat.ini
@@ -21,7 +21,7 @@
     - restart beatcop
 
 - name: create the beatcop upstart script
-  sudo: True
+  become: true
   template:
     src=beatcop.conf.j2
     dest=/etc/init/beatcop.conf
@@ -32,18 +32,18 @@
     - restart beatcop
 
 - name: create the beatcop python script
-  sudo: True
+  become: true
   copy:
     src=beatcop
-    dest="{{ application_virtualenv_bin }}/beatcop"
-    owner="{{ application_user }}"
-    group="{{ application_user }}"
+    dest="{{ api_virtualenv_bin }}/beatcop"
+    owner="{{ api_user }}"
+    group="{{ api_user }}"
     mode=0775
   notify:
     - restart beatcop
 
 - name: start and enable the beatcop service
-  sudo: True
+  become: true
   service:
     name=beatcop
     state=started

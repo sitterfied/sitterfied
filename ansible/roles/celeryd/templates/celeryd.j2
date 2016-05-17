@@ -1,10 +1,10 @@
 export DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
 
-CELERYD_CHDIR="{{ application_root }}"
+CELERYD_CHDIR="{{ api_root }}"
 
 CELERYD_NODES="{% for n in range(celeryd_workers) %}worker{{ n }} {% endfor %}"
 
-CELERY_BIN="{{ application_virtualenv_root }}/bin/celery"
+CELERY_BIN="{{ api_virtualenv_root }}/bin/celery"
 
 CELERYD_OPTS="--concurrency={{ celeryd_concurrency }} {{ celeryd_extra_opts }}"
 
@@ -13,7 +13,7 @@ CELERY_APP="sitterfied.celeryapp:app"
 CELERYD_LOG_FILE="/var/log/celery/%N.log"
 CELERYD_PID_FILE="/var/run/celery/%N.pid"
 
-CELERYD_USER="{{ application_user }}"
-CELERYD_GROUP="{{ application_user }}"
+CELERYD_USER="{{ api_user }}"
+CELERYD_GROUP="{{ api_user }}"
 
 CELERY_CREATE_DIRS=1

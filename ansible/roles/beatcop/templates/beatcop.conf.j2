@@ -15,11 +15,11 @@ pre-start script
     [ -d /var/run/beatcop ] || mkdir -p /var/run/beatcop
 end script
 
-env PYTHONPATH={{ application_root }}
+env PYTHONPATH={{ api_root }}
 env DJANGO_SETTINGS_MODULE=sitterfied.settings.{{ env }}
 
 # Start the process
-exec {{ application_virtualenv_bin }}/python {{ application_virtualenv_bin}}/beatcop /etc/beatcop.d/celerybeat.ini >> /var/log/beatcop.log 2>&1
+exec {{ api_virtualenv_bin }}/python {{ api_virtualenv_bin}}/beatcop /etc/beatcop.d/celerybeat.ini >> /var/log/beatcop.log 2>&1
 
 # Run after start
 post-start script

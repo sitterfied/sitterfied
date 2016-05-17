@@ -1,7 +1,7 @@
 ---
 
 - name: install postgresql and related packages
-  sudo: true
+  become: true
   apt: name={{ item }} state=present
   with_items:
     - libpq-dev
@@ -13,7 +13,7 @@
     LC_ALL: en_US.utf8
 
 - name: add the postgresql server configuration file
-  sudo: true
+  become: true
   template: 
     src=postgresql.conf.j2
     dest=/etc/postgresql/9.3/main/postgresql.conf
@@ -24,7 +24,7 @@
     - restart postgresql
 
 - name: add the postgresql client authentication configuration file
-  sudo: true
+  become: true
   copy: 
     src=pg_hba.conf
     dest=/etc/postgresql/9.3/main/pg_hba.conf

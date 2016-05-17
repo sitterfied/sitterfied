@@ -1,26 +1,21 @@
 ---
 
 - hosts: all
+  become: true
+  become_method: 'sudo'
+  become_user: 'root'
   roles:
     - common
     - nodejs
-    - application
+    - supervisord
+    - nginx
     - uwsgi
+    - api
 
 - hosts: development
   roles:
     - postgres
-    - ngrok
     - redis
     - beatcop
     - celeryd
-    - monit
     - dev
-  vars:
-    celeryd_state: "started"
-    monit_state: "started"
-    monit_webinterface_acl_rules: 
-      - 192.168.100.1 # vpc
-      - 0.0.0.0 # local
-    ngrok_tunnels: "web"
-    with_redmon: false
