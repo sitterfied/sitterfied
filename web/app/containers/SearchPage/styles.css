@@ -1,0 +1,19 @@
+.filters {
+  background-color: #248796;
+  color: #FFF;
+  position: fixed;
+  top: 4.5rem;
+  bottom: 0;
+  left: 0;
+  width: 20%;
+  padding: 2rem 1rem;
+}
+
+.main {
+  margin-left: 20%;
+  padding: 2rem;
+}
+
+.results {
+  margin: 0 -1rem;
+}

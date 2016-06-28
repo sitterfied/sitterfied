@@ -1,0 +1,27 @@
+.wrapper {
+  background-color: #E6E6E6;
+  margin: -2rem -2rem 1rem;
+  padding: 1.5rem 2rem 1rem 15rem;
+}
+
+.teamHeading {
+  width: 13rem;
+  float: left;
+  line-height: 1.5rem;
+  padding: 0.25rem;
+  margin-left: -13rem;
+}
+
+.empty {
+  color: #777;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.sitterChip:hover {
+  background-color: #DA4848;
+  color: #FFF;
+}
+
+.sitterChip:hover i {
+  color: #FFF;
+}

@@ -1,0 +1,27 @@
+.buttonWrapper {
+  margin: 1em 0;
+}
+
+.button {
+  display: block;
+  box-sizing: border-box;
+  padding: 0.5em;
+  line-height: 1;
+  text-align: center;
+  margin: 0;
+  border: 0;
+  text-decoration: none;
+  border-radius: 3px;
+  -webkit-touch-callout: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: 1px solid #E88648;
+  color: #E88648;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  background-color: #E88648;
+  color: #FFF;
+}

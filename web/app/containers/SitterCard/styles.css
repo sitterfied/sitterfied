@@ -1,0 +1,66 @@
+.wrapper {
+  background-color: #FFF;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.wrapper:hover {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.avatar {
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.addSitter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 15%;
+  background-color: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.addSitter:hover {
+  opacity: 1;
+  color: #E88648;
+}
+
+.addSitter i {
+  font-size: 4rem;
+  display: block;
+}
+
+.addSitter i.rotate::before {
+  transition: transform 0.5s;
+}
+
+.addSitter:hover i.rotate::before {
+  transform: rotate(90deg);
+}
+
+.details {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.details li {
+  color: #777;
+}

@@ -1,0 +1,25 @@
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  background-color: #2CA5B7;
+  color: #FFF;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.logoWrapper {
+  width: 20%;
+  text-align: center;
+}
+
+.logo {
+  height: 1.5rem;
+}
+
+.link {
+  color: #FFF;
+  display: inline-block;
+  vertical-align: top;
+}

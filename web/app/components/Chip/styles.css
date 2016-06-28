@@ -1,0 +1,23 @@
+.chip,
+.chip i {
+  transition: all 0.3s;
+}
+
+.chip {
+  background-color: #FFF;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.chip:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.chip i {
+  margin-left: 0.5rem;
+  color: #777;
+}

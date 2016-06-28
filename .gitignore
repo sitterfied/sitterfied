@@ -10,3 +10,5 @@ _steps
 sitterfied*.js
 templates.js
 ec2_amazon-ebs.pem
+.DS_Store
+.vagrant
