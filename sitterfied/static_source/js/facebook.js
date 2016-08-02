@@ -1,11 +1,12 @@
 window.fbAsyncInit = function() {
     FB.init({
-        appId      : FACEBOOK_APP_ID,
-        channelUrl : '/channel.html', // Channel File
-        status     : true, // check login status
-        cookie     : true, // enable cookies to allow the server to access the session
-        xfbml      : true,  // parse XFBML
-        frictionlessRequests : true
+      appId      : FACEBOOK_APP_ID,
+      channelUrl : '/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true,  // parse XFBML
+      frictionlessRequests : true,
+      version    : 'v2.1'
     });
 
 };
