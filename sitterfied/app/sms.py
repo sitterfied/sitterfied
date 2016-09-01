@@ -10,7 +10,7 @@ from twilio.rest import TwilioRestClient
 from twilio.twiml import Response
 
 from sitterfied.app.utils import get_short_url
-from sitterfied.bookings.models import Booking
+from sitterfied.bookings.models import AlreadyAcceptedException, Booking
 from sitterfied.sitters.models import Sitter
 from sitterfied.utils.models import IncomingSMSMessage
 
@@ -67,16 +67,22 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
             'We\'re sorry, but we couldn\'t find job request ' + request_id + '. Please check the code and try again.')
         return resp
 
-    if booking.accepted_sitter:
-        if booking.accepted_sitter == sitter:
-            if response != 'decline' and response != 'no':
-                resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but you\'ve already accepted this job.')
-        else:
-            resp.sms('Hi ' + sitter.first_name + '. Thanks for responding, but this job has already been accepted.')
-        return resp
-
     if response in ['accept', 'yes', 'yeah', 'y', 'yup']:
-        booking.accept(sitter)
+        if booking.accepted_sitter == sitter:
+            resp.sms(
+                'Hi %s. Thanks for responding, but you\'ve already accepted this job.',
+                (sitter.first_name),
+            )
+            return resp
+
+        try:
+            booking.accept(sitter)
+        except AlreadyAcceptedException:
+            resp.sms(
+                'Hi %s. Thanks for responding, but this job has already been accepted.',
+                (sitter.first_name),
+            )
+            return resp
     elif response in ['decline', 'no', 'nope', 'n']:
         if booking.accepted_sitter == sitter:
             short_url = get_short_url('/mybookings/upcoming')

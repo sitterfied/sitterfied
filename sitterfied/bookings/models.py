@@ -13,6 +13,15 @@ booking_declined = Signal(providing_args=['booking'])
 booking_canceled = Signal(providing_args=['booking'])
 
 
+class AlreadyAcceptedException(Exception):
+    sitter = None
+
+    def __init__(self, *args, **kwargs):
+        self.sitter = kwargs.pop('sitter', None)
+
+        super(AlreadyAcceptedException, self).__init__(*args, **kwargs)
+
+
 class Booking(WatchedFieldsMixin, TimeStampedModel):
     """
     Booking model
@@ -78,7 +87,12 @@ class Booking(WatchedFieldsMixin, TimeStampedModel):
 
     @cached_property
     def accepted_sitter(self):
-        return self.sitters.filter(responses__booking=self, responses__response=Booking.BOOKING_STATUS_ACCEPTED).first()
+        return self.sitters.filter(
+            responses__booking=self,
+            responses__response=Booking.BOOKING_STATUS_ACCEPTED
+        ).order_by(
+            'responses__responded_at'
+        ).first()
 
     @property
     def declined_sitters(self):
@@ -89,6 +103,10 @@ class Booking(WatchedFieldsMixin, TimeStampedModel):
         booking_response.response = Booking.BOOKING_STATUS_ACCEPTED
         booking_response.responded_at = time.now()
         booking_response.save()
+
+        accepted_sitter = self.accepted_sitter
+        if accepted_sitter and accepted_sitter != sitter:
+            raise AlreadyAcceptedException('This job has already been accepted.', sitter=accepted_sitter)
 
         self.booking_status = Booking.BOOKING_STATUS_ACCEPTED
         self.save()

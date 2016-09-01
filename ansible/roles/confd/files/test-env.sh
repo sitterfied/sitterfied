@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # Export environment variables
-export TEST_SITTERFIED_WEBSITE_CELERY_BROKER_URL=amqp://lsdfdcxd:StyUlwbvedCHxIT354qe_LXX1YYwnEjs@tiger.cloudamqp.com/lsdfdcxd
+export TEST_SITTERFIED_WEBSITE_CELERY_BROKER_URL=amqp://pefpvhja:AxNSZh1hNBt_XiTu_59GDg_Oezfuw0BF@tiger.cloudamqp.com/pefpvhja
 export TEST_SITTERFIED_WEBSITE_CELERY_CONCURRENCY=1
 export TEST_SITTERFIED_WEBSITE_CELERY_DEFAULT_QUEUE=sitterfied-test
 export TEST_SITTERFIED_WEBSITE_CELERY_QUEUE_NAME_PREFIX=test-
