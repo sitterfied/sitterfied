@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404
-from rest_framework import permissions
+from rest_framework import permissions, serializers
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 
-from sitterfied.bookings.models import Booking
+from sitterfied.bookings.models import AlreadyAcceptedException, Booking
 from sitterfied.bookings.serializers import BookingSerializer
 from sitterfied.sitters.serializers import SitterSerializer
 from sitterfied.utils.views import IdFilterViewset, OutputSerializerMixin
@@ -31,11 +31,14 @@ class BookingViewSet(OutputSerializerMixin, IdFilterViewset):
     @detail_route(methods=['post'])
     def accept_booking(self, request, id=None):
         booking = get_object_or_404(Booking, id=id)
-        sitter = request.user.sitter
-        booking.accept(sitter)
+
+        try:
+            booking.accept(request.user.sitter)
+        except AlreadyAcceptedException:
+            return Response('This job has already been accepted', status=409)
+
         serializer = BookingSerializer(booking, context=self.get_serializer_context())
-        response = Response(serializer.data)
-        return response
+        return Response(serializer.data)
 
     @detail_route(methods=['post'])
     def cancel_booking(self, request, id=None):
