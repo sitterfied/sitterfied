@@ -70,8 +70,8 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
     if response in ['accept', 'yes', 'yeah', 'y', 'yup']:
         if booking.accepted_sitter == sitter:
             resp.sms(
-                'Hi %s. Thanks for responding, but you\'ve already accepted this job.',
-                (sitter.first_name),
+                'Hi %s. Thanks for responding, but you\'ve already accepted this job.'
+                % sitter.first_name
             )
             return resp
 
@@ -79,8 +79,8 @@ Please respond with either ACCEPT or DECLINE followed by the code you received.'
             booking.accept(sitter)
         except AlreadyAcceptedException:
             resp.sms(
-                'Hi %s. Thanks for responding, but this job has already been accepted.',
-                (sitter.first_name),
+                'Hi %s. Thanks for responding, but this job has already been accepted.'
+                % sitter.first_name
             )
             return resp
     elif response in ['decline', 'no', 'nope', 'n']:

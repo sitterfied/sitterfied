@@ -1090,6 +1090,7 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
         acceptBooking: (booking) ->
             return if this.isAccepting
             this.set("isAccepting", true)
+            self = this
             $.ajax
                 type: "POST"
                 url:"/api/bookings/" + booking.get('id') + "/accept_booking/"
@@ -1098,10 +1099,14 @@ define ["jquery", "ember", "cs!sitterfied", 'moment', "cs!models"], ($, Em, Sitt
                     booking: booking.get('id')
                 success: (response) ->
                     booking.load(booking.get('id'), response)
-                error: () ->
-                    alert("There was a problem accepting this booking. Please try again")
-                complete: ()->
-                    this.set("isAccepting", false)
+                error: (response, textStatus, errorThrown) ->
+                    if errorThrown == 'CONFLICT'
+                      alert(response.responseText)
+                      booking.load(booking.get('id'), response)
+                    else
+                      alert("There was a problem accepting this booking. Please try again")
+                complete: () ->
+                    self.set("isAccepting", false)
 
         rate: ( () ->
             num_children = @get('num_children')

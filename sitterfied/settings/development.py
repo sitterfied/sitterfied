@@ -62,7 +62,7 @@ SHORT_URL = 'localhost:8000/'
 FACEBOOK_APP_ID = '746551758706532'
 
 # Celery configuration
-BROKER_URL = REDIS_URL + '/1'
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 CELERY_DEFAULT_QUEUE = 'sitterfied-dev'
 CELERY_QUEUES = (
     Queue(CELERY_DEFAULT_QUEUE, Exchange(CELERY_DEFAULT_QUEUE, routing_key=CELERY_DEFAULT_QUEUE)),
