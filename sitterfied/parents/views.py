@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db.models import Q
 from rest_framework import permissions
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 
 from sitterfied.bookings.models import Booking
@@ -93,4 +93,70 @@ class ParentViewSet(OutputSerializerMixin, IdFilterViewset):
             .filter(Q(parent=pk) | Q(sitters=pk))
 
         serializer = BookingSerializer(queryset, many=True, context=self.get_serializer_context())
+        return Response(serializer.data)
+
+    @detail_route(methods=['get'])
+    def sitters(self, request, id=None):
+        queryset = Sitter.objects \
+            .prefetch_related(
+                'reviews',
+                'languages',
+                'sitter_teams',
+                'sitter_groups',
+                'bookmarks',
+                'friends',
+                'certifications',
+                'schedule',
+                'other_services',
+                'bookings',
+                'settings',
+            ).filter(sitter_teams=id)
+
+        serializer = SitterSerializer(queryset, many=True, context=self.get_serializer_context());
+        return Response(serializer.data);
+
+
+class FriendsViewSet(OutputSerializerMixin, IdFilterViewset):
+    lookup_field = 'id'
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Parent.objects \
+        .select_related('settings') \
+        .prefetch_related(
+            'reviews',
+            'languages',
+            'settings',
+            'sitter_groups',
+            'bookings',
+            'children',
+            'friends',
+            'sitter_teams',
+            'bookmarks',
+        ).all()
+    serializer_class = ParentSerializer
+    def get_queryset(self):
+        qs = self.queryset
+        if 'parents_id' in self.kwargs:
+            qs = qs.filter(friends=self.kwargs.get('parents_id'))
+        return qs
+
+    @list_route(methods=['get'])
+    def sitters(self, request, parents_id=None):
+        friends = Parent.objects.filter(friends=parents_id)
+        queryset = Sitter.objects \
+            .prefetch_related(
+                'reviews',
+                'languages',
+                'sitter_teams',
+                'sitter_groups',
+                'bookmarks',
+                'friends',
+                'certifications',
+                'schedule',
+                'other_services',
+                'bookings',
+                'settings',
+            ).filter(sitter_teams=friends)
+
+        serializer = SitterSerializer(queryset, many=True, context=self.get_serializer_context())
+
         return Response(serializer.data)

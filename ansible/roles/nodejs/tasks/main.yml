@@ -1,9 +1,61 @@
 ---
 
-- name: install node.js and npm
+- name: install nodejs packages
   sudo: true
-  apt: pkg={{ item }} state=present
+  apt: name={{ item }} state=present
   with_items:
     - nodejs
-    - nodejs-legacy
     - npm
+
+- name: npm install additional packages
+  sudo: true
+  npm:
+    name={{ item.name }}
+    version={{ item.version }}
+    global=yes
+  with_items:
+     - { name: 'grunt-cli', version: '0.1.11' }
+     - { name: 'gulp', version: '3.9.0' }
+
+- name: get nvm from git repo
+  sudo: true
+  git:
+    repo=https://github.com/creationix/nvm.git
+    dest=/usr/lib/nvm version=v0.31.0
+
+- name: create /opt/nvm
+  sudo: true
+  file:
+    path=/opt/nvm
+    state=directory
+    owner=root
+    group=root
+    mode=ug+rwx,o=rx
+
+- name: install nvm links
+  sudo: true
+  file:
+    path=/opt/nvm/{{ item }}
+    src=/usr/lib/nvm/{{ item }}
+    state=link
+    owner=root
+    group=root
+    mode=ug+rwx,o=rx
+  with_items:
+    - nvm-exec
+    - nvm.sh
+
+- name: enable profile.d
+  sudo: true
+  copy:
+    src=nvm-profile.d.sh
+    dest=/etc/profile.d/nvm.sh
+
+- name: install extra node versions
+  sudo: true
+  shell: source /opt/nvm/nvm.sh && nvm install {{item}}
+  args:
+    executable: /bin/bash
+    creates: /opt/nvm/versions/node/{{item}}/bin/node
+  with_items:
+    - v5.8.0

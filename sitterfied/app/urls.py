@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url, include
-from rest_framework.routers import DefaultRouter
+from rest_framework_nested import routers
 
 from sitterfied.app import api, google
 from sitterfied.bookings.views import BookingViewSet
 from sitterfied.children.views import ChildViewSet
 from sitterfied.integrations import textit, typeform
-from sitterfied.parents.views import ParentViewSet
+from sitterfied.parents.views import FriendsViewSet, ParentViewSet
 from sitterfied.sitters.views import SitterViewSet
 from sitterfied.users.views import UserViewSet
 
 from .signals import *
 from .signup import RegistrationView
 
-router = DefaultRouter()
+router = routers.DefaultRouter()
 router.register(r'bookings', BookingViewSet)
 router.register(r'certifications', api.CertificationViewSet)
 router.register(r'children', ChildViewSet)
@@ -28,6 +28,9 @@ router.register(r'sitters', SitterViewSet)
 router.register(r'sitterreviews', api.ReviewViewSet)
 router.register(r'users', UserViewSet)
 
+friends_router = routers.NestedSimpleRouter(router, r'parents', lookup='parents')
+friends_router.register(r'friends', FriendsViewSet, base_name='parent-friends')
+
 urlpatterns = patterns('sitterfied.app.views',
     url(r'^error/', 'error', name='error'),
     url(r'^onboarding/$', 'onboarding1', name='onboarding1'),
@@ -40,6 +43,7 @@ urlpatterns = patterns('sitterfied.app.views',
     url(r'^api/integrations/typeform/sitterchoices', typeform.views.sitterchoices, name='typeform-sitterchoices'),
     url(r'^api/search/$', 'search', name='search'),
     url(r'^api/', include(router.urls)),
+    url(r'^api/', include(friends_router.urls)),
     url(r'^remove_friend', 'remove_friend', name='remove_friend'),
     url(r'^remove_group', 'remove_group', name='remove_group'),
     url(r'^add_group', 'add_group', name='add_group'),
